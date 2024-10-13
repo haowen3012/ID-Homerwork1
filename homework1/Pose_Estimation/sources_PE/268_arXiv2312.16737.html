@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video</title>
+<!--Generated on Wed Dec 27 22:21:17 2023 by LaTeXML (version 0.8.7) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv_0.7.4.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2312.16737v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="#S1" title="1 Additional Experiments ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Additional Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S1.SS1" title="1.1 HO-3D Test Split Results ‣ 1 Additional Experiments ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1.1 </span>HO-3D Test Split Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S1.SS2" title="1.2 Sample Diversity of Different Motion Priors ‣ 1 Additional Experiments ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1.2 </span>Sample Diversity of Different Motion Priors</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="#S2" title="2 Additional Qualitative Results &amp; Remarks ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Additional Qualitative Results &amp; Remarks</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="#S3" title="3 Training A Hand Motion Prior ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Training A Hand Motion Prior</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="#S4" title="4 Failure Cases ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Failure Cases</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<div aria-label="”Conversion" been="" class="package-alerts ltx_document" errors="" found”="" have="" role="“status”">
+<button aria-label="Dismiss alert" onclick="closePopup()">
+<span aria-hidden="true"><svg aria-hidden="true" focusable="false" height="20" role="presentation" viewbox="0 0 44 44" width="20">
+<path d="M0.549989 4.44999L4.44999 0.549988L43.45 39.55L39.55 43.45L0.549989 4.44999Z"></path>
+<path d="M39.55 0.549988L43.45 4.44999L4.44999 43.45L0.549988 39.55L39.55 0.549988Z"></path>
+</svg></span>
+</button>
+<p>HTML conversions <a href="https://info.dev.arxiv.org/about/accessibility_html_error_messages.html" target="_blank">sometimes display errors</a> due to content that did not convert correctly from the source. This paper uses the following packages that are not yet supported by the HTML conversion tool. Feedback on these issues are not necessary; they are known and are being worked on.</p>
+<ul arial-label="Unsupported packages used in this paper">
+<li>failed: epic</li>
+</ul>
+<p>Authors: achieve the best HTML results from your LaTeX submissions by following these <a href="https://info.arxiv.org/help/submit_latex_best_practices.html" target="_blank">best practices</a>.</p>
+</div><div class="section" id="target-section"><div id="license-tr">License: CC BY 4.0</div><div id="watermark-tr">arXiv:2312.16737v1 [cs.CV] 27 Dec 2023</div></div>
+<script>
+            function closePopup() {
+                document.querySelector('.package-alerts').style.display = 'none';
+            }
+        </script>
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Supplementary Material for 
+<br class="ltx_break"/>HMP: Hand Motion Priors for Pose and Shape Estimation From Video
+</h1>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Additional Experiments</h2>
+<section class="ltx_subsection" id="S1.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.1 </span>HO-3D Test Split Results</h3>
+<div class="ltx_para" id="S1.SS1.p1">
+<p class="ltx_p" id="S1.SS1.p1.1">We report quantitative results over the HO3D test split in <a class="ltx_ref" href="#S1.T1" title="Table 1 ‣ 1.1 HO-3D Test Split Results ‣ 1 Additional Experiments ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">1</span></a>. In addition to mean-per-joint-projection error (PA-MPJPE) and vertex-to-vertex error (PA-V2V) we provide the F-scores after procrustes alignment: PA-F@5, and PA-F@15. Those values are obtained from the official evaluation server using the test set of HO-3D. Since we do not have the ground-truth labels for the test set, we cannot compute and report RA-ACC.</p>
+</div>
+<div class="ltx_para" id="S1.SS1.p2">
+<p class="ltx_p" id="S1.SS1.p2.1">Recent methods utilize HO3D and DexYCB as their primary training datasets. However, given the limited background and subject diversity inherent to HO3D and DexYCB, methods solely trained on these datasets struggle to generalize effectively to in-the-wild videos. In contrast, neither PyMAF-X nor our motion prior relies on these datasets for training, thereby enhancing their generalization to in-the-wild scenarios. Consequently, directly comparing our method with those trained on HO3D and DexYCB can be challenging. To signify this distinction, we have marked such methods with <math alttext="\dagger" class="ltx_Math" display="inline" id="S1.SS1.p2.1.m1.1"><semantics id="S1.SS1.p2.1.m1.1a"><mo id="S1.SS1.p2.1.m1.1.1" xref="S1.SS1.p2.1.m1.1.1.cmml">†</mo><annotation-xml encoding="MathML-Content" id="S1.SS1.p2.1.m1.1b"><ci id="S1.SS1.p2.1.m1.1.1.cmml" xref="S1.SS1.p2.1.m1.1.1">†</ci></annotation-xml><annotation encoding="application/x-tex" id="S1.SS1.p2.1.m1.1c">\dagger</annotation><annotation encoding="application/x-llamapun" id="S1.SS1.p2.1.m1.1d">†</annotation></semantics></math> in the corresponding tables. Overall, our method outperforms the existing state-of-the-art (SOTA) techniques on the HO3D-test split. Furthermore, our approach enhances the performance of the PyMAF-X method, which we employ for initialization, across both datasets.</p>
+</div>
+<figure class="ltx_table" id="S1.T1">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S1.T1.11" style="width:433.6pt;height:212.3pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="transform:translate(14.6pt,-7.2pt) scale(1.07223840707677,1.07223840707677) ;">
+<table class="ltx_tabular ltx_align_middle" id="S1.T1.11.11">
+<tr class="ltx_tr" id="S1.T1.11.11.12">
+<td class="ltx_td ltx_border_r ltx_border_tt" id="S1.T1.11.11.12.1"></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" colspan="4" id="S1.T1.11.11.12.2">
+<span class="ltx_text ltx_font_bold" id="S1.T1.11.11.12.2.1">HO3D-v3</span></td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.4.4.4">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S1.T1.4.4.4.5"><span class="ltx_text ltx_font_bold" id="S1.T1.4.4.4.5.1">Methods</span></td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.1.1.1.1">
+<span class="ltx_text ltx_font_bold" id="S1.T1.1.1.1.1.1">PA-MPJPE</span> <math alttext="\downarrow" class="ltx_Math" display="inline" id="S1.T1.1.1.1.1.m1.1"><semantics id="S1.T1.1.1.1.1.m1.1a"><mo id="S1.T1.1.1.1.1.m1.1.1" stretchy="false" xref="S1.T1.1.1.1.1.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S1.T1.1.1.1.1.m1.1b"><ci id="S1.T1.1.1.1.1.m1.1.1.cmml" xref="S1.T1.1.1.1.1.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.1.1.1.1.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S1.T1.1.1.1.1.m1.1d">↓</annotation></semantics></math>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.2.2.2.2">
+<span class="ltx_text ltx_font_bold" id="S1.T1.2.2.2.2.1">PA-V2V 2V</span> <math alttext="\downarrow" class="ltx_Math" display="inline" id="S1.T1.2.2.2.2.m1.1"><semantics id="S1.T1.2.2.2.2.m1.1a"><mo id="S1.T1.2.2.2.2.m1.1.1" stretchy="false" xref="S1.T1.2.2.2.2.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S1.T1.2.2.2.2.m1.1b"><ci id="S1.T1.2.2.2.2.m1.1.1.cmml" xref="S1.T1.2.2.2.2.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.2.2.2.2.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S1.T1.2.2.2.2.m1.1d">↓</annotation></semantics></math>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.3.3.3.3">
+<span class="ltx_text ltx_font_bold" id="S1.T1.3.3.3.3.1">PA-F@5</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S1.T1.3.3.3.3.m1.1"><semantics id="S1.T1.3.3.3.3.m1.1a"><mo id="S1.T1.3.3.3.3.m1.1.1" stretchy="false" xref="S1.T1.3.3.3.3.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S1.T1.3.3.3.3.m1.1b"><ci id="S1.T1.3.3.3.3.m1.1.1.cmml" xref="S1.T1.3.3.3.3.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.3.3.3.3.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S1.T1.3.3.3.3.m1.1d">↑</annotation></semantics></math>
+</td>
+<td class="ltx_td ltx_align_right" id="S1.T1.4.4.4.4">
+<span class="ltx_text ltx_font_bold" id="S1.T1.4.4.4.4.1">PA-F@15</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S1.T1.4.4.4.4.m1.1"><semantics id="S1.T1.4.4.4.4.m1.1a"><mo id="S1.T1.4.4.4.4.m1.1.1" stretchy="false" xref="S1.T1.4.4.4.4.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S1.T1.4.4.4.4.m1.1b"><ci id="S1.T1.4.4.4.4.m1.1.1.cmml" xref="S1.T1.4.4.4.4.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.4.4.4.4.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S1.T1.4.4.4.4.m1.1d">↑</annotation></semantics></math>
+</td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.5.5.5">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S1.T1.5.5.5.1">Hasson <em class="ltx_emph ltx_font_italic" id="S1.T1.5.5.5.1.1">et al</em>.<span class="ltx_text" id="S1.T1.5.5.5.1.2"></span> <math alttext="{}^{\dagger}" class="ltx_Math" display="inline" id="S1.T1.5.5.5.1.m1.1"><semantics id="S1.T1.5.5.5.1.m1.1a"><msup id="S1.T1.5.5.5.1.m1.1.1" xref="S1.T1.5.5.5.1.m1.1.1.cmml"><mi id="S1.T1.5.5.5.1.m1.1.1a" xref="S1.T1.5.5.5.1.m1.1.1.cmml"></mi><mo id="S1.T1.5.5.5.1.m1.1.1.1" xref="S1.T1.5.5.5.1.m1.1.1.1.cmml">†</mo></msup><annotation-xml encoding="MathML-Content" id="S1.T1.5.5.5.1.m1.1b"><apply id="S1.T1.5.5.5.1.m1.1.1.cmml" xref="S1.T1.5.5.5.1.m1.1.1"><ci id="S1.T1.5.5.5.1.m1.1.1.1.cmml" xref="S1.T1.5.5.5.1.m1.1.1.1">†</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.5.5.5.1.m1.1c">{}^{\dagger}</annotation><annotation encoding="application/x-llamapun" id="S1.T1.5.5.5.1.m1.1d">start_FLOATSUPERSCRIPT † end_FLOATSUPERSCRIPT</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib4" title="">4</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t" id="S1.T1.5.5.5.2">11.4</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t" id="S1.T1.5.5.5.3">11.4</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t" id="S1.T1.5.5.5.4">42.8</td>
+<td class="ltx_td ltx_align_right ltx_border_t" id="S1.T1.5.5.5.5">93.2</td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.6.6.6">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S1.T1.6.6.6.1">Hasson <em class="ltx_emph ltx_font_italic" id="S1.T1.6.6.6.1.1">et al</em>.<span class="ltx_text" id="S1.T1.6.6.6.1.2"></span> <math alttext="{}^{\dagger}" class="ltx_Math" display="inline" id="S1.T1.6.6.6.1.m1.1"><semantics id="S1.T1.6.6.6.1.m1.1a"><msup id="S1.T1.6.6.6.1.m1.1.1" xref="S1.T1.6.6.6.1.m1.1.1.cmml"><mi id="S1.T1.6.6.6.1.m1.1.1a" xref="S1.T1.6.6.6.1.m1.1.1.cmml"></mi><mo id="S1.T1.6.6.6.1.m1.1.1.1" xref="S1.T1.6.6.6.1.m1.1.1.1.cmml">†</mo></msup><annotation-xml encoding="MathML-Content" id="S1.T1.6.6.6.1.m1.1b"><apply id="S1.T1.6.6.6.1.m1.1.1.cmml" xref="S1.T1.6.6.6.1.m1.1.1"><ci id="S1.T1.6.6.6.1.m1.1.1.1.cmml" xref="S1.T1.6.6.6.1.m1.1.1.1">†</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.6.6.6.1.m1.1c">{}^{\dagger}</annotation><annotation encoding="application/x-llamapun" id="S1.T1.6.6.6.1.m1.1d">start_FLOATSUPERSCRIPT † end_FLOATSUPERSCRIPT</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib5" title="">5</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.6.6.6.2">11.1</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.6.6.6.3">11.0</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.6.6.6.4">46.0</td>
+<td class="ltx_td ltx_align_right" id="S1.T1.6.6.6.5">93.0</td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.7.7.7">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S1.T1.7.7.7.1">TempCLR<math alttext="{}^{\dagger}" class="ltx_Math" display="inline" id="S1.T1.7.7.7.1.m1.1"><semantics id="S1.T1.7.7.7.1.m1.1a"><msup id="S1.T1.7.7.7.1.m1.1.1" xref="S1.T1.7.7.7.1.m1.1.1.cmml"><mi id="S1.T1.7.7.7.1.m1.1.1a" xref="S1.T1.7.7.7.1.m1.1.1.cmml"></mi><mo id="S1.T1.7.7.7.1.m1.1.1.1" xref="S1.T1.7.7.7.1.m1.1.1.1.cmml">†</mo></msup><annotation-xml encoding="MathML-Content" id="S1.T1.7.7.7.1.m1.1b"><apply id="S1.T1.7.7.7.1.m1.1.1.cmml" xref="S1.T1.7.7.7.1.m1.1.1"><ci id="S1.T1.7.7.7.1.m1.1.1.1.cmml" xref="S1.T1.7.7.7.1.m1.1.1.1">†</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.7.7.7.1.m1.1c">{}^{\dagger}</annotation><annotation encoding="application/x-llamapun" id="S1.T1.7.7.7.1.m1.1d">start_FLOATSUPERSCRIPT † end_FLOATSUPERSCRIPT</annotation></semantics></math>
+<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib15" title="">15</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.7.7.7.2">10.6</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.7.7.7.3">10.6</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.7.7.7.4">48.1</td>
+<td class="ltx_td ltx_align_right" id="S1.T1.7.7.7.5">93.7</td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.8.8.8">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S1.T1.8.8.8.1">Hampali <em class="ltx_emph ltx_font_italic" id="S1.T1.8.8.8.1.1">et al</em>.<span class="ltx_text" id="S1.T1.8.8.8.1.2"></span> <math alttext="{}^{\dagger}" class="ltx_Math" display="inline" id="S1.T1.8.8.8.1.m1.1"><semantics id="S1.T1.8.8.8.1.m1.1a"><msup id="S1.T1.8.8.8.1.m1.1.1" xref="S1.T1.8.8.8.1.m1.1.1.cmml"><mi id="S1.T1.8.8.8.1.m1.1.1a" xref="S1.T1.8.8.8.1.m1.1.1.cmml"></mi><mo id="S1.T1.8.8.8.1.m1.1.1.1" xref="S1.T1.8.8.8.1.m1.1.1.1.cmml">†</mo></msup><annotation-xml encoding="MathML-Content" id="S1.T1.8.8.8.1.m1.1b"><apply id="S1.T1.8.8.8.1.m1.1.1.cmml" xref="S1.T1.8.8.8.1.m1.1.1"><ci id="S1.T1.8.8.8.1.m1.1.1.1.cmml" xref="S1.T1.8.8.8.1.m1.1.1.1">†</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.8.8.8.1.m1.1c">{}^{\dagger}</annotation><annotation encoding="application/x-llamapun" id="S1.T1.8.8.8.1.m1.1d">start_FLOATSUPERSCRIPT † end_FLOATSUPERSCRIPT</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib2" title="">2</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.8.8.8.2">10.7</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.8.8.8.3">10.6</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.8.8.8.4">50.6</td>
+<td class="ltx_td ltx_align_right" id="S1.T1.8.8.8.5">94.2</td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.9.9.9">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S1.T1.9.9.9.1">Liu <em class="ltx_emph ltx_font_italic" id="S1.T1.9.9.9.1.1">et al</em>.<span class="ltx_text" id="S1.T1.9.9.9.1.2"></span> <math alttext="{}^{\dagger}" class="ltx_Math" display="inline" id="S1.T1.9.9.9.1.m1.1"><semantics id="S1.T1.9.9.9.1.m1.1a"><msup id="S1.T1.9.9.9.1.m1.1.1" xref="S1.T1.9.9.9.1.m1.1.1.cmml"><mi id="S1.T1.9.9.9.1.m1.1.1a" xref="S1.T1.9.9.9.1.m1.1.1.cmml"></mi><mo id="S1.T1.9.9.9.1.m1.1.1.1" xref="S1.T1.9.9.9.1.m1.1.1.1.cmml">†</mo></msup><annotation-xml encoding="MathML-Content" id="S1.T1.9.9.9.1.m1.1b"><apply id="S1.T1.9.9.9.1.m1.1.1.cmml" xref="S1.T1.9.9.9.1.m1.1.1"><ci id="S1.T1.9.9.9.1.m1.1.1.1.cmml" xref="S1.T1.9.9.9.1.m1.1.1.1">†</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.9.9.9.1.m1.1c">{}^{\dagger}</annotation><annotation encoding="application/x-llamapun" id="S1.T1.9.9.9.1.m1.1d">start_FLOATSUPERSCRIPT † end_FLOATSUPERSCRIPT</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib8" title="">8</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.9.9.9.2">10.1</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.9.9.9.3">9.7</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.9.9.9.4">53.2</td>
+<td class="ltx_td ltx_align_right" id="S1.T1.9.9.9.5">95.2</td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.10.10.10">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S1.T1.10.10.10.1">Deformer<math alttext="{}^{\dagger}" class="ltx_Math" display="inline" id="S1.T1.10.10.10.1.m1.1"><semantics id="S1.T1.10.10.10.1.m1.1a"><msup id="S1.T1.10.10.10.1.m1.1.1" xref="S1.T1.10.10.10.1.m1.1.1.cmml"><mi id="S1.T1.10.10.10.1.m1.1.1a" xref="S1.T1.10.10.10.1.m1.1.1.cmml"></mi><mo id="S1.T1.10.10.10.1.m1.1.1.1" xref="S1.T1.10.10.10.1.m1.1.1.1.cmml">†</mo></msup><annotation-xml encoding="MathML-Content" id="S1.T1.10.10.10.1.m1.1b"><apply id="S1.T1.10.10.10.1.m1.1.1.cmml" xref="S1.T1.10.10.10.1.m1.1.1"><ci id="S1.T1.10.10.10.1.m1.1.1.1.cmml" xref="S1.T1.10.10.10.1.m1.1.1.1">†</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.10.10.10.1.m1.1c">{}^{\dagger}</annotation><annotation encoding="application/x-llamapun" id="S1.T1.10.10.10.1.m1.1d">start_FLOATSUPERSCRIPT † end_FLOATSUPERSCRIPT</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib1" title="">1</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.10.10.10.2">9.4</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.10.10.10.3">9.1</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.10.10.10.4">54.6</td>
+<td class="ltx_td ltx_align_right" id="S1.T1.10.10.10.5"><span class="ltx_text ltx_font_bold" id="S1.T1.10.10.10.5.1">96.3</span></td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.11.11.11">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S1.T1.11.11.11.1">HandOccNet<math alttext="{}^{\dagger}" class="ltx_Math" display="inline" id="S1.T1.11.11.11.1.m1.1"><semantics id="S1.T1.11.11.11.1.m1.1a"><msup id="S1.T1.11.11.11.1.m1.1.1" xref="S1.T1.11.11.11.1.m1.1.1.cmml"><mi id="S1.T1.11.11.11.1.m1.1.1a" xref="S1.T1.11.11.11.1.m1.1.1.cmml"></mi><mo id="S1.T1.11.11.11.1.m1.1.1.1" xref="S1.T1.11.11.11.1.m1.1.1.1.cmml">†</mo></msup><annotation-xml encoding="MathML-Content" id="S1.T1.11.11.11.1.m1.1b"><apply id="S1.T1.11.11.11.1.m1.1.1.cmml" xref="S1.T1.11.11.11.1.m1.1.1"><ci id="S1.T1.11.11.11.1.m1.1.1.1.cmml" xref="S1.T1.11.11.11.1.m1.1.1.1">†</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.11.11.11.1.m1.1c">{}^{\dagger}</annotation><annotation encoding="application/x-llamapun" id="S1.T1.11.11.11.1.m1.1d">start_FLOATSUPERSCRIPT † end_FLOATSUPERSCRIPT</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib11" title="">11</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.11.11.11.2"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.11.2.1">9.1</span></td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.11.11.11.3"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.11.3.1">8.8</span></td>
+<td class="ltx_td ltx_align_right ltx_border_r" id="S1.T1.11.11.11.4"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.11.4.1">56.4</span></td>
+<td class="ltx_td ltx_align_right" id="S1.T1.11.11.11.5"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.11.5.1">96.3</span></td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.11.11.13">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S1.T1.11.11.13.1">PyMAF-X <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib13" title="">13</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t" id="S1.T1.11.11.13.2">11.2</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t" id="S1.T1.11.11.13.3">11.0</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t" id="S1.T1.11.11.13.4">47.6</td>
+<td class="ltx_td ltx_align_right ltx_border_t" id="S1.T1.11.11.13.5">92.8</td>
+</tr>
+<tr class="ltx_tr" id="S1.T1.11.11.14">
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_r" id="S1.T1.11.11.14.1">HMP (Ours)</td>
+<td class="ltx_td ltx_align_right ltx_border_bb ltx_border_r" id="S1.T1.11.11.14.2"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.14.2.1">10.2</span></td>
+<td class="ltx_td ltx_align_right ltx_border_bb ltx_border_r" id="S1.T1.11.11.14.3"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.14.3.1">9.9</span></td>
+<td class="ltx_td ltx_align_right ltx_border_bb ltx_border_r" id="S1.T1.11.11.14.4"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.14.4.1">51.0</span></td>
+<td class="ltx_td ltx_align_right ltx_border_bb" id="S1.T1.11.11.14.5"><span class="ltx_text ltx_font_bold" id="S1.T1.11.11.14.5.1">94.6</span></td>
+</tr>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S1.T1.15.2.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S1.T1.13.1" style="font-size:90%;">State-of-the-art comparison on the test split of HO3D-v3 dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib3" title="">3</a>]</cite>. Methods denoted with <math alttext="\dagger" class="ltx_Math" display="inline" id="S1.T1.13.1.m1.1"><semantics id="S1.T1.13.1.m1.1b"><mo id="S1.T1.13.1.m1.1.1" xref="S1.T1.13.1.m1.1.1.cmml">†</mo><annotation-xml encoding="MathML-Content" id="S1.T1.13.1.m1.1c"><ci id="S1.T1.13.1.m1.1.1.cmml" xref="S1.T1.13.1.m1.1.1">†</ci></annotation-xml><annotation encoding="application/x-tex" id="S1.T1.13.1.m1.1d">\dagger</annotation><annotation encoding="application/x-llamapun" id="S1.T1.13.1.m1.1e">†</annotation></semantics></math> uses HO-3D as their training dataset.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S1.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.2 </span>Sample Diversity of Different Motion Priors</h3>
+<div class="ltx_para" id="S1.SS2.p1">
+<p class="ltx_p" id="S1.SS2.p1.1">We report the sample diversity metrics for PCA-based motion prior, GMM-based motion prior, and our motion prior in <a class="ltx_ref" href="#S1.T2" title="Table 2 ‣ 1.2 Sample Diversity of Different Motion Priors ‣ 1 Additional Experiments ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">2</span></a>. All motion priors are trained on the same sequences from the AMASS dataset. We follow the same evaluation criteria as <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib6" title="">6</a>]</cite>.</p>
+</div>
+<figure class="ltx_table" id="S1.T2">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S1.T2.1">
+<tr class="ltx_tr" id="S1.T2.1.1">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S1.T2.1.1.2">MP Type</td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S1.T2.1.1.1">Diversity <math alttext="\uparrow" class="ltx_Math" display="inline" id="S1.T2.1.1.1.m1.1"><semantics id="S1.T2.1.1.1.m1.1a"><mo id="S1.T2.1.1.1.m1.1.1" stretchy="false" xref="S1.T2.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S1.T2.1.1.1.m1.1b"><ci id="S1.T2.1.1.1.m1.1.1.cmml" xref="S1.T2.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S1.T2.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S1.T2.1.1.1.m1.1d">↑</annotation></semantics></math>
+</td>
+</tr>
+<tr class="ltx_tr" id="S1.T2.1.2">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S1.T2.1.2.1">PCA-based</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.T2.1.2.2">5.83</td>
+</tr>
+<tr class="ltx_tr" id="S1.T2.1.3">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S1.T2.1.3.1">GMM-based</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S1.T2.1.3.2">5.79</td>
+</tr>
+<tr class="ltx_tr" id="S1.T2.1.4">
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t" id="S1.T2.1.4.1">HMP (Ours)</td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S1.T2.1.4.2"><span class="ltx_text ltx_font_bold" id="S1.T2.1.4.2.1">5.86</span></td>
+</tr>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S1.T2.3.1.1" style="font-size:90%;">Table 2</span>: </span><span class="ltx_text" id="S1.T2.4.2" style="font-size:90%;">Diversity metrics for different motion prior types</span></figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Additional Qualitative Results &amp; Remarks</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.3"><span class="ltx_text ltx_font_bold" id="S2.p1.3.1">Obtaining 2D Pose Confidence</span>: We use keypoint confidences to weight <math alttext="\mathcal{L}_{\textrm{2D}}" class="ltx_Math" display="inline" id="S2.p1.1.m1.1"><semantics id="S2.p1.1.m1.1a"><msub id="S2.p1.1.m1.1.1" xref="S2.p1.1.m1.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S2.p1.1.m1.1.1.2" xref="S2.p1.1.m1.1.1.2.cmml">ℒ</mi><mtext id="S2.p1.1.m1.1.1.3" xref="S2.p1.1.m1.1.1.3a.cmml">2D</mtext></msub><annotation-xml encoding="MathML-Content" id="S2.p1.1.m1.1b"><apply id="S2.p1.1.m1.1.1.cmml" xref="S2.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S2.p1.1.m1.1.1.1.cmml" xref="S2.p1.1.m1.1.1">subscript</csymbol><ci id="S2.p1.1.m1.1.1.2.cmml" xref="S2.p1.1.m1.1.1.2">ℒ</ci><ci id="S2.p1.1.m1.1.1.3a.cmml" xref="S2.p1.1.m1.1.1.3"><mtext id="S2.p1.1.m1.1.1.3.cmml" mathsize="70%" xref="S2.p1.1.m1.1.1.3">2D</mtext></ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p1.1.m1.1c">\mathcal{L}_{\textrm{2D}}</annotation><annotation encoding="application/x-llamapun" id="S2.p1.1.m1.1d">caligraphic_L start_POSTSUBSCRIPT 2D end_POSTSUBSCRIPT</annotation></semantics></math>. Unfortunately, MediaPipe does not provide separate confidences for hand keypoints <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib9" title="">9</a>]</cite>. To obtain confidence keypoints, we augment with 11 different views through random rotation and scaling. We perform detection on these views and project the results back. For each joint with index <math alttext="j" class="ltx_Math" display="inline" id="S2.p1.2.m2.1"><semantics id="S2.p1.2.m2.1a"><mi id="S2.p1.2.m2.1.1" xref="S2.p1.2.m2.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S2.p1.2.m2.1b"><ci id="S2.p1.2.m2.1.1.cmml" xref="S2.p1.2.m2.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.p1.2.m2.1c">j</annotation><annotation encoding="application/x-llamapun" id="S2.p1.2.m2.1d">italic_j</annotation></semantics></math> we compute an std value <math alttext="\sigma_{j}" class="ltx_Math" display="inline" id="S2.p1.3.m3.1"><semantics id="S2.p1.3.m3.1a"><msub id="S2.p1.3.m3.1.1" xref="S2.p1.3.m3.1.1.cmml"><mi id="S2.p1.3.m3.1.1.2" xref="S2.p1.3.m3.1.1.2.cmml">σ</mi><mi id="S2.p1.3.m3.1.1.3" xref="S2.p1.3.m3.1.1.3.cmml">j</mi></msub><annotation-xml encoding="MathML-Content" id="S2.p1.3.m3.1b"><apply id="S2.p1.3.m3.1.1.cmml" xref="S2.p1.3.m3.1.1"><csymbol cd="ambiguous" id="S2.p1.3.m3.1.1.1.cmml" xref="S2.p1.3.m3.1.1">subscript</csymbol><ci id="S2.p1.3.m3.1.1.2.cmml" xref="S2.p1.3.m3.1.1.2">𝜎</ci><ci id="S2.p1.3.m3.1.1.3.cmml" xref="S2.p1.3.m3.1.1.3">𝑗</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p1.3.m3.1c">\sigma_{j}</annotation><annotation encoding="application/x-llamapun" id="S2.p1.3.m3.1d">italic_σ start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT</annotation></semantics></math>:</p>
+</div>
+<div class="ltx_para" id="S2.p2">
+<table class="ltx_equation ltx_eqn_table" id="S2.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\sigma_{j}^{2}=\frac{1}{N}\sum_{n=1}^{N}(P_{n}-P_{0})^{2}." class="ltx_Math" display="block" id="S2.E1.m1.1"><semantics id="S2.E1.m1.1a"><mrow id="S2.E1.m1.1.1.1" xref="S2.E1.m1.1.1.1.1.cmml"><mrow id="S2.E1.m1.1.1.1.1" xref="S2.E1.m1.1.1.1.1.cmml"><msubsup id="S2.E1.m1.1.1.1.1.3" xref="S2.E1.m1.1.1.1.1.3.cmml"><mi id="S2.E1.m1.1.1.1.1.3.2.2" xref="S2.E1.m1.1.1.1.1.3.2.2.cmml">σ</mi><mi id="S2.E1.m1.1.1.1.1.3.2.3" xref="S2.E1.m1.1.1.1.1.3.2.3.cmml">j</mi><mn id="S2.E1.m1.1.1.1.1.3.3" xref="S2.E1.m1.1.1.1.1.3.3.cmml">2</mn></msubsup><mo id="S2.E1.m1.1.1.1.1.2" xref="S2.E1.m1.1.1.1.1.2.cmml">=</mo><mrow id="S2.E1.m1.1.1.1.1.1" xref="S2.E1.m1.1.1.1.1.1.cmml"><mfrac id="S2.E1.m1.1.1.1.1.1.3" xref="S2.E1.m1.1.1.1.1.1.3.cmml"><mn id="S2.E1.m1.1.1.1.1.1.3.2" xref="S2.E1.m1.1.1.1.1.1.3.2.cmml">1</mn><mi id="S2.E1.m1.1.1.1.1.1.3.3" xref="S2.E1.m1.1.1.1.1.1.3.3.cmml">N</mi></mfrac><mo id="S2.E1.m1.1.1.1.1.1.2" xref="S2.E1.m1.1.1.1.1.1.2.cmml">⁢</mo><mrow id="S2.E1.m1.1.1.1.1.1.1" xref="S2.E1.m1.1.1.1.1.1.1.cmml"><munderover id="S2.E1.m1.1.1.1.1.1.1.2" xref="S2.E1.m1.1.1.1.1.1.1.2.cmml"><mo id="S2.E1.m1.1.1.1.1.1.1.2.2.2" movablelimits="false" rspace="0em" xref="S2.E1.m1.1.1.1.1.1.1.2.2.2.cmml">∑</mo><mrow id="S2.E1.m1.1.1.1.1.1.1.2.2.3" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3.cmml"><mi id="S2.E1.m1.1.1.1.1.1.1.2.2.3.2" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3.2.cmml">n</mi><mo id="S2.E1.m1.1.1.1.1.1.1.2.2.3.1" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3.1.cmml">=</mo><mn id="S2.E1.m1.1.1.1.1.1.1.2.2.3.3" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3.3.cmml">1</mn></mrow><mi id="S2.E1.m1.1.1.1.1.1.1.2.3" xref="S2.E1.m1.1.1.1.1.1.1.2.3.cmml">N</mi></munderover><msup id="S2.E1.m1.1.1.1.1.1.1.1" xref="S2.E1.m1.1.1.1.1.1.1.1.cmml"><mrow id="S2.E1.m1.1.1.1.1.1.1.1.1.1" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.cmml"><mo id="S2.E1.m1.1.1.1.1.1.1.1.1.1.2" stretchy="false" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.cmml">(</mo><mrow id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.cmml"><msub id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.cmml"><mi id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.2" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.2.cmml">P</mi><mi id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.3" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.3.cmml">n</mi></msub><mo id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.1" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.1.cmml">−</mo><msub id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.cmml"><mi id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.2" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.2.cmml">P</mi><mn id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.3" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.3.cmml">0</mn></msub></mrow><mo id="S2.E1.m1.1.1.1.1.1.1.1.1.1.3" stretchy="false" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.cmml">)</mo></mrow><mn id="S2.E1.m1.1.1.1.1.1.1.1.3" xref="S2.E1.m1.1.1.1.1.1.1.1.3.cmml">2</mn></msup></mrow></mrow></mrow><mo id="S2.E1.m1.1.1.1.2" lspace="0em" xref="S2.E1.m1.1.1.1.1.cmml">.</mo></mrow><annotation-xml encoding="MathML-Content" id="S2.E1.m1.1b"><apply id="S2.E1.m1.1.1.1.1.cmml" xref="S2.E1.m1.1.1.1"><eq id="S2.E1.m1.1.1.1.1.2.cmml" xref="S2.E1.m1.1.1.1.1.2"></eq><apply id="S2.E1.m1.1.1.1.1.3.cmml" xref="S2.E1.m1.1.1.1.1.3"><csymbol cd="ambiguous" id="S2.E1.m1.1.1.1.1.3.1.cmml" xref="S2.E1.m1.1.1.1.1.3">superscript</csymbol><apply id="S2.E1.m1.1.1.1.1.3.2.cmml" xref="S2.E1.m1.1.1.1.1.3"><csymbol cd="ambiguous" id="S2.E1.m1.1.1.1.1.3.2.1.cmml" xref="S2.E1.m1.1.1.1.1.3">subscript</csymbol><ci id="S2.E1.m1.1.1.1.1.3.2.2.cmml" xref="S2.E1.m1.1.1.1.1.3.2.2">𝜎</ci><ci id="S2.E1.m1.1.1.1.1.3.2.3.cmml" xref="S2.E1.m1.1.1.1.1.3.2.3">𝑗</ci></apply><cn id="S2.E1.m1.1.1.1.1.3.3.cmml" type="integer" xref="S2.E1.m1.1.1.1.1.3.3">2</cn></apply><apply id="S2.E1.m1.1.1.1.1.1.cmml" xref="S2.E1.m1.1.1.1.1.1"><times id="S2.E1.m1.1.1.1.1.1.2.cmml" xref="S2.E1.m1.1.1.1.1.1.2"></times><apply id="S2.E1.m1.1.1.1.1.1.3.cmml" xref="S2.E1.m1.1.1.1.1.1.3"><divide id="S2.E1.m1.1.1.1.1.1.3.1.cmml" xref="S2.E1.m1.1.1.1.1.1.3"></divide><cn id="S2.E1.m1.1.1.1.1.1.3.2.cmml" type="integer" xref="S2.E1.m1.1.1.1.1.1.3.2">1</cn><ci id="S2.E1.m1.1.1.1.1.1.3.3.cmml" xref="S2.E1.m1.1.1.1.1.1.3.3">𝑁</ci></apply><apply id="S2.E1.m1.1.1.1.1.1.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1"><apply id="S2.E1.m1.1.1.1.1.1.1.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S2.E1.m1.1.1.1.1.1.1.2.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2">superscript</csymbol><apply id="S2.E1.m1.1.1.1.1.1.1.2.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S2.E1.m1.1.1.1.1.1.1.2.2.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2">subscript</csymbol><sum id="S2.E1.m1.1.1.1.1.1.1.2.2.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2.2.2"></sum><apply id="S2.E1.m1.1.1.1.1.1.1.2.2.3.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3"><eq id="S2.E1.m1.1.1.1.1.1.1.2.2.3.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3.1"></eq><ci id="S2.E1.m1.1.1.1.1.1.1.2.2.3.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3.2">𝑛</ci><cn id="S2.E1.m1.1.1.1.1.1.1.2.2.3.3.cmml" type="integer" xref="S2.E1.m1.1.1.1.1.1.1.2.2.3.3">1</cn></apply></apply><ci id="S2.E1.m1.1.1.1.1.1.1.2.3.cmml" xref="S2.E1.m1.1.1.1.1.1.1.2.3">𝑁</ci></apply><apply id="S2.E1.m1.1.1.1.1.1.1.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S2.E1.m1.1.1.1.1.1.1.1.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1">superscript</csymbol><apply id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1"><minus id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.1"></minus><apply id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2">subscript</csymbol><ci id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.2">𝑃</ci><ci id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.3.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.2.3">𝑛</ci></apply><apply id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3"><csymbol cd="ambiguous" id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.1.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3">subscript</csymbol><ci id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.2.cmml" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.2">𝑃</ci><cn id="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.3.cmml" type="integer" xref="S2.E1.m1.1.1.1.1.1.1.1.1.1.1.3.3">0</cn></apply></apply><cn id="S2.E1.m1.1.1.1.1.1.1.1.3.cmml" type="integer" xref="S2.E1.m1.1.1.1.1.1.1.1.3">2</cn></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.E1.m1.1c">\sigma_{j}^{2}=\frac{1}{N}\sum_{n=1}^{N}(P_{n}-P_{0})^{2}.</annotation><annotation encoding="application/x-llamapun" id="S2.E1.m1.1d">italic_σ start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT start_POSTSUPERSCRIPT 2 end_POSTSUPERSCRIPT = divide start_ARG 1 end_ARG start_ARG italic_N end_ARG ∑ start_POSTSUBSCRIPT italic_n = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_N end_POSTSUPERSCRIPT ( italic_P start_POSTSUBSCRIPT italic_n end_POSTSUBSCRIPT - italic_P start_POSTSUBSCRIPT 0 end_POSTSUBSCRIPT ) start_POSTSUPERSCRIPT 2 end_POSTSUPERSCRIPT .</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.p2.3">Here <math alttext="P_{0}" class="ltx_Math" display="inline" id="S2.p2.1.m1.1"><semantics id="S2.p2.1.m1.1a"><msub id="S2.p2.1.m1.1.1" xref="S2.p2.1.m1.1.1.cmml"><mi id="S2.p2.1.m1.1.1.2" xref="S2.p2.1.m1.1.1.2.cmml">P</mi><mn id="S2.p2.1.m1.1.1.3" xref="S2.p2.1.m1.1.1.3.cmml">0</mn></msub><annotation-xml encoding="MathML-Content" id="S2.p2.1.m1.1b"><apply id="S2.p2.1.m1.1.1.cmml" xref="S2.p2.1.m1.1.1"><csymbol cd="ambiguous" id="S2.p2.1.m1.1.1.1.cmml" xref="S2.p2.1.m1.1.1">subscript</csymbol><ci id="S2.p2.1.m1.1.1.2.cmml" xref="S2.p2.1.m1.1.1.2">𝑃</ci><cn id="S2.p2.1.m1.1.1.3.cmml" type="integer" xref="S2.p2.1.m1.1.1.3">0</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p2.1.m1.1c">P_{0}</annotation><annotation encoding="application/x-llamapun" id="S2.p2.1.m1.1d">italic_P start_POSTSUBSCRIPT 0 end_POSTSUBSCRIPT</annotation></semantics></math> and <math alttext="P_{n}" class="ltx_Math" display="inline" id="S2.p2.2.m2.1"><semantics id="S2.p2.2.m2.1a"><msub id="S2.p2.2.m2.1.1" xref="S2.p2.2.m2.1.1.cmml"><mi id="S2.p2.2.m2.1.1.2" xref="S2.p2.2.m2.1.1.2.cmml">P</mi><mi id="S2.p2.2.m2.1.1.3" xref="S2.p2.2.m2.1.1.3.cmml">n</mi></msub><annotation-xml encoding="MathML-Content" id="S2.p2.2.m2.1b"><apply id="S2.p2.2.m2.1.1.cmml" xref="S2.p2.2.m2.1.1"><csymbol cd="ambiguous" id="S2.p2.2.m2.1.1.1.cmml" xref="S2.p2.2.m2.1.1">subscript</csymbol><ci id="S2.p2.2.m2.1.1.2.cmml" xref="S2.p2.2.m2.1.1.2">𝑃</ci><ci id="S2.p2.2.m2.1.1.3.cmml" xref="S2.p2.2.m2.1.1.3">𝑛</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p2.2.m2.1c">P_{n}</annotation><annotation encoding="application/x-llamapun" id="S2.p2.2.m2.1d">italic_P start_POSTSUBSCRIPT italic_n end_POSTSUBSCRIPT</annotation></semantics></math> denotes the original view and n’th view obtained by random scaling and rotation. To discard anomalies, we clip the std values by an upper threshold <math alttext="\gamma" class="ltx_Math" display="inline" id="S2.p2.3.m3.1"><semantics id="S2.p2.3.m3.1a"><mi id="S2.p2.3.m3.1.1" xref="S2.p2.3.m3.1.1.cmml">γ</mi><annotation-xml encoding="MathML-Content" id="S2.p2.3.m3.1b"><ci id="S2.p2.3.m3.1.1.cmml" xref="S2.p2.3.m3.1.1">𝛾</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.p2.3.m3.1c">\gamma</annotation><annotation encoding="application/x-llamapun" id="S2.p2.3.m3.1d">italic_γ</annotation></semantics></math>:</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\sigma_{j}=\min{(\sigma_{j},\gamma)}." class="ltx_Math" display="block" id="S2.E2.m1.3"><semantics id="S2.E2.m1.3a"><mrow id="S2.E2.m1.3.3.1" xref="S2.E2.m1.3.3.1.1.cmml"><mrow id="S2.E2.m1.3.3.1.1" xref="S2.E2.m1.3.3.1.1.cmml"><msub id="S2.E2.m1.3.3.1.1.3" xref="S2.E2.m1.3.3.1.1.3.cmml"><mi id="S2.E2.m1.3.3.1.1.3.2" xref="S2.E2.m1.3.3.1.1.3.2.cmml">σ</mi><mi id="S2.E2.m1.3.3.1.1.3.3" xref="S2.E2.m1.3.3.1.1.3.3.cmml">j</mi></msub><mo id="S2.E2.m1.3.3.1.1.2" xref="S2.E2.m1.3.3.1.1.2.cmml">=</mo><mrow id="S2.E2.m1.3.3.1.1.1.1" xref="S2.E2.m1.3.3.1.1.1.2.cmml"><mi id="S2.E2.m1.1.1" xref="S2.E2.m1.1.1.cmml">min</mi><mo id="S2.E2.m1.3.3.1.1.1.1a" xref="S2.E2.m1.3.3.1.1.1.2.cmml">⁡</mo><mrow id="S2.E2.m1.3.3.1.1.1.1.1" xref="S2.E2.m1.3.3.1.1.1.2.cmml"><mo id="S2.E2.m1.3.3.1.1.1.1.1.2" stretchy="false" xref="S2.E2.m1.3.3.1.1.1.2.cmml">(</mo><msub id="S2.E2.m1.3.3.1.1.1.1.1.1" xref="S2.E2.m1.3.3.1.1.1.1.1.1.cmml"><mi id="S2.E2.m1.3.3.1.1.1.1.1.1.2" xref="S2.E2.m1.3.3.1.1.1.1.1.1.2.cmml">σ</mi><mi id="S2.E2.m1.3.3.1.1.1.1.1.1.3" xref="S2.E2.m1.3.3.1.1.1.1.1.1.3.cmml">j</mi></msub><mo id="S2.E2.m1.3.3.1.1.1.1.1.3" xref="S2.E2.m1.3.3.1.1.1.2.cmml">,</mo><mi id="S2.E2.m1.2.2" xref="S2.E2.m1.2.2.cmml">γ</mi><mo id="S2.E2.m1.3.3.1.1.1.1.1.4" stretchy="false" xref="S2.E2.m1.3.3.1.1.1.2.cmml">)</mo></mrow></mrow></mrow><mo id="S2.E2.m1.3.3.1.2" lspace="0em" xref="S2.E2.m1.3.3.1.1.cmml">.</mo></mrow><annotation-xml encoding="MathML-Content" id="S2.E2.m1.3b"><apply id="S2.E2.m1.3.3.1.1.cmml" xref="S2.E2.m1.3.3.1"><eq id="S2.E2.m1.3.3.1.1.2.cmml" xref="S2.E2.m1.3.3.1.1.2"></eq><apply id="S2.E2.m1.3.3.1.1.3.cmml" xref="S2.E2.m1.3.3.1.1.3"><csymbol cd="ambiguous" id="S2.E2.m1.3.3.1.1.3.1.cmml" xref="S2.E2.m1.3.3.1.1.3">subscript</csymbol><ci id="S2.E2.m1.3.3.1.1.3.2.cmml" xref="S2.E2.m1.3.3.1.1.3.2">𝜎</ci><ci id="S2.E2.m1.3.3.1.1.3.3.cmml" xref="S2.E2.m1.3.3.1.1.3.3">𝑗</ci></apply><apply id="S2.E2.m1.3.3.1.1.1.2.cmml" xref="S2.E2.m1.3.3.1.1.1.1"><min id="S2.E2.m1.1.1.cmml" xref="S2.E2.m1.1.1"></min><apply id="S2.E2.m1.3.3.1.1.1.1.1.1.cmml" xref="S2.E2.m1.3.3.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S2.E2.m1.3.3.1.1.1.1.1.1.1.cmml" xref="S2.E2.m1.3.3.1.1.1.1.1.1">subscript</csymbol><ci id="S2.E2.m1.3.3.1.1.1.1.1.1.2.cmml" xref="S2.E2.m1.3.3.1.1.1.1.1.1.2">𝜎</ci><ci id="S2.E2.m1.3.3.1.1.1.1.1.1.3.cmml" xref="S2.E2.m1.3.3.1.1.1.1.1.1.3">𝑗</ci></apply><ci id="S2.E2.m1.2.2.cmml" xref="S2.E2.m1.2.2">𝛾</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.E2.m1.3c">\sigma_{j}=\min{(\sigma_{j},\gamma)}.</annotation><annotation encoding="application/x-llamapun" id="S2.E2.m1.3d">italic_σ start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT = roman_min ( italic_σ start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT , italic_γ ) .</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.p2.6">We then compute confidence value as,</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\alpha_{j}=1-\frac{\sigma_{j}}{\gamma}." class="ltx_Math" display="block" id="S2.E3.m1.1"><semantics id="S2.E3.m1.1a"><mrow id="S2.E3.m1.1.1.1" xref="S2.E3.m1.1.1.1.1.cmml"><mrow id="S2.E3.m1.1.1.1.1" xref="S2.E3.m1.1.1.1.1.cmml"><msub id="S2.E3.m1.1.1.1.1.2" xref="S2.E3.m1.1.1.1.1.2.cmml"><mi id="S2.E3.m1.1.1.1.1.2.2" xref="S2.E3.m1.1.1.1.1.2.2.cmml">α</mi><mi id="S2.E3.m1.1.1.1.1.2.3" xref="S2.E3.m1.1.1.1.1.2.3.cmml">j</mi></msub><mo id="S2.E3.m1.1.1.1.1.1" xref="S2.E3.m1.1.1.1.1.1.cmml">=</mo><mrow id="S2.E3.m1.1.1.1.1.3" xref="S2.E3.m1.1.1.1.1.3.cmml"><mn id="S2.E3.m1.1.1.1.1.3.2" xref="S2.E3.m1.1.1.1.1.3.2.cmml">1</mn><mo id="S2.E3.m1.1.1.1.1.3.1" xref="S2.E3.m1.1.1.1.1.3.1.cmml">−</mo><mfrac id="S2.E3.m1.1.1.1.1.3.3" xref="S2.E3.m1.1.1.1.1.3.3.cmml"><msub id="S2.E3.m1.1.1.1.1.3.3.2" xref="S2.E3.m1.1.1.1.1.3.3.2.cmml"><mi id="S2.E3.m1.1.1.1.1.3.3.2.2" xref="S2.E3.m1.1.1.1.1.3.3.2.2.cmml">σ</mi><mi id="S2.E3.m1.1.1.1.1.3.3.2.3" xref="S2.E3.m1.1.1.1.1.3.3.2.3.cmml">j</mi></msub><mi id="S2.E3.m1.1.1.1.1.3.3.3" xref="S2.E3.m1.1.1.1.1.3.3.3.cmml">γ</mi></mfrac></mrow></mrow><mo id="S2.E3.m1.1.1.1.2" lspace="0em" xref="S2.E3.m1.1.1.1.1.cmml">.</mo></mrow><annotation-xml encoding="MathML-Content" id="S2.E3.m1.1b"><apply id="S2.E3.m1.1.1.1.1.cmml" xref="S2.E3.m1.1.1.1"><eq id="S2.E3.m1.1.1.1.1.1.cmml" xref="S2.E3.m1.1.1.1.1.1"></eq><apply id="S2.E3.m1.1.1.1.1.2.cmml" xref="S2.E3.m1.1.1.1.1.2"><csymbol cd="ambiguous" id="S2.E3.m1.1.1.1.1.2.1.cmml" xref="S2.E3.m1.1.1.1.1.2">subscript</csymbol><ci id="S2.E3.m1.1.1.1.1.2.2.cmml" xref="S2.E3.m1.1.1.1.1.2.2">𝛼</ci><ci id="S2.E3.m1.1.1.1.1.2.3.cmml" xref="S2.E3.m1.1.1.1.1.2.3">𝑗</ci></apply><apply id="S2.E3.m1.1.1.1.1.3.cmml" xref="S2.E3.m1.1.1.1.1.3"><minus id="S2.E3.m1.1.1.1.1.3.1.cmml" xref="S2.E3.m1.1.1.1.1.3.1"></minus><cn id="S2.E3.m1.1.1.1.1.3.2.cmml" type="integer" xref="S2.E3.m1.1.1.1.1.3.2">1</cn><apply id="S2.E3.m1.1.1.1.1.3.3.cmml" xref="S2.E3.m1.1.1.1.1.3.3"><divide id="S2.E3.m1.1.1.1.1.3.3.1.cmml" xref="S2.E3.m1.1.1.1.1.3.3"></divide><apply id="S2.E3.m1.1.1.1.1.3.3.2.cmml" xref="S2.E3.m1.1.1.1.1.3.3.2"><csymbol cd="ambiguous" id="S2.E3.m1.1.1.1.1.3.3.2.1.cmml" xref="S2.E3.m1.1.1.1.1.3.3.2">subscript</csymbol><ci id="S2.E3.m1.1.1.1.1.3.3.2.2.cmml" xref="S2.E3.m1.1.1.1.1.3.3.2.2">𝜎</ci><ci id="S2.E3.m1.1.1.1.1.3.3.2.3.cmml" xref="S2.E3.m1.1.1.1.1.3.3.2.3">𝑗</ci></apply><ci id="S2.E3.m1.1.1.1.1.3.3.3.cmml" xref="S2.E3.m1.1.1.1.1.3.3.3">𝛾</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.E3.m1.1c">\alpha_{j}=1-\frac{\sigma_{j}}{\gamma}.</annotation><annotation encoding="application/x-llamapun" id="S2.E3.m1.1d">italic_α start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT = 1 - divide start_ARG italic_σ start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT end_ARG start_ARG italic_γ end_ARG .</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.p2.5">We set <math alttext="N" class="ltx_Math" display="inline" id="S2.p2.4.m1.1"><semantics id="S2.p2.4.m1.1a"><mi id="S2.p2.4.m1.1.1" xref="S2.p2.4.m1.1.1.cmml">N</mi><annotation-xml encoding="MathML-Content" id="S2.p2.4.m1.1b"><ci id="S2.p2.4.m1.1.1.cmml" xref="S2.p2.4.m1.1.1">𝑁</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.p2.4.m1.1c">N</annotation><annotation encoding="application/x-llamapun" id="S2.p2.4.m1.1d">italic_N</annotation></semantics></math>=11 and <math alttext="\gamma" class="ltx_Math" display="inline" id="S2.p2.5.m2.1"><semantics id="S2.p2.5.m2.1a"><mi id="S2.p2.5.m2.1.1" xref="S2.p2.5.m2.1.1.cmml">γ</mi><annotation-xml encoding="MathML-Content" id="S2.p2.5.m2.1b"><ci id="S2.p2.5.m2.1.1.cmml" xref="S2.p2.5.m2.1.1">𝛾</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.p2.5.m2.1c">\gamma</annotation><annotation encoding="application/x-llamapun" id="S2.p2.5.m2.1d">italic_γ</annotation></semantics></math> = 4.</p>
+</div>
+<div class="ltx_para" id="S2.p3">
+<p class="ltx_p" id="S2.p3.1"><span class="ltx_text ltx_font_bold" id="S2.p3.1.1">Qualitative Results:</span> We provide more qualitative results on DexYCB dataset and in-the-wild videos in Fig. <a class="ltx_ref" href="#S2.F1" title="Figure 1 ‣ 2 Additional Qualitative Results &amp; Remarks ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">1</span></a>, <a class="ltx_ref" href="#S2.F2" title="Figure 2 ‣ 2 Additional Qualitative Results &amp; Remarks ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">2</span></a>, and <a class="ltx_ref" href="#S3.F3" title="Figure 3 ‣ 3 Training A Hand Motion Prior ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">3</span></a>. We refer the readers to our SupMat video for more results.</p>
+</div>
+<figure class="ltx_figure" id="S2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="667" id="S2.F1.g1" src="x1.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.3.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text ltx_font_bold" id="S2.F1.4.2" style="font-size:90%;">3D hand pose and shape estimation on an in-the-wild video:<span class="ltx_text ltx_font_medium" id="S2.F1.4.2.1"> input video (top), PyMAF-X (middle), HMP (bottom)</span></span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S2.F2">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_flex_size_1 ltx_img_landscape" height="541" id="S2.F2.g1" src="x2.png" width="830"/></div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_flex_size_1 ltx_img_square" height="895" id="S2.F2.g2" src="x3.png" width="830"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.3.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text ltx_font_bold" id="S2.F2.4.2" style="font-size:90%;">3D hand pose and shape estimation on an in-the-wild video:<span class="ltx_text ltx_font_medium" id="S2.F2.4.2.1"> input video (top), PyMAF-X (middle), HMP (bottom)</span></span></figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Training A Hand Motion Prior</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.3"><span class="ltx_text ltx_font_bold" id="S3.p1.3.1">Data Preprocessing:</span> We adopted a similar approach to data preprocessing as <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib6" title="">6</a>, <a class="ltx_ref" href="#bib.bib12" title="">12</a>]</cite>. GRAB, TCDHands, and SAMP datasets in AMASS have hand articulation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib10" title="">10</a>]</cite>. We only train motion prior for the right hand. We first reflect left hand articulations in the dataset for data augmentation. Then all sequences are divided to motion clips of 128 timesteps. These clips are preprocessed to obtain processed data <math alttext="\mathbf{X}" class="ltx_Math" display="inline" id="S3.p1.1.m1.1"><semantics id="S3.p1.1.m1.1a"><mi id="S3.p1.1.m1.1.1" xref="S3.p1.1.m1.1.1.cmml">𝐗</mi><annotation-xml encoding="MathML-Content" id="S3.p1.1.m1.1b"><ci id="S3.p1.1.m1.1.1.cmml" xref="S3.p1.1.m1.1.1">𝐗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.1.m1.1c">\mathbf{X}</annotation><annotation encoding="application/x-llamapun" id="S3.p1.1.m1.1d">bold_X</annotation></semantics></math>. For any timestep <math alttext="t" class="ltx_Math" display="inline" id="S3.p1.2.m2.1"><semantics id="S3.p1.2.m2.1a"><mi id="S3.p1.2.m2.1.1" xref="S3.p1.2.m2.1.1.cmml">t</mi><annotation-xml encoding="MathML-Content" id="S3.p1.2.m2.1b"><ci id="S3.p1.2.m2.1.1.cmml" xref="S3.p1.2.m2.1.1">𝑡</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.2.m2.1c">t</annotation><annotation encoding="application/x-llamapun" id="S3.p1.2.m2.1d">italic_t</annotation></semantics></math>, the processed data point <math alttext="\mathbf{X}_{t}" class="ltx_Math" display="inline" id="S3.p1.3.m3.1"><semantics id="S3.p1.3.m3.1a"><msub id="S3.p1.3.m3.1.1" xref="S3.p1.3.m3.1.1.cmml"><mi id="S3.p1.3.m3.1.1.2" xref="S3.p1.3.m3.1.1.2.cmml">𝐗</mi><mi id="S3.p1.3.m3.1.1.3" xref="S3.p1.3.m3.1.1.3.cmml">t</mi></msub><annotation-xml encoding="MathML-Content" id="S3.p1.3.m3.1b"><apply id="S3.p1.3.m3.1.1.cmml" xref="S3.p1.3.m3.1.1"><csymbol cd="ambiguous" id="S3.p1.3.m3.1.1.1.cmml" xref="S3.p1.3.m3.1.1">subscript</csymbol><ci id="S3.p1.3.m3.1.1.2.cmml" xref="S3.p1.3.m3.1.1.2">𝐗</ci><ci id="S3.p1.3.m3.1.1.3.cmml" xref="S3.p1.3.m3.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.3.m3.1c">\mathbf{X}_{t}</annotation><annotation encoding="application/x-llamapun" id="S3.p1.3.m3.1d">bold_X start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT</annotation></semantics></math> is,</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E4">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathbf{X}_{t}=\left(\begin{array}[]{llll}\mathbf{x}_{t}^{p}&amp;\dot{\mathbf{x}}_%
+{t}^{p}&amp;\mathbf{x}_{t}^{r}&amp;\dot{\mathbf{x}}_{t}^{r}\end{array}\right)\in%
+\mathbb{R}^{J\times 15}." class="ltx_Math" display="block" id="S3.E4.m1.2"><semantics id="S3.E4.m1.2a"><mrow id="S3.E4.m1.2.2.1" xref="S3.E4.m1.2.2.1.1.cmml"><mrow id="S3.E4.m1.2.2.1.1" xref="S3.E4.m1.2.2.1.1.cmml"><msub id="S3.E4.m1.2.2.1.1.2" xref="S3.E4.m1.2.2.1.1.2.cmml"><mi id="S3.E4.m1.2.2.1.1.2.2" xref="S3.E4.m1.2.2.1.1.2.2.cmml">𝐗</mi><mi id="S3.E4.m1.2.2.1.1.2.3" xref="S3.E4.m1.2.2.1.1.2.3.cmml">t</mi></msub><mo id="S3.E4.m1.2.2.1.1.3" xref="S3.E4.m1.2.2.1.1.3.cmml">=</mo><mrow id="S3.E4.m1.2.2.1.1.4.2" xref="S3.E4.m1.1.1.cmml"><mo id="S3.E4.m1.2.2.1.1.4.2.1" xref="S3.E4.m1.1.1.cmml">(</mo><mtable columnspacing="5pt" displaystyle="true" id="S3.E4.m1.1.1" xref="S3.E4.m1.1.1.cmml"><mtr id="S3.E4.m1.1.1a" xref="S3.E4.m1.1.1.cmml"><mtd class="ltx_align_left" columnalign="left" id="S3.E4.m1.1.1b" xref="S3.E4.m1.1.1.cmml"><msubsup id="S3.E4.m1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.cmml"><mi id="S3.E4.m1.1.1.1.1.1.2.2" xref="S3.E4.m1.1.1.1.1.1.2.2.cmml">𝐱</mi><mi id="S3.E4.m1.1.1.1.1.1.2.3" xref="S3.E4.m1.1.1.1.1.1.2.3.cmml">t</mi><mi id="S3.E4.m1.1.1.1.1.1.3" xref="S3.E4.m1.1.1.1.1.1.3.cmml">p</mi></msubsup></mtd><mtd class="ltx_align_left" columnalign="left" id="S3.E4.m1.1.1c" xref="S3.E4.m1.1.1.cmml"><msubsup id="S3.E4.m1.1.1.1.2.1" xref="S3.E4.m1.1.1.1.2.1.cmml"><mover accent="true" id="S3.E4.m1.1.1.1.2.1.2.2" xref="S3.E4.m1.1.1.1.2.1.2.2.cmml"><mi id="S3.E4.m1.1.1.1.2.1.2.2.2" xref="S3.E4.m1.1.1.1.2.1.2.2.2.cmml">𝐱</mi><mo id="S3.E4.m1.1.1.1.2.1.2.2.1" xref="S3.E4.m1.1.1.1.2.1.2.2.1.cmml">˙</mo></mover><mi id="S3.E4.m1.1.1.1.2.1.2.3" xref="S3.E4.m1.1.1.1.2.1.2.3.cmml">t</mi><mi id="S3.E4.m1.1.1.1.2.1.3" xref="S3.E4.m1.1.1.1.2.1.3.cmml">p</mi></msubsup></mtd><mtd class="ltx_align_left" columnalign="left" id="S3.E4.m1.1.1d" xref="S3.E4.m1.1.1.cmml"><msubsup id="S3.E4.m1.1.1.1.3.1" xref="S3.E4.m1.1.1.1.3.1.cmml"><mi id="S3.E4.m1.1.1.1.3.1.2.2" xref="S3.E4.m1.1.1.1.3.1.2.2.cmml">𝐱</mi><mi id="S3.E4.m1.1.1.1.3.1.2.3" xref="S3.E4.m1.1.1.1.3.1.2.3.cmml">t</mi><mi id="S3.E4.m1.1.1.1.3.1.3" xref="S3.E4.m1.1.1.1.3.1.3.cmml">r</mi></msubsup></mtd><mtd class="ltx_align_left" columnalign="left" id="S3.E4.m1.1.1e" xref="S3.E4.m1.1.1.cmml"><msubsup id="S3.E4.m1.1.1.1.4.1" xref="S3.E4.m1.1.1.1.4.1.cmml"><mover accent="true" id="S3.E4.m1.1.1.1.4.1.2.2" xref="S3.E4.m1.1.1.1.4.1.2.2.cmml"><mi id="S3.E4.m1.1.1.1.4.1.2.2.2" xref="S3.E4.m1.1.1.1.4.1.2.2.2.cmml">𝐱</mi><mo id="S3.E4.m1.1.1.1.4.1.2.2.1" xref="S3.E4.m1.1.1.1.4.1.2.2.1.cmml">˙</mo></mover><mi id="S3.E4.m1.1.1.1.4.1.2.3" xref="S3.E4.m1.1.1.1.4.1.2.3.cmml">t</mi><mi id="S3.E4.m1.1.1.1.4.1.3" xref="S3.E4.m1.1.1.1.4.1.3.cmml">r</mi></msubsup></mtd></mtr></mtable><mo id="S3.E4.m1.2.2.1.1.4.2.2" xref="S3.E4.m1.1.1.cmml">)</mo></mrow><mo id="S3.E4.m1.2.2.1.1.5" xref="S3.E4.m1.2.2.1.1.5.cmml">∈</mo><msup id="S3.E4.m1.2.2.1.1.6" xref="S3.E4.m1.2.2.1.1.6.cmml"><mi id="S3.E4.m1.2.2.1.1.6.2" xref="S3.E4.m1.2.2.1.1.6.2.cmml">ℝ</mi><mrow id="S3.E4.m1.2.2.1.1.6.3" xref="S3.E4.m1.2.2.1.1.6.3.cmml"><mi id="S3.E4.m1.2.2.1.1.6.3.2" xref="S3.E4.m1.2.2.1.1.6.3.2.cmml">J</mi><mo id="S3.E4.m1.2.2.1.1.6.3.1" lspace="0.222em" rspace="0.222em" xref="S3.E4.m1.2.2.1.1.6.3.1.cmml">×</mo><mn id="S3.E4.m1.2.2.1.1.6.3.3" xref="S3.E4.m1.2.2.1.1.6.3.3.cmml">15</mn></mrow></msup></mrow><mo id="S3.E4.m1.2.2.1.2" lspace="0em" xref="S3.E4.m1.2.2.1.1.cmml">.</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.E4.m1.2b"><apply id="S3.E4.m1.2.2.1.1.cmml" xref="S3.E4.m1.2.2.1"><and id="S3.E4.m1.2.2.1.1a.cmml" xref="S3.E4.m1.2.2.1"></and><apply id="S3.E4.m1.2.2.1.1b.cmml" xref="S3.E4.m1.2.2.1"><eq id="S3.E4.m1.2.2.1.1.3.cmml" xref="S3.E4.m1.2.2.1.1.3"></eq><apply id="S3.E4.m1.2.2.1.1.2.cmml" xref="S3.E4.m1.2.2.1.1.2"><csymbol cd="ambiguous" id="S3.E4.m1.2.2.1.1.2.1.cmml" xref="S3.E4.m1.2.2.1.1.2">subscript</csymbol><ci id="S3.E4.m1.2.2.1.1.2.2.cmml" xref="S3.E4.m1.2.2.1.1.2.2">𝐗</ci><ci id="S3.E4.m1.2.2.1.1.2.3.cmml" xref="S3.E4.m1.2.2.1.1.2.3">𝑡</ci></apply><matrix id="S3.E4.m1.1.1.cmml" xref="S3.E4.m1.2.2.1.1.4.2"><matrixrow id="S3.E4.m1.1.1a.cmml" xref="S3.E4.m1.2.2.1.1.4.2"><apply id="S3.E4.m1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1">superscript</csymbol><apply id="S3.E4.m1.1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1">subscript</csymbol><ci id="S3.E4.m1.1.1.1.1.1.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.2.2">𝐱</ci><ci id="S3.E4.m1.1.1.1.1.1.2.3.cmml" xref="S3.E4.m1.1.1.1.1.1.2.3">𝑡</ci></apply><ci id="S3.E4.m1.1.1.1.1.1.3.cmml" xref="S3.E4.m1.1.1.1.1.1.3">𝑝</ci></apply><apply id="S3.E4.m1.1.1.1.2.1.cmml" xref="S3.E4.m1.1.1.1.2.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.2.1.1.cmml" xref="S3.E4.m1.1.1.1.2.1">superscript</csymbol><apply id="S3.E4.m1.1.1.1.2.1.2.cmml" xref="S3.E4.m1.1.1.1.2.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.2.1.2.1.cmml" xref="S3.E4.m1.1.1.1.2.1">subscript</csymbol><apply id="S3.E4.m1.1.1.1.2.1.2.2.cmml" xref="S3.E4.m1.1.1.1.2.1.2.2"><ci id="S3.E4.m1.1.1.1.2.1.2.2.1.cmml" xref="S3.E4.m1.1.1.1.2.1.2.2.1">˙</ci><ci id="S3.E4.m1.1.1.1.2.1.2.2.2.cmml" xref="S3.E4.m1.1.1.1.2.1.2.2.2">𝐱</ci></apply><ci id="S3.E4.m1.1.1.1.2.1.2.3.cmml" xref="S3.E4.m1.1.1.1.2.1.2.3">𝑡</ci></apply><ci id="S3.E4.m1.1.1.1.2.1.3.cmml" xref="S3.E4.m1.1.1.1.2.1.3">𝑝</ci></apply><apply id="S3.E4.m1.1.1.1.3.1.cmml" xref="S3.E4.m1.1.1.1.3.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.3.1.1.cmml" xref="S3.E4.m1.1.1.1.3.1">superscript</csymbol><apply id="S3.E4.m1.1.1.1.3.1.2.cmml" xref="S3.E4.m1.1.1.1.3.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.3.1.2.1.cmml" xref="S3.E4.m1.1.1.1.3.1">subscript</csymbol><ci id="S3.E4.m1.1.1.1.3.1.2.2.cmml" xref="S3.E4.m1.1.1.1.3.1.2.2">𝐱</ci><ci id="S3.E4.m1.1.1.1.3.1.2.3.cmml" xref="S3.E4.m1.1.1.1.3.1.2.3">𝑡</ci></apply><ci id="S3.E4.m1.1.1.1.3.1.3.cmml" xref="S3.E4.m1.1.1.1.3.1.3">𝑟</ci></apply><apply id="S3.E4.m1.1.1.1.4.1.cmml" xref="S3.E4.m1.1.1.1.4.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.4.1.1.cmml" xref="S3.E4.m1.1.1.1.4.1">superscript</csymbol><apply id="S3.E4.m1.1.1.1.4.1.2.cmml" xref="S3.E4.m1.1.1.1.4.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.4.1.2.1.cmml" xref="S3.E4.m1.1.1.1.4.1">subscript</csymbol><apply id="S3.E4.m1.1.1.1.4.1.2.2.cmml" xref="S3.E4.m1.1.1.1.4.1.2.2"><ci id="S3.E4.m1.1.1.1.4.1.2.2.1.cmml" xref="S3.E4.m1.1.1.1.4.1.2.2.1">˙</ci><ci id="S3.E4.m1.1.1.1.4.1.2.2.2.cmml" xref="S3.E4.m1.1.1.1.4.1.2.2.2">𝐱</ci></apply><ci id="S3.E4.m1.1.1.1.4.1.2.3.cmml" xref="S3.E4.m1.1.1.1.4.1.2.3">𝑡</ci></apply><ci id="S3.E4.m1.1.1.1.4.1.3.cmml" xref="S3.E4.m1.1.1.1.4.1.3">𝑟</ci></apply></matrixrow></matrix></apply><apply id="S3.E4.m1.2.2.1.1c.cmml" xref="S3.E4.m1.2.2.1"><in id="S3.E4.m1.2.2.1.1.5.cmml" xref="S3.E4.m1.2.2.1.1.5"></in><share href="#S3.E4.m1.2.2.1.1.4.cmml" id="S3.E4.m1.2.2.1.1d.cmml" xref="S3.E4.m1.2.2.1"></share><apply id="S3.E4.m1.2.2.1.1.6.cmml" xref="S3.E4.m1.2.2.1.1.6"><csymbol cd="ambiguous" id="S3.E4.m1.2.2.1.1.6.1.cmml" xref="S3.E4.m1.2.2.1.1.6">superscript</csymbol><ci id="S3.E4.m1.2.2.1.1.6.2.cmml" xref="S3.E4.m1.2.2.1.1.6.2">ℝ</ci><apply id="S3.E4.m1.2.2.1.1.6.3.cmml" xref="S3.E4.m1.2.2.1.1.6.3"><times id="S3.E4.m1.2.2.1.1.6.3.1.cmml" xref="S3.E4.m1.2.2.1.1.6.3.1"></times><ci id="S3.E4.m1.2.2.1.1.6.3.2.cmml" xref="S3.E4.m1.2.2.1.1.6.3.2">𝐽</ci><cn id="S3.E4.m1.2.2.1.1.6.3.3.cmml" type="integer" xref="S3.E4.m1.2.2.1.1.6.3.3">15</cn></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E4.m1.2c">\mathbf{X}_{t}=\left(\begin{array}[]{llll}\mathbf{x}_{t}^{p}&amp;\dot{\mathbf{x}}_%
+{t}^{p}&amp;\mathbf{x}_{t}^{r}&amp;\dot{\mathbf{x}}_{t}^{r}\end{array}\right)\in%
+\mathbb{R}^{J\times 15}.</annotation><annotation encoding="application/x-llamapun" id="S3.E4.m1.2d">bold_X start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT = ( start_ARRAY start_ROW start_CELL bold_x start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_p end_POSTSUPERSCRIPT end_CELL start_CELL over˙ start_ARG bold_x end_ARG start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_p end_POSTSUPERSCRIPT end_CELL start_CELL bold_x start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_r end_POSTSUPERSCRIPT end_CELL start_CELL over˙ start_ARG bold_x end_ARG start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_r end_POSTSUPERSCRIPT end_CELL end_ROW end_ARRAY ) ∈ blackboard_R start_POSTSUPERSCRIPT italic_J × 15 end_POSTSUPERSCRIPT .</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.p1.9">For a timestep <math alttext="t" class="ltx_Math" display="inline" id="S3.p1.4.m1.1"><semantics id="S3.p1.4.m1.1a"><mi id="S3.p1.4.m1.1.1" xref="S3.p1.4.m1.1.1.cmml">t</mi><annotation-xml encoding="MathML-Content" id="S3.p1.4.m1.1b"><ci id="S3.p1.4.m1.1.1.cmml" xref="S3.p1.4.m1.1.1">𝑡</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.4.m1.1c">t</annotation><annotation encoding="application/x-llamapun" id="S3.p1.4.m1.1d">italic_t</annotation></semantics></math>, <math alttext="\mathbf{x}_{t}^{r}\in\mathbb{R}^{J\times 3}" class="ltx_Math" display="inline" id="S3.p1.5.m2.1"><semantics id="S3.p1.5.m2.1a"><mrow id="S3.p1.5.m2.1.1" xref="S3.p1.5.m2.1.1.cmml"><msubsup id="S3.p1.5.m2.1.1.2" xref="S3.p1.5.m2.1.1.2.cmml"><mi id="S3.p1.5.m2.1.1.2.2.2" xref="S3.p1.5.m2.1.1.2.2.2.cmml">𝐱</mi><mi id="S3.p1.5.m2.1.1.2.2.3" xref="S3.p1.5.m2.1.1.2.2.3.cmml">t</mi><mi id="S3.p1.5.m2.1.1.2.3" xref="S3.p1.5.m2.1.1.2.3.cmml">r</mi></msubsup><mo id="S3.p1.5.m2.1.1.1" xref="S3.p1.5.m2.1.1.1.cmml">∈</mo><msup id="S3.p1.5.m2.1.1.3" xref="S3.p1.5.m2.1.1.3.cmml"><mi id="S3.p1.5.m2.1.1.3.2" xref="S3.p1.5.m2.1.1.3.2.cmml">ℝ</mi><mrow id="S3.p1.5.m2.1.1.3.3" xref="S3.p1.5.m2.1.1.3.3.cmml"><mi id="S3.p1.5.m2.1.1.3.3.2" xref="S3.p1.5.m2.1.1.3.3.2.cmml">J</mi><mo id="S3.p1.5.m2.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.p1.5.m2.1.1.3.3.1.cmml">×</mo><mn id="S3.p1.5.m2.1.1.3.3.3" xref="S3.p1.5.m2.1.1.3.3.3.cmml">3</mn></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.p1.5.m2.1b"><apply id="S3.p1.5.m2.1.1.cmml" xref="S3.p1.5.m2.1.1"><in id="S3.p1.5.m2.1.1.1.cmml" xref="S3.p1.5.m2.1.1.1"></in><apply id="S3.p1.5.m2.1.1.2.cmml" xref="S3.p1.5.m2.1.1.2"><csymbol cd="ambiguous" id="S3.p1.5.m2.1.1.2.1.cmml" xref="S3.p1.5.m2.1.1.2">superscript</csymbol><apply id="S3.p1.5.m2.1.1.2.2.cmml" xref="S3.p1.5.m2.1.1.2"><csymbol cd="ambiguous" id="S3.p1.5.m2.1.1.2.2.1.cmml" xref="S3.p1.5.m2.1.1.2">subscript</csymbol><ci id="S3.p1.5.m2.1.1.2.2.2.cmml" xref="S3.p1.5.m2.1.1.2.2.2">𝐱</ci><ci id="S3.p1.5.m2.1.1.2.2.3.cmml" xref="S3.p1.5.m2.1.1.2.2.3">𝑡</ci></apply><ci id="S3.p1.5.m2.1.1.2.3.cmml" xref="S3.p1.5.m2.1.1.2.3">𝑟</ci></apply><apply id="S3.p1.5.m2.1.1.3.cmml" xref="S3.p1.5.m2.1.1.3"><csymbol cd="ambiguous" id="S3.p1.5.m2.1.1.3.1.cmml" xref="S3.p1.5.m2.1.1.3">superscript</csymbol><ci id="S3.p1.5.m2.1.1.3.2.cmml" xref="S3.p1.5.m2.1.1.3.2">ℝ</ci><apply id="S3.p1.5.m2.1.1.3.3.cmml" xref="S3.p1.5.m2.1.1.3.3"><times id="S3.p1.5.m2.1.1.3.3.1.cmml" xref="S3.p1.5.m2.1.1.3.3.1"></times><ci id="S3.p1.5.m2.1.1.3.3.2.cmml" xref="S3.p1.5.m2.1.1.3.3.2">𝐽</ci><cn id="S3.p1.5.m2.1.1.3.3.3.cmml" type="integer" xref="S3.p1.5.m2.1.1.3.3.3">3</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.5.m2.1c">\mathbf{x}_{t}^{r}\in\mathbb{R}^{J\times 3}</annotation><annotation encoding="application/x-llamapun" id="S3.p1.5.m2.1d">bold_x start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_r end_POSTSUPERSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_J × 3 end_POSTSUPERSCRIPT</annotation></semantics></math> denotes joint positions, <math alttext="\dot{\mathbf{x}}_{t}^{p}\in\mathbb{R}^{J\times 3}" class="ltx_Math" display="inline" id="S3.p1.6.m3.1"><semantics id="S3.p1.6.m3.1a"><mrow id="S3.p1.6.m3.1.1" xref="S3.p1.6.m3.1.1.cmml"><msubsup id="S3.p1.6.m3.1.1.2" xref="S3.p1.6.m3.1.1.2.cmml"><mover accent="true" id="S3.p1.6.m3.1.1.2.2.2" xref="S3.p1.6.m3.1.1.2.2.2.cmml"><mi id="S3.p1.6.m3.1.1.2.2.2.2" xref="S3.p1.6.m3.1.1.2.2.2.2.cmml">𝐱</mi><mo id="S3.p1.6.m3.1.1.2.2.2.1" xref="S3.p1.6.m3.1.1.2.2.2.1.cmml">˙</mo></mover><mi id="S3.p1.6.m3.1.1.2.2.3" xref="S3.p1.6.m3.1.1.2.2.3.cmml">t</mi><mi id="S3.p1.6.m3.1.1.2.3" xref="S3.p1.6.m3.1.1.2.3.cmml">p</mi></msubsup><mo id="S3.p1.6.m3.1.1.1" xref="S3.p1.6.m3.1.1.1.cmml">∈</mo><msup id="S3.p1.6.m3.1.1.3" xref="S3.p1.6.m3.1.1.3.cmml"><mi id="S3.p1.6.m3.1.1.3.2" xref="S3.p1.6.m3.1.1.3.2.cmml">ℝ</mi><mrow id="S3.p1.6.m3.1.1.3.3" xref="S3.p1.6.m3.1.1.3.3.cmml"><mi id="S3.p1.6.m3.1.1.3.3.2" xref="S3.p1.6.m3.1.1.3.3.2.cmml">J</mi><mo id="S3.p1.6.m3.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.p1.6.m3.1.1.3.3.1.cmml">×</mo><mn id="S3.p1.6.m3.1.1.3.3.3" xref="S3.p1.6.m3.1.1.3.3.3.cmml">3</mn></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.p1.6.m3.1b"><apply id="S3.p1.6.m3.1.1.cmml" xref="S3.p1.6.m3.1.1"><in id="S3.p1.6.m3.1.1.1.cmml" xref="S3.p1.6.m3.1.1.1"></in><apply id="S3.p1.6.m3.1.1.2.cmml" xref="S3.p1.6.m3.1.1.2"><csymbol cd="ambiguous" id="S3.p1.6.m3.1.1.2.1.cmml" xref="S3.p1.6.m3.1.1.2">superscript</csymbol><apply id="S3.p1.6.m3.1.1.2.2.cmml" xref="S3.p1.6.m3.1.1.2"><csymbol cd="ambiguous" id="S3.p1.6.m3.1.1.2.2.1.cmml" xref="S3.p1.6.m3.1.1.2">subscript</csymbol><apply id="S3.p1.6.m3.1.1.2.2.2.cmml" xref="S3.p1.6.m3.1.1.2.2.2"><ci id="S3.p1.6.m3.1.1.2.2.2.1.cmml" xref="S3.p1.6.m3.1.1.2.2.2.1">˙</ci><ci id="S3.p1.6.m3.1.1.2.2.2.2.cmml" xref="S3.p1.6.m3.1.1.2.2.2.2">𝐱</ci></apply><ci id="S3.p1.6.m3.1.1.2.2.3.cmml" xref="S3.p1.6.m3.1.1.2.2.3">𝑡</ci></apply><ci id="S3.p1.6.m3.1.1.2.3.cmml" xref="S3.p1.6.m3.1.1.2.3">𝑝</ci></apply><apply id="S3.p1.6.m3.1.1.3.cmml" xref="S3.p1.6.m3.1.1.3"><csymbol cd="ambiguous" id="S3.p1.6.m3.1.1.3.1.cmml" xref="S3.p1.6.m3.1.1.3">superscript</csymbol><ci id="S3.p1.6.m3.1.1.3.2.cmml" xref="S3.p1.6.m3.1.1.3.2">ℝ</ci><apply id="S3.p1.6.m3.1.1.3.3.cmml" xref="S3.p1.6.m3.1.1.3.3"><times id="S3.p1.6.m3.1.1.3.3.1.cmml" xref="S3.p1.6.m3.1.1.3.3.1"></times><ci id="S3.p1.6.m3.1.1.3.3.2.cmml" xref="S3.p1.6.m3.1.1.3.3.2">𝐽</ci><cn id="S3.p1.6.m3.1.1.3.3.3.cmml" type="integer" xref="S3.p1.6.m3.1.1.3.3.3">3</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.6.m3.1c">\dot{\mathbf{x}}_{t}^{p}\in\mathbb{R}^{J\times 3}</annotation><annotation encoding="application/x-llamapun" id="S3.p1.6.m3.1d">over˙ start_ARG bold_x end_ARG start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_p end_POSTSUPERSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_J × 3 end_POSTSUPERSCRIPT</annotation></semantics></math> denotes joint velocities,
+<math alttext="\mathbf{x}_{t}^{r}\in\mathbb{R}^{J\times 6}" class="ltx_Math" display="inline" id="S3.p1.7.m4.1"><semantics id="S3.p1.7.m4.1a"><mrow id="S3.p1.7.m4.1.1" xref="S3.p1.7.m4.1.1.cmml"><msubsup id="S3.p1.7.m4.1.1.2" xref="S3.p1.7.m4.1.1.2.cmml"><mi id="S3.p1.7.m4.1.1.2.2.2" xref="S3.p1.7.m4.1.1.2.2.2.cmml">𝐱</mi><mi id="S3.p1.7.m4.1.1.2.2.3" xref="S3.p1.7.m4.1.1.2.2.3.cmml">t</mi><mi id="S3.p1.7.m4.1.1.2.3" xref="S3.p1.7.m4.1.1.2.3.cmml">r</mi></msubsup><mo id="S3.p1.7.m4.1.1.1" xref="S3.p1.7.m4.1.1.1.cmml">∈</mo><msup id="S3.p1.7.m4.1.1.3" xref="S3.p1.7.m4.1.1.3.cmml"><mi id="S3.p1.7.m4.1.1.3.2" xref="S3.p1.7.m4.1.1.3.2.cmml">ℝ</mi><mrow id="S3.p1.7.m4.1.1.3.3" xref="S3.p1.7.m4.1.1.3.3.cmml"><mi id="S3.p1.7.m4.1.1.3.3.2" xref="S3.p1.7.m4.1.1.3.3.2.cmml">J</mi><mo id="S3.p1.7.m4.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.p1.7.m4.1.1.3.3.1.cmml">×</mo><mn id="S3.p1.7.m4.1.1.3.3.3" xref="S3.p1.7.m4.1.1.3.3.3.cmml">6</mn></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.p1.7.m4.1b"><apply id="S3.p1.7.m4.1.1.cmml" xref="S3.p1.7.m4.1.1"><in id="S3.p1.7.m4.1.1.1.cmml" xref="S3.p1.7.m4.1.1.1"></in><apply id="S3.p1.7.m4.1.1.2.cmml" xref="S3.p1.7.m4.1.1.2"><csymbol cd="ambiguous" id="S3.p1.7.m4.1.1.2.1.cmml" xref="S3.p1.7.m4.1.1.2">superscript</csymbol><apply id="S3.p1.7.m4.1.1.2.2.cmml" xref="S3.p1.7.m4.1.1.2"><csymbol cd="ambiguous" id="S3.p1.7.m4.1.1.2.2.1.cmml" xref="S3.p1.7.m4.1.1.2">subscript</csymbol><ci id="S3.p1.7.m4.1.1.2.2.2.cmml" xref="S3.p1.7.m4.1.1.2.2.2">𝐱</ci><ci id="S3.p1.7.m4.1.1.2.2.3.cmml" xref="S3.p1.7.m4.1.1.2.2.3">𝑡</ci></apply><ci id="S3.p1.7.m4.1.1.2.3.cmml" xref="S3.p1.7.m4.1.1.2.3">𝑟</ci></apply><apply id="S3.p1.7.m4.1.1.3.cmml" xref="S3.p1.7.m4.1.1.3"><csymbol cd="ambiguous" id="S3.p1.7.m4.1.1.3.1.cmml" xref="S3.p1.7.m4.1.1.3">superscript</csymbol><ci id="S3.p1.7.m4.1.1.3.2.cmml" xref="S3.p1.7.m4.1.1.3.2">ℝ</ci><apply id="S3.p1.7.m4.1.1.3.3.cmml" xref="S3.p1.7.m4.1.1.3.3"><times id="S3.p1.7.m4.1.1.3.3.1.cmml" xref="S3.p1.7.m4.1.1.3.3.1"></times><ci id="S3.p1.7.m4.1.1.3.3.2.cmml" xref="S3.p1.7.m4.1.1.3.3.2">𝐽</ci><cn id="S3.p1.7.m4.1.1.3.3.3.cmml" type="integer" xref="S3.p1.7.m4.1.1.3.3.3">6</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.7.m4.1c">\mathbf{x}_{t}^{r}\in\mathbb{R}^{J\times 6}</annotation><annotation encoding="application/x-llamapun" id="S3.p1.7.m4.1d">bold_x start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_r end_POSTSUPERSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_J × 6 end_POSTSUPERSCRIPT</annotation></semantics></math> denotes hand pose in 6D rotation representation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib14" title="">14</a>]</cite>, <math alttext="\dot{\mathbf{x}}_{t}^{r}\in\mathbb{R}^{J\times 3}" class="ltx_Math" display="inline" id="S3.p1.8.m5.1"><semantics id="S3.p1.8.m5.1a"><mrow id="S3.p1.8.m5.1.1" xref="S3.p1.8.m5.1.1.cmml"><msubsup id="S3.p1.8.m5.1.1.2" xref="S3.p1.8.m5.1.1.2.cmml"><mover accent="true" id="S3.p1.8.m5.1.1.2.2.2" xref="S3.p1.8.m5.1.1.2.2.2.cmml"><mi id="S3.p1.8.m5.1.1.2.2.2.2" xref="S3.p1.8.m5.1.1.2.2.2.2.cmml">𝐱</mi><mo id="S3.p1.8.m5.1.1.2.2.2.1" xref="S3.p1.8.m5.1.1.2.2.2.1.cmml">˙</mo></mover><mi id="S3.p1.8.m5.1.1.2.2.3" xref="S3.p1.8.m5.1.1.2.2.3.cmml">t</mi><mi id="S3.p1.8.m5.1.1.2.3" xref="S3.p1.8.m5.1.1.2.3.cmml">r</mi></msubsup><mo id="S3.p1.8.m5.1.1.1" xref="S3.p1.8.m5.1.1.1.cmml">∈</mo><msup id="S3.p1.8.m5.1.1.3" xref="S3.p1.8.m5.1.1.3.cmml"><mi id="S3.p1.8.m5.1.1.3.2" xref="S3.p1.8.m5.1.1.3.2.cmml">ℝ</mi><mrow id="S3.p1.8.m5.1.1.3.3" xref="S3.p1.8.m5.1.1.3.3.cmml"><mi id="S3.p1.8.m5.1.1.3.3.2" xref="S3.p1.8.m5.1.1.3.3.2.cmml">J</mi><mo id="S3.p1.8.m5.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.p1.8.m5.1.1.3.3.1.cmml">×</mo><mn id="S3.p1.8.m5.1.1.3.3.3" xref="S3.p1.8.m5.1.1.3.3.3.cmml">3</mn></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.p1.8.m5.1b"><apply id="S3.p1.8.m5.1.1.cmml" xref="S3.p1.8.m5.1.1"><in id="S3.p1.8.m5.1.1.1.cmml" xref="S3.p1.8.m5.1.1.1"></in><apply id="S3.p1.8.m5.1.1.2.cmml" xref="S3.p1.8.m5.1.1.2"><csymbol cd="ambiguous" id="S3.p1.8.m5.1.1.2.1.cmml" xref="S3.p1.8.m5.1.1.2">superscript</csymbol><apply id="S3.p1.8.m5.1.1.2.2.cmml" xref="S3.p1.8.m5.1.1.2"><csymbol cd="ambiguous" id="S3.p1.8.m5.1.1.2.2.1.cmml" xref="S3.p1.8.m5.1.1.2">subscript</csymbol><apply id="S3.p1.8.m5.1.1.2.2.2.cmml" xref="S3.p1.8.m5.1.1.2.2.2"><ci id="S3.p1.8.m5.1.1.2.2.2.1.cmml" xref="S3.p1.8.m5.1.1.2.2.2.1">˙</ci><ci id="S3.p1.8.m5.1.1.2.2.2.2.cmml" xref="S3.p1.8.m5.1.1.2.2.2.2">𝐱</ci></apply><ci id="S3.p1.8.m5.1.1.2.2.3.cmml" xref="S3.p1.8.m5.1.1.2.2.3">𝑡</ci></apply><ci id="S3.p1.8.m5.1.1.2.3.cmml" xref="S3.p1.8.m5.1.1.2.3">𝑟</ci></apply><apply id="S3.p1.8.m5.1.1.3.cmml" xref="S3.p1.8.m5.1.1.3"><csymbol cd="ambiguous" id="S3.p1.8.m5.1.1.3.1.cmml" xref="S3.p1.8.m5.1.1.3">superscript</csymbol><ci id="S3.p1.8.m5.1.1.3.2.cmml" xref="S3.p1.8.m5.1.1.3.2">ℝ</ci><apply id="S3.p1.8.m5.1.1.3.3.cmml" xref="S3.p1.8.m5.1.1.3.3"><times id="S3.p1.8.m5.1.1.3.3.1.cmml" xref="S3.p1.8.m5.1.1.3.3.1"></times><ci id="S3.p1.8.m5.1.1.3.3.2.cmml" xref="S3.p1.8.m5.1.1.3.3.2">𝐽</ci><cn id="S3.p1.8.m5.1.1.3.3.3.cmml" type="integer" xref="S3.p1.8.m5.1.1.3.3.3">3</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.8.m5.1c">\dot{\mathbf{x}}_{t}^{r}\in\mathbb{R}^{J\times 3}</annotation><annotation encoding="application/x-llamapun" id="S3.p1.8.m5.1d">over˙ start_ARG bold_x end_ARG start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_r end_POSTSUPERSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_J × 3 end_POSTSUPERSCRIPT</annotation></semantics></math> denotes angular velocity. <math alttext="J" class="ltx_Math" display="inline" id="S3.p1.9.m6.1"><semantics id="S3.p1.9.m6.1a"><mi id="S3.p1.9.m6.1.1" xref="S3.p1.9.m6.1.1.cmml">J</mi><annotation-xml encoding="MathML-Content" id="S3.p1.9.m6.1b"><ci id="S3.p1.9.m6.1.1.cmml" xref="S3.p1.9.m6.1.1">𝐽</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.p1.9.m6.1c">J</annotation><annotation encoding="application/x-llamapun" id="S3.p1.9.m6.1d">italic_J</annotation></semantics></math> indicates the number of joints.</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<p class="ltx_p" id="S3.p2.2"><span class="ltx_text ltx_font_bold" id="S3.p2.2.1">Architecture:</span> The architecture is adapted from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib6" title="">6</a>]</cite>. We employed the Adam optimizer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="#bib.bib7" title="">7</a>]</cite>. The training process takes <math alttext="\sim" class="ltx_Math" display="inline" id="S3.p2.1.m1.1"><semantics id="S3.p2.1.m1.1a"><mo id="S3.p2.1.m1.1.1" xref="S3.p2.1.m1.1.1.cmml">∼</mo><annotation-xml encoding="MathML-Content" id="S3.p2.1.m1.1b"><csymbol cd="latexml" id="S3.p2.1.m1.1.1.cmml" xref="S3.p2.1.m1.1.1">similar-to</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S3.p2.1.m1.1c">\sim</annotation><annotation encoding="application/x-llamapun" id="S3.p2.1.m1.1d">∼</annotation></semantics></math>10 hours on NVIDIA-A100 GPU. Our motion prior contains parameters contains <math alttext="\sim" class="ltx_Math" display="inline" id="S3.p2.2.m2.1"><semantics id="S3.p2.2.m2.1a"><mo id="S3.p2.2.m2.1.1" xref="S3.p2.2.m2.1.1.cmml">∼</mo><annotation-xml encoding="MathML-Content" id="S3.p2.2.m2.1b"><csymbol cd="latexml" id="S3.p2.2.m2.1.1.cmml" xref="S3.p2.2.m2.1.1">similar-to</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S3.p2.2.m2.1c">\sim</annotation><annotation encoding="application/x-llamapun" id="S3.p2.2.m2.1d">∼</annotation></semantics></math>63.4 million parameters. Please refer to Table <a class="ltx_ref" href="#S3.T3" title="Table 3 ‣ 3 Training A Hand Motion Prior ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">3</span></a> for hyperparameter values.</p>
+</div>
+<figure class="ltx_table" id="S3.T3">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S3.T3.2">
+<tr class="ltx_tr" id="S3.T3.2.1">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T3.2.1.1">Hyperparameter</td>
+<td class="ltx_td ltx_align_center" id="S3.T3.2.1.2">Value</td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.2.2">
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S3.T3.2.2.1">Epochs</td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S3.T3.2.2.2">1000</td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.2.3">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T3.2.3.1">Batch Size</td>
+<td class="ltx_td ltx_align_center" id="S3.T3.2.3.2">16</td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.2.4">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T3.2.4.1">Learning Rate</td>
+<td class="ltx_td ltx_align_center" id="S3.T3.2.4.2">1e-4</td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.2.5">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T3.2.5.1">Weight Decay</td>
+<td class="ltx_td ltx_align_center" id="S3.T3.2.5.2">1e-4</td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.2.6">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T3.2.6.1">Latent Dimension</td>
+<td class="ltx_td ltx_align_center" id="S3.T3.2.6.2">1024</td>
+</tr>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T3.3.1.1" style="font-size:90%;">Table 3</span>: </span><span class="ltx_text" id="S3.T3.4.2" style="font-size:90%;">Hyperparameter setting in motion prior training</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="556" id="S3.F3.g1" src="x4.png" width="951"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.3.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text ltx_font_bold" id="S3.F3.4.2" style="font-size:90%;">3D hand pose and shape estimation on DexYCB videos:<span class="ltx_text ltx_font_medium" id="S3.F3.4.2.1"> input video (top), PyMAF-X (middle), HMP (bottom)</span></span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="361" id="S3.F4.g1" src="x5.png" width="951"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F4.2.1.1" style="font-size:90%;">Figure 4</span>: </span><span class="ltx_text" id="S3.F4.3.2" style="font-size:90%;">Failure in motion inbetweening due to the discontinuity in bounding box detection. Bounding boxes are detected only for the first and the final frame.</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="591" id="S3.F5.g1" src="x6.png" width="951"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F5.2.1.1" style="font-size:90%;">Figure 5</span>: </span><span class="ltx_text" id="S3.F5.3.2" style="font-size:90%;">Failure cases caused by faulty keypoint detections. Keypoints detected (top), HMP (bottom)</span></figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Failure Cases</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1"><span class="ltx_text ltx_font_bold" id="S4.p1.1.1">Keypoint Detection Failure:</span> One key cause for our method’s failure is inaccurate keypoints. Under motion blur and occlusion, current state-of-the-art keypoint detectors tend to fail providing correct detections. Fig. <a class="ltx_ref" href="#S3.F5" title="Figure 5 ‣ 3 Training A Hand Motion Prior ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">5</span></a> shows those cases along with our methods’ output.</p>
+</div>
+<div class="ltx_para" id="S4.p2">
+<p class="ltx_p" id="S4.p2.1"><span class="ltx_text ltx_font_bold" id="S4.p2.1.1">Bounding Box Discontinuity:</span> Another risk of failure originates from hand bounding box detection. Our method fails to interpolate and perform motion inbetweening. This usually happens with motion blur. An example can be seen in Fig. <a class="ltx_ref" href="#S3.F4" title="Figure 4 ‣ 3 Training A Hand Motion Prior ‣ Supplementary Material for HMP: Hand Motion Priors for Pose and Shape Estimation From Video"><span class="ltx_text ltx_ref_tag">4</span></a>.</p>
+</div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.1.1" style="font-size:90%;">
+</span><span class="ltx_text" id="bib.bib1.2.2" style="font-size:90%;">Qichen Fu, Xingyu Liu, Ran Xu, Juan Carlos Niebles, and Kris Kitani.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.3.1" style="font-size:90%;">Deformer: Dynamic fusion transformer for robust hand pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib1.4.1" style="font-size:90%;">ArXiv</span><span class="ltx_text" id="bib.bib1.5.2" style="font-size:90%;">, abs/2303.04991, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.1.1" style="font-size:90%;">
+Shreyas Hampali, Mahdi Rad, Markus Oberweger, and Vincent Lepetit.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.2.1" style="font-size:90%;">Honnotate: A method for 3D annotation of hand and object poses.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib2.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib2.5.3" style="font-size:90%;">, pages 3196–3206, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.1.1" style="font-size:90%;">
+Shreyas Hampali, Sayan Deb Sarkar, and Vincent Lepetit.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.2.1" style="font-size:90%;">HO-3D-v3: Improving the accuracy of hand-object annotations of the
+HO-3D dataset, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.1.1" style="font-size:90%;">
+Yana Hasson, Bugra Tekin, Federica Bogo, Ivan Laptev, Marc Pollefeys, and
+Cordelia Schmid.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.2.1" style="font-size:90%;">Leveraging photometric consistency over time for sparsely supervised
+hand-object reconstruction.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib4.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib4.5.3" style="font-size:90%;">, pages 571–580, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.1.1" style="font-size:90%;">
+Yana Hasson, Gül Varol, Dimitrios Tzionas, Igor Kalevatykh, Michael J.
+Black, Ivan Laptev, and Cordelia Schmid.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.2.1" style="font-size:90%;">Learning joint reconstruction of hands and manipulated objects.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib5.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition</span><span class="ltx_text" id="bib.bib5.5.3" style="font-size:90%;">, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.1.1" style="font-size:90%;">
+Chengan He, Jun Saito, James Zachary, Holly Rushmeier, and Yi Zhou.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.2.1" style="font-size:90%;">NeMF: Neural motion fields for kinematic animation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib6.4.2" style="font-size:90%;">NeurIPS</span><span class="ltx_text" id="bib.bib6.5.3" style="font-size:90%;">, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.1.1" style="font-size:90%;">
+Diederik P. Kingma and Jimmy Ba.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.2.1" style="font-size:90%;">Adam: A method for stochastic optimization.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib7.4.2" style="font-size:90%;">ICLR</span><span class="ltx_text" id="bib.bib7.5.3" style="font-size:90%;">, 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.1.1" style="font-size:90%;">
+Shaowei Liu, Hanwen Jiang, Jiarui Xu, Sifei Liu, and Xiaolong Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.2.1" style="font-size:90%;">Semi-supervised 3D hand-object poses estimation with interactions
+in time.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib8.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib8.5.3" style="font-size:90%;">, pages 14687–14697, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.1.1" style="font-size:90%;">
+Camillo Lugaresi, Jiuqiang Tang, Hadon Nash, Chris McClanahan, Esha Uboweja,
+Michael Hays, Fan Zhang, Chuo-Ling Chang, Ming Guang Yong, Juhyun Lee,
+Wan-Teh Chang, Wei Hua, Manfred Georg, and Matthias Grundmann.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.2.1" style="font-size:90%;">MediaPipe: A framework for building perception pipelines, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.1.1" style="font-size:90%;">
+Naureen Mahmood, Nima Ghorbani, Nikolaus F. Troje, Gerard Pons-Moll, and
+Michael J. Black.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.2.1" style="font-size:90%;">AMASS: Archive of motion capture as surface shapes.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib10.4.2" style="font-size:90%;">ICCV</span><span class="ltx_text" id="bib.bib10.5.3" style="font-size:90%;">, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.1.1" style="font-size:90%;">
+JoonKyu Park, Yeonguk Oh, Gyeongsik Moon, Hongsuk Choi, and Kyoung Mu Lee.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.2.1" style="font-size:90%;">Handoccnet: Occlusion-robust 3D hand mesh estimation network.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib11.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib11.5.3" style="font-size:90%;">, pages 1496–1505, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.1.1" style="font-size:90%;">
+Davis Rempe, Tolga Birdal, Aaron Hertzmann, Jimei Yang, Srinath Sridhar, and
+Leonidas J. Guibas.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.2.1" style="font-size:90%;">HuMoR: 3d human motion model for robust pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib12.4.2" style="font-size:90%;">ICCV</span><span class="ltx_text" id="bib.bib12.5.3" style="font-size:90%;">, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.1.1" style="font-size:90%;">
+Hongwen Zhang, Yating Tian, Yuxiang Zhang, Mengcheng Li, Liang An, Zhenan Sun,
+and Yebin Liu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.2.1" style="font-size:90%;">Pymaf-x: Towards well-aligned full-body model regression from
+monocular images.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib13.3.1" style="font-size:90%;">IEEE TPAMI</span><span class="ltx_text" id="bib.bib13.4.2" style="font-size:90%;">, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.1.1" style="font-size:90%;">
+</span><span class="ltx_text" id="bib.bib14.2.2" style="font-size:90%;">Yi Zhou, Connelly Barnes, Jingwan Lu, Jimei Yang, and Hao Li.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.3.1" style="font-size:90%;">On the continuity of rotation representations in neural networks.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.4.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib14.5.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib14.6.3" style="font-size:90%;">, pages 5745–5753, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.1.1" style="font-size:90%;">
+Andrea Ziani, Zicong Fan, Muhammed Kocabas, Sammy Christen, and Otmar Hilliges.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.2.1" style="font-size:90%;">TempCLR: Reconstructing hands via time-coherent contrastive
+learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib15.4.2" style="font-size:90%;">3DV</span><span class="ltx_text" id="bib.bib15.5.3" style="font-size:90%;">, 2022.
+</span>
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Dec 27 22:21:17 2023 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span style="font-size:70%;position:relative; bottom:2.2pt;">A</span>T<span style="position:relative; bottom:-0.4ex;">E</span></span><span class="ltx_font_smallcaps">xml</span><img alt="[LOGO]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

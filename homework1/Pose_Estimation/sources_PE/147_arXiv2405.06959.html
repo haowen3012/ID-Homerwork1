@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn</title>
+<!--Generated on Tue May 14 16:13:25 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="
+Precision farming; Selective harvesting; Agricultural robotics; Plant phenotyping; Pose estimation
+" lang="en" name="keywords"/>
+<base href="/html/2405.06959v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S1" title="In AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S2" title="In AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Related Work</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S3" title="In AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Method</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S3.SS1" title="In III Method ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-A</span> </span><span class="ltx_text ltx_font_italic">Platform Design</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S3.SS2" title="In III Method ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span> </span><span class="ltx_text ltx_font_italic">Phenotyping</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S3.SS3" title="In III Method ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span> </span><span class="ltx_text ltx_font_italic">Pose Estimation</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S3.SS4" title="In III Method ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-D</span> </span><span class="ltx_text ltx_font_italic">Decision and Motion Planning</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S4" title="In AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Experiment Results</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S4.SS1" title="In IV Experiment Results ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-A</span> </span><span class="ltx_text ltx_font_italic">Dataset and Training</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S4.SS2" title="In IV Experiment Results ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-B</span> </span><span class="ltx_text ltx_font_italic">Phenotyping Test</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S4.SS3" title="In IV Experiment Results ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-C</span> </span><span class="ltx_text ltx_font_italic">Pose estimation test</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S4.SS4" title="In IV Experiment Results ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-D</span> </span><span class="ltx_text ltx_font_italic">Automated Harvesting experiment</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S4.SS4.SSS1" title="In IV-D Automated Harvesting experiment ‣ IV Experiment Results ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-D</span>1 </span>Harvesting Test Under Different Target Poses</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S4.SS4.SSS2" title="In IV-D Automated Harvesting experiment ‣ IV Experiment Results ‣ AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-D</span>2 </span>Autonomous Continuous Harvesting Test</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2405.06959v1#S5" title="In AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation *Work done during an internship at Beijing AIForce Technology. This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107). 1Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn 2Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com † Corresponding author: Nan Ma. manan123@bjut.edu.cn"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">AHPPEBot: Autonomous Robot for Tomato Harvesting based on Phenotyping and Pose Estimation
+<span class="ltx_note ltx_role_thanks" id="id1.id1"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">thanks: </span>
+<sup class="ltx_sup" id="id1.id1.1">*</sup>Work done during an internship at Beijing AIForce Technology.
+This work is supported by the National Natural Science Foundation of China (No. 62371013), Beijing AIForce Technology, the Beijing Natural Science Foundation (No. 4222025), QIYUAN LAB Innovation Foundation (Innovation Research) Project (No. S20210201107).
+<sup class="ltx_sup" id="id1.id1.2">1</sup>Faculty of Information Technology, Beijing University of Technology, Beijing 100124, China. lixingxu@emails.bjut.edu.cn, hanyiheng@bjut.edu.cn
+<sup class="ltx_sup" id="id1.id1.3">2</sup>Beijing AIForce Technology Co., Ltd., 6 Chuangye Road, Beijing 100085, China. {yangshun, zhengsiyi}@aiforcetech.com
+<sup class="ltx_sup" id="id1.id1.4">†</sup> Corresponding author: Nan Ma. manan123@bjut.edu.cn
+
+</span></span></span>
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Xingxu Li<sup class="ltx_sup" id="id2.1.id1">1,2*</sup>,
+Nan Ma<sup class="ltx_sup" id="id3.2.id2">1†</sup>,
+Yiheng Han<sup class="ltx_sup" id="id4.3.id3">1</sup>,
+Shun Yang<sup class="ltx_sup" id="id5.4.id4">2</sup>,
+and Siyi Zheng<sup class="ltx_sup" id="id6.5.id5">2</sup>
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id7.id1">To address the limitations inherent to conventional automated harvesting robots specifically their suboptimal success rates and risk of crop damage, we design a novel bot named AHPPEBot which is capable of autonomous harvesting based on crop phenotyping and pose estimation. Specifically, In phenotyping, the detection, association, and maturity estimation of tomato trusses and individual fruits are accomplished through a multi-task YOLOv5 model coupled with a detection-based adaptive DBScan clustering algorithm. In pose estimation, we employ a deep learning model to predict seven semantic keypoints on the pedicel. These keypoints assist in the robot’s path planning, minimize target contact, and facilitate the use of our specialized end effector for harvesting. In autonomous tomato harvesting experiments conducted in commercial greenhouses, our proposed robot achieved a harvesting success rate of 86.67%, with an average successful harvest time of 32.46 s, showcasing its continuous and robust harvesting capabilities. The result underscores the potential of harvesting robots to bridge the labor gap in agriculture.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Index Terms: </h6>
+Precision farming; Selective harvesting; Agricultural robotics; Plant phenotyping; Pose estimation
+
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.1.1">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Labor shortages in agricultural production limit the expansion of production scales[1]. Implementing automation systems is a feasible solution to enhance productivity[2]. Research on robotic harvesting has garnered increasing attention, and substantial progress has been achieved in crops such as strawberries[3], apples[4], bell peppers[5], and tomatoes[6]. The widely adopted perception methods and harvesting procedures can be summarized as follows: maturity is categorized into a binary classification using supervised learning, where maturity levels are directly mapped to harvestable and non-harvestable states. Once the detection is completed, point clouds of the target are acquired through segmentation models, and these clouds are then fit into geometric shapes like spheres or cylinders, facilitating the determination of crop posture and planning of the appropriate grabbing angle.</p>
+</div>
+<figure class="ltx_figure" id="S1.F1">
+<p class="ltx_p ltx_align_center" id="S1.F1.1"><span class="ltx_text" id="S1.F1.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="340" id="S1.F1.1.1.g1" src="extracted/2405.06959v1/cover.png" width="598"/></span></p>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>AHPPEBot Overview: The robot perceives nearby tomato trusses and autonomously makes decisions based on various information such as arm workspace, ripeness, and pose, ultimately using a circular cutter to harvest the target.</figcaption>
+</figure>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">While these traditional methods have been applied to many crops, they have limitations regarding the automated harvesting of truss tomatoes. Firstly, as truss tomatoes are a fresh consumption economic crop, their maturity requires a more detailed assessment to ensure edible quality. The interpretability and adjustability of the binary classification method based on deep learning are insufficient, hampering the robot’s selective harvesting and quality management of the harvested product. Secondly, unlike strawberries or citrus fruits, truss tomatoes cannot be harvested by grabbing and pulling, as this may lead to crop or facility damage. The ideal harvesting method is cutting the peduncle, but due to its slender nature and color similarity to the background, detection and cutting point localization present challenges.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">This paper designs AHPPEBot, a robot Autonomous Harvesting tomato trusses based on Phenotyping and Pose Estimation. To improve the robot’s success rate, efficiency, and safety, we have made advancements in three crucial areas:</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<ol class="ltx_enumerate" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">Phenotyping: We propose an adaptive DBScan clustering algorithm predicated on object detection, designed to associate individual fruits with their corresponding tomato trusses, facilitating the extraction of pertinent information, encompassing the overall maturity level of the tomato truss, the number of fruits, and their respective volumes.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">Pose estimation: We introduce a deep learning-based keypoint detection method for pose estimation of tomato trusses, enabling arm path planning and movement with reduced contact with the target.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">Harvesting System: Integrating phenotypic and postural information, the robot achieves full-state perception of the tomato truss, autonomously selecting optimal harvest targets. Leveraging posture key points, it strategically plans the arm trajectory, complemented by a novel designed end-effector for precise harvesting.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.1.1">Related Work</span>
+</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">Recognizing, parsing, and understanding crops in the environment is foundational to enabling robots to perform selective harvesting autonomously. Early research primarily identified and located fruits through image processing techniques such as color segmentation and morphological operations or through machine learning approaches[7-10, 13]. Recent advancements have shown that perception techniques based on deep learning models exhibit greater robustness in detection, classification, and segmentation challenges in real-world scenarios compared to traditional methods. Zhang et al.[11] utilized CNNs for the maturity classification of tomato images, while Afonso et al.[12] employed Mask R-CNN to detect ripe and unripe tomatoes in greenhouses, achieving commendable accuracy and robustness.</p>
+</div>
+<div class="ltx_para" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1">The precise orientation or posture of crops is imperative for accurate harvesting. Wei et al.[14] extracted grape bunch pixel regions using Mask R-CNN and derived corresponding point clouds. These point clouds were fitted into cylindrical shapes using the RANSAC algorithm to determine posture. Rong et al.[15] utilized YOLOv4-Tiny to detect the main body and stalk of tomato bunches. After semantic segmentation of the stalk with the YOLACT++ model, they used least squares to fit it into a curve, obtaining three key points, and subsequently estimated the stalk’s posture through a geometric model. Li et al.[16] employed a multi-camera system and a DCNN model to detect apple targets, reconstructed obscured parts from the visible target point cloud, and the estimated fruit center. In Alessandra et al.’s [17] method, Five key points are defined for each tomato, serving as references for the end-effector performing the grasping action. Fan et al.[18] proposed a keypoint-based method for estimating the pose of tomato trusses. Their approach is limited to trusses containing only six fruits.</p>
+</div>
+<div class="ltx_para" id="S2.p3">
+<p class="ltx_p" id="S2.p3.1">Even when crop detection and harvesting point localization are accomplished, the actual harvesting process can still encounter failures. During the act of harvesting, robotic arms equipped with end-effectors may fail due to obstacles, pose estimation errors, or damage to the crop. In 2017, Bac et al.[19] designed a bell pepper harvesting robot under the CROPS (the Clever Robots for Crops) project, conducting experiments in a commercial greenhouse using two different end-effectors in untrimmed and trimmed environments. Lehner et al.[9] designed a bell pepper harvesting robot named ”Harvey,” which harvests by suctioning the target and cutting the peduncle with a blade. In particular failure cases, the irregular morphology of the bell peppers led to deviations in the model’s estimated grasping angle. Consequently, the blade failed to sever the pedicel accurately, or inadvertently caused damage to the fruit. Gao et al.[6] investigated a two-fingered gripper end-effector that harvests individual fruits from cherry tomato trusses.</p>
+</div>
+<div class="ltx_para" id="S2.p4">
+<p class="ltx_p" id="S2.p4.1">Reviewing prior research, the reasons for harvesting failures can be categorized as follows: inaccurate fruit localization, obstructions from leaves or fruit clusters, extreme fruit positions, crop damage, and separation failures.</p>
+</div>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps" id="S3.1.1">Method</span>
+</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">AHPPEBot is designed for automated truss tomato harvesting in commercial greenhouse environments, as shown in Figure 1. The harvesting system can be divided into four main components: ”Phenotyping,” ”Pose Estimation”, ”Fusion of Information,” and ”Decision and Motion Planning”. The flowchart of the system algorithm and workflow is illustrated in Figure 2. We anticipate that by optimizing perception techniques and end-effector design and precisely planning the robotic arm’s motion based on crop posture, we can minimize unnecessary contact, thereby achieving our goal of enhancing the harvesting success rate and safety.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2">
+<p class="ltx_p ltx_align_center" id="S3.F2.1"><span class="ltx_text" id="S3.F2.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="238" id="S3.F2.1.1.g1" src="extracted/2405.06959v1/system.png" width="598"/></span></p>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Automated Harvesting System Workflow: During the phenotyping, the number and ripeness of each tomato truss are determined (different color prediction frames indicate varying maturity levels). The pose detection captures the key points of the tomato trusses. By integrating and encoding both phenotypic and pose information, a target is selected. Subsequently, based on its pose, the robotic arm’s path is planned, and harvesting is executed.</figcaption>
+</figure>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS1.4.1.1">III-A</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS1.5.2">Platform Design</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">The hardware architecture of AHPPEBot comprises five main components: two RGB-D cameras, a robotic arm, an end-effector, a computing unit, and a mobility chassis. In consideration of the narrow space within greenhouses, we opted for a SCARA robotic arm, augmented with a rotary motor at its end, as depicted in Figure 1. This configuration serves to simplify path planning for the robotic arm while maintaining flexibility.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">The exterior of the effector features multiple spike-shaped guiding grooves and a saw blade. The groove size is tailored based on the width of the tomato vine and truss peduncle, ensuring that only the peduncle can fit and be cut while preventing the vine from entering, enhancing safety. Once the peduncle is severed, the tomato truss temporarily collects in a mesh pocket.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS2.4.1.1">III-B</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS2.5.2">Phenotyping</span>
+</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">Maturity level, fruit count, and fruit size are important phenotypic information for harvesting and quality grading. We adopt a method that infers the overall maturity and quality grading of the truss based on the status of each fruit. In this paper, fruit maturity is categorized into four stages based on agronomic standards: green mature, turning, ripe, and fully ripe, as illustrated in Figure 2. Concurrently, we stipulate that if the terminal fruit on a truss reaches at least the turning stage and the rest of the fruits are ripe or beyond, the truss is considered mature overall and suitable for harvesting, storage, and transport. This criterion aligns with the harvesting standards of the greenhouse production base where our experiments took place.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.1">We enhanced the YOLOv5 model for multi-tasking, introducing an additional branch in the prediction section to determine fruit maturity. The loss function for our multi-task YOLOv5 is designed based on the original YOLOv5’s loss function:</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<table class="ltx_equation ltx_eqn_table" id="S3.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{L}=\lambda_{1}\mathcal{L}_{{cls}}+\lambda_{2}\mathcal{L}_{{conf}}+%
+\lambda_{3}\mathcal{L}_{{box}}+\lambda_{4}\mathcal{L}_{{rip}}" class="ltx_Math" display="block" id="S3.E1.m1.1"><semantics id="S3.E1.m1.1a"><mrow id="S3.E1.m1.1.1" xref="S3.E1.m1.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E1.m1.1.1.2" xref="S3.E1.m1.1.1.2.cmml">ℒ</mi><mo id="S3.E1.m1.1.1.1" xref="S3.E1.m1.1.1.1.cmml">=</mo><mrow id="S3.E1.m1.1.1.3" xref="S3.E1.m1.1.1.3.cmml"><mrow id="S3.E1.m1.1.1.3.2" xref="S3.E1.m1.1.1.3.2.cmml"><msub id="S3.E1.m1.1.1.3.2.2" xref="S3.E1.m1.1.1.3.2.2.cmml"><mi id="S3.E1.m1.1.1.3.2.2.2" xref="S3.E1.m1.1.1.3.2.2.2.cmml">λ</mi><mn id="S3.E1.m1.1.1.3.2.2.3" xref="S3.E1.m1.1.1.3.2.2.3.cmml">1</mn></msub><mo id="S3.E1.m1.1.1.3.2.1" xref="S3.E1.m1.1.1.3.2.1.cmml">⁢</mo><msub id="S3.E1.m1.1.1.3.2.3" xref="S3.E1.m1.1.1.3.2.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E1.m1.1.1.3.2.3.2" xref="S3.E1.m1.1.1.3.2.3.2.cmml">ℒ</mi><mrow id="S3.E1.m1.1.1.3.2.3.3" xref="S3.E1.m1.1.1.3.2.3.3.cmml"><mi id="S3.E1.m1.1.1.3.2.3.3.2" xref="S3.E1.m1.1.1.3.2.3.3.2.cmml">c</mi><mo id="S3.E1.m1.1.1.3.2.3.3.1" xref="S3.E1.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.2.3.3.3" xref="S3.E1.m1.1.1.3.2.3.3.3.cmml">l</mi><mo id="S3.E1.m1.1.1.3.2.3.3.1a" xref="S3.E1.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.2.3.3.4" xref="S3.E1.m1.1.1.3.2.3.3.4.cmml">s</mi></mrow></msub></mrow><mo id="S3.E1.m1.1.1.3.1" xref="S3.E1.m1.1.1.3.1.cmml">+</mo><mrow id="S3.E1.m1.1.1.3.3" xref="S3.E1.m1.1.1.3.3.cmml"><msub id="S3.E1.m1.1.1.3.3.2" xref="S3.E1.m1.1.1.3.3.2.cmml"><mi id="S3.E1.m1.1.1.3.3.2.2" xref="S3.E1.m1.1.1.3.3.2.2.cmml">λ</mi><mn id="S3.E1.m1.1.1.3.3.2.3" xref="S3.E1.m1.1.1.3.3.2.3.cmml">2</mn></msub><mo id="S3.E1.m1.1.1.3.3.1" xref="S3.E1.m1.1.1.3.3.1.cmml">⁢</mo><msub id="S3.E1.m1.1.1.3.3.3" xref="S3.E1.m1.1.1.3.3.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E1.m1.1.1.3.3.3.2" xref="S3.E1.m1.1.1.3.3.3.2.cmml">ℒ</mi><mrow id="S3.E1.m1.1.1.3.3.3.3" xref="S3.E1.m1.1.1.3.3.3.3.cmml"><mi id="S3.E1.m1.1.1.3.3.3.3.2" xref="S3.E1.m1.1.1.3.3.3.3.2.cmml">c</mi><mo id="S3.E1.m1.1.1.3.3.3.3.1" xref="S3.E1.m1.1.1.3.3.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.3.3.3" xref="S3.E1.m1.1.1.3.3.3.3.3.cmml">o</mi><mo id="S3.E1.m1.1.1.3.3.3.3.1a" xref="S3.E1.m1.1.1.3.3.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.3.3.4" xref="S3.E1.m1.1.1.3.3.3.3.4.cmml">n</mi><mo id="S3.E1.m1.1.1.3.3.3.3.1b" xref="S3.E1.m1.1.1.3.3.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.3.3.3.5" xref="S3.E1.m1.1.1.3.3.3.3.5.cmml">f</mi></mrow></msub></mrow><mo id="S3.E1.m1.1.1.3.1a" xref="S3.E1.m1.1.1.3.1.cmml">+</mo><mrow id="S3.E1.m1.1.1.3.4" xref="S3.E1.m1.1.1.3.4.cmml"><msub id="S3.E1.m1.1.1.3.4.2" xref="S3.E1.m1.1.1.3.4.2.cmml"><mi id="S3.E1.m1.1.1.3.4.2.2" xref="S3.E1.m1.1.1.3.4.2.2.cmml">λ</mi><mn id="S3.E1.m1.1.1.3.4.2.3" xref="S3.E1.m1.1.1.3.4.2.3.cmml">3</mn></msub><mo id="S3.E1.m1.1.1.3.4.1" xref="S3.E1.m1.1.1.3.4.1.cmml">⁢</mo><msub id="S3.E1.m1.1.1.3.4.3" xref="S3.E1.m1.1.1.3.4.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E1.m1.1.1.3.4.3.2" xref="S3.E1.m1.1.1.3.4.3.2.cmml">ℒ</mi><mrow id="S3.E1.m1.1.1.3.4.3.3" xref="S3.E1.m1.1.1.3.4.3.3.cmml"><mi id="S3.E1.m1.1.1.3.4.3.3.2" xref="S3.E1.m1.1.1.3.4.3.3.2.cmml">b</mi><mo id="S3.E1.m1.1.1.3.4.3.3.1" xref="S3.E1.m1.1.1.3.4.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.4.3.3.3" xref="S3.E1.m1.1.1.3.4.3.3.3.cmml">o</mi><mo id="S3.E1.m1.1.1.3.4.3.3.1a" xref="S3.E1.m1.1.1.3.4.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.4.3.3.4" xref="S3.E1.m1.1.1.3.4.3.3.4.cmml">x</mi></mrow></msub></mrow><mo id="S3.E1.m1.1.1.3.1b" xref="S3.E1.m1.1.1.3.1.cmml">+</mo><mrow id="S3.E1.m1.1.1.3.5" xref="S3.E1.m1.1.1.3.5.cmml"><msub id="S3.E1.m1.1.1.3.5.2" xref="S3.E1.m1.1.1.3.5.2.cmml"><mi id="S3.E1.m1.1.1.3.5.2.2" xref="S3.E1.m1.1.1.3.5.2.2.cmml">λ</mi><mn id="S3.E1.m1.1.1.3.5.2.3" xref="S3.E1.m1.1.1.3.5.2.3.cmml">4</mn></msub><mo id="S3.E1.m1.1.1.3.5.1" xref="S3.E1.m1.1.1.3.5.1.cmml">⁢</mo><msub id="S3.E1.m1.1.1.3.5.3" xref="S3.E1.m1.1.1.3.5.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E1.m1.1.1.3.5.3.2" xref="S3.E1.m1.1.1.3.5.3.2.cmml">ℒ</mi><mrow id="S3.E1.m1.1.1.3.5.3.3" xref="S3.E1.m1.1.1.3.5.3.3.cmml"><mi id="S3.E1.m1.1.1.3.5.3.3.2" xref="S3.E1.m1.1.1.3.5.3.3.2.cmml">r</mi><mo id="S3.E1.m1.1.1.3.5.3.3.1" xref="S3.E1.m1.1.1.3.5.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.5.3.3.3" xref="S3.E1.m1.1.1.3.5.3.3.3.cmml">i</mi><mo id="S3.E1.m1.1.1.3.5.3.3.1a" xref="S3.E1.m1.1.1.3.5.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.1.1.3.5.3.3.4" xref="S3.E1.m1.1.1.3.5.3.3.4.cmml">p</mi></mrow></msub></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E1.m1.1b"><apply id="S3.E1.m1.1.1.cmml" xref="S3.E1.m1.1.1"><eq id="S3.E1.m1.1.1.1.cmml" xref="S3.E1.m1.1.1.1"></eq><ci id="S3.E1.m1.1.1.2.cmml" xref="S3.E1.m1.1.1.2">ℒ</ci><apply id="S3.E1.m1.1.1.3.cmml" xref="S3.E1.m1.1.1.3"><plus id="S3.E1.m1.1.1.3.1.cmml" xref="S3.E1.m1.1.1.3.1"></plus><apply id="S3.E1.m1.1.1.3.2.cmml" xref="S3.E1.m1.1.1.3.2"><times id="S3.E1.m1.1.1.3.2.1.cmml" xref="S3.E1.m1.1.1.3.2.1"></times><apply id="S3.E1.m1.1.1.3.2.2.cmml" xref="S3.E1.m1.1.1.3.2.2"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.2.2.1.cmml" xref="S3.E1.m1.1.1.3.2.2">subscript</csymbol><ci id="S3.E1.m1.1.1.3.2.2.2.cmml" xref="S3.E1.m1.1.1.3.2.2.2">𝜆</ci><cn id="S3.E1.m1.1.1.3.2.2.3.cmml" type="integer" xref="S3.E1.m1.1.1.3.2.2.3">1</cn></apply><apply id="S3.E1.m1.1.1.3.2.3.cmml" xref="S3.E1.m1.1.1.3.2.3"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.2.3.1.cmml" xref="S3.E1.m1.1.1.3.2.3">subscript</csymbol><ci id="S3.E1.m1.1.1.3.2.3.2.cmml" xref="S3.E1.m1.1.1.3.2.3.2">ℒ</ci><apply id="S3.E1.m1.1.1.3.2.3.3.cmml" xref="S3.E1.m1.1.1.3.2.3.3"><times id="S3.E1.m1.1.1.3.2.3.3.1.cmml" xref="S3.E1.m1.1.1.3.2.3.3.1"></times><ci id="S3.E1.m1.1.1.3.2.3.3.2.cmml" xref="S3.E1.m1.1.1.3.2.3.3.2">𝑐</ci><ci id="S3.E1.m1.1.1.3.2.3.3.3.cmml" xref="S3.E1.m1.1.1.3.2.3.3.3">𝑙</ci><ci id="S3.E1.m1.1.1.3.2.3.3.4.cmml" xref="S3.E1.m1.1.1.3.2.3.3.4">𝑠</ci></apply></apply></apply><apply id="S3.E1.m1.1.1.3.3.cmml" xref="S3.E1.m1.1.1.3.3"><times id="S3.E1.m1.1.1.3.3.1.cmml" xref="S3.E1.m1.1.1.3.3.1"></times><apply id="S3.E1.m1.1.1.3.3.2.cmml" xref="S3.E1.m1.1.1.3.3.2"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.3.2.1.cmml" xref="S3.E1.m1.1.1.3.3.2">subscript</csymbol><ci id="S3.E1.m1.1.1.3.3.2.2.cmml" xref="S3.E1.m1.1.1.3.3.2.2">𝜆</ci><cn id="S3.E1.m1.1.1.3.3.2.3.cmml" type="integer" xref="S3.E1.m1.1.1.3.3.2.3">2</cn></apply><apply id="S3.E1.m1.1.1.3.3.3.cmml" xref="S3.E1.m1.1.1.3.3.3"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.3.3.1.cmml" xref="S3.E1.m1.1.1.3.3.3">subscript</csymbol><ci id="S3.E1.m1.1.1.3.3.3.2.cmml" xref="S3.E1.m1.1.1.3.3.3.2">ℒ</ci><apply id="S3.E1.m1.1.1.3.3.3.3.cmml" xref="S3.E1.m1.1.1.3.3.3.3"><times id="S3.E1.m1.1.1.3.3.3.3.1.cmml" xref="S3.E1.m1.1.1.3.3.3.3.1"></times><ci id="S3.E1.m1.1.1.3.3.3.3.2.cmml" xref="S3.E1.m1.1.1.3.3.3.3.2">𝑐</ci><ci id="S3.E1.m1.1.1.3.3.3.3.3.cmml" xref="S3.E1.m1.1.1.3.3.3.3.3">𝑜</ci><ci id="S3.E1.m1.1.1.3.3.3.3.4.cmml" xref="S3.E1.m1.1.1.3.3.3.3.4">𝑛</ci><ci id="S3.E1.m1.1.1.3.3.3.3.5.cmml" xref="S3.E1.m1.1.1.3.3.3.3.5">𝑓</ci></apply></apply></apply><apply id="S3.E1.m1.1.1.3.4.cmml" xref="S3.E1.m1.1.1.3.4"><times id="S3.E1.m1.1.1.3.4.1.cmml" xref="S3.E1.m1.1.1.3.4.1"></times><apply id="S3.E1.m1.1.1.3.4.2.cmml" xref="S3.E1.m1.1.1.3.4.2"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.4.2.1.cmml" xref="S3.E1.m1.1.1.3.4.2">subscript</csymbol><ci id="S3.E1.m1.1.1.3.4.2.2.cmml" xref="S3.E1.m1.1.1.3.4.2.2">𝜆</ci><cn id="S3.E1.m1.1.1.3.4.2.3.cmml" type="integer" xref="S3.E1.m1.1.1.3.4.2.3">3</cn></apply><apply id="S3.E1.m1.1.1.3.4.3.cmml" xref="S3.E1.m1.1.1.3.4.3"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.4.3.1.cmml" xref="S3.E1.m1.1.1.3.4.3">subscript</csymbol><ci id="S3.E1.m1.1.1.3.4.3.2.cmml" xref="S3.E1.m1.1.1.3.4.3.2">ℒ</ci><apply id="S3.E1.m1.1.1.3.4.3.3.cmml" xref="S3.E1.m1.1.1.3.4.3.3"><times id="S3.E1.m1.1.1.3.4.3.3.1.cmml" xref="S3.E1.m1.1.1.3.4.3.3.1"></times><ci id="S3.E1.m1.1.1.3.4.3.3.2.cmml" xref="S3.E1.m1.1.1.3.4.3.3.2">𝑏</ci><ci id="S3.E1.m1.1.1.3.4.3.3.3.cmml" xref="S3.E1.m1.1.1.3.4.3.3.3">𝑜</ci><ci id="S3.E1.m1.1.1.3.4.3.3.4.cmml" xref="S3.E1.m1.1.1.3.4.3.3.4">𝑥</ci></apply></apply></apply><apply id="S3.E1.m1.1.1.3.5.cmml" xref="S3.E1.m1.1.1.3.5"><times id="S3.E1.m1.1.1.3.5.1.cmml" xref="S3.E1.m1.1.1.3.5.1"></times><apply id="S3.E1.m1.1.1.3.5.2.cmml" xref="S3.E1.m1.1.1.3.5.2"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.5.2.1.cmml" xref="S3.E1.m1.1.1.3.5.2">subscript</csymbol><ci id="S3.E1.m1.1.1.3.5.2.2.cmml" xref="S3.E1.m1.1.1.3.5.2.2">𝜆</ci><cn id="S3.E1.m1.1.1.3.5.2.3.cmml" type="integer" xref="S3.E1.m1.1.1.3.5.2.3">4</cn></apply><apply id="S3.E1.m1.1.1.3.5.3.cmml" xref="S3.E1.m1.1.1.3.5.3"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.3.5.3.1.cmml" xref="S3.E1.m1.1.1.3.5.3">subscript</csymbol><ci id="S3.E1.m1.1.1.3.5.3.2.cmml" xref="S3.E1.m1.1.1.3.5.3.2">ℒ</ci><apply id="S3.E1.m1.1.1.3.5.3.3.cmml" xref="S3.E1.m1.1.1.3.5.3.3"><times id="S3.E1.m1.1.1.3.5.3.3.1.cmml" xref="S3.E1.m1.1.1.3.5.3.3.1"></times><ci id="S3.E1.m1.1.1.3.5.3.3.2.cmml" xref="S3.E1.m1.1.1.3.5.3.3.2">𝑟</ci><ci id="S3.E1.m1.1.1.3.5.3.3.3.cmml" xref="S3.E1.m1.1.1.3.5.3.3.3">𝑖</ci><ci id="S3.E1.m1.1.1.3.5.3.3.4.cmml" xref="S3.E1.m1.1.1.3.5.3.3.4">𝑝</ci></apply></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E1.m1.1c">\mathcal{L}=\lambda_{1}\mathcal{L}_{{cls}}+\lambda_{2}\mathcal{L}_{{conf}}+%
+\lambda_{3}\mathcal{L}_{{box}}+\lambda_{4}\mathcal{L}_{{rip}}</annotation><annotation encoding="application/x-llamapun" id="S3.E1.m1.1d">caligraphic_L = italic_λ start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT caligraphic_L start_POSTSUBSCRIPT italic_c italic_l italic_s end_POSTSUBSCRIPT + italic_λ start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT caligraphic_L start_POSTSUBSCRIPT italic_c italic_o italic_n italic_f end_POSTSUBSCRIPT + italic_λ start_POSTSUBSCRIPT 3 end_POSTSUBSCRIPT caligraphic_L start_POSTSUBSCRIPT italic_b italic_o italic_x end_POSTSUBSCRIPT + italic_λ start_POSTSUBSCRIPT 4 end_POSTSUBSCRIPT caligraphic_L start_POSTSUBSCRIPT italic_r italic_i italic_p end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS2.p3.5">where <math alttext="\lambda" class="ltx_Math" display="inline" id="S3.SS2.p3.1.m1.1"><semantics id="S3.SS2.p3.1.m1.1a"><mi id="S3.SS2.p3.1.m1.1.1" xref="S3.SS2.p3.1.m1.1.1.cmml">λ</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.1.m1.1b"><ci id="S3.SS2.p3.1.m1.1.1.cmml" xref="S3.SS2.p3.1.m1.1.1">𝜆</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.1.m1.1c">\lambda</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.1.m1.1d">italic_λ</annotation></semantics></math> represents the weight of different loss functions. <math alttext="\mathcal{L}_{{cls}}" class="ltx_Math" display="inline" id="S3.SS2.p3.2.m2.1"><semantics id="S3.SS2.p3.2.m2.1a"><msub id="S3.SS2.p3.2.m2.1.1" xref="S3.SS2.p3.2.m2.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.2.m2.1.1.2" xref="S3.SS2.p3.2.m2.1.1.2.cmml">ℒ</mi><mrow id="S3.SS2.p3.2.m2.1.1.3" xref="S3.SS2.p3.2.m2.1.1.3.cmml"><mi id="S3.SS2.p3.2.m2.1.1.3.2" xref="S3.SS2.p3.2.m2.1.1.3.2.cmml">c</mi><mo id="S3.SS2.p3.2.m2.1.1.3.1" xref="S3.SS2.p3.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.2.m2.1.1.3.3" xref="S3.SS2.p3.2.m2.1.1.3.3.cmml">l</mi><mo id="S3.SS2.p3.2.m2.1.1.3.1a" xref="S3.SS2.p3.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.2.m2.1.1.3.4" xref="S3.SS2.p3.2.m2.1.1.3.4.cmml">s</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.2.m2.1b"><apply id="S3.SS2.p3.2.m2.1.1.cmml" xref="S3.SS2.p3.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.2.m2.1.1.1.cmml" xref="S3.SS2.p3.2.m2.1.1">subscript</csymbol><ci id="S3.SS2.p3.2.m2.1.1.2.cmml" xref="S3.SS2.p3.2.m2.1.1.2">ℒ</ci><apply id="S3.SS2.p3.2.m2.1.1.3.cmml" xref="S3.SS2.p3.2.m2.1.1.3"><times id="S3.SS2.p3.2.m2.1.1.3.1.cmml" xref="S3.SS2.p3.2.m2.1.1.3.1"></times><ci id="S3.SS2.p3.2.m2.1.1.3.2.cmml" xref="S3.SS2.p3.2.m2.1.1.3.2">𝑐</ci><ci id="S3.SS2.p3.2.m2.1.1.3.3.cmml" xref="S3.SS2.p3.2.m2.1.1.3.3">𝑙</ci><ci id="S3.SS2.p3.2.m2.1.1.3.4.cmml" xref="S3.SS2.p3.2.m2.1.1.3.4">𝑠</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.2.m2.1c">\mathcal{L}_{{cls}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.2.m2.1d">caligraphic_L start_POSTSUBSCRIPT italic_c italic_l italic_s end_POSTSUBSCRIPT</annotation></semantics></math>is the classification loss, <math alttext="\mathcal{L}_{{cls}}" class="ltx_Math" display="inline" id="S3.SS2.p3.3.m3.1"><semantics id="S3.SS2.p3.3.m3.1a"><msub id="S3.SS2.p3.3.m3.1.1" xref="S3.SS2.p3.3.m3.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.3.m3.1.1.2" xref="S3.SS2.p3.3.m3.1.1.2.cmml">ℒ</mi><mrow id="S3.SS2.p3.3.m3.1.1.3" xref="S3.SS2.p3.3.m3.1.1.3.cmml"><mi id="S3.SS2.p3.3.m3.1.1.3.2" xref="S3.SS2.p3.3.m3.1.1.3.2.cmml">c</mi><mo id="S3.SS2.p3.3.m3.1.1.3.1" xref="S3.SS2.p3.3.m3.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.3.m3.1.1.3.3" xref="S3.SS2.p3.3.m3.1.1.3.3.cmml">l</mi><mo id="S3.SS2.p3.3.m3.1.1.3.1a" xref="S3.SS2.p3.3.m3.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.3.m3.1.1.3.4" xref="S3.SS2.p3.3.m3.1.1.3.4.cmml">s</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.3.m3.1b"><apply id="S3.SS2.p3.3.m3.1.1.cmml" xref="S3.SS2.p3.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.3.m3.1.1.1.cmml" xref="S3.SS2.p3.3.m3.1.1">subscript</csymbol><ci id="S3.SS2.p3.3.m3.1.1.2.cmml" xref="S3.SS2.p3.3.m3.1.1.2">ℒ</ci><apply id="S3.SS2.p3.3.m3.1.1.3.cmml" xref="S3.SS2.p3.3.m3.1.1.3"><times id="S3.SS2.p3.3.m3.1.1.3.1.cmml" xref="S3.SS2.p3.3.m3.1.1.3.1"></times><ci id="S3.SS2.p3.3.m3.1.1.3.2.cmml" xref="S3.SS2.p3.3.m3.1.1.3.2">𝑐</ci><ci id="S3.SS2.p3.3.m3.1.1.3.3.cmml" xref="S3.SS2.p3.3.m3.1.1.3.3">𝑙</ci><ci id="S3.SS2.p3.3.m3.1.1.3.4.cmml" xref="S3.SS2.p3.3.m3.1.1.3.4">𝑠</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.3.m3.1c">\mathcal{L}_{{cls}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.3.m3.1d">caligraphic_L start_POSTSUBSCRIPT italic_c italic_l italic_s end_POSTSUBSCRIPT</annotation></semantics></math> is the confidence loss and <math alttext="\mathcal{L}_{{box}}" class="ltx_Math" display="inline" id="S3.SS2.p3.4.m4.1"><semantics id="S3.SS2.p3.4.m4.1a"><msub id="S3.SS2.p3.4.m4.1.1" xref="S3.SS2.p3.4.m4.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.4.m4.1.1.2" xref="S3.SS2.p3.4.m4.1.1.2.cmml">ℒ</mi><mrow id="S3.SS2.p3.4.m4.1.1.3" xref="S3.SS2.p3.4.m4.1.1.3.cmml"><mi id="S3.SS2.p3.4.m4.1.1.3.2" xref="S3.SS2.p3.4.m4.1.1.3.2.cmml">b</mi><mo id="S3.SS2.p3.4.m4.1.1.3.1" xref="S3.SS2.p3.4.m4.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.4.m4.1.1.3.3" xref="S3.SS2.p3.4.m4.1.1.3.3.cmml">o</mi><mo id="S3.SS2.p3.4.m4.1.1.3.1a" xref="S3.SS2.p3.4.m4.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.4.m4.1.1.3.4" xref="S3.SS2.p3.4.m4.1.1.3.4.cmml">x</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.4.m4.1b"><apply id="S3.SS2.p3.4.m4.1.1.cmml" xref="S3.SS2.p3.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.4.m4.1.1.1.cmml" xref="S3.SS2.p3.4.m4.1.1">subscript</csymbol><ci id="S3.SS2.p3.4.m4.1.1.2.cmml" xref="S3.SS2.p3.4.m4.1.1.2">ℒ</ci><apply id="S3.SS2.p3.4.m4.1.1.3.cmml" xref="S3.SS2.p3.4.m4.1.1.3"><times id="S3.SS2.p3.4.m4.1.1.3.1.cmml" xref="S3.SS2.p3.4.m4.1.1.3.1"></times><ci id="S3.SS2.p3.4.m4.1.1.3.2.cmml" xref="S3.SS2.p3.4.m4.1.1.3.2">𝑏</ci><ci id="S3.SS2.p3.4.m4.1.1.3.3.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3">𝑜</ci><ci id="S3.SS2.p3.4.m4.1.1.3.4.cmml" xref="S3.SS2.p3.4.m4.1.1.3.4">𝑥</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.4.m4.1c">\mathcal{L}_{{box}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.4.m4.1d">caligraphic_L start_POSTSUBSCRIPT italic_b italic_o italic_x end_POSTSUBSCRIPT</annotation></semantics></math> represents the bounding box loss. The binary cross-entropy loss function <math alttext="\mathcal{L}_{{rip}}" class="ltx_Math" display="inline" id="S3.SS2.p3.5.m5.1"><semantics id="S3.SS2.p3.5.m5.1a"><msub id="S3.SS2.p3.5.m5.1.1" xref="S3.SS2.p3.5.m5.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.5.m5.1.1.2" xref="S3.SS2.p3.5.m5.1.1.2.cmml">ℒ</mi><mrow id="S3.SS2.p3.5.m5.1.1.3" xref="S3.SS2.p3.5.m5.1.1.3.cmml"><mi id="S3.SS2.p3.5.m5.1.1.3.2" xref="S3.SS2.p3.5.m5.1.1.3.2.cmml">r</mi><mo id="S3.SS2.p3.5.m5.1.1.3.1" xref="S3.SS2.p3.5.m5.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.5.m5.1.1.3.3" xref="S3.SS2.p3.5.m5.1.1.3.3.cmml">i</mi><mo id="S3.SS2.p3.5.m5.1.1.3.1a" xref="S3.SS2.p3.5.m5.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.5.m5.1.1.3.4" xref="S3.SS2.p3.5.m5.1.1.3.4.cmml">p</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.5.m5.1b"><apply id="S3.SS2.p3.5.m5.1.1.cmml" xref="S3.SS2.p3.5.m5.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.5.m5.1.1.1.cmml" xref="S3.SS2.p3.5.m5.1.1">subscript</csymbol><ci id="S3.SS2.p3.5.m5.1.1.2.cmml" xref="S3.SS2.p3.5.m5.1.1.2">ℒ</ci><apply id="S3.SS2.p3.5.m5.1.1.3.cmml" xref="S3.SS2.p3.5.m5.1.1.3"><times id="S3.SS2.p3.5.m5.1.1.3.1.cmml" xref="S3.SS2.p3.5.m5.1.1.3.1"></times><ci id="S3.SS2.p3.5.m5.1.1.3.2.cmml" xref="S3.SS2.p3.5.m5.1.1.3.2">𝑟</ci><ci id="S3.SS2.p3.5.m5.1.1.3.3.cmml" xref="S3.SS2.p3.5.m5.1.1.3.3">𝑖</ci><ci id="S3.SS2.p3.5.m5.1.1.3.4.cmml" xref="S3.SS2.p3.5.m5.1.1.3.4">𝑝</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.5.m5.1c">\mathcal{L}_{{rip}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.5.m5.1d">caligraphic_L start_POSTSUBSCRIPT italic_r italic_i italic_p end_POSTSUBSCRIPT</annotation></semantics></math> is employed to compute the tomato fruit maturity loss.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p4">
+<p class="ltx_p" id="S3.SS2.p4.1">While the model can detect each individual fruit, it does not provide the relationship between the fruits and the tomato trusses. We match and group fruits based on their 2D/3D spatial relationships with the tomato trusses, thus obtaining information on the quantity and maturity of fruits within a given truss. In the 2D space, we calculate the Intersection over Union (IOU) between the bounding boxes of the fruits and the tomato trusses to determine if a fruit belongs to a specific truss. However, when multiple tomato trusses overlap in the camera’s field of view, this algorithm may produce matching errors. To address this issue, we employ point cloud clustering to distinguish overlapping tomato trusses in the foreground and background, thereby determining the ownership of fruits.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p5">
+<p class="ltx_p" id="S3.SS2.p5.1">Traditional DBScan clustering suffers from extensive and inefficient nearest neighbor searches and random initial point selection, affecting its computational speed. We propose an adaptive DBScan algorithm based on object detection. The bounding boxes in the detection results provide prior knowledge of the spatial positions of the targets. Precise cropping of the input point cloud is achieved using the exact bounding boxes of the tomato trusses, eliminating the need for full point cloud computation. The center points of the fruit bounding boxes are used as the initial point set for clustering, enabling adaptive selection of high-density target point clouds. By employing adaptive input cropping and initial point selection, the number of nearby searches can be significantly reduced, leading to a notable improvement in computational speed. Additionally, the threshold values of the clustering algorithm can be determined based on the structural prior knowledge of various tomato truss varieties.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p6">
+<p class="ltx_p" id="S3.SS2.p6.1">To swiftly estimate the volume of fruits and determine their spatial positions, we do not partition the precise point cloud of each fruit from the point cloud returned by the depth camera. Instead, we approximate the contour of the fruits in the images using a circle with a radius equal to the average width and height of the rectangular predicted bounding box. Combined with the intrinsic parameters of the depth camera, we perform back-projection to generate a spherical virtual point cloud in three-dimensional space, preparing for collision detection during path planning, as illustrated in Figure 2. This estimation method has low computational complexity and errors are within an acceptable range for our harvesting approach.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS3.4.1.1">III-C</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS3.5.2">Pose Estimation</span>
+</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">To better support robotic arm path planning, we incorporated structural prior knowledge of tomato trusses and defined seven peduncle keypoints. Their nomenclature and abbreviations are shown in Figure 3. SP, CP, and FP along with their connecting curves represent segments of the peduncle that can be cut. SP is situated at the junction of the tomato truss peduncle and the main stem, serving as both the starting point of the tomato curve and the anticipated cutting position for our end-effector. CP is located at the maximum curvature of the peduncle and is also the traditional cutting point for clamp-style end-effectors. Ideally, in our robot, cutting should occur close to the SP position of the peduncle. FP is where the first fruit petiole connects to the peduncle, while EP is at the end of the peduncle, and in combination with other peduncle and fruit keypoints, indicates the posture of the tomato truss. This area is to be avoided contact or cutting.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1">Even when annotating peduncle keypoints for the same tomato truss, different annotators may produce results that are not entirely consistent, potentially resulting in varying degrees of discrepancy. For instance, the positions of QP, MP, and TQP are evenly distributed along the peduncle area from FP to EP. Their structural features are less prominent compared to SP and CP. Similar to the COCO human keypoint dataset [20], we use the OKS (Object Keypoint Similarity) value as the evaluation metric for peduncle keypoint prediction accuracy. The ’sigmas’ parameter for peduncle keypoints is obtained by calculating the standard deviation between multiple human annotator keypoints and expert ground truth annotations.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p3">
+<p class="ltx_p" id="S3.SS3.p3.1">The difference lies in the fact that not all keypoints in the COCO human keypoint dataset are equally important. For harvesting tasks, the importance of each keypoint and the consequences of prediction errors vary. SP, CP, and FP peduncle keypoints require the highest prediction and localization accuracy possible. If their predicted positions do not align perfectly with the peduncle, harvesting is likely to fail, and there may even be damage to the tomato vines. The other points are primarily used to avoid collisions between the end-effector and tomato trusses and do not require ultra-high precision. The OKS calculates the overall similarity between the ground truth and predicted values of multiple keypoints on the target. One potential issue is that a model with a high accuracy evaluation score may perform well in predicting keypoints from FP to EP, but may lack precision in predicting SP and CP. This contradicts our harvesting objectives.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p4">
+<p class="ltx_p" id="S3.SS3.p4.1">We manually fine-tuned the’ sigmas’ values obtained for each keypoint to obtain a keypoint detection model based on OKS evaluation that better aligns with harvesting requirements. The manual adjustment involved reducing the ’sigmas’ values for SP and CP points while increasing the ’sigmas’ values for the remaining points. This adjustment signifies our intention for the model evaluation to lean towards higher accuracy prediction of SP and CP keypoints.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p5">
+<p class="ltx_p" id="S3.SS3.p5.1">For detecting keypoints on tomato peduncles, we employed the HRnet-w48 model. Additionally, several state-of-the-art networks on the COCO keypoint detection dataset were experimented with, including RTMPose, CID, UDP, and DarkPose, with CID, DarkPose, and UDP all using HRnet as their backbone. Moreover, we explored regression-based keypoint detection approaches, such as YOLOv8-pose, and models using Resnet101 as the backbone for regression prediction.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3">
+<p class="ltx_p ltx_align_center" id="S3.F3.1"><span class="ltx_text" id="S3.F3.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="191" id="S3.F3.1.1.g1" src="extracted/2405.06959v1/process.png" width="598"/></span></p>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>A tomato truss is represented by a combination of 7 peduncle keypoints and multiple fruit keypoints. The harvesting process, termed ”bottom-up wrapping,” involves (a) initial positioning below the target; (b) slow ascent and translation along the peduncle curve to avoid collisions with the target until all fruits are fully enveloped; (c) bringing the edge of the end-effector close to the SP point; (d) rotating the end-effector, causing the peduncle to fall into the slot and be cut by the blade; (e) applying continued pressure through rotation; (f) the peduncle is severed and falls into the collection mesh. Key keypoints predominantly utilized in each stage are denoted in blue.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS4.4.1.1">III-D</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS4.5.2">Decision and Motion Planning</span>
+</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">In the greenhouse, limited operational space and entangled vines challenge automated harvesting tasks. We contend that the operation of harvesting robots must be predicated upon the principle of ”do no harm” to the surroundings. Accordingly, we have designed and optimized decision-making processes with ”minimizing risks whenever possible” as a central tenet.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.1">By integrating the local information of the tomato trusses obtained from the Phenotyping phase with the holistic posture information acquired during the Pose estimation phase, we encode the features of each tomato trusses object. Utilizing this feature data, we further refine the selection of optimal harvesting targets. Targets that are either immature or of subpar quality are excluded. tomato trusses with extreme growth positions or orientations are also discarded. For instance, when harvesting tomato trusses facing the interior of cultivation troughs or positioned opposite to the direction of vine suspension, there is a high likelihood of occurrences such as mechanical arm collisions with heating pipes or entanglement with vines. Excluding such targets would effectively reduce the risk of accidents and contribute to enhancing the overall continuity and success rate of the harvesting process.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p3">
+<p class="ltx_p" id="S3.SS4.p3.1">Upon target selection, the robot engages in end-effector path planning based on target volume and pose keypoints, refer to Figure 3. Initially, the EP, TQP, MP, QP, and FP points serve as end-effector motion pathpoints, generating a smooth end-effector trajectory. To enhance harvesting success, collision detection is performed to ensure that the inner wall and upper edge of the end-effector do not collide with the tomato trusses. Leveraging prior knowledge of tomato truss growth, it is observed that fruits predominantly grow towards the normal direction of the peduncle curve. If there is a risk of collision, the end-effector path points are shifted outward along the normal direction of the peduncle curve. Subsequently, the end-effector follows the planned trajectory to envelop the main body of the tomato truss containing the fruits, with the edge containing the blade reaching the SP point. The end-effector rotates, applying pressure and cutting the peduncle, thereby completing the harvesting process.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.1.1">Experiment Results</span>
+</h2>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS1.4.1.1">IV-A</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS1.5.2">Dataset and Training</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Due to the absence of publicly available cherry tomato datasets, we collected image data from a commercial greenhouse in Haidian District, Beijing. Two datasets were generated after manual annotation by experts: Dataset-1, tailored for tomato object detection and ripeness differentiation, comprises 2,000 annotated images with 112,000 targets. Dataset-2, designed for peduncle keypoint detection, encompasses 1,000 images with 5,432 annotated subjects. For phenotypic multi-task modeling, we employed the Yolov5m model and trained it on Dataset-1, designating 300 images for validation. Multiple models destined for peduncle keypoint prediction were trained using Dataset-2, allocating 150 images for the validation set.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS2.4.1.1">IV-B</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS2.5.2">Phenotyping Test</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">Our trained multi-task YOLOv5m achieved an mAP of 90.18% on the validation set for tomato trusses and four maturity stages of fruits with IOU threshold set at 0.5. Our assessment of overall ripeness and other phenotypic applications is based on this model and the adaptive DBscan method. Subsequently, through an enhanced adaptive clustering algorithm, fruits were systematically matched with their corresponding trusses, facilitating an inference of the aggregate ripeness from individual fruit metrics. As a benchmark, the conventional method utilized a supervised binary classification model to evaluate the truss’s maturity directly. Within a validation dataset consisting of 300 image samples, both methodologies were rigorously examined, and the findings are delineated in Table 1.</p>
+</div>
+<figure class="ltx_table" id="S4.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE I: </span>Accuracy Comparison of tomato trusses Maturity Assessment on the Validation Set: Our Approach (Phenotyping based on Object Detection) vs. Traditional Methods (Supervised Deep Learning Classification Models).</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T1.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.1.1.1.1">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T1.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S4.T1.1.1.1.2.1">Result</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T1.1.2.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.1.2.1.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.2.1.1.1">Our method</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.1.2.1.2"><span class="ltx_text ltx_font_bold" id="S4.T1.1.2.1.2.1">0.8971</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.3.2">
+<td class="ltx_td ltx_align_center" id="S4.T1.1.3.2.1">Mobilenet-v2</td>
+<td class="ltx_td ltx_align_center" id="S4.T1.1.3.2.2">0.8604</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.4.3">
+<td class="ltx_td ltx_align_center" id="S4.T1.1.4.3.1">Resnet18</td>
+<td class="ltx_td ltx_align_center" id="S4.T1.1.4.3.2">0.8101</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.5.4">
+<td class="ltx_td ltx_align_center" id="S4.T1.1.5.4.1">Efficientnet-b4</td>
+<td class="ltx_td ltx_align_center" id="S4.T1.1.5.4.2">0.8449</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.6.5">
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T1.1.6.5.1">Swin-Transformer small</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T1.1.6.5.2">0.8527</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">The experimental results demonstrate that our method exhibits a significant accuracy advantage in estimating the maturity of entire tomato trusses. Moreover, this method aligns well with agronomic standards, maintaining excellent interpretability and adjustability. To illustrate, if there’s a shift in ripeness criteria to consider a tomato truss as mature only when every individual fruit achieves or surpasses a certain maturity threshold, the conventional classification approach would demand an exhaustive re-evaluation and adjustment of annotations across the dataset.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS3.4.1.1">IV-C</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS3.5.2">Pose estimation test</span>
+</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">We compiled a pedicel keypoint validation set comprising 150 images to evaluate the pose estimation accuracy of various models. The test results are presented in Table 2.</p>
+</div>
+<figure class="ltx_table" id="S4.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE II: </span>Performance of Various Models on the Pedicel Keypoint Validation Set using OKS Metric at a Threshold of 0.75.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T2.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T2.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.1.1">Category</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.2.1">Model</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.1.1.1.3"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.3.1">Input size</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.1.1.1.4"><span class="ltx_text ltx_font_bold" id="S4.T2.1.1.1.4.1">OKS@.75</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T2.1.2.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.1.2.1.1" rowspan="6"><span class="ltx_text" id="S4.T2.1.2.1.1.1">
+<span class="ltx_tabular ltx_align_middle" id="S4.T2.1.2.1.1.1.1">
+<span class="ltx_tr" id="S4.T2.1.2.1.1.1.1.1">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T2.1.2.1.1.1.1.1.1">Heatmap</span></span>
+<span class="ltx_tr" id="S4.T2.1.2.1.1.1.1.2">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T2.1.2.1.1.1.1.2.1">based</span></span>
+</span></span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.1.2.1.2"><span class="ltx_text ltx_font_bold" id="S4.T2.1.2.1.2.1">Our method</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.1.2.1.3">256x192</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.1.2.1.4"><span class="ltx_text ltx_font_bold" id="S4.T2.1.2.1.4.1">0.7561</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.3.2">
+<td class="ltx_td ltx_align_center" id="S4.T2.1.3.2.1">HRnet_w32</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.3.2.2">256x192</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.3.2.3">0.6968</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.4.3">
+<td class="ltx_td ltx_align_center" id="S4.T2.1.4.3.1">DarkPose</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.4.3.2">384x288</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.4.3.3">0.7113</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.5.4">
+<td class="ltx_td ltx_align_center" id="S4.T2.1.5.4.1">CID</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.5.4.2">512x512</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.5.4.3">0.4895</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.6.5">
+<td class="ltx_td ltx_align_center" id="S4.T2.1.6.5.1">UDP</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.6.5.2">384x288</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.6.5.3">0.7456</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.7.6">
+<td class="ltx_td ltx_align_center" id="S4.T2.1.7.6.1">RTMPose_L</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.7.6.2">256x192</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.7.6.3">0.7452</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.8.7">
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.1.8.7.1" rowspan="2"><span class="ltx_text" id="S4.T2.1.8.7.1.1">
+<span class="ltx_tabular ltx_align_middle" id="S4.T2.1.8.7.1.1.1">
+<span class="ltx_tr" id="S4.T2.1.8.7.1.1.1.1">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T2.1.8.7.1.1.1.1.1">Regression</span></span>
+<span class="ltx_tr" id="S4.T2.1.8.7.1.1.1.2">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T2.1.8.7.1.1.1.2.1">based</span></span>
+</span></span></td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.8.7.2">Yolov8-pose</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.8.7.3">640x640</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.1.8.7.4">0.5307</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.1.9.8">
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.1.9.8.1">RES101_RLE</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.1.9.8.2">256x192</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.1.9.8.3">0.5447</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1">Based on the experimental results, when using the OKS metric with a threshold of 0.75, our method exhibited outstanding performance, achieving a precision of 0.7561. Although our algorithm lags in inference speed, considering that the operational efficiency of the harvesting robot is predominantly constrained by the several-second action cycle of its mechanical components, this shortfall seems relatively insignificant compared to perception speed.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p3">
+<p class="ltx_p" id="S4.SS3.p3.1">Furthermore, we observed that keypoint prediction models based on heatmaps generally outperform models that directly regress the keypoint positions in detecting peduncle keypoints. This is likely related to the small pixel area that the peduncle occupies in the image. For instance, in a 720P frame containing a tomato truss image with dimensions 138x438 pixels, the pedicel has a pixel width of 8. Prior to input into the HRnet with an input layer of 192x168, this pedicel pixel region is magnified. Conversely, models employing global computations, such as YOLO with an input layer of 640x640, would compress the pedicel image, thereby compromising precise prediction.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS4.4.1.1">IV-D</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS4.5.2">Automated Harvesting experiment</span>
+</h3>
+<div class="ltx_para" id="S4.SS4.p1">
+<p class="ltx_p" id="S4.SS4.p1.1">In a greenhouse, two rounds of experiments were conducted. First, under a controlled scenario, we evaluated the robot’s performance using a harvesting path planning based on pose estimation, also known as ’Bottom-up wrapping’, and its end-effector’s proficiency when confronting tomato trusses of varied orientations. Second, we tested AHPPEBot’s continuous harvesting capability in an unaltered environment.</p>
+</div>
+<section class="ltx_subsubsection" id="S4.SS4.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection"><span class="ltx_text" id="S4.SS4.SSS1.4.1.1">IV-D</span>1 </span>Harvesting Test Under Different Target Poses</h4>
+<div class="ltx_para" id="S4.SS4.SSS1.p1">
+<p class="ltx_p" id="S4.SS4.SSS1.p1.1">In the experiment, we manually pruned to ensure only one cluster of tomatoes was present in the robot’s workspace, preventing interference with the vines. Upon receiving a start command, the robot initiated the harvesting. If three consecutive attempts failed, or if there were safety concerns or damage to the tomato, the action was deemed unsuccessful. In such cases, the operator intervened, halting the operation and removing the target tomato trusses. Upon successful harvesting, the robot moved to the next pick point.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.SSS1.p2">
+<p class="ltx_p" id="S4.SS4.SSS1.p2.1">In preliminary tests, due to constraints from planting infrastructure and the direction of tomato plant hangings, clusters with orientations facing left or inwards (growing towards the cultivation trough) were challenging to harvest from the robot’s viewpoint. Consequently, these outliers were excluded, focusing only on clusters suitable for harvesting, those facing right or towards the robot. The success rates for critical steps throughout the harvesting process are detailed in Table 3.</p>
+</div>
+<figure class="ltx_table" id="S4.T3">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE III: </span>tomato trusses Harvesting Success Rates for Two Poses Under Manual Intervention: SP Point Prediction (Accuracy in Locating Points on the Pedicel), Bottom-up Wrapping (Success in Target Encasement), Detachment Efficacy (Successful Pedicel Cutting), and Overall Harvesting Integrity (Preservation and Correct Maturity of tomato trusses).</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T3.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T3.1.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T3.1.1.1.1">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.1.1.1.1">
+<tr class="ltx_tr" id="S4.T3.1.1.1.1.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.1.1.1.1.1">Tomato</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.1.1.1.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.1.1.1.1.2.1"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.1.1.2.1.1">Bunch</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.1.1.1.1.3">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.1.1.1.1.3.1"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.1.1.3.1.1">Pose</span></td>
+</tr>
+</table>
+</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T3.1.1.1.2">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.1.1.2.1">
+<tr class="ltx_tr" id="S4.T3.1.1.1.2.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.1.1.2.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.2.1.1.1.1">SP Point</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.1.1.2.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.1.1.2.1.2.1"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.2.1.2.1.1">Identification</span></td>
+</tr>
+</table>
+</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T3.1.1.1.3">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.1.1.3.1">
+<tr class="ltx_tr" id="S4.T3.1.1.1.3.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.1.1.3.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.3.1.1.1.1">Bottom-up</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.1.1.3.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.1.1.3.1.2.1"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.3.1.2.1.1">Wrapping</span></td>
+</tr>
+</table>
+</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T3.1.1.1.4"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.4.1">Detach</span></th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T3.1.1.1.5"><span class="ltx_text ltx_font_bold" id="S4.T3.1.1.1.5.1">Harvesting</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T3.1.2.1">
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T3.1.2.1.1">Front</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T3.1.2.1.2">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.2.1.2.1">
+<tr class="ltx_tr" id="S4.T3.1.2.1.2.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.2.1.1.1">86.36%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.2.1.2.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.2.1.2.1">(19/22)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T3.1.2.1.3">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.2.1.3.1">
+<tr class="ltx_tr" id="S4.T3.1.2.1.3.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.3.1.1.1">95.45%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.2.1.3.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.3.1.2.1">(21/22)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T3.1.2.1.4">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.2.1.4.1">
+<tr class="ltx_tr" id="S4.T3.1.2.1.4.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.4.1.1.1">95.24%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.2.1.4.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.4.1.2.1">(20/21)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T3.1.2.1.5">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.2.1.5.1">
+<tr class="ltx_tr" id="S4.T3.1.2.1.5.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.5.1.1.1">90.90%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.2.1.5.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.2.1.5.1.2.1">(20/22)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.3.2">
+<td class="ltx_td ltx_align_left" id="S4.T3.1.3.2.1">Right</td>
+<td class="ltx_td ltx_align_left" id="S4.T3.1.3.2.2">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.3.2.2.1">
+<tr class="ltx_tr" id="S4.T3.1.3.2.2.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.2.1.1.1">84.62%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.3.2.2.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.2.1.2.1">(22/26)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left" id="S4.T3.1.3.2.3">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.3.2.3.1">
+<tr class="ltx_tr" id="S4.T3.1.3.2.3.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.3.1.1.1">92.31%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.3.2.3.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.3.1.2.1">(24/26)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left" id="S4.T3.1.3.2.4">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.3.2.4.1">
+<tr class="ltx_tr" id="S4.T3.1.3.2.4.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.4.1.1.1">95.83%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.3.2.4.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.4.1.2.1">(23/24)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left" id="S4.T3.1.3.2.5">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.3.2.5.1">
+<tr class="ltx_tr" id="S4.T3.1.3.2.5.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.5.1.1.1">88.46%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.3.2.5.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.3.2.5.1.2.1">(23/26)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.4.3">
+<td class="ltx_td ltx_border_b" id="S4.T3.1.4.3.1"></td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T3.1.4.3.2">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.4.3.2.1">
+<tr class="ltx_tr" id="S4.T3.1.4.3.2.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.2.1.1.1">85.41%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.4.3.2.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.2.1.2.1">(41/48)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T3.1.4.3.3">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.4.3.3.1">
+<tr class="ltx_tr" id="S4.T3.1.4.3.3.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.3.1.1.1">93.75%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.4.3.3.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.3.1.2.1">(44/48)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T3.1.4.3.4">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.4.3.4.1">
+<tr class="ltx_tr" id="S4.T3.1.4.3.4.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.4.1.1.1">95.56%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.4.3.4.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.4.1.2.1">(43/45)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T3.1.4.3.5">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.1.4.3.5.1">
+<tr class="ltx_tr" id="S4.T3.1.4.3.5.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.5.1.1.1">89.58%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.1.4.3.5.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T3.1.4.3.5.1.2.1">(43/48)</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S4.SS4.SSS1.p3">
+<p class="ltx_p" id="S4.SS4.SSS1.p3.1">In the experimental results, the success rate for the Bottom-up wrapping reached 93.75%, while the detach success rate was 95.56%, and the overall harvesting success rate stood at 89.58%. It’s noteworthy that successful harvesting does not solely rely on accurate prediction of the target keypoints, the precision with which the end-effector encircles the tomato trusses is equally crucial.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S4.SS4.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection"><span class="ltx_text" id="S4.SS4.SSS2.4.1.1">IV-D</span>2 </span>Autonomous Continuous Harvesting Test</h4>
+<div class="ltx_para" id="S4.SS4.SSS2.p1">
+<p class="ltx_p" id="S4.SS4.SSS2.p1.1">In this experiment, we continued with the target selection strategy outlined in the previous section, focusing primarily on two types of target postures for harvesting. Unlike before, the environment wasn’t manually pruned for this test, and the robot attempted each target only once. The robot autonomously operated in an environment teeming with potential harvesting targets, encompassing actions like: advancing, target identification, assessing harvest viability, executing the harvest, and autonomously moving to the next target location.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.SSS2.p2">
+<p class="ltx_p" id="S4.SS4.SSS2.p2.1">The main emphasis of this experiment was on: the robot’s decision-making accuracy based on phenotype and posture estimation, the success rate of the harvesting operation, and its capability to execute tasks consecutively. To delve deeper, multiple tests were conducted, from which a representative experiment involving the operational records of 15 tomato trusses was selected. The specific data is presented in Table 4.</p>
+</div>
+<figure class="ltx_table" id="S4.T4">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE IV: </span>Harvesting Results for Various tomato trusses in Continuous Automatic Picking Experiments in Natural Environments: ’Time Used’ refers to the duration required for the robotic arm to move from its initial position to complete the cutting process.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S4.T4.1">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T4.1.1.1">
+<td class="ltx_td ltx_border_t" id="S4.T4.1.1.1.1"></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T4.1.1.1.2">
+<table class="ltx_tabular ltx_align_middle" id="S4.T4.1.1.1.2.1">
+<tr class="ltx_tr" id="S4.T4.1.1.1.2.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.1.1.1.2.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.2.1.1.1.1">Tomato</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.1.1.2.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.1.1.1.2.1.2.1"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.2.1.2.1.1">Truss</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.1.1.2.1.3">
+<td class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.1.1.1.2.1.3.1"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.2.1.3.1.1">Pose</span></td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T4.1.1.1.3">
+<table class="ltx_tabular ltx_align_middle" id="S4.T4.1.1.1.3.1">
+<tr class="ltx_tr" id="S4.T4.1.1.1.3.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.1.1.3.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.3.1.1.1.1">Bottom-up</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.1.1.3.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.1.1.3.1.2.1"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.3.1.2.1.1">Wrapping</span></td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T4.1.1.1.4"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.4.1">Detach</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T4.1.1.1.5"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.5.1">Harvesting</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T4.1.1.1.6"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.6.1">Time used (s)</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.2.2">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T4.1.2.2.1">1</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T4.1.2.2.2">Front</td>
+<td class="ltx_td ltx_align_center ltx_border_t" colspan="3" id="S4.T4.1.2.2.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T4.1.2.2.4">26</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.3.3">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.3.3.1">2</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.3.3.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.3.3.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.3.3.4">21</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.4.4">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.4.4.1">3</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.4.4.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.4.4.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.4.4.4">24</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.5.5">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.5.5.1">4</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.5.5.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.5.5.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.5.5.4">22</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.6.6">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.6.6.1">5</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.6.6.2">Front</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.6.6.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.6.6.4">34</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.7.7">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.7.7.1">6</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.7.7.2">Right</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.7.7.3">✓</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.7.7.4">×</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.7.7.5">×</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.7.7.6">32</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.8.8">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.8.8.1">7</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.8.8.2">Front</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.8.8.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.8.8.4">27</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.9.9">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.9.9.1">8</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.9.9.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.9.9.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.9.9.4">26</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.10.10">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.10.10.1">9</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.10.10.2">Back</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.10.10.3">×</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.10.10.4">-</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.10.10.5">×</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.10.10.6">32</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.11.11">
+<td class="ltx_td ltx_align_center" id="S4.T4.1.11.11.1">10</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.11.11.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.11.11.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.11.11.4">28</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.12.12">
+<td class="ltx_td ltx_align_left" id="S4.T4.1.12.12.1">11</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.12.12.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.12.12.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.12.12.4">30</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.13.13">
+<td class="ltx_td ltx_align_left" id="S4.T4.1.13.13.1">12</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.13.13.2">Front</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.13.13.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.13.13.4">29</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.14.14">
+<td class="ltx_td ltx_align_left" id="S4.T4.1.14.14.1">13</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.14.14.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.14.14.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.14.14.4">31</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.15.15">
+<td class="ltx_td ltx_align_left" id="S4.T4.1.15.15.1">14</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.15.15.2">Right</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.15.15.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.15.15.4">30</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.16.16">
+<td class="ltx_td ltx_align_left" id="S4.T4.1.16.16.1">15</td>
+<td class="ltx_td ltx_align_center" id="S4.T4.1.16.16.2">Front</td>
+<td class="ltx_td ltx_align_center" colspan="3" id="S4.T4.1.16.16.3" style="background-color:#C0C0C0;">✓</td>
+<td class="ltx_td ltx_align_left" id="S4.T4.1.16.16.4">30</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.17.17">
+<td class="ltx_td ltx_border_b" id="S4.T4.1.17.17.1"></td>
+<td class="ltx_td ltx_border_b" id="S4.T4.1.17.17.2"></td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T4.1.17.17.3">
+<table class="ltx_tabular ltx_align_middle" id="S4.T4.1.17.17.3.1">
+<tr class="ltx_tr" id="S4.T4.1.17.17.3.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.3.1.1.1">93.33%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.17.17.3.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.3.1.2.1">(14/15)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T4.1.17.17.4">
+<table class="ltx_tabular ltx_align_middle" id="S4.T4.1.17.17.4.1">
+<tr class="ltx_tr" id="S4.T4.1.17.17.4.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.4.1.1.1">92.86%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.17.17.4.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.4.1.2.1">(13/14)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T4.1.17.17.5">
+<table class="ltx_tabular ltx_align_middle" id="S4.T4.1.17.17.5.1">
+<tr class="ltx_tr" id="S4.T4.1.17.17.5.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.5.1.1.1">86.67%</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.17.17.5.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.5.1.2.1">(13/15)</td>
+</tr>
+</table>
+</td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T4.1.17.17.6">
+<table class="ltx_tabular ltx_align_middle" id="S4.T4.1.17.17.6.1">
+<tr class="ltx_tr" id="S4.T4.1.17.17.6.1.1">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.6.1.1.1">13 successes</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.17.17.6.1.2">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.6.1.2.1">in 422s,</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.1.17.17.6.1.3">
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T4.1.17.17.6.1.3.1">avg. 32.46s</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S4.SS4.SSS2.p3">
+<p class="ltx_p" id="S4.SS4.SSS2.p3.1">In the results of this experiment, we observed that the Bottom-up wrapping method based on posture estimation achieved a success rate of 93.33%. The end effector’s success rate for stem detachment stood at 92.86%, with an overall harvesting success rate reaching 86.67%.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.SSS2.p4">
+<p class="ltx_p" id="S4.SS4.SSS2.p4.1">Upon analyzing the factors leading to harvesting failures, we identified three primary causes: 1) Interference from the actuator leading to target displacement; 2) Errors in posture estimation; and 3) Limitations of the end effector’s performance. To illustrate, the tomato trusses labeled as #9 encountered errors in posture estimation due to occlusions, causing it to bypass the decision system’s filter, and the end effector could not successfully enclose and harvest the target. Additionally, the failure in harvesting the #6 tomato trusses occurred because the end effector rotated, with its netted bottom touching the base of the cluster, displacing it. Consequently, the stem did not fall into the guiding slot for the blade to cut, resulting in an unsuccessful harvest.</p>
+</div>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps" id="S5.1.1">Conclusion</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">In this paper, we design AHPPEBot, an advanced robot specifically designed for the automated harvesting of tomatoes. To ensure the autonomy and precision of the robot’s harvesting capabilities, we integrated two pivotal technologies: a rapid phenotyping method based on object detection and a pose estimation technique for tomato trusses using key points. These integrations have enhanced the robot’s abilities in recognizing tomato trusses, decision-making, and planning its harvesting path. Experimental results in a greenhouse setting reveal that with effective visual guidance and a high-performing end-effector, our robot achieved state-of-the-art harvesting success rates, demonstrating its capability for continuous harvesting. The results offer a highly efficient and reliable automated solution for agricultural robotics.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"> A. Ghobadpour, G. Monsalve, A. Cardenas, and H. Mousazadeh, ”Off-road electric vehicles and autonomous robots in agricultural sector: trends, challenges, and opportunities,” Vehicles, vol. 4, no. 3, pp. 843–864, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"> L. Christiaensen, Z. Rutledge, and J. E. Taylor, ”Viewpoint: The future of work in agri-food,” Food Policy, vol. 99, p. 101963, 2021. doi:https://doi.org/10.1016/j.foodpol.2020.101963.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"> S. Parsa, B. Debnath, M. A. Khan, and Others, ”Autonomous Strawberry Picking Robotic System (Robofruit),” arXiv preprint arXiv:2301.03947, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"> T. Li, F. Xie, Z. Zhao, H. Zhao, X. Guo, and Q. Feng, ”A multi-arm robot system for efficient apple harvesting: Perception, task plan and control,” Comput. Electron. Agr., vol. 211, p. 107979, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"> B. Arad et al., ”Development of a sweet pepper harvesting robot,” J. Field Robot., vol. 37, no. 6, pp. 1027–1039, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"> J. Gao et al., ”Development and evaluation of a pneumatic finger-like end-effector for cherry tomato harvesting robot in greenhouse,” Comput. Electron. Agr., vol. 197, p. 106879, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"> M. H. Malik, T. Zhang, H. Li, M. Zhang, S. Shabbir, and A. Saeed, ”Mature tomato fruit detection algorithm based on improved HSV and watershed algorithm,” IFAC-PapersOnLine, vol. 51, no. 17, pp. 431–436, 2018.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"> J. Zhuang et al., ”Computer vision-based localisation of picking points for automatic litchi harvesting applications towards natural scenarios,” Biosyst. Eng., vol. 187, pp. 1–20, 2019.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"> C. Lehnert, A. English, C. McCool, A. W. Tow, and T. Perez, ”Autonomous sweet pepper harvesting for protected cropping systems,” IEEE Robotics and Automation Letters, vol. 2, no. 2, pp. 872–879, 2017.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"> I. Sa et al., ”Peduncle detection of sweet pepper for autonomous crop harvesting—combined color and 3-D information,” IEEE Robotics and Automation Letters, vol. 2, no. 2, pp. 765–772, 2017.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"> H. T. M. Htet, T. T. Thu, A. K. Win, and Y. Shibata, ”Vision-based automatic strawberry shape and size estimation and classification using Raspberry Pi,” presented at, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"> L. Zhang, J. Jia, G. Gui, X. Hao, W. Gao, and M. Wang, ”Deep Learning Based Improved Classification System for Designing Tomato Harvesting Robot,” IEEE Access, vol. 6, no. , pp. 67940-67950, 2018. doi:10.1109/ACCESS.2018.2879324.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"> M. Afonso et al., ”Tomato fruit detection and counting in greenhouses using deep learning,” Front. Plant Sci., vol. 11, p. 571299, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"> W. Yin, H. Wen, Z. Ning, J. Ye, Z. Dong, and L. Luo, ”Fruit detection and pose estimation for grape cluster–harvesting robot using binocular imagery based on deep neural networks,” Frontiers in Robotics and AI, vol. 8, p. 626989, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"> J. Rong, G. Dai, and P. Wang, ”A peduncle detection method of tomato for autonomous harvesting,” Complex &amp; Intelligent Systems, pp. 1–15, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"> T. Li, F. Xie, Q. Feng, and Q. Qiu, ”Multi-vision-based Localization and Pose Estimation of Occluded Apple Fruits for Harvesting Robots,” presented at, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"> A. Tafuro, A. Adewumi, S. Parsa, G. E. Amir, and B. Debnath, ”Strawberry picking point localization ripeness and weight estimation,” presented at, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"> F. Zhang, J. Gao, H. Zhou, J. Zhang, K. Zou, and T. Yuan, ”Three-dimensional pose detection method based on keypoints detection network for tomato bunch,” Comput. Electron. Agr., vol. 195, p. 106824, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"> C. W. Bac, J. Hemming, B. Van Tuijl, R. Barth, E. Wais, and E. J. van Henten, ”Performance evaluation of a harvesting robot for sweet pepper,” J. Field Robot., vol. 34, no. 6, pp. 1123–1139, 2017.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"> T. Lin et al., ”Microsoft coco: Common objects in context,” presented at, 2014.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Tue May 14 16:13:25 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

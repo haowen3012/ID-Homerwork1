@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Clustering-based Learning for UAV Tracking and Pose Estimation</title>
+<!--Generated on Mon May 27 06:19:44 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2405.16867v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S1" title="In Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S2" title="In Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Exploratory Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S2.SS1" title="In 2 Exploratory Work ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>K-Means Clustering Approach</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S2.SS2" title="In 2 Exploratory Work ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Optimization of Cluster Parameters</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S2.SS3" title="In 2 Exploratory Work ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Monitoring and Estimating Drone Position</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S2.SS4" title="In 2 Exploratory Work ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Parameter Tuning</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S2.SS5" title="In 2 Exploratory Work ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.5 </span>Elbow Method Application</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3" title="In Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Methodology</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.SS1" title="In 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Data Sources</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.SS2" title="In 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Algorithm</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.SS2.SSS1" title="In 3.2 Algorithm ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.1 </span>LiDAR 360 Data Processing</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.SS2.SSS2" title="In 3.2 Algorithm ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.2 </span>Livox Avia Data Processing</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.SS2.SSS3" title="In 3.2 Algorithm ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.3 </span>Fallback Method</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.SS3" title="In 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Implementation Details</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S4" title="In Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S5" title="In Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusions</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Clustering-based Learning for UAV Tracking and Pose Estimation</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Jiaping Xiao<sup class="ltx_sup" id="id4.4.id1"><span class="ltx_text ltx_font_italic" id="id4.4.id1.1">†</span></sup>, Phumrapee Pisutsin<sup class="ltx_sup" id="id5.5.id2"><span class="ltx_text ltx_font_italic" id="id5.5.id2.1">†</span></sup>, Cheng Wen Tsao, Mir Feroskhan<sup class="ltx_sup" id="id6.6.id3">∗</sup>
+<br class="ltx_break"/>Nanyang Technological University
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="id7.7.id4" style="font-size:90%;">{jiaping001, pisu0001, tsao0002}@e.ntu.edu.sg, mir.feroskhan@ntu.edu.sg</span>
+</span><span class="ltx_author_notes">Equally contributed co-first authors, *Corresponding author.</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id8.id1">UAV tracking and pose estimation plays an imperative role in various UAV-related missions, such as formation control and anti-UAV measures. Accurately detecting and tracking UAVs in a 3D space remains a particularly challenging problem, as it requires extracting sparse features of micro UAVs from different flight environments and continuously matching correspondences, especially during agile flight. Generally, cameras and LiDARs are the two main types of sensors used to capture UAV trajectories in flight. However, both sensors have limitations in UAV classification and pose estimation. This technical report briefly introduces the method proposed by our team “NTU-ICG” for the CVPR 2024 UG2+ Challenge Track 5. This work develops a clustering-based learning detection approach, CL-Det, for UAV tracking and pose estimation using two types of LiDARs, namely Livox Avia and LiDAR 360. We combine the information from the two data sources to locate drones in 3D. We first align the timestamps of Livox Avia data and LiDAR 360 data and then separate the point cloud of objects of interest (OOIs) from the environment. The point cloud of OOIs is clustered using the DBSCAN method, with the midpoint of the largest cluster assumed to be the UAV position. Furthermore, we utilize historical estimations to fill in missing data. The proposed method shows competitive pose estimation performance and ranks 5th on the final leaderboard of the CVPR 2024 UG2+ Challenge.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Unmanned aerial vehicles (UAVs), commonly known as drones, have become increasingly prevalent and have significantly impacted various fields such as transportation, photography, and search and rescue <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib8" title=""><span class="ltx_text" style="font-size:90%;">8</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib2" title=""><span class="ltx_text" style="font-size:90%;">2</span></a>]</cite>, providing immense benefits to the general public. However, the widespread use and advanced capabilities of small commercial UAVs have also introduced complex security challenges that go beyond traditional concerns <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib9" title=""><span class="ltx_text" style="font-size:90%;">9</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib6" title=""><span class="ltx_text" style="font-size:90%;">6</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib7" title=""><span class="ltx_text" style="font-size:90%;">7</span></a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">In recent years, there has been a notable surge in research focused on anti-UAV systems <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib4" title=""><span class="ltx_text" style="font-size:90%;">4</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib11" title=""><span class="ltx_text" style="font-size:90%;">11</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib5" title=""><span class="ltx_text" style="font-size:90%;">5</span></a>]</cite>. Current anti-UAV solutions primarily rely on visual, radar, and radio frequency (RF) modalities. Despite these advancements, identifying drones remains a significant challenge for sensors such as cameras, especially when drones operate at high altitudes or under extreme visual conditions. These methods often struggle to detect small drones due to their compact size, resulting in a reduced radar cross-section and a smaller visual presence. Additionally, contemporary anti-UAV research predominantly concentrates on object detection and 2D tracking, neglecting the critical aspect of 3D trajectory estimation. This oversight considerably limits the practical applications of anti-UAV systems in real-world scenarios.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">To address these challenges, our team “NTU-ICG” participated in the CVPR 2024 UG2+ Challenge Track 5 <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://cvpr2024ug2challenge.github.io/index.html" title="">https://cvpr2024ug2challenge.github.io/index.html</a>, which aims to integrate features from diverse modalities to achieve robust 3D UAV position estimation, even under challenging conditions where certain sensors may fail to provide valid information. This challenge involves the use of fisheye camera images, millimeter-wave radar data, and lidar data from a Livox Mid-360 (LiDAR 360) and a Livox Avia for both drone-type classification and 3D position estimation tasks, with ground truth provided by a Leica Nova MS60 Multi-Station <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib10" title=""><span class="ltx_text" style="font-size:90%;">10</span></a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Our proposed method, a clustering-based learning detection approach (CL-Det), leverages the complementary strengths of Livox Avia and LiDAR 360 to enhance UAV tracking and pose estimation. Initially, we align the timestamps of Livox Avia data and LiDAR 360 data to ensure temporal coherence. By utilizing the LiDAR data, which provides coordinates of objects in space at specific timestamps, we compared these coordinates to the known ground truth positions of the drone at corresponding timestamps. This comparison allowed us to effectively pinpoint the location of the drone within the cloud of LiDAR data points. We then separate the point cloud of objects of interest (OOIs) from the surrounding environment. The OOIs’ point cloud is clustered using the DBSCAN method, with the midpoint of the largest cluster assumed to be the UAV position. The information from the radar dataset provided also encounters a significant challenge from missing data. To address potential data gaps, we utilize historical estimations to fill in missing information, ensuring continuity and accuracy in UAV tracking.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">The evaluation process is conducted on a hold-out set of multimodal datasets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib10" title=""><span class="ltx_text" style="font-size:90%;">10</span></a>]</cite> derived from the MMAUD dataset, the first dataset dedicated to predicting the 3D positions of drones using multimodal data. The method is evaluated on the provided test data to infer both the position and type of the drone at each given timestamp. The ranking criteria for this challenge are based on two factors: i) Mean Square Loss (MSE Loss) relative to the ground truth labels of the testing set (main metric) and ii) the classification accuracy of the UAV types in the testing set. Our proposed method, CL-Det, demonstrated competitive performance, ranking 5th on the final leaderboard of the CVPR 2024 UG2+ Challenge, highlighting its effectiveness in real-world UAV tracking and pose estimation tasks.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Exploratory Work</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>K-Means Clustering Approach</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">K-Means clustering works by partitioning the entire dataset into K distinct clusters based on their proximity to the centroids of the clusters. For our application, the centroids represent potential drone locations, and the clusters encapsulate the distribution of LiDAR points around these centroids. We initially set the number of clusters to correspond closely with the expected number of drones in the field of view of the LiDAR.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">To determine the drone’s position, we analyzed the clusters at each timestamp, identifying which cluster’s centroid is nearest to the ground truth position of the drone. This method assumes that the drone is likely to be at the center of a dense cluster of points, given its significant relative size and distinct shape compared to the surrounding environment.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Optimization of Cluster Parameters</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">To optimize our use of the K-Means algorithm, we focused on the following key areas:</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1"><span class="ltx_text ltx_font_bold" id="S2.SS2.p2.1.1">Number of Clusters (K)</span>: We experimented with different values of K to find the most suitable number that reflects the actual number of drones likely to be present in the LiDAR data. This was critical because an incorrect number of clusters could lead to inaccurate drone detection, either by merging multiple drones into a single cluster or dividing a single drone into multiple clusters.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.1"><span class="ltx_text ltx_font_bold" id="S2.SS2.p3.1.1">Initialization Method</span>: We tested various initialization methods to start the clustering process. The default method is to select cluster centers randomly, but we found that using the k-means++ <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib1" title=""><span class="ltx_text" style="font-size:90%;">1</span></a>]</cite> initialization, which spreads out the initial centroids before proceeding with the standard algorithm, often led to better and more consistent results.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS2.p4">
+<p class="ltx_p" id="S2.SS2.p4.1"><span class="ltx_text ltx_font_bold" id="S2.SS2.p4.1.1">Iteration and Convergence</span>: The algorithm was allowed to run until the centroids did not change significantly between iterations, ensuring that a stable solution was found. We monitored the change in centroid positions as a function of iteration to determine when the algorithm had effectively converged.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Monitoring and Estimating Drone Position</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1"><span class="ltx_text ltx_font_bold" id="S2.SS3.p1.1.1">Cluster Density and Centroid Proximity</span>: After forming clusters, we analyzed each cluster’s density and the proximity of its centroid to the LiDAR data points. Clusters with higher point densities were considered more likely to represent the drone, as drones typically generate more reflective LiDAR returns than the surrounding air.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1"><span class="ltx_text ltx_font_bold" id="S2.SS3.p2.1.1">Centroid Tracking</span>: By tracking the movement of the centroid over time, we could further refine our estimate of the drone’s trajectory and position. This tracking correlated with the drone’s known ground truth trajectory to validate our clustering approach.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS3.p3">
+<p class="ltx_p" id="S2.SS3.p3.1">Each time sequence was analyzed separately, and drones were classified into different classes (0, 1, 2, 3) based on their specific characteristics and trajectories. Each drone belonged to a distinct class based on its flight pattern and operational role. By assigning class labels to each drone, we could track and predict their positions more accurately across various sequences, enhancing our model’s robustness and reliability.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Parameter Tuning</h3>
+<div class="ltx_para" id="S2.SS4.p1">
+<p class="ltx_p" id="S2.SS4.p1.1">We experimented with various values for K, ranging from 2 to 10, observing the impact on cluster purity and the precision of drone localization. Additionally, we adjusted the maximum number of iterations and the initialization method (choosing between random initialization and k-means++) to achieve more stable and accurate clustering.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.5 </span>Elbow Method Application</h3>
+<div class="ltx_para" id="S2.SS5.p1">
+<p class="ltx_p" id="S2.SS5.p1.1">The elbow method was crucial in determining the optimal number of clusters. By plotting the sum of squared distances from points to their respective cluster centroids against the number of clusters, we identified a “knee” in the curve. This point represents a balance between complexity (number of clusters) and effectiveness (compactness of clusters), guiding us to choose the most appropriate K value for subsequent experiments.</p>
+</div>
+<div class="ltx_para" id="S2.SS5.p2">
+<p class="ltx_p" id="S2.SS5.p2.1">To validate the effectiveness of K-Means clustering, we also implemented the DBSCAN (Density-Based Spatial Clustering of Applications with Noise) algorithm <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#bib.bib3" title=""><span class="ltx_text" style="font-size:90%;">3</span></a>]</cite> as a comparative approach. DBSCAN excels in identifying clusters of varying shapes and sizes, which is advantageous in complex environments. Hence, in the following implementation, the DBSCAN clustering technique is adopted.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Methodology</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">In this section, we describe our method for determining the drone’s 3D position using data from LiDAR 360 and Livox Avia sensors. Our approach leverages both types of sensor data to ensure accurate position estimation.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Data Sources</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">The dataset provided by the CVPR 2024 UG2+ Challenge Track 5 includes several modalities of data as follows:</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<ul class="ltx_itemize" id="S3.I1">
+<li class="ltx_item" id="S3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i1.p1">
+<p class="ltx_p" id="S3.I1.i1.p1.1">Double fisheye camera visual images</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i2.p1">
+<p class="ltx_p" id="S3.I1.i2.p1.1">Livox Mid-360 (LiDAR 360) 3D point cloud data</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i3.p1">
+<p class="ltx_p" id="S3.I1.i3.p1.1">Livox Avia 3D point cloud data</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i4.p1">
+<p class="ltx_p" id="S3.I1.i4.p1.1">Millimeter-wave radar 3D point cloud data</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S3.SS1.p3">
+<p class="ltx_p" id="S3.SS1.p3.1">Upon investigation, it was found that only 14 out of 59 test sequences have non-zero radar values; therefore, the radar dataset is excluded from this work due to data availability issues. We utilized two primary types of sensors: LiDAR 360 and Livox Avia, which provide 3D point cloud data for identifying the drone’s position. The detailed data description are outlined as follows:</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p4">
+<ul class="ltx_itemize" id="S3.I2">
+<li class="ltx_item" id="S3.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i1.p1">
+<p class="ltx_p" id="S3.I2.i1.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I2.i1.p1.1.1">LiDAR 360</span> provides 360-degree coverage with 3D point cloud data. This data typically includes the environment and other observable objects, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F1" title="Figure 1 ‣ 3.1 Data Sources ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">1</span></a>.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i2.p1">
+<p class="ltx_p" id="S3.I2.i2.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I2.i2.p1.1.1">Livox Avia</span> provides focused 3D point cloud data for a specific timestamp, usually representing the origin point or the drone position, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F2" title="Figure 2 ‣ 3.1 Data Sources ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+</li>
+</ul>
+</div>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="182" id="S3.F1.g1" src="extracted/5622590/image/sample_lidar_360.jpg" width="197"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F1.2.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S3.F1.3.2" style="font-size:90%;">Sample LiDAR 360 3D point cloud data plot</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="176" id="S3.F2.g1" src="extracted/5622590/image/sample_livox_avia.png" width="197"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.2.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S3.F2.3.2" style="font-size:90%;">Sample Livox Avia 3D point cloud data plot</span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS1.p5">
+<p class="ltx_p" id="S3.SS1.p5.1">The ground truth location of the drone position is recorded in <math alttext="(x,y,z)" class="ltx_Math" display="inline" id="S3.SS1.p5.1.m1.3"><semantics id="S3.SS1.p5.1.m1.3a"><mrow id="S3.SS1.p5.1.m1.3.4.2" xref="S3.SS1.p5.1.m1.3.4.1.cmml"><mo id="S3.SS1.p5.1.m1.3.4.2.1" stretchy="false" xref="S3.SS1.p5.1.m1.3.4.1.cmml">(</mo><mi id="S3.SS1.p5.1.m1.1.1" xref="S3.SS1.p5.1.m1.1.1.cmml">x</mi><mo id="S3.SS1.p5.1.m1.3.4.2.2" xref="S3.SS1.p5.1.m1.3.4.1.cmml">,</mo><mi id="S3.SS1.p5.1.m1.2.2" xref="S3.SS1.p5.1.m1.2.2.cmml">y</mi><mo id="S3.SS1.p5.1.m1.3.4.2.3" xref="S3.SS1.p5.1.m1.3.4.1.cmml">,</mo><mi id="S3.SS1.p5.1.m1.3.3" xref="S3.SS1.p5.1.m1.3.3.cmml">z</mi><mo id="S3.SS1.p5.1.m1.3.4.2.4" stretchy="false" xref="S3.SS1.p5.1.m1.3.4.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS1.p5.1.m1.3b"><vector id="S3.SS1.p5.1.m1.3.4.1.cmml" xref="S3.SS1.p5.1.m1.3.4.2"><ci id="S3.SS1.p5.1.m1.1.1.cmml" xref="S3.SS1.p5.1.m1.1.1">𝑥</ci><ci id="S3.SS1.p5.1.m1.2.2.cmml" xref="S3.SS1.p5.1.m1.2.2">𝑦</ci><ci id="S3.SS1.p5.1.m1.3.3.cmml" xref="S3.SS1.p5.1.m1.3.3">𝑧</ci></vector></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p5.1.m1.3c">(x,y,z)</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p5.1.m1.3d">( italic_x , italic_y , italic_z )</annotation></semantics></math> format. Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F3" title="Figure 3 ‣ 3.1 Data Sources ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">3</span></a> provides a heatmap of the drone position ground truth. Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F4" title="Figure 4 ‣ 3.1 Data Sources ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">4</span></a> shows a histogram of the drone position ground truth.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="105" id="S3.F3.g1" src="extracted/5622590/image/heatmap.png" width="314"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.2.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S3.F3.3.2" style="font-size:90%;">Heatmap of the drone position ground truth</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="188" id="S3.F4.g1" src="extracted/5622590/image/histogram.png" width="314"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F4.2.1.1" style="font-size:90%;">Figure 4</span>: </span><span class="ltx_text" id="S3.F4.3.2" style="font-size:90%;">Histogram of the drone position ground truth</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Algorithm</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">For each sequence, we record corresponding positions at given timestamps. The method prioritizes the use of LiDAR 360 data, falling back to Livox Avia data if LiDAR 360 data is unavailable. We estimate the position using historical averages if neither data source is available.</p>
+</div>
+<section class="ltx_subsubsection" id="S3.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.1 </span>LiDAR 360 Data Processing</h4>
+<div class="ltx_para" id="S3.SS2.SSS1.p1">
+<ul class="ltx_itemize" id="S3.I3">
+<li class="ltx_item" id="S3.I3.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I3.i1.p1">
+<p class="ltx_p" id="S3.I3.i1.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I3.i1.p1.1.1">Separation of Points</span>: We visually inspect the LiDAR 360 data to categorize areas into two zones: environment and non-environment zones, based on the heatmap in Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F3" title="Figure 3 ‣ 3.1 Data Sources ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I3.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I3.i2.p1">
+<p class="ltx_p" id="S3.I3.i2.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I3.i2.p1.1.1">Removal of Environment Points</span>: All points inside the environment zone are considered as part of the environment and thus are removed from the dataset. Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F5" title="Figure 5 ‣ 3.2.1 LiDAR 360 Data Processing ‣ 3.2 Algorithm ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">5</span></a> shows environment points in light blue, non-environment points in red, and ground truth drone position in dark blue. After removing environment points, it is observed that the remaining non-environment points imply the drone position, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F6" title="Figure 6 ‣ 3.2.1 LiDAR 360 Data Processing ‣ 3.2 Algorithm ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">6</span></a></p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I3.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I3.i3.p1">
+<p class="ltx_p" id="S3.I3.i3.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I3.i3.p1.1.1">Clustering</span>: We apply the DBSCAN clustering algorithm to the remaining points to identify distinct clusters. The clustering results in Figure <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S3.F7" title="Figure 7 ‣ 3.2.1 LiDAR 360 Data Processing ‣ 3.2 Algorithm ‣ 3 Methodology ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">7</span></a> show a good performance with actual drone position shown in blue and the nearest cluster in red.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I3.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I3.i4.p1">
+<p class="ltx_p" id="S3.I3.i4.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I3.i4.p1.1.1">Cluster Selection</span>: The largest non-environment cluster is selected as the representative set of points that belong to the drone.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I3.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I3.i5.p1">
+<p class="ltx_p" id="S3.I3.i5.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I3.i5.p1.1.1">Mean Position Calculation</span>: The mean of the selected cluster is calculated to determine the drone’s position, in <math alttext="(x,y,z)" class="ltx_Math" display="inline" id="S3.I3.i5.p1.1.m1.3"><semantics id="S3.I3.i5.p1.1.m1.3a"><mrow id="S3.I3.i5.p1.1.m1.3.4.2" xref="S3.I3.i5.p1.1.m1.3.4.1.cmml"><mo id="S3.I3.i5.p1.1.m1.3.4.2.1" stretchy="false" xref="S3.I3.i5.p1.1.m1.3.4.1.cmml">(</mo><mi id="S3.I3.i5.p1.1.m1.1.1" xref="S3.I3.i5.p1.1.m1.1.1.cmml">x</mi><mo id="S3.I3.i5.p1.1.m1.3.4.2.2" xref="S3.I3.i5.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.I3.i5.p1.1.m1.2.2" xref="S3.I3.i5.p1.1.m1.2.2.cmml">y</mi><mo id="S3.I3.i5.p1.1.m1.3.4.2.3" xref="S3.I3.i5.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.I3.i5.p1.1.m1.3.3" xref="S3.I3.i5.p1.1.m1.3.3.cmml">z</mi><mo id="S3.I3.i5.p1.1.m1.3.4.2.4" stretchy="false" xref="S3.I3.i5.p1.1.m1.3.4.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.I3.i5.p1.1.m1.3b"><vector id="S3.I3.i5.p1.1.m1.3.4.1.cmml" xref="S3.I3.i5.p1.1.m1.3.4.2"><ci id="S3.I3.i5.p1.1.m1.1.1.cmml" xref="S3.I3.i5.p1.1.m1.1.1">𝑥</ci><ci id="S3.I3.i5.p1.1.m1.2.2.cmml" xref="S3.I3.i5.p1.1.m1.2.2">𝑦</ci><ci id="S3.I3.i5.p1.1.m1.3.3.cmml" xref="S3.I3.i5.p1.1.m1.3.3">𝑧</ci></vector></annotation-xml><annotation encoding="application/x-tex" id="S3.I3.i5.p1.1.m1.3c">(x,y,z)</annotation><annotation encoding="application/x-llamapun" id="S3.I3.i5.p1.1.m1.3d">( italic_x , italic_y , italic_z )</annotation></semantics></math> coordinates.</p>
+</div>
+</li>
+</ul>
+</div>
+<figure class="ltx_figure" id="S3.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="198" id="S3.F5.g1" src="extracted/5622590/image/clustering_2d_with_background.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F5.2.1.1" style="font-size:90%;">Figure 5</span>: </span><span class="ltx_text" id="S3.F5.3.2" style="font-size:90%;">2D plots of LiDAR 360 point cloud with environment data point</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="198" id="S3.F6.g1" src="extracted/5622590/image/clustering_2d_without_background.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F6.2.1.1" style="font-size:90%;">Figure 6</span>: </span><span class="ltx_text" id="S3.F6.3.2" style="font-size:90%;">2D plots of LiDAR 360 point cloud without environment data point</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F7"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="458" id="S3.F7.g1" src="extracted/5622590/image/clustering_result.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F7.2.1.1" style="font-size:90%;">Figure 7</span>: </span><span class="ltx_text" id="S3.F7.3.2" style="font-size:90%;">Sample LiDAR 360 point cloud after DBSCAN clustering</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.2 </span>Livox Avia Data Processing</h4>
+<div class="ltx_para" id="S3.SS2.SSS2.p1">
+<ul class="ltx_itemize" id="S3.I4">
+<li class="ltx_item" id="S3.I4.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I4.i1.p1">
+<p class="ltx_p" id="S3.I4.i1.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I4.i1.p1.1.1">Removal of Noise</span>: All points with coordinates (0, 0, 0) are removed as they are considered noise.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I4.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I4.i2.p1">
+<p class="ltx_p" id="S3.I4.i2.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I4.i2.p1.1.1">Mean Position Calculation</span>: The mean of the remaining points is calculated to determine the drone’s position, in <math alttext="(x,y,z)" class="ltx_Math" display="inline" id="S3.I4.i2.p1.1.m1.3"><semantics id="S3.I4.i2.p1.1.m1.3a"><mrow id="S3.I4.i2.p1.1.m1.3.4.2" xref="S3.I4.i2.p1.1.m1.3.4.1.cmml"><mo id="S3.I4.i2.p1.1.m1.3.4.2.1" stretchy="false" xref="S3.I4.i2.p1.1.m1.3.4.1.cmml">(</mo><mi id="S3.I4.i2.p1.1.m1.1.1" xref="S3.I4.i2.p1.1.m1.1.1.cmml">x</mi><mo id="S3.I4.i2.p1.1.m1.3.4.2.2" xref="S3.I4.i2.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.I4.i2.p1.1.m1.2.2" xref="S3.I4.i2.p1.1.m1.2.2.cmml">y</mi><mo id="S3.I4.i2.p1.1.m1.3.4.2.3" xref="S3.I4.i2.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.I4.i2.p1.1.m1.3.3" xref="S3.I4.i2.p1.1.m1.3.3.cmml">z</mi><mo id="S3.I4.i2.p1.1.m1.3.4.2.4" stretchy="false" xref="S3.I4.i2.p1.1.m1.3.4.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.I4.i2.p1.1.m1.3b"><vector id="S3.I4.i2.p1.1.m1.3.4.1.cmml" xref="S3.I4.i2.p1.1.m1.3.4.2"><ci id="S3.I4.i2.p1.1.m1.1.1.cmml" xref="S3.I4.i2.p1.1.m1.1.1">𝑥</ci><ci id="S3.I4.i2.p1.1.m1.2.2.cmml" xref="S3.I4.i2.p1.1.m1.2.2">𝑦</ci><ci id="S3.I4.i2.p1.1.m1.3.3.cmml" xref="S3.I4.i2.p1.1.m1.3.3">𝑧</ci></vector></annotation-xml><annotation encoding="application/x-tex" id="S3.I4.i2.p1.1.m1.3c">(x,y,z)</annotation><annotation encoding="application/x-llamapun" id="S3.I4.i2.p1.1.m1.3d">( italic_x , italic_y , italic_z )</annotation></semantics></math> coordinates.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.3 </span>Fallback Method</h4>
+<div class="ltx_para" id="S3.SS2.SSS3.p1">
+<p class="ltx_p" id="S3.SS2.SSS3.p1.2">If neither LiDAR 360 nor Livox Avia data is available, we use the drone’s average location derived from training datasets. The average ground truth position <math alttext="(x,y,z)" class="ltx_Math" display="inline" id="S3.SS2.SSS3.p1.1.m1.3"><semantics id="S3.SS2.SSS3.p1.1.m1.3a"><mrow id="S3.SS2.SSS3.p1.1.m1.3.4.2" xref="S3.SS2.SSS3.p1.1.m1.3.4.1.cmml"><mo id="S3.SS2.SSS3.p1.1.m1.3.4.2.1" stretchy="false" xref="S3.SS2.SSS3.p1.1.m1.3.4.1.cmml">(</mo><mi id="S3.SS2.SSS3.p1.1.m1.1.1" xref="S3.SS2.SSS3.p1.1.m1.1.1.cmml">x</mi><mo id="S3.SS2.SSS3.p1.1.m1.3.4.2.2" xref="S3.SS2.SSS3.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.SS2.SSS3.p1.1.m1.2.2" xref="S3.SS2.SSS3.p1.1.m1.2.2.cmml">y</mi><mo id="S3.SS2.SSS3.p1.1.m1.3.4.2.3" xref="S3.SS2.SSS3.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.SS2.SSS3.p1.1.m1.3.3" xref="S3.SS2.SSS3.p1.1.m1.3.3.cmml">z</mi><mo id="S3.SS2.SSS3.p1.1.m1.3.4.2.4" stretchy="false" xref="S3.SS2.SSS3.p1.1.m1.3.4.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS3.p1.1.m1.3b"><vector id="S3.SS2.SSS3.p1.1.m1.3.4.1.cmml" xref="S3.SS2.SSS3.p1.1.m1.3.4.2"><ci id="S3.SS2.SSS3.p1.1.m1.1.1.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1">𝑥</ci><ci id="S3.SS2.SSS3.p1.1.m1.2.2.cmml" xref="S3.SS2.SSS3.p1.1.m1.2.2">𝑦</ci><ci id="S3.SS2.SSS3.p1.1.m1.3.3.cmml" xref="S3.SS2.SSS3.p1.1.m1.3.3">𝑧</ci></vector></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS3.p1.1.m1.3c">(x,y,z)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS3.p1.1.m1.3d">( italic_x , italic_y , italic_z )</annotation></semantics></math> from all training datasets estimates the drone ground truth position, which is <math alttext="(0.734,-9.739,33.353)" class="ltx_Math" display="inline" id="S3.SS2.SSS3.p1.2.m2.3"><semantics id="S3.SS2.SSS3.p1.2.m2.3a"><mrow id="S3.SS2.SSS3.p1.2.m2.3.3.1" xref="S3.SS2.SSS3.p1.2.m2.3.3.2.cmml"><mo id="S3.SS2.SSS3.p1.2.m2.3.3.1.2" stretchy="false" xref="S3.SS2.SSS3.p1.2.m2.3.3.2.cmml">(</mo><mn id="S3.SS2.SSS3.p1.2.m2.1.1" xref="S3.SS2.SSS3.p1.2.m2.1.1.cmml">0.734</mn><mo id="S3.SS2.SSS3.p1.2.m2.3.3.1.3" xref="S3.SS2.SSS3.p1.2.m2.3.3.2.cmml">,</mo><mrow id="S3.SS2.SSS3.p1.2.m2.3.3.1.1" xref="S3.SS2.SSS3.p1.2.m2.3.3.1.1.cmml"><mo id="S3.SS2.SSS3.p1.2.m2.3.3.1.1a" xref="S3.SS2.SSS3.p1.2.m2.3.3.1.1.cmml">−</mo><mn id="S3.SS2.SSS3.p1.2.m2.3.3.1.1.2" xref="S3.SS2.SSS3.p1.2.m2.3.3.1.1.2.cmml">9.739</mn></mrow><mo id="S3.SS2.SSS3.p1.2.m2.3.3.1.4" xref="S3.SS2.SSS3.p1.2.m2.3.3.2.cmml">,</mo><mn id="S3.SS2.SSS3.p1.2.m2.2.2" xref="S3.SS2.SSS3.p1.2.m2.2.2.cmml">33.353</mn><mo id="S3.SS2.SSS3.p1.2.m2.3.3.1.5" stretchy="false" xref="S3.SS2.SSS3.p1.2.m2.3.3.2.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS3.p1.2.m2.3b"><vector id="S3.SS2.SSS3.p1.2.m2.3.3.2.cmml" xref="S3.SS2.SSS3.p1.2.m2.3.3.1"><cn id="S3.SS2.SSS3.p1.2.m2.1.1.cmml" type="float" xref="S3.SS2.SSS3.p1.2.m2.1.1">0.734</cn><apply id="S3.SS2.SSS3.p1.2.m2.3.3.1.1.cmml" xref="S3.SS2.SSS3.p1.2.m2.3.3.1.1"><minus id="S3.SS2.SSS3.p1.2.m2.3.3.1.1.1.cmml" xref="S3.SS2.SSS3.p1.2.m2.3.3.1.1"></minus><cn id="S3.SS2.SSS3.p1.2.m2.3.3.1.1.2.cmml" type="float" xref="S3.SS2.SSS3.p1.2.m2.3.3.1.1.2">9.739</cn></apply><cn id="S3.SS2.SSS3.p1.2.m2.2.2.cmml" type="float" xref="S3.SS2.SSS3.p1.2.m2.2.2">33.353</cn></vector></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS3.p1.2.m2.3c">(0.734,-9.739,33.353)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS3.p1.2.m2.3d">( 0.734 , - 9.739 , 33.353 )</annotation></semantics></math>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Implementation Details</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">The program retrieves LiDAR 360 or Livox Avia data from the nearest timestamp for each sequence with the given timestamp in the test dataset. Clustering is performed using the DBSCAN algorithm with appropriate parameters to ensure robust clustering. Visual inspection is employed for initial point separation, ensuring accurate categorization of environment points.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1">The implementation was carried out on a Lenovo Ideapad Slim 5 Pro (16”) running Windows 11 with AMD Ryzen 7 5800H CPU and 16GB DDR4 RAM. The analysis was conducted in a Jupyter Notebook environment using Python 3.10. For clustering, we utilized the DBSCAN algorithm from the Scikit-Learn library<span class="ltx_note ltx_role_footnote" id="footnote2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>https://scikit-learn.org/stable/</span></span></span>. The DBSCAN algorithm was configured with an epsilon (eps) value of 2 and a minimum number of points (minPts) set to 1.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Results</h2>
+<figure class="ltx_table" id="S4.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T1.4.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S4.T1.5.2" style="font-size:90%;">Evaluation results on CVPR 2024 UG2+ Challenge Track 5 leaderboard</span></figcaption>
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S4.T1.2" style="width:238.5pt;height:126.7pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="transform:translate(-16.3pt,8.6pt) scale(0.879986370283389,0.879986370283389) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S4.T1.2.2">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T1.2.2.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_t" id="S4.T1.2.2.2.3">Team</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_t" id="S4.T1.2.2.2.4">ID</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.1.1.1.1">Pose MSE (<math alttext="\downarrow" class="ltx_Math" display="inline" id="S4.T1.1.1.1.1.1.m1.1"><semantics id="S4.T1.1.1.1.1.1.m1.1a"><mo id="S4.T1.1.1.1.1.1.m1.1.1" stretchy="false" xref="S4.T1.1.1.1.1.1.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S4.T1.1.1.1.1.1.m1.1b"><ci id="S4.T1.1.1.1.1.1.m1.1.1.cmml" xref="S4.T1.1.1.1.1.1.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.T1.1.1.1.1.1.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S4.T1.1.1.1.1.1.m1.1d">↓</annotation></semantics></math>)</span></th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T1.2.2.2.2">Accuracy (<math alttext="\uparrow" class="ltx_Math" display="inline" id="S4.T1.2.2.2.2.m1.1"><semantics id="S4.T1.2.2.2.2.m1.1a"><mo id="S4.T1.2.2.2.2.m1.1.1" stretchy="false" xref="S4.T1.2.2.2.2.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S4.T1.2.2.2.2.m1.1b"><ci id="S4.T1.2.2.2.2.m1.1.1.cmml" xref="S4.T1.2.2.2.2.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.T1.2.2.2.2.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S4.T1.2.2.2.2.m1.1d">↑</annotation></semantics></math>)</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T1.2.2.3.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S4.T1.2.2.3.1.1">SDUCZS</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S4.T1.2.2.3.1.2">58198</th>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.2.3.1.3">2.21375</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.2.3.1.4">0.8136</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2.4.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S4.T1.2.2.4.2.1">Gaofen Lab</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.2.2.4.2.2">57978</th>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.4.2.3">7.299575</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.4.2.4">0.3220</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2.5.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S4.T1.2.2.5.3.1">sysutlt</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.2.2.5.3.2">57843</th>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.5.3.3">24.50694</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.5.3.4">0.3220</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2.6.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S4.T1.2.2.6.4.1">casetrous</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.2.2.6.4.2">58233</th>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.6.4.3">56.880267</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.6.4.4">0.2542</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2.7.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S4.T1.2.2.7.5.1"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.7.5.1.1">NTU-ICG (ours)</span></th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.2.2.7.5.2">58268</th>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.7.5.3"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.7.5.3.1">120.215107</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.7.5.4">0.3220</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2.8.6">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S4.T1.2.2.8.6.1">MTC</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.2.2.8.6.2">58180</th>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.8.6.3">189.669428</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.2.8.6.4">0.2724</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2.9.7">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r" id="S4.T1.2.2.9.7.1">gzist</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b" id="S4.T1.2.2.9.7.2">56936</th>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T1.2.2.9.7.3">417.396317</td>
+<td class="ltx_td ltx_align_left ltx_border_b" id="S4.T1.2.2.9.7.4">0.2302</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">The algorithm is found to have a pose MSE loss of 120.215 and classification accuracy of 0.322. Table <a class="ltx_ref" href="https://arxiv.org/html/2405.16867v1#S4.T1" title="Table 1 ‣ 4 Results ‣ Clustering-based Learning for UAV Tracking and Pose Estimation"><span class="ltx_text ltx_ref_tag">1</span></a> lists the evaluation outcomes in comparison to other teams on the CVPR 2024 UG2+ Prize Challenge Track 5 leaderboard. Our team ranked 5th place with only Lidar dataset and provided a time-efficient <span class="ltx_text ltx_font_bold" id="S4.p1.1.1">(14.9 prediction/second)</span> solution for fast UAV tracking and pose estimation.</p>
+</div>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusions</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">This work proposes a clustering-based learning method CL-Det using advanced clustering techniques like K-Means and DBSCAN for UAV detection and pose estimation with LiDAR data. Our method ensures reliable and accurate estimation of drone positions by leveraging multi-sensor data and robust clustering techniques. The fallback mechanisms ensure continuous position estimation even in the absence of primary sensor data. Through rigorous parameter optimization and comparative analysis, we demonstrate the competitive performance of our method in drone tracking and pose estimation (ranked 5th place in the CVPR 2024 UG2+ Challenge Track 5).
+
+
+<span class="ltx_text" id="S5.p1.1.1" style="font-size:90%;"></span></p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib1.4.4.1" style="font-size:90%;">Arthur [2007]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.6.1" style="font-size:90%;">
+David Arthur.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.7.1" style="font-size:90%;">K-means++: The advantages if careful seeding.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.8.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib1.9.2" style="font-size:90%;">Proc. Eighteenth Annual ACM-SIAM Symposium on Discrete Algorithms, 2007</em><span class="ltx_text" id="bib.bib1.10.3" style="font-size:90%;">, pages 1027–1035, 2007.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib2.5.5.1" style="font-size:90%;">Chen et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.7.1" style="font-size:90%;">
+Liangming Chen, Jiaping Xiao, Reuben Chua Hong Lin, and Mir Feroskhan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.8.1" style="font-size:90%;">Angle-constrained formation maneuvering of unmanned aerial vehicles.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib2.9.1" style="font-size:90%;">IEEE Transactions on Control Systems Technology</em><span class="ltx_text" id="bib.bib2.10.2" style="font-size:90%;">, 31(4):1733–1746, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib3.5.5.1" style="font-size:90%;">Ester et al. [1996]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.7.1" style="font-size:90%;">
+Martin Ester, Hans-Peter Kriegel, Jörg Sander, Xiaowei Xu, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.8.1" style="font-size:90%;">A density-based algorithm for discovering clusters in large spatial databases with noise.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib3.10.2" style="font-size:90%;">kdd</em><span class="ltx_text" id="bib.bib3.11.3" style="font-size:90%;">, pages 226–231, 1996.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib4.5.5.1" style="font-size:90%;">Jiang et al. [2021]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.7.1" style="font-size:90%;">
+Nan Jiang, Kuiran Wang, Xiaoke Peng, Xuehui Yu, Qiang Wang, Junliang Xing, Guorong Li, Guodong Guo, Qixiang Ye, Jianbin Jiao, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.8.1" style="font-size:90%;">Anti-uav: a large-scale benchmark for vision-based uav tracking.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib4.9.1" style="font-size:90%;">IEEE Transactions on Multimedia</em><span class="ltx_text" id="bib.bib4.10.2" style="font-size:90%;">, 25:486–500, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib5.5.5.1" style="font-size:90%;">Li et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.7.1" style="font-size:90%;">
+Yifan Li, Dian Yuan, Meng Sun, Hongyu Wang, Xiaotao Liu, and Jing Liu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.8.1" style="font-size:90%;">A global-local tracking framework driven by both motion and appearance for infrared anti-uav.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.9.1" style="font-size:90%;">In </span><em class="ltx_emph ltx_font_italic" id="bib.bib5.10.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em><span class="ltx_text" id="bib.bib5.11.3" style="font-size:90%;">, pages 3025–3034, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib6.4.4.1" style="font-size:90%;">Xiao and Feroskhan [2022]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.6.1" style="font-size:90%;">
+Jiaping Xiao and Mir Feroskhan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.7.1" style="font-size:90%;">Cyber attack detection and isolation for a quadrotor uav with modified sliding innovation sequences.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib6.8.1" style="font-size:90%;">IEEE Transactions on Vehicular Technology</em><span class="ltx_text" id="bib.bib6.9.2" style="font-size:90%;">, 71(7):7202–7214, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib7.4.4.1" style="font-size:90%;">Xiao and Feroskhan [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.6.1" style="font-size:90%;">
+Jiaping Xiao and Mir Feroskhan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.7.1" style="font-size:90%;">Learning multi-pursuit evasion for safe targeted navigation of drones.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib7.8.1" style="font-size:90%;">IEEE Transactions on Artificial Intelligence</em><span class="ltx_text" id="bib.bib7.9.2" style="font-size:90%;">, pages 1–14, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib8.5.5.1" style="font-size:90%;">Xiao et al. [2023]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.7.1" style="font-size:90%;">
+Jiaping Xiao, Rangya Zhang, Yuhang Zhang, and Mir Feroskhan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.8.1" style="font-size:90%;">Vision-based learning for drones: A survey.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib8.9.1" style="font-size:90%;">arXiv preprint arXiv:2312.05019</em><span class="ltx_text" id="bib.bib8.10.2" style="font-size:90%;">, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib9.5.5.1" style="font-size:90%;">Xiao et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.7.1" style="font-size:90%;">
+Jiaping Xiao, Jian Hui Chee, and Mir Feroskhan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.8.1" style="font-size:90%;">Real-time multi-drone detection and tracking for pursuit-evasion with parameter search.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib9.9.1" style="font-size:90%;">IEEE Transactions on Intelligent Vehicles</em><span class="ltx_text" id="bib.bib9.10.2" style="font-size:90%;">, pages 1–11, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib10.5.5.1" style="font-size:90%;">Yuan et al. [2024]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.7.1" style="font-size:90%;">
+Shenghai Yuan, Yizhuo Yang, Thien Hoang Nguyen, Thien-Minh Nguyen, Jianfei Yang, Fen Liu, Jianping Li, Han Wang, and Lihua Xie.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.8.1" style="font-size:90%;">Mmaud: A comprehensive multi-modal anti-uav dataset for modern miniature drone threats.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib10.9.1" style="font-size:90%;">arXiv preprint arXiv:2402.03706</em><span class="ltx_text" id="bib.bib10.10.2" style="font-size:90%;">, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem"><span class="ltx_text" id="bib.bib11.5.5.1" style="font-size:90%;">Zhao et al. [2022]</span></span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.7.1" style="font-size:90%;">
+Jie Zhao, Jingshu Zhang, Dongdong Li, and Dong Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.8.1" style="font-size:90%;">Vision-based anti-uav detection and tracking.
+</span>
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib11.9.1" style="font-size:90%;">IEEE Transactions on Intelligent Transportation Systems</em><span class="ltx_text" id="bib.bib11.10.2" style="font-size:90%;">, 23(12):25323–25334, 2022.
+</span>
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon May 27 06:19:44 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

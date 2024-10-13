@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones</title>
+<!--Generated on Fri Feb 23 11:34:27 2024 by LaTeXML (version 0.8.7) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv_0.7.4.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2402.15273v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S1" title="1 Introduction and Related Works ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction and Related Works</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2" title="2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Materials and Methods</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2.SS0.SSS0.Px1" title="Target Platform: ‣ 2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_title">Target Platform:</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2.SS0.SSS0.Px2" title="Complexity-driven Architecture Search: ‣ 2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_title">Complexity-driven Architecture Search:</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2.SS0.SSS0.Px3" title="Fused Kernel for efficient inference: ‣ 2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_title">Fused Kernel for efficient inference:</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S3" title="3 Experimental Results ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Experimental Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S4" title="4 Conclusions ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Conclusions</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<div aria-label="Conversion errors have been found" class="package-alerts ltx_document" role="status">
+<button aria-label="Dismiss alert" onclick="closePopup()">
+<span aria-hidden="true"><svg aria-hidden="true" focusable="false" height="20" role="presentation" viewbox="0 0 44 44" width="20">
+<path d="M0.549989 4.44999L4.44999 0.549988L43.45 39.55L39.55 43.45L0.549989 4.44999Z"></path>
+<path d="M39.55 0.549988L43.45 4.44999L4.44999 43.45L0.549988 39.55L39.55 0.549988Z"></path>
+</svg></span>
+</button>
+<p>HTML conversions <a href="https://info.dev.arxiv.org/about/accessibility_html_error_messages.html" target="_blank">sometimes display errors</a> due to content that did not convert correctly from the source. This paper uses the following packages that are not yet supported by the HTML conversion tool. Feedback on these issues are not necessary; they are known and are being worked on.</p>
+<ul arial-label="Unsupported packages used in this paper">
+<li>failed: uri</li>
+</ul>
+<p>Authors: achieve the best HTML results from your LaTeX submissions by following these <a href="https://info.arxiv.org/help/submit_latex_best_practices.html" target="_blank">best practices</a>.</p>
+</div><div class="section" id="target-section"><div id="license-tr">License: CC BY 4.0</div><div id="watermark-tr">arXiv:2402.15273v1 [cs.CV] 23 Feb 2024</div></div>
+<script>
+            function closePopup() {
+                document.querySelector('.package-alerts').style.display = 'none';
+            }
+        </script>
+<article class="ltx_document ltx_authors_1line"><span class="ltx_ERROR undefined" id="id1">\tocauthor</span>
+<div class="ltx_para" id="p1">
+<p class="ltx_p" id="p1.1">Matteo Risso, Francesco Daghero, Beatrice Alessandra Motetti, Daniele Jahier Pagliari, Enrico Macii, Massimo Poncino, Alessio Burrello
+<span class="ltx_note ltx_role_institutetext" id="p1.1.1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">institutetext: </span>
+Department of Control and Computer Engineering,
+<br class="ltx_break"/></span></span></span><span class="ltx_note ltx_role_institutetext" id="p1.1.2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">institutetext: </span>Interuniversity Department of Regional and Urban Studies and Planning,
+<br class="ltx_break"/>Politecnico di Torino, Turin 10129, Italy,
+<br class="ltx_break"/><span class="ltx_note ltx_role_email" id="p1.1.2.1"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">email: </span>first_name.first_surname@polito.it</span></span></span>
+</span></span></span></p>
+</div>
+<h1 class="ltx_title ltx_title_document">Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Matteo Risso
+</span><span class="ltx_author_notes">11</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Francesco Daghero
+</span><span class="ltx_author_notes">22</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Beatrice Alessandra Motetti
+</span><span class="ltx_author_notes">11</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Daniele Jahier Pagliari
+</span><span class="ltx_author_notes">11</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Enrico Macii
+</span><span class="ltx_author_notes">22</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Massimo Poncino
+</span><span class="ltx_author_notes">11</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Alessio Burrello
+</span><span class="ltx_author_notes">22</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id1.1">Miniaturized autonomous unmanned aerial vehicles (UAVs) are gaining popularity due to their small size, enabling new tasks such as indoor navigation or people monitoring. Nonetheless, their size and simple electronics pose severe challenges in implementing advanced onboard intelligence.
+This work proposes a new automatic optimization pipeline for visual pose estimation tasks using Deep Neural Networks (DNNs). The pipeline leverages two different Neural Architecture Search (NAS) algorithms to pursue a vast complexity-driven exploration in the DNNs’ architectural space. The obtained networks are then deployed on an off-the-shelf nano-drone equipped with a parallel ultra-low power System-on-Chip leveraging a set of novel software kernels for the efficient fused execution of critical DNN layer sequences.
+Our results improve the state-of-the-art reducing inference latency by up to 3.22<math alttext="\times" class="ltx_Math" display="inline" id="id1.1.m1.1"><semantics id="id1.1.m1.1a"><mo id="id1.1.m1.1.1" xref="id1.1.m1.1.1.cmml">×</mo><annotation-xml encoding="MathML-Content" id="id1.1.m1.1b"><times id="id1.1.m1.1.1.cmml" xref="id1.1.m1.1.1"></times></annotation-xml><annotation encoding="application/x-tex" id="id1.1.m1.1c">\times</annotation><annotation encoding="application/x-llamapun" id="id1.1.m1.1d">×</annotation></semantics></math> at iso-error.</p>
+</div>
+<div class="ltx_classification">
+<h6 class="ltx_title ltx_title_classification">keywords: </h6>Nano-drones, TinyML, NAS, CNN, Fused Layers
+</div>
+<div class="ltx_para" id="p2">
+<svg class="ltx_picture" height="19.06" id="p2.pic1" overflow="visible" version="1.1" width="604.52"><g color="#000000" fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,19.06) matrix(1 0 0 -1 0 0) translate(-122.74,0) translate(0,-14.11) matrix(1.0 0.0 0.0 1.0 127.35 18.8)"><foreignobject height="9.84" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="595.3"><span class="ltx_text ltx_parbox ltx_align_middle ltx_framed_rectangle" id="p2.pic1.1.1.1.1" style="font-size:80%;width:430.2pt;border-color: #000000;">This paper has been accepted for publication in the ERF 2024 conference.</span></foreignobject></g></svg>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction and Related Works</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.2">Nano-sized unmanned aerial vehicles (UAVs), commonly named “nano-drones”, are increasingly used for navigation in GPS-denied environments and to operate near humans, thanks to their small size (sub-<math alttext="10\text{\,}\mathrm{cm}" class="ltx_Math" display="inline" id="S1.p1.1.m1.3"><semantics id="S1.p1.1.m1.3a"><mrow id="S1.p1.1.m1.3.3" xref="S1.p1.1.m1.3.3.cmml"><mn id="S1.p1.1.m1.1.1.1.1.1.1" xref="S1.p1.1.m1.1.1.1.1.1.1.cmml">10</mn><mtext id="S1.p1.1.m1.2.2.2.2.2.2" xref="S1.p1.1.m1.2.2.2.2.2.2.cmml"> </mtext><mi class="ltx_unit" id="S1.p1.1.m1.3.3.3.3.3.3" xref="S1.p1.1.m1.3.3.3.3.3.3.cmml">cm</mi></mrow><annotation-xml encoding="MathML-Content" id="S1.p1.1.m1.3b"><apply id="S1.p1.1.m1.3.3.cmml" xref="S1.p1.1.m1.3.3"><csymbol cd="latexml" id="S1.p1.1.m1.2.2.2.2.2.2.cmml" xref="S1.p1.1.m1.2.2.2.2.2.2">times</csymbol><cn id="S1.p1.1.m1.1.1.1.1.1.1.cmml" type="integer" xref="S1.p1.1.m1.1.1.1.1.1.1">10</cn><csymbol cd="latexml" id="S1.p1.1.m1.3.3.3.3.3.3.cmml" xref="S1.p1.1.m1.3.3.3.3.3.3">centimeter</csymbol></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.p1.1.m1.3c">10\text{\,}\mathrm{cm}</annotation><annotation encoding="application/x-llamapun" id="S1.p1.1.m1.3d">start_ARG 10 end_ARG start_ARG times end_ARG start_ARG roman_cm end_ARG</annotation></semantics></math>) and low weight (sub-<math alttext="40\text{\,}\mathrm{g}" class="ltx_Math" display="inline" id="S1.p1.2.m2.3"><semantics id="S1.p1.2.m2.3a"><mrow id="S1.p1.2.m2.3.3" xref="S1.p1.2.m2.3.3.cmml"><mn id="S1.p1.2.m2.1.1.1.1.1.1" xref="S1.p1.2.m2.1.1.1.1.1.1.cmml">40</mn><mtext id="S1.p1.2.m2.2.2.2.2.2.2" xref="S1.p1.2.m2.2.2.2.2.2.2.cmml"> </mtext><mi class="ltx_unit" id="S1.p1.2.m2.3.3.3.3.3.3" mathvariant="normal" xref="S1.p1.2.m2.3.3.3.3.3.3.cmml">g</mi></mrow><annotation-xml encoding="MathML-Content" id="S1.p1.2.m2.3b"><apply id="S1.p1.2.m2.3.3.cmml" xref="S1.p1.2.m2.3.3"><csymbol cd="latexml" id="S1.p1.2.m2.2.2.2.2.2.2.cmml" xref="S1.p1.2.m2.2.2.2.2.2.2">times</csymbol><cn id="S1.p1.2.m2.1.1.1.1.1.1.cmml" type="integer" xref="S1.p1.2.m2.1.1.1.1.1.1">40</cn><csymbol cd="latexml" id="S1.p1.2.m2.3.3.3.3.3.3.cmml" xref="S1.p1.2.m2.3.3.3.3.3.3">gram</csymbol></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.p1.2.m2.3c">40\text{\,}\mathrm{g}</annotation><annotation encoding="application/x-llamapun" id="S1.p1.2.m2.3d">start_ARG 40 end_ARG start_ARG times end_ARG start_ARG roman_g end_ARG</annotation></semantics></math>). However, their limited on-board computational and memory capacity pose substantial challenges to achieving full autonomy. In particular, they make it impossible to utilize large deep learning models for perception <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib10" title="">10</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib11" title="">11</a>]</cite>.
+A particularly relevant task for nano-UAVs is <span class="ltx_text ltx_font_italic" id="S1.p1.2.1">human pose estimation</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib11" title="">11</a>]</cite>, which enables applications such as “people monitoring” and “follow-me”. Recent research on this task has concentrated on optimizing tiny Convolutional Neural Networks (CNNs) to operate within tight nano-UAVs hardware constraints, marking a significant stride towards obtaining reasonable perceptual performance on such platforms <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib11" title="">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>. The work of <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib3" title="">3</a>]</cite>, in particular, underscored the critical role of automated optimization methods such as <span class="ltx_text ltx_font_italic" id="S1.p1.2.2">Neural Architecture Search</span> (NAS) in facilitating the design of efficient architectures that balance computational efficiency with task performance. However, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib3" title="">3</a>]</cite> only scratched the surface of a potentially vast research direction, applying a NAS algorithm aimed at shrinking an input CNN architecture (called “seed”) through the elimination of unimportant feature maps <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib12" title="">12</a>]</cite>, closely resembling <span class="ltx_text ltx_font_italic" id="S1.p1.2.3">structured pruning</span>. Other NAS methods allow exploring broader (yet less fine-grained) search spaces, e.g., by selecting between different alternatives for each layer of the CNN <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib13" title="">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib2" title="">2</a>]</cite>. In this work, we show that the sequential application of these two families of NASs (layer selection and model shrinking) can yield superior results in terms of the pose estimation accuracy versus latency and memory trade-offs.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">In addition to an optimized network architecture, another key component to enable real-time CNN-based perception on nano-UAVs is the availability of efficient low-level software kernels, fully exploiting the hardware available onboard. To this end, this work proposes the usage of optimized kernels for the execution of <span class="ltx_text ltx_font_italic" id="S1.p2.1.1">fused DepthWise (DW) and PointWise (PW) convolution</span> on the Parallel Ultra Low-Power (PULP) multi-core clusters available in recent nano-UAV platforms <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib10" title="">10</a>]</cite>. Sequences of DW and PW layers are common in tiny CNNs (inspired by MobileNets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib6" title="">6</a>]</cite>), and fusing them significantly reduces the amount of intermediate memory transfers, thus improving end-to-end latency compared to single-layer kernels for the same hardware, such as the ones in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib5" title="">5</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Through the combined optimization of a CNN architecture (with two chained NAS steps) and of the corresponding inference software stack, we outperform the state-of-the-art (SoTA) on human pose estimation for nano-UAV-class devices <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>, obtaining up to 13.78% lower Mean Absolute Error (MAE), or reducing latency by up to 3.22<math alttext="\times" class="ltx_Math" display="inline" id="S1.p3.1.m1.1"><semantics id="S1.p3.1.m1.1a"><mo id="S1.p3.1.m1.1.1" xref="S1.p3.1.m1.1.1.cmml">×</mo><annotation-xml encoding="MathML-Content" id="S1.p3.1.m1.1b"><times id="S1.p3.1.m1.1.1.cmml" xref="S1.p3.1.m1.1.1"></times></annotation-xml><annotation encoding="application/x-tex" id="S1.p3.1.m1.1c">\times</annotation><annotation encoding="application/x-llamapun" id="S1.p3.1.m1.1d">×</annotation></semantics></math> at iso-error. Our work highlights the key importance of multi-level automated deployment flows for tinyML on tiny drones.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Materials and Methods</h2>
+<section class="ltx_paragraph" id="S2.SS0.SSS0.Px1">
+<h3 class="ltx_title ltx_title_paragraph">Target Platform:</h3>
+<div class="ltx_para" id="S2.SS0.SSS0.Px1.p1">
+<p class="ltx_p" id="S2.SS0.SSS0.Px1.p1.1">We focus on the Bitcraze Crazyflie 2.1 nanodrone equipped with a greyscale camera and the GAP8 SoC <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib4" title="">4</a>]</cite>. GAP8 comprises a single-core fabric controller (FC) and an 8-core PULP cluster (CL). The FC orchestrates memory transfers and delegates demanding computations to the CL. CL cores share a 64 kB L1 memory and the SoC includes a 512 kB L2 memory. A Direct Memory Access (DMA) unit handles transfers between the two memories.
+</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S2.SS0.SSS0.Px2">
+<h3 class="ltx_title ltx_title_paragraph">Complexity-driven Architecture Search: </h3>
+<div class="ltx_para" id="S2.SS0.SSS0.Px2.p1">
+<p class="ltx_p" id="S2.SS0.SSS0.Px2.p1.6">Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2.F1" title="Figure 1 ‣ Complexity-driven Architecture Search: ‣ 2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">1</span></a> (left) shows the proposed architecture optimization flow, which combines two SotA NASs, <span class="ltx_text ltx_font_italic" id="S2.SS0.SSS0.Px2.p1.6.1">Supernet</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib8" title="">8</a>]</cite> and <span class="ltx_text ltx_font_italic" id="S2.SS0.SSS0.Px2.p1.6.2">PIT</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib12" title="">12</a>]</cite>, using the implementations of the PLiNIO open-source library <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib7" title="">7</a>]</cite>.
+Both are so-called Differentiable NASs (DNASs), i.e., they jointly train (with gradient descent) the standard weights of the network <math alttext="W" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.1.m1.1"><semantics id="S2.SS0.SSS0.Px2.p1.1.m1.1a"><mi id="S2.SS0.SSS0.Px2.p1.1.m1.1.1" xref="S2.SS0.SSS0.Px2.p1.1.m1.1.1.cmml">W</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.1.m1.1b"><ci id="S2.SS0.SSS0.Px2.p1.1.m1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.1.m1.1.1">𝑊</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.1.m1.1c">W</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.1.m1.1d">italic_W</annotation></semantics></math> and some additional parameters <math alttext="\theta" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.2.m2.1"><semantics id="S2.SS0.SSS0.Px2.p1.2.m2.1a"><mi id="S2.SS0.SSS0.Px2.p1.2.m2.1.1" xref="S2.SS0.SSS0.Px2.p1.2.m2.1.1.cmml">θ</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.2.m2.1b"><ci id="S2.SS0.SSS0.Px2.p1.2.m2.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.2.m2.1.1">𝜃</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.2.m2.1c">\theta</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.2.m2.1d">italic_θ</annotation></semantics></math>, which control architectural choices such as the type of layer (for <span class="ltx_text ltx_font_italic" id="S2.SS0.SSS0.Px2.p1.6.3">Supernet</span>) or the number of output features of each layer (for <span class="ltx_text ltx_font_italic" id="S2.SS0.SSS0.Px2.p1.6.4">PIT</span>).
+The red box of Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2.F1" title="Figure 1 ‣ Complexity-driven Architecture Search: ‣ 2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">1</span></a> shows the loss function minimized by both NASs, where <math alttext="\mathcal{L}" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.3.m3.1"><semantics id="S2.SS0.SSS0.Px2.p1.3.m3.1a"><mi class="ltx_font_mathcaligraphic" id="S2.SS0.SSS0.Px2.p1.3.m3.1.1" xref="S2.SS0.SSS0.Px2.p1.3.m3.1.1.cmml">ℒ</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.3.m3.1b"><ci id="S2.SS0.SSS0.Px2.p1.3.m3.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.3.m3.1.1">ℒ</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.3.m3.1c">\mathcal{L}</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.3.m3.1d">caligraphic_L</annotation></semantics></math> is the task-specific loss (e.g., Mean Squared Error) and <math alttext="\mathcal{C}" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.4.m4.1"><semantics id="S2.SS0.SSS0.Px2.p1.4.m4.1a"><mi class="ltx_font_mathcaligraphic" id="S2.SS0.SSS0.Px2.p1.4.m4.1.1" xref="S2.SS0.SSS0.Px2.p1.4.m4.1.1.cmml">𝒞</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.4.m4.1b"><ci id="S2.SS0.SSS0.Px2.p1.4.m4.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.4.m4.1.1">𝒞</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.4.m4.1c">\mathcal{C}</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.4.m4.1d">caligraphic_C</annotation></semantics></math> is an added complexity term such as the number of parameters or operations of the network, as a function of <math alttext="\theta" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.5.m5.1"><semantics id="S2.SS0.SSS0.Px2.p1.5.m5.1a"><mi id="S2.SS0.SSS0.Px2.p1.5.m5.1.1" xref="S2.SS0.SSS0.Px2.p1.5.m5.1.1.cmml">θ</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.5.m5.1b"><ci id="S2.SS0.SSS0.Px2.p1.5.m5.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.5.m5.1.1">𝜃</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.5.m5.1c">\theta</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.5.m5.1d">italic_θ</annotation></semantics></math>. The balance between the two is controlled by the scalar <math alttext="\lambda" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p1.6.m6.1"><semantics id="S2.SS0.SSS0.Px2.p1.6.m6.1a"><mi id="S2.SS0.SSS0.Px2.p1.6.m6.1.1" xref="S2.SS0.SSS0.Px2.p1.6.m6.1.1.cmml">λ</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p1.6.m6.1b"><ci id="S2.SS0.SSS0.Px2.p1.6.m6.1.1.cmml" xref="S2.SS0.SSS0.Px2.p1.6.m6.1.1">𝜆</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p1.6.m6.1c">\lambda</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p1.6.m6.1d">italic_λ</annotation></semantics></math>. In particular, we used the size complexity defined in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib12" title="">12</a>]</cite>.
+</p>
+</div>
+<figure class="ltx_figure" id="S2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="173" id="S2.F1.g1" src="extracted/5427449/figures/all.png" width="592"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>NAS-based optimization flow (left); Optimized PW+DW kernel (right).</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS0.SSS0.Px2.p2">
+<p class="ltx_p" id="S2.SS0.SSS0.Px2.p2.7">We use a MobileNetV1 architecture as blueprint for the SuperNet step, since it demonstrated SotA performance on human-to-nanodrone pose estimation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>. For each DW+PW block of the original network, the NAS selects between: i) The original block; ii) A single PW layer; iii) A standard 2DConv with 3<math alttext="\times" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p2.1.m1.1"><semantics id="S2.SS0.SSS0.Px2.p2.1.m1.1a"><mo id="S2.SS0.SSS0.Px2.p2.1.m1.1.1" xref="S2.SS0.SSS0.Px2.p2.1.m1.1.1.cmml">×</mo><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p2.1.m1.1b"><times id="S2.SS0.SSS0.Px2.p2.1.m1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.1.m1.1.1"></times></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p2.1.m1.1c">\times</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p2.1.m1.1d">×</annotation></semantics></math>3 filter; iv) A “no-operation” to optionally skip the block.
+As depicted in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2.F1" title="Figure 1 ‣ Complexity-driven Architecture Search: ‣ 2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">1</span></a>, each of the <math alttext="\mathcal{M}=4" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p2.2.m2.1"><semantics id="S2.SS0.SSS0.Px2.p2.2.m2.1a"><mrow id="S2.SS0.SSS0.Px2.p2.2.m2.1.1" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S2.SS0.SSS0.Px2.p2.2.m2.1.1.2" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1.2.cmml">ℳ</mi><mo id="S2.SS0.SSS0.Px2.p2.2.m2.1.1.1" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1.1.cmml">=</mo><mn id="S2.SS0.SSS0.Px2.p2.2.m2.1.1.3" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1.3.cmml">4</mn></mrow><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p2.2.m2.1b"><apply id="S2.SS0.SSS0.Px2.p2.2.m2.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1"><eq id="S2.SS0.SSS0.Px2.p2.2.m2.1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1.1"></eq><ci id="S2.SS0.SSS0.Px2.p2.2.m2.1.1.2.cmml" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1.2">ℳ</ci><cn id="S2.SS0.SSS0.Px2.p2.2.m2.1.1.3.cmml" type="integer" xref="S2.SS0.SSS0.Px2.p2.2.m2.1.1.3">4</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p2.2.m2.1c">\mathcal{M}=4</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p2.2.m2.1d">caligraphic_M = 4</annotation></semantics></math> alternatives is coupled with a <math alttext="\theta_{i}" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p2.3.m3.1"><semantics id="S2.SS0.SSS0.Px2.p2.3.m3.1a"><msub id="S2.SS0.SSS0.Px2.p2.3.m3.1.1" xref="S2.SS0.SSS0.Px2.p2.3.m3.1.1.cmml"><mi id="S2.SS0.SSS0.Px2.p2.3.m3.1.1.2" xref="S2.SS0.SSS0.Px2.p2.3.m3.1.1.2.cmml">θ</mi><mi id="S2.SS0.SSS0.Px2.p2.3.m3.1.1.3" xref="S2.SS0.SSS0.Px2.p2.3.m3.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p2.3.m3.1b"><apply id="S2.SS0.SSS0.Px2.p2.3.m3.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.3.m3.1.1"><csymbol cd="ambiguous" id="S2.SS0.SSS0.Px2.p2.3.m3.1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.3.m3.1.1">subscript</csymbol><ci id="S2.SS0.SSS0.Px2.p2.3.m3.1.1.2.cmml" xref="S2.SS0.SSS0.Px2.p2.3.m3.1.1.2">𝜃</ci><ci id="S2.SS0.SSS0.Px2.p2.3.m3.1.1.3.cmml" xref="S2.SS0.SSS0.Px2.p2.3.m3.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p2.3.m3.1c">\theta_{i}</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p2.3.m3.1d">italic_θ start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> parameter. At the end of training, the alternative associated with the largest <math alttext="\theta_{i}" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p2.4.m4.1"><semantics id="S2.SS0.SSS0.Px2.p2.4.m4.1a"><msub id="S2.SS0.SSS0.Px2.p2.4.m4.1.1" xref="S2.SS0.SSS0.Px2.p2.4.m4.1.1.cmml"><mi id="S2.SS0.SSS0.Px2.p2.4.m4.1.1.2" xref="S2.SS0.SSS0.Px2.p2.4.m4.1.1.2.cmml">θ</mi><mi id="S2.SS0.SSS0.Px2.p2.4.m4.1.1.3" xref="S2.SS0.SSS0.Px2.p2.4.m4.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p2.4.m4.1b"><apply id="S2.SS0.SSS0.Px2.p2.4.m4.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.4.m4.1.1"><csymbol cd="ambiguous" id="S2.SS0.SSS0.Px2.p2.4.m4.1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.4.m4.1.1">subscript</csymbol><ci id="S2.SS0.SSS0.Px2.p2.4.m4.1.1.2.cmml" xref="S2.SS0.SSS0.Px2.p2.4.m4.1.1.2">𝜃</ci><ci id="S2.SS0.SSS0.Px2.p2.4.m4.1.1.3.cmml" xref="S2.SS0.SSS0.Px2.p2.4.m4.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p2.4.m4.1c">\theta_{i}</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p2.4.m4.1d">italic_θ start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> is selected.
+The architectures obtained with the Supernet are further optimized with PIT, which applies a fine-grained structured pruning, eliminating unimportant output channels from each layer.
+Namely, the weight tensor of each Conv or linear layer is paired with a set of binary trainable masks <math alttext="\theta" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p2.5.m5.1"><semantics id="S2.SS0.SSS0.Px2.p2.5.m5.1a"><mi id="S2.SS0.SSS0.Px2.p2.5.m5.1.1" xref="S2.SS0.SSS0.Px2.p2.5.m5.1.1.cmml">θ</mi><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p2.5.m5.1b"><ci id="S2.SS0.SSS0.Px2.p2.5.m5.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.5.m5.1.1">𝜃</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p2.5.m5.1c">\theta</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p2.5.m5.1d">italic_θ</annotation></semantics></math>, which are trained to control whether a specific feature is removed (<math alttext="\theta_{i}=0" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p2.6.m6.1"><semantics id="S2.SS0.SSS0.Px2.p2.6.m6.1a"><mrow id="S2.SS0.SSS0.Px2.p2.6.m6.1.1" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.cmml"><msub id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.cmml"><mi id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.2" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.2.cmml">θ</mi><mi id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.3" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.3.cmml">i</mi></msub><mo id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.1" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.1.cmml">=</mo><mn id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.3" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.3.cmml">0</mn></mrow><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p2.6.m6.1b"><apply id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1"><eq id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.1"></eq><apply id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.cmml" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2"><csymbol cd="ambiguous" id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.1.cmml" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2">subscript</csymbol><ci id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.2.cmml" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.2">𝜃</ci><ci id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.3.cmml" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.2.3">𝑖</ci></apply><cn id="S2.SS0.SSS0.Px2.p2.6.m6.1.1.3.cmml" type="integer" xref="S2.SS0.SSS0.Px2.p2.6.m6.1.1.3">0</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p2.6.m6.1c">\theta_{i}=0</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p2.6.m6.1d">italic_θ start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT = 0</annotation></semantics></math>) or kept (<math alttext="\theta_{i}=1" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px2.p2.7.m7.1"><semantics id="S2.SS0.SSS0.Px2.p2.7.m7.1a"><mrow id="S2.SS0.SSS0.Px2.p2.7.m7.1.1" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.cmml"><msub id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.cmml"><mi id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.2" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.2.cmml">θ</mi><mi id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.3" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.3.cmml">i</mi></msub><mo id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.1" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.1.cmml">=</mo><mn id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.3" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.3.cmml">1</mn></mrow><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px2.p2.7.m7.1b"><apply id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1"><eq id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.1.cmml" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.1"></eq><apply id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.cmml" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2"><csymbol cd="ambiguous" id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.1.cmml" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2">subscript</csymbol><ci id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.2.cmml" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.2">𝜃</ci><ci id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.3.cmml" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.2.3">𝑖</ci></apply><cn id="S2.SS0.SSS0.Px2.p2.7.m7.1.1.3.cmml" type="integer" xref="S2.SS0.SSS0.Px2.p2.7.m7.1.1.3">1</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px2.p2.7.m7.1c">\theta_{i}=1</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px2.p2.7.m7.1d">italic_θ start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT = 1</annotation></semantics></math>).</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S2.SS0.SSS0.Px3">
+<h3 class="ltx_title ltx_title_paragraph">Fused Kernel for efficient inference:</h3>
+<div class="ltx_para" id="S2.SS0.SSS0.Px3.p1">
+<p class="ltx_p" id="S2.SS0.SSS0.Px3.p1.1">DW layers are notoriously difficult to accelerate due to their more limited data reuse options compared to standard 2D Conv. PULP-NN <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib5" title="">5</a>]</cite>, a SoTA open-source kernel library for GAP8, handles this by changing the input data layout from Height-Width-Channels (HWC) to Channels-Height-Width (CHW). However, this causes an increase in data transfers, as the re-ordering operation has to be repeated multiple times when tiling the layers (i.e., loading parts of the data in L1 memory before performing computations) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib1" title="">1</a>]</cite>.
+To reduce this overhead, we implement a new fused kernel, computing a PW+DW sequence entirely in L1, as shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S2.F1" title="Figure 1 ‣ Complexity-driven Architecture Search: ‣ 2 Materials and Methods ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">1</span></a> (right).
+We accelerate PW+DW (and not DW+PW) sequences, as this enables exploiting the independence of DW computations across input/output channels (C/K). Specifically, we compute a subset (FB) of the PW output channels storing them in an additional L1 buffer of size IX*IY*FB (IX/IY = input rows/columns); then, we execute the DW operation on such buffer. The whole process is repeated until all K output channels have been produced.
+Since the DW is parallelized over channels, we set <math alttext="FB=8" class="ltx_Math" display="inline" id="S2.SS0.SSS0.Px3.p1.1.m1.1"><semantics id="S2.SS0.SSS0.Px3.p1.1.m1.1a"><mrow id="S2.SS0.SSS0.Px3.p1.1.m1.1.1" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.cmml"><mrow id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.cmml"><mi id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.2" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.2.cmml">F</mi><mo id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.1" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.3" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.3.cmml">B</mi></mrow><mo id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.1" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.1.cmml">=</mo><mn id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.3" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.3.cmml">8</mn></mrow><annotation-xml encoding="MathML-Content" id="S2.SS0.SSS0.Px3.p1.1.m1.1b"><apply id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.cmml" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1"><eq id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.1.cmml" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.1"></eq><apply id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.cmml" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2"><times id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.1.cmml" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.1"></times><ci id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.2.cmml" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.2">𝐹</ci><ci id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.3.cmml" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.2.3">𝐵</ci></apply><cn id="S2.SS0.SSS0.Px3.p1.1.m1.1.1.3.cmml" type="integer" xref="S2.SS0.SSS0.Px3.p1.1.m1.1.1.3">8</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS0.SSS0.Px3.p1.1.m1.1c">FB=8</annotation><annotation encoding="application/x-llamapun" id="S2.SS0.SSS0.Px3.p1.1.m1.1d">italic_F italic_B = 8</annotation></semantics></math>, i.e., equal to the cores of GAP8, to maximize utilization with the
+minimum possible L1 memory overhead.
+</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Experimental Results</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">We train and test our CNNs on the dataset introduced in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib11" title="">11</a>]</cite>, and with the same data splits of <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>
+Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S3.F2" title="Figure 2 ‣ 3 Experimental Results ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">2</span></a> shows the results obtained with the cascaded application of the Supernet and PIT NASs compared with the SotA networks (red circles) of <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite> in the N. of Parameters vs. MAE plane. All the results are uniformly quantized to INT8 data format using <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib7" title="">7</a>]</cite>.
+We use a slightly modified version of the test set, as in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>, where the labels have been adjusted to compensate for a calibration inaccuracy of the measurement tools detected through manual inspection.</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<p class="ltx_p" id="S3.p2.2">We apply the SuperNet NAS using two different MobileNetV1 variants as blueprints: a standard one (denoted as <span class="ltx_text ltx_font_italic" id="S3.p2.2.1">Large</span>) and one with a width-multiplier of <math alttext="0.25\times" class="ltx_math_unparsed" display="inline" id="S3.p2.1.m1.1"><semantics id="S3.p2.1.m1.1a"><mrow id="S3.p2.1.m1.1b"><mn id="S3.p2.1.m1.1.1">0.25</mn><mo id="S3.p2.1.m1.1.2" lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex" id="S3.p2.1.m1.1c">0.25\times</annotation><annotation encoding="application/x-llamapun" id="S3.p2.1.m1.1d">0.25 ×</annotation></semantics></math> (<span class="ltx_text ltx_font_italic" id="S3.p2.2.2">Small</span>).
+The orange and blue triangles of Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S3.F2" title="Figure 2 ‣ 3 Experimental Results ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">2</span></a> denote two promising output architectures obtained with this first NAS step.
+In particular, we selected the blue triangle (SuperNet Small) as the smallest network achieving a MAE <math alttext="&lt;" class="ltx_Math" display="inline" id="S3.p2.2.m2.1"><semantics id="S3.p2.2.m2.1a"><mo id="S3.p2.2.m2.1.1" xref="S3.p2.2.m2.1.1.cmml">&lt;</mo><annotation-xml encoding="MathML-Content" id="S3.p2.2.m2.1b"><lt id="S3.p2.2.m2.1.1.cmml" xref="S3.p2.2.m2.1.1"></lt></annotation-xml><annotation encoding="application/x-tex" id="S3.p2.2.m2.1c">&lt;</annotation><annotation encoding="application/x-llamapun" id="S3.p2.2.m2.1d">&lt;</annotation></semantics></math> 1. Conversely, we selected the orange one (SuperNet Large) as the network achieving the lowest MAE.
+The found architectures details are as follows: SuperNet Large substitutes the first three DW+PW layers of the vanilla MobileNetV1 with standard 2DConv layers.
+Conversely, SuperNet Small substitutes only the first DW+PW block with a 2DConv, while skipping entirely the last DW+PW block.</p>
+</div>
+<div class="ltx_para" id="S3.p3">
+<p class="ltx_p" id="S3.p3.1">We then apply PIT to both these models, obtaining the rich collection of Pareto-optimal architectures, depicted in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S3.F2" title="Figure 2 ‣ 3 Experimental Results ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">2</span></a> with blue and orange stars.
+Noteworthy, our smallest model achieves a <math alttext="9\times" class="ltx_math_unparsed" display="inline" id="S3.p3.1.m1.1"><semantics id="S3.p3.1.m1.1a"><mrow id="S3.p3.1.m1.1b"><mn id="S3.p3.1.m1.1.1">9</mn><mo id="S3.p3.1.m1.1.2" lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex" id="S3.p3.1.m1.1c">9\times</annotation><annotation encoding="application/x-llamapun" id="S3.p3.1.m1.1d">9 ×</annotation></semantics></math> size compression at iso-MAE w.r.t. the most accurate SotA model <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>.
+Conversely, in the large N. of Parameters regime, our solutions can improve the SotA by up to 13.78%.
+Note that these results showcase the benefits of the combined usage of both NASs, given that SotA networks have been obtained using PIT only <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib3" title="">3</a>]</cite>.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Optimized architectures vs SotA from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>.</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2"><span class="ltx_inline-para ltx_minipage ltx_flex_size_2 ltx_align_center ltx_align_middle" id="S3.F2.1" style="width:190.8pt;">
+<span class="ltx_para" id="S3.F2.1.p1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="504" id="S3.F2.1.p1.g1" src="x1.png" width="747"/>
+</span></span></div>
+<div class="ltx_flex_cell ltx_flex_size_2"><span class="ltx_inline-para ltx_minipage ltx_flex_size_2 ltx_align_center ltx_align_middle" id="S3.F2.2" style="width:173.4pt;">
+<span class="ltx_para ltx_align_center" id="S3.F2.2.p1">
+<span class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S3.F2.2.p1.3">
+<span class="ltx_tbody">
+<span class="ltx_tr" id="S3.F2.2.p1.3.4.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.3.4.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.2.p1.3.4.1.1.1" style="font-size:70%;">Model</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.3.4.1.2"><span class="ltx_text ltx_font_bold" id="S3.F2.2.p1.3.4.1.2.1" style="font-size:70%;">Ker</span></span>
+<span class="ltx_td ltx_align_left" id="S3.F2.2.p1.3.4.1.3"><span class="ltx_text ltx_font_bold" id="S3.F2.2.p1.3.4.1.3.1" style="font-size:70%;">MAE</span><span class="ltx_text" id="S3.F2.2.p1.3.4.1.3.2" style="font-size:70%;"></span></span>
+<span class="ltx_td ltx_align_left ltx_border_l ltx_border_r" id="S3.F2.2.p1.3.4.1.4"><span class="ltx_text ltx_font_bold" id="S3.F2.2.p1.3.4.1.4.1" style="font-size:70%;">Lat[ms]</span><span class="ltx_text" id="S3.F2.2.p1.3.4.1.4.2" style="font-size:70%;"></span></span>
+<span class="ltx_td ltx_align_left ltx_border_l ltx_border_r" id="S3.F2.2.p1.3.4.1.5"><span class="ltx_text ltx_font_bold" id="S3.F2.2.p1.3.4.1.5.1" style="font-size:70%;">Mem[kB]</span><span class="ltx_text" id="S3.F2.2.p1.3.4.1.5.2" style="font-size:70%;"></span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.3.5.2">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt ltx_colspan ltx_colspan_5" id="S3.F2.2.p1.3.5.2.1"><span class="ltx_text ltx_font_bold" id="S3.F2.2.p1.3.5.2.1.1" style="font-size:70%;">SoTA</span><span class="ltx_text" id="S3.F2.2.p1.3.5.2.1.2" style="font-size:70%;"></span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.1.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.F2.2.p1.1.1.1"><math alttext="F^{1}" class="ltx_Math" display="inline" id="S3.F2.2.p1.1.1.1.m1.1"><semantics id="S3.F2.2.p1.1.1.1.m1.1a"><msup id="S3.F2.2.p1.1.1.1.m1.1.1" xref="S3.F2.2.p1.1.1.1.m1.1.1.cmml"><mi id="S3.F2.2.p1.1.1.1.m1.1.1.2" mathsize="70%" xref="S3.F2.2.p1.1.1.1.m1.1.1.2.cmml">F</mi><mn id="S3.F2.2.p1.1.1.1.m1.1.1.3" mathsize="70%" xref="S3.F2.2.p1.1.1.1.m1.1.1.3.cmml">1</mn></msup><annotation-xml encoding="MathML-Content" id="S3.F2.2.p1.1.1.1.m1.1b"><apply id="S3.F2.2.p1.1.1.1.m1.1.1.cmml" xref="S3.F2.2.p1.1.1.1.m1.1.1"><csymbol cd="ambiguous" id="S3.F2.2.p1.1.1.1.m1.1.1.1.cmml" xref="S3.F2.2.p1.1.1.1.m1.1.1">superscript</csymbol><ci id="S3.F2.2.p1.1.1.1.m1.1.1.2.cmml" xref="S3.F2.2.p1.1.1.1.m1.1.1.2">𝐹</ci><cn id="S3.F2.2.p1.1.1.1.m1.1.1.3.cmml" type="integer" xref="S3.F2.2.p1.1.1.1.m1.1.1.3">1</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F2.2.p1.1.1.1.m1.1c">F^{1}</annotation><annotation encoding="application/x-llamapun" id="S3.F2.2.p1.1.1.1.m1.1d">italic_F start_POSTSUPERSCRIPT 1 end_POSTSUPERSCRIPT</annotation></semantics></math></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.F2.2.p1.1.1.2"><span class="ltx_text" id="S3.F2.2.p1.1.1.2.1" style="font-size:70%;">U</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S3.F2.2.p1.1.1.3"><span class="ltx_text" id="S3.F2.2.p1.1.1.3.1" style="font-size:70%;">1.34</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S3.F2.2.p1.1.1.4"><span class="ltx_text" id="S3.F2.2.p1.1.1.4.1" style="font-size:70%;">7.06</span></span>
+<span class="ltx_td ltx_align_left ltx_border_t" id="S3.F2.2.p1.1.1.5"><span class="ltx_text" id="S3.F2.2.p1.1.1.5.1" style="font-size:70%;">14.8</span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.2.2">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.2.2.1"><math alttext="F^{2}" class="ltx_Math" display="inline" id="S3.F2.2.p1.2.2.1.m1.1"><semantics id="S3.F2.2.p1.2.2.1.m1.1a"><msup id="S3.F2.2.p1.2.2.1.m1.1.1" xref="S3.F2.2.p1.2.2.1.m1.1.1.cmml"><mi id="S3.F2.2.p1.2.2.1.m1.1.1.2" mathsize="70%" xref="S3.F2.2.p1.2.2.1.m1.1.1.2.cmml">F</mi><mn id="S3.F2.2.p1.2.2.1.m1.1.1.3" mathsize="70%" xref="S3.F2.2.p1.2.2.1.m1.1.1.3.cmml">2</mn></msup><annotation-xml encoding="MathML-Content" id="S3.F2.2.p1.2.2.1.m1.1b"><apply id="S3.F2.2.p1.2.2.1.m1.1.1.cmml" xref="S3.F2.2.p1.2.2.1.m1.1.1"><csymbol cd="ambiguous" id="S3.F2.2.p1.2.2.1.m1.1.1.1.cmml" xref="S3.F2.2.p1.2.2.1.m1.1.1">superscript</csymbol><ci id="S3.F2.2.p1.2.2.1.m1.1.1.2.cmml" xref="S3.F2.2.p1.2.2.1.m1.1.1.2">𝐹</ci><cn id="S3.F2.2.p1.2.2.1.m1.1.1.3.cmml" type="integer" xref="S3.F2.2.p1.2.2.1.m1.1.1.3">2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F2.2.p1.2.2.1.m1.1c">F^{2}</annotation><annotation encoding="application/x-llamapun" id="S3.F2.2.p1.2.2.1.m1.1d">italic_F start_POSTSUPERSCRIPT 2 end_POSTSUPERSCRIPT</annotation></semantics></math></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.2.2.2"><span class="ltx_text" id="S3.F2.2.p1.2.2.2.1" style="font-size:70%;">U</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r" id="S3.F2.2.p1.2.2.3"><span class="ltx_text" id="S3.F2.2.p1.2.2.3.1" style="font-size:70%;">1.1</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r" id="S3.F2.2.p1.2.2.4"><span class="ltx_text" id="S3.F2.2.p1.2.2.4.1" style="font-size:70%;">8.82</span></span>
+<span class="ltx_td ltx_align_left" id="S3.F2.2.p1.2.2.5"><span class="ltx_text" id="S3.F2.2.p1.2.2.5.1" style="font-size:70%;">44.5</span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.3.3">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.3.3.1"><math alttext="M^{1}" class="ltx_Math" display="inline" id="S3.F2.2.p1.3.3.1.m1.1"><semantics id="S3.F2.2.p1.3.3.1.m1.1a"><msup id="S3.F2.2.p1.3.3.1.m1.1.1" xref="S3.F2.2.p1.3.3.1.m1.1.1.cmml"><mi id="S3.F2.2.p1.3.3.1.m1.1.1.2" mathsize="70%" xref="S3.F2.2.p1.3.3.1.m1.1.1.2.cmml">M</mi><mn id="S3.F2.2.p1.3.3.1.m1.1.1.3" mathsize="70%" xref="S3.F2.2.p1.3.3.1.m1.1.1.3.cmml">1</mn></msup><annotation-xml encoding="MathML-Content" id="S3.F2.2.p1.3.3.1.m1.1b"><apply id="S3.F2.2.p1.3.3.1.m1.1.1.cmml" xref="S3.F2.2.p1.3.3.1.m1.1.1"><csymbol cd="ambiguous" id="S3.F2.2.p1.3.3.1.m1.1.1.1.cmml" xref="S3.F2.2.p1.3.3.1.m1.1.1">superscript</csymbol><ci id="S3.F2.2.p1.3.3.1.m1.1.1.2.cmml" xref="S3.F2.2.p1.3.3.1.m1.1.1.2">𝑀</ci><cn id="S3.F2.2.p1.3.3.1.m1.1.1.3.cmml" type="integer" xref="S3.F2.2.p1.3.3.1.m1.1.1.3">1</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F2.2.p1.3.3.1.m1.1c">M^{1}</annotation><annotation encoding="application/x-llamapun" id="S3.F2.2.p1.3.3.1.m1.1d">italic_M start_POSTSUPERSCRIPT 1 end_POSTSUPERSCRIPT</annotation></semantics></math></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.3.3.2"><span class="ltx_text" id="S3.F2.2.p1.3.3.2.1" style="font-size:70%;">U</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r" id="S3.F2.2.p1.3.3.3"><span class="ltx_text" id="S3.F2.2.p1.3.3.3.1" style="font-size:70%;">1.04</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r" id="S3.F2.2.p1.3.3.4"><span class="ltx_text" id="S3.F2.2.p1.3.3.4.1" style="font-size:70%;">21.76</span></span>
+<span class="ltx_td ltx_align_left" id="S3.F2.2.p1.3.3.5"><span class="ltx_text" id="S3.F2.2.p1.3.3.5.1" style="font-size:70%;">46.8</span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.3.6.3">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t ltx_colspan ltx_colspan_5" id="S3.F2.2.p1.3.6.3.1"><span class="ltx_text ltx_font_bold" id="S3.F2.2.p1.3.6.3.1.1" style="font-size:70%;">Ours</span><span class="ltx_text" id="S3.F2.2.p1.3.6.3.1.2" style="font-size:70%;"></span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.3.7.4">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t ltx_rowspan ltx_rowspan_2" id="S3.F2.2.p1.3.7.4.1"><span class="ltx_text" id="S3.F2.2.p1.3.7.4.1.1" style="font-size:70%;">S</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.F2.2.p1.3.7.4.2"><span class="ltx_text" id="S3.F2.2.p1.3.7.4.2.1" style="font-size:70%;">U</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r ltx_border_t ltx_rowspan ltx_rowspan_2" id="S3.F2.2.p1.3.7.4.3"><span class="ltx_text" id="S3.F2.2.p1.3.7.4.3.1" style="font-size:70%;">1.04</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S3.F2.2.p1.3.7.4.4"><span class="ltx_text" id="S3.F2.2.p1.3.7.4.4.1" style="font-size:70%;">7.4</span></span>
+<span class="ltx_td ltx_align_left ltx_border_t ltx_rowspan ltx_rowspan_2" id="S3.F2.2.p1.3.7.4.5"><span class="ltx_text" id="S3.F2.2.p1.3.7.4.5.1" style="font-size:70%;">5.14</span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.3.8.5">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.3.8.5.1"><span class="ltx_text" id="S3.F2.2.p1.3.8.5.1.1" style="font-size:70%;">F</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r" id="S3.F2.2.p1.3.8.5.2"><span class="ltx_text" id="S3.F2.2.p1.3.8.5.2.1" style="font-size:70%;">6.76</span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.3.9.6">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r ltx_rowspan ltx_rowspan_2" id="S3.F2.2.p1.3.9.6.1"><span class="ltx_text" id="S3.F2.2.p1.3.9.6.1.1" style="font-size:70%;">L</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S3.F2.2.p1.3.9.6.2"><span class="ltx_text" id="S3.F2.2.p1.3.9.6.2.1" style="font-size:70%;">U</span></span>
+<span class="ltx_td ltx_align_left ltx_border_b ltx_border_r ltx_rowspan ltx_rowspan_2" id="S3.F2.2.p1.3.9.6.3"><span class="ltx_text" id="S3.F2.2.p1.3.9.6.3.1" style="font-size:70%;">0.97</span></span>
+<span class="ltx_td ltx_align_left ltx_border_r" id="S3.F2.2.p1.3.9.6.4"><span class="ltx_text" id="S3.F2.2.p1.3.9.6.4.1" style="font-size:70%;">32.5</span></span>
+<span class="ltx_td ltx_align_left ltx_border_b ltx_rowspan ltx_rowspan_2" id="S3.F2.2.p1.3.9.6.5"><span class="ltx_text" id="S3.F2.2.p1.3.9.6.5.1" style="font-size:70%;">116.63</span></span></span>
+<span class="ltx_tr" id="S3.F2.2.p1.3.10.7">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r" id="S3.F2.2.p1.3.10.7.1"><span class="ltx_text" id="S3.F2.2.p1.3.10.7.1.1" style="font-size:70%;">F</span></span>
+<span class="ltx_td ltx_align_left ltx_border_b ltx_border_r" id="S3.F2.2.p1.3.10.7.2"><span class="ltx_text" id="S3.F2.2.p1.3.10.7.2.1" style="font-size:70%;">31.43</span></span></span>
+</span>
+</span>
+</span>
+<span class="ltx_table ltx_align_center" id="S3.T1">
+<span class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Deployment results.</span>
+</span></span></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Optimized architectures vs SotA from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>.</figcaption>
+</figure>
+<div class="ltx_para" id="S3.p4">
+<p class="ltx_p" id="S3.p4.1">We deploy models on GAP8 mirroring the setup of <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib9" title="">9</a>]</cite>.
+Table <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S3.T1" title="Table 1 ‣ Figure 2 ‣ 3 Experimental Results ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">1</span></a> shows the deployment results of selected CNNs from Fig. <a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#S3.F2" title="Figure 2 ‣ 3 Experimental Results ‣ Optimized Deployment of Deep Neural Networks for Visual Pose Estimation on Nano-drones"><span class="ltx_text ltx_ref_tag">2</span></a> (those labeled with a letter) from our work and the SoTA. We deploy the smallest (S) and most accurate (L) CNNs found by our NAS chain, excluding models that do not fit the L2 memory of GAP8 (512 kB).
+For each model, we report the test set MAE, the weight memory footprint (Mem), and the latency (Lat). We also report the kernel used for all PW+DW sequences (Ker), which is either our proposed fused implementation (F) or an unfused one (U) from vanilla PULP-NN.</p>
+</div>
+<div class="ltx_para" id="S3.p5">
+<p class="ltx_p" id="S3.p5.1">When considering the S model, we achieve the same MAE at far lower latency (-65%) w.r.t. the most accurate SoTA model (M1).
+The speedup increases to 68.1% (a further 8.6% reduction) when utilizing our fused PW+DW kernel.
+If we compare the same model to the least accurate SoTA one (F1), we achieve significantly better MAE (-0.3) with more than 30<math alttext="\times" class="ltx_Math" display="inline" id="S3.p5.1.m1.1"><semantics id="S3.p5.1.m1.1a"><mo id="S3.p5.1.m1.1.1" xref="S3.p5.1.m1.1.1.cmml">×</mo><annotation-xml encoding="MathML-Content" id="S3.p5.1.m1.1b"><times id="S3.p5.1.m1.1.1.cmml" xref="S3.p5.1.m1.1.1"></times></annotation-xml><annotation encoding="application/x-tex" id="S3.p5.1.m1.1c">\times</annotation><annotation encoding="application/x-llamapun" id="S3.p5.1.m1.1d">×</annotation></semantics></math> fewer parameters. When using fused kernels, we also still reduce latency by 4.2%.
+The L model, on the other hand, outperforms the most accurate SoTA CNN in terms of MAE (6.98% reduction).
+Fused kernels are less beneficial for this model, as most of the latency is due to the initial standard convolutional layers.
+Nonetheless, they still grant a latency reduction of 3.27% compared to a standard deployment.
+Noteworthy, as shown in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.15273v1#bib.bib3" title="">3</a>]</cite>, reducing perception latency (i.e., improving the frames per second that the model can process) has been shown very beneficial to improve the performance of nano-drones control loops.</p>
+</div>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Conclusions</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">We have presented a multi-stage, fully-automated optimization pipeline for visual human-to-nanodrone pose estimation, including two chained NAS methods, respectively for layer selection and model pruning, and an optimized implementation of fused PW and DW convolutions to improve CNN inference latency, and consequently the drone’s controller reaction time, by cutting intermediate memory transfers. Overall, our work serves to demonstrate the fundamental importance of deployment optimization pipelines for TinyML on tiny drones.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+Burrello, A., et al.: Dory: Automatic end-to-end deployment of real-world dnns on low-cost iot mcus.
+
+</span>
+<span class="ltx_bibblock">IEEE Transactions on Computers pp. 1253–1268 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Burrello, A., et al.: Enhancing neural architecture search with multiple hardware constraints for deep learning model deployment on tiny iot devices.
+
+</span>
+<span class="ltx_bibblock">IEEE Transactions on Emerging Topics in Computing pp. 1–15 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Cereda, E., et al.: Deep neural network architecture search for accurate visual pose estimation aboard nano-uavs.
+
+</span>
+<span class="ltx_bibblock">In: IEEE ICRA (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Flamand, E., et al.: Gap-8: A risc-v soc for ai at the edge of the iot.
+
+</span>
+<span class="ltx_bibblock">In: IEEE 29th ASAP, pp. 1–4 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Garofalo, A., et al.: Pulp-nn: A computing library for quantized neural network inference at the edge on risc-v based parallel ultra low power clusters.
+
+</span>
+<span class="ltx_bibblock">In: 26th IEEE ICECS, pp. 33–36. IEEE (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+Howard, A.G., et al.: Mobilenets: Efficient convolutional neural networks for mobile vision applications.
+
+</span>
+<span class="ltx_bibblock">arXiv preprint arXiv:1704.04861 (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Jahier Pagliari, D., et al.: Plinio: A user-friendly library of gradient-based methods for complexity-aware dnn optimization.
+
+</span>
+<span class="ltx_bibblock">In: FDL, pp. 1–8 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+Liu, H., Simonyan, K., Yang, Y.: Darts: Differentiable architecture search.
+
+</span>
+<span class="ltx_bibblock">arXiv preprint arXiv:1806.09055 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Motetti, B.A., et al.: Adaptive Deep Learning for Efficient Visual Pose Estimation aboard Ultra-low-power Nano-drones.
+
+</span>
+<span class="ltx_bibblock">arXiv:2401.15236 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Palossi, D., et al.: An open source and open hardware deep learning-powered visual navigation engine for autonomous nano-uavs.
+
+</span>
+<span class="ltx_bibblock">In: 15th DCOSS, pp. 604–611 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Palossi, D., et al.: Fully onboard ai-powered human-drone pose estimation on ultralow-power autonomous flying nano-uavs.
+
+</span>
+<span class="ltx_bibblock">IEEE IoTJ <span class="ltx_text ltx_font_bold" id="bib.bib11.1.1">9</span>(3), 1913–1929 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Risso, M., et al.: Lightweight neural architecture search for temporal convolutional networks at the edge.
+
+</span>
+<span class="ltx_bibblock">IEEE Trans. Comp. (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Tan, M., et al.: Mnasnet: Platform-aware neural architecture search for mobile.
+
+</span>
+<span class="ltx_bibblock">In: IEEE/CVF CVPR, pp. 2820–2828 (2019)
+
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Fri Feb 23 11:34:27 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span style="font-size:70%;position:relative; bottom:2.2pt;">A</span>T<span style="position:relative; bottom:-0.4ex;">E</span></span><span class="ltx_font_smallcaps">xml</span><img alt="[LOGO]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

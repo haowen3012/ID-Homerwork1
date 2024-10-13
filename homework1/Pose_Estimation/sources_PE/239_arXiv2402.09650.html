@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Foul prediction with estimated poses from soccer broadcast video</title>
+<!--Generated on Thu Feb 15 01:21:02 2024 by LaTeXML (version 0.8.7) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv_0.7.4.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2402.09650v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S1" title="1 Introduction ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S2" title="2 Related work ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S2.SS1" title="2.1 Multi-object tracking and datasets in soccer ‣ 2 Related work ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Multi-object tracking and datasets in soccer</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S2.SS2" title="2.2 Behavior recognition and prediction in soccer ‣ 2 Related work ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Behavior recognition and prediction in soccer</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3" title="3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Dataset</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.SS1" title="3.1 Video dataset ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Video dataset</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.SS2" title="3.2 Selection of foul labels ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Selection of foul labels</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.SS3" title="3.3 Extraction of analysis interval ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Extraction of analysis interval</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.SS4" title="3.4 Extraction of bboxes with object tracking ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Extraction of bboxes with object tracking</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.SS5" title="3.5 Extraction of estimated pose information ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5 </span>Extraction of estimated pose information</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.SS6" title="3.6 Extraction of bbox image ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.6 </span>Extraction of bbox image</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S4" title="4 Proposed method ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Proposed method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S4.SS1" title="4.1 Feature creation ‣ 4 Proposed method ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Feature creation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S4.SS2" title="4.2 Proposed model: FutureFoul ‣ 4 Proposed method ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Proposed model: FutureFoul</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S4.SS3" title="4.3 Training ‣ 4 Proposed method ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Training</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5" title="5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.SS1" title="5.1 Setup ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Setup</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.SS2" title="5.2 Quantitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Quantitative evaluation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.SS3" title="5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3 </span>Qualitative evaluation</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.SS3.SSS1" title="5.3.1 Examples of success predictions ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3.1 </span>Examples of success predictions</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.SS3.SSS2" title="5.3.2 An examples of failures: missed detection ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3.2 </span>An examples of failures: missed detection</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.SS3.SSS3" title="5.3.3 An examples of failures: false alarm ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3.3 </span>An examples of failures: false alarm</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S6" title="6 Conclusion ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<div aria-label="Conversion errors have been found" class="package-alerts ltx_document" role="status">
+<button aria-label="Dismiss alert" onclick="closePopup()">
+<span aria-hidden="true"><svg aria-hidden="true" focusable="false" height="20" role="presentation" viewbox="0 0 44 44" width="20">
+<path d="M0.549989 4.44999L4.44999 0.549988L43.45 39.55L39.55 43.45L0.549989 4.44999Z"></path>
+<path d="M39.55 0.549988L43.45 4.44999L4.44999 43.45L0.549988 39.55L39.55 0.549988Z"></path>
+</svg></span>
+</button>
+<p>HTML conversions <a href="https://info.dev.arxiv.org/about/accessibility_html_error_messages.html" target="_blank">sometimes display errors</a> due to content that did not convert correctly from the source. This paper uses the following packages that are not yet supported by the HTML conversion tool. Feedback on these issues are not necessary; they are known and are being worked on.</p>
+<ul arial-label="Unsupported packages used in this paper">
+<li>failed: manyfoot</li>
+</ul>
+<p>Authors: achieve the best HTML results from your LaTeX submissions by following these <a href="https://info.arxiv.org/help/submit_latex_best_practices.html" target="_blank">best practices</a>.</p>
+</div><div class="section" id="target-section"><div id="license-tr">License: CC BY-NC-ND 4.0</div><div id="watermark-tr">arXiv:2402.09650v1 [cs.CV] 15 Feb 2024</div></div>
+<script>
+            function closePopup() {
+                document.querySelector('.package-alerts').style.display = 'none';
+            }
+        </script>
+<article class="ltx_document ltx_authors_1line">
+<div class="ltx_para" id="p1">
+<p class="ltx_p" id="p1.1">[1,2,3]<span class="ltx_ERROR undefined" id="p1.1.1">\fnm</span>Keisuke <span class="ltx_ERROR undefined" id="p1.1.2">\sur</span>Fujii
+</p>
+</div>
+<div class="ltx_para" id="p2">
+<p class="ltx_p" id="p2.1">[1]<span class="ltx_ERROR undefined" id="p2.1.1">\orgdiv</span>Graduate School of Informatics, <span class="ltx_ERROR undefined" id="p2.1.2">\orgname</span>Nagoya University, <span class="ltx_ERROR undefined" id="p2.1.3">\orgaddress</span><span class="ltx_ERROR undefined" id="p2.1.4">\street</span>Chikusa-ku, <span class="ltx_ERROR undefined" id="p2.1.5">\city</span>Nagoya, <span class="ltx_ERROR undefined" id="p2.1.6">\state</span>Aichi, <span class="ltx_ERROR undefined" id="p2.1.7">\country</span>Japan</p>
+</div>
+<div class="ltx_para" id="p3">
+<p class="ltx_p" id="p3.1">2]<span class="ltx_ERROR undefined" id="p3.1.1">\orgdiv</span>RIKEN Center for Advanced Intelligence Project, <span class="ltx_ERROR undefined" id="p3.1.2">\orgname</span>1-5, <span class="ltx_ERROR undefined" id="p3.1.3">\orgaddress</span><span class="ltx_ERROR undefined" id="p3.1.4">\street</span>Yamadaoka, <span class="ltx_ERROR undefined" id="p3.1.5">\city</span>Suita, <span class="ltx_ERROR undefined" id="p3.1.6">\state</span>Osaka, <span class="ltx_ERROR undefined" id="p3.1.7">\country</span>Japan</p>
+</div>
+<div class="ltx_para" id="p4">
+<p class="ltx_p" id="p4.1">3]<span class="ltx_ERROR undefined" id="p4.1.1">\orgdiv</span>PRESTO, <span class="ltx_ERROR undefined" id="p4.1.2">\orgname</span>Japan Science and Technology Agency, <span class="ltx_ERROR undefined" id="p4.1.3">\orgaddress</span><span class="ltx_ERROR undefined" id="p4.1.4">\city</span>Kawaguchi, <span class="ltx_ERROR undefined" id="p4.1.5">\state</span>Saitama,<span class="ltx_ERROR undefined" id="p4.1.6">\country</span>Japan
+</p>
+</div>
+<h1 class="ltx_title ltx_title_document">Foul prediction with estimated poses from soccer broadcast video</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"><span class="ltx_ERROR undefined" id="id1.1.id1">\fnm</span>Jiale <span class="ltx_ERROR undefined" id="id2.2.id2">\sur</span>Fang
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="mailto:fang.jiale@g.sp.m.is.nagoya-u.ac.jp">fang.jiale@g.sp.m.is.nagoya-u.ac.jp</a>
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"><span class="ltx_ERROR undefined" id="id3.1.id1">\fnm</span>Calvin <span class="ltx_ERROR undefined" id="id4.2.id2">\sur</span>Yeung
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="mailto:yeung.chikwong@g.sp.m.is.nagoya-u.ac.jp">yeung.chikwong@g.sp.m.is.nagoya-u.ac.jp</a>
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="mailto:fujii@i.nagoya-u.ac.jp">fujii@i.nagoya-u.ac.jp</a>
+</span>
+<span class="ltx_contact ltx_role_affiliation">*
+</span>
+<span class="ltx_contact ltx_role_affiliation">[
+</span>
+<span class="ltx_contact ltx_role_affiliation">[
+</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id5.id1">Recent advances in computer vision have made significant progress in tracking and pose estimation of sports players. However, there have been fewer studies on behavior prediction with pose estimation in sports, in particular, the prediction of soccer fouls is challenging because of the smaller image size of each player and of difficulty in the usage of e.g., the ball and pose information.
+In our research, we introduce an innovative deep learning approach for anticipating soccer fouls. This method integrates video data, bounding box positions, image details, and pose information by curating a novel soccer foul dataset. Our model utilizes a combination of convolutional and recurrent neural networks (CNNs and RNNs) to effectively merge information from these four modalities.
+The experimental results show that our full model outperformed the ablated models, and all of the RNN modules, bounding box position and image, and estimated pose were useful for the foul prediction.
+Our findings have important implications for a deeper understanding of foul play in soccer and provide a valuable reference for future research and practice in this area.</p>
+</div>
+<div class="ltx_classification">
+<h6 class="ltx_title ltx_title_classification">keywords: </h6>datasets, neural networks, soccer, pose estimation
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">With the rapid development in the field of computer science, computer vision has become a research field of great interest. With the continuous advancement of technology, impressive achievements have been made in the fields of object detection and tracking, and action classification, laying the foundation for subsequent analysis.
+In sports such as soccer, larger sports video datasets (e.g.<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib4" title="">4</a>]</cite>) have been published and algorithms based on the datasets have been developed such as multi-object tracking (MOT) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib4" title="">4</a>]</cite>, action spotting <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib3" title="">3</a>]</cite>, and video understanding <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib9" title="">9</a>]</cite>.
+However, most of the recent methods for action spotting or classification have directly used video as input for deep learning models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib10" title="">10</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib11" title="">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib12" title="">12</a>]</cite>, and fewer studies have considered behavior predictions with pose information (e.g., shot prediction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib13" title="">13</a>]</cite> and pass receiver prediction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib14" title="">14</a>]</cite>) because behavior prediction with pose estimation in soccer are challenging due to the smaller image size of each player and the difficulty in the usage of the ball information.
+</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">In the context of autonomous driving and human behavior understanding, methods of pedestrian intention prediction have been intensively investigated.
+Earlier work used single-frame images as input into convolutional neural networks (CNNs) for the prediction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib15" title="">15</a>]</cite>, and recently spatio-temporal image sequence features such as videos, bounding boxes (bboxes), and estimated pose for the pedestrians such as using recurrent neural networks (RNNs) (e.g., <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib16" title="">16</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib18" title="">18</a>]</cite> and reviewed by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib19" title="">19</a>]</cite>).</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">In soccer, the prediction of foul behavior is of great importance to referees and players.
+When it comes to dangerous behaviors and violations in soccer, it has a significant impact on the outcome of the game and the safety of the players.
+With the help of posture analysis technology, we can expect to predict the presence of foul play by analyzing a player’s posture and movements. For example, whether a player has made a deliberate foul move or inappropriate physical contact, potential foul play can be predicted in advance and provides an objective basis for decision-making.
+However, challenges still exist in predicting foul plays in soccer as described above.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">In this paper, we propose a foul behavior prediction system called <span class="ltx_text ltx_font_italic" id="S1.p4.1.1">FutureFoul</span> from soccer broadcast videos, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">1</span></a>. The system analyzes data such as the player’s posture, movement, and position and compares and evaluates them.
+In the experiments, we show that our system can accurately identify potential fouls and provide appropriate warnings or alerts.
+We also show that in a soccer game, players’ postures and movements are crucial for determining the presence of foul play.
+By utilizing our approach, we hope to help the management and supervision of soccer games, facilitating the development of the game and improving the safety of players.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">The contributions of this paper are as follows:</p>
+<ol class="ltx_enumerate" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We propose a new deep learning method to predict soccer fouls with the combination of video, bounding box position and image, and pose information by constructing a new soccer foul dataset. We leverage the fused CNNs and RNNs for an accurate foul prediction.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">The experimental results show that our full model outperformed the ablated models, and the RNN module, bounding box position and image, and estimated pose were useful for the foul prediction. We also analyzed the successes and failures in the predictions and obtained insights about the foul prediction.</p>
+</div>
+</li>
+</ol>
+</div>
+<figure class="ltx_figure" id="S1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="374" id="S1.F1.g1" src="extracted/5409688/fig/picMain1_new.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Our foul prediction system (FutureFoul). Our method uses video, bbox, bbox image and pose information of 3 s duration to predict fouls in the future 1 s.</figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related work</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Multi-object tracking and datasets in soccer</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">As a large broadcast video dataset in soccer, the SoccerNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib1" title="">1</a>]</cite> dataset provides a resource of recorded video of soccer leagues in Europe, but the dataset lacks detailed information such as annotations, which makes it relatively difficult to use. To overcome this problem, the SoccerNet-v2 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib2" title="">2</a>]</cite> dataset adds about 300,000 annotations to SoccerNet, extends the range of research tasks in the field of soccer, including action spotting, camera shot segmentation with boundary detection, and defines a novel replay-based task.
+In addition, the SoccerNet-v3 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib20" title="">20</a>]</cite> dataset annotates action replay sequences from soccer matches with annotations that include lines and goal sections on replay frames and live action frames, as well as annotating bboxes for players on the field and specifying the team to which the player belongs.
+For other similar datasets, SportsMOT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib21" title="">21</a>]</cite> and SoccerTrack <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib4" title="">4</a>]</cite> have been published.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">In MOT, various methods have been developed mainly for pedestrian tracking, mainly with tracking-by-detection paradigms such as DeepSORT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib22" title="">22</a>]</cite> and ByteTrack <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib23" title="">23</a>]</cite>.
+Recently, end-to-end methods utilizing Transformer have been developed such as <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib24" title="">24</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib25" title="">25</a>]</cite>.
+In soccer MOT, the SoccerNet Tracking <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib5" title="">5</a>]</cite> tested several tracking methods including DeepSORT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib22" title="">22</a>]</cite>, FairMOT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib26" title="">26</a>]</cite>, and ByteTrack <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib23" title="">23</a>]</cite>. SportsMOT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib21" title="">21</a>]</cite> proposed MixSort, a new multi-object tracking framework, with introducing a MixFormer-like structure <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib27" title="">27</a>]</cite>.
+In re-identification, the recent approach Body Feature Alignment Based on Pose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib28" title="">28</a>]</cite> successfully extracts key features of the players in the image, overcoming challenges such as the same team wearing similar outfits, limited samples, and low-resolution images.
+A soccer and player tracking method based on You Only Look Once (YOLOv3) and Simple Online Real-Time (SORT) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib29" title="">29</a>]</cite> was also proposed, aiming to accurately categorize objects detected in soccer videos and track them in a variety of challenging contexts.
+A semi-supervised training method <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib30" title="">30</a>]</cite> also
+utilized a combination of labeled and unlabeled data to improve the performance of the detection algorithms.
+In this study, we used ByteTrack <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib23" title="">23</a>]</cite>, which uses complex association and matching algorithms to achieve accurate MOT, because our aim is not to improve the MOT. </p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Behavior recognition and prediction in soccer</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">Since there have been many studies of behavior recognition in sports, we introduce soccer-related work.
+As behavior recognition, for instance, action spotting <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib2" title="">2</a>]</cite> have been recently investigated. As an example, a temporally-aware feature pooling <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib3" title="">3</a>]</cite> approach was proposed for action spotting in soccer broadcasts.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1">Another research direction is foul detection, a joint architecture <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib10" title="">10</a>]</cite> is proposed for detecting foul events, which combines event clips with contextual information and enables the localization of events and proposal of story boundaries.
+In general, OpenPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib31" title="">31</a>]</cite> , HRNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib32" title="">32</a>]</cite>, OCHuman <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib33" title="">33</a>]</cite>, HigherHRNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib34" title="">34</a>]</cite>, BalanceHRNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib35" title="">35</a>]</cite> and more have been used for pose estimation.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.1">Although the behavior prediction has been investigated mainly from event and location data (e.g., <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib37" title="">37</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib39" title="">39</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib40" title="">40</a>]</cite>), there have been few prediction methods from video (e.g., shot prediction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib13" title="">13</a>]</cite> and pass receiver prediction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib14" title="">14</a>]</cite>). Video footage of a soccer game captures the postures of the players, offering valuable insights into their future actions and intentions.
+Therefore, in this study, we utilize the video footage to predict the foul with estimated pose information by OCHuman <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib33" title="">33</a>]</cite>, which is challenging due to the smaller image size of each player and the difficulty in the usage of the ball information.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Dataset</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">We construct the soccer foul dataset to verify our methods. In this section, we first describe the video dataset we used, and then explain the creation of foul labels, bboxes, and pose estimation.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Video dataset</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">The videos are obtained from SoccerNet-v3 dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib20" title="">20</a>]</cite>, which is a code base for a generic data loader containing annotations and data in SoccerNet Dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib1" title="">1</a>]</cite>.
+The SoccerNet dataset is a large-scale dataset for soccer video understanding. It contains 550 complete broadcast soccer matches and 12 single-camera matches from major European leagues. The video data in the SoccerNet dataset is provided in .mkv format with a frame rate of 25 frames per second and a resolution of 720p or 224p.
+SoccerNet-v3 provides a convenient way to load images and parse JSON annotation files for correspondence between bboxes, lines, and bboxes, thus providing a rich environment for soccer-related computer vision tasks. Multiple replay sequences of 500 fully broadcast matches were covered in the SoccerNet-v3 dataset. For each action in the replay sequence, the timestamps of the replay frames showing the real-time action frames were marked and these replay frames and action frames with lines and goals were annotated. In addition, each character on the field with a bboxes and specified the team they belonged to were annotated. Also, prominent objects were annotated. To establish player correspondence between replay and live view, jersey numbers were used as identifiers whenever possible. Such data annotation makes the SoccerNet-v3 dataset ideal for processing soccer-related computer vision tasks.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Selection of foul labels</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">First, we selected the foul tag “foul” from the Soccernet-v3 dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib20" title="">20</a>]</cite>. In addition, we also selected other tags for the non-foul tags, including “Ball out of play”, “Clearance”, “Shots on target”, “Shots off target”, “Offside”, and “Goal”. These tags provide references to different scenarios and actions in the game and are used to build a comprehensive dataset. It is worth noting that some of the tags were not used in this experiment due to excessive camera movement and long ball movement distances.
+In addition, in this study, we focus on the prevention of fouls arising from dangerous behavior. Therefore, we decided not to consider the “offside” in soccer as a foul. Offside is an offense under the rules of soccer when an attacking player receives the ball behind the opposing defense without at least two defending players in front of him. Although an offside infringement can affect the play and outcome of a match, it is not an infringement that directly involves dangerous behavior. Our research aims to explore and prevent behaviors that could lead to injury or danger. Therefore, we have chosen to focus on those acts that may trigger direct physical contact, foul play, or potential injury. To make it easier to identify players who committed fouls, we added a screening criterion. We excluded data on fouls for which the soccer could not be found in the image. Finally, we successfully got data for 2,500 fouls and 2,500 non-fouls.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="573" id="S3.F2.g1" src="extracted/5409688/fig/picVideo_new_withmark.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Video data example. Frames 1, 25, 50, and 75 are the time-ordered frames in the 3 s before the foul. Frame 85 and 95 are examples of foal happening within 1 s of the denoted foul time, which is not be used for our FutureFoul model training.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Extraction of analysis interval</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">Here we explain the extraction of the analysis interval in the video dataset.
+First, we filter the events labeled ”foul” from Soccernet-v3 dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib20" title="">20</a>]</cite> and record the number of matches and the exact time of these events. We then use the video footage from the Soccernet dataset to cut out clips related to these events. Our cropping method is to select video from 3 seconds before and 1 second after the denoted foul time, for a combined duration of 4 seconds. Such a selection is based on the minimum granularity of the event occurrence time in seconds in the Soccernet-v3 dataset. Considering that the time stamp in the dataset may be inaccurate by up to 1 second (for example, although the foul happens at 3 min 30s 12ms, the time step from Soccernet-v3 will denote as 3min 30s), we ensured that the cropped video covered the key moments before and after the actual foul event. Through this process, we are able to obtain data with the “foul” tag and extract the relevant game, the specific time, and the corresponding video clip. This data and video footage will support our research and allow us to gain insight into the characteristics and patterns of foul play. An example of a foul event video data is shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.F2" title="Figure 2 ‣ 3.2 Selection of foul labels ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">2</span></a>. We took the first 75 frames of each video as training data.
+</p>
+</div>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="472" id="S3.F3.g1" src="extracted/5409688/fig/picVideo_bbox.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Bbox extraction. The bbox information extracted using ByteTrack <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib23" title="">23</a>]</cite> (Before) was filtered to extract the five closest to the position of the soccer ball at the time of the foul (After).</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Extraction of bboxes with object tracking</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">To extract the bbox data from the video, we used the existing ByteTrack model <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib23" title="">23</a>]</cite>. However, as there are different numbers of people in each frame, some decisions were made to facilitate model learning. Typically, at the time of a foul event, there may be 2-3 people who appear to be falling. However, it is challenging to accurately locate these 2-3 people. To solve this problem, we decided to choose a fixed number of people as the observation target and set it to 5. We took the frame where the foul occurred and selected the five people closest to the ball on that frame as our observation target. By performing a backtracking approach,
+We identify the five players closest to the soccer ball in the foul frame and their respective bboxes. For the previous frame, we track the 5 players by finding the closest bboxes with the center point of the bbox. In this step, we also manually checked the data and removed some inaccurate data.
+The purpose of this approach is to ensure that we obtain the key person movement data and to reduce the complexity of the model. By fixing the number of people, we can better capture the relevant movement trajectories and provide a more accurate basis for data analysis and research. An example of a foul event bbox data is shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.F3" title="Figure 3 ‣ 3.3 Extraction of analysis interval ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="S3.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="494" id="S3.F4.g1" src="extracted/5409688/fig/picVideo_pose.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Pose extraction. We used OCHuman <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib33" title="">33</a>]</cite> to obtain pose data (After) corresponding to the previously obtained Bbox information (Before).</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5 </span>Extraction of estimated pose information</h3>
+<div class="ltx_para" id="S3.SS5.p1">
+<p class="ltx_p" id="S3.SS5.p1.1">In the step of extracting pose information, we make use of the previously acquired bbox data and video data. This data is fed into a pre-trained ResNet-50 network and processed using an OCHuman model <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib33" title="">33</a>]</cite>. This OCHuman model was pre-trained based on the ResNet-50 network. With the OCHuman model, we were able to extract information about the poses of five people at different points in time, including 17 key points. These key points are nose, left eye, right eye, left ear, right ear, left shoulder, right shoulder, left elbow, right elbow, left wrist, right wrist, left hip, and right hip. These key points provide important information about human posture. They are crucial to the analysis and understanding of human movement and the characteristics of posture. With the OCHuman model, we were able to extract the posture information of these five people at various points in time from the video, providing a wealth of data for subsequent analysis and research. This data can be used for tasks such as action recognition, pose analysis, and human behavior pattern recognition, providing us with strong support for the in-depth study of action and pose in soccer matches. Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.F4" title="Figure 4 ‣ 3.4 Extraction of bboxes with object tracking ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">4</span></a> is an example of the pose data we obtained.</p>
+</div>
+<figure class="ltx_figure" id="S3.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="451" id="S3.F5.g1" src="extracted/5409688/fig/bboxpic.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Bounding box image extraction. We obtain bbox image data (After) from the video data(Before).</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS6">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.6 </span>Extraction of bbox image</h3>
+<div class="ltx_para" id="S3.SS6.p1">
+<p class="ltx_p" id="S3.SS6.p1.1">In the step of extracting bbox picture information, we use the acquired bbox data and video data. We use bbox positions data to cut out images of the corresponding players from the video. Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.F5" title="Figure 5 ‣ 3.5 Extraction of estimated pose information ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">5</span></a> is an example of the bbox image data we obtained.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Proposed method</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">In this study, a video-based method that combines pose information and bboxes information is proposed for predicting foul behaviors in soccer games. The method is divided into the steps of feature extraction, CNN and gated recurrent unit (GRU) as RNN network modeling, and foul behavior prediction as presented in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S3.F5" title="Figure 5 ‣ 3.5 Extraction of estimated pose information ‣ 3 Dataset ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">5</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="S4.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="309" id="S4.F6.g1" src="extracted/5409688/fig/picMain_new.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>FutureFoul model architecture. We construct a four-branch network structure for foul behavior prediction. (a),(d) Vision Branch extracts features from the four images in the video, by feeding these features into a CNN and followed by a GRU network the GRU last time step output is obtained. (b), (c) Bbox position and Pose Branches have a similar structure, they input the bbox information and pose information into GRU networks respectively.
+Finally, by concatenating all four benches’ output and feeding into an MLP, we predict whether a foul will be committed in the future 1 s or not.</figcaption>
+</figure>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Feature creation</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">In order to create features, we need to pre-process the data obtained above to ensure the quality and consistency of the data. As an input of our model, we subsampled video frames such as four frames from each video, frame 1, frame 25, frame 50, and frame 75 (we examined various subsample frequencies in the experiments), and obtained the bbox and pose data on these frames. For memory saving and faster training, in pass receiver prediction in Soccer Videos <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#bib.bib14" title="">14</a>]</cite>, they down-sampled the videos. According to this, we also down-sampled the video to speed up our training. We will further investigate the effect of skipping in future studies. We created the following four types of features.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<ol class="ltx_enumerate" id="S4.I1">
+<li class="ltx_item" id="S4.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S4.I1.i1.p1">
+<p class="ltx_p" id="S4.I1.i1.p1.1">Video: To facilitate the learning of the network, We resized the input image to a size of <math alttext="64\times 64" class="ltx_Math" display="inline" id="S4.I1.i1.p1.1.m1.1"><semantics id="S4.I1.i1.p1.1.m1.1a"><mrow id="S4.I1.i1.p1.1.m1.1.1" xref="S4.I1.i1.p1.1.m1.1.1.cmml"><mn id="S4.I1.i1.p1.1.m1.1.1.2" xref="S4.I1.i1.p1.1.m1.1.1.2.cmml">64</mn><mo id="S4.I1.i1.p1.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S4.I1.i1.p1.1.m1.1.1.1.cmml">×</mo><mn id="S4.I1.i1.p1.1.m1.1.1.3" xref="S4.I1.i1.p1.1.m1.1.1.3.cmml">64</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.I1.i1.p1.1.m1.1b"><apply id="S4.I1.i1.p1.1.m1.1.1.cmml" xref="S4.I1.i1.p1.1.m1.1.1"><times id="S4.I1.i1.p1.1.m1.1.1.1.cmml" xref="S4.I1.i1.p1.1.m1.1.1.1"></times><cn id="S4.I1.i1.p1.1.m1.1.1.2.cmml" type="integer" xref="S4.I1.i1.p1.1.m1.1.1.2">64</cn><cn id="S4.I1.i1.p1.1.m1.1.1.3.cmml" type="integer" xref="S4.I1.i1.p1.1.m1.1.1.3">64</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.I1.i1.p1.1.m1.1c">64\times 64</annotation><annotation encoding="application/x-llamapun" id="S4.I1.i1.p1.1.m1.1d">64 × 64</annotation></semantics></math> (in the experiment, we validate the sizes). The purpose of resizing the images is to meet the input requirements of the network model. The smaller image size helps to reduce the number of parameters and computational complexity of the model, improving the efficiency of training and inference.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S4.I1.i2.p1">
+<p class="ltx_p" id="S4.I1.i2.p1.1">Bbox: We are particularly interested in the position information and movement information of the players. To do this, we extracted the foot position (the bottom center of the bbox) of each player at each frame from the bbox data and used this as input to the model. We did not use the soccer ball’s bbox data during training, which was only used for preprocessing.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S4.I1.i3.p1">
+<p class="ltx_p" id="S4.I1.i3.p1.1">Pose: The key points in the pose data may not be detected completely due to occlusion. To deal with this situation, we take a padding operation and fill the undetected parts with zeros in order to facilitate model learning.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span>
+<div class="ltx_para" id="S4.I1.i4.p1">
+<p class="ltx_p" id="S4.I1.i4.p1.1">BboxImg: We want to focus more on the actions of athletes to predict fouls more accurately, so we extracted images of five athletes from the video and use bbox’s image data as an input to the model.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1">In this way, we were able to provide the model with accurate training and testing data and enable it to effectively learn and understand information about players’ positions, movements, and postures. These steps could help to improve the performance of the model and its ability to recognize different events in the game.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Proposed model: FutureFoul</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">To model the features temporally, we use the RNN (GRU) model. The RNN model architecture is capable of capturing athlete action sequences and temporal information. The modeling is performed by taking the pose, bbox, bbox image and video feature sequences of each frame as input, after multiple layers of RNN units.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">The overall architecture is shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S4.F6" title="Figure 6 ‣ 4 Proposed method ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">6</span></a>. It consists of CNN modules, RNN modules, and feed forward modules.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p3.1.1">CNN module.</span> The input to the model is a 3D array of size [3,224, 224] for image RGB channels, pixel width, and pixel height, respectively. The model processes this input data using three convolutional layers, each followed by a ReLU activation function and concludes with a maximum pooling layer. The convolutional layers utilize three 3x3 kernels and determine the number of output channels to capture distinct features. The batch normalization layer is employed to accelerate training and enhance the generalization performance of the model, while the Dropout layer helps mitigate the risk of overfitting.
+</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p4">
+<p class="ltx_p" id="S4.SS2.p4.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p4.1.1">RNN module.</span> After the CNN part we use a recurrent neural network (RNN) specifically a GRU. The GRU receives the features output from the CNN part, the bbox, or pose keypoints and processes the features as a time series. the GRU layer has 2 hidden layers with a hidden state dimension of 256. the role of the GRU is to capture the temporal dependencies by memorizing and updating the hidden states. In our model, the last time step output of the GRU is passed to the subsequent linear for processing and prediction.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p5">
+<p class="ltx_p" id="S4.SS2.p5.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p5.1.1">MLP module.</span>
+MLP (Multilayer Perceptron), is a common feed-forward neural network structure. It consists of multiple hidden layers, where each neuron is connected to all neurons in the previous layer.
+Taking these videos, bbox positions, bbox images and pose data as inputs, MLP learns to extract patterns of foul behavior from these features. It can map the input data to label for representing situations whether foul play and non-foul play situations will occur.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Training</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">In the model training phase, we train the GRU networks using the labeled foul behavior data.
+We input the bbox data, the pose data, and the picture data into their respective branches. At the same time we use bbox data and video data to extract images of athletes and input into the bbox image branch. The results obtained from each branch are then integrated into the feed forward mechanism, resulting in a prediction of whether a foul will be committed next. To train the model, we chose a learning rate of 0.001, and a batch size of 32. We used the Adam optimizer to update the model parameters. To prevent overfitting, we adopted the Dropout layer, which randomly discards some neurons during the training process to reduce the overfitting of the model to the training data. During the training process, the main metrics we focus on are training loss, validation loss, training accuracy, and validation accuracy. We expect these metrics to decrease gradually as the training progresses to ensure that both the training and validation performance of the model is improved.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1">For the loss function, we have chosen Cross Entropy Loss, a loss function for classification problems. In our task, even though we are doing a prediction task, it is essentially still a binary classification task, where we classify the first 3 seconds of a play that will be followed by a foul player in the following second or not.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Experiments</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">In this section, we performed the experiments to verify our models and qualitatively analyze the successes and failures of the prediction and discuss the possibility of practical usage.</p>
+</div>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Setup</h3>
+<div class="ltx_para" id="S5.SS1.p1">
+<p class="ltx_p" id="S5.SS1.p1.1">We used our dataset for verification of our methods, both of which are described above.
+To train our model, we first split our dataset into 4,000, 500, and 500 samples as training/validation/test sets.
+Here we compared our methods to four baseline methods with our full model:</p>
+</div>
+<div class="ltx_para" id="S5.SS1.p2">
+<ul class="ltx_itemize" id="S5.I1">
+<li class="ltx_item" id="S5.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i1.p1">
+<p class="ltx_p" id="S5.I1.i1.p1.1"><code class="ltx_verbatim ltx_font_typewriter" id="S5.I1.i1.p1.1.1">CNN w/ video</code><span class="ltx_text" id="S5.I1.i1.p1.1.2">: Using only video data we trained only CNN models.</span></p>
+</div>
+</li>
+<li class="ltx_item" id="S5.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i2.p1">
+<p class="ltx_p" id="S5.I1.i2.p1.1"><code class="ltx_verbatim ltx_font_typewriter" id="S5.I1.i2.p1.1.1">CNN+GRU w/ video</code><span class="ltx_text" id="S5.I1.i2.p1.1.2">: Using video data as input, but we trained CNN and GRU models.</span></p>
+</div>
+</li>
+<li class="ltx_item" id="S5.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i3.p1">
+<p class="ltx_p" id="S5.I1.i3.p1.1"><code class="ltx_verbatim ltx_font_typewriter" id="S5.I1.i3.p1.1.1">CNN+GRU w/ video+bbox</code><span class="ltx_text" id="S5.I1.i3.p1.1.2">: Using a combination of video and bbox position data as input, we trained the CNN and GRU models.</span></p>
+</div>
+</li>
+<li class="ltx_item" id="S5.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i4.p1">
+<p class="ltx_p" id="S5.I1.i4.p1.1"><code class="ltx_verbatim ltx_font_typewriter" id="S5.I1.i4.p1.1.1">CNN+GRU w/ video+bbox+pose (FutureFoul w/o BboxImg)</code><span class="ltx_text" id="S5.I1.i4.p1.1.2">: Using a combination of video, bbox position, and pose data as input, we trained the CNN and GRU models.</span></p>
+</div>
+</li>
+<li class="ltx_item" id="S5.I1.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i5.p1">
+<p class="ltx_p" id="S5.I1.i5.p1.1"><code class="ltx_verbatim ltx_font_typewriter" id="S5.I1.i5.p1.1.1">FutureFoul (CNN+GRU w/ video+bbox+pose+BboxImg)</code><span class="ltx_text" id="S5.I1.i5.p1.1.2">: This is our full FutureFoul model. Using a combination of video, bbox position, pose and bbox image data as input, we trained the CNN and GRU models.</span></p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Quantitative evaluation</h3>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p" id="S5.SS2.p1.1">In this subsection, we investigated the accuracy of our models.
+Table <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.T1" title="Table 1 ‣ 5.2 Quantitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">1</span></a> shows a comparison of the accuracy of our different models. Our model (FutureFoul) includes CNN+GRU models using video, bbox, pose information and bbox image.
+As can be observed from the table, the FutureFoul model achieved the highest accuracy in our experiments, with 77.4%. Compared with other models, the accuracy of the CNN+GRU model using video and bbox position and pose was 74.8%, the accuracy of the CNN+GRU model using only video and bbox position was 71.2%, which was slightly higher than the accuracy of the CNN+GRU model using only video (67.6%). In contrast, the accuracy of the video-only CNN model was the lowest at 65.4%. This suggests that the RNN module, bbox position, bbox image and pose information play a role in improving the accuracy of the model in the foul prediction task.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p2">
+<p class="ltx_p" id="S5.SS2.p2.1">The tendency of the results in terms of precision was similar for all models. However, results of the recall were relatively lower than that of the precision, and our full model (FuturePose) did not improve from baselines in terms of recall.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p3">
+<p class="ltx_p" id="S5.SS2.p3.1">In general, by combining pose information and bbox information, and integrating RNN networks for modeling and prediction, our method was able to accurately predict the occurrence of foul behavior in soccer games. This method provided valuable decision support for referees and coaches and could improve the fairness and quality of the game.</p>
+</div>
+<figure class="ltx_table" id="S5.T1">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Performances of our models. Accuracy (Acc), precision (Prec), and recall (Rec) were computed.</figcaption>
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T1.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T1.1.1.1.1">Model</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T1.1.1.1.2">Acc (%)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T1.1.1.1.3">Prec (%)</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S5.T1.1.1.1.4">Rec (%)</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T1.1.2.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.2.1.1">FutureFoul (ours)</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.2.1.2"><span class="ltx_text ltx_font_bold" id="S5.T1.1.2.1.2.1">77.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.2.1.3"><span class="ltx_text ltx_font_bold" id="S5.T1.1.2.1.3.1">79.0</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S5.T1.1.2.1.4">75.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.1.3.2">
+<td class="ltx_td ltx_align_center" id="S5.T1.1.3.2.1">CNN+GRU w/ video+bbox+pose</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.1.3.2.2">74.8</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.1.3.2.3">76.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T1.1.3.2.4">72.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.1.4.3">
+<td class="ltx_td ltx_align_center" id="S5.T1.1.4.3.1">CNN+GRU w/ video+bbox</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.1.4.3.2">71.2</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.1.4.3.3">73.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T1.1.4.3.4">67.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.1.5.4">
+<td class="ltx_td ltx_align_center" id="S5.T1.1.5.4.1">CNN+GRU w/ video</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.1.5.4.2">67.6</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.1.5.4.3">63.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T1.1.5.4.4"><span class="ltx_text ltx_font_bold" id="S5.T1.1.5.4.4.1">84.0</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.1.6.5">
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.6.5.1">CNN w/ video</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.6.5.2">65.4</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.6.5.3"><span class="ltx_text ltx_font_bold" id="S5.T1.1.6.5.3.1">79.0</span></td>
+<td class="ltx_td ltx_align_left ltx_border_bb" id="S5.T1.1.6.5.4">42.0</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S5.SS2.p4">
+<p class="ltx_p" id="S5.SS2.p4.1">To validate the numbers of frames to input the model, we experimented with different frame settings, including 8, 15, 25, 35, and 45 frames (Table <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.T2" title="Table 2 ‣ 5.2 Quantitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">2</span></a>). However, we did not observe improvements in accuracy with an increase in the number of frames. There was even a slight decrease.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p5">
+<p class="ltx_p" id="S5.SS2.p5.1">Note that increasing the number of frames extends the training time. Given this consideration, we ultimately opted for a configuration with 4 frames. We believe it strikes a balance between accuracy and training efficiency in practical terms.</p>
+</div>
+<figure class="ltx_table" id="S5.T2">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 2: </span>Performances of our models in different frames. Accuracy (Acc), precision (Prec), and recall (Rec) were computed.</figcaption>
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T2.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T2.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T2.1.1.1.1">Model</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T2.1.1.1.2">Acc (%)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T2.1.1.1.3">Prec (%)</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S5.T2.1.1.1.4">Rec (%)</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T2.1.2.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.2.1.1">FutureFoul (4 frames,ours)</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.2.1.2"><span class="ltx_text ltx_font_bold" id="S5.T2.1.2.1.2.1">77.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.2.1.3"><span class="ltx_text ltx_font_bold" id="S5.T2.1.2.1.3.1">79.0</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S5.T2.1.2.1.4">75.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.1.3.2">
+<td class="ltx_td ltx_align_center" id="S5.T2.1.3.2.1">FutureFoul (45 frames)</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.3.2.2">75.8</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.3.2.3">75.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T2.1.3.2.4">77.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.1.4.3">
+<td class="ltx_td ltx_align_center" id="S5.T2.1.4.3.1">FutureFoul (35 frames)</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.4.3.2">73.6</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.4.3.3">72.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T2.1.4.3.4">77.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.1.5.4">
+<td class="ltx_td ltx_align_center" id="S5.T2.1.5.4.1">FutureFoul (25 frames)</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.5.4.2">74.0</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.5.4.3">74.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T2.1.5.4.4">74.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.1.6.5">
+<td class="ltx_td ltx_align_center" id="S5.T2.1.6.5.1">FutureFoul (15 frames)</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.6.5.2">77.0</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.1.6.5.3">77.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T2.1.6.5.4">77.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.1.7.6">
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.7.6.1">FutureFoul (8 frames)</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.7.6.2">76.0</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.7.6.3">75.0</td>
+<td class="ltx_td ltx_align_left ltx_border_bb" id="S5.T2.1.7.6.4"><span class="ltx_text ltx_font_bold" id="S5.T2.1.7.6.4.1">78.0</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S5.SS2.p6">
+<p class="ltx_p" id="S5.SS2.p6.2">To validate the global content image sizes, we conducted experiments with the final model with different global content image sizes, including <math alttext="128\times 128" class="ltx_Math" display="inline" id="S5.SS2.p6.1.m1.1"><semantics id="S5.SS2.p6.1.m1.1a"><mrow id="S5.SS2.p6.1.m1.1.1" xref="S5.SS2.p6.1.m1.1.1.cmml"><mn id="S5.SS2.p6.1.m1.1.1.2" xref="S5.SS2.p6.1.m1.1.1.2.cmml">128</mn><mo id="S5.SS2.p6.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.SS2.p6.1.m1.1.1.1.cmml">×</mo><mn id="S5.SS2.p6.1.m1.1.1.3" xref="S5.SS2.p6.1.m1.1.1.3.cmml">128</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.SS2.p6.1.m1.1b"><apply id="S5.SS2.p6.1.m1.1.1.cmml" xref="S5.SS2.p6.1.m1.1.1"><times id="S5.SS2.p6.1.m1.1.1.1.cmml" xref="S5.SS2.p6.1.m1.1.1.1"></times><cn id="S5.SS2.p6.1.m1.1.1.2.cmml" type="integer" xref="S5.SS2.p6.1.m1.1.1.2">128</cn><cn id="S5.SS2.p6.1.m1.1.1.3.cmml" type="integer" xref="S5.SS2.p6.1.m1.1.1.3">128</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.SS2.p6.1.m1.1c">128\times 128</annotation><annotation encoding="application/x-llamapun" id="S5.SS2.p6.1.m1.1d">128 × 128</annotation></semantics></math> and <math alttext="256\times 256" class="ltx_Math" display="inline" id="S5.SS2.p6.2.m2.1"><semantics id="S5.SS2.p6.2.m2.1a"><mrow id="S5.SS2.p6.2.m2.1.1" xref="S5.SS2.p6.2.m2.1.1.cmml"><mn id="S5.SS2.p6.2.m2.1.1.2" xref="S5.SS2.p6.2.m2.1.1.2.cmml">256</mn><mo id="S5.SS2.p6.2.m2.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.SS2.p6.2.m2.1.1.1.cmml">×</mo><mn id="S5.SS2.p6.2.m2.1.1.3" xref="S5.SS2.p6.2.m2.1.1.3.cmml">256</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.SS2.p6.2.m2.1b"><apply id="S5.SS2.p6.2.m2.1.1.cmml" xref="S5.SS2.p6.2.m2.1.1"><times id="S5.SS2.p6.2.m2.1.1.1.cmml" xref="S5.SS2.p6.2.m2.1.1.1"></times><cn id="S5.SS2.p6.2.m2.1.1.2.cmml" type="integer" xref="S5.SS2.p6.2.m2.1.1.2">256</cn><cn id="S5.SS2.p6.2.m2.1.1.3.cmml" type="integer" xref="S5.SS2.p6.2.m2.1.1.3">256</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.SS2.p6.2.m2.1c">256\times 256</annotation><annotation encoding="application/x-llamapun" id="S5.SS2.p6.2.m2.1d">256 × 256</annotation></semantics></math> (Table <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.T3" title="Table 3 ‣ 5.2 Quantitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">3</span></a>). We found that different sizes of global content images had different effects on both the training and inference phases of the model.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p7">
+<p class="ltx_p" id="S5.SS2.p7.1">First, using a global content image size of <math alttext="64\times 64" class="ltx_Math" display="inline" id="S5.SS2.p7.1.m1.1"><semantics id="S5.SS2.p7.1.m1.1a"><mrow id="S5.SS2.p7.1.m1.1.1" xref="S5.SS2.p7.1.m1.1.1.cmml"><mn id="S5.SS2.p7.1.m1.1.1.2" xref="S5.SS2.p7.1.m1.1.1.2.cmml">64</mn><mo id="S5.SS2.p7.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.SS2.p7.1.m1.1.1.1.cmml">×</mo><mn id="S5.SS2.p7.1.m1.1.1.3" xref="S5.SS2.p7.1.m1.1.1.3.cmml">64</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.SS2.p7.1.m1.1b"><apply id="S5.SS2.p7.1.m1.1.1.cmml" xref="S5.SS2.p7.1.m1.1.1"><times id="S5.SS2.p7.1.m1.1.1.1.cmml" xref="S5.SS2.p7.1.m1.1.1.1"></times><cn id="S5.SS2.p7.1.m1.1.1.2.cmml" type="integer" xref="S5.SS2.p7.1.m1.1.1.2">64</cn><cn id="S5.SS2.p7.1.m1.1.1.3.cmml" type="integer" xref="S5.SS2.p7.1.m1.1.1.3">64</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.SS2.p7.1.m1.1c">64\times 64</annotation><annotation encoding="application/x-llamapun" id="S5.SS2.p7.1.m1.1d">64 × 64</annotation></semantics></math>, we observe that the model exhibits high accuracy (77.4%) and precision (79.0%) at this setting. This means that the model has a better overall performance for classification and recognition tasks of images. Meanwhile, the recall rate is 75.0%, which indicates that the model successfully captures most of the positive case samples, but there may be some missed recognition in some cases.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p8">
+<p class="ltx_p" id="S5.SS2.p8.1">Using a global content image size of <math alttext="128\times 128" class="ltx_Math" display="inline" id="S5.SS2.p8.1.m1.1"><semantics id="S5.SS2.p8.1.m1.1a"><mrow id="S5.SS2.p8.1.m1.1.1" xref="S5.SS2.p8.1.m1.1.1.cmml"><mn id="S5.SS2.p8.1.m1.1.1.2" xref="S5.SS2.p8.1.m1.1.1.2.cmml">128</mn><mo id="S5.SS2.p8.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.SS2.p8.1.m1.1.1.1.cmml">×</mo><mn id="S5.SS2.p8.1.m1.1.1.3" xref="S5.SS2.p8.1.m1.1.1.3.cmml">128</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.SS2.p8.1.m1.1b"><apply id="S5.SS2.p8.1.m1.1.1.cmml" xref="S5.SS2.p8.1.m1.1.1"><times id="S5.SS2.p8.1.m1.1.1.1.cmml" xref="S5.SS2.p8.1.m1.1.1.1"></times><cn id="S5.SS2.p8.1.m1.1.1.2.cmml" type="integer" xref="S5.SS2.p8.1.m1.1.1.2">128</cn><cn id="S5.SS2.p8.1.m1.1.1.3.cmml" type="integer" xref="S5.SS2.p8.1.m1.1.1.3">128</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.SS2.p8.1.m1.1c">128\times 128</annotation><annotation encoding="application/x-llamapun" id="S5.SS2.p8.1.m1.1d">128 × 128</annotation></semantics></math>, we found that the accuracy and precision of the model slightly decreased at this size, 73.2% and 76.0%, respectively. This may indicate that the increase in image resolution has some degree of negative impact on model performance. The recall is 68.0%, showing a decrease in the model’s performance in capturing positive examples.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p9">
+<p class="ltx_p" id="S5.SS2.p9.1">Finally, using a global content image size of <math alttext="256\times 256" class="ltx_Math" display="inline" id="S5.SS2.p9.1.m1.1"><semantics id="S5.SS2.p9.1.m1.1a"><mrow id="S5.SS2.p9.1.m1.1.1" xref="S5.SS2.p9.1.m1.1.1.cmml"><mn id="S5.SS2.p9.1.m1.1.1.2" xref="S5.SS2.p9.1.m1.1.1.2.cmml">256</mn><mo id="S5.SS2.p9.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.SS2.p9.1.m1.1.1.1.cmml">×</mo><mn id="S5.SS2.p9.1.m1.1.1.3" xref="S5.SS2.p9.1.m1.1.1.3.cmml">256</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.SS2.p9.1.m1.1b"><apply id="S5.SS2.p9.1.m1.1.1.cmml" xref="S5.SS2.p9.1.m1.1.1"><times id="S5.SS2.p9.1.m1.1.1.1.cmml" xref="S5.SS2.p9.1.m1.1.1.1"></times><cn id="S5.SS2.p9.1.m1.1.1.2.cmml" type="integer" xref="S5.SS2.p9.1.m1.1.1.2">256</cn><cn id="S5.SS2.p9.1.m1.1.1.3.cmml" type="integer" xref="S5.SS2.p9.1.m1.1.1.3">256</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.SS2.p9.1.m1.1c">256\times 256</annotation><annotation encoding="application/x-llamapun" id="S5.SS2.p9.1.m1.1d">256 × 256</annotation></semantics></math>, we noticed a further decrease in model performance. The accuracy is 66.8%, precision is 75.0%, and recall is only 50.0%. This suggests that larger image sizes may cause the model to struggle to capture all positive examples and there may be information overload
+</p>
+</div>
+<figure class="ltx_table" id="S5.T3">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 3: </span>Performances of our models in different size. Accuracy (Acc), precision (Prec), and recall (Rec) were computed.</figcaption>
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T3.3">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T3.3.4.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T3.3.4.1.1">Model</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T3.3.4.1.2">Acc (%)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S5.T3.3.4.1.3">Prec (%)</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S5.T3.3.4.1.4">Rec (%)</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T3.1.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1">FutureFoul (<math alttext="64\times 64" class="ltx_Math" display="inline" id="S5.T3.1.1.1.m1.1"><semantics id="S5.T3.1.1.1.m1.1a"><mrow id="S5.T3.1.1.1.m1.1.1" xref="S5.T3.1.1.1.m1.1.1.cmml"><mn id="S5.T3.1.1.1.m1.1.1.2" xref="S5.T3.1.1.1.m1.1.1.2.cmml">64</mn><mo id="S5.T3.1.1.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.T3.1.1.1.m1.1.1.1.cmml">×</mo><mn id="S5.T3.1.1.1.m1.1.1.3" xref="S5.T3.1.1.1.m1.1.1.3.cmml">64</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.T3.1.1.1.m1.1b"><apply id="S5.T3.1.1.1.m1.1.1.cmml" xref="S5.T3.1.1.1.m1.1.1"><times id="S5.T3.1.1.1.m1.1.1.1.cmml" xref="S5.T3.1.1.1.m1.1.1.1"></times><cn id="S5.T3.1.1.1.m1.1.1.2.cmml" type="integer" xref="S5.T3.1.1.1.m1.1.1.2">64</cn><cn id="S5.T3.1.1.1.m1.1.1.3.cmml" type="integer" xref="S5.T3.1.1.1.m1.1.1.3">64</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.T3.1.1.1.m1.1c">64\times 64</annotation><annotation encoding="application/x-llamapun" id="S5.T3.1.1.1.m1.1d">64 × 64</annotation></semantics></math>,ours)</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.2"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.2.1">77.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.3"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.3.1">79.0</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S5.T3.1.1.4">75.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T3.2.2">
+<td class="ltx_td ltx_align_center" id="S5.T3.2.2.1">FutureFoul (<math alttext="128\times 128" class="ltx_Math" display="inline" id="S5.T3.2.2.1.m1.1"><semantics id="S5.T3.2.2.1.m1.1a"><mrow id="S5.T3.2.2.1.m1.1.1" xref="S5.T3.2.2.1.m1.1.1.cmml"><mn id="S5.T3.2.2.1.m1.1.1.2" xref="S5.T3.2.2.1.m1.1.1.2.cmml">128</mn><mo id="S5.T3.2.2.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.T3.2.2.1.m1.1.1.1.cmml">×</mo><mn id="S5.T3.2.2.1.m1.1.1.3" xref="S5.T3.2.2.1.m1.1.1.3.cmml">128</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.T3.2.2.1.m1.1b"><apply id="S5.T3.2.2.1.m1.1.1.cmml" xref="S5.T3.2.2.1.m1.1.1"><times id="S5.T3.2.2.1.m1.1.1.1.cmml" xref="S5.T3.2.2.1.m1.1.1.1"></times><cn id="S5.T3.2.2.1.m1.1.1.2.cmml" type="integer" xref="S5.T3.2.2.1.m1.1.1.2">128</cn><cn id="S5.T3.2.2.1.m1.1.1.3.cmml" type="integer" xref="S5.T3.2.2.1.m1.1.1.3">128</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.T3.2.2.1.m1.1c">128\times 128</annotation><annotation encoding="application/x-llamapun" id="S5.T3.2.2.1.m1.1d">128 × 128</annotation></semantics></math>)</td>
+<td class="ltx_td ltx_align_center" id="S5.T3.2.2.2">73.2</td>
+<td class="ltx_td ltx_align_center" id="S5.T3.2.2.3">76.0</td>
+<td class="ltx_td ltx_align_left" id="S5.T3.2.2.4">68.0</td>
+</tr>
+<tr class="ltx_tr" id="S5.T3.3.3">
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T3.3.3.1">FutureFoul (<math alttext="256\times 256" class="ltx_Math" display="inline" id="S5.T3.3.3.1.m1.1"><semantics id="S5.T3.3.3.1.m1.1a"><mrow id="S5.T3.3.3.1.m1.1.1" xref="S5.T3.3.3.1.m1.1.1.cmml"><mn id="S5.T3.3.3.1.m1.1.1.2" xref="S5.T3.3.3.1.m1.1.1.2.cmml">256</mn><mo id="S5.T3.3.3.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S5.T3.3.3.1.m1.1.1.1.cmml">×</mo><mn id="S5.T3.3.3.1.m1.1.1.3" xref="S5.T3.3.3.1.m1.1.1.3.cmml">256</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.T3.3.3.1.m1.1b"><apply id="S5.T3.3.3.1.m1.1.1.cmml" xref="S5.T3.3.3.1.m1.1.1"><times id="S5.T3.3.3.1.m1.1.1.1.cmml" xref="S5.T3.3.3.1.m1.1.1.1"></times><cn id="S5.T3.3.3.1.m1.1.1.2.cmml" type="integer" xref="S5.T3.3.3.1.m1.1.1.2">256</cn><cn id="S5.T3.3.3.1.m1.1.1.3.cmml" type="integer" xref="S5.T3.3.3.1.m1.1.1.3">256</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.T3.3.3.1.m1.1c">256\times 256</annotation><annotation encoding="application/x-llamapun" id="S5.T3.3.3.1.m1.1d">256 × 256</annotation></semantics></math>)</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T3.3.3.2">66.8</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T3.3.3.3">75.0</td>
+<td class="ltx_td ltx_align_left ltx_border_bb" id="S5.T3.3.3.4">50.0</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S5.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>Qualitative evaluation</h3>
+<div class="ltx_para" id="S5.SS3.p1">
+<p class="ltx_p" id="S5.SS3.p1.1">To analyze the prediction results in our approach, we qualitatively analyze the example results of successes and failures from the tests.</p>
+</div>
+<section class="ltx_subsubsection" id="S5.SS3.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.3.1 </span>Examples of success predictions</h4>
+<div class="ltx_para" id="S5.SS3.SSS1.p1">
+<p class="ltx_p" id="S5.SS3.SSS1.p1.1">In most cases, the model was able to accurately predict whether a foul was about to occur and gave the correct prediction. Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.F7" title="Figure 7 ‣ 5.3.1 Examples of success predictions ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">7</span></a> Top, which is our full FutureFoul model, demonstrate that the model could capture key information in the video and identify patterns associated with imminent fouls.
+In Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.F7" title="Figure 7 ‣ 5.3.1 Examples of success predictions ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">7</span></a> Bottom, which was CNN+GRU w/ video+bbox, we obtained limited information when we only considered the position and size of the bbox (without pose). In frame 75, the top two people were in the bbox, which could have included the impending fouler. However, if we did not consider pose information, the model could only observe that they partially overlap and was unable to determine this as an impending foul.
+However, when we added the pose key points in CNN+GRU w/ video+bbox in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.F7" title="Figure 7 ‣ 5.3.1 Examples of success predictions ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">7</span></a> Bottom, which consisted of the magnitude of the foot movement of the two people. With these pose key points, the model was able to more accurately determine that they were about to commit a foul as Table <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.T1" title="Table 1 ‣ 5.2 Quantitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">1</span></a> shows.</p>
+</div>
+<figure class="ltx_figure" id="S5.F7"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="296" id="S5.F7.g1" src="extracted/5409688/fig/predict_compare.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>Qualitative evaluation using examples of success prediction. Under the same conditions, using our full model (top), with the addition of pose data to the baseline model (bottom), the foul can be successfully predicted. In contrast, CNN+GRU w/video+bbox could not predict an impending foul. </figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S5.SS3.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.3.2 </span>An examples of failures: missed detection</h4>
+<div class="ltx_para" id="S5.SS3.SSS2.p1">
+<p class="ltx_p" id="S5.SS3.SSS2.p1.1">The system sometimes incorrectly predicted the fouls as non-foul (Recall: 75.0%). Although we expected the model to accurately identify and predict potential foul play, in some complex scenarios, the model could fail to capture all the details and features, resulting in a failed prediction.
+This could have happened because there were many variables and uncertainties in the scenes, and the lack of certain key features or noisy data could have significantly affected the model’s performance in complex scenarios.</p>
+</div>
+<div class="ltx_para" id="S5.SS3.SSS2.p2">
+<p class="ltx_p" id="S5.SS3.SSS2.p2.1">For example, in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.F8" title="Figure 8 ‣ 5.3.2 An examples of failures: missed detection ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">8</span></a>, the movement of the athletes was relatively small and the length and width of the bbox did not change significantly. In fact, foul behavior was about to appear on the two people in the middle of the frame in frame 75. There was still some distance between these two people and the pose key points of the right foot part of the one on the right were not detected correctly due to players overlapping. This could have caused the model to incorrectly assume that this situation was non-foul and failed to predict the possible foul behavior.</p>
+</div>
+<figure class="ltx_figure" id="S5.F8"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="431" id="S5.F8.g1" src="extracted/5409688/fig/predict_fail_new.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 8: </span>Qualitative evaluation using an example of missed detection in our model (FutureFoul).</figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S5.SS3.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.3.3 </span>An examples of failures: false alarm</h4>
+<div class="ltx_para" id="S5.SS3.SSS3.p1">
+<p class="ltx_p" id="S5.SS3.SSS3.p1.1">Another type of prediction failure occurred when the system incorrectly predicted an impending foul that did not actually occur (precision: 79.0%). This could occur because some situations were very similar to foul behavior. The model could have incorrectly associated these with fouls.</p>
+</div>
+<div class="ltx_para" id="S5.SS3.SSS3.p2">
+<p class="ltx_p" id="S5.SS3.SSS3.p2.1">In frames 50 and 75 in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.09650v1#S5.F9" title="Figure 9 ‣ 5.3.3 An examples of failures: false alarm ‣ 5.3 Qualitative evaluation ‣ 5 Experiments ‣ Foul prediction with estimated poses from soccer broadcast video"><span class="ltx_text ltx_ref_tag">9</span></a>, it can be observed that the bbox had a lot of overlap. In addition, the characters tended to move in the same direction. However, there were more missing pose key points in some characters. Based on these observations, the model incorrectly predicted that foul play would occur. This situation was very similar to the foul scene.</p>
+</div>
+<div class="ltx_para" id="S5.SS3.SSS3.p3">
+<p class="ltx_p" id="S5.SS3.SSS3.p3.1">In addition, we note that the inaccuracy of the bboxes in the input data and the loss of pose information could have negatively affected the accuracy of the predictions. The inaccuracy of the bbox could have made it difficult for the model to accurately locate the target, while the loss of pose information could have limited the model’s use of key features.</p>
+</div>
+<figure class="ltx_figure" id="S5.F9"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="421" id="S5.F9.g1" src="extracted/5409688/fig/predict_fail_new1.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 9: </span>Qualitative evaluation using an example of false alarm. Our model warns of an upcoming foul for a normal scenario.</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Conclusion</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">This paper presents a soccer foul dataset containing pose and bbox and proposes a method combining video, bbox, and pose to predict foul events in soccer. The results show that the pose and bbox information play an auxiliary role in the prediction of foul behavior.
+However, there are some limitations to this study. Firstly, the accuracy of the soccer foul-related dataset itself can be improved. During target detection and tracking, target loss may affect the final prediction results. In addition, detecting pose data is also challenging in pose detection due to the potential overlap between poses.
+There may be some confounding factors in the current dataset that affect the learning process of bbox and pose data.</p>
+</div>
+<div class="ltx_para" id="S6.p2">
+<p class="ltx_p" id="S6.p2.1">Despite these limitations, this study provides an important exploration and contribution to the understanding of soccer foul play. Future work could further improve the accuracy and quality of the dataset, improve algorithms for target detection, tracking, and pose detection, and explore the possibility of other combinations of data sources and models to improve the accuracy and reliability of foul prediction. This will help to provide further insight into soccer foul play and provide useful support for refereeing decisions and training in soccer matches.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx1">
+<h2 class="ltx_title ltx_title_section">Acknowledgments</h2>
+<div class="ltx_para" id="Sx1.p1">
+<p class="ltx_p" id="Sx1.p1.1">This work was financially supported by JSPS Grant Number 20H04075, 23H03282 and JST PRESTO Grant Number JPMJPR20CA.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx2">
+<h2 class="ltx_title ltx_title_section">Declarations</h2>
+<section class="ltx_subsection" id="Sx2.SSx1">
+<h3 class="ltx_title ltx_title_subsection">Conflict of Interest</h3>
+<div class="ltx_para" id="Sx2.SSx1.p1">
+<p class="ltx_p" id="Sx2.SSx1.p1.1">The authors declare that they have no conflict of interest.
+</p>
+</div>
+</section>
+<section class="ltx_subsection" id="Sx2.SSx2">
+<h3 class="ltx_title ltx_title_subsection">Data availability statements</h3>
+<div class="ltx_para" id="Sx2.SSx2.p1">
+<p class="ltx_p" id="Sx2.SSx2.p1.1">The datasets generated during and/or analyzed during the current study will be available in the GitHub repository. </p>
+</div>
+</section>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+</ul>
+<span class="ltx_ERROR undefined" id="bib.1">\bibcommenthead</span>
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Giancola et al. [2018]</span>
+<span class="ltx_bibblock">
+Giancola, S.,
+Amine, M.,
+Dghaily, T.,
+Ghanem, B.:
+Soccernet: A scalable dataset for action spotting in soccer videos.
+In: Proceedings of the IEEE Conference on Computer Vision and Pattern
+Recognition Workshops,
+pp. 1711–1721
+(2018)
+
+
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Deliege et al. [2021]</span>
+<span class="ltx_bibblock">
+Deliege, A.,
+Cioppa, A.,
+Giancola, S.,
+Seikavandi, M.J.,
+Dueholm, J.V.,
+Nasrollahi, K.,
+Ghanem, B.,
+Moeslund, T.B.,
+Van Droogenbroeck, M.:
+Soccernet-v2: A dataset and benchmarks for holistic understanding of
+broadcast soccer videos.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 4508–4519
+(2021)
+
+
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Giancola and
+Ghanem [2021]</span>
+<span class="ltx_bibblock">
+Giancola, S.,
+Ghanem, B.:
+Temporally-aware feature pooling for action spotting in soccer
+broadcasts.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 4490–4499
+(2021)
+
+
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Scott et al. [2022]</span>
+<span class="ltx_bibblock">
+Scott, A.,
+Uchida, I.,
+Onishi, M.,
+Kameda, Y.,
+Fukui, K.,
+Fujii, K.:
+Soccertrack: A dataset and tracking algorithm for soccer with fish-eye
+and drone videos.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 3569–3579
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cioppa et al. [2022]</span>
+<span class="ltx_bibblock">
+Cioppa, A.,
+Giancola, S.,
+Deliege, A.,
+Kang, L.,
+Zhou, X.,
+Cheng, Z.,
+Ghanem, B.,
+Van Droogenbroeck, M.:
+Soccernet-tracking: Multiple object tracking dataset and benchmark in
+soccer videos.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 3491–3502
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cioppa et al. [2020]</span>
+<span class="ltx_bibblock">
+Cioppa, A.,
+Deliege, A.,
+Giancola, S.,
+Ghanem, B.,
+Droogenbroeck, M.V.,
+Gade, R.,
+Moeslund, T.B.:
+A context-aware loss function for action spotting in soccer videos.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 13126–13136
+(2020)
+
+
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Giancola et al. [2023]</span>
+<span class="ltx_bibblock">
+Giancola, S.,
+Cioppa, A.,
+Georgieva, J.,
+Billingham, J.,
+Serner, A.,
+Peek, K.,
+Ghanem, B.,
+Van Droogenbroeck, M.:
+Towards active learning for action spotting in association football
+videos.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 5097–5107
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Held et al. [2023]</span>
+<span class="ltx_bibblock">
+Held, J.,
+Cioppa, A.,
+Giancola, S.,
+Hamdi, A.,
+Ghanem, B.,
+Van Droogenbroeck, M.:
+Vars: Video assistant referee system for automated soccer decision making from
+multiple views.
+arXiv preprint arXiv:2304.04617
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Mkhallati
+et al. [2023]</span>
+<span class="ltx_bibblock">
+Mkhallati, H.,
+Cioppa, A.,
+Giancola, S.,
+Ghanem, B.,
+Van Droogenbroeck, M.:
+Soccernet-caption: Dense video captioning for soccer broadcasts
+commentaries.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 5073–5084
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Khan et al. [2018]</span>
+<span class="ltx_bibblock">
+Khan, M.Z.,
+Saleem, S.,
+Hassan, M.A.,
+Khan, M.U.G.:
+Learning deep c3d features for soccer video event detection.
+In: 2018 14th International Conference on Emerging Technologies
+(ICET),
+pp. 1–6
+(2018).
+IEEE
+
+
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Rongved et al. [2020]</span>
+<span class="ltx_bibblock">
+Rongved, O.A.N.,
+Hicks, S.A.,
+Thambawita, V.,
+Stensland, H.K.,
+Zouganeli, E.,
+Johansen, D.,
+Riegler, M.A.,
+Halvorsen, P.:
+Real-time detection of events in soccer videos using 3d convolutional
+neural networks.
+In: 2020 IEEE International Symposium on Multimedia (ISM),
+pp. 135–144
+(2020).
+IEEE
+
+
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Karimi et al. [2021]</span>
+<span class="ltx_bibblock">
+Karimi, A.,
+Toosi, R.,
+Akhaee, M.A.:
+Soccer event detection using deep learning.
+arXiv preprint arXiv:2102.04331
+(2021)
+
+
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Goka et al. [2023]</span>
+<span class="ltx_bibblock">
+Goka, R.,
+Moroto, Y.,
+Maeda, K.,
+Ogawa, T.,
+Haseyama, M.:
+Prediction of shooting events in soccer videos using complete
+bipartite graphs and players’ spatial-temporal relations.
+Sensors
+<span class="ltx_text ltx_font_bold" id="bib.bib13.1.1">23</span>(9),
+4506
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Honda et al. [2022]</span>
+<span class="ltx_bibblock">
+Honda, Y.,
+Kawakami, R.,
+Yoshihashi, R.,
+Kato, K.,
+Naemura, T.:
+Pass receiver prediction in soccer using video and players’
+trajectories.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 3503–3512
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Rasouli et al. [2017]</span>
+<span class="ltx_bibblock">
+Rasouli, A.,
+Kotseruba, I.,
+Tsotsos, J.K.:
+Are they going to cross? a benchmark dataset and baseline for
+pedestrian crosswalk behavior.
+In: Proceedings of the IEEE International Conference on Computer
+Vision Workshops,
+pp. 206–213
+(2017)
+
+
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Piccoli et al. [2020]</span>
+<span class="ltx_bibblock">
+Piccoli, F.,
+Balakrishnan, R.,
+Perez, M.J.,
+Sachdeo, M.,
+Nunez, C.,
+Tang, M.,
+Andreasson, K.,
+Bjurek, K.,
+Raj, R.D.,
+Davidsson, E., <span class="ltx_text ltx_font_italic" id="bib.bib16.1.1">et al.</span>:
+Fussi-net: Fusion of spatio-temporal skeletons for intention
+prediction network.
+In: 2020 54th Asilomar Conference on Signals, Systems, and Computers,
+pp. 68–72
+(2020).
+IEEE
+
+
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Rasouli et al. [2022]</span>
+<span class="ltx_bibblock">
+Rasouli, A.,
+Yau, T.,
+Rohani, M.,
+Luo, J.:
+Multi-modal hybrid architecture for pedestrian action prediction.
+In: 2022 IEEE Intelligent Vehicles Symposium (IV),
+pp. 91–97
+(2022).
+IEEE
+
+
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kotseruba
+et al. [2021]</span>
+<span class="ltx_bibblock">
+Kotseruba, I.,
+Rasouli, A.,
+Tsotsos, J.K.:
+Benchmark for evaluating pedestrian action prediction.
+In: Proceedings of the IEEE/CVF Winter Conference on Applications of
+Computer Vision,
+pp. 1258–1268
+(2021)
+
+
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sharma et al. [2022]</span>
+<span class="ltx_bibblock">
+Sharma, N.,
+Dhiman, C.,
+Indu, S.:
+Pedestrian intention prediction for autonomous vehicles: A comprehensive
+survey.
+Neurocomputing
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cioppa et al. [2022]</span>
+<span class="ltx_bibblock">
+Cioppa, A.,
+Deliège, A.,
+Giancola, S.,
+Ghanem, B.,
+Van Droogenbroeck, M.:
+Scaling up soccernet with multi-view spatiazhang2019pose2segl
+localization and re-identification.
+Scientific Data
+<span class="ltx_text ltx_font_bold" id="bib.bib20.1.1">9</span>(1),
+355
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cui et al. [2023]</span>
+<span class="ltx_bibblock">
+Cui, Y.,
+Zeng, C.,
+Zhao, X.,
+Yang, Y.,
+Wu, G.,
+Wang, L.:
+Sportsmot: A large multi-object tracking dataset in multiple sports scenes.
+arXiv preprint arXiv:2304.05170
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Veeramani
+et al. [2018]</span>
+<span class="ltx_bibblock">
+Veeramani, B.,
+Raymond, J.W.,
+Chanda, P.:
+Deepsort: deep convolutional networks for sorting haploid maize
+seeds.
+BMC bioinformatics
+<span class="ltx_text ltx_font_bold" id="bib.bib22.1.1">19</span>,
+1–9
+(2018)
+
+
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2022]</span>
+<span class="ltx_bibblock">
+Zhang, Y.,
+Sun, P.,
+Jiang, Y.,
+Yu, D.,
+Weng, F.,
+Yuan, Z.,
+Luo, P.,
+Liu, W.,
+Wang, X.:
+Bytetrack: Multi-object tracking by associating every detection box.
+In: European Conference on Computer Vision,
+pp. 1–21
+(2022).
+Springer
+
+
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. [2021]</span>
+<span class="ltx_bibblock">
+Wang, Y.,
+Xu, Z.,
+Wang, X.,
+Shen, C.,
+Cheng, B.,
+Shen, H.,
+Xia, H.:
+End-to-end video instance segmentation with transformers.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 8741–8750
+(2021)
+
+
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Carion et al. [2020]</span>
+<span class="ltx_bibblock">
+Carion, N.,
+Massa, F.,
+Synnaeve, G.,
+Usunier, N.,
+Kirillov, A.,
+Zagoruyko, S.:
+End-to-end object detection with transformers.
+In: European Conference on Computer Vision,
+pp. 213–229
+(2020).
+Springer
+
+
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2021]</span>
+<span class="ltx_bibblock">
+Zhang, Y.,
+Wang, C.,
+Wang, X.,
+Zeng, W.,
+Liu, W.:
+Fairmot: On the fairness of detection and re-identification in
+multiple object tracking.
+International Journal of Computer Vision
+<span class="ltx_text ltx_font_bold" id="bib.bib26.1.1">129</span>,
+3069–3087
+(2021)
+
+
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cui et al. [2022]</span>
+<span class="ltx_bibblock">
+Cui, Y.,
+Jiang, C.,
+Wang, L.,
+Wu, G.:
+Mixformer: End-to-end tracking with iterative mixed attention.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 13608–13618
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Akan and
+Varlı [2023]</span>
+<span class="ltx_bibblock">
+Akan, S.,
+Varlı, S.:
+Reidentifying soccer players in broadcast videos using body feature
+alignment based on pose.
+In: Proceedings of the 2023 4th International Conference on Computing,
+Networks and Internet of Things,
+pp. 440–444
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Naik and Hashmi [2023]</span>
+<span class="ltx_bibblock">
+Naik, B.T.,
+Hashmi, M.F.:
+Yolov3-sort: detection and tracking player/ball in soccer sport.
+Journal of Electronic Imaging
+<span class="ltx_text ltx_font_bold" id="bib.bib29.1.1">32</span>(1),
+011003–011003
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Vandeghen et al. [2022]</span>
+<span class="ltx_bibblock">
+Vandeghen, R.,
+Cioppa, A.,
+Van Droogenbroeck, M.:
+Semi-supervised training to improve player and ball detection in
+soccer.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 3481–3490
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cao et al. [2017]</span>
+<span class="ltx_bibblock">
+Cao, Z.,
+Simon, T.,
+Wei, S.-E.,
+Sheikh, Y.:
+Realtime multi-person 2d pose estimation using part affinity fields.
+In: Proceedings of the IEEE Conference on Computer Vision and Pattern
+Recognition,
+pp. 7291–7299
+(2017)
+
+
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sun et al. [2019]</span>
+<span class="ltx_bibblock">
+Sun, K.,
+Xiao, B.,
+Liu, D.,
+Wang, J.:
+Deep high-resolution representation learning for human pose
+estimation.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 5693–5703
+(2019)
+
+
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2019]</span>
+<span class="ltx_bibblock">
+Zhang, S.-H.,
+Li, R.,
+Dong, X.,
+Rosin, P.,
+Cai, Z.,
+Han, X.,
+Yang, D.,
+Huang, H.,
+Hu, S.-M.:
+Pose2seg: Detection free human instance segmentation.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 889–898
+(2019)
+
+
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cheng et al. [2020]</span>
+<span class="ltx_bibblock">
+Cheng, B.,
+Xiao, B.,
+Wang, J.,
+Shi, H.,
+Huang, T.S.,
+Zhang, L.:
+Higherhrnet: Scale-aware representation learning for bottom-up human
+pose estimation.
+In: Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition,
+pp. 5386–5395
+(2020)
+
+
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Li et al. [2023]</span>
+<span class="ltx_bibblock">
+Li, Y.,
+Jia, S.,
+Li, Q.:
+Balancehrnet: An effective network for bottom-up human pose
+estimation.
+Neural Networks
+<span class="ltx_text ltx_font_bold" id="bib.bib35.1.1">161</span>,
+297–305
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Decroos et al. [2019]</span>
+<span class="ltx_bibblock">
+Decroos, T.,
+Bransen, L.,
+Van Haaren, J.,
+Davis, J.:
+Actions speak louder than goals: Valuing player actions in soccer.
+In: Proceedings of the 25th ACM SIGKDD International Conference on
+Knowledge Discovery &amp; Data Mining,
+pp. 1851–1861
+(2019)
+
+
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Toda et al. [2022]</span>
+<span class="ltx_bibblock">
+Toda, K.,
+Teranishi, M.,
+Kushiro, K.,
+Fujii, K.:
+Evaluation of soccer team defense based on prediction models of ball
+recovery and being attacked: A pilot study.
+Plos one
+<span class="ltx_text ltx_font_bold" id="bib.bib37.1.1">17</span>(1),
+0263051
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Simpson et al. [2022]</span>
+<span class="ltx_bibblock">
+Simpson, I.,
+Beal, R.J.,
+Locke, D.,
+Norman, T.J.:
+Seq2event: Learning the language of soccer using transformer-based
+match event prediction.
+In: Proceedings of the 28th ACM SIGKDD Conference on Knowledge
+Discovery and Data Mining,
+pp. 3898–3908
+(2022)
+
+
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yeung et al. [2023]</span>
+<span class="ltx_bibblock">
+Yeung, C.C.,
+Sit, T.,
+Fujii, K.:
+Transformer-based neural marked spatio temporal point process model for
+football match events analysis.
+arXiv preprint arXiv:2302.09276
+(2023)
+
+
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Umemoto et al. [2022]</span>
+<span class="ltx_bibblock">
+Umemoto, R.,
+Tsutsui, K.,
+Fujii, K.:
+Location analysis of players in uefa euro 2020 and 2022 using generalized
+valuation of defense by estimating probabilities.
+arXiv preprint arXiv:2212.00021
+(2022)
+
+
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</span>
+</li>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Thu Feb 15 01:21:02 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span style="font-size:70%;position:relative; bottom:2.2pt;">A</span>T<span style="position:relative; bottom:-0.4ex;">E</span></span><span class="ltx_font_smallcaps">xml</span><img alt="[LOGO]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

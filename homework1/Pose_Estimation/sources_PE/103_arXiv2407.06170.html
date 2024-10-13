@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC</title>
+<!--Generated on Thu Jun  6 17:18:11 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="
+Artificial Intelligence,  Neural Networks,  Mixed-Precision Quantization,  Inference,  Embedded Systems,  Aerospace
+" lang="en" name="keywords"/>
+<base href="/html/2407.06170v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S1" title="In Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S2" title="In Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Related Works</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3" title="In Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Co-Design Methodology</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.SS1" title="In III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-A</span> </span><span class="ltx_text ltx_font_italic">Methodology Overview</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.SS2" title="In III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span> </span><span class="ltx_text ltx_font_italic">Neural Network Architecture</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.SS3" title="In III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span> </span><span class="ltx_text ltx_font_italic">Mixed-Precision Quantization</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.SS4" title="In III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-D</span> </span><span class="ltx_text ltx_font_italic">Experimental Results</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S4" title="In Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Comparison</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S4.SS1" title="In IV Comparison ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-A</span> </span><span class="ltx_text ltx_font_italic">Results Summary</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S4.SS2" title="In IV Comparison ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-B</span> </span><span class="ltx_text ltx_font_italic">Limitations and Future Works</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S5" title="In Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S6" title="In Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI </span><span class="ltx_text ltx_font_smallcaps">Acknowledgments</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+
+Julien Posso1,
+Guy Bois1,
+Yvon Savaria2
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">
+1Department of Computer Engineering, 
+<br class="ltx_break"/>2Department of Electrical Engineering, 
+<br class="ltx_break"/>École Polytechnique de Montréal, Québec, Canada 
+<br class="ltx_break"/>
+</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id1.id1">This article presents a pioneering approach to real-time spacecraft pose estimation, utilizing a mixed-precision quantized neural network implemented on the FPGA components of a commercially available Xilinx MPSoC, renowned for its suitability in space applications. Our co-design methodology includes a novel evaluation technique for assessing the layer-wise neural network sensitivity to quantization, facilitating an optimal balance between accuracy, latency, and FPGA resource utilization. Utilizing the FINN library, we developed a bespoke FPGA dataflow accelerator that integrates on-chip weights and activation functions to minimize latency and energy consumption. Our implementation is 7.7 times faster and 19.5 times more energy-efficient than the best-reported values in the existing spacecraft pose estimation literature. Furthermore, our contribution includes the first real-time, open-source implementation of such algorithms, marking a significant advancement in making efficient spacecraft pose estimation algorithms widely accessible. The source code is available at https://github.com/possoj/FPGA-SpacePose.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Index Terms: </h6>
+Artificial Intelligence, Neural Networks, Mixed-Precision Quantization, Inference, Embedded Systems, Aerospace
+
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.1.1">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Estimating the relative pose (position and orientation) of a known, uncooperative spacecraft from a monocular image is a crucial task in computer vision. It aims to enhance the autonomy of in-orbit spacecraft operations such as formation flying, autonomous docking, satellite maintenance, and debris removal <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib1" title="">1</a>]</cite>. The upcoming ClearSpace-1 mission, scheduled for 2026, underscores the significance of debris removal for space sustainability and will represent the first instance of a space mission that integrates a vision-based pose estimation algorithm <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib2" title="">2</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">The challenge posed by the European Space Agency (ESA) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib3" title="">3</a>]</cite> has significantly boosted interest in spacecraft pose estimation (SPE). It focuses on estimating the pose of the Tango spacecraft using the Spacecraft Pose Estimation Dataset (SPEED) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib4" title="">4</a>]</cite>, which has become a benchmark for training and evaluating SPE algorithms. This dataset is utilized in our study.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Two prominent techniques based on convolutional neural networks (CNNs) have emerged as highly effective in the SPE domain: keypoint detection <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib9" title="">9</a>]</cite> and a combination of soft classification with direct regression <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite>. However, challenges persist in the area of real-time SPE inference, with only a few publications addressing this issue <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib11" title="">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib12" title="">12</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib13" title="">13</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">This paper proposes a pioneering approach to real-time SPE on a commercial off-the-shelf (COTS) Xilinx MPSoC, already utilized in the space domain <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib14" title="">14</a>]</cite>. We begin with a trained Float32 Mobile-URSONet model, featuring an embedded-friendly MobileNetV2 backbone <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite>. Mixed-precision quantization is used to find an optimal balance between accuracy, latency, and FPGA resource utilization for each neural network layer. We develop a custom energy-efficient dataflow accelerator and implement it on the programmable logic available on the Xilinx MPSoC, commonly called FPGA. This co-design methodology aims to provide high-quality SPE algorithms executed on low-cost, low-power, space-ready embedded computers. The contributions of our paper include:</p>
+<ul class="ltx_itemize" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">The first real-time inference of a popular SPE neural network on a space-ready Xilinx MPSoC. Our FPGA dataflow accelerator is 7.7 times faster and 19.5 times more energy-efficient than the best-reported values in the existing SPE literature.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">An in-depth study of layer-wise mixed-precision quantization for the SPE neural network. This study leads us to propose a method for selecting the bit-width of the mixed-precision neural network.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">The first open-source, real-time implementation of an SPE neural network <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib15" title="">15</a>]</cite>.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.1.1">Related Works</span>
+</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">Recent advancements in spacecraft pose estimation (SPE) have been driven by keypoint detection <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib9" title="">9</a>]</cite> and soft classification techniques <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite>. Keypoint detection involves identifying and locating <span class="ltx_text ltx_font_italic" id="S2.p1.1.1">a priori</span> defined landmarks of the target within an image, and combining them with a 3D model of these landmarks to recover the pose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib3" title="">3</a>]</cite>. In contrast, soft classification assigns a probability distribution across predefined orientation classes in a discrete output space. When combined with direct regression for position estimation, this method has demonstrated the best generalization capabilities <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite> and the potential to extend pose estimation to unknown targets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib1" title="">1</a>]</cite>. However, the neural network complexity and embeddability balance have received less attention. The works of <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>]</cite> and <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite> have significantly contributed to the embeddability of SPE algorithms by leveraging the MobileNetV2 architecture <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib16" title="">16</a>]</cite>. We argue that quantizing these previously reported models would further enhance their embeddability. Our paper primarily focuses on Mobile-URSONet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite>, an open-source framework, but the same methodology could be applied to the work presented in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1">Mixed-precision quantization <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib18" title="">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib19" title="">19</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib22" title="">22</a>]</cite> has emerged as a superior method for enhancing neural networks’ latency and energy efficiency beyond uniform Int8 quantization, primarily applied to benchmark datasets like CIFAR, ImageNet, and VOC. Uniquely, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib23" title="">23</a>]</cite> introduced a module-wise quantization tailored for SPE but did not achieve real-time inference on embedded computers.</p>
+</div>
+<div class="ltx_para" id="S2.p3">
+<p class="ltx_p" id="S2.p3.1">Previous research on real-time embedded SPE has made significant strides, as seen in works by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>]</cite>, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib13" title="">13</a>]</cite>, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib11" title="">11</a>]</cite>, and <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib12" title="">12</a>]</cite>, employing various hardware and quantization strategies. However, these studies often lack detailed methodology, particularly regarding quantization’s effects on accuracy and efficiency, and frequently omit source code, hindering reproducibility. The absence of exhaustive performance metrics such as throughput and power consumption also restricts the understanding of their practical efficiency and applicability. Our research addresses these gaps by prioritizing methodological transparency, reproducibility, and comprehensive performance evaluation.</p>
+</div>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps" id="S3.1.1">Co-Design Methodology</span>
+</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS1.4.1.1">III-A</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS1.5.2">Methodology Overview</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">Figure <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.F1" title="Figure 1 ‣ III-A Methodology Overview ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">1</span></a> outlines our proposed co-design methodology, which achieves an optimal balance between accuracy, latency, and FPGA resource utilization. The process begins with the Float32 weights of Mobile-URSONet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite>. Using Brevitas <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib24" title="">24</a>]</cite>, we quantize the network for Quantization-Aware Training (QAT) employing per-channel symmetric uniform quantization with layer-wise arbitrary precision. Over 20 epochs, we trained 146 model variants to optimize bit-widths across layers, a process detailed in Section <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.SS3" title="III-C Mixed-Precision Quantization ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag"><span class="ltx_text">III-C</span></span></a>. Although such an exhaustive approach would be impractical for large datasets like ImageNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib18" title="">18</a>]</cite>, it was feasible within a week for a smaller dataset using an Nvidia P100 GPU. This efficiency was partly due to acceleration from Float32 pre-training, which reduced QAT time by a factor of three. Subsequently, we converted the neural network into a FINN-ONNX graph, which was then transformed into FINN C++ High-Level Synthesis (HLS)-compatible nodes <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib25" title="">25</a>]</cite>, ensuring a one-to-one correspondence between the nodes and the neural network layers, including im2col and matrix-vector multiplication nodes for convolutions. Our custom folding algorithm was designed to optimize node parallelism, minimizing FPGA resource usage while meeting our target latency constraints, in line with FINN’s inter-layer constraints. Through Python simulations, we fine-tuned FIFO depths to ensure optimal data flow, a process elaborated in Section <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.SS4" title="III-D Experimental Results ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag"><span class="ltx_text">III-D</span></span></a>. Post-synthesis, meeting FPGA resource constraints may require design optimizations, such as reducing parallelism or adjusting the QAT bit-widths. The final outcome is an accelerator pipeline, with one accelerator per CNN layer, featuring on-chip weights and activations to minimize both energy use <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib26" title="">26</a>]</cite> and latency, compared to conventional accelerators <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib27" title="">27</a>]</cite>.</p>
+</div>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="135" id="S3.F1.g1" src="extracted/5649389/figures/fpga_flow.png" width="100"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F1.2.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S3.F1.3.2" style="font-size:90%;">Methodology that targets FPGA inference</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS2.4.1.1">III-B</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS2.5.2">Neural Network Architecture</span>
+</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">Mobile-URSONet leverages a MobileNetV2 backbone <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite>, beginning with a 3x3 convolutional layer, followed by 17 inverted residual blocks, and ending with a 1x1 convolutional layer. We have tailored the architecture of the inverted residual blocks, as illustrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.F2" title="Figure 2 ‣ III-B Neural Network Architecture ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">2</span></a>, by integrating linear activations with shared scaling factors. This adaptation enables quantized tensor summation and allows for entirely integer-based computations throughout the network after applying FINN transformations. Moreover, we maintain true residual connections in the neural network, contrary to the FINN authors who insert activation functions or convolutions in every shortcut to facilitate the transformation to HLS-compatible nodes at the cost of the network’s simplicity <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib28" title="">28</a>]</cite>. While the parameter count of MobileNetV2 increases across its layers, the number of Multiply-Accumulate (MAC) operations remains comparatively consistent. This stability is attributed to the feature maps’ diminishing dimensions (width and height) as the network deepens, counterbalancing the increase in parameter count.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="149" id="S3.F2.g1" src="extracted/5649389/figures/inverted_residual_modified.png" width="147"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.2.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S3.F2.3.2" style="font-size:90%;">Modified inverted residual block</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS3.4.1.1">III-C</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS3.5.2">Mixed-Precision Quantization</span>
+</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">This section proposes a method to assess each layer’s sensitivity to low-bit quantization by setting all layers to 8-bit weights and activations, except for one layer’s binarized weights. In Figure <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.F3.sf1" title="In Figure 3 ‣ III-C Mixed-Precision Quantization ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">3(a)</span></a>, we observe that layers closer to the input of the neural network generally exhibit greater sensitivity to quantization. This trend is consistent with Figure <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.F3.sf2" title="In Figure 3 ‣ III-C Mixed-Precision Quantization ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">3(b)</span></a>, which shows that sensitivity to low-bit quantization decreases with the parameter count of a layer, and the network’s parameter count grows across its layers. The considerable volume of MAC operations in the early layers, driven by high-dimensional feature maps, does not reduce the sensitivity to quantization, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.F3.sf3" title="In Figure 3 ‣ III-C Mixed-Precision Quantization ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">3(c)</span></a>. These findings challenge the prevailing belief that quantization impacts the first and last layers most significantly <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib18" title="">18</a>]</cite>. Notably, the second convolutional layer diverges from these expectations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib18" title="">18</a>]</cite>, a variance linked to a characteristic of MobileNetV2. Specifically, the architecture’s first inverted residual block omits the expansion layer to keep a reasonable MAC operations count in the subsequent layer. This results in the initial depthwise convolution having merely 288 parameters, as highlighted in Figure <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.F3" title="Figure 3 ‣ III-C Mixed-Precision Quantization ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">3</span></a>. This finding suggests that architectural modifications in recent designs <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib30" title="">30</a>]</cite>, influenced by vision transformers that position depthwise convolutions before expansion layers, might be sensitive to low-bit quantization.
+Further experiments have revealed that activations are notably more sensitive to low-bit quantization, with quantization errors below 4 bits frequently causing orientation decoding errors and disrupting the neural network’s training process. This significant constraint influences the layer-wise bit-width activation choices in the next paragraph. Our findings also indicate that the binarization of early layers diminishes the generalization capabilities of the neural network. However, it improves in later layers, suggesting that low-bit quantization compromises information in the initial layers while acting as regularization in the last layers. Additionally, the sensitivity of early layers to quantization predominantly affects orientation estimation, as opposed to position estimation, which is comparatively simpler <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib10" title="">10</a>]</cite>. Therefore, quantization below 8 bits has a more pronounced impact on orientation accuracy than on position accuracy.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F3.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="449" id="S3.F3.sf1.g1" src="extracted/5649389/figures/esa_score_vs_layer_index.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.sf1.2.1.1" style="font-size:90%;">(a)</span> </span><span class="ltx_text" id="S3.F3.sf1.3.2" style="font-size:90%;">ESA score vs. weight layer index binarization</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F3.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="449" id="S3.F3.sf2.g1" src="extracted/5649389/figures/esa_score_vs_params.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.sf2.2.1.1" style="font-size:90%;">(b)</span> </span><span class="ltx_text" id="S3.F3.sf2.3.2" style="font-size:90%;">ESA score vs. the number of parameters in the binarized layer</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F3.sf3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="449" id="S3.F3.sf3.g1" src="extracted/5649389/figures/esa_score_vs_mac_ops.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.sf3.2.1.1" style="font-size:90%;">(c)</span> </span><span class="ltx_text" id="S3.F3.sf3.3.2" style="font-size:90%;">ESA score vs. the number of MAC operations in the binarized layer</span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.2.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S3.F3.3.2" style="font-size:90%;">ESA score when only one convolutional layer’s weights are binarized, with all other layers and activations at 8 bits</span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1">This analysis leads us to identify an optimal balance among layer-wise bit-width, FPGA resource utilization, and throughput. Given the limitations of FINN, we quantize only the neural network’s backbone for FPGA deployment, leaving the heads in Float32. We observed that activations are highly sensitive to low-bit quantization, yet the hardware resources required increase exponentially with the activation bit-width due to the current FINN C++ HLS backend <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib25" title="">25</a>]</cite>. Consequently, we quantize all activations to four bits to conserve FPGA resources, as higher bit-widths would disproportionately consume resources <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib27" title="">27</a>]</cite>. Weight bit-width selection varies by layer index due to differing quantization sensitivities; the weights of the first layer are quantized at four bits, reflecting their higher sensitivity. The most sensitive layer, the first depthwise convolution, uses six-bit weights. Subsequently, the first projection convolution weights are set to four bits, and the weights of all remaining 49 convolutional layers are set to three bits. This configuration will be used in the next section to evaluate and implement the neural network on the FPGA.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS4.4.1.1">III-D</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS4.5.2">Experimental Results</span>
+</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.2">Table <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.T1" title="TABLE I ‣ III-D Experimental Results ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">I</span></a> presents a comparison of pose estimation metrics across the FPGA workflow, including ESA score (where lower is better), position error (<math alttext="e_{t}" class="ltx_Math" display="inline" id="S3.SS4.p1.1.m1.1"><semantics id="S3.SS4.p1.1.m1.1a"><msub id="S3.SS4.p1.1.m1.1.1" xref="S3.SS4.p1.1.m1.1.1.cmml"><mi id="S3.SS4.p1.1.m1.1.1.2" xref="S3.SS4.p1.1.m1.1.1.2.cmml">e</mi><mi id="S3.SS4.p1.1.m1.1.1.3" xref="S3.SS4.p1.1.m1.1.1.3.cmml">t</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.1.m1.1b"><apply id="S3.SS4.p1.1.m1.1.1.cmml" xref="S3.SS4.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS4.p1.1.m1.1.1.1.cmml" xref="S3.SS4.p1.1.m1.1.1">subscript</csymbol><ci id="S3.SS4.p1.1.m1.1.1.2.cmml" xref="S3.SS4.p1.1.m1.1.1.2">𝑒</ci><ci id="S3.SS4.p1.1.m1.1.1.3.cmml" xref="S3.SS4.p1.1.m1.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.1.m1.1c">e_{t}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.1.m1.1d">italic_e start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT</annotation></semantics></math>), and orientation error (<math alttext="e_{q}" class="ltx_Math" display="inline" id="S3.SS4.p1.2.m2.1"><semantics id="S3.SS4.p1.2.m2.1a"><msub id="S3.SS4.p1.2.m2.1.1" xref="S3.SS4.p1.2.m2.1.1.cmml"><mi id="S3.SS4.p1.2.m2.1.1.2" xref="S3.SS4.p1.2.m2.1.1.2.cmml">e</mi><mi id="S3.SS4.p1.2.m2.1.1.3" xref="S3.SS4.p1.2.m2.1.1.3.cmml">q</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.2.m2.1b"><apply id="S3.SS4.p1.2.m2.1.1.cmml" xref="S3.SS4.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS4.p1.2.m2.1.1.1.cmml" xref="S3.SS4.p1.2.m2.1.1">subscript</csymbol><ci id="S3.SS4.p1.2.m2.1.1.2.cmml" xref="S3.SS4.p1.2.m2.1.1.2">𝑒</ci><ci id="S3.SS4.p1.2.m2.1.1.3.cmml" xref="S3.SS4.p1.2.m2.1.1.3">𝑞</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.2.m2.1c">e_{q}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.2.m2.1d">italic_e start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT</annotation></semantics></math>) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib3" title="">3</a>]</cite>, from initial Float32 inferences on a computer to FPGA deployment via FINN, with images sized at 240x240 to meet FINN’s requirements. The shift to Int8 quantization leads to a slight increase in the ESA score, primarily attributed to a rise in position error. This is likely due to the position estimation’s reliance on direct regression, which is more susceptible to optimization effects, in contrast to orientation estimation, which employs a probabilistic method through soft classification and thus exhibits greater robustness. Additionally, the quantization process introduces a regularization effect that benefits orientation estimation, given the large number of parameters in its neural network branch. Mixed-precision quantization affects both position and orientation errors despite using larger bit-widths for the most sensitive CNN layers, as explained in Section <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.SS3" title="III-C Mixed-Precision Quantization ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag"><span class="ltx_text">III-C</span></span></a>. Nevertheless, the resulting degradation is kept to a manageable level. Our CNN FPGA accelerator generates outputs that exactly match the tensors computed with Brevitas on the computer. The mean square error analysis reveals no differences, ensuring identical Pose metrics on both the FPGA and computer, underscoring our FPGA accelerator’s meticulous design and validation.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T1.5.1.1" style="font-size:90%;">TABLE I</span>: </span><span class="ltx_text" id="S3.T1.6.2" style="font-size:90%;">Pose metrics from the Float32 on computer inference to the onboard implementation on the SPEED dataset</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T1.3">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T1.3.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.3.3.4">Model</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T1.1.1.1">ESA score <math alttext="\downarrow" class="ltx_Math" display="inline" id="S3.T1.1.1.1.m1.1"><semantics id="S3.T1.1.1.1.m1.1a"><mo id="S3.T1.1.1.1.m1.1.1" stretchy="false" xref="S3.T1.1.1.1.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S3.T1.1.1.1.m1.1b"><ci id="S3.T1.1.1.1.m1.1.1.cmml" xref="S3.T1.1.1.1.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.T1.1.1.1.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S3.T1.1.1.1.m1.1d">↓</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T1.2.2.2">
+<math alttext="e_{q}" class="ltx_Math" display="inline" id="S3.T1.2.2.2.m1.1"><semantics id="S3.T1.2.2.2.m1.1a"><msub id="S3.T1.2.2.2.m1.1.1" xref="S3.T1.2.2.2.m1.1.1.cmml"><mi id="S3.T1.2.2.2.m1.1.1.2" xref="S3.T1.2.2.2.m1.1.1.2.cmml">e</mi><mi id="S3.T1.2.2.2.m1.1.1.3" xref="S3.T1.2.2.2.m1.1.1.3.cmml">q</mi></msub><annotation-xml encoding="MathML-Content" id="S3.T1.2.2.2.m1.1b"><apply id="S3.T1.2.2.2.m1.1.1.cmml" xref="S3.T1.2.2.2.m1.1.1"><csymbol cd="ambiguous" id="S3.T1.2.2.2.m1.1.1.1.cmml" xref="S3.T1.2.2.2.m1.1.1">subscript</csymbol><ci id="S3.T1.2.2.2.m1.1.1.2.cmml" xref="S3.T1.2.2.2.m1.1.1.2">𝑒</ci><ci id="S3.T1.2.2.2.m1.1.1.3.cmml" xref="S3.T1.2.2.2.m1.1.1.3">𝑞</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.T1.2.2.2.m1.1c">e_{q}</annotation><annotation encoding="application/x-llamapun" id="S3.T1.2.2.2.m1.1d">italic_e start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT</annotation></semantics></math> (°)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T1.3.3.3">
+<math alttext="e_{t}" class="ltx_Math" display="inline" id="S3.T1.3.3.3.m1.1"><semantics id="S3.T1.3.3.3.m1.1a"><msub id="S3.T1.3.3.3.m1.1.1" xref="S3.T1.3.3.3.m1.1.1.cmml"><mi id="S3.T1.3.3.3.m1.1.1.2" xref="S3.T1.3.3.3.m1.1.1.2.cmml">e</mi><mi id="S3.T1.3.3.3.m1.1.1.3" xref="S3.T1.3.3.3.m1.1.1.3.cmml">t</mi></msub><annotation-xml encoding="MathML-Content" id="S3.T1.3.3.3.m1.1b"><apply id="S3.T1.3.3.3.m1.1.1.cmml" xref="S3.T1.3.3.3.m1.1.1"><csymbol cd="ambiguous" id="S3.T1.3.3.3.m1.1.1.1.cmml" xref="S3.T1.3.3.3.m1.1.1">subscript</csymbol><ci id="S3.T1.3.3.3.m1.1.1.2.cmml" xref="S3.T1.3.3.3.m1.1.1.2">𝑒</ci><ci id="S3.T1.3.3.3.m1.1.1.3.cmml" xref="S3.T1.3.3.3.m1.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.T1.3.3.3.m1.1c">e_{t}</annotation><annotation encoding="application/x-llamapun" id="S3.T1.3.3.3.m1.1d">italic_e start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT</annotation></semantics></math> (m)</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.3.4.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.3.4.1.1">Float32</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.3.4.1.2">0.296</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.3.4.1.3">13.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.3.4.1.4">0.71</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.3.5.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r" id="S3.T1.3.5.2.1">Int8</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.3.5.2.2">0.307</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.3.5.2.3">13.2</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.3.5.2.4">0.80</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.3.6.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r" id="S3.T1.3.6.3.1">mixed-precision</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.3.6.3.2">0.411</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.3.6.3.3">18.7</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.3.6.3.4">0.91</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.3.7.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r" id="S3.T1.3.7.4.1">FPGA on-board</th>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T1.3.7.4.2">0.411</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T1.3.7.4.3">18.7</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T1.3.7.4.4">0.91</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.1">Our FPGA accelerator operates at 187.5 MHz and utilizes 91% of the Lookup Tables (LUTs) and 90% of the Block RAMs (BRAMs), but only 32% of the Digital Signal Processors and 26% of the flip-flops on the FPGA. Contrary to the expectations of the FINN library authors <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib27" title="">27</a>]</cite>, computing activation functions significantly impact FPGA resources, as it requires as many LUTs as computing convolutions. This discrepancy could stem from using the MobileNetV2 architecture tailored for mobile inference, unlike the less efficient ResNet architecture employed by FINN’s authors. The multi-threshold units and convolution computations primarily consume flip-flops and LUTs. At the same time, nearly all BRAMs are dedicated to FIFOs between units, indicating potential for optimization in FINN’s resource allocation strategies.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p3">
+<p class="ltx_p" id="S3.SS4.p3.1">Table <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S3.T2" title="TABLE II ‣ III-D Experimental Results ‣ III Co-Design Methodology ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">II</span></a> presents FPGA implementation results compared to estimates, covering power consumption (static and dynamic), frames per second (FPS), and energy efficiency. Our accelerator is structured as a pipeline of units connected by FIFOs, with its throughput limited by the slowest unit, which operates at 250 FPS. Combined with the power consumption derived from the Xilinx Vivado post-implementation report, it indicates high energy efficiency, as detailed in Section <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S4.SS1" title="IV-A Results Summary ‣ IV Comparison ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag"><span class="ltx_text">IV-A</span></span></a>. On-board testing reveals a significant throughput discrepancy, more than four times lower than estimated, attributed to insufficient BRAMs, which lead to undersized FIFOs. This constraint slows down the pipeline and reduces power consumption by a factor of 4.4. Despite this limitation, the results underscore the real-time energy-efficient capabilities of our FPGA-accelerated SPE algorithm, with further comparisons provided in Section <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S4.SS1" title="IV-A Results Summary ‣ IV Comparison ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag"><span class="ltx_text">IV-A</span></span></a>.</p>
+</div>
+<figure class="ltx_table" id="S3.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T2.2.1.1" style="font-size:90%;">TABLE II</span>: </span><span class="ltx_text" id="S3.T2.3.2" style="font-size:90%;">FPGA implementation metrics</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T2.4">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T2.4.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S3.T2.4.1.1.1">Board</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T2.4.1.1.2">Power (W)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T2.4.1.1.3">FPS</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S3.T2.4.1.1.4">FPS per Watt</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T2.4.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S3.T2.4.2.1.1">Estimation</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.4.2.1.2">3.83</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.4.2.1.3">250</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.4.2.1.4">65.3</td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.4.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r" id="S3.T2.4.3.2.1">ZCU104</th>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T2.4.3.2.2">0.865</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T2.4.3.2.3">58.7</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T2.4.3.2.4">67.9</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.1.1">Comparison</span>
+</h2>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS1.4.1.1">IV-A</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS1.5.2">Results Summary</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Table <a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#S4.T3" title="TABLE III ‣ IV-A Results Summary ‣ IV Comparison ‣ Real-Time Spacecraft Pose Estimation Using Mixed-Precision Quantized Neural Network on COTS Reconfigurable MPSoC"><span class="ltx_text ltx_ref_tag">III</span></a> summarizes the performance of our implementations compared to existing works. The implementation by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib11" title="">11</a>]</cite> does not provide throughput or latency data, which prevents the computation of the energy efficiency of their implementation. Given that they use a Xilinx Ultra96 board, which contains a single-core Xilinx DPU on a small FPGA, achieving real-time inference may not be possible. The other FPGA Ultra96 implementation by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib12" title="">12</a>]</cite> implemented only a single layer of their neural network on the FPGA, also hindering the calculation of energy efficiency. Our implementation is almost 9 times faster and over 38 times more energy efficient than the Intel Atom-based implementation by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>]</cite>. Additionally, our FPGA solution is 7.7 times faster and 19.5 times more energy efficient than the Google Edge TPU-based ASIC by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib13" title="">13</a>]</cite>, highlighting the efficiency of our mixed-precision dataflow FPGA accelerator.</p>
+</div>
+<figure class="ltx_table" id="S4.T3">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T3.2.1.1" style="font-size:90%;">TABLE III</span>: </span><span class="ltx_text" id="S4.T3.3.2" style="font-size:90%;">Comparison with the existing literature</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T3.4">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T3.4.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.4.1.1.1">Implementation</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T3.4.1.1.2">Power (W)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T3.4.1.1.3">FPS</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S4.T3.4.1.1.4">FPS per Watt</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T3.4.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.4.2.1.1">FPGA ZCU104 (ours)</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.4.2.1.2">0.865</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.4.2.1.3">58.7</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.4.2.1.4">67.9</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.4.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r" id="S4.T3.4.3.2.1">CPU Intel Atom <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>]</cite>
+</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.3.2.2">3.7</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.3.2.3">6.58</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.3.2.4">1.78</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.4.4.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r" id="S4.T3.4.4.3.1">FPGA Ultra96 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib11" title="">11</a>]</cite>
+</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.4.3.2">1.32</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.4.3.3">x</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.4.3.4">x</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.4.5.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r" id="S4.T3.4.5.4.1">FPGA Ultra96 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib12" title="">12</a>]</cite>
+</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.5.4.2">x</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.5.4.3">167</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.4.5.4.4">x</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.4.6.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r" id="S4.T3.4.6.5.1">Google edge TPU <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib13" title="">13</a>]</cite>
+</th>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.4.6.5.2">2.2</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.4.6.5.3">7.66</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.4.6.5.4">3.48</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS2.4.1.1">IV-B</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS2.5.2">Limitations and Future Works</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">This work advances embedded in-orbit SPE, highlighting achievements and suggesting future directions. Integrating the neural network’s backbone into the FPGA marks a significant step forward, with potential enhancements including transitioning the network’s head from the CPU to the FPGA for full capability utilization. Future research could explore additional SPE neural networks, such as <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib6" title="">6</a>]</cite>’s keypoint-based model, despite challenges in experiment reproducibility due to unavailable code and data. Investigating newer convolutional architectures such as ConvNext V2 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2407.06170v1#bib.bib30" title="">30</a>]</cite> could offer accuracy improvements and insights into the impact of low-bit quantization on advanced model structures, particularly regarding quantization effects on modified inverted residual blocks. Further experiments are essential to validate these preliminary findings.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps" id="S5.1.1">Conclusion</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">This paper aims to provide efficient spacecraft pose estimation (SPE) algorithms that can be effectively implemented on low-cost, low-power, space-ready embedded computers to achieve autonomous space navigation. We propose a co-design methodology to achieve real-time and energy-efficient inference of a popular SPE neural network on the FPGA of a commercial, space-proven Xilinx MPSoC. Thanks to the use of mixed-precision quantization and custom dataflow FPGA acceleration, our implementation is 7.7 times faster and 19.5 times more energy-efficient than the best previously reported SPE algorithms. Furthermore, we present the first real-time, open-source implementation, marking a significant step toward democratizing efficient spacecraft pose estimation algorithms.</p>
+</div>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VI </span><span class="ltx_text ltx_font_smallcaps" id="S6.1.1">Acknowledgments</span>
+</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">The authors thank the Canadian Space Agency, MITACS, and Space Codesign Systems for their financial support.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+P. F. Proença and Y. Gao, “Deep learning for spacecraft pose estimation from photorealistic rendering,” in <em class="ltx_emph ltx_font_italic" id="bib.bib1.1.1">2020 IEEE International Conference on Robotics and Automation (ICRA)</em>.   IEEE, 2020, pp. 6007–6013.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+“ClearSpace - A mission to make space sustainable,” Mar. 2023. [Online]. Available: https://clearspace.today/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+M. Kisantal, S. Sharma, T. H. Park, D. Izzo, M. Märtens, and S. D’Amico, “Satellite Pose Estimation Challenge: Dataset, Competition Design and Results,” <em class="ltx_emph ltx_font_italic" id="bib.bib3.1.1">arXiv:1911.02050 [cs]</em>, Apr. 2020, arXiv: 1911.02050. [Online]. Available: http://arxiv.org/abs/1911.02050
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+S. Sharma and S. D’Amico, “Pose Estimation for Non-Cooperative Rendezvous Using Neural Networks,” <em class="ltx_emph ltx_font_italic" id="bib.bib4.1.1">arXiv:1906.09868 [cs]</em>, Jun. 2019, arXiv: 1906.09868. [Online]. Available: http://arxiv.org/abs/1906.09868
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+B. Chen, J. Cao, A. Parra, and T.-J. Chin, “Satellite Pose Estimation with Deep Landmark Regression and Nonlinear Pose Refinement,” <em class="ltx_emph ltx_font_italic" id="bib.bib5.1.1">arXiv:1908.11542 [cs]</em>, Aug. 2019, arXiv: 1908.11542. [Online]. Available: http://arxiv.org/abs/1908.11542
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+K. Black, S. Shankar, D. Fonseka, J. Deutsch, A. Dhir, and M. R. Akella, “Real-Time, Flight-Ready, Non-Cooperative Spacecraft Pose Estimation Using Monocular Imagery,” <em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">arXiv:2101.09553 [cs]</em>, Jan. 2021, arXiv: 2101.09553. [Online]. Available: http://arxiv.org/abs/2101.09553
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Y. Hu, S. Speierer, W. Jakob, P. Fua, and M. Salzmann, “Wide-Depth-Range 6D Object Pose Estimation in Space,” in <em class="ltx_emph ltx_font_italic" id="bib.bib7.1.1">2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>.   Nashville, TN, USA: IEEE, Jun. 2021, pp. 15 865–15 874. [Online]. Available: https://ieeexplore.ieee.org/document/9578408/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+L. P. Cassinis, T. H. Park, N. Stacey, S. D’Amico, A. Menicucci, E. Gill, I. Ahrns, and M. Sanchez-Gestido, “Leveraging Neural Network Uncertainty in Adaptive Unscented Kalman Filter for Spacecraft Pose Estimation,” <em class="ltx_emph ltx_font_italic" id="bib.bib8.1.1">Advances in Space Research</em>, Mar. 2023. [Online]. Available: https://www.sciencedirect.com/science/article/pii/S0273117723001400
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+A. Legrand, R. Detry, and C. De Vleeschouwer, “End-to-end Neural Estimation of Spacecraft Pose with Intermediate Detection of Keypoints,” in <em class="ltx_emph ltx_font_italic" id="bib.bib9.1.1">Computer Vision – ECCV 2022 Workshops: Tel Aviv, Israel, October 23–27, 2022, Proceedings, Part I</em>.   Berlin, Heidelberg: Springer-Verlag, 2023, pp. 154–169.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+J. Posso, G. Bois, and Y. Savaria, “Mobile-URSONet: an Embeddable Neural Network for Onboard Spacecraft Pose Estimation,” in <em class="ltx_emph ltx_font_italic" id="bib.bib10.1.1">2022 IEEE International Symposium on Circuits and Systems (ISCAS)</em>, May 2022, pp. 794–798, iSSN: 2158-1525.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+K. Cosmas and A. Kenichi, “Utilization of FPGA for Onboard Inference of Landmark Localization in CNN-Based Spacecraft Pose Estimation,” <em class="ltx_emph ltx_font_italic" id="bib.bib11.1.1">Aerospace</em>, vol. 7, no. 11, p. 159, Nov. 2020, number: 11 Publisher: Multidisciplinary Digital Publishing Institute. [Online]. Available: https://www.mdpi.com/2226-4310/7/11/159
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+S. Wang, S. Wang, B. Jiao, D. Yang, L. Su, P. Zhai, C. Chen, and L. Zhang, “CA-SpaceNet: Counterfactual Analysis for 6D Pose Estimation in Space,” Jul. 2022, arXiv:2207.07869 [cs]. [Online]. Available: http://arxiv.org/abs/2207.07869
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+A. Lotti, D. Modenini, P. Tortora, M. Saponara, and M. A. Perino, “Deep Learning for Real Time Satellite Pose Estimation on Low Power Edge TPU,” Jun. 2022, arXiv:2204.03296 [cs]. [Online]. Available: http://arxiv.org/abs/2204.03296
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+A. Pérez, A. Rodríguez, A. Otero, D. G. Arjona, A. Jiménez-Peralo, M. A. Verdugo, and E. De La Torre, “Run-Time Reconfigurable MPSoC-Based On-Board Processor for Vision-Based Space Navigation,” <em class="ltx_emph ltx_font_italic" id="bib.bib14.1.1">IEEE Access</em>, vol. 8, pp. 59 891–59 905, 2020, conference Name: IEEE Access.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+J. Posso, “FPGA-SpacePose,” Apr. 2024, original-date: 2024-04-15T14:54:55Z. [Online]. Available: https://github.com/possoj/FPGA-SpacePose
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+M. Sandler, A. Howard, M. Zhu, A. Zhmoginov, and L.-C. Chen, “MobileNetV2: Inverted Residuals and Linear Bottlenecks,” in <em class="ltx_emph ltx_font_italic" id="bib.bib16.1.1">2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>.   Salt Lake City, UT: IEEE, Jun. 2018, pp. 4510–4520. [Online]. Available: https://ieeexplore.ieee.org/document/8578572/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+Z. Dong, Z. Yao, A. Gholami, M. Mahoney, and K. Keutzer, “HAWQ: Hessian AWare Quantization of Neural Networks With Mixed-Precision,” in <em class="ltx_emph ltx_font_italic" id="bib.bib17.1.1">2019 IEEE/CVF International Conference on Computer Vision (ICCV)</em>.   Seoul, Korea (South): IEEE, Oct. 2019, pp. 293–302. [Online]. Available: https://ieeexplore.ieee.org/document/9009512/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+K. Wang, Z. Liu, Y. Lin, J. Lin, and S. Han, “HAQ: Hardware-Aware Automated Quantization With Mixed Precision,” in <em class="ltx_emph ltx_font_italic" id="bib.bib18.1.1">2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>.   Long Beach, CA, USA: IEEE, Jun. 2019, pp. 8604–8612. [Online]. Available: https://ieeexplore.ieee.org/document/8954415/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+S. Uhlich, L. Mauch, F. Cardinaux, K. Yoshiyama, J. A. Garcia, S. Tiedemann, T. Kemp, and A. Nakamura, “Mixed Precision DNNs: All you need is a good parametrization,” May 2020, arXiv:1905.11452 [cs, stat]. [Online]. Available: http://arxiv.org/abs/1905.11452
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+M. Askarihemmat, S. Wagner, O. Bilaniuk, Y. Hariri, Y. Savaria, and J.-P. David, “BARVINN: Arbitrary Precision DNN Accelerator Controlled by a RISC-V CPU,” in <em class="ltx_emph ltx_font_italic" id="bib.bib20.1.1">Proceedings of the 28th Asia and South Pacific Design Automation Conference</em>, Jan. 2023, pp. 483–489, arXiv:2301.00290 [cs]. [Online]. Available: http://arxiv.org/abs/2301.00290
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+C. Tang, K. Ouyang, Z. Wang, Y. Zhu, Y. Wang, W. Ji, and W. Zhu, “Mixed-Precision Neural Network Quantization via Learned Layer-wise Importance,” Mar. 2023, arXiv:2203.08368 [cs]. [Online]. Available: http://arxiv.org/abs/2203.08368
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+M. Rakka, M. E. Fouda, P. Khargonekar, and F. Kurdahi, “Mixed-Precision Neural Networks: A Survey,” Aug. 2022, arXiv:2208.06064 [cs]. [Online]. Available: http://arxiv.org/abs/2208.06064
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+S. Javed, A. Price, Y. Hu, and M. Salzmann, “Module-Wise Network Quantization for 6D Object Pose Estimation,” Mar. 2023, arXiv:2303.06753 [cs]. [Online]. Available: http://arxiv.org/abs/2303.06753
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+A. Pappalardo, “Xilinx/brevitas,” Jun. 2021, original-date: 2018-07-10T22:37:01Z. [Online]. Available: https://github.com/Xilinx/brevitas
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+“finn-hlslib,” Jun. 2023, original-date: 2019-09-17T17:57:58Z. [Online]. Available: https://github.com/Xilinx/finn-hlslib
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+M. Horowitz, “1.1 Computing’s energy problem (and what we can do about it),” in <em class="ltx_emph ltx_font_italic" id="bib.bib26.1.1">2014 IEEE International Solid-State Circuits Conference Digest of Technical Papers (ISSCC)</em>, Feb. 2014, pp. 10–14, iSSN: 2376-8606.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+M. Blott, T. B. Preußer, N. J. Fraser, G. Gambardella, K. O’brien, Y. Umuroglu, M. Leeser, and K. Vissers, “FINN- <span class="ltx_text ltx_font_italic" id="bib.bib27.1.1">R</span>: An End-to-End Deep-Learning Framework for Fast Exploration of Quantized Neural Networks,” <em class="ltx_emph ltx_font_italic" id="bib.bib27.2.2">ACM Transactions on Reconfigurable Technology and Systems</em>, vol. 11, no. 3, pp. 1–23, Dec. 2018. [Online]. Available: https://dl.acm.org/doi/10.1145/3242897
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+“FINN.” [Online]. Available: https://xilinx.github.io/finn/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+H. Liu, S. Elkerdawy, N. Ray, and M. Elhoushi, “Layer Importance Estimation with Imprinting for Neural Network Quantization,” in <em class="ltx_emph ltx_font_italic" id="bib.bib29.1.1">2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)</em>.   Nashville, TN, USA: IEEE, Jun. 2021, pp. 2408–2417. [Online]. Available: https://ieeexplore.ieee.org/document/9522743/
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+S. Woo, S. Debnath, R. Hu, X. Chen, Z. Liu, I. S. Kweon, and S. Xie, “ConvNeXt V2: Co-designing and Scaling ConvNets with Masked Autoencoders,” Jan. 2023, arXiv:2301.00808 [cs]. [Online]. Available: http://arxiv.org/abs/2301.00808
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Thu Jun  6 17:18:11 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

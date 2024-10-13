@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>SABER-6D: Shape Representation Based Implicit Object Pose Estimation</title>
+<!--Generated on Mon Sep  2 13:39:25 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2408.05867v2/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S1" title="In SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S2" title="In SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S2.SS1" title="In 2 Related work ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Pose estimation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3" title="In SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Approach</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3.SS1" title="In 3 Approach ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>6D Pose Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3.SS2" title="In 3 Approach ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Architecture</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3.SS2.SSS1" title="In 3.2 Architecture ‣ 3 Approach ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.1 </span>Decoder</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3.SS2.SSS2" title="In 3.2 Architecture ‣ 3 Approach ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.2 </span>Encoder</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3.SS2.SSS3" title="In 3.2 Architecture ‣ 3 Approach ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.3 </span>Translation predictor</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3.SS3" title="In 3 Approach ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Training Stages</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4" title="In SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS1" title="In 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Training Protocol</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS2" title="In 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Architecture Details</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS3" title="In 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Evaluation</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS3.SSS1" title="In 4.3 Evaluation ‣ 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3.1 </span>LineMOD</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS3.SSS2" title="In 4.3 Evaluation ‣ 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3.2 </span>Occlusion-LineMOD</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS3.SSS3" title="In 4.3 Evaluation ‣ 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3.3 </span>T-LESS</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS4" title="In 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.4 </span>Performance gap from SC6D</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.SS5" title="In 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.5 </span>Ablation Studies</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S5" title="In SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion &amp; Summary</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<div class="ltx_para" id="p1">
+<span class="ltx_ERROR undefined" id="p1.6">\stackMath</span><span class="ltx_note ltx_role_institutetext" id="p1.5"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">institutetext: </span><sup class="ltx_sup" id="p1.5.1">1</sup>Technical University of Munich  <sup class="ltx_sup" id="p1.5.2">2</sup>Siemens Technology  <sup class="ltx_sup" id="p1.5.3">3</sup>Robert Bosch GmbH
+
+<br class="ltx_break"/><sup class="ltx_sup" id="p1.5.4">4</sup>Munich Center for Machine Learning (MCML)
+ <sup class="ltx_sup" id="p1.5.5">4</sup>Max-Planck Institute(MPI) </span></span></span>
+</div>
+<h1 class="ltx_title ltx_title_document">SABER-6D: Shape Representation Based Implicit Object Pose Estimation</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Shishir Reddy Vutukur  <span class="ltx_ERROR undefined" id="id1.1.id1">\orcidlink</span>0000-0002-4406-8491
+</span><span class="ltx_author_notes">1122</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Mengkejiergeli Ba <span class="ltx_ERROR undefined" id="id2.1.id1">\orcidlink</span>0009-0008-7905-9609
+</span><span class="ltx_author_notes">33</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Benjamin Busam <span class="ltx_ERROR undefined" id="id3.1.id1">\orcidlink</span>0000-0002-0620-5774
+</span><span class="ltx_author_notes">1144</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<br class="ltx_break"/>Matthias Kayser <span class="ltx_ERROR undefined" id="id4.1.id1">\orcidlink</span>0009-0000-5228-3397
+</span><span class="ltx_author_notes">33</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Gurprit Singh <span class="ltx_ERROR undefined" id="id5.1.id1">\orcidlink</span>0000-0003-0970-5835
+</span><span class="ltx_author_notes">44</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id6.id1">In this paper, we propose a novel encoder-decoder architecture, named SABER, to learn the 6D pose of the object in the embedding space by learning shape representation at a given pose. This model enables us to learn pose by performing shape representation at a target pose from RGB image input. We perform shape representation as an auxiliary task which helps us in learning rotations space for an object based on 2D images. An image encoder predicts the rotation in the embedding space and the DeepSDF based decoder learns to represent the object’s shape at the given pose. As our approach is shape based, the pipeline is suitable for any type of object irrespective of the symmetry. Moreover, we need only a CAD model of the objects to train SABER. Our pipeline is synthetic data based and can also handle symmetric objects without symmetry labels and, thus, no additional labeled training data is needed. The experimental evaluation shows that our method achieves close to benchmark results for both symmetric objects and asymmetric objects on Occlusion-LineMOD, and T-LESS datasets.
+</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Information about the 6D pose of an object in the world is crucial for many applications such as robotics and augmented reality.
+In robotics, a precise pose is needed to locate an object for further operations such as grasping and automatic assembling.
+Basically,
+6D pose refers to estimating the translation and orientation of an object in 3D space from a viewpoint.
+In our work, we aim to train a neural network <span class="ltx_text ltx_font_italic" id="S1.p1.1.1">SABER</span> to estimate the 6D pose using only the CAD model of the objects without any prior labels about the symmetry.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Most research <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib9" title="">9</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib13" title="">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib40" title="">40</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib33" title="">33</a>]</cite> in this field has a strong focus on bridging the gap between synthetic and real by employing training pipelines using data generated purely from CAD models using BlenderProc<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib7" title="">7</a>]</cite>. Our work also tries to address this issue and in addition, solve the problem of pose estimation without knowing the object’s symmetry. Many approaches<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib40" title="">40</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib37" title="">37</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib27" title="">27</a>]</cite> assume the symmetry knowledge of an object beforehand and try to convert ambiguous poses for symmetric objects into unambiguous poses and regress correspondences or poses in the unambiguous space. This is impractical in some scenarios because estimating symmetry labels for a CAD model with higher degrees of symmetry is difficult. Moreover, objects like a coffee mug, which are conditionally symmetric, are much more difficult to deal with while estimating their pose. It is also difficult to annotate symmetry labels for such objects and for objects with complex symmetries as shown in the Symmetric Solids Dataset<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib25" title="">25</a>]</cite>. Thus, an approach that can handle any object irrespective of symmetry labels is desired.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Approaches like SurfEmb<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib9" title="">9</a>]</cite>, SC6D<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib2" title="">2</a>]</cite>, and Augmented Autoencoder (AAE)<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib34" title="">34</a>]</cite> employ textured CAD models without assuming symmetry for the pose estimation task. We employ a similar setting by training the approach with CAD model based photorealistic data (PBR) generated using BlenderProc<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib7" title="">7</a>]</cite> without assuming symmetry labels are known.
+SurfEmb learns symmetry invariant per-point features to handle symmetry. During inference, they employ an intensive render and compare pipeline to estimate 6D pose from 2D-3D correspondences. They need the intensive inference step to handle symmetrical objects as they cannot get one-to-one correspondences for symmetric objects. SC6D assigns a embedding vector for each rotation in a sampled SO3 space and formulates a contrastive loss with a embedding vector from the CNN. They optimize both CNN and rotation embedding vectors during training. SurfEmb handles the symmetry ambiguity by learning symmetry invariant features while SC6D handles this by mapping viewpoint to a optimizable rotation embedding vector. SC6D performs slightly better than our approach as it solves a easier task to optimize rotation embeddings compared to the shape reconstruction problem that we employ. AAE learns to generate unaugmented images from an augmented version of the same image. This enables them to learn the pose in embedding space, but they do not make explicit use of shape information from the CAD model. We employ a similar pipeline to learn the pose in the embedding space. We generate the shape of the object from a 2D image at the same pose as the input image. This enables us to learn rotations in the embedding space. Concretely, our pipeline takes a single 2D image as input and predicts the shape of the object at the same rotation as the 2D image. To reconstruct the shape of the object at the same pose as the input image, the network has to learn rotations in the embedding space. This view-based shape prediction enables us to map ambiguous poses to a single embedding vector as both the shape and the image do not change with different symmetric configurations.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Our work starts with the exploration of DeepSDF<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib26" title="">26</a>]</cite>, which is a method to learn the 3D representation of objects in a canonical orientation. DeepSDF learns to represent the shape of a 3D object by making the network learn the Signed Distance Function (SDF) of an object.
+DeepSDF learns to represent objects in canonical space and performs shape completion in canonical space from partial point clouds. The shape completion and representation do not generalize to rotated shapes. They only operate in one canonical orientation. In our approach, we employ the DeepSDF decoder to learn object shapes at different rotations and learn to represent and reconstruct shapes at different rotations in SO3 space. During training, our network learns to represent rotations in embedding space. However, we observe that we cannot learn to predict the shape from the 2D image by simultaneously training a CNN encoder and the DeepSDF decoder. Thus, we employ a two-stage pipeline for training which involves initially training the DeepSDF decoder in an Autodecoder manner where embedding vectors for rotations are optimized along with the decoder itself. This pre-training helps in conditioning the decoder to learn to represent the shape at different rotations. Then, we train the encoder and decoder together that learns to represent the shape at the desired rotation based on the 2D image input. Some approaches <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib19" title="">19</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib23" title="">23</a>]</cite> deploy DeepSDF as part of the pose estimation training pipeline, but they employ DeepSDF in canonical orientation and for learning a category of shapes. Contrarily, we employ DeepSDF to represent many rotated versions of the same instance object and to create a symmetry invariant pipeline.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">Concretely, we obtain the 2D image and pass it through a CNN to get a rotation embedding feature. The rotation embedding feature along with a 3D point is passed through a DeepSDF decoder to predict the SDF value of the point. Predicting the SDF value from a 2D image indicates that the network represents the shape at the pose conditioned on the input 2D image. Our pipeline enables the prediction of the rotated shape of an object from 2D image input. We make our implementation publicly available <a class="ltx_ref ltx_href" href="https://github.com/shishirreddy/Saber6D" title="">here</a>.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">The contributions of our work are summarized as follows:</p>
+<ul class="ltx_itemize" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We propose a novel approach, SABER, which implicitly estimates the 6D pose of the object in embedding space by conditioning shape prediction on the input image.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">Our network can handle CAD models without symmetry labels by employing a shape representation based approach.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related work</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Pose estimation</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">Many deep learning methods <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib39" title="">39</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib28" title="">28</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib30" title="">30</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib38" title="">38</a>]</cite> estimate the pose as a regression problem directly relying on the labeled pose. Considering the high cost of annotating labels, NOL <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib29" title="">29</a>]</cite> trains the networks using both real images and synthetic data. NOL applies a network to generate synthetic images covering various unseen poses from a few cluttered images and texture-less 3D models of objects. Real data based approaches, NeRF-Pose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib22" title="">22</a>]</cite> and NeRF-Feat <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib35" title="">35</a>]</cite> employ NeRF to train pose estimation pipeline in the absence of a CAD model. Welsa-6D  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib36" title="">36</a>]</cite> employs a feature based point cloud registration approach to label weakly labeled samples using few labeled data which also does not assume the symmetry label is known. TexPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib3" title="">3</a>]</cite> leverages real images for photometrically accurate textures while geometry is learned from synthetic renderings.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">In AAE, different views of objects are rendered as training data. An augmented auto-encoder structure is utilized to reconstruct the object image and the reconstruction loss serves as the supervision signal to train the network. Our network also learns the pose implicitly which is accomplished by 3D shape prediction. Pix2Pose<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib30" title="">30</a>]</cite>, DPOD<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib39" title="">39</a>]</cite> estimate the pose by directly learning 2D-3D correspondences and the pose is estimated in a refinement step, i.e., by PnP and RANSAC algorithms. In <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib28" title="">28</a>]</cite>, pose estimation is treated as a pixel-wise 3D coordinates regression problem. For each pixel, the 2D-3D correspondence is obtained by modeling an object in a colored space from an RGB image and texture-less 3D model. CosyPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib21" title="">21</a>]</cite> starts with a single-view 6D pose estimation to select object candidates from multiple images of a scene to refine the estimated pose.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p" id="S2.SS1.p3.1">A critical issue in pose estimation is visual ambiguity <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib24" title="">24</a>]</cite>. Given a symmetric object, it remains the identical pose with reference to the camera when rotated about a symmetric axis, which leads to rotation ambiguity. SurfEmb, NeRF-Feat, SC6D, Augmented AutoEncoder, and EPOS<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib13" title="">13</a>]</cite>, MatchU<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib17" title="">17</a>]</cite>, DiffusionNocs<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib18" title="">18</a>]</cite> proposed approaches that can handle symmetries by design without assuming symmetry labels. We also propose an approach in a similar direction where we do not assume symmetry labels are known. We compare our approach to RGB based methods, SurfEmb, SC6D, AAE, EPOS, without requiring depth.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p4">
+<p class="ltx_p" id="S2.SS1.p4.1">Aforementioned methods focus solely on an instance level pose estimation. Category level pose estimation approaches typically employ a shape estimation/deformation module to predict the shape of unseen instances. Shapo <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib20" title="">20</a>]</cite>, iCaps, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib6" title="">6</a>]</cite>, SGPA <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib4" title="">4</a>]</cite>, Zero123-6D<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib8" title="">8</a>]</cite>, FSD <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib23" title="">23</a>]</cite>, CenterSnap<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib19" title="">19</a>]</cite> employ shape prediction modules in canonical orientation while our approach employs shape prediction at the same orientation as the object in the image.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p5">
+<p class="ltx_p" id="S2.SS1.p5.1">There is a line of research where rotation distribution is estimated to understand the symmetries of objects without prior labels. Implicit-PDF<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib25" title="">25</a>]</cite>, SpyroPose<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib10" title="">10</a>]</cite>, HyperPosePdf<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib16" title="">16</a>]</cite> employ approaches to learn rotation distribution for challenging symmetric objects without assuming symmetry labels. Our approach focuses on 6D pose estimation, but it can potentially be extended to estimate rotation distribution similar to these approaches.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Approach</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">Our approach, SABER, employs a two-stage encoder-decoder network with a rotation estimation block followed by a translation predictor for the 6D pose estimation.
+The network learns the shape representation of objects in embedding space at different orientations, which are used to predict the rotation.
+The encoder-decoder pipeline learns rotations in embedding space and the signed distance function (SDF) of the object at different orientations.
+Learning SDF values enables us to perform shape representation and employ a shape-dependent loss function for pose estimation, which helps to treat symmetric objects indifferently.</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<p class="ltx_p" id="S3.p2.1">Unlike other approaches, where the encoder and decoder are trained together, we train the decoder first and then the encoder together with the already pre-trained decoder. We choose this paradigm to make the decoder initially learn rotation space which can then generalize well and adapt well to unseen rotations during the second stage.
+The decoder initially learns to represent the object at some randomly sampled rotations and learns rotations in embedding space. DeepSDF optimizes object related embedding vectors during training while we optimize rotation related embedding vectors during training the decoder. However, these optimized embedding vectors are only used for training in the first stage and are discarded for the second stage.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>6D Pose Estimation</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">The encoder takes an image as input and predicts the rotation in embedding space. The decoder decodes the shape from the rotation embedding at the same pose as the input image. After training, we discard the decoder and create a lookup table with rotation embedding vectors generated from the encoder using different training images with corresponding rotation matrices. During Inference, the embedding vector is predicted from the image encoder, and the rotation matrix corresponding to the closest embedding vector in the lookup table is considered the estimated rotation. Similar to GDR-Net and SC6D, we also employ scale invariant translation estimation (SITE) coordinates to estimate translation from a 2D image using a CNN, Translation predictor. In effect, we estimate the rotation from the encoder and the translation from the translation predictor to get the final 6D pose.</p>
+</div>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="223" id="S3.F1.g1" src="x1.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F1.6.3.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S3.F1.4.2" style="font-size:90%;">Encoder-decoder architecture. A 2D image, <math alttext="I" class="ltx_Math" display="inline" id="S3.F1.3.1.m1.1"><semantics id="S3.F1.3.1.m1.1b"><mi id="S3.F1.3.1.m1.1.1" xref="S3.F1.3.1.m1.1.1.cmml">I</mi><annotation-xml encoding="MathML-Content" id="S3.F1.3.1.m1.1c"><ci id="S3.F1.3.1.m1.1.1.cmml" xref="S3.F1.3.1.m1.1.1">𝐼</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.F1.3.1.m1.1d">I</annotation><annotation encoding="application/x-llamapun" id="S3.F1.3.1.m1.1e">italic_I</annotation></semantics></math> is input to the image encoder to predict transformation embedding. A 3D point, <math alttext="x" class="ltx_Math" display="inline" id="S3.F1.4.2.m2.1"><semantics id="S3.F1.4.2.m2.1b"><mi id="S3.F1.4.2.m2.1.1" xref="S3.F1.4.2.m2.1.1.cmml">x</mi><annotation-xml encoding="MathML-Content" id="S3.F1.4.2.m2.1c"><ci id="S3.F1.4.2.m2.1.1.cmml" xref="S3.F1.4.2.m2.1.1">𝑥</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.F1.4.2.m2.1d">x</annotation><annotation encoding="application/x-llamapun" id="S3.F1.4.2.m2.1e">italic_x</annotation></semantics></math>, is concatenated to the transformation embedding and input to the decoder to predict the corresponding SDF value. The input images, the corresponding learned shape representations are visualized by generating meshes using marching cubes. Meshes can be generated by estimating SDF values for 3D points in a grid. This pipeline is employed for estimating rotation.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Architecture</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">Our encoder-decoder architecture is depicted in Figure <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S3.F1" title="Fig. 1 ‣ 3.1 6D Pose Estimation ‣ 3 Approach ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_tag">1</span></a>. The architecture comprises an image based encoder and a multilayer perceptron as the decoder. The translation predictor uses another CNN network to regress the translation. These blocks are explained in the following sections. We employ an Allocentric representation similar to GDR-Net and SC-6D as allocentric rotation is defined based on object rotation and not based on viewpoint.</p>
+</div>
+<section class="ltx_subsubsection" id="S3.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.1 </span>Decoder</h4>
+<div class="ltx_para" id="S3.SS2.SSS1.p1">
+<p class="ltx_p" id="S3.SS2.SSS1.p1.1">As mentioned before, our decoder is adopted from the DeepSDF approach. DeepSDF initially samples random embedding vectors for representing each object in the category that are optimized along with the network.
+Analogously, we use different embeddings for representing the object at different rotations which are optimized along with the decoder similar to DeepSDF.
+Our decoder is trained as an auto-decoder, without an encoder, similar to DeepSDF where embedding vectors are optimized along with the weights during training.
+</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p2">
+<p class="ltx_p" id="S3.SS2.SSS1.p2.6">Specifically, we sample <math alttext="K" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p2.1.m1.1"><semantics id="S3.SS2.SSS1.p2.1.m1.1a"><mi id="S3.SS2.SSS1.p2.1.m1.1.1" xref="S3.SS2.SSS1.p2.1.m1.1.1.cmml">K</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p2.1.m1.1b"><ci id="S3.SS2.SSS1.p2.1.m1.1.1.cmml" xref="S3.SS2.SSS1.p2.1.m1.1.1">𝐾</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p2.1.m1.1c">K</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p2.1.m1.1d">italic_K</annotation></semantics></math> embedding vectors corresponding to <math alttext="K" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p2.2.m2.1"><semantics id="S3.SS2.SSS1.p2.2.m2.1a"><mi id="S3.SS2.SSS1.p2.2.m2.1.1" xref="S3.SS2.SSS1.p2.2.m2.1.1.cmml">K</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p2.2.m2.1b"><ci id="S3.SS2.SSS1.p2.2.m2.1.1.cmml" xref="S3.SS2.SSS1.p2.2.m2.1.1">𝐾</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p2.2.m2.1c">K</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p2.2.m2.1d">italic_K</annotation></semantics></math> rotations with a dimension of <math alttext="1000" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p2.3.m3.1"><semantics id="S3.SS2.SSS1.p2.3.m3.1a"><mn id="S3.SS2.SSS1.p2.3.m3.1.1" xref="S3.SS2.SSS1.p2.3.m3.1.1.cmml">1000</mn><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p2.3.m3.1b"><cn id="S3.SS2.SSS1.p2.3.m3.1.1.cmml" type="integer" xref="S3.SS2.SSS1.p2.3.m3.1.1">1000</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p2.3.m3.1c">1000</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p2.3.m3.1d">1000</annotation></semantics></math> from <math alttext="\mathcal{N}(0,1/1000)" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p2.4.m4.2"><semantics id="S3.SS2.SSS1.p2.4.m4.2a"><mrow id="S3.SS2.SSS1.p2.4.m4.2.2" xref="S3.SS2.SSS1.p2.4.m4.2.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.SSS1.p2.4.m4.2.2.3" xref="S3.SS2.SSS1.p2.4.m4.2.2.3.cmml">𝒩</mi><mo id="S3.SS2.SSS1.p2.4.m4.2.2.2" xref="S3.SS2.SSS1.p2.4.m4.2.2.2.cmml">⁢</mo><mrow id="S3.SS2.SSS1.p2.4.m4.2.2.1.1" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.2.cmml"><mo id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.2" stretchy="false" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.2.cmml">(</mo><mn id="S3.SS2.SSS1.p2.4.m4.1.1" xref="S3.SS2.SSS1.p2.4.m4.1.1.cmml">0</mn><mo id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.3" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.2.cmml">,</mo><mrow id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.cmml"><mn id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.2" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.2.cmml">1</mn><mo id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.1" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.1.cmml">/</mo><mn id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.3" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.3.cmml">1000</mn></mrow><mo id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.4" stretchy="false" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.2.cmml">)</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p2.4.m4.2b"><apply id="S3.SS2.SSS1.p2.4.m4.2.2.cmml" xref="S3.SS2.SSS1.p2.4.m4.2.2"><times id="S3.SS2.SSS1.p2.4.m4.2.2.2.cmml" xref="S3.SS2.SSS1.p2.4.m4.2.2.2"></times><ci id="S3.SS2.SSS1.p2.4.m4.2.2.3.cmml" xref="S3.SS2.SSS1.p2.4.m4.2.2.3">𝒩</ci><interval closure="open" id="S3.SS2.SSS1.p2.4.m4.2.2.1.2.cmml" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1"><cn id="S3.SS2.SSS1.p2.4.m4.1.1.cmml" type="integer" xref="S3.SS2.SSS1.p2.4.m4.1.1">0</cn><apply id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.cmml" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1"><divide id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.1.cmml" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.1"></divide><cn id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.2.cmml" type="integer" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.2">1</cn><cn id="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.3.cmml" type="integer" xref="S3.SS2.SSS1.p2.4.m4.2.2.1.1.1.3">1000</cn></apply></interval></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p2.4.m4.2c">\mathcal{N}(0,1/1000)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p2.4.m4.2d">caligraphic_N ( 0 , 1 / 1000 )</annotation></semantics></math>, which we will call transformation embeddings. Although, the embedding vectors are sampled randomly, the embeddings are optimized during the decoder training. We randomly sample <math alttext="K" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p2.5.m5.1"><semantics id="S3.SS2.SSS1.p2.5.m5.1a"><mi id="S3.SS2.SSS1.p2.5.m5.1.1" xref="S3.SS2.SSS1.p2.5.m5.1.1.cmml">K</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p2.5.m5.1b"><ci id="S3.SS2.SSS1.p2.5.m5.1.1.cmml" xref="S3.SS2.SSS1.p2.5.m5.1.1">𝐾</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p2.5.m5.1c">K</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p2.5.m5.1d">italic_K</annotation></semantics></math> quaternions to learn objects at <math alttext="K" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p2.6.m6.1"><semantics id="S3.SS2.SSS1.p2.6.m6.1a"><mi id="S3.SS2.SSS1.p2.6.m6.1.1" xref="S3.SS2.SSS1.p2.6.m6.1.1.cmml">K</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p2.6.m6.1b"><ci id="S3.SS2.SSS1.p2.6.m6.1.1.cmml" xref="S3.SS2.SSS1.p2.6.m6.1.1">𝐾</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p2.6.m6.1c">K</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p2.6.m6.1d">italic_K</annotation></semantics></math> orientations.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p3">
+<p class="ltx_p" id="S3.SS2.SSS1.p3.4">To learn the SDF of an object, we sample 3D points in the space around and inside the object and estimate their SDF values from the object mesh at canonical orientation to generate ground truth training samples. We can generate training samples for different rotations by simply rotating the 3D points. Rotated 3D points with the same SDF values represent rotated shape. We refer to the 3D points as <math alttext="X" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p3.1.m1.1"><semantics id="S3.SS2.SSS1.p3.1.m1.1a"><mi id="S3.SS2.SSS1.p3.1.m1.1.1" xref="S3.SS2.SSS1.p3.1.m1.1.1.cmml">X</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p3.1.m1.1b"><ci id="S3.SS2.SSS1.p3.1.m1.1.1.cmml" xref="S3.SS2.SSS1.p3.1.m1.1.1">𝑋</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p3.1.m1.1c">X</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p3.1.m1.1d">italic_X</annotation></semantics></math> and the corresponding SDF values as <math alttext="S" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p3.2.m2.1"><semantics id="S3.SS2.SSS1.p3.2.m2.1a"><mi id="S3.SS2.SSS1.p3.2.m2.1.1" xref="S3.SS2.SSS1.p3.2.m2.1.1.cmml">S</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p3.2.m2.1b"><ci id="S3.SS2.SSS1.p3.2.m2.1.1.cmml" xref="S3.SS2.SSS1.p3.2.m2.1.1">𝑆</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p3.2.m2.1c">S</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p3.2.m2.1d">italic_S</annotation></semantics></math> in the canonical orientation. We refer to a single 3D point as <math alttext="x" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p3.3.m3.1"><semantics id="S3.SS2.SSS1.p3.3.m3.1a"><mi id="S3.SS2.SSS1.p3.3.m3.1.1" xref="S3.SS2.SSS1.p3.3.m3.1.1.cmml">x</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p3.3.m3.1b"><ci id="S3.SS2.SSS1.p3.3.m3.1.1.cmml" xref="S3.SS2.SSS1.p3.3.m3.1.1">𝑥</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p3.3.m3.1c">x</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p3.3.m3.1d">italic_x</annotation></semantics></math> and a vector of 3D points as <math alttext="X" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p3.4.m4.1"><semantics id="S3.SS2.SSS1.p3.4.m4.1a"><mi id="S3.SS2.SSS1.p3.4.m4.1.1" xref="S3.SS2.SSS1.p3.4.m4.1.1.cmml">X</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p3.4.m4.1b"><ci id="S3.SS2.SSS1.p3.4.m4.1.1.cmml" xref="S3.SS2.SSS1.p3.4.m4.1.1">𝑋</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p3.4.m4.1c">X</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p3.4.m4.1d">italic_X</annotation></semantics></math> and we follow this convention for other variables as well.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p4">
+<p class="ltx_p" id="S3.SS2.SSS1.p4.13">The training samples constitute a transformation embedding vector, <math alttext="T_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.1.m1.1"><semantics id="S3.SS2.SSS1.p4.1.m1.1a"><msub id="S3.SS2.SSS1.p4.1.m1.1.1" xref="S3.SS2.SSS1.p4.1.m1.1.1.cmml"><mi id="S3.SS2.SSS1.p4.1.m1.1.1.2" xref="S3.SS2.SSS1.p4.1.m1.1.1.2.cmml">T</mi><mi id="S3.SS2.SSS1.p4.1.m1.1.1.3" xref="S3.SS2.SSS1.p4.1.m1.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.1.m1.1b"><apply id="S3.SS2.SSS1.p4.1.m1.1.1.cmml" xref="S3.SS2.SSS1.p4.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS1.p4.1.m1.1.1.1.cmml" xref="S3.SS2.SSS1.p4.1.m1.1.1">subscript</csymbol><ci id="S3.SS2.SSS1.p4.1.m1.1.1.2.cmml" xref="S3.SS2.SSS1.p4.1.m1.1.1.2">𝑇</ci><ci id="S3.SS2.SSS1.p4.1.m1.1.1.3.cmml" xref="S3.SS2.SSS1.p4.1.m1.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.1.m1.1c">T_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.1.m1.1d">italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, corresponding to <math alttext="k" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.2.m2.1"><semantics id="S3.SS2.SSS1.p4.2.m2.1a"><mi id="S3.SS2.SSS1.p4.2.m2.1.1" xref="S3.SS2.SSS1.p4.2.m2.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.2.m2.1b"><ci id="S3.SS2.SSS1.p4.2.m2.1.1.cmml" xref="S3.SS2.SSS1.p4.2.m2.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.2.m2.1c">k</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.2.m2.1d">italic_k</annotation></semantics></math>-th rotation, a 3D point, <math alttext="x_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.3.m3.1"><semantics id="S3.SS2.SSS1.p4.3.m3.1a"><msub id="S3.SS2.SSS1.p4.3.m3.1.1" xref="S3.SS2.SSS1.p4.3.m3.1.1.cmml"><mi id="S3.SS2.SSS1.p4.3.m3.1.1.2" xref="S3.SS2.SSS1.p4.3.m3.1.1.2.cmml">x</mi><mi id="S3.SS2.SSS1.p4.3.m3.1.1.3" xref="S3.SS2.SSS1.p4.3.m3.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.3.m3.1b"><apply id="S3.SS2.SSS1.p4.3.m3.1.1.cmml" xref="S3.SS2.SSS1.p4.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS1.p4.3.m3.1.1.1.cmml" xref="S3.SS2.SSS1.p4.3.m3.1.1">subscript</csymbol><ci id="S3.SS2.SSS1.p4.3.m3.1.1.2.cmml" xref="S3.SS2.SSS1.p4.3.m3.1.1.2">𝑥</ci><ci id="S3.SS2.SSS1.p4.3.m3.1.1.3.cmml" xref="S3.SS2.SSS1.p4.3.m3.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.3.m3.1c">x_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.3.m3.1d">italic_x start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, rotated with <math alttext="k" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.4.m4.1"><semantics id="S3.SS2.SSS1.p4.4.m4.1a"><mi id="S3.SS2.SSS1.p4.4.m4.1.1" xref="S3.SS2.SSS1.p4.4.m4.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.4.m4.1b"><ci id="S3.SS2.SSS1.p4.4.m4.1.1.cmml" xref="S3.SS2.SSS1.p4.4.m4.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.4.m4.1c">k</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.4.m4.1d">italic_k</annotation></semantics></math>-th rotation and its corresponding SDF value, <math alttext="s" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.5.m5.1"><semantics id="S3.SS2.SSS1.p4.5.m5.1a"><mi id="S3.SS2.SSS1.p4.5.m5.1.1" xref="S3.SS2.SSS1.p4.5.m5.1.1.cmml">s</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.5.m5.1b"><ci id="S3.SS2.SSS1.p4.5.m5.1.1.cmml" xref="S3.SS2.SSS1.p4.5.m5.1.1">𝑠</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.5.m5.1c">s</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.5.m5.1d">italic_s</annotation></semantics></math>. Note that the SDF value does not change with object rotation as the rotated 3D points with the same sdf values represent the rotated object.
+Each transformation embedding vector, <math alttext="T_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.6.m6.1"><semantics id="S3.SS2.SSS1.p4.6.m6.1a"><msub id="S3.SS2.SSS1.p4.6.m6.1.1" xref="S3.SS2.SSS1.p4.6.m6.1.1.cmml"><mi id="S3.SS2.SSS1.p4.6.m6.1.1.2" xref="S3.SS2.SSS1.p4.6.m6.1.1.2.cmml">T</mi><mi id="S3.SS2.SSS1.p4.6.m6.1.1.3" xref="S3.SS2.SSS1.p4.6.m6.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.6.m6.1b"><apply id="S3.SS2.SSS1.p4.6.m6.1.1.cmml" xref="S3.SS2.SSS1.p4.6.m6.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS1.p4.6.m6.1.1.1.cmml" xref="S3.SS2.SSS1.p4.6.m6.1.1">subscript</csymbol><ci id="S3.SS2.SSS1.p4.6.m6.1.1.2.cmml" xref="S3.SS2.SSS1.p4.6.m6.1.1.2">𝑇</ci><ci id="S3.SS2.SSS1.p4.6.m6.1.1.3.cmml" xref="S3.SS2.SSS1.p4.6.m6.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.6.m6.1c">T_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.6.m6.1d">italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, is assigned to a rotation, <math alttext="R_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.7.m7.1"><semantics id="S3.SS2.SSS1.p4.7.m7.1a"><msub id="S3.SS2.SSS1.p4.7.m7.1.1" xref="S3.SS2.SSS1.p4.7.m7.1.1.cmml"><mi id="S3.SS2.SSS1.p4.7.m7.1.1.2" xref="S3.SS2.SSS1.p4.7.m7.1.1.2.cmml">R</mi><mi id="S3.SS2.SSS1.p4.7.m7.1.1.3" xref="S3.SS2.SSS1.p4.7.m7.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.7.m7.1b"><apply id="S3.SS2.SSS1.p4.7.m7.1.1.cmml" xref="S3.SS2.SSS1.p4.7.m7.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS1.p4.7.m7.1.1.1.cmml" xref="S3.SS2.SSS1.p4.7.m7.1.1">subscript</csymbol><ci id="S3.SS2.SSS1.p4.7.m7.1.1.2.cmml" xref="S3.SS2.SSS1.p4.7.m7.1.1.2">𝑅</ci><ci id="S3.SS2.SSS1.p4.7.m7.1.1.3.cmml" xref="S3.SS2.SSS1.p4.7.m7.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.7.m7.1c">R_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.7.m7.1d">italic_R start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>. The 3D point sample corresponding to the object rotated by <math alttext="k" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.8.m8.1"><semantics id="S3.SS2.SSS1.p4.8.m8.1a"><mi id="S3.SS2.SSS1.p4.8.m8.1.1" xref="S3.SS2.SSS1.p4.8.m8.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.8.m8.1b"><ci id="S3.SS2.SSS1.p4.8.m8.1.1.cmml" xref="S3.SS2.SSS1.p4.8.m8.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.8.m8.1c">k</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.8.m8.1d">italic_k</annotation></semantics></math>-th rotation, <math alttext="R_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.9.m9.1"><semantics id="S3.SS2.SSS1.p4.9.m9.1a"><msub id="S3.SS2.SSS1.p4.9.m9.1.1" xref="S3.SS2.SSS1.p4.9.m9.1.1.cmml"><mi id="S3.SS2.SSS1.p4.9.m9.1.1.2" xref="S3.SS2.SSS1.p4.9.m9.1.1.2.cmml">R</mi><mi id="S3.SS2.SSS1.p4.9.m9.1.1.3" xref="S3.SS2.SSS1.p4.9.m9.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.9.m9.1b"><apply id="S3.SS2.SSS1.p4.9.m9.1.1.cmml" xref="S3.SS2.SSS1.p4.9.m9.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS1.p4.9.m9.1.1.1.cmml" xref="S3.SS2.SSS1.p4.9.m9.1.1">subscript</csymbol><ci id="S3.SS2.SSS1.p4.9.m9.1.1.2.cmml" xref="S3.SS2.SSS1.p4.9.m9.1.1.2">𝑅</ci><ci id="S3.SS2.SSS1.p4.9.m9.1.1.3.cmml" xref="S3.SS2.SSS1.p4.9.m9.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.9.m9.1c">R_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.9.m9.1d">italic_R start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, is concatenated with corresponding transformation embedding <math alttext="T_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.10.m10.1"><semantics id="S3.SS2.SSS1.p4.10.m10.1a"><msub id="S3.SS2.SSS1.p4.10.m10.1.1" xref="S3.SS2.SSS1.p4.10.m10.1.1.cmml"><mi id="S3.SS2.SSS1.p4.10.m10.1.1.2" xref="S3.SS2.SSS1.p4.10.m10.1.1.2.cmml">T</mi><mi id="S3.SS2.SSS1.p4.10.m10.1.1.3" xref="S3.SS2.SSS1.p4.10.m10.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.10.m10.1b"><apply id="S3.SS2.SSS1.p4.10.m10.1.1.cmml" xref="S3.SS2.SSS1.p4.10.m10.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS1.p4.10.m10.1.1.1.cmml" xref="S3.SS2.SSS1.p4.10.m10.1.1">subscript</csymbol><ci id="S3.SS2.SSS1.p4.10.m10.1.1.2.cmml" xref="S3.SS2.SSS1.p4.10.m10.1.1.2">𝑇</ci><ci id="S3.SS2.SSS1.p4.10.m10.1.1.3.cmml" xref="S3.SS2.SSS1.p4.10.m10.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.10.m10.1c">T_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.10.m10.1d">italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math> to create the input vector. <math alttext="\phi" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.11.m11.1"><semantics id="S3.SS2.SSS1.p4.11.m11.1a"><mi id="S3.SS2.SSS1.p4.11.m11.1.1" xref="S3.SS2.SSS1.p4.11.m11.1.1.cmml">ϕ</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.11.m11.1b"><ci id="S3.SS2.SSS1.p4.11.m11.1.1.cmml" xref="S3.SS2.SSS1.p4.11.m11.1.1">italic-ϕ</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.11.m11.1c">\phi</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.11.m11.1d">italic_ϕ</annotation></semantics></math> is a one-to-one mapping function between embedding vectors and corresponding rotation matrices. The network, <math alttext="D_{\theta}" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.12.m12.1"><semantics id="S3.SS2.SSS1.p4.12.m12.1a"><msub id="S3.SS2.SSS1.p4.12.m12.1.1" xref="S3.SS2.SSS1.p4.12.m12.1.1.cmml"><mi id="S3.SS2.SSS1.p4.12.m12.1.1.2" xref="S3.SS2.SSS1.p4.12.m12.1.1.2.cmml">D</mi><mi id="S3.SS2.SSS1.p4.12.m12.1.1.3" xref="S3.SS2.SSS1.p4.12.m12.1.1.3.cmml">θ</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.12.m12.1b"><apply id="S3.SS2.SSS1.p4.12.m12.1.1.cmml" xref="S3.SS2.SSS1.p4.12.m12.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS1.p4.12.m12.1.1.1.cmml" xref="S3.SS2.SSS1.p4.12.m12.1.1">subscript</csymbol><ci id="S3.SS2.SSS1.p4.12.m12.1.1.2.cmml" xref="S3.SS2.SSS1.p4.12.m12.1.1.2">𝐷</ci><ci id="S3.SS2.SSS1.p4.12.m12.1.1.3.cmml" xref="S3.SS2.SSS1.p4.12.m12.1.1.3">𝜃</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.12.m12.1c">D_{\theta}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.12.m12.1d">italic_D start_POSTSUBSCRIPT italic_θ end_POSTSUBSCRIPT</annotation></semantics></math>, takes the input vector and predicts the SDF value, <math alttext="s" class="ltx_Math" display="inline" id="S3.SS2.SSS1.p4.13.m13.1"><semantics id="S3.SS2.SSS1.p4.13.m13.1a"><mi id="S3.SS2.SSS1.p4.13.m13.1.1" xref="S3.SS2.SSS1.p4.13.m13.1.1.cmml">s</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS1.p4.13.m13.1b"><ci id="S3.SS2.SSS1.p4.13.m13.1.1.cmml" xref="S3.SS2.SSS1.p4.13.m13.1.1">𝑠</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS1.p4.13.m13.1c">s</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS1.p4.13.m13.1d">italic_s</annotation></semantics></math>.</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\begin{split}R_{k}&amp;=\phi(T_{k}),\quad x_{k}=R_{k}\cdot x\\
+s&amp;=D_{\theta}(x_{k},T_{k})\end{split}" class="ltx_math_unparsed" display="block" id="S3.E1.m1.31"><semantics id="S3.E1.m1.31a"><mtable columnspacing="0pt" displaystyle="true" id="S3.E1.m1.31.31.4" rowspacing="0pt"><mtr id="S3.E1.m1.31.31.4a"><mtd class="ltx_align_right" columnalign="right" id="S3.E1.m1.31.31.4b"><msub id="S3.E1.m1.2.2.2.2.2"><mi id="S3.E1.m1.1.1.1.1.1.1">R</mi><mi id="S3.E1.m1.2.2.2.2.2.2.1">k</mi></msub></mtd><mtd class="ltx_align_left" columnalign="left" id="S3.E1.m1.31.31.4c"><mrow id="S3.E1.m1.29.29.2.29.18.16.16"><mrow id="S3.E1.m1.28.28.1.28.17.15.15.1"><mi id="S3.E1.m1.28.28.1.28.17.15.15.1.2"></mi><mo id="S3.E1.m1.3.3.3.3.1.1">=</mo><mrow id="S3.E1.m1.28.28.1.28.17.15.15.1.1"><mi id="S3.E1.m1.4.4.4.4.2.2">ϕ</mi><mo id="S3.E1.m1.28.28.1.28.17.15.15.1.1.2">⁢</mo><mrow id="S3.E1.m1.28.28.1.28.17.15.15.1.1.1.1"><mo id="S3.E1.m1.5.5.5.5.3.3" stretchy="false">(</mo><msub id="S3.E1.m1.28.28.1.28.17.15.15.1.1.1.1.1"><mi id="S3.E1.m1.6.6.6.6.4.4">T</mi><mi id="S3.E1.m1.7.7.7.7.5.5.1">k</mi></msub><mo id="S3.E1.m1.8.8.8.8.6.6" stretchy="false">)</mo></mrow></mrow></mrow><mo id="S3.E1.m1.9.9.9.9.7.7" rspace="1.167em">,</mo><mrow id="S3.E1.m1.29.29.2.29.18.16.16.2"><msub id="S3.E1.m1.29.29.2.29.18.16.16.2.1"><mi id="S3.E1.m1.10.10.10.10.8.8">x</mi><mi id="S3.E1.m1.11.11.11.11.9.9.1">k</mi></msub><mo id="S3.E1.m1.12.12.12.12.10.10">=</mo><mrow id="S3.E1.m1.29.29.2.29.18.16.16.2.2"><msub id="S3.E1.m1.29.29.2.29.18.16.16.2.2.1"><mi id="S3.E1.m1.13.13.13.13.11.11">R</mi><mi id="S3.E1.m1.14.14.14.14.12.12.1">k</mi></msub><mo id="S3.E1.m1.15.15.15.15.13.13" lspace="0.222em" rspace="0.222em">⋅</mo><mi id="S3.E1.m1.16.16.16.16.14.14">x</mi></mrow></mrow></mrow></mtd></mtr><mtr id="S3.E1.m1.31.31.4d"><mtd class="ltx_align_right" columnalign="right" id="S3.E1.m1.31.31.4e"><mi id="S3.E1.m1.17.17.17.1.1.1">s</mi></mtd><mtd class="ltx_align_left" columnalign="left" id="S3.E1.m1.31.31.4f"><mrow id="S3.E1.m1.31.31.4.31.13.12"><mi id="S3.E1.m1.31.31.4.31.13.12.13"></mi><mo id="S3.E1.m1.18.18.18.2.1.1">=</mo><mrow id="S3.E1.m1.31.31.4.31.13.12.12"><msub id="S3.E1.m1.31.31.4.31.13.12.12.4"><mi id="S3.E1.m1.19.19.19.3.2.2">D</mi><mi id="S3.E1.m1.20.20.20.4.3.3.1">θ</mi></msub><mo id="S3.E1.m1.31.31.4.31.13.12.12.3">⁢</mo><mrow id="S3.E1.m1.31.31.4.31.13.12.12.2.2"><mo id="S3.E1.m1.21.21.21.5.4.4" stretchy="false">(</mo><msub id="S3.E1.m1.30.30.3.30.12.11.11.1.1.1"><mi id="S3.E1.m1.22.22.22.6.5.5">x</mi><mi id="S3.E1.m1.23.23.23.7.6.6.1">k</mi></msub><mo id="S3.E1.m1.24.24.24.8.7.7">,</mo><msub id="S3.E1.m1.31.31.4.31.13.12.12.2.2.2"><mi id="S3.E1.m1.25.25.25.9.8.8">T</mi><mi id="S3.E1.m1.26.26.26.10.9.9.1">k</mi></msub><mo id="S3.E1.m1.27.27.27.11.10.10" stretchy="false">)</mo></mrow></mrow></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex" id="S3.E1.m1.31b">\begin{split}R_{k}&amp;=\phi(T_{k}),\quad x_{k}=R_{k}\cdot x\\
+s&amp;=D_{\theta}(x_{k},T_{k})\end{split}</annotation><annotation encoding="application/x-llamapun" id="S3.E1.m1.31c">start_ROW start_CELL italic_R start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT end_CELL start_CELL = italic_ϕ ( italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT ) , italic_x start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT = italic_R start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT ⋅ italic_x end_CELL end_ROW start_ROW start_CELL italic_s end_CELL start_CELL = italic_D start_POSTSUBSCRIPT italic_θ end_POSTSUBSCRIPT ( italic_x start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT , italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT ) end_CELL end_ROW</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.2 </span>Encoder</h4>
+<div class="ltx_para" id="S3.SS2.SSS2.p1">
+<p class="ltx_p" id="S3.SS2.SSS2.p1.1">A ResNet16 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib11" title="">11</a>]</cite> encoder extracts features from an RGB image and predicts the transformation in the embedding space.
+The transformation embedding is input into the decoder along with the 3D points to predict the corresponding point-wise SDF value.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS2.p2">
+<p class="ltx_p" id="S3.SS2.SSS2.p2.3">The image corresponding to <math alttext="k^{th}" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p2.1.m1.1"><semantics id="S3.SS2.SSS2.p2.1.m1.1a"><msup id="S3.SS2.SSS2.p2.1.m1.1.1" xref="S3.SS2.SSS2.p2.1.m1.1.1.cmml"><mi id="S3.SS2.SSS2.p2.1.m1.1.1.2" xref="S3.SS2.SSS2.p2.1.m1.1.1.2.cmml">k</mi><mrow id="S3.SS2.SSS2.p2.1.m1.1.1.3" xref="S3.SS2.SSS2.p2.1.m1.1.1.3.cmml"><mi id="S3.SS2.SSS2.p2.1.m1.1.1.3.2" xref="S3.SS2.SSS2.p2.1.m1.1.1.3.2.cmml">t</mi><mo id="S3.SS2.SSS2.p2.1.m1.1.1.3.1" xref="S3.SS2.SSS2.p2.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.SSS2.p2.1.m1.1.1.3.3" xref="S3.SS2.SSS2.p2.1.m1.1.1.3.3.cmml">h</mi></mrow></msup><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS2.p2.1.m1.1b"><apply id="S3.SS2.SSS2.p2.1.m1.1.1.cmml" xref="S3.SS2.SSS2.p2.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS2.p2.1.m1.1.1.1.cmml" xref="S3.SS2.SSS2.p2.1.m1.1.1">superscript</csymbol><ci id="S3.SS2.SSS2.p2.1.m1.1.1.2.cmml" xref="S3.SS2.SSS2.p2.1.m1.1.1.2">𝑘</ci><apply id="S3.SS2.SSS2.p2.1.m1.1.1.3.cmml" xref="S3.SS2.SSS2.p2.1.m1.1.1.3"><times id="S3.SS2.SSS2.p2.1.m1.1.1.3.1.cmml" xref="S3.SS2.SSS2.p2.1.m1.1.1.3.1"></times><ci id="S3.SS2.SSS2.p2.1.m1.1.1.3.2.cmml" xref="S3.SS2.SSS2.p2.1.m1.1.1.3.2">𝑡</ci><ci id="S3.SS2.SSS2.p2.1.m1.1.1.3.3.cmml" xref="S3.SS2.SSS2.p2.1.m1.1.1.3.3">ℎ</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS2.p2.1.m1.1c">k^{th}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS2.p2.1.m1.1d">italic_k start_POSTSUPERSCRIPT italic_t italic_h end_POSTSUPERSCRIPT</annotation></semantics></math> rotation, <math alttext="{I}_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p2.2.m2.1"><semantics id="S3.SS2.SSS2.p2.2.m2.1a"><msub id="S3.SS2.SSS2.p2.2.m2.1.1" xref="S3.SS2.SSS2.p2.2.m2.1.1.cmml"><mi id="S3.SS2.SSS2.p2.2.m2.1.1.2" xref="S3.SS2.SSS2.p2.2.m2.1.1.2.cmml">I</mi><mi id="S3.SS2.SSS2.p2.2.m2.1.1.3" xref="S3.SS2.SSS2.p2.2.m2.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS2.p2.2.m2.1b"><apply id="S3.SS2.SSS2.p2.2.m2.1.1.cmml" xref="S3.SS2.SSS2.p2.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS2.p2.2.m2.1.1.1.cmml" xref="S3.SS2.SSS2.p2.2.m2.1.1">subscript</csymbol><ci id="S3.SS2.SSS2.p2.2.m2.1.1.2.cmml" xref="S3.SS2.SSS2.p2.2.m2.1.1.2">𝐼</ci><ci id="S3.SS2.SSS2.p2.2.m2.1.1.3.cmml" xref="S3.SS2.SSS2.p2.2.m2.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS2.p2.2.m2.1c">{I}_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS2.p2.2.m2.1d">italic_I start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, is input to the encoder to predict transformation embedding <math alttext="T_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p2.3.m3.1"><semantics id="S3.SS2.SSS2.p2.3.m3.1a"><msub id="S3.SS2.SSS2.p2.3.m3.1.1" xref="S3.SS2.SSS2.p2.3.m3.1.1.cmml"><mi id="S3.SS2.SSS2.p2.3.m3.1.1.2" xref="S3.SS2.SSS2.p2.3.m3.1.1.2.cmml">T</mi><mi id="S3.SS2.SSS2.p2.3.m3.1.1.3" xref="S3.SS2.SSS2.p2.3.m3.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS2.p2.3.m3.1b"><apply id="S3.SS2.SSS2.p2.3.m3.1.1.cmml" xref="S3.SS2.SSS2.p2.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS2.p2.3.m3.1.1.1.cmml" xref="S3.SS2.SSS2.p2.3.m3.1.1">subscript</csymbol><ci id="S3.SS2.SSS2.p2.3.m3.1.1.2.cmml" xref="S3.SS2.SSS2.p2.3.m3.1.1.2">𝑇</ci><ci id="S3.SS2.SSS2.p2.3.m3.1.1.3.cmml" xref="S3.SS2.SSS2.p2.3.m3.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS2.p2.3.m3.1c">T_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS2.p2.3.m3.1d">italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math> as follows:</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="T_{k}=E_{\theta}({I}_{k})" class="ltx_Math" display="block" id="S3.E2.m1.1"><semantics id="S3.E2.m1.1a"><mrow id="S3.E2.m1.1.1" xref="S3.E2.m1.1.1.cmml"><msub id="S3.E2.m1.1.1.3" xref="S3.E2.m1.1.1.3.cmml"><mi id="S3.E2.m1.1.1.3.2" xref="S3.E2.m1.1.1.3.2.cmml">T</mi><mi id="S3.E2.m1.1.1.3.3" xref="S3.E2.m1.1.1.3.3.cmml">k</mi></msub><mo id="S3.E2.m1.1.1.2" xref="S3.E2.m1.1.1.2.cmml">=</mo><mrow id="S3.E2.m1.1.1.1" xref="S3.E2.m1.1.1.1.cmml"><msub id="S3.E2.m1.1.1.1.3" xref="S3.E2.m1.1.1.1.3.cmml"><mi id="S3.E2.m1.1.1.1.3.2" xref="S3.E2.m1.1.1.1.3.2.cmml">E</mi><mi id="S3.E2.m1.1.1.1.3.3" xref="S3.E2.m1.1.1.1.3.3.cmml">θ</mi></msub><mo id="S3.E2.m1.1.1.1.2" xref="S3.E2.m1.1.1.1.2.cmml">⁢</mo><mrow id="S3.E2.m1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.1.cmml"><mo id="S3.E2.m1.1.1.1.1.1.2" stretchy="false" xref="S3.E2.m1.1.1.1.1.1.1.cmml">(</mo><msub id="S3.E2.m1.1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.1.cmml"><mi id="S3.E2.m1.1.1.1.1.1.1.2" xref="S3.E2.m1.1.1.1.1.1.1.2.cmml">I</mi><mi id="S3.E2.m1.1.1.1.1.1.1.3" xref="S3.E2.m1.1.1.1.1.1.1.3.cmml">k</mi></msub><mo id="S3.E2.m1.1.1.1.1.1.3" stretchy="false" xref="S3.E2.m1.1.1.1.1.1.1.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E2.m1.1b"><apply id="S3.E2.m1.1.1.cmml" xref="S3.E2.m1.1.1"><eq id="S3.E2.m1.1.1.2.cmml" xref="S3.E2.m1.1.1.2"></eq><apply id="S3.E2.m1.1.1.3.cmml" xref="S3.E2.m1.1.1.3"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.3.1.cmml" xref="S3.E2.m1.1.1.3">subscript</csymbol><ci id="S3.E2.m1.1.1.3.2.cmml" xref="S3.E2.m1.1.1.3.2">𝑇</ci><ci id="S3.E2.m1.1.1.3.3.cmml" xref="S3.E2.m1.1.1.3.3">𝑘</ci></apply><apply id="S3.E2.m1.1.1.1.cmml" xref="S3.E2.m1.1.1.1"><times id="S3.E2.m1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.2"></times><apply id="S3.E2.m1.1.1.1.3.cmml" xref="S3.E2.m1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.3.1.cmml" xref="S3.E2.m1.1.1.1.3">subscript</csymbol><ci id="S3.E2.m1.1.1.1.3.2.cmml" xref="S3.E2.m1.1.1.1.3.2">𝐸</ci><ci id="S3.E2.m1.1.1.1.3.3.cmml" xref="S3.E2.m1.1.1.1.3.3">𝜃</ci></apply><apply id="S3.E2.m1.1.1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1.1">subscript</csymbol><ci id="S3.E2.m1.1.1.1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.1.1.1.2">𝐼</ci><ci id="S3.E2.m1.1.1.1.1.1.1.3.cmml" xref="S3.E2.m1.1.1.1.1.1.1.3">𝑘</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E2.m1.1c">T_{k}=E_{\theta}({I}_{k})</annotation><annotation encoding="application/x-llamapun" id="S3.E2.m1.1d">italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT = italic_E start_POSTSUBSCRIPT italic_θ end_POSTSUBSCRIPT ( italic_I start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.3 </span>Translation predictor</h4>
+<div class="ltx_para" id="S3.SS2.SSS3.p1">
+<p class="ltx_p" id="S3.SS2.SSS3.p1.4">This module estimates the translation in SITE coordinates as employed in GDR-Net and SC6D. SITE coordinates comprises a 2D offset between the center of the object and the center of the image crop and z-axis translation. We employ a CNN similar to the one employed in SC6D for predicting SITE coordinates from a 2D image. The 2D image corresponding to the <math alttext="k^{th}" class="ltx_Math" display="inline" id="S3.SS2.SSS3.p1.1.m1.1"><semantics id="S3.SS2.SSS3.p1.1.m1.1a"><msup id="S3.SS2.SSS3.p1.1.m1.1.1" xref="S3.SS2.SSS3.p1.1.m1.1.1.cmml"><mi id="S3.SS2.SSS3.p1.1.m1.1.1.2" xref="S3.SS2.SSS3.p1.1.m1.1.1.2.cmml">k</mi><mrow id="S3.SS2.SSS3.p1.1.m1.1.1.3" xref="S3.SS2.SSS3.p1.1.m1.1.1.3.cmml"><mi id="S3.SS2.SSS3.p1.1.m1.1.1.3.2" xref="S3.SS2.SSS3.p1.1.m1.1.1.3.2.cmml">t</mi><mo id="S3.SS2.SSS3.p1.1.m1.1.1.3.1" xref="S3.SS2.SSS3.p1.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.SSS3.p1.1.m1.1.1.3.3" xref="S3.SS2.SSS3.p1.1.m1.1.1.3.3.cmml">h</mi></mrow></msup><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS3.p1.1.m1.1b"><apply id="S3.SS2.SSS3.p1.1.m1.1.1.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS3.p1.1.m1.1.1.1.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1">superscript</csymbol><ci id="S3.SS2.SSS3.p1.1.m1.1.1.2.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1.2">𝑘</ci><apply id="S3.SS2.SSS3.p1.1.m1.1.1.3.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1.3"><times id="S3.SS2.SSS3.p1.1.m1.1.1.3.1.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1.3.1"></times><ci id="S3.SS2.SSS3.p1.1.m1.1.1.3.2.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1.3.2">𝑡</ci><ci id="S3.SS2.SSS3.p1.1.m1.1.1.3.3.cmml" xref="S3.SS2.SSS3.p1.1.m1.1.1.3.3">ℎ</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS3.p1.1.m1.1c">k^{th}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS3.p1.1.m1.1d">italic_k start_POSTSUPERSCRIPT italic_t italic_h end_POSTSUPERSCRIPT</annotation></semantics></math> rotation, <math alttext="{I}_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS3.p1.2.m2.1"><semantics id="S3.SS2.SSS3.p1.2.m2.1a"><msub id="S3.SS2.SSS3.p1.2.m2.1.1" xref="S3.SS2.SSS3.p1.2.m2.1.1.cmml"><mi id="S3.SS2.SSS3.p1.2.m2.1.1.2" xref="S3.SS2.SSS3.p1.2.m2.1.1.2.cmml">I</mi><mi id="S3.SS2.SSS3.p1.2.m2.1.1.3" xref="S3.SS2.SSS3.p1.2.m2.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS3.p1.2.m2.1b"><apply id="S3.SS2.SSS3.p1.2.m2.1.1.cmml" xref="S3.SS2.SSS3.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS3.p1.2.m2.1.1.1.cmml" xref="S3.SS2.SSS3.p1.2.m2.1.1">subscript</csymbol><ci id="S3.SS2.SSS3.p1.2.m2.1.1.2.cmml" xref="S3.SS2.SSS3.p1.2.m2.1.1.2">𝐼</ci><ci id="S3.SS2.SSS3.p1.2.m2.1.1.3.cmml" xref="S3.SS2.SSS3.p1.2.m2.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS3.p1.2.m2.1c">{I}_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS3.p1.2.m2.1d">italic_I start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, is input to the translation predictor, <math alttext="M_{\theta}" class="ltx_Math" display="inline" id="S3.SS2.SSS3.p1.3.m3.1"><semantics id="S3.SS2.SSS3.p1.3.m3.1a"><msub id="S3.SS2.SSS3.p1.3.m3.1.1" xref="S3.SS2.SSS3.p1.3.m3.1.1.cmml"><mi id="S3.SS2.SSS3.p1.3.m3.1.1.2" xref="S3.SS2.SSS3.p1.3.m3.1.1.2.cmml">M</mi><mi id="S3.SS2.SSS3.p1.3.m3.1.1.3" xref="S3.SS2.SSS3.p1.3.m3.1.1.3.cmml">θ</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS3.p1.3.m3.1b"><apply id="S3.SS2.SSS3.p1.3.m3.1.1.cmml" xref="S3.SS2.SSS3.p1.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS3.p1.3.m3.1.1.1.cmml" xref="S3.SS2.SSS3.p1.3.m3.1.1">subscript</csymbol><ci id="S3.SS2.SSS3.p1.3.m3.1.1.2.cmml" xref="S3.SS2.SSS3.p1.3.m3.1.1.2">𝑀</ci><ci id="S3.SS2.SSS3.p1.3.m3.1.1.3.cmml" xref="S3.SS2.SSS3.p1.3.m3.1.1.3">𝜃</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS3.p1.3.m3.1c">M_{\theta}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS3.p1.3.m3.1d">italic_M start_POSTSUBSCRIPT italic_θ end_POSTSUBSCRIPT</annotation></semantics></math> to predict SITE coordinates, <math alttext="t_{k}" class="ltx_Math" display="inline" id="S3.SS2.SSS3.p1.4.m4.1"><semantics id="S3.SS2.SSS3.p1.4.m4.1a"><msub id="S3.SS2.SSS3.p1.4.m4.1.1" xref="S3.SS2.SSS3.p1.4.m4.1.1.cmml"><mi id="S3.SS2.SSS3.p1.4.m4.1.1.2" xref="S3.SS2.SSS3.p1.4.m4.1.1.2.cmml">t</mi><mi id="S3.SS2.SSS3.p1.4.m4.1.1.3" xref="S3.SS2.SSS3.p1.4.m4.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.SSS3.p1.4.m4.1b"><apply id="S3.SS2.SSS3.p1.4.m4.1.1.cmml" xref="S3.SS2.SSS3.p1.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS2.SSS3.p1.4.m4.1.1.1.cmml" xref="S3.SS2.SSS3.p1.4.m4.1.1">subscript</csymbol><ci id="S3.SS2.SSS3.p1.4.m4.1.1.2.cmml" xref="S3.SS2.SSS3.p1.4.m4.1.1.2">𝑡</ci><ci id="S3.SS2.SSS3.p1.4.m4.1.1.3.cmml" xref="S3.SS2.SSS3.p1.4.m4.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.SSS3.p1.4.m4.1c">t_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.SSS3.p1.4.m4.1d">italic_t start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, as follows:</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="t_{k}=M_{\theta}({I}_{k})" class="ltx_Math" display="block" id="S3.E3.m1.1"><semantics id="S3.E3.m1.1a"><mrow id="S3.E3.m1.1.1" xref="S3.E3.m1.1.1.cmml"><msub id="S3.E3.m1.1.1.3" xref="S3.E3.m1.1.1.3.cmml"><mi id="S3.E3.m1.1.1.3.2" xref="S3.E3.m1.1.1.3.2.cmml">t</mi><mi id="S3.E3.m1.1.1.3.3" xref="S3.E3.m1.1.1.3.3.cmml">k</mi></msub><mo id="S3.E3.m1.1.1.2" xref="S3.E3.m1.1.1.2.cmml">=</mo><mrow id="S3.E3.m1.1.1.1" xref="S3.E3.m1.1.1.1.cmml"><msub id="S3.E3.m1.1.1.1.3" xref="S3.E3.m1.1.1.1.3.cmml"><mi id="S3.E3.m1.1.1.1.3.2" xref="S3.E3.m1.1.1.1.3.2.cmml">M</mi><mi id="S3.E3.m1.1.1.1.3.3" xref="S3.E3.m1.1.1.1.3.3.cmml">θ</mi></msub><mo id="S3.E3.m1.1.1.1.2" xref="S3.E3.m1.1.1.1.2.cmml">⁢</mo><mrow id="S3.E3.m1.1.1.1.1.1" xref="S3.E3.m1.1.1.1.1.1.1.cmml"><mo id="S3.E3.m1.1.1.1.1.1.2" stretchy="false" xref="S3.E3.m1.1.1.1.1.1.1.cmml">(</mo><msub id="S3.E3.m1.1.1.1.1.1.1" xref="S3.E3.m1.1.1.1.1.1.1.cmml"><mi id="S3.E3.m1.1.1.1.1.1.1.2" xref="S3.E3.m1.1.1.1.1.1.1.2.cmml">I</mi><mi id="S3.E3.m1.1.1.1.1.1.1.3" xref="S3.E3.m1.1.1.1.1.1.1.3.cmml">k</mi></msub><mo id="S3.E3.m1.1.1.1.1.1.3" stretchy="false" xref="S3.E3.m1.1.1.1.1.1.1.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E3.m1.1b"><apply id="S3.E3.m1.1.1.cmml" xref="S3.E3.m1.1.1"><eq id="S3.E3.m1.1.1.2.cmml" xref="S3.E3.m1.1.1.2"></eq><apply id="S3.E3.m1.1.1.3.cmml" xref="S3.E3.m1.1.1.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.1.cmml" xref="S3.E3.m1.1.1.3">subscript</csymbol><ci id="S3.E3.m1.1.1.3.2.cmml" xref="S3.E3.m1.1.1.3.2">𝑡</ci><ci id="S3.E3.m1.1.1.3.3.cmml" xref="S3.E3.m1.1.1.3.3">𝑘</ci></apply><apply id="S3.E3.m1.1.1.1.cmml" xref="S3.E3.m1.1.1.1"><times id="S3.E3.m1.1.1.1.2.cmml" xref="S3.E3.m1.1.1.1.2"></times><apply id="S3.E3.m1.1.1.1.3.cmml" xref="S3.E3.m1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.1.3.1.cmml" xref="S3.E3.m1.1.1.1.3">subscript</csymbol><ci id="S3.E3.m1.1.1.1.3.2.cmml" xref="S3.E3.m1.1.1.1.3.2">𝑀</ci><ci id="S3.E3.m1.1.1.1.3.3.cmml" xref="S3.E3.m1.1.1.1.3.3">𝜃</ci></apply><apply id="S3.E3.m1.1.1.1.1.1.1.cmml" xref="S3.E3.m1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.1.1.1.1.1.cmml" xref="S3.E3.m1.1.1.1.1.1">subscript</csymbol><ci id="S3.E3.m1.1.1.1.1.1.1.2.cmml" xref="S3.E3.m1.1.1.1.1.1.1.2">𝐼</ci><ci id="S3.E3.m1.1.1.1.1.1.1.3.cmml" xref="S3.E3.m1.1.1.1.1.1.1.3">𝑘</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E3.m1.1c">t_{k}=M_{\theta}({I}_{k})</annotation><annotation encoding="application/x-llamapun" id="S3.E3.m1.1d">italic_t start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT = italic_M start_POSTSUBSCRIPT italic_θ end_POSTSUBSCRIPT ( italic_I start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Training Stages</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">We train our pipeline in two stages instead of directly training both decoder and encoder together. We train the decoder in the first stage and then we train both the encoder and decoder in the second stage.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1">We employ a two stage pipeline because we observed that when the encoder and decoder are trained together in a single stage, it falls into local minima and reconstructs sphere shape for all poses. The sphere shape is a local minima since we are rotating our object around the origin and the sphere will locally minimize all the rotated shapes in a batch and predict a sphere to satisfy them all. The task of shape estimation at various poses based on the input image is difficult and simultaneously training the encoder and decoder from scratch does not facilitate the shape learning. To avoid this, we sample some rotations randomly and train our decoder alone to represent and learn the rotated versions of our object. This makes it easier for the network to learn shapes directly without also optimizing the encoder. This pre-training of the decoder helps it to learn the shape and also understand the rotation space.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p3">
+<p class="ltx_p" id="S3.SS3.p3.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p3.1.1">Stage 1:</span>
+We train the DeepSDF decoder in an auto-decoder manner where rotation embedding codes are optimized along with the decoder network. After training the decoder, the decoder learns to represent shapes at different rotations. We discard the learned embedding vectors representing rotations after this stage as we train an encoder in the second stage to predict the embedding vectors.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p4">
+<p class="ltx_p" id="S3.SS3.p4.4">The decoder takes a concatenated vector of 3D point and the embedding vector to predict the SDF value. The shape loss, <math alttext="L_{s}" class="ltx_Math" display="inline" id="S3.SS3.p4.1.m1.1"><semantics id="S3.SS3.p4.1.m1.1a"><msub id="S3.SS3.p4.1.m1.1.1" xref="S3.SS3.p4.1.m1.1.1.cmml"><mi id="S3.SS3.p4.1.m1.1.1.2" xref="S3.SS3.p4.1.m1.1.1.2.cmml">L</mi><mi id="S3.SS3.p4.1.m1.1.1.3" xref="S3.SS3.p4.1.m1.1.1.3.cmml">s</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p4.1.m1.1b"><apply id="S3.SS3.p4.1.m1.1.1.cmml" xref="S3.SS3.p4.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS3.p4.1.m1.1.1.1.cmml" xref="S3.SS3.p4.1.m1.1.1">subscript</csymbol><ci id="S3.SS3.p4.1.m1.1.1.2.cmml" xref="S3.SS3.p4.1.m1.1.1.2">𝐿</ci><ci id="S3.SS3.p4.1.m1.1.1.3.cmml" xref="S3.SS3.p4.1.m1.1.1.3">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p4.1.m1.1c">L_{s}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p4.1.m1.1d">italic_L start_POSTSUBSCRIPT italic_s end_POSTSUBSCRIPT</annotation></semantics></math> is formulated to predict accurate SDF values. The ground truth SDF values, predicted SDF values are denoted as <math alttext="\hat{S}" class="ltx_Math" display="inline" id="S3.SS3.p4.2.m2.1"><semantics id="S3.SS3.p4.2.m2.1a"><mover accent="true" id="S3.SS3.p4.2.m2.1.1" xref="S3.SS3.p4.2.m2.1.1.cmml"><mi id="S3.SS3.p4.2.m2.1.1.2" xref="S3.SS3.p4.2.m2.1.1.2.cmml">S</mi><mo id="S3.SS3.p4.2.m2.1.1.1" xref="S3.SS3.p4.2.m2.1.1.1.cmml">^</mo></mover><annotation-xml encoding="MathML-Content" id="S3.SS3.p4.2.m2.1b"><apply id="S3.SS3.p4.2.m2.1.1.cmml" xref="S3.SS3.p4.2.m2.1.1"><ci id="S3.SS3.p4.2.m2.1.1.1.cmml" xref="S3.SS3.p4.2.m2.1.1.1">^</ci><ci id="S3.SS3.p4.2.m2.1.1.2.cmml" xref="S3.SS3.p4.2.m2.1.1.2">𝑆</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p4.2.m2.1c">\hat{S}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p4.2.m2.1d">over^ start_ARG italic_S end_ARG</annotation></semantics></math> and <math alttext="{S}" class="ltx_Math" display="inline" id="S3.SS3.p4.3.m3.1"><semantics id="S3.SS3.p4.3.m3.1a"><mi id="S3.SS3.p4.3.m3.1.1" xref="S3.SS3.p4.3.m3.1.1.cmml">S</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p4.3.m3.1b"><ci id="S3.SS3.p4.3.m3.1.1.cmml" xref="S3.SS3.p4.3.m3.1.1">𝑆</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p4.3.m3.1c">{S}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p4.3.m3.1d">italic_S</annotation></semantics></math> respectively. The decoder loss, <math alttext="L_{D}" class="ltx_Math" display="inline" id="S3.SS3.p4.4.m4.1"><semantics id="S3.SS3.p4.4.m4.1a"><msub id="S3.SS3.p4.4.m4.1.1" xref="S3.SS3.p4.4.m4.1.1.cmml"><mi id="S3.SS3.p4.4.m4.1.1.2" xref="S3.SS3.p4.4.m4.1.1.2.cmml">L</mi><mi id="S3.SS3.p4.4.m4.1.1.3" xref="S3.SS3.p4.4.m4.1.1.3.cmml">D</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p4.4.m4.1b"><apply id="S3.SS3.p4.4.m4.1.1.cmml" xref="S3.SS3.p4.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS3.p4.4.m4.1.1.1.cmml" xref="S3.SS3.p4.4.m4.1.1">subscript</csymbol><ci id="S3.SS3.p4.4.m4.1.1.2.cmml" xref="S3.SS3.p4.4.m4.1.1.2">𝐿</ci><ci id="S3.SS3.p4.4.m4.1.1.3.cmml" xref="S3.SS3.p4.4.m4.1.1.3">𝐷</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p4.4.m4.1c">L_{D}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p4.4.m4.1d">italic_L start_POSTSUBSCRIPT italic_D end_POSTSUBSCRIPT</annotation></semantics></math>, used to train the decoder computed as follows:</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.Ex1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="L_{D}=\sum||S,\hat{S}||_{1}" class="ltx_math_unparsed" display="block" id="S3.Ex1.m1.2"><semantics id="S3.Ex1.m1.2a"><mrow id="S3.Ex1.m1.2b"><msub id="S3.Ex1.m1.2.3"><mi id="S3.Ex1.m1.2.3.2">L</mi><mi id="S3.Ex1.m1.2.3.3">D</mi></msub><mo id="S3.Ex1.m1.2.4" rspace="0.111em">=</mo><mo id="S3.Ex1.m1.2.5" movablelimits="false" rspace="0em">∑</mo><mo fence="false" id="S3.Ex1.m1.2.6" rspace="0.167em" stretchy="false">|</mo><mo fence="false" id="S3.Ex1.m1.2.7" rspace="0.167em" stretchy="false">|</mo><mi id="S3.Ex1.m1.1.1">S</mi><mo id="S3.Ex1.m1.2.8">,</mo><mover accent="true" id="S3.Ex1.m1.2.2"><mi id="S3.Ex1.m1.2.2.2">S</mi><mo id="S3.Ex1.m1.2.2.1">^</mo></mover><mo fence="false" id="S3.Ex1.m1.2.9" rspace="0.167em" stretchy="false">|</mo><msub id="S3.Ex1.m1.2.10"><mo fence="false" id="S3.Ex1.m1.2.10.2" stretchy="false">|</mo><mn id="S3.Ex1.m1.2.10.3">1</mn></msub></mrow><annotation encoding="application/x-tex" id="S3.Ex1.m1.2c">L_{D}=\sum||S,\hat{S}||_{1}</annotation><annotation encoding="application/x-llamapun" id="S3.Ex1.m1.2d">italic_L start_POSTSUBSCRIPT italic_D end_POSTSUBSCRIPT = ∑ | | italic_S , over^ start_ARG italic_S end_ARG | | start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS3.p5">
+<p class="ltx_p" id="S3.SS3.p5.5"><span class="ltx_text ltx_font_bold" id="S3.SS3.p5.5.1">Stage 2</span>
+In this stage, we train the encoder and the pre-trained decoder together to represent shapes from rotations corresponding to the pose in the image. As the decoder is already pre-trained, the encoder finds it easy to predict shapes at various orientations. In this stage, the image encoder and decoder learn to map rotations from 2D image to shape representation through the transformation embedding.
+The image of the object corresponding to <math alttext="k" class="ltx_Math" display="inline" id="S3.SS3.p5.1.m1.1"><semantics id="S3.SS3.p5.1.m1.1a"><mi id="S3.SS3.p5.1.m1.1.1" xref="S3.SS3.p5.1.m1.1.1.cmml">k</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.1.m1.1b"><ci id="S3.SS3.p5.1.m1.1.1.cmml" xref="S3.SS3.p5.1.m1.1.1">𝑘</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.1.m1.1c">k</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.1.m1.1d">italic_k</annotation></semantics></math>-th rotation, <math alttext="I_{k}" class="ltx_Math" display="inline" id="S3.SS3.p5.2.m2.1"><semantics id="S3.SS3.p5.2.m2.1a"><msub id="S3.SS3.p5.2.m2.1.1" xref="S3.SS3.p5.2.m2.1.1.cmml"><mi id="S3.SS3.p5.2.m2.1.1.2" xref="S3.SS3.p5.2.m2.1.1.2.cmml">I</mi><mi id="S3.SS3.p5.2.m2.1.1.3" xref="S3.SS3.p5.2.m2.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.2.m2.1b"><apply id="S3.SS3.p5.2.m2.1.1.cmml" xref="S3.SS3.p5.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS3.p5.2.m2.1.1.1.cmml" xref="S3.SS3.p5.2.m2.1.1">subscript</csymbol><ci id="S3.SS3.p5.2.m2.1.1.2.cmml" xref="S3.SS3.p5.2.m2.1.1.2">𝐼</ci><ci id="S3.SS3.p5.2.m2.1.1.3.cmml" xref="S3.SS3.p5.2.m2.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.2.m2.1c">I_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.2.m2.1d">italic_I start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, is input to encoder to predict the transformation embedding, <math alttext="T_{k}" class="ltx_Math" display="inline" id="S3.SS3.p5.3.m3.1"><semantics id="S3.SS3.p5.3.m3.1a"><msub id="S3.SS3.p5.3.m3.1.1" xref="S3.SS3.p5.3.m3.1.1.cmml"><mi id="S3.SS3.p5.3.m3.1.1.2" xref="S3.SS3.p5.3.m3.1.1.2.cmml">T</mi><mi id="S3.SS3.p5.3.m3.1.1.3" xref="S3.SS3.p5.3.m3.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.3.m3.1b"><apply id="S3.SS3.p5.3.m3.1.1.cmml" xref="S3.SS3.p5.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS3.p5.3.m3.1.1.1.cmml" xref="S3.SS3.p5.3.m3.1.1">subscript</csymbol><ci id="S3.SS3.p5.3.m3.1.1.2.cmml" xref="S3.SS3.p5.3.m3.1.1.2">𝑇</ci><ci id="S3.SS3.p5.3.m3.1.1.3.cmml" xref="S3.SS3.p5.3.m3.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.3.m3.1c">T_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.3.m3.1d">italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>. The transformation embedding is concatenated with a 3D point, <math alttext="x_{k}" class="ltx_Math" display="inline" id="S3.SS3.p5.4.m4.1"><semantics id="S3.SS3.p5.4.m4.1a"><msub id="S3.SS3.p5.4.m4.1.1" xref="S3.SS3.p5.4.m4.1.1.cmml"><mi id="S3.SS3.p5.4.m4.1.1.2" xref="S3.SS3.p5.4.m4.1.1.2.cmml">x</mi><mi id="S3.SS3.p5.4.m4.1.1.3" xref="S3.SS3.p5.4.m4.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.4.m4.1b"><apply id="S3.SS3.p5.4.m4.1.1.cmml" xref="S3.SS3.p5.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS3.p5.4.m4.1.1.1.cmml" xref="S3.SS3.p5.4.m4.1.1">subscript</csymbol><ci id="S3.SS3.p5.4.m4.1.1.2.cmml" xref="S3.SS3.p5.4.m4.1.1.2">𝑥</ci><ci id="S3.SS3.p5.4.m4.1.1.3.cmml" xref="S3.SS3.p5.4.m4.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.4.m4.1c">x_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.4.m4.1d">italic_x start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, and input to the decoder to predict corresponding per-point SDF values, <math alttext="s" class="ltx_Math" display="inline" id="S3.SS3.p5.5.m5.1"><semantics id="S3.SS3.p5.5.m5.1a"><mi id="S3.SS3.p5.5.m5.1.1" xref="S3.SS3.p5.5.m5.1.1.cmml">s</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.5.m5.1b"><ci id="S3.SS3.p5.5.m5.1.1.cmml" xref="S3.SS3.p5.5.m5.1.1">𝑠</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.5.m5.1c">s</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.5.m5.1d">italic_s</annotation></semantics></math>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p6">
+<p class="ltx_p" id="S3.SS3.p6.1">We use the SDF loss, <math alttext="L_{E}" class="ltx_Math" display="inline" id="S3.SS3.p6.1.m1.1"><semantics id="S3.SS3.p6.1.m1.1a"><msub id="S3.SS3.p6.1.m1.1.1" xref="S3.SS3.p6.1.m1.1.1.cmml"><mi id="S3.SS3.p6.1.m1.1.1.2" xref="S3.SS3.p6.1.m1.1.1.2.cmml">L</mi><mi id="S3.SS3.p6.1.m1.1.1.3" xref="S3.SS3.p6.1.m1.1.1.3.cmml">E</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p6.1.m1.1b"><apply id="S3.SS3.p6.1.m1.1.1.cmml" xref="S3.SS3.p6.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS3.p6.1.m1.1.1.1.cmml" xref="S3.SS3.p6.1.m1.1.1">subscript</csymbol><ci id="S3.SS3.p6.1.m1.1.1.2.cmml" xref="S3.SS3.p6.1.m1.1.1.2">𝐿</ci><ci id="S3.SS3.p6.1.m1.1.1.3.cmml" xref="S3.SS3.p6.1.m1.1.1.3">𝐸</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p6.1.m1.1c">L_{E}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p6.1.m1.1d">italic_L start_POSTSUBSCRIPT italic_E end_POSTSUBSCRIPT</annotation></semantics></math> to train the encoder-decoder in this stage. SDF is not affected by symmetries since it is an inherent property of shape where symmetries are considered implicitly.</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.Ex2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="L_{E}=\sum||S,\hat{S}||_{1}" class="ltx_math_unparsed" display="block" id="S3.Ex2.m1.2"><semantics id="S3.Ex2.m1.2a"><mrow id="S3.Ex2.m1.2b"><msub id="S3.Ex2.m1.2.3"><mi id="S3.Ex2.m1.2.3.2">L</mi><mi id="S3.Ex2.m1.2.3.3">E</mi></msub><mo id="S3.Ex2.m1.2.4" rspace="0.111em">=</mo><mo id="S3.Ex2.m1.2.5" movablelimits="false" rspace="0em">∑</mo><mo fence="false" id="S3.Ex2.m1.2.6" rspace="0.167em" stretchy="false">|</mo><mo fence="false" id="S3.Ex2.m1.2.7" rspace="0.167em" stretchy="false">|</mo><mi id="S3.Ex2.m1.1.1">S</mi><mo id="S3.Ex2.m1.2.8">,</mo><mover accent="true" id="S3.Ex2.m1.2.2"><mi id="S3.Ex2.m1.2.2.2">S</mi><mo id="S3.Ex2.m1.2.2.1">^</mo></mover><mo fence="false" id="S3.Ex2.m1.2.9" rspace="0.167em" stretchy="false">|</mo><msub id="S3.Ex2.m1.2.10"><mo fence="false" id="S3.Ex2.m1.2.10.2" stretchy="false">|</mo><mn id="S3.Ex2.m1.2.10.3">1</mn></msub></mrow><annotation encoding="application/x-tex" id="S3.Ex2.m1.2c">L_{E}=\sum||S,\hat{S}||_{1}</annotation><annotation encoding="application/x-llamapun" id="S3.Ex2.m1.2d">italic_L start_POSTSUBSCRIPT italic_E end_POSTSUBSCRIPT = ∑ | | italic_S , over^ start_ARG italic_S end_ARG | | start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS3.p7">
+<p class="ltx_p" id="S3.SS3.p7.4"><span class="ltx_text ltx_font_bold" id="S3.SS3.p7.4.1">Translation predictor loss functions:</span>
+The translation predictor takes the 2D image corresponding to the <math alttext="k^{th}" class="ltx_Math" display="inline" id="S3.SS3.p7.1.m1.1"><semantics id="S3.SS3.p7.1.m1.1a"><msup id="S3.SS3.p7.1.m1.1.1" xref="S3.SS3.p7.1.m1.1.1.cmml"><mi id="S3.SS3.p7.1.m1.1.1.2" xref="S3.SS3.p7.1.m1.1.1.2.cmml">k</mi><mrow id="S3.SS3.p7.1.m1.1.1.3" xref="S3.SS3.p7.1.m1.1.1.3.cmml"><mi id="S3.SS3.p7.1.m1.1.1.3.2" xref="S3.SS3.p7.1.m1.1.1.3.2.cmml">t</mi><mo id="S3.SS3.p7.1.m1.1.1.3.1" xref="S3.SS3.p7.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS3.p7.1.m1.1.1.3.3" xref="S3.SS3.p7.1.m1.1.1.3.3.cmml">h</mi></mrow></msup><annotation-xml encoding="MathML-Content" id="S3.SS3.p7.1.m1.1b"><apply id="S3.SS3.p7.1.m1.1.1.cmml" xref="S3.SS3.p7.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS3.p7.1.m1.1.1.1.cmml" xref="S3.SS3.p7.1.m1.1.1">superscript</csymbol><ci id="S3.SS3.p7.1.m1.1.1.2.cmml" xref="S3.SS3.p7.1.m1.1.1.2">𝑘</ci><apply id="S3.SS3.p7.1.m1.1.1.3.cmml" xref="S3.SS3.p7.1.m1.1.1.3"><times id="S3.SS3.p7.1.m1.1.1.3.1.cmml" xref="S3.SS3.p7.1.m1.1.1.3.1"></times><ci id="S3.SS3.p7.1.m1.1.1.3.2.cmml" xref="S3.SS3.p7.1.m1.1.1.3.2">𝑡</ci><ci id="S3.SS3.p7.1.m1.1.1.3.3.cmml" xref="S3.SS3.p7.1.m1.1.1.3.3">ℎ</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p7.1.m1.1c">k^{th}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p7.1.m1.1d">italic_k start_POSTSUPERSCRIPT italic_t italic_h end_POSTSUPERSCRIPT</annotation></semantics></math> rotation, <math alttext="{I}_{k}" class="ltx_Math" display="inline" id="S3.SS3.p7.2.m2.1"><semantics id="S3.SS3.p7.2.m2.1a"><msub id="S3.SS3.p7.2.m2.1.1" xref="S3.SS3.p7.2.m2.1.1.cmml"><mi id="S3.SS3.p7.2.m2.1.1.2" xref="S3.SS3.p7.2.m2.1.1.2.cmml">I</mi><mi id="S3.SS3.p7.2.m2.1.1.3" xref="S3.SS3.p7.2.m2.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p7.2.m2.1b"><apply id="S3.SS3.p7.2.m2.1.1.cmml" xref="S3.SS3.p7.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS3.p7.2.m2.1.1.1.cmml" xref="S3.SS3.p7.2.m2.1.1">subscript</csymbol><ci id="S3.SS3.p7.2.m2.1.1.2.cmml" xref="S3.SS3.p7.2.m2.1.1.2">𝐼</ci><ci id="S3.SS3.p7.2.m2.1.1.3.cmml" xref="S3.SS3.p7.2.m2.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p7.2.m2.1c">{I}_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p7.2.m2.1d">italic_I start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>, as input and predicts the SITE coordinates, <math alttext="t_{k}" class="ltx_Math" display="inline" id="S3.SS3.p7.3.m3.1"><semantics id="S3.SS3.p7.3.m3.1a"><msub id="S3.SS3.p7.3.m3.1.1" xref="S3.SS3.p7.3.m3.1.1.cmml"><mi id="S3.SS3.p7.3.m3.1.1.2" xref="S3.SS3.p7.3.m3.1.1.2.cmml">t</mi><mi id="S3.SS3.p7.3.m3.1.1.3" xref="S3.SS3.p7.3.m3.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p7.3.m3.1b"><apply id="S3.SS3.p7.3.m3.1.1.cmml" xref="S3.SS3.p7.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS3.p7.3.m3.1.1.1.cmml" xref="S3.SS3.p7.3.m3.1.1">subscript</csymbol><ci id="S3.SS3.p7.3.m3.1.1.2.cmml" xref="S3.SS3.p7.3.m3.1.1.2">𝑡</ci><ci id="S3.SS3.p7.3.m3.1.1.3.cmml" xref="S3.SS3.p7.3.m3.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p7.3.m3.1c">t_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p7.3.m3.1d">italic_t start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math>. The translation predictor is trained with the loss function using the ground truth translation labels, <math alttext="\hat{t}_{k}" class="ltx_Math" display="inline" id="S3.SS3.p7.4.m4.1"><semantics id="S3.SS3.p7.4.m4.1a"><msub id="S3.SS3.p7.4.m4.1.1" xref="S3.SS3.p7.4.m4.1.1.cmml"><mover accent="true" id="S3.SS3.p7.4.m4.1.1.2" xref="S3.SS3.p7.4.m4.1.1.2.cmml"><mi id="S3.SS3.p7.4.m4.1.1.2.2" xref="S3.SS3.p7.4.m4.1.1.2.2.cmml">t</mi><mo id="S3.SS3.p7.4.m4.1.1.2.1" xref="S3.SS3.p7.4.m4.1.1.2.1.cmml">^</mo></mover><mi id="S3.SS3.p7.4.m4.1.1.3" xref="S3.SS3.p7.4.m4.1.1.3.cmml">k</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p7.4.m4.1b"><apply id="S3.SS3.p7.4.m4.1.1.cmml" xref="S3.SS3.p7.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS3.p7.4.m4.1.1.1.cmml" xref="S3.SS3.p7.4.m4.1.1">subscript</csymbol><apply id="S3.SS3.p7.4.m4.1.1.2.cmml" xref="S3.SS3.p7.4.m4.1.1.2"><ci id="S3.SS3.p7.4.m4.1.1.2.1.cmml" xref="S3.SS3.p7.4.m4.1.1.2.1">^</ci><ci id="S3.SS3.p7.4.m4.1.1.2.2.cmml" xref="S3.SS3.p7.4.m4.1.1.2.2">𝑡</ci></apply><ci id="S3.SS3.p7.4.m4.1.1.3.cmml" xref="S3.SS3.p7.4.m4.1.1.3">𝑘</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p7.4.m4.1c">\hat{t}_{k}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p7.4.m4.1d">over^ start_ARG italic_t end_ARG start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT</annotation></semantics></math> as follows:</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E4">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="L_{T}=\sum_{k}||(t_{k},\hat{t}_{k})||_{1}" class="ltx_Math" display="block" id="S3.E4.m1.1"><semantics id="S3.E4.m1.1a"><mrow id="S3.E4.m1.1.1" xref="S3.E4.m1.1.1.cmml"><msub id="S3.E4.m1.1.1.3" xref="S3.E4.m1.1.1.3.cmml"><mi id="S3.E4.m1.1.1.3.2" xref="S3.E4.m1.1.1.3.2.cmml">L</mi><mi id="S3.E4.m1.1.1.3.3" xref="S3.E4.m1.1.1.3.3.cmml">T</mi></msub><mo id="S3.E4.m1.1.1.2" rspace="0.111em" xref="S3.E4.m1.1.1.2.cmml">=</mo><mrow id="S3.E4.m1.1.1.1" xref="S3.E4.m1.1.1.1.cmml"><munder id="S3.E4.m1.1.1.1.2" xref="S3.E4.m1.1.1.1.2.cmml"><mo id="S3.E4.m1.1.1.1.2.2" movablelimits="false" rspace="0em" xref="S3.E4.m1.1.1.1.2.2.cmml">∑</mo><mi id="S3.E4.m1.1.1.1.2.3" xref="S3.E4.m1.1.1.1.2.3.cmml">k</mi></munder><msub id="S3.E4.m1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.cmml"><mrow id="S3.E4.m1.1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.2.cmml"><mo id="S3.E4.m1.1.1.1.1.1.1.2" stretchy="false" xref="S3.E4.m1.1.1.1.1.1.2.1.cmml">‖</mo><mrow id="S3.E4.m1.1.1.1.1.1.1.1.2" xref="S3.E4.m1.1.1.1.1.1.1.1.3.cmml"><mo id="S3.E4.m1.1.1.1.1.1.1.1.2.3" stretchy="false" xref="S3.E4.m1.1.1.1.1.1.1.1.3.cmml">(</mo><msub id="S3.E4.m1.1.1.1.1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.cmml"><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.2" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.2.cmml">t</mi><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.3.cmml">k</mi></msub><mo id="S3.E4.m1.1.1.1.1.1.1.1.2.4" xref="S3.E4.m1.1.1.1.1.1.1.1.3.cmml">,</mo><msub id="S3.E4.m1.1.1.1.1.1.1.1.2.2" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.cmml"><mover accent="true" id="S3.E4.m1.1.1.1.1.1.1.1.2.2.2" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.cmml"><mi id="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.2" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.2.cmml">t</mi><mo id="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.1" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.1.cmml">^</mo></mover><mi id="S3.E4.m1.1.1.1.1.1.1.1.2.2.3" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.3.cmml">k</mi></msub><mo id="S3.E4.m1.1.1.1.1.1.1.1.2.5" stretchy="false" xref="S3.E4.m1.1.1.1.1.1.1.1.3.cmml">)</mo></mrow><mo id="S3.E4.m1.1.1.1.1.1.1.3" stretchy="false" xref="S3.E4.m1.1.1.1.1.1.2.1.cmml">‖</mo></mrow><mn id="S3.E4.m1.1.1.1.1.3" xref="S3.E4.m1.1.1.1.1.3.cmml">1</mn></msub></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E4.m1.1b"><apply id="S3.E4.m1.1.1.cmml" xref="S3.E4.m1.1.1"><eq id="S3.E4.m1.1.1.2.cmml" xref="S3.E4.m1.1.1.2"></eq><apply id="S3.E4.m1.1.1.3.cmml" xref="S3.E4.m1.1.1.3"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.3.1.cmml" xref="S3.E4.m1.1.1.3">subscript</csymbol><ci id="S3.E4.m1.1.1.3.2.cmml" xref="S3.E4.m1.1.1.3.2">𝐿</ci><ci id="S3.E4.m1.1.1.3.3.cmml" xref="S3.E4.m1.1.1.3.3">𝑇</ci></apply><apply id="S3.E4.m1.1.1.1.cmml" xref="S3.E4.m1.1.1.1"><apply id="S3.E4.m1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.2.1.cmml" xref="S3.E4.m1.1.1.1.2">subscript</csymbol><sum id="S3.E4.m1.1.1.1.2.2.cmml" xref="S3.E4.m1.1.1.1.2.2"></sum><ci id="S3.E4.m1.1.1.1.2.3.cmml" xref="S3.E4.m1.1.1.1.2.3">𝑘</ci></apply><apply id="S3.E4.m1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1">subscript</csymbol><apply id="S3.E4.m1.1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1"><csymbol cd="latexml" id="S3.E4.m1.1.1.1.1.1.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2">norm</csymbol><interval closure="open" id="S3.E4.m1.1.1.1.1.1.1.1.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.2"><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1">subscript</csymbol><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.2">𝑡</ci><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.3">𝑘</ci></apply><apply id="S3.E4.m1.1.1.1.1.1.1.1.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.1.2.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2">subscript</csymbol><apply id="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.2"><ci id="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.1">^</ci><ci id="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.2.2">𝑡</ci></apply><ci id="S3.E4.m1.1.1.1.1.1.1.1.2.2.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.2.2.3">𝑘</ci></apply></interval></apply><cn id="S3.E4.m1.1.1.1.1.3.cmml" type="integer" xref="S3.E4.m1.1.1.1.1.3">1</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E4.m1.1c">L_{T}=\sum_{k}||(t_{k},\hat{t}_{k})||_{1}</annotation><annotation encoding="application/x-llamapun" id="S3.E4.m1.1d">italic_L start_POSTSUBSCRIPT italic_T end_POSTSUBSCRIPT = ∑ start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT | | ( italic_t start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT , over^ start_ARG italic_t end_ARG start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT ) | | start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experiments</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">We evaluated SABER on three datasets for 6D pose estimation: LineMOD <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib12" title="">12</a>]</cite>, Occlusion-LineMOD <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib1" title="">1</a>]</cite>, T-LESS <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib14" title="">14</a>]</cite>. We employ the standard AR metric from BOP challenge <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib15" title="">15</a>]</cite> for T-Less and Occlusion-LineMOD while we employ ADD score for LineMOD. For these datasets, we have trained SABER using only the PBR images generated from CAD models provided in the BOP challenge. We did not use the symmetry labels provided for objects in these datasets. We use the object detections from CosyPose<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib21" title="">21</a>]</cite> to have the same base data for a fair comparison. Our pipeline achieves close to the state-of-the-art approach, SC6D, on LineMOD, Occlusion-LineMOD and T-LESS.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Training Protocol</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.7">We train the decoder for <math alttext="500" class="ltx_Math" display="inline" id="S4.SS1.p1.1.m1.1"><semantics id="S4.SS1.p1.1.m1.1a"><mn id="S4.SS1.p1.1.m1.1.1" xref="S4.SS1.p1.1.m1.1.1.cmml">500</mn><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.1.m1.1b"><cn id="S4.SS1.p1.1.m1.1.1.cmml" type="integer" xref="S4.SS1.p1.1.m1.1.1">500</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.1.m1.1c">500</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.1.m1.1d">500</annotation></semantics></math> epochs from scratch with a batch of <math alttext="25" class="ltx_Math" display="inline" id="S4.SS1.p1.2.m2.1"><semantics id="S4.SS1.p1.2.m2.1a"><mn id="S4.SS1.p1.2.m2.1.1" xref="S4.SS1.p1.2.m2.1.1.cmml">25</mn><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.2.m2.1b"><cn id="S4.SS1.p1.2.m2.1.1.cmml" type="integer" xref="S4.SS1.p1.2.m2.1.1">25</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.2.m2.1c">25</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.2.m2.1d">25</annotation></semantics></math>. Different learning rates are used to train the embedding vectors, <math alttext="0.0005" class="ltx_Math" display="inline" id="S4.SS1.p1.3.m3.1"><semantics id="S4.SS1.p1.3.m3.1a"><mn id="S4.SS1.p1.3.m3.1.1" xref="S4.SS1.p1.3.m3.1.1.cmml">0.0005</mn><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.3.m3.1b"><cn id="S4.SS1.p1.3.m3.1.1.cmml" type="float" xref="S4.SS1.p1.3.m3.1.1">0.0005</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.3.m3.1c">0.0005</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.3.m3.1d">0.0005</annotation></semantics></math>, and the weights of the network, <math alttext="0.001" class="ltx_Math" display="inline" id="S4.SS1.p1.4.m4.1"><semantics id="S4.SS1.p1.4.m4.1a"><mn id="S4.SS1.p1.4.m4.1.1" xref="S4.SS1.p1.4.m4.1.1.cmml">0.001</mn><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.4.m4.1b"><cn id="S4.SS1.p1.4.m4.1.1.cmml" type="float" xref="S4.SS1.p1.4.m4.1.1">0.001</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.4.m4.1c">0.001</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.4.m4.1d">0.001</annotation></semantics></math>, because we want the embedding vectors to vary less as the training progresses. Then, we use the trained decoder to train the encoder using PBR data for <math alttext="2400" class="ltx_Math" display="inline" id="S4.SS1.p1.5.m5.1"><semantics id="S4.SS1.p1.5.m5.1a"><mn id="S4.SS1.p1.5.m5.1.1" xref="S4.SS1.p1.5.m5.1.1.cmml">2400</mn><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.5.m5.1b"><cn id="S4.SS1.p1.5.m5.1.1.cmml" type="integer" xref="S4.SS1.p1.5.m5.1.1">2400</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.5.m5.1c">2400</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.5.m5.1d">2400</annotation></semantics></math> epochs with a batch-size of <math alttext="25" class="ltx_Math" display="inline" id="S4.SS1.p1.6.m6.1"><semantics id="S4.SS1.p1.6.m6.1a"><mn id="S4.SS1.p1.6.m6.1.1" xref="S4.SS1.p1.6.m6.1.1.cmml">25</mn><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.6.m6.1b"><cn id="S4.SS1.p1.6.m6.1.1.cmml" type="integer" xref="S4.SS1.p1.6.m6.1.1">25</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.6.m6.1c">25</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.6.m6.1d">25</annotation></semantics></math>. The learning rate is set to <math alttext="0.001" class="ltx_Math" display="inline" id="S4.SS1.p1.7.m7.1"><semantics id="S4.SS1.p1.7.m7.1a"><mn id="S4.SS1.p1.7.m7.1.1" xref="S4.SS1.p1.7.m7.1.1.cmml">0.001</mn><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.7.m7.1b"><cn id="S4.SS1.p1.7.m7.1.1.cmml" type="float" xref="S4.SS1.p1.7.m7.1.1">0.001</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.7.m7.1c">0.001</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.7.m7.1d">0.001</annotation></semantics></math> while training the encoder-decoder in Stage 2. We use the same configurations as the encoder for the translation predictor. Our approach takes 30ms during inference for a single frame on an Nvidia Titan X.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Architecture Details</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">We employ a seven-layer MLP with ReLu activations for our Decoder. We employ a ResNet16 as the image encoder. For the translation predictor, we employ an SC6D based U-Net network with a ResNet34 encoder and decoder with 2D conv layers and 3 MLP layers.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Evaluation</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">For inference, we generate a codebook mapping rotation matrices to rotation embedding vectors using images from PBR data. We only use an image encoder to generate embedding vectors and discard the decoder for inference. We generate a codebook containing 200000 embedding vectors with corresponding rotation matrices. During inference, we send an image through the encoder to estimate an embedding vector which is used to find the nearest neighbor from the codebook and extract the corresponding rotation matrix as the estimated rotation. We estimate translation using the translation predictor. We employ the ADD score for evaluating LineMOD and the AR score from BOP for evaluating LineMOD-Occlusion and T-Less. During inference, we use the available detection crops from the models in CosyPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib21" title="">21</a>]</cite> trained on the synthetic images.</p>
+</div>
+<figure class="ltx_table" id="S4.T1">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S4.T1.2">
+<tr class="ltx_tr" id="S4.T1.2.1">
+<td class="ltx_td ltx_border_r" id="S4.T1.2.1.1"></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.2.1.2"><span class="ltx_text ltx_font_bold" id="S4.T1.2.1.2.1">GDRN<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.2.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib37" title="">37</a><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.2.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.2.1.3"><span class="ltx_text ltx_font_bold" id="S4.T1.2.1.3.1">Dpod<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.3.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib40" title="">40</a><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.3.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.2.1.4"><span class="ltx_text ltx_font_bold" id="S4.T1.2.1.4.1">DpodV2<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.4.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib32" title="">32</a><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.4.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.2.1.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.1.5.1">AAE<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.5.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib34" title="">34</a><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.5.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.2.1.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.1.6.1">SC6D<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.6.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib2" title="">2</a><span class="ltx_text ltx_font_medium" id="S4.T1.2.1.6.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.2.1.7"><span class="ltx_text ltx_font_bold" id="S4.T1.2.1.7.1">Ours</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S4.T1.2.2.1"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.1.1">Sym</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.2.2.2"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.2.1">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.2.2.3"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.3.1">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.2.2.4"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.4.1">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.2.2.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.5.1">✗</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.2.2.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.6.1">✗</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.2.2.7"><span class="ltx_text ltx_font_bold" id="S4.T1.2.2.7.1">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.3">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_tt ltx_border_t" id="S4.T1.2.3.1">ADD</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T1.2.3.2">0.77</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T1.2.3.3">0.66</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T1.2.3.4"><span class="ltx_text ltx_font_bold" id="S4.T1.2.3.4.1">0.81</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T1.2.3.5">0.31</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T1.2.3.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.3.6.1">0.73</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt ltx_border_t" id="S4.T1.2.3.7">0.71</td>
+</tr>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T1.3.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S4.T1.4.2" style="font-size:90%;">Results on LineMOD. Sym refers to employing symmetry priors for training. GDRN refers to GDR-Net approach.</span></figcaption>
+</figure>
+<section class="ltx_subsubsection" id="S4.SS3.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.3.1 </span>LineMOD</h4>
+<div class="ltx_para" id="S4.SS3.SSS1.p1">
+<p class="ltx_p" id="S4.SS3.SSS1.p1.1">LineMOD dataset contains <math alttext="15" class="ltx_Math" display="inline" id="S4.SS3.SSS1.p1.1.m1.1"><semantics id="S4.SS3.SSS1.p1.1.m1.1a"><mn id="S4.SS3.SSS1.p1.1.m1.1.1" xref="S4.SS3.SSS1.p1.1.m1.1.1.cmml">15</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS1.p1.1.m1.1b"><cn id="S4.SS3.SSS1.p1.1.m1.1.1.cmml" type="integer" xref="S4.SS3.SSS1.p1.1.m1.1.1">15</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS1.p1.1.m1.1c">15</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS1.p1.1.m1.1d">15</annotation></semantics></math> objects with some texture-less objects. It is a standard dataset to test the approach containing less occlusions, but it is still challenging since there is a Sim-to-real gap when we train on PBR data and evaluate on real scenes. We observed that our approach can achieve closer to benchmark approaches as shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.T1" title="Table 1 ‣ 4.3 Evaluation ‣ 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_tag">1</span></a> using ADD score. SC6D performs slightly better than our approach, while GDR-Net and Dpodv2 perform even better in the presence of symmetry labels. The performance improvement over AAE shows that shape encoding is stronger than image encoding.</p>
+</div>
+<figure class="ltx_table" id="S4.T2">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S4.T2.2">
+<tr class="ltx_tr" id="S4.T2.2.1">
+<td class="ltx_td ltx_border_r" id="S4.T2.2.1.1"></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.1.2"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.2.1">GDRN<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.2.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib37" title="">37</a><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.2.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.1.3"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.3.1">CP<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.3.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib21" title="">21</a><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.3.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.1.4"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.4.1">EPOS<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.4.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib13" title="">13</a><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.4.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.1.5"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.5.1">SEMB<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.5.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib9" title="">9</a><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.5.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T2.2.1.6"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.6.1">SC6D<cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.6.1.1.1">[</span><a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#bib.bib2" title="">2</a><span class="ltx_text ltx_font_medium" id="S4.T2.2.1.6.1.2.2">]</span></cite></span></td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.7"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.7.1">Ours</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.2.2">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S4.T2.2.2.1"><span class="ltx_text ltx_font_bold" id="S4.T2.2.2.1.1">Sym</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.2.2"><span class="ltx_text ltx_font_bold" id="S4.T2.2.2.2.1">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.2.3"><span class="ltx_text ltx_font_bold" id="S4.T2.2.2.3.1">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.2.4"><span class="ltx_text ltx_font_bold" id="S4.T2.2.2.4.1">✗</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.2.5"><span class="ltx_text ltx_font_bold" id="S4.T2.2.2.5.1">✗</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.2.6"><span class="ltx_text ltx_font_bold" id="S4.T2.2.2.6.1">✗</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.2.2.7"><span class="ltx_text ltx_font_bold" id="S4.T2.2.2.7.1">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.2.3">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S4.T2.2.3.1"><span class="ltx_text ltx_font_bold" id="S4.T2.2.3.1.1">Ref</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.3.2">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.3.3">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.3.4">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.3.5">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T2.2.3.6">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T2.2.3.7">✗</td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.2.4">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_tt" id="S4.T2.2.4.1">AR</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T2.2.4.2"><span class="ltx_text ltx_font_bold" id="S4.T2.2.4.2.1">0.71</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T2.2.4.3">0.63</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T2.2.4.4">0.44</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T2.2.4.5">0.66</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T2.2.4.6"><span class="ltx_text ltx_font_bold" id="S4.T2.2.4.6.1">0.59</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S4.T2.2.4.7">0.55</td>
+</tr>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T2.3.1.1" style="font-size:90%;">Table 2</span>: </span><span class="ltx_text" id="S4.T2.4.2" style="font-size:90%;">Results on Occlusion-LineMOD. Sym and Ref refer to symmetry priors and refinement respectively. GDRN, CP, SEMB refer to GDR-Net, CosyPose and SurfEmb.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S4.SS3.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.3.2 </span>Occlusion-LineMOD</h4>
+<div class="ltx_para" id="S4.SS3.SSS2.p1">
+<p class="ltx_p" id="S4.SS3.SSS2.p1.1">The Occlusion-LineMOD dataset consists of <math alttext="8" class="ltx_Math" display="inline" id="S4.SS3.SSS2.p1.1.m1.1"><semantics id="S4.SS3.SSS2.p1.1.m1.1a"><mn id="S4.SS3.SSS2.p1.1.m1.1.1" xref="S4.SS3.SSS2.p1.1.m1.1.1.cmml">8</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS2.p1.1.m1.1b"><cn id="S4.SS3.SSS2.p1.1.m1.1.1.cmml" type="integer" xref="S4.SS3.SSS2.p1.1.m1.1.1">8</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS2.p1.1.m1.1c">8</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS2.p1.1.m1.1d">8</annotation></semantics></math> objects from LineMOD with more challenging test scene. A scene from the original linemod dataset with heavy occlusions is extracted to test the performance in the presence of occlusions. This dataset is challenging due to severe occlusions and it comprises texture-less objects and symmetric objects. The occlusions are efficiently handled by the PBR data generated using realistic occlusions and it reflects in the performance of our approach in the presence of occlusions. We observed that SABER is robust to occlusions because we formulate the loss to reconstruct the full shape even from the occluded data and thus the encoder learns to handle occlusions well. We achieved 0.55 AR score, comparable to other SOTA approaches, as shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.T2" title="Table 2 ‣ 4.3.1 LineMOD ‣ 4.3 Evaluation ‣ 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_tag">2</span></a>. SurfEmb reports the results with refinement and also takes 2.2s for inference while our approach takes 30ms and doesn’t employ refinement. GDR-Net has the best performance in the BOP challenge, but they assume that symmetry labels are known. Our approach achieves close to benchmark results from SC6D without symmetry prior.</p>
+</div>
+<figure class="ltx_table" id="S4.T3">
+<table class="ltx_tabular ltx_align_middle" id="S4.T3.2">
+<tr class="ltx_tr" id="S4.T3.2.1">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S4.T3.2.1.1"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.1.1">Method</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.2"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.2.1">GDRN</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.3"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.3.1">CP</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.4"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.4.1">CP</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.5"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.5.1">AAE</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.6"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.6.1">EPOS</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.7"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.7.1">SEMB</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.8"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.8.1">SEMB</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.9"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.9.1">SC6D</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.2.1.10"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.10.1">SC6D</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T3.2.1.11"><span class="ltx_text ltx_font_bold" id="S4.T3.2.1.11.1">Ours</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.2.2">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S4.T3.2.2.1"><span class="ltx_text ltx_font_bold" id="S4.T3.2.2.1.1">Sym</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.2">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.3">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.4">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.5">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.6">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.7">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.8">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.9">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.2.10">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T3.2.2.11">✗</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.2.3">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="S4.T3.2.3.1"><span class="ltx_text ltx_font_bold" id="S4.T3.2.3.1.1">Ref</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.2">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.3">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.4">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.5">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.6">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.7">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.8">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.9">✗</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.2.3.10">✓</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T3.2.3.11">✗</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.2.4">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_tt" id="S4.T3.2.4.1">Accuracy</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.2"><span class="ltx_text ltx_font_bold" id="S4.T3.2.4.2.1">0.82</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.3">0.52</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.4">0.64</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.5">0.30</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.6">0.47</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.7">0.62</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.8">0.74</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.9"><span class="ltx_text ltx_font_bold" id="S4.T3.2.4.9.1">0.73</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" id="S4.T3.2.4.10">0.74</td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S4.T3.2.4.11">0.68</td>
+</tr>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T3.3.1.1" style="font-size:90%;">Table 3</span>: </span><span class="ltx_text" id="S4.T3.4.2" style="font-size:90%;">T-LESS Results. Sym and Ref
+refers to employing symmetry priors and pose
+refinement respectively.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S4.SS3.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.3.3 </span>T-LESS</h4>
+<div class="ltx_para" id="S4.SS3.SSS3.p1">
+<p class="ltx_p" id="S4.SS3.SSS3.p1.6">The T-LESS dataset is an industrial dataset comprising <math alttext="30" class="ltx_Math" display="inline" id="S4.SS3.SSS3.p1.1.m1.1"><semantics id="S4.SS3.SSS3.p1.1.m1.1a"><mn id="S4.SS3.SSS3.p1.1.m1.1.1" xref="S4.SS3.SSS3.p1.1.m1.1.1.cmml">30</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS3.p1.1.m1.1b"><cn id="S4.SS3.SSS3.p1.1.m1.1.1.cmml" type="integer" xref="S4.SS3.SSS3.p1.1.m1.1.1">30</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS3.p1.1.m1.1c">30</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS3.p1.1.m1.1d">30</annotation></semantics></math> texture-less objects with <math alttext="11" class="ltx_Math" display="inline" id="S4.SS3.SSS3.p1.2.m2.1"><semantics id="S4.SS3.SSS3.p1.2.m2.1a"><mn id="S4.SS3.SSS3.p1.2.m2.1.1" xref="S4.SS3.SSS3.p1.2.m2.1.1.cmml">11</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS3.p1.2.m2.1b"><cn id="S4.SS3.SSS3.p1.2.m2.1.1.cmml" type="integer" xref="S4.SS3.SSS3.p1.2.m2.1.1">11</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS3.p1.2.m2.1c">11</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS3.p1.2.m2.1d">11</annotation></semantics></math> continuous symmetric objects, <math alttext="16" class="ltx_Math" display="inline" id="S4.SS3.SSS3.p1.3.m3.1"><semantics id="S4.SS3.SSS3.p1.3.m3.1a"><mn id="S4.SS3.SSS3.p1.3.m3.1.1" xref="S4.SS3.SSS3.p1.3.m3.1.1.cmml">16</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS3.p1.3.m3.1b"><cn id="S4.SS3.SSS3.p1.3.m3.1.1.cmml" type="integer" xref="S4.SS3.SSS3.p1.3.m3.1.1">16</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS3.p1.3.m3.1c">16</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS3.p1.3.m3.1d">16</annotation></semantics></math> discrete symmetric objects, and <math alttext="3" class="ltx_Math" display="inline" id="S4.SS3.SSS3.p1.4.m4.1"><semantics id="S4.SS3.SSS3.p1.4.m4.1a"><mn id="S4.SS3.SSS3.p1.4.m4.1.1" xref="S4.SS3.SSS3.p1.4.m4.1.1.cmml">3</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS3.p1.4.m4.1b"><cn id="S4.SS3.SSS3.p1.4.m4.1.1.cmml" type="integer" xref="S4.SS3.SSS3.p1.4.m4.1.1">3</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS3.p1.4.m4.1c">3</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS3.p1.4.m4.1d">3</annotation></semantics></math> asymmetric objects. This dataset involves <math alttext="20" class="ltx_Math" display="inline" id="S4.SS3.SSS3.p1.5.m5.1"><semantics id="S4.SS3.SSS3.p1.5.m5.1a"><mn id="S4.SS3.SSS3.p1.5.m5.1.1" xref="S4.SS3.SSS3.p1.5.m5.1.1.cmml">20</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS3.p1.5.m5.1b"><cn id="S4.SS3.SSS3.p1.5.m5.1.1.cmml" type="integer" xref="S4.SS3.SSS3.p1.5.m5.1.1">20</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS3.p1.5.m5.1c">20</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS3.p1.5.m5.1d">20</annotation></semantics></math> different scenes with various levels of occlusion and clutter. We achieved an object recall accuracy of <math alttext="0.67" class="ltx_Math" display="inline" id="S4.SS3.SSS3.p1.6.m6.1"><semantics id="S4.SS3.SSS3.p1.6.m6.1a"><mn id="S4.SS3.SSS3.p1.6.m6.1.1" xref="S4.SS3.SSS3.p1.6.m6.1.1.cmml">0.67</mn><annotation-xml encoding="MathML-Content" id="S4.SS3.SSS3.p1.6.m6.1b"><cn id="S4.SS3.SSS3.p1.6.m6.1.1.cmml" type="float" xref="S4.SS3.SSS3.p1.6.m6.1.1">0.67</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.SSS3.p1.6.m6.1c">0.67</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.SSS3.p1.6.m6.1d">0.67</annotation></semantics></math>. We compare our method with other SOTA approaches in the Table <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.T3" title="Table 3 ‣ 4.3.2 Occlusion-LineMOD ‣ 4.3 Evaluation ‣ 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_tag">3</span></a>. We compare with other approaches which don’t assume that symmetry is known beforehand. We observe that our approach achieves close to benchmark results by SC6D. We perform better than CosyPose which is also a correspondence-free method that assumes the symmetry labels are known. We also perform better than SurfEmb which also doesn’t assume symmetry labels, and the inference time for SurfEmb is 2.2s compared to our approach which takes 30ms which is the same as SC6D. Our approach performs better than AAE which also works on similar principles as us by learning pose in latent space, but the performance of our shape based approach is better than the viewpoint image prediction method in AAE.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.4 </span>Performance gap from SC6D</h3>
+<div class="ltx_para" id="S4.SS4.p1">
+<p class="ltx_p" id="S4.SS4.p1.1">While our approach achieves closer to the benchmark approach, SC6D, there is still some performance gap. This is because our approach tries to do a harder task compared to SC6D. Our approach tries to learn to reconstruct the object at different orientations which is a harder task compared to optimizing a rotation embedding for a viewpoint in SC6D. Although we didn’t demonstrate the generalization capabilities of the approach, we believe our approach can be extended to a generalizable approach unlike SurfEmb and SC6D which are limited by the requirement of an MLP and rotation embeddings for every object they train on.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.5 </span>Ablation Studies</h3>
+<div class="ltx_para" id="S4.SS5.p1">
+<p class="ltx_p" id="S4.SS5.p1.1">We perform ablation on 4 objects(4,22,23,30) in T-LESS consisting 2 continuous symmetric, a discrete symmetric and an asymmetric object.</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p2">
+<p class="ltx_p" id="S4.SS5.p2.2">We perform an ablation to justify the choice of our two-stage pipeline. Approach trained with a single stage achieves only <math alttext="5\%" class="ltx_Math" display="inline" id="S4.SS5.p2.1.m1.1"><semantics id="S4.SS5.p2.1.m1.1a"><mrow id="S4.SS5.p2.1.m1.1.1" xref="S4.SS5.p2.1.m1.1.1.cmml"><mn id="S4.SS5.p2.1.m1.1.1.2" xref="S4.SS5.p2.1.m1.1.1.2.cmml">5</mn><mo id="S4.SS5.p2.1.m1.1.1.1" xref="S4.SS5.p2.1.m1.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.SS5.p2.1.m1.1b"><apply id="S4.SS5.p2.1.m1.1.1.cmml" xref="S4.SS5.p2.1.m1.1.1"><csymbol cd="latexml" id="S4.SS5.p2.1.m1.1.1.1.cmml" xref="S4.SS5.p2.1.m1.1.1.1">percent</csymbol><cn id="S4.SS5.p2.1.m1.1.1.2.cmml" type="integer" xref="S4.SS5.p2.1.m1.1.1.2">5</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.p2.1.m1.1c">5\%</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.p2.1.m1.1d">5 %</annotation></semantics></math> compared to our two-stage approach which achieves a <math alttext="74\%" class="ltx_Math" display="inline" id="S4.SS5.p2.2.m2.1"><semantics id="S4.SS5.p2.2.m2.1a"><mrow id="S4.SS5.p2.2.m2.1.1" xref="S4.SS5.p2.2.m2.1.1.cmml"><mn id="S4.SS5.p2.2.m2.1.1.2" xref="S4.SS5.p2.2.m2.1.1.2.cmml">74</mn><mo id="S4.SS5.p2.2.m2.1.1.1" xref="S4.SS5.p2.2.m2.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.SS5.p2.2.m2.1b"><apply id="S4.SS5.p2.2.m2.1.1.cmml" xref="S4.SS5.p2.2.m2.1.1"><csymbol cd="latexml" id="S4.SS5.p2.2.m2.1.1.1.cmml" xref="S4.SS5.p2.2.m2.1.1.1">percent</csymbol><cn id="S4.SS5.p2.2.m2.1.1.2.cmml" type="integer" xref="S4.SS5.p2.2.m2.1.1.2">74</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.p2.2.m2.1c">74\%</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.p2.2.m2.1d">74 %</annotation></semantics></math> as shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2408.05867v2#S4.T4" title="Table 4 ‣ 4.5 Ablation Studies ‣ 4 Experiments ‣ SABER-6D: Shape Representation Based Implicit Object Pose Estimation"><span class="ltx_text ltx_ref_tag">4</span></a>.</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p3">
+<p class="ltx_p" id="S4.SS5.p3.1">We perform ablation for our choice of shape loss, Signed Distance Function loss over other shape loss,
+Chamfer Distance. We regress correspondences instead of signed distance function and formulate chamfer distance as loss between estimated points and predicted points. We learn the rotations in latent space and follow the same inference pipeline to estimate rotation from latent space. Chamfer distance is also a shape based loss function, but the performance gap of <math alttext="59\%" class="ltx_Math" display="inline" id="S4.SS5.p3.1.m1.1"><semantics id="S4.SS5.p3.1.m1.1a"><mrow id="S4.SS5.p3.1.m1.1.1" xref="S4.SS5.p3.1.m1.1.1.cmml"><mn id="S4.SS5.p3.1.m1.1.1.2" xref="S4.SS5.p3.1.m1.1.1.2.cmml">59</mn><mo id="S4.SS5.p3.1.m1.1.1.1" xref="S4.SS5.p3.1.m1.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.SS5.p3.1.m1.1b"><apply id="S4.SS5.p3.1.m1.1.1.cmml" xref="S4.SS5.p3.1.m1.1.1"><csymbol cd="latexml" id="S4.SS5.p3.1.m1.1.1.1.cmml" xref="S4.SS5.p3.1.m1.1.1.1">percent</csymbol><cn id="S4.SS5.p3.1.m1.1.1.2.cmml" type="integer" xref="S4.SS5.p3.1.m1.1.1.2">59</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.p3.1.m1.1c">59\%</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.p3.1.m1.1d">59 %</annotation></semantics></math> indicates that the Signed Distance Function loss is a stronger shape based loss compared to Chamfer distance in our scenario.</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p4">
+<p class="ltx_p" id="S4.SS5.p4.1">We perform an ablation to justify our shape-based pipeline instead of a correspondence regression pipeline in the absence of a symmetry prior. We regress 3D correspondences instead of regressing the SDF value to show that our approach handles symmetric objects using a shape-based approach without symmetry prior. We regress correspondences and learn the rotations in latent space and follow the same inference pipeline to estimate rotation from latent space. We observe that the performance degrades by <math alttext="24\%" class="ltx_Math" display="inline" id="S4.SS5.p4.1.m1.1"><semantics id="S4.SS5.p4.1.m1.1a"><mrow id="S4.SS5.p4.1.m1.1.1" xref="S4.SS5.p4.1.m1.1.1.cmml"><mn id="S4.SS5.p4.1.m1.1.1.2" xref="S4.SS5.p4.1.m1.1.1.2.cmml">24</mn><mo id="S4.SS5.p4.1.m1.1.1.1" xref="S4.SS5.p4.1.m1.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S4.SS5.p4.1.m1.1b"><apply id="S4.SS5.p4.1.m1.1.1.cmml" xref="S4.SS5.p4.1.m1.1.1"><csymbol cd="latexml" id="S4.SS5.p4.1.m1.1.1.1.cmml" xref="S4.SS5.p4.1.m1.1.1.1">percent</csymbol><cn id="S4.SS5.p4.1.m1.1.1.2.cmml" type="integer" xref="S4.SS5.p4.1.m1.1.1.2">24</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS5.p4.1.m1.1c">24\%</annotation><annotation encoding="application/x-llamapun" id="S4.SS5.p4.1.m1.1d">24 %</annotation></semantics></math> as the regression cannot handle symmetric shapes without prior information about symmetries.</p>
+</div>
+<figure class="ltx_table" id="S4.T4">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S4.T4.2">
+<tr class="ltx_tr" id="S4.T4.2.1">
+<td class="ltx_td ltx_align_left ltx_border_r" id="S4.T4.2.1.1"><span class="ltx_text ltx_font_bold" id="S4.T4.2.1.1.1">Exp</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.2.1.2"><span class="ltx_text ltx_font_bold" id="S4.T4.2.1.2.1">Reg</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.2.1.3"><span class="ltx_text ltx_font_bold" id="S4.T4.2.1.3.1">Cha</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.2.1.4"><span class="ltx_text ltx_font_bold" id="S4.T4.2.1.4.1">Ours-S</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T4.2.1.5"><span class="ltx_text ltx_font_bold" id="S4.T4.2.1.5.1">Ours-D</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.2.2">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_tt ltx_border_t" id="S4.T4.2.2.1">AR</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T4.2.2.2">0.5</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T4.2.2.3">0.15</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt ltx_border_t" id="S4.T4.2.2.4">0.05</td>
+<td class="ltx_td ltx_align_center ltx_border_tt ltx_border_t" id="S4.T4.2.2.5">0.74</td>
+</tr>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T4.3.1.1" style="font-size:90%;">Table 4</span>: </span><span class="ltx_text" id="S4.T4.4.2" style="font-size:90%;">Ablation Results on 4 objects in T-Less dataset. Reg refers to the approach trained using regression loss by predicting correspondences in canonical orientation and formulating a coordinate regression loss. Similarly, Cha refers to the approach trained using chamfer loss by predicting 3D points instead of SDF. Ours-S refers to our approach trained with a Single stage instead of employing a two-stage pipeline(Ours-D). </span></figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion &amp; Summary</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">In this paper, we proposed a novel method, SABER, to estimate pose in implicit space by learning to represent shape from image input. We employ a DeepSDF based shape representation network to learn to represent an object at various orientations which enables us to learn poses in embedding space. Rotation embedding space is learned by employing shape and image which don’t change with symmetry. Employing an implicit rotation estimation model enables us to handle symmetrical objects by design without requiring symmetry labels. We achieve close to state-of-the-art on Occlusion-LineMOD and T-Less datasets.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+Brachmann, E., Krull, A., Michel, F., Gumhold, S., Shotton, J., Rother, C.: Learning 6D object pose estimation using 3D object coordinates. In: European Conference on Computer Vision (ECCV). pp. 536–551 (2014)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Cai, D., Heikkilä, J., Rahtu, E.: Sc6d: Symmetry-agnostic and correspondence-free 6d object pose estimation. In: 2022 International Conference on 3D Vision (3DV). IEEE (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Chen, H., Manhardt, F., Navab, N., Busam, B.: Texpose: Neural texture learning for self-supervised 6d object pose estimation. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 4841–4852 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Chen, K., Dou, Q.: Sgpa: Structure-guided prior adaptation for category-level 6d object pose estimation. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 2773–2782 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Chen, W., Jia, X., Chang, H.J., Duan, J., Leonardis, A.: G2L-Net: Global to local network for real-time 6D pose estimation with embedding vector features. In: Conference on Computer Vision and Pattern Recognition (CVPR). pp. 4232–4241 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+Deng, X., Geng, J., Bretl, T., Xiang, Y., Fox, D.: icaps: Iterative category-level object pose and shape estimation. IEEE Robotics and Automation Letters <span class="ltx_text ltx_font_bold" id="bib.bib6.1.1">7</span>(2), 1784–1791 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Denninger, M., Winkelbauer, D., Sundermeyer, M., Boerdijk, W., Knauer, M., Strobl, K.H., Humt, M., Triebel, R.: Blenderproc2: A procedural pipeline for photorealistic rendering. Journal of Open Source Software <span class="ltx_text ltx_font_bold" id="bib.bib7.1.1">8</span>(82),  4901 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+Di Felice, F., Remus, A., Gasperini, S., Busam, B., Ott, L., Tombari, F., Siegwart, R., Avizzano, C.A.: Zero123-6d: Zero-shot novel view synthesis for rgb category-level 6d pose estimation. arXiv preprint arXiv:2403.14279 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Haugaard, R., Buch, A.: Surfemb: Dense and continuous correspondence distributions for object pose estimation with learnt surface embeddings. In: 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). pp. 6739–6748. IEEE Computer Society, Los Alamitos, CA, USA (jun 2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Haugaard, R.L., Hagelskjær, F., Iversen, T.M.: Spyropose: Se (3) pyramids for object pose distribution estimation. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 2082–2091 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+He, K., Zhang, X., Ren, S., Sun, J.: Deep residual learning for image recognition. pp. 770–778 (06 2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Hinterstoisser, S., Holzer, S., Cagniart, C., Ilic, S., Konolige, K., Navab, N., Lepetit, V.: Multimodal templates for real-time detection of texture-less objects in heavily cluttered scenes. In: International Conference on Computer Vision (ICCV). pp. 858–865 (2011)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Hodan, T., Barath, D., Matas, J.: Epos: Estimating 6d pose of objects with symmetries. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 11703–11712 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+Hodan, T., Haluza, P., Obdrzalek, S., Matas, J., Lourakis, M., Zabulis, X.: T-LESS: An RGB-D dataset for 6D pose estimation of texture-less objects. IEEE Winter Conference on Applications of Computer Vision (WACV) (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+Hodan, T., Melenovsky, A.: Bop: Benchmark for 6d object pose estimation (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+Höfer, T., Kiefer, B., Messmer, M., Zell, A.: Hyperposepdf-hypernetworks predicting the probability distribution on so (3). In: Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision. pp. 2369–2379 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+Huang, J., Yu, H., Yu, K.T., Navab, N., Ilic, S., Busam, B.: Matchu: Matching unseen objects for 6d pose estimation from rgb-d images (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+Ikeda, T., Zakharov, S., Ko, T., Irshad, M.Z., Lee, R., Liu, K., Ambrus, R., Nishiwaki, K.: Diffusionnocs: Managing symmetry and uncertainty in sim2real multi-modal category-level pose estimation. arXiv preprint arXiv:2402.12647 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+Irshad, M.Z., Kollar, T., Laskey, M., Stone, K., Kira, Z.: Centersnap: Single-shot multi-object 3d shape reconstruction and categorical 6d pose and size estimation. In: 2022 International Conference on Robotics and Automation (ICRA). pp. 10632–10640 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+Irshad, M.Z., Zakharov, S., Ambrus, R., Kollar, T., Kira, Z., Gaidon, A.: Shapo: Implicit representations for multi-object shape appearance and pose optimization (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+Labbé, Y., Carpentier, J., Aubry, M., Sivic, J.: CosyPose: Consistent multi-view multi-object 6D pose estimation. In: European Conference on Computer Vision (ECCV) (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+Li, F., Vutukur, S.R., Yu, H., Shugurov, I., Busam, B., Yang, S., Ilic, S.: Nerf-pose: A first-reconstruct-then-regress approach for weakly-supervised 6d object pose estimation. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 2123–2133 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+Lunayach, M., Zakharov, S., Chen, D., Ambrus, R., Kira, Z., Irshad, M.Z.: Fsd: Fast self-supervised single rgb-d to categorical 3d objects. In: 2024 IEEE International Conference on Robotics and Automation (ICRA). pp. 14630–14637 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+Manhardt, F., Arroyo, D.M., Rupprecht, C., Busam, B., Birdal, T., Navab, N., Tombari, F.: Explaining the ambiguity of object detection and 6d pose from visual data. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 6841–6850 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+Murphy, K.A., Esteves, C., Jampani, V., Ramalingam, S., Makadia, A.: Implicit-pdf: Non-parametric representation of probability distributions on the rotation manifold. In: Proceedings of the 38th International Conference on Machine Learning. pp. 7882–7893 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+Park, J.J., Florence, P., Straub, J., Newcombe, R., Lovegrove, S.: DeepSDF: Learning continuous signed distance functions for shape representation. In: Conference on Computer Vision and Pattern Recognition (CVPR). pp. 165–174 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+Park, K., Patten, T., Vincze, M.: Pix2pose: Pix2pose: Pixel-wise coordinate regression of objects for 6d pose estimation. In: The IEEE International Conference on Computer Vision (ICCV) (Oct 2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+Park, K., Patten, T., Vincze, M.: Pix2Pose: Pixel-wise coordinate regression of objects for 6D pose estimation. In: International Conference on Computer Vision (ICCV). pp. 7667–7676 (Oct 2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+Park, K., Patten, T., Vincze, M.: Neural object learning for 6D pose estimation using a few cluttered images. In: European Conference on Computer Vision (ECCV). pp. 656–673 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+Peng, S., Liu, Y., Huang, Q., Bao, H., Zhou, X.: PVNet: Pixel-wise voting network for 6DoF pose estimation. In: Conference on Computer Vision and Pattern Recognition (CVPR). pp. 4556–4565 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+Peng, W., Yan, J., Wen, H., Sun, Y.: Self-supervised category-level 6d object pose estimation with deep implicit shape representation. In: Proceedings of the AAAI Conference on Artificial Intelligence. vol. 36, pp. 2082–2090 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+Shugurov, I., Zakharov, S., Ilic, S.: Dpodv2: Dense correspondence-based 6 dof pose estimation. vol. 44, pp. 7417–7435. IEEE Computer Society, Los Alamitos, CA, USA (nov 2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+Su, Y., Saleh, M., Fetzer, T., Rambach, J., Navab, N., Busam, B., Stricker, D., Tombari, F.: Zebrapose: Coarse to fine surface encoding for 6dof object pose estimation. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 6738–6748 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock">
+Sundermeyer, M., Marton, Z.C., Durner, M., Brucker, M., Triebel, R.: Implicit 3D orientation learning for 6D object detection from RGB images. In: European Conference on Computer Vision (ECCV). pp. 712–729 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock">
+Vutukur, S.R., Brock, H., Busam, B., Birdal, T., Hutter, A., Ilic, S.: Nerf-feat: 6d object pose estimation using feature rendering. In: 2024 International Conference on 3D Vision (3DV). pp. 1146–1155 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock">
+Vutukur, S.R., Shugurov, I., Busam, B., Hutter, A., Ilic, S.: Welsa: Learning to predict 6d pose from weakly labeled data using shape alignment. In: European Conference on Computer Vision. pp. 645–661. Springer (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock">
+Wang, G., Manhardt, F., Tombari, F., Ji, X.: GDR-Net: Geometry-guided direct regression network for monocular 6d object pose estimation. In: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). pp. 16611–16621 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock">
+Xu, Z., Chen, K., Jia, K.: W-PoseNet: Dense correspondence regularized pixel pair pose regression. CoRR <span class="ltx_text ltx_font_bold" id="bib.bib38.1.1">arXiv</span>, 1912.11888 [cs.CV] (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock">
+Zakharov, S., Shugurov, I., Ilic, S.: DPOD: 6D pose object detector and refiner. In: International Conference on Computer Vision (ICCV). pp. 1941–1950 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock">
+Zakharov, S., Shugurov, I., Ilic, S.: Dpod: 6d pose object detector and refiner. In: International Conference on Computer Vision (ICCV) (October 2019)
+
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon Sep  2 13:39:25 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

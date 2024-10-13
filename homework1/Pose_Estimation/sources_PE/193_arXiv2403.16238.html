@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments</title>
+<!--Generated on Mon Jul 29 09:50:28 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2403.16238v2/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S1" title="In KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S2" title="In KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Related Work</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S2.SS1" title="In II Related Work ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-A</span> </span><span class="ltx_text ltx_font_italic">Objects Datasets</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S2.SS2" title="In II Related Work ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-B</span> </span><span class="ltx_text ltx_font_italic">6D Pose Estimation Methods</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3" title="In KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">The KITchen Dataset</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS1" title="In III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-A</span> </span><span class="ltx_text ltx_font_italic">Dataset’s Objects</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS2" title="In III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span> </span><span class="ltx_text ltx_font_italic">Dataset Recording</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS3" title="In III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span> </span><span class="ltx_text ltx_font_italic">Annotation Pipeline</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS3.SSS1" title="In III-C Annotation Pipeline ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span>1 </span>2D Objects Bounding Boxes Annotation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS3.SSS2" title="In III-C Annotation Pipeline ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span>2 </span>2D Objects Segmentation Masks</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS3.SSS3" title="In III-C Annotation Pipeline ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span>3 </span>6D Object Poses</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS4" title="In III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-D</span> </span><span class="ltx_text ltx_font_italic">Comparison to Existing Datasets</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S4" title="In KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">The KITchen Benchmark</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S4.SS1" title="In IV The KITchen Benchmark ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-A</span> </span><span class="ltx_text ltx_font_italic">Problem Statement</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S4.SS2" title="In IV The KITchen Benchmark ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-B</span> </span><span class="ltx_text ltx_font_italic">Datasets</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S4.SS3" title="In IV The KITchen Benchmark ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-C</span> </span><span class="ltx_text ltx_font_italic">Pose Error Calculation</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S5" title="In KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_font_bold ltx_title_document" style="font-size:173%;">KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Abdelrahman Younes and Tamim Asfour
+</span><span class="ltx_author_notes">The research leading to these results has received funding from the Baden-Württemberg Ministry of Science, Research and the Arts (MWK) as part of the state’s ”digital@bw” digitization strategy in the context of the Real-World Lab ”Robotics AI” and by the Carl Zeiss Foundation through the JuBot projectThe authors are with the High Performance Humanoid Technologies Lab, Institute for Anthropomatics and Robotics, Karlsruhe Institute of Technology (KIT), Germany.  <span class="ltx_text ltx_font_typewriter" id="id1.1.id1">{younes, asfour}@kit.edu</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id2.id1">Despite the recent progress on 6D object pose estimation methods for robotic grasping, a substantial performance gap persists between the capabilities of these methods on existing datasets and their efficacy in real-world grasping and mobile manipulation tasks, particularly when robots rely solely on their monocular egocentric field of view (FOV). Existing real-world datasets primarily focus on table-top grasping scenarios, where a robot arm is placed in a fixed position and the objects are centralized within the FOV of fixed external camera(s). Assessing performance on such datasets may not accurately reflect the challenges encountered in everyday grasping and mobile manipulation tasks within kitchen environments such as retrieving objects from higher shelves, sinks, dishwashers, ovens, refrigerators, or microwaves.
+To address this gap, we present KITchen, a novel benchmark designed specifically for estimating the 6D poses of objects located in diverse positions within kitchen settings. For this purpose, we recorded a comprehensive dataset comprising around 205k real-world RGBD images for 111 kitchen objects captured in two distinct kitchens, utilizing a humanoid robot with its egocentric perspectives. Subsequently, we developed a semi-automated annotation pipeline, to streamline the labeling process of such datasets, resulting in the generation of 2D object labels, 2D object segmentation masks, and 6D object poses with minimal human effort.
+The benchmark, the dataset, and the annotation pipeline will be publicly available at <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://kitchen-dataset.github.io/KITchen" title="">https://kitchen-dataset.github.io/KITchen</a>.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.1.1">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Recent work in robot navigation in indoor environments shows remarkable advances for mobile robots to navigate towards a goal position following different modalities such as 2D points <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib51" title="">51</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib14" title="">14</a>]</cite>, object’s image <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib37" title="">37</a>]</cite>, language instruction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib1" title="">1</a>]</cite>, and acoustic signals <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib52" title="">52</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib9" title="">9</a>]</cite>. However, expanding the capabilities of these robots beyond navigation to perform tasks that require physical interaction with the surrounding objects in the environments remains a harder challenge. Therefore, understanding the 3D surroundings and objects’ 6D pose estimation are essential pre-tasks for any robotic grasping and manipulation task <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib39" title="">39</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib40" title="">40</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib4" title="">4</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Current advances in tackling the 6D pose estimation problem focus on developing new models and approaches <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib32" title="">32</a>]</cite> to achieve the best results on the BOP challenge<span class="ltx_note ltx_role_footnote" id="footnote1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span><a class="ltx_ref ltx_url ltx_font_typewriter" href="https://bop.felk.cvut.cz" title="">https://bop.felk.cvut.cz</a></span></span></span> datasets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib22" title="">22</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib28" title="">28</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib46" title="">46</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib50" title="">50</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib16" title="">16</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib44" title="">44</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib23" title="">23</a>]</cite>. While this paradigm boosted the research on 6D pose estimation, however, the available real-world datasets primarily focus on serving the table-top robotic grasping setup, featuring a robotic arm fixed in a position above objects, close to them, and often the objects are centered within the robot’s FOV and in some cases with multiple cameras setup <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib45" title="">45</a>]</cite>.</p>
+</div>
+<figure class="ltx_figure" id="S1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="672" id="S1.F1.g1" src="extracted/5757345/figures/Kitchen_locations.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Challenging kitchen locations that our dataset covers in contrast with the currently available datasets. The objects are distributed across diverse locations such as fridge, drawer, sink, higher shelves, microwave, dishwasher, oven, etc.</figcaption>
+</figure>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">These datasets do not cover the challenging scenarios that mobile manipulators face inside indoor environments, especially in kitchens, where objects are normally placed in different not-centered positions with respect to the robot’s field of view (FOV) such as on higher shelves, inside fridges, microwaves, dishwashers or ovens or in sinks. These locations not only impose challenging 6D poses with respect to the robot’s camera but also cover more diverse and challenging surroundings such as transparent shelves in the case of refrigerators, see-through shelves in the case of dishwashers, and reflective backgrounds in the case of sinks, these challenges are not covered in the currently available real-world datasets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib45" title="">45</a>]</cite>. These gaps and the not-covered scenarios do not provide a reliable indication of the performance of the developed methods on these real-world datasets in the context of mobile manipulation tasks with monocular egocentric FOV.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.3">In addition to that, the current top 10 models on the BOP leaderboard train a model for each dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib25" title="">25</a>]</cite>, or even for each object <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib48" title="">48</a>]</cite>, which makes it hard to use for robotic applications, where the robots have to deal with a large number of objects under constrained resources. Furthermore, the average inference time of these top 10 approaches is <math alttext="0.0283" class="ltx_Math" display="inline" id="S1.p4.1.m1.1"><semantics id="S1.p4.1.m1.1a"><mn id="S1.p4.1.m1.1.1" xref="S1.p4.1.m1.1.1.cmml">0.0283</mn><annotation-xml encoding="MathML-Content" id="S1.p4.1.m1.1b"><cn id="S1.p4.1.m1.1.1.cmml" type="float" xref="S1.p4.1.m1.1.1">0.0283</cn></annotation-xml><annotation encoding="application/x-tex" id="S1.p4.1.m1.1c">0.0283</annotation><annotation encoding="application/x-llamapun" id="S1.p4.1.m1.1d">0.0283</annotation></semantics></math> frames per second (<math alttext="fps" class="ltx_Math" display="inline" id="S1.p4.2.m2.1"><semantics id="S1.p4.2.m2.1a"><mrow id="S1.p4.2.m2.1.1" xref="S1.p4.2.m2.1.1.cmml"><mi id="S1.p4.2.m2.1.1.2" xref="S1.p4.2.m2.1.1.2.cmml">f</mi><mo id="S1.p4.2.m2.1.1.1" xref="S1.p4.2.m2.1.1.1.cmml">⁢</mo><mi id="S1.p4.2.m2.1.1.3" xref="S1.p4.2.m2.1.1.3.cmml">p</mi><mo id="S1.p4.2.m2.1.1.1a" xref="S1.p4.2.m2.1.1.1.cmml">⁢</mo><mi id="S1.p4.2.m2.1.1.4" xref="S1.p4.2.m2.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S1.p4.2.m2.1b"><apply id="S1.p4.2.m2.1.1.cmml" xref="S1.p4.2.m2.1.1"><times id="S1.p4.2.m2.1.1.1.cmml" xref="S1.p4.2.m2.1.1.1"></times><ci id="S1.p4.2.m2.1.1.2.cmml" xref="S1.p4.2.m2.1.1.2">𝑓</ci><ci id="S1.p4.2.m2.1.1.3.cmml" xref="S1.p4.2.m2.1.1.3">𝑝</ci><ci id="S1.p4.2.m2.1.1.4.cmml" xref="S1.p4.2.m2.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.p4.2.m2.1c">fps</annotation><annotation encoding="application/x-llamapun" id="S1.p4.2.m2.1d">italic_f italic_p italic_s</annotation></semantics></math>) with the best being <math alttext="4.386fps" class="ltx_Math" display="inline" id="S1.p4.3.m3.1"><semantics id="S1.p4.3.m3.1a"><mrow id="S1.p4.3.m3.1.1" xref="S1.p4.3.m3.1.1.cmml"><mn id="S1.p4.3.m3.1.1.2" xref="S1.p4.3.m3.1.1.2.cmml">4.386</mn><mo id="S1.p4.3.m3.1.1.1" xref="S1.p4.3.m3.1.1.1.cmml">⁢</mo><mi id="S1.p4.3.m3.1.1.3" xref="S1.p4.3.m3.1.1.3.cmml">f</mi><mo id="S1.p4.3.m3.1.1.1a" xref="S1.p4.3.m3.1.1.1.cmml">⁢</mo><mi id="S1.p4.3.m3.1.1.4" xref="S1.p4.3.m3.1.1.4.cmml">p</mi><mo id="S1.p4.3.m3.1.1.1b" xref="S1.p4.3.m3.1.1.1.cmml">⁢</mo><mi id="S1.p4.3.m3.1.1.5" xref="S1.p4.3.m3.1.1.5.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S1.p4.3.m3.1b"><apply id="S1.p4.3.m3.1.1.cmml" xref="S1.p4.3.m3.1.1"><times id="S1.p4.3.m3.1.1.1.cmml" xref="S1.p4.3.m3.1.1.1"></times><cn id="S1.p4.3.m3.1.1.2.cmml" type="float" xref="S1.p4.3.m3.1.1.2">4.386</cn><ci id="S1.p4.3.m3.1.1.3.cmml" xref="S1.p4.3.m3.1.1.3">𝑓</ci><ci id="S1.p4.3.m3.1.1.4.cmml" xref="S1.p4.3.m3.1.1.4">𝑝</ci><ci id="S1.p4.3.m3.1.1.5.cmml" xref="S1.p4.3.m3.1.1.5">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.p4.3.m3.1c">4.386fps</annotation><annotation encoding="application/x-llamapun" id="S1.p4.3.m3.1d">4.386 italic_f italic_p italic_s</annotation></semantics></math>. This makes these approaches not reliable for real-time applications, such as mobile manipulation where the 6D pose estimate is only a preliminary step of object grasping which is followed by a set of actions needed to execute the grasp such as grasp selection, motion planning, etc.</p>
+</div>
+<figure class="ltx_figure" id="S1.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_portrait" height="584" id="S1.F2.g1" src="extracted/5757345/figures/ARMAR-6_cropped.png" width="359"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>The humanoid robot ARMAR-6, leveraged for its adjustable torso height and various camera angles provided by its adjustable roll-yaw neck, to enrich our dataset.</figcaption>
+</figure>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">To overcome the limitations of the current 6D pose estimation methods, we introduce KITchen, the first-of-its-kind large-scale real-world dataset recorded using the humanoid robot <span class="ltx_text" id="S1.p5.1.1">ARMAR-6</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib2" title="">2</a>]</cite> as shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S1.F2" title="Figure 2 ‣ I Introduction ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">2</span></a>, which has adjustable height and roll-yaw neck, in 2 different kitchen environments covering 111 kitchen objects from the robots’ egocentric perspective to cover the objects in the challenging kitchens’ locations as shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S1.F1" title="Figure 1 ‣ I Introduction ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">1</span></a>. KITchen offers 2D bounding boxes, object segmentation, and 6D poses annotated with a semi-automated annotation pipeline to minimize the need for manual labeling.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">The main contributions of our work are:
+
+<span class="ltx_inline-enumerate" id="S1.I1">
+<span class="ltx_inline-item" id="S1.I1.i1"><span class="ltx_tag ltx_tag_inline-item">(i)</span> <span class="ltx_text" id="S1.I1.i1.1">we introduce a large real-world annotated RGBD dataset for 111 objects with their 2D bounding boxes, segmentation masks, and 6D poses.
+</span></span>
+<span class="ltx_inline-item" id="S1.I1.i2"><span class="ltx_tag ltx_tag_inline-item">(ii)</span> <span class="ltx_text" id="S1.I1.i2.1">we propose a semi-automated annotation pipeline to annotate the objects in the dataset to facilitate the creation of more real-world datasets and make it publicly available to other researchers to create such large-scale datasets.
+</span></span>
+<span class="ltx_inline-item" id="S1.I1.i3"><span class="ltx_tag ltx_tag_inline-item">(iii)</span> <span class="ltx_text" id="S1.I1.i3.1">we introduce a new benchmark and competition, where the focus is to solve the object 6D pose estimation problem depending solely on the monocular FOV of robots and limiting the submissions to approaches that offer at least <math alttext="5fps" class="ltx_Math" display="inline" id="S1.I1.i3.1.m1.1"><semantics id="S1.I1.i3.1.m1.1a"><mrow id="S1.I1.i3.1.m1.1.1" xref="S1.I1.i3.1.m1.1.1.cmml"><mn id="S1.I1.i3.1.m1.1.1.2" xref="S1.I1.i3.1.m1.1.1.2.cmml">5</mn><mo id="S1.I1.i3.1.m1.1.1.1" xref="S1.I1.i3.1.m1.1.1.1.cmml">⁢</mo><mi id="S1.I1.i3.1.m1.1.1.3" xref="S1.I1.i3.1.m1.1.1.3.cmml">f</mi><mo id="S1.I1.i3.1.m1.1.1.1a" xref="S1.I1.i3.1.m1.1.1.1.cmml">⁢</mo><mi id="S1.I1.i3.1.m1.1.1.4" xref="S1.I1.i3.1.m1.1.1.4.cmml">p</mi><mo id="S1.I1.i3.1.m1.1.1.1b" xref="S1.I1.i3.1.m1.1.1.1.cmml">⁢</mo><mi id="S1.I1.i3.1.m1.1.1.5" xref="S1.I1.i3.1.m1.1.1.5.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S1.I1.i3.1.m1.1b"><apply id="S1.I1.i3.1.m1.1.1.cmml" xref="S1.I1.i3.1.m1.1.1"><times id="S1.I1.i3.1.m1.1.1.1.cmml" xref="S1.I1.i3.1.m1.1.1.1"></times><cn id="S1.I1.i3.1.m1.1.1.2.cmml" type="integer" xref="S1.I1.i3.1.m1.1.1.2">5</cn><ci id="S1.I1.i3.1.m1.1.1.3.cmml" xref="S1.I1.i3.1.m1.1.1.3">𝑓</ci><ci id="S1.I1.i3.1.m1.1.1.4.cmml" xref="S1.I1.i3.1.m1.1.1.4">𝑝</ci><ci id="S1.I1.i3.1.m1.1.1.5.cmml" xref="S1.I1.i3.1.m1.1.1.5">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S1.I1.i3.1.m1.1c">5fps</annotation><annotation encoding="application/x-llamapun" id="S1.I1.i3.1.m1.1d">5 italic_f italic_p italic_s</annotation></semantics></math> to encourage further work on this problem while taking into consideration real-time applicability.
+</span></span>
+</span></p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.1.1">Related Work</span>
+</h2>
+<figure class="ltx_table" id="S2.T1">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S2.T1.7">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S2.T1.7.8.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" id="S2.T1.7.8.1.1">Dataset</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" id="S2.T1.7.8.1.2">Objects</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="S2.T1.7.8.1.3">Images</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="S2.T1.7.8.1.4">Annotated Objects/Image</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="S2.T1.7.8.1.5">Multi-object</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="S2.T1.7.8.1.6">Multi-instance</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S2.T1.7.8.1.7">Mobile Robot’s FOV</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S2.T1.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S2.T1.1.1.2">LineMOD/LineMOD-Occluded <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib5" title="">5</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S2.T1.1.1.3">15</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S2.T1.1.1.4">18.2K</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S2.T1.1.1.1">
+<math alttext="\leq" class="ltx_Math" display="inline" id="S2.T1.1.1.1.m1.1"><semantics id="S2.T1.1.1.1.m1.1a"><mo id="S2.T1.1.1.1.m1.1.1" xref="S2.T1.1.1.1.m1.1.1.cmml">≤</mo><annotation-xml encoding="MathML-Content" id="S2.T1.1.1.1.m1.1b"><leq id="S2.T1.1.1.1.m1.1.1.cmml" xref="S2.T1.1.1.1.m1.1.1"></leq></annotation-xml><annotation encoding="application/x-tex" id="S2.T1.1.1.1.m1.1c">\leq</annotation><annotation encoding="application/x-llamapun" id="S2.T1.1.1.1.m1.1d">≤</annotation></semantics></math> 8</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S2.T1.1.1.5"><span class="ltx_text" id="S2.T1.1.1.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S2.T1.1.1.6"><span class="ltx_text" id="S2.T1.1.1.6.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S2.T1.1.1.7"><span class="ltx_text" id="S2.T1.1.1.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.2.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.2.2.2">T-LESS <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib22" title="">22</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.2.2.3">30</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.2.2.4">39K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.2.2.1">
+<math alttext="\leq" class="ltx_Math" display="inline" id="S2.T1.2.2.1.m1.1"><semantics id="S2.T1.2.2.1.m1.1a"><mo id="S2.T1.2.2.1.m1.1.1" xref="S2.T1.2.2.1.m1.1.1.cmml">≤</mo><annotation-xml encoding="MathML-Content" id="S2.T1.2.2.1.m1.1b"><leq id="S2.T1.2.2.1.m1.1.1.cmml" xref="S2.T1.2.2.1.m1.1.1"></leq></annotation-xml><annotation encoding="application/x-tex" id="S2.T1.2.2.1.m1.1c">\leq</annotation><annotation encoding="application/x-llamapun" id="S2.T1.2.2.1.m1.1d">≤</annotation></semantics></math> 10</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.2.2.5"><span class="ltx_text" id="S2.T1.2.2.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.2.2.6"><span class="ltx_text" id="S2.T1.2.2.6.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.2.2.7"><span class="ltx_text" id="S2.T1.2.2.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.3.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.3.3.2">ITODD <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib17" title="">17</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.3.3.3">28</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.3.3.4">1K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.3.3.1">
+<math alttext="\leq" class="ltx_Math" display="inline" id="S2.T1.3.3.1.m1.1"><semantics id="S2.T1.3.3.1.m1.1a"><mo id="S2.T1.3.3.1.m1.1.1" xref="S2.T1.3.3.1.m1.1.1.cmml">≤</mo><annotation-xml encoding="MathML-Content" id="S2.T1.3.3.1.m1.1b"><leq id="S2.T1.3.3.1.m1.1.1.cmml" xref="S2.T1.3.3.1.m1.1.1"></leq></annotation-xml><annotation encoding="application/x-tex" id="S2.T1.3.3.1.m1.1c">\leq</annotation><annotation encoding="application/x-llamapun" id="S2.T1.3.3.1.m1.1d">≤</annotation></semantics></math> 8</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.3.3.5"><span class="ltx_text" id="S2.T1.3.3.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.3.3.6"><span class="ltx_text" id="S2.T1.3.3.6.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.3.3.7"><span class="ltx_text" id="S2.T1.3.3.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.4.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.4.4.2">Homebrewed-Database <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib28" title="">28</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.4.4.3">33</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.4.4.4">5K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.4.4.1">
+<math alttext="\leq" class="ltx_Math" display="inline" id="S2.T1.4.4.1.m1.1"><semantics id="S2.T1.4.4.1.m1.1a"><mo id="S2.T1.4.4.1.m1.1.1" xref="S2.T1.4.4.1.m1.1.1.cmml">≤</mo><annotation-xml encoding="MathML-Content" id="S2.T1.4.4.1.m1.1b"><leq id="S2.T1.4.4.1.m1.1.1.cmml" xref="S2.T1.4.4.1.m1.1.1"></leq></annotation-xml><annotation encoding="application/x-tex" id="S2.T1.4.4.1.m1.1c">\leq</annotation><annotation encoding="application/x-llamapun" id="S2.T1.4.4.1.m1.1d">≤</annotation></semantics></math> 8</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.4.4.5"><span class="ltx_text" id="S2.T1.4.4.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.4.4.6"><span class="ltx_text" id="S2.T1.4.4.6.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.4.4.7"><span class="ltx_text" id="S2.T1.4.4.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.7.9.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.9.1.1">HOPE <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib46" title="">46</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.9.1.2">28</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.9.1.3">238</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.9.1.4">5-20</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.9.1.5"><span class="ltx_text" id="S2.T1.7.9.1.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.9.1.6"><span class="ltx_text" id="S2.T1.7.9.1.6.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.7.9.1.7"><span class="ltx_text" id="S2.T1.7.9.1.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.5.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.5.5.2">ICBIN <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib16" title="">16</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.5.5.3">3</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.5.5.4">177</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.5.5.1">
+<math alttext="\leq" class="ltx_Math" display="inline" id="S2.T1.5.5.1.m1.1"><semantics id="S2.T1.5.5.1.m1.1a"><mo id="S2.T1.5.5.1.m1.1.1" xref="S2.T1.5.5.1.m1.1.1.cmml">≤</mo><annotation-xml encoding="MathML-Content" id="S2.T1.5.5.1.m1.1b"><leq id="S2.T1.5.5.1.m1.1.1.cmml" xref="S2.T1.5.5.1.m1.1.1"></leq></annotation-xml><annotation encoding="application/x-tex" id="S2.T1.5.5.1.m1.1c">\leq</annotation><annotation encoding="application/x-llamapun" id="S2.T1.5.5.1.m1.1d">≤</annotation></semantics></math> 3</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.5.5.5"><span class="ltx_text" id="S2.T1.5.5.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.5.5.6"><span class="ltx_text" id="S2.T1.5.5.6.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.5.5.7"><span class="ltx_text" id="S2.T1.5.5.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.7.10.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.10.2.1">TUD-L <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib23" title="">23</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.10.2.2">3</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.10.2.3">11K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.10.2.4">1</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.10.2.5"><span class="ltx_text" id="S2.T1.7.10.2.5.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.10.2.6"><span class="ltx_text" id="S2.T1.7.10.2.6.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.7.10.2.7"><span class="ltx_text" id="S2.T1.7.10.2.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.6.6">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.6.6.2">MP6D <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib10" title="">10</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.6.6.3">20</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.6.6.4">20.1K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.6.6.1">
+<math alttext="\leq" class="ltx_Math" display="inline" id="S2.T1.6.6.1.m1.1"><semantics id="S2.T1.6.6.1.m1.1a"><mo id="S2.T1.6.6.1.m1.1.1" xref="S2.T1.6.6.1.m1.1.1.cmml">≤</mo><annotation-xml encoding="MathML-Content" id="S2.T1.6.6.1.m1.1b"><leq id="S2.T1.6.6.1.m1.1.1.cmml" xref="S2.T1.6.6.1.m1.1.1"></leq></annotation-xml><annotation encoding="application/x-tex" id="S2.T1.6.6.1.m1.1c">\leq</annotation><annotation encoding="application/x-llamapun" id="S2.T1.6.6.1.m1.1d">≤</annotation></semantics></math> 8</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.6.6.5"><span class="ltx_text" id="S2.T1.6.6.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.6.6.6"><span class="ltx_text" id="S2.T1.6.6.6.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.6.6.7"><span class="ltx_text" id="S2.T1.6.6.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.7.7">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.7.2">ClearPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib11" title="">11</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.7.3">63</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.7.4">355K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.7.1">
+<math alttext="\leq" class="ltx_Math" display="inline" id="S2.T1.7.7.1.m1.1"><semantics id="S2.T1.7.7.1.m1.1a"><mo id="S2.T1.7.7.1.m1.1.1" xref="S2.T1.7.7.1.m1.1.1.cmml">≤</mo><annotation-xml encoding="MathML-Content" id="S2.T1.7.7.1.m1.1b"><leq id="S2.T1.7.7.1.m1.1.1.cmml" xref="S2.T1.7.7.1.m1.1.1"></leq></annotation-xml><annotation encoding="application/x-tex" id="S2.T1.7.7.1.m1.1c">\leq</annotation><annotation encoding="application/x-llamapun" id="S2.T1.7.7.1.m1.1d">≤</annotation></semantics></math> 10</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.7.5"><span class="ltx_text" id="S2.T1.7.7.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.7.6"><span class="ltx_text" id="S2.T1.7.7.6.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.7.7.7"><span class="ltx_text" id="S2.T1.7.7.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.7.11.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.11.3.1">YCB-video (YCB-V) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib50" title="">50</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib6" title="">6</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.11.3.2">21</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.11.3.3">134K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.11.3.4">5</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.11.3.5"><span class="ltx_text" id="S2.T1.7.11.3.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.11.3.6"><span class="ltx_text" id="S2.T1.7.11.3.6.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.7.11.3.7"><span class="ltx_text" id="S2.T1.7.11.3.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.7.12.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.12.4.1">GraspNet-1Billion <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib18" title="">18</a>]</cite>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S2.T1.7.12.4.2">88</th>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.12.4.3">97.3K</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.12.4.4">10</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.12.4.5"><span class="ltx_text" id="S2.T1.7.12.4.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S2.T1.7.12.4.6"><span class="ltx_text" id="S2.T1.7.12.4.6.1" style="color:#FF0000;">✗</span></td>
+<td class="ltx_td ltx_align_center" id="S2.T1.7.12.4.7"><span class="ltx_text" id="S2.T1.7.12.4.7.1" style="color:#FF0000;">✗</span></td>
+</tr>
+<tr class="ltx_tr" id="S2.T1.7.13.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_r" id="S2.T1.7.13.5.1">KITchen (ours)</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r" id="S2.T1.7.13.5.2">111</th>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" id="S2.T1.7.13.5.3">205K</td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" id="S2.T1.7.13.5.4">10-50</td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" id="S2.T1.7.13.5.5"><span class="ltx_text" id="S2.T1.7.13.5.5.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" id="S2.T1.7.13.5.6"><span class="ltx_text" id="S2.T1.7.13.5.6.1" style="color:#00FF00;">✓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S2.T1.7.13.5.7"><span class="ltx_text" id="S2.T1.7.13.5.7.1" style="color:#00FF00;">✓</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE I: </span>Overview of available datasets for instance-level 6D pose estimation</figcaption>
+</figure>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS1.5.1.1">II-A</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS1.6.2">Objects Datasets</span>
+</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">Current research on 6D pose estimation leverages several datasets categorized into two main groups: instance-level object datasets and category-level object datasets. Instance-level datasets offer 6D pose annotations for specific objects, serving as benchmarks for many object pose estimation methods. In contrast, category-level datasets aim to extend object pose estimation approaches to estimate the pose of different instances within the same category. In this work, we focus on instance-level object pose estimation. This subsection provides an overview of currently available real-world datasets for instance-level 6D object pose estimation.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1"><span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.1">LineMOD (LM)</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib21" title="">21</a>]</cite> comprises 15 texture-less objects with diverse shapes, colors, and sizes. LM provides approximately 1.2K real-world test images for each object in cluttered scenes, totaling 18241 images.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.2">LineMOD-Occluded (LMO)</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib5" title="">5</a>]</cite> offers pose annotations for only eight objects from the LineMOD dataset under severe occluded conditions.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.3">T-LESS</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib22" title="">22</a>]</cite> consists of 30 industrial texture-less, symmetric, and similar objects with 1296 real-world images per object, totaling around 39K images.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.4">ITODD</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib17" title="">17</a>]</cite> provides 6D pose annotations for 28 industrial objects with less than 1K publicly available Gray-Depth validation images.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.5">Homebrewed-Database (HB)</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib28" title="">28</a>]</cite> comprises less than 5K real-world images as validation set for 33 objects, with only 8 of them being household objects.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.6">HOPE</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib46" title="">46</a>]</cite> consists of 28 toy grocery objects that could be utilized in kitchen environments, but it provides only 238 real-world images in 50 scenes.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.7">IC-BIN</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib16" title="">16</a>]</cite> also offers only 177 real-world test images for only 3 out of its 8 objects in multi-objects cluttered scenes with heavy occlusion to be used for the BOP challenge.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.8">TUD-L</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib23" title="">23</a>]</cite> provides around 11K real-world images for 3 objects not placed on tables which differs this dataset from the others.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.9">MP6D</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib10" title="">10</a>]</cite> consists of 20.1K real-world frames for 20 symmetrical specular-reflective objects in cluttered multi-object setups with occlusion.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.10">ClearPose</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib11" title="">11</a>]</cite> offers about 355K real images for 63 transparent symmetrical objects in 51 cluttered scenes with diverse backgrounds and occlusion.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p2.1.11">YCB-video (YCB-V)</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib50" title="">50</a>]</cite> provides 134K real-world images for 21 objects from the original YCB dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib6" title="">6</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p" id="S2.SS1.p3.1"><span class="ltx_text ltx_font_italic" id="S2.SS1.p3.1.1">GraspNet-1Billion</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib18" title="">18</a>]</cite> contains around 97.3K RGBD images for 88 objects recorded with 2 different cameras for table-top grasping scenario with one robot arm.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p3.1.2">KIT object models database</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib29" title="">29</a>]</cite> was originally introduced in 2012 and offers 3D CAD models for more than 100 diverse objects, the majority of which are kitchen-related groceries. However, it only offers very few images for each object, which makes it hard to use this dataset for 6D pose estimation with the current state-of-the-art (SOTA) data-driven 6D pose estimation approaches.
+<span class="ltx_text ltx_font_italic" id="S2.SS1.p3.1.3">KIT bimanual manipulation dataset</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib31" title="">31</a>]</cite> provides rich data for learning models of bimanual manipulation tasks from human demonstrations. It includes accurate whole-body motion data, hand configurations, and 6D object poses captured using various sensors. The dataset features 12 bimanual actions for 21 kitchen-related objects.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p4">
+<p class="ltx_p" id="S2.SS1.p4.1">An overview of available datasets for instance-level 6D pose estimation is given in  Table <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S2.T1" title="TABLE I ‣ II Related Work ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">I</span></a>. The overview highlights key metrics including the number of covered objects in the dataset, total image count, number of annotated objects per image, presence of multi-object setups, availability of multiple instances of the same objects, and whether the dataset was captured using a mobile robot’s field of view.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p5">
+<p class="ltx_p" id="S2.SS1.p5.1">In this work, we carefully selected 111 kitchen-related objects from the YCB, KIT object dataset, and the KIT bimanual manipulation dataset to record the first-of-its-kind large-scale real-world RGBD dataset featuring multi-objects in structured cluttered setups with diverse backgrounds and lighting conditions recorded using a humanoid robot.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS2.5.1.1">II-B</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS2.6.2">6D Pose Estimation Methods</span>
+</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">The current landscape of 6D pose estimation methods is diverse, ranging from traditional techniques such as template matching <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib27" title="">27</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib42" title="">42</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib36" title="">36</a>]</cite> and correspondences with locally invariant features <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib13" title="">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib12" title="">12</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib38" title="">38</a>]</cite> to the current advanced deep learning SOTA render &amp; compare approaches <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib49" title="">49</a>]</cite>. These approaches provide the 6D poses of novel objects by rendering many views of the object during inference using its 3D CAD model and then passing these rendered views with the received cropped image of the object obtained by any 2D object detectors <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib43" title="">43</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib34" title="">34</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib53" title="">53</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib33" title="">33</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib47" title="">47</a>]</cite> to a coarse model which classifies which rendered image best matches the input image. Finally, they pass the initial pose to a refiner network to estimate an updated 6D pose of the object. In this work, we leverage MegaPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib32" title="">32</a>]</cite>, Segment Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib30" title="">30</a>]</cite>, and YOLOv5 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib26" title="">26</a>]</cite> to annotate our dataset.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps" id="S3.1.1">The KITchen Dataset</span>
+</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS1.5.1.1">III-A</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS1.6.2">Dataset’s Objects</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">We aim to create a large-scale real-world dataset that covers objects that are commonly used in kitchen environments. Although some of the existing object datasets already offer objects that are commonly used in kitchens, they lack enough diverse RGBD annotated images to train on <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib50" title="">50</a>]</cite> or no annotated RGBD at all <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib35" title="">35</a>]</cite>. Therefore, we decided to reuse the already available kitchen-related objects from these datasets and provide a large real-world RGBD annotated dataset for them to facilitate research on 6D pose estimation for kitchen objects. These objects vary from toy vegetables and fruits from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib6" title="">6</a>]</cite> to kitchen tools such as knives, spoons, cups, mugs, bowls, cutting board, egg whisk, frying pan, plate, etc. from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib50" title="">50</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib35" title="">35</a>]</cite> to kitchen groceries objects from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib29" title="">29</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS2.5.1.1">III-B</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS2.6.2">Dataset Recording</span>
+</h3>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="169" id="S3.F3.g1" src="extracted/5757345/figures/2Kitchens.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>The two distinguished kitchens where we recorded our dataset. On the left side is the Main Kitchen while on the right side is the Mobile Kitchen.</figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="113" id="S3.F4.g1" src="extracted/5757345/figures/adjustable_torso.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Diverse robot and camera heights realized through different torso positions of <span class="ltx_text" id="S3.F4.2.1">ARMAR-6</span>. The images display heights of 145cm, 177cm, and 185cm from left to right, illustrating the varied perspectives captured in the datasets and the different placements of objects relative to the robot’s field of view.</figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">We recorded the dataset using our humanoid robot <span class="ltx_text" id="S3.SS2.p1.1.1">ARMAR-6</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib3" title="">3</a>]</cite> inside two distinct kitchen environments as seen in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.F3" title="Figure 3 ‣ III-B Dataset Recording ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">3</span></a> the first kitchen, referred to as the <span class="ltx_text ltx_font_italic" id="S3.SS2.p1.1.2">Main Kitchen</span>, includes typical kitchen appliances such as a fridge, counter with drawers, table, sink, microwave, dishwasher, and oven. The second kitchen, named <span class="ltx_text ltx_font_italic" id="S3.SS2.p1.1.3">Mobile Kitchen</span>, features a counter with drawers, sink, dishwasher, fridge, and three tables. To enhance diversity, we utilized four different table-top colors (red, white, gray, and blue) and varied the camera’s heights (150cm, 177cm, and 185cm) using <span class="ltx_text" id="S3.SS2.p1.1.4">ARMAR-6</span>’s torso as shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.F4" title="Figure 4 ‣ III-B Dataset Recording ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">4</span></a>. Additionally, we recorded data under three different pitch angles (10 degrees, 37 degrees, and 49 degrees down) and six different lighting conditions as shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.F5" title="Figure 5 ‣ III-B Dataset Recording ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">5</span></a>. We shuffled the objects with each change of lighting, camera’s height, or camera’s angle to enrich the diversity of the recorded scenes. To avoid similar and repetitive frames, we limited our recording to 5 <math alttext="fps" class="ltx_Math" display="inline" id="S3.SS2.p1.1.m1.1"><semantics id="S3.SS2.p1.1.m1.1a"><mrow id="S3.SS2.p1.1.m1.1.1" xref="S3.SS2.p1.1.m1.1.1.cmml"><mi id="S3.SS2.p1.1.m1.1.1.2" xref="S3.SS2.p1.1.m1.1.1.2.cmml">f</mi><mo id="S3.SS2.p1.1.m1.1.1.1" xref="S3.SS2.p1.1.m1.1.1.1.cmml">⁢</mo><mi id="S3.SS2.p1.1.m1.1.1.3" xref="S3.SS2.p1.1.m1.1.1.3.cmml">p</mi><mo id="S3.SS2.p1.1.m1.1.1.1a" xref="S3.SS2.p1.1.m1.1.1.1.cmml">⁢</mo><mi id="S3.SS2.p1.1.m1.1.1.4" xref="S3.SS2.p1.1.m1.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.1.m1.1b"><apply id="S3.SS2.p1.1.m1.1.1.cmml" xref="S3.SS2.p1.1.m1.1.1"><times id="S3.SS2.p1.1.m1.1.1.1.cmml" xref="S3.SS2.p1.1.m1.1.1.1"></times><ci id="S3.SS2.p1.1.m1.1.1.2.cmml" xref="S3.SS2.p1.1.m1.1.1.2">𝑓</ci><ci id="S3.SS2.p1.1.m1.1.1.3.cmml" xref="S3.SS2.p1.1.m1.1.1.3">𝑝</ci><ci id="S3.SS2.p1.1.m1.1.1.4.cmml" xref="S3.SS2.p1.1.m1.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.1.m1.1c">fps</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.1.m1.1d">italic_f italic_p italic_s</annotation></semantics></math>. To the best of our knowledge, this is the first of its kind dataset that covers this amount of different robots’ fields of view.</p>
+</div>
+<figure class="ltx_figure" id="S3.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="113" id="S3.F5.g1" src="extracted/5757345/figures/camera_angles.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Variation in robot neck pitch angle. The images depict angles of 10, 37, and 49 degrees from left to right, showcasing a diverse range of perspectives.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS3.5.1.1">III-C</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS3.6.2">Annotation Pipeline</span>
+</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">Annotating objects with their ground truth 6D poses is a labor-intensive and time-consuming task. Although some of the recently published datasets attempted to semi-automate the annotation process. For instance, GraspNet-1Billion’s approach <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib18" title="">18</a>]</cite> relies on manually annotating the first frame of each scene, then leveraging recorded camera poses to calculate the objects’ poses in the following frames. However, this method was not optimal for our dataset, as KITchen has many more diverse scenes per kitchen compared to the simple setup used in GraspNet-1Billion, resulting in significantly more effort required for manual annotation. Another attempt to semi-automate the annotation process was presented by HANDAL <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib19" title="">19</a>]</cite>, but their approach assumes a single object in the scene, making it unsuitable for our dataset, which contains multiple objects <math alttext="10-50" class="ltx_Math" display="inline" id="S3.SS3.p1.1.m1.1"><semantics id="S3.SS3.p1.1.m1.1a"><mrow id="S3.SS3.p1.1.m1.1.1" xref="S3.SS3.p1.1.m1.1.1.cmml"><mn id="S3.SS3.p1.1.m1.1.1.2" xref="S3.SS3.p1.1.m1.1.1.2.cmml">10</mn><mo id="S3.SS3.p1.1.m1.1.1.1" xref="S3.SS3.p1.1.m1.1.1.1.cmml">−</mo><mn id="S3.SS3.p1.1.m1.1.1.3" xref="S3.SS3.p1.1.m1.1.1.3.cmml">50</mn></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.1.m1.1b"><apply id="S3.SS3.p1.1.m1.1.1.cmml" xref="S3.SS3.p1.1.m1.1.1"><minus id="S3.SS3.p1.1.m1.1.1.1.cmml" xref="S3.SS3.p1.1.m1.1.1.1"></minus><cn id="S3.SS3.p1.1.m1.1.1.2.cmml" type="integer" xref="S3.SS3.p1.1.m1.1.1.2">10</cn><cn id="S3.SS3.p1.1.m1.1.1.3.cmml" type="integer" xref="S3.SS3.p1.1.m1.1.1.3">50</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.1.m1.1c">10-50</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.1.m1.1d">10 - 50</annotation></semantics></math> objects in each scene. To overcome the limitations of existing approaches and streamline the annotation process, we propose a semi-automated annotation pipeline. This pipeline generates three types of annotations: 2D object bounding boxes, 2D segmentation masks, and 6D poses, see <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.F6" title="Figure 6 ‣ III-C Annotation Pipeline ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">6</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="S3.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="143" id="S3.F6.g1" src="extracted/5757345/figures/AnnotationPipelineFinal_humanoids.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>Our proposed annotation pipeline. The pipeline starts 3D meshes of dataset objects as input, which are processed by BlenderProc2 to generate synthetic data with 2D bounding boxes. This annotated 2D data is used to train a YOLOv5 2D object detector. Subsequently, real-world recorded data is fed into the trained model, and the output is manually inspected for correct and incorrect labeling. The correctly labeled images are used for model refinement, which is then validated on the incorrectly labeled images. This iterative process continues until all images are correctly labeled. The correctly labeled images are then passed to Segment Anything (SAM) to generate masks. Finally, the images, along with the 2D labels and 3D meshes, are fed into MegaPose to generate 6D poses for detected objects. Manual inspection of poses is performed using contour and mesh overlay images, and corrected annotations are used to iteratively fine-tune MegaPose until the entire dataset is accurately annotated.</figcaption>
+</figure>
+<section class="ltx_subsubsection" id="S3.SS3.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection"><span class="ltx_text" id="S3.SS3.SSS1.5.1.1">III-C</span>1 </span>2D Objects Bounding Boxes Annotation</h4>
+<div class="ltx_para" id="S3.SS3.SSS1.p1">
+<p class="ltx_p" id="S3.SS3.SSS1.p1.1">The pipeline starts by receiving the collected 3D CAD object models for the dataset, then it generates around 100K annotated photo-realistic synthetic RGBD images with 2D bounding boxes using BlenderProc2 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib15" title="">15</a>]</cite>. These synthetic images are used to finetune a pretrained YOLOv5 model <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib26" title="">26</a>]</cite> for 2D object detection. Subsequently, the trained model is applied to our real-world data, and manually classified images are inspected to distinguish correctly labeled ones. The model is then fine-tuned iteratively until all real-world data is accurately labeled with 2D object labels.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS3.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection"><span class="ltx_text" id="S3.SS3.SSS2.5.1.1">III-C</span>2 </span>2D Objects Segmentation Masks</h4>
+<div class="ltx_para" id="S3.SS3.SSS2.p1">
+<p class="ltx_p" id="S3.SS3.SSS2.p1.1">For segmenting the objects and producing the 2D segmentation masks, we leverage Segment Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib30" title="">30</a>]</cite>, by passing the images as well as the 2D bounding boxes generated from the previous step.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS3.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection"><span class="ltx_text" id="S3.SS3.SSS3.5.1.1">III-C</span>3 </span>6D Object Poses</h4>
+<div class="ltx_para" id="S3.SS3.SSS3.p1">
+<p class="ltx_p" id="S3.SS3.SSS3.p1.1">To generate the 6D poses for the objects in the images, we pass the 2D bounding boxes which are generated using the fine-tuned YOLOv5 object detection model alongside the 3D CAD models of the detected objects with the input image into MegaPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib32" title="">32</a>]</cite>. The output 6D poses are used to overlay contours and meshes on the images for manual inspection. The MegaPose model is fine-tuned with corrected labeled data iteratively until all data are accurately annotated.
+The entire annotation pipeline is illustrated in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.F6" title="Figure 6 ‣ III-C Annotation Pipeline ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">6</span></a> and several illustrative examples of the output of each step are demonstrated in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.F7" title="Figure 7 ‣ III-C3 6D Object Poses ‣ III-C Annotation Pipeline ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">7</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="S3.F7">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_square" height="505" id="S3.F7.g1" src="extracted/5757345/figures/annotation_4rows.png" width="598"/></div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="252" id="S3.F7.g2" src="extracted/5757345/figures/annotation_7.drawio.png" width="598"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>Examples of the results generated by our proposed annotation pipeline. Sequentially from left to right: output of the 2D detector, segmentation masks, contour overlay, and mesh overlay.</figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS4.5.1.1">III-D</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS4.6.2">Comparison to Existing Datasets</span>
+</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">When compared to currently available datasets, the KITchen dataset stands out in several key aspects. With a diverse collection of 111 objects, our dataset offers a significantly wider range than the average number of objects found in existing datasets, surpassing the average by a factor of four. This expansive variety is crucial for training robust pose estimation models capable of handling a multitude of real-world scenarios. Moreover, the KITchen dataset offers a total of 205K RGBD images. This surpasses the average number of annotated images in existing datasets covered in Table <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S2.T1" title="TABLE I ‣ II Related Work ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">I</span></a> by over threefold, providing more data for training and evaluation purposes. Furthermore, our dataset has a remarkably larger number of annotated objects per image compared to the existing datasets with an unprecedented number of objects reaching 50 per image. This exceeds any available dataset by a significant margin, enabling more comprehensive analysis and training of instance-level 6D pose estimation models. Additionally, the KITchen dataset is unique in its capture methodology. It is the only dataset to have been recorded using the field of view of a humanoid robot with adjustable heights, camera angles, and lighting conditions. Unlike existing datasets that predominantly focus on tabletop scenes, our dataset features challenging locations within kitchen environments including refrigerators, ovens, sinks, higher shelves, microwaves, and
+dishwashers, offering a broader scope of real-world scenarios for pose estimation research.
+An overview of the dataset comparison is given in Table <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S2.T1" title="TABLE I ‣ II Related Work ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">I</span></a>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.1.1">The KITchen Benchmark</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.2">Our proposed KITchen benchmark aims to encourage researchers in both computer vision and robotics to test their developed methods on a diverse and challenging multi-object dataset while considering the resource constraints of robots. To this end, we impose specific guidelines for leaderboard submissions to ensure practical applicability. Specifically, submissions must utilize a single model for all objects and maintain a minimum processing frequency of 5<math alttext="fps" class="ltx_Math" display="inline" id="S4.p1.1.m1.1"><semantics id="S4.p1.1.m1.1a"><mrow id="S4.p1.1.m1.1.1" xref="S4.p1.1.m1.1.1.cmml"><mi id="S4.p1.1.m1.1.1.2" xref="S4.p1.1.m1.1.1.2.cmml">f</mi><mo id="S4.p1.1.m1.1.1.1" xref="S4.p1.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.p1.1.m1.1.1.3" xref="S4.p1.1.m1.1.1.3.cmml">p</mi><mo id="S4.p1.1.m1.1.1.1a" xref="S4.p1.1.m1.1.1.1.cmml">⁢</mo><mi id="S4.p1.1.m1.1.1.4" xref="S4.p1.1.m1.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.p1.1.m1.1b"><apply id="S4.p1.1.m1.1.1.cmml" xref="S4.p1.1.m1.1.1"><times id="S4.p1.1.m1.1.1.1.cmml" xref="S4.p1.1.m1.1.1.1"></times><ci id="S4.p1.1.m1.1.1.2.cmml" xref="S4.p1.1.m1.1.1.2">𝑓</ci><ci id="S4.p1.1.m1.1.1.3.cmml" xref="S4.p1.1.m1.1.1.3">𝑝</ci><ci id="S4.p1.1.m1.1.1.4.cmml" xref="S4.p1.1.m1.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.1.m1.1c">fps</annotation><annotation encoding="application/x-llamapun" id="S4.p1.1.m1.1d">italic_f italic_p italic_s</annotation></semantics></math> during inference. The above conditions enhance the likelihood of the applicability of these methods in robotics. Aligning these criteria with those of the BOP Benchmark <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib24" title="">24</a>]</cite>, we observe remarkable differences. Among the top 10 methods on the leaderboard, only two meet to the requirement of utilizing a single model per dataset rather than per object. Moreover, none of these methods achieves the required performance of 5 <math alttext="fps" class="ltx_Math" display="inline" id="S4.p1.2.m2.1"><semantics id="S4.p1.2.m2.1a"><mrow id="S4.p1.2.m2.1.1" xref="S4.p1.2.m2.1.1.cmml"><mi id="S4.p1.2.m2.1.1.2" xref="S4.p1.2.m2.1.1.2.cmml">f</mi><mo id="S4.p1.2.m2.1.1.1" xref="S4.p1.2.m2.1.1.1.cmml">⁢</mo><mi id="S4.p1.2.m2.1.1.3" xref="S4.p1.2.m2.1.1.3.cmml">p</mi><mo id="S4.p1.2.m2.1.1.1a" xref="S4.p1.2.m2.1.1.1.cmml">⁢</mo><mi id="S4.p1.2.m2.1.1.4" xref="S4.p1.2.m2.1.1.4.cmml">s</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.p1.2.m2.1b"><apply id="S4.p1.2.m2.1.1.cmml" xref="S4.p1.2.m2.1.1"><times id="S4.p1.2.m2.1.1.1.cmml" xref="S4.p1.2.m2.1.1.1"></times><ci id="S4.p1.2.m2.1.1.2.cmml" xref="S4.p1.2.m2.1.1.2">𝑓</ci><ci id="S4.p1.2.m2.1.1.3.cmml" xref="S4.p1.2.m2.1.1.3">𝑝</ci><ci id="S4.p1.2.m2.1.1.4.cmml" xref="S4.p1.2.m2.1.1.4">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.p1.2.m2.1c">fps</annotation><annotation encoding="application/x-llamapun" id="S4.p1.2.m2.1d">italic_f italic_p italic_s</annotation></semantics></math>, with the closest reaching 4.3 fps. This discrepancy underscores a critical gap between current state-of-the-art approaches and the requirements of time-critical robotics applications, as evidenced by the average processing speed of the top 10 approaches on the BOP leaderboard, which is only 0.03 fps.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS1.5.1.1">IV-A</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS1.6.2">Problem Statement</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.17">The benchmark is designed to address the object 6D pose estimation problem, where the model receives an image <math alttext="I" class="ltx_Math" display="inline" id="S4.SS1.p1.1.m1.1"><semantics id="S4.SS1.p1.1.m1.1a"><mi id="S4.SS1.p1.1.m1.1.1" xref="S4.SS1.p1.1.m1.1.1.cmml">I</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.1.m1.1b"><ci id="S4.SS1.p1.1.m1.1.1.cmml" xref="S4.SS1.p1.1.m1.1.1">𝐼</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.1.m1.1c">I</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.1.m1.1d">italic_I</annotation></semantics></math> from the dataset <math alttext="D" class="ltx_Math" display="inline" id="S4.SS1.p1.2.m2.1"><semantics id="S4.SS1.p1.2.m2.1a"><mi id="S4.SS1.p1.2.m2.1.1" xref="S4.SS1.p1.2.m2.1.1.cmml">D</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.2.m2.1b"><ci id="S4.SS1.p1.2.m2.1.1.cmml" xref="S4.SS1.p1.2.m2.1.1">𝐷</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.2.m2.1c">D</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.2.m2.1d">italic_D</annotation></semantics></math>, where <math alttext="D" class="ltx_Math" display="inline" id="S4.SS1.p1.3.m3.1"><semantics id="S4.SS1.p1.3.m3.1a"><mi id="S4.SS1.p1.3.m3.1.1" xref="S4.SS1.p1.3.m3.1.1.cmml">D</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.3.m3.1b"><ci id="S4.SS1.p1.3.m3.1.1.cmml" xref="S4.SS1.p1.3.m3.1.1">𝐷</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.3.m3.1c">D</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.3.m3.1d">italic_D</annotation></semantics></math> is a set of RGBD images. The image <math alttext="I" class="ltx_Math" display="inline" id="S4.SS1.p1.4.m4.1"><semantics id="S4.SS1.p1.4.m4.1a"><mi id="S4.SS1.p1.4.m4.1.1" xref="S4.SS1.p1.4.m4.1.1.cmml">I</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.4.m4.1b"><ci id="S4.SS1.p1.4.m4.1.1.cmml" xref="S4.SS1.p1.4.m4.1.1">𝐼</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.4.m4.1c">I</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.4.m4.1d">italic_I</annotation></semantics></math> contains a set of objects <math alttext="\{{o\}^{n}_{i=0}}" class="ltx_Math" display="inline" id="S4.SS1.p1.5.m5.1"><semantics id="S4.SS1.p1.5.m5.1a"><msubsup id="S4.SS1.p1.5.m5.1.2" xref="S4.SS1.p1.5.m5.1.2.cmml"><mrow id="S4.SS1.p1.5.m5.1.2.2.2.2" xref="S4.SS1.p1.5.m5.1.2.2.2.1.cmml"><mo id="S4.SS1.p1.5.m5.1.2.2.2.2.1" stretchy="false" xref="S4.SS1.p1.5.m5.1.2.2.2.1.cmml">{</mo><mi id="S4.SS1.p1.5.m5.1.1" xref="S4.SS1.p1.5.m5.1.1.cmml">o</mi><mo id="S4.SS1.p1.5.m5.1.2.2.2.2.2" stretchy="false" xref="S4.SS1.p1.5.m5.1.2.2.2.1.cmml">}</mo></mrow><mrow id="S4.SS1.p1.5.m5.1.2.3" xref="S4.SS1.p1.5.m5.1.2.3.cmml"><mi id="S4.SS1.p1.5.m5.1.2.3.2" xref="S4.SS1.p1.5.m5.1.2.3.2.cmml">i</mi><mo id="S4.SS1.p1.5.m5.1.2.3.1" xref="S4.SS1.p1.5.m5.1.2.3.1.cmml">=</mo><mn id="S4.SS1.p1.5.m5.1.2.3.3" xref="S4.SS1.p1.5.m5.1.2.3.3.cmml">0</mn></mrow><mi id="S4.SS1.p1.5.m5.1.2.2.3" xref="S4.SS1.p1.5.m5.1.2.2.3.cmml">n</mi></msubsup><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.5.m5.1b"><apply id="S4.SS1.p1.5.m5.1.2.cmml" xref="S4.SS1.p1.5.m5.1.2"><csymbol cd="ambiguous" id="S4.SS1.p1.5.m5.1.2.1.cmml" xref="S4.SS1.p1.5.m5.1.2">subscript</csymbol><apply id="S4.SS1.p1.5.m5.1.2.2.cmml" xref="S4.SS1.p1.5.m5.1.2"><csymbol cd="ambiguous" id="S4.SS1.p1.5.m5.1.2.2.1.cmml" xref="S4.SS1.p1.5.m5.1.2">superscript</csymbol><set id="S4.SS1.p1.5.m5.1.2.2.2.1.cmml" xref="S4.SS1.p1.5.m5.1.2.2.2.2"><ci id="S4.SS1.p1.5.m5.1.1.cmml" xref="S4.SS1.p1.5.m5.1.1">𝑜</ci></set><ci id="S4.SS1.p1.5.m5.1.2.2.3.cmml" xref="S4.SS1.p1.5.m5.1.2.2.3">𝑛</ci></apply><apply id="S4.SS1.p1.5.m5.1.2.3.cmml" xref="S4.SS1.p1.5.m5.1.2.3"><eq id="S4.SS1.p1.5.m5.1.2.3.1.cmml" xref="S4.SS1.p1.5.m5.1.2.3.1"></eq><ci id="S4.SS1.p1.5.m5.1.2.3.2.cmml" xref="S4.SS1.p1.5.m5.1.2.3.2">𝑖</ci><cn id="S4.SS1.p1.5.m5.1.2.3.3.cmml" type="integer" xref="S4.SS1.p1.5.m5.1.2.3.3">0</cn></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.5.m5.1c">\{{o\}^{n}_{i=0}}</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.5.m5.1d">{ italic_o } start_POSTSUPERSCRIPT italic_n end_POSTSUPERSCRIPT start_POSTSUBSCRIPT italic_i = 0 end_POSTSUBSCRIPT</annotation></semantics></math>. The model has access to the <math alttext="M" class="ltx_Math" display="inline" id="S4.SS1.p1.6.m6.1"><semantics id="S4.SS1.p1.6.m6.1a"><mi id="S4.SS1.p1.6.m6.1.1" xref="S4.SS1.p1.6.m6.1.1.cmml">M</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.6.m6.1b"><ci id="S4.SS1.p1.6.m6.1.1.cmml" xref="S4.SS1.p1.6.m6.1.1">𝑀</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.6.m6.1c">M</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.6.m6.1d">italic_M</annotation></semantics></math>, where <math alttext="M" class="ltx_Math" display="inline" id="S4.SS1.p1.7.m7.1"><semantics id="S4.SS1.p1.7.m7.1a"><mi id="S4.SS1.p1.7.m7.1.1" xref="S4.SS1.p1.7.m7.1.1.cmml">M</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.7.m7.1b"><ci id="S4.SS1.p1.7.m7.1.1.cmml" xref="S4.SS1.p1.7.m7.1.1">𝑀</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.7.m7.1c">M</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.7.m7.1d">italic_M</annotation></semantics></math> is a set of 3D meshes of all objects <math alttext="O" class="ltx_Math" display="inline" id="S4.SS1.p1.8.m8.1"><semantics id="S4.SS1.p1.8.m8.1a"><mi id="S4.SS1.p1.8.m8.1.1" xref="S4.SS1.p1.8.m8.1.1.cmml">O</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.8.m8.1b"><ci id="S4.SS1.p1.8.m8.1.1.cmml" xref="S4.SS1.p1.8.m8.1.1">𝑂</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.8.m8.1c">O</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.8.m8.1d">italic_O</annotation></semantics></math> in the dataset <math alttext="D" class="ltx_Math" display="inline" id="S4.SS1.p1.9.m9.1"><semantics id="S4.SS1.p1.9.m9.1a"><mi id="S4.SS1.p1.9.m9.1.1" xref="S4.SS1.p1.9.m9.1.1.cmml">D</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.9.m9.1b"><ci id="S4.SS1.p1.9.m9.1.1.cmml" xref="S4.SS1.p1.9.m9.1.1">𝐷</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.9.m9.1c">D</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.9.m9.1d">italic_D</annotation></semantics></math>. The objective is to estimate the pose <math alttext="P" class="ltx_Math" display="inline" id="S4.SS1.p1.10.m10.1"><semantics id="S4.SS1.p1.10.m10.1a"><mi id="S4.SS1.p1.10.m10.1.1" xref="S4.SS1.p1.10.m10.1.1.cmml">P</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.10.m10.1b"><ci id="S4.SS1.p1.10.m10.1.1.cmml" xref="S4.SS1.p1.10.m10.1.1">𝑃</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.10.m10.1c">P</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.10.m10.1d">italic_P</annotation></semantics></math> of all objects <math alttext="\{{o\}^{n}_{i=0}}" class="ltx_Math" display="inline" id="S4.SS1.p1.11.m11.1"><semantics id="S4.SS1.p1.11.m11.1a"><msubsup id="S4.SS1.p1.11.m11.1.2" xref="S4.SS1.p1.11.m11.1.2.cmml"><mrow id="S4.SS1.p1.11.m11.1.2.2.2.2" xref="S4.SS1.p1.11.m11.1.2.2.2.1.cmml"><mo id="S4.SS1.p1.11.m11.1.2.2.2.2.1" stretchy="false" xref="S4.SS1.p1.11.m11.1.2.2.2.1.cmml">{</mo><mi id="S4.SS1.p1.11.m11.1.1" xref="S4.SS1.p1.11.m11.1.1.cmml">o</mi><mo id="S4.SS1.p1.11.m11.1.2.2.2.2.2" stretchy="false" xref="S4.SS1.p1.11.m11.1.2.2.2.1.cmml">}</mo></mrow><mrow id="S4.SS1.p1.11.m11.1.2.3" xref="S4.SS1.p1.11.m11.1.2.3.cmml"><mi id="S4.SS1.p1.11.m11.1.2.3.2" xref="S4.SS1.p1.11.m11.1.2.3.2.cmml">i</mi><mo id="S4.SS1.p1.11.m11.1.2.3.1" xref="S4.SS1.p1.11.m11.1.2.3.1.cmml">=</mo><mn id="S4.SS1.p1.11.m11.1.2.3.3" xref="S4.SS1.p1.11.m11.1.2.3.3.cmml">0</mn></mrow><mi id="S4.SS1.p1.11.m11.1.2.2.3" xref="S4.SS1.p1.11.m11.1.2.2.3.cmml">n</mi></msubsup><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.11.m11.1b"><apply id="S4.SS1.p1.11.m11.1.2.cmml" xref="S4.SS1.p1.11.m11.1.2"><csymbol cd="ambiguous" id="S4.SS1.p1.11.m11.1.2.1.cmml" xref="S4.SS1.p1.11.m11.1.2">subscript</csymbol><apply id="S4.SS1.p1.11.m11.1.2.2.cmml" xref="S4.SS1.p1.11.m11.1.2"><csymbol cd="ambiguous" id="S4.SS1.p1.11.m11.1.2.2.1.cmml" xref="S4.SS1.p1.11.m11.1.2">superscript</csymbol><set id="S4.SS1.p1.11.m11.1.2.2.2.1.cmml" xref="S4.SS1.p1.11.m11.1.2.2.2.2"><ci id="S4.SS1.p1.11.m11.1.1.cmml" xref="S4.SS1.p1.11.m11.1.1">𝑜</ci></set><ci id="S4.SS1.p1.11.m11.1.2.2.3.cmml" xref="S4.SS1.p1.11.m11.1.2.2.3">𝑛</ci></apply><apply id="S4.SS1.p1.11.m11.1.2.3.cmml" xref="S4.SS1.p1.11.m11.1.2.3"><eq id="S4.SS1.p1.11.m11.1.2.3.1.cmml" xref="S4.SS1.p1.11.m11.1.2.3.1"></eq><ci id="S4.SS1.p1.11.m11.1.2.3.2.cmml" xref="S4.SS1.p1.11.m11.1.2.3.2">𝑖</ci><cn id="S4.SS1.p1.11.m11.1.2.3.3.cmml" type="integer" xref="S4.SS1.p1.11.m11.1.2.3.3">0</cn></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.11.m11.1c">\{{o\}^{n}_{i=0}}</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.11.m11.1d">{ italic_o } start_POSTSUPERSCRIPT italic_n end_POSTSUPERSCRIPT start_POSTSUBSCRIPT italic_i = 0 end_POSTSUBSCRIPT</annotation></semantics></math> in each image <math alttext="I" class="ltx_Math" display="inline" id="S4.SS1.p1.12.m12.1"><semantics id="S4.SS1.p1.12.m12.1a"><mi id="S4.SS1.p1.12.m12.1.1" xref="S4.SS1.p1.12.m12.1.1.cmml">I</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.12.m12.1b"><ci id="S4.SS1.p1.12.m12.1.1.cmml" xref="S4.SS1.p1.12.m12.1.1">𝐼</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.12.m12.1c">I</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.12.m12.1d">italic_I</annotation></semantics></math>, where <math alttext="P=[R,T;0,1]" class="ltx_Math" display="inline" id="S4.SS1.p1.13.m13.4"><semantics id="S4.SS1.p1.13.m13.4a"><mrow id="S4.SS1.p1.13.m13.4.5" xref="S4.SS1.p1.13.m13.4.5.cmml"><mi id="S4.SS1.p1.13.m13.4.5.2" xref="S4.SS1.p1.13.m13.4.5.2.cmml">P</mi><mo id="S4.SS1.p1.13.m13.4.5.1" xref="S4.SS1.p1.13.m13.4.5.1.cmml">=</mo><mrow id="S4.SS1.p1.13.m13.4.5.3.2" xref="S4.SS1.p1.13.m13.4.5.3.1.cmml"><mo id="S4.SS1.p1.13.m13.4.5.3.2.1" stretchy="false" xref="S4.SS1.p1.13.m13.4.5.3.1.cmml">[</mo><mi id="S4.SS1.p1.13.m13.1.1" xref="S4.SS1.p1.13.m13.1.1.cmml">R</mi><mo id="S4.SS1.p1.13.m13.4.5.3.2.2" xref="S4.SS1.p1.13.m13.4.5.3.1.cmml">,</mo><mi id="S4.SS1.p1.13.m13.2.2" xref="S4.SS1.p1.13.m13.2.2.cmml">T</mi><mo id="S4.SS1.p1.13.m13.4.5.3.2.3" xref="S4.SS1.p1.13.m13.4.5.3.1.cmml">;</mo><mn id="S4.SS1.p1.13.m13.3.3" xref="S4.SS1.p1.13.m13.3.3.cmml">0</mn><mo id="S4.SS1.p1.13.m13.4.5.3.2.4" xref="S4.SS1.p1.13.m13.4.5.3.1.cmml">,</mo><mn id="S4.SS1.p1.13.m13.4.4" xref="S4.SS1.p1.13.m13.4.4.cmml">1</mn><mo id="S4.SS1.p1.13.m13.4.5.3.2.5" stretchy="false" xref="S4.SS1.p1.13.m13.4.5.3.1.cmml">]</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.13.m13.4b"><apply id="S4.SS1.p1.13.m13.4.5.cmml" xref="S4.SS1.p1.13.m13.4.5"><eq id="S4.SS1.p1.13.m13.4.5.1.cmml" xref="S4.SS1.p1.13.m13.4.5.1"></eq><ci id="S4.SS1.p1.13.m13.4.5.2.cmml" xref="S4.SS1.p1.13.m13.4.5.2">𝑃</ci><list id="S4.SS1.p1.13.m13.4.5.3.1.cmml" xref="S4.SS1.p1.13.m13.4.5.3.2"><ci id="S4.SS1.p1.13.m13.1.1.cmml" xref="S4.SS1.p1.13.m13.1.1">𝑅</ci><ci id="S4.SS1.p1.13.m13.2.2.cmml" xref="S4.SS1.p1.13.m13.2.2">𝑇</ci><cn id="S4.SS1.p1.13.m13.3.3.cmml" type="integer" xref="S4.SS1.p1.13.m13.3.3">0</cn><cn id="S4.SS1.p1.13.m13.4.4.cmml" type="integer" xref="S4.SS1.p1.13.m13.4.4">1</cn></list></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.13.m13.4c">P=[R,T;0,1]</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.13.m13.4d">italic_P = [ italic_R , italic_T ; 0 , 1 ]</annotation></semantics></math>, where <math alttext="R" class="ltx_Math" display="inline" id="S4.SS1.p1.14.m14.1"><semantics id="S4.SS1.p1.14.m14.1a"><mi id="S4.SS1.p1.14.m14.1.1" xref="S4.SS1.p1.14.m14.1.1.cmml">R</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.14.m14.1b"><ci id="S4.SS1.p1.14.m14.1.1.cmml" xref="S4.SS1.p1.14.m14.1.1">𝑅</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.14.m14.1c">R</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.14.m14.1d">italic_R</annotation></semantics></math> is a <math alttext="3\times 3" class="ltx_Math" display="inline" id="S4.SS1.p1.15.m15.1"><semantics id="S4.SS1.p1.15.m15.1a"><mrow id="S4.SS1.p1.15.m15.1.1" xref="S4.SS1.p1.15.m15.1.1.cmml"><mn id="S4.SS1.p1.15.m15.1.1.2" xref="S4.SS1.p1.15.m15.1.1.2.cmml">3</mn><mo id="S4.SS1.p1.15.m15.1.1.1" lspace="0.222em" rspace="0.222em" xref="S4.SS1.p1.15.m15.1.1.1.cmml">×</mo><mn id="S4.SS1.p1.15.m15.1.1.3" xref="S4.SS1.p1.15.m15.1.1.3.cmml">3</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.15.m15.1b"><apply id="S4.SS1.p1.15.m15.1.1.cmml" xref="S4.SS1.p1.15.m15.1.1"><times id="S4.SS1.p1.15.m15.1.1.1.cmml" xref="S4.SS1.p1.15.m15.1.1.1"></times><cn id="S4.SS1.p1.15.m15.1.1.2.cmml" type="integer" xref="S4.SS1.p1.15.m15.1.1.2">3</cn><cn id="S4.SS1.p1.15.m15.1.1.3.cmml" type="integer" xref="S4.SS1.p1.15.m15.1.1.3">3</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.15.m15.1c">3\times 3</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.15.m15.1d">3 × 3</annotation></semantics></math> rotational matrix that describes the rotation of each of <math alttext="\{{o\}^{n}_{i=0}}" class="ltx_Math" display="inline" id="S4.SS1.p1.16.m16.1"><semantics id="S4.SS1.p1.16.m16.1a"><msubsup id="S4.SS1.p1.16.m16.1.2" xref="S4.SS1.p1.16.m16.1.2.cmml"><mrow id="S4.SS1.p1.16.m16.1.2.2.2.2" xref="S4.SS1.p1.16.m16.1.2.2.2.1.cmml"><mo id="S4.SS1.p1.16.m16.1.2.2.2.2.1" stretchy="false" xref="S4.SS1.p1.16.m16.1.2.2.2.1.cmml">{</mo><mi id="S4.SS1.p1.16.m16.1.1" xref="S4.SS1.p1.16.m16.1.1.cmml">o</mi><mo id="S4.SS1.p1.16.m16.1.2.2.2.2.2" stretchy="false" xref="S4.SS1.p1.16.m16.1.2.2.2.1.cmml">}</mo></mrow><mrow id="S4.SS1.p1.16.m16.1.2.3" xref="S4.SS1.p1.16.m16.1.2.3.cmml"><mi id="S4.SS1.p1.16.m16.1.2.3.2" xref="S4.SS1.p1.16.m16.1.2.3.2.cmml">i</mi><mo id="S4.SS1.p1.16.m16.1.2.3.1" xref="S4.SS1.p1.16.m16.1.2.3.1.cmml">=</mo><mn id="S4.SS1.p1.16.m16.1.2.3.3" xref="S4.SS1.p1.16.m16.1.2.3.3.cmml">0</mn></mrow><mi id="S4.SS1.p1.16.m16.1.2.2.3" xref="S4.SS1.p1.16.m16.1.2.2.3.cmml">n</mi></msubsup><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.16.m16.1b"><apply id="S4.SS1.p1.16.m16.1.2.cmml" xref="S4.SS1.p1.16.m16.1.2"><csymbol cd="ambiguous" id="S4.SS1.p1.16.m16.1.2.1.cmml" xref="S4.SS1.p1.16.m16.1.2">subscript</csymbol><apply id="S4.SS1.p1.16.m16.1.2.2.cmml" xref="S4.SS1.p1.16.m16.1.2"><csymbol cd="ambiguous" id="S4.SS1.p1.16.m16.1.2.2.1.cmml" xref="S4.SS1.p1.16.m16.1.2">superscript</csymbol><set id="S4.SS1.p1.16.m16.1.2.2.2.1.cmml" xref="S4.SS1.p1.16.m16.1.2.2.2.2"><ci id="S4.SS1.p1.16.m16.1.1.cmml" xref="S4.SS1.p1.16.m16.1.1">𝑜</ci></set><ci id="S4.SS1.p1.16.m16.1.2.2.3.cmml" xref="S4.SS1.p1.16.m16.1.2.2.3">𝑛</ci></apply><apply id="S4.SS1.p1.16.m16.1.2.3.cmml" xref="S4.SS1.p1.16.m16.1.2.3"><eq id="S4.SS1.p1.16.m16.1.2.3.1.cmml" xref="S4.SS1.p1.16.m16.1.2.3.1"></eq><ci id="S4.SS1.p1.16.m16.1.2.3.2.cmml" xref="S4.SS1.p1.16.m16.1.2.3.2">𝑖</ci><cn id="S4.SS1.p1.16.m16.1.2.3.3.cmml" type="integer" xref="S4.SS1.p1.16.m16.1.2.3.3">0</cn></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.16.m16.1c">\{{o\}^{n}_{i=0}}</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.16.m16.1d">{ italic_o } start_POSTSUPERSCRIPT italic_n end_POSTSUPERSCRIPT start_POSTSUBSCRIPT italic_i = 0 end_POSTSUBSCRIPT</annotation></semantics></math> to the robot camera’s frame and <math alttext="T" class="ltx_Math" display="inline" id="S4.SS1.p1.17.m17.1"><semantics id="S4.SS1.p1.17.m17.1a"><mi id="S4.SS1.p1.17.m17.1.1" xref="S4.SS1.p1.17.m17.1.1.cmml">T</mi><annotation-xml encoding="MathML-Content" id="S4.SS1.p1.17.m17.1b"><ci id="S4.SS1.p1.17.m17.1.1.cmml" xref="S4.SS1.p1.17.m17.1.1">𝑇</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p1.17.m17.1c">T</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p1.17.m17.1d">italic_T</annotation></semantics></math> is the translation vector to the origin of robot camera’s coordinate system.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS2.5.1.1">IV-B</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS2.6.2">Datasets</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">Our benchmark leverages the KITchen dataset introduced in Sec. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3" title="III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag">III</span></a>. Notably, this dataset stands out as the first of its kind, captured from the perspective of a humanoid robot, and encompasses varying heights and pitch angles, making it more suited to cover robotic mobile manipulation scenarios in kitchen environments. We split the dataset to training/validation/test sets with a 70/20/10 ratio.
+<br class="ltx_break"/>Although our benchmark primarily focuses on the KITchen dataset, we invite other robotics research groups to record datasets in kitchen environments using their own robots and leverage our proposed annotation pipeline in Sec. <a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#S3.SS3" title="III-C Annotation Pipeline ‣ III The KITchen Dataset ‣ KITchen: A Real-World Benchmark and Dataset for 6D Object Pose Estimation in Kitchen Environments"><span class="ltx_text ltx_ref_tag"><span class="ltx_text">III-C</span></span></a> to annotate their data efficiently. Our vision for this benchmark extends beyond our dataset alone, we see it as a dynamic community platform where diverse research groups can collectively work to advance the field of robotic perception and pose estimation by testing their methods on a variety of datasets and providing their own datasets for other researchers to test on.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS3.5.1.1">IV-C</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS3.6.2">Pose Error Calculation</span>
+</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.12">We utilize the same pose error function used by the BOP challenge <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2403.16238v2#bib.bib24" title="">24</a>]</cite>. The estimated pose is considered correct if the pose error function <math alttext="e" class="ltx_Math" display="inline" id="S4.SS3.p1.1.m1.1"><semantics id="S4.SS3.p1.1.m1.1a"><mi id="S4.SS3.p1.1.m1.1.1" xref="S4.SS3.p1.1.m1.1.1.cmml">e</mi><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.1.m1.1b"><ci id="S4.SS3.p1.1.m1.1.1.cmml" xref="S4.SS3.p1.1.m1.1.1">𝑒</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.1.m1.1c">e</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.1.m1.1d">italic_e</annotation></semantics></math> calculated between the annotated pose <math alttext="P" class="ltx_Math" display="inline" id="S4.SS3.p1.2.m2.1"><semantics id="S4.SS3.p1.2.m2.1a"><mi id="S4.SS3.p1.2.m2.1.1" xref="S4.SS3.p1.2.m2.1.1.cmml">P</mi><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.2.m2.1b"><ci id="S4.SS3.p1.2.m2.1.1.cmml" xref="S4.SS3.p1.2.m2.1.1">𝑃</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.2.m2.1c">P</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.2.m2.1d">italic_P</annotation></semantics></math> and the estimated pose <math alttext="\hat{P}" class="ltx_Math" display="inline" id="S4.SS3.p1.3.m3.1"><semantics id="S4.SS3.p1.3.m3.1a"><mover accent="true" id="S4.SS3.p1.3.m3.1.1" xref="S4.SS3.p1.3.m3.1.1.cmml"><mi id="S4.SS3.p1.3.m3.1.1.2" xref="S4.SS3.p1.3.m3.1.1.2.cmml">P</mi><mo id="S4.SS3.p1.3.m3.1.1.1" xref="S4.SS3.p1.3.m3.1.1.1.cmml">^</mo></mover><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.3.m3.1b"><apply id="S4.SS3.p1.3.m3.1.1.cmml" xref="S4.SS3.p1.3.m3.1.1"><ci id="S4.SS3.p1.3.m3.1.1.1.cmml" xref="S4.SS3.p1.3.m3.1.1.1">^</ci><ci id="S4.SS3.p1.3.m3.1.1.2.cmml" xref="S4.SS3.p1.3.m3.1.1.2">𝑃</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.3.m3.1c">\hat{P}</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.3.m3.1d">over^ start_ARG italic_P end_ARG</annotation></semantics></math> is lower than a predefined threshold <math alttext="\theta_{e}" class="ltx_Math" display="inline" id="S4.SS3.p1.4.m4.1"><semantics id="S4.SS3.p1.4.m4.1a"><msub id="S4.SS3.p1.4.m4.1.1" xref="S4.SS3.p1.4.m4.1.1.cmml"><mi id="S4.SS3.p1.4.m4.1.1.2" xref="S4.SS3.p1.4.m4.1.1.2.cmml">θ</mi><mi id="S4.SS3.p1.4.m4.1.1.3" xref="S4.SS3.p1.4.m4.1.1.3.cmml">e</mi></msub><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.4.m4.1b"><apply id="S4.SS3.p1.4.m4.1.1.cmml" xref="S4.SS3.p1.4.m4.1.1"><csymbol cd="ambiguous" id="S4.SS3.p1.4.m4.1.1.1.cmml" xref="S4.SS3.p1.4.m4.1.1">subscript</csymbol><ci id="S4.SS3.p1.4.m4.1.1.2.cmml" xref="S4.SS3.p1.4.m4.1.1.2">𝜃</ci><ci id="S4.SS3.p1.4.m4.1.1.3.cmml" xref="S4.SS3.p1.4.m4.1.1.3">𝑒</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.4.m4.1c">\theta_{e}</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.4.m4.1d">italic_θ start_POSTSUBSCRIPT italic_e end_POSTSUBSCRIPT</annotation></semantics></math>, where <math alttext="e" class="ltx_Math" display="inline" id="S4.SS3.p1.5.m5.1"><semantics id="S4.SS3.p1.5.m5.1a"><mi id="S4.SS3.p1.5.m5.1.1" xref="S4.SS3.p1.5.m5.1.1.cmml">e</mi><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.5.m5.1b"><ci id="S4.SS3.p1.5.m5.1.1.cmml" xref="S4.SS3.p1.5.m5.1.1">𝑒</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.5.m5.1c">e</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.5.m5.1d">italic_e</annotation></semantics></math> <math alttext="\in\{e_{VSD},e_{MSSD},e_{MSPD}\}" class="ltx_Math" display="inline" id="S4.SS3.p1.6.m6.3"><semantics id="S4.SS3.p1.6.m6.3a"><mrow id="S4.SS3.p1.6.m6.3.3" xref="S4.SS3.p1.6.m6.3.3.cmml"><mi id="S4.SS3.p1.6.m6.3.3.5" xref="S4.SS3.p1.6.m6.3.3.5.cmml"></mi><mo id="S4.SS3.p1.6.m6.3.3.4" xref="S4.SS3.p1.6.m6.3.3.4.cmml">∈</mo><mrow id="S4.SS3.p1.6.m6.3.3.3.3" xref="S4.SS3.p1.6.m6.3.3.3.4.cmml"><mo id="S4.SS3.p1.6.m6.3.3.3.3.4" stretchy="false" xref="S4.SS3.p1.6.m6.3.3.3.4.cmml">{</mo><msub id="S4.SS3.p1.6.m6.1.1.1.1.1" xref="S4.SS3.p1.6.m6.1.1.1.1.1.cmml"><mi id="S4.SS3.p1.6.m6.1.1.1.1.1.2" xref="S4.SS3.p1.6.m6.1.1.1.1.1.2.cmml">e</mi><mrow id="S4.SS3.p1.6.m6.1.1.1.1.1.3" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.cmml"><mi id="S4.SS3.p1.6.m6.1.1.1.1.1.3.2" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.2.cmml">V</mi><mo id="S4.SS3.p1.6.m6.1.1.1.1.1.3.1" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.1.1.1.1.1.3.3" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.3.cmml">S</mi><mo id="S4.SS3.p1.6.m6.1.1.1.1.1.3.1a" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.1.1.1.1.1.3.4" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.4.cmml">D</mi></mrow></msub><mo id="S4.SS3.p1.6.m6.3.3.3.3.5" xref="S4.SS3.p1.6.m6.3.3.3.4.cmml">,</mo><msub id="S4.SS3.p1.6.m6.2.2.2.2.2" xref="S4.SS3.p1.6.m6.2.2.2.2.2.cmml"><mi id="S4.SS3.p1.6.m6.2.2.2.2.2.2" xref="S4.SS3.p1.6.m6.2.2.2.2.2.2.cmml">e</mi><mrow id="S4.SS3.p1.6.m6.2.2.2.2.2.3" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.cmml"><mi id="S4.SS3.p1.6.m6.2.2.2.2.2.3.2" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.2.cmml">M</mi><mo id="S4.SS3.p1.6.m6.2.2.2.2.2.3.1" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.2.2.2.2.2.3.3" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.3.cmml">S</mi><mo id="S4.SS3.p1.6.m6.2.2.2.2.2.3.1a" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.2.2.2.2.2.3.4" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.4.cmml">S</mi><mo id="S4.SS3.p1.6.m6.2.2.2.2.2.3.1b" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.2.2.2.2.2.3.5" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.5.cmml">D</mi></mrow></msub><mo id="S4.SS3.p1.6.m6.3.3.3.3.6" xref="S4.SS3.p1.6.m6.3.3.3.4.cmml">,</mo><msub id="S4.SS3.p1.6.m6.3.3.3.3.3" xref="S4.SS3.p1.6.m6.3.3.3.3.3.cmml"><mi id="S4.SS3.p1.6.m6.3.3.3.3.3.2" xref="S4.SS3.p1.6.m6.3.3.3.3.3.2.cmml">e</mi><mrow id="S4.SS3.p1.6.m6.3.3.3.3.3.3" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.cmml"><mi id="S4.SS3.p1.6.m6.3.3.3.3.3.3.2" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.2.cmml">M</mi><mo id="S4.SS3.p1.6.m6.3.3.3.3.3.3.1" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.3.3.3.3.3.3.3" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.3.cmml">S</mi><mo id="S4.SS3.p1.6.m6.3.3.3.3.3.3.1a" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.3.3.3.3.3.3.4" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.4.cmml">P</mi><mo id="S4.SS3.p1.6.m6.3.3.3.3.3.3.1b" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.6.m6.3.3.3.3.3.3.5" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.5.cmml">D</mi></mrow></msub><mo id="S4.SS3.p1.6.m6.3.3.3.3.7" stretchy="false" xref="S4.SS3.p1.6.m6.3.3.3.4.cmml">}</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.6.m6.3b"><apply id="S4.SS3.p1.6.m6.3.3.cmml" xref="S4.SS3.p1.6.m6.3.3"><in id="S4.SS3.p1.6.m6.3.3.4.cmml" xref="S4.SS3.p1.6.m6.3.3.4"></in><csymbol cd="latexml" id="S4.SS3.p1.6.m6.3.3.5.cmml" xref="S4.SS3.p1.6.m6.3.3.5">absent</csymbol><set id="S4.SS3.p1.6.m6.3.3.3.4.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3"><apply id="S4.SS3.p1.6.m6.1.1.1.1.1.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1"><csymbol cd="ambiguous" id="S4.SS3.p1.6.m6.1.1.1.1.1.1.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1">subscript</csymbol><ci id="S4.SS3.p1.6.m6.1.1.1.1.1.2.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1.2">𝑒</ci><apply id="S4.SS3.p1.6.m6.1.1.1.1.1.3.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3"><times id="S4.SS3.p1.6.m6.1.1.1.1.1.3.1.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.1"></times><ci id="S4.SS3.p1.6.m6.1.1.1.1.1.3.2.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.2">𝑉</ci><ci id="S4.SS3.p1.6.m6.1.1.1.1.1.3.3.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.3">𝑆</ci><ci id="S4.SS3.p1.6.m6.1.1.1.1.1.3.4.cmml" xref="S4.SS3.p1.6.m6.1.1.1.1.1.3.4">𝐷</ci></apply></apply><apply id="S4.SS3.p1.6.m6.2.2.2.2.2.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2"><csymbol cd="ambiguous" id="S4.SS3.p1.6.m6.2.2.2.2.2.1.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2">subscript</csymbol><ci id="S4.SS3.p1.6.m6.2.2.2.2.2.2.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2.2">𝑒</ci><apply id="S4.SS3.p1.6.m6.2.2.2.2.2.3.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3"><times id="S4.SS3.p1.6.m6.2.2.2.2.2.3.1.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.1"></times><ci id="S4.SS3.p1.6.m6.2.2.2.2.2.3.2.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.2">𝑀</ci><ci id="S4.SS3.p1.6.m6.2.2.2.2.2.3.3.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.3">𝑆</ci><ci id="S4.SS3.p1.6.m6.2.2.2.2.2.3.4.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.4">𝑆</ci><ci id="S4.SS3.p1.6.m6.2.2.2.2.2.3.5.cmml" xref="S4.SS3.p1.6.m6.2.2.2.2.2.3.5">𝐷</ci></apply></apply><apply id="S4.SS3.p1.6.m6.3.3.3.3.3.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3"><csymbol cd="ambiguous" id="S4.SS3.p1.6.m6.3.3.3.3.3.1.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3">subscript</csymbol><ci id="S4.SS3.p1.6.m6.3.3.3.3.3.2.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3.2">𝑒</ci><apply id="S4.SS3.p1.6.m6.3.3.3.3.3.3.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3"><times id="S4.SS3.p1.6.m6.3.3.3.3.3.3.1.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.1"></times><ci id="S4.SS3.p1.6.m6.3.3.3.3.3.3.2.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.2">𝑀</ci><ci id="S4.SS3.p1.6.m6.3.3.3.3.3.3.3.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.3">𝑆</ci><ci id="S4.SS3.p1.6.m6.3.3.3.3.3.3.4.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.4">𝑃</ci><ci id="S4.SS3.p1.6.m6.3.3.3.3.3.3.5.cmml" xref="S4.SS3.p1.6.m6.3.3.3.3.3.3.5">𝐷</ci></apply></apply></set></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.6.m6.3c">\in\{e_{VSD},e_{MSSD},e_{MSPD}\}</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.6.m6.3d">∈ { italic_e start_POSTSUBSCRIPT italic_V italic_S italic_D end_POSTSUBSCRIPT , italic_e start_POSTSUBSCRIPT italic_M italic_S italic_S italic_D end_POSTSUBSCRIPT , italic_e start_POSTSUBSCRIPT italic_M italic_S italic_P italic_D end_POSTSUBSCRIPT }</annotation></semantics></math>, where <math alttext="e_{VSD}" class="ltx_Math" display="inline" id="S4.SS3.p1.7.m7.1"><semantics id="S4.SS3.p1.7.m7.1a"><msub id="S4.SS3.p1.7.m7.1.1" xref="S4.SS3.p1.7.m7.1.1.cmml"><mi id="S4.SS3.p1.7.m7.1.1.2" xref="S4.SS3.p1.7.m7.1.1.2.cmml">e</mi><mrow id="S4.SS3.p1.7.m7.1.1.3" xref="S4.SS3.p1.7.m7.1.1.3.cmml"><mi id="S4.SS3.p1.7.m7.1.1.3.2" xref="S4.SS3.p1.7.m7.1.1.3.2.cmml">V</mi><mo id="S4.SS3.p1.7.m7.1.1.3.1" xref="S4.SS3.p1.7.m7.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.7.m7.1.1.3.3" xref="S4.SS3.p1.7.m7.1.1.3.3.cmml">S</mi><mo id="S4.SS3.p1.7.m7.1.1.3.1a" xref="S4.SS3.p1.7.m7.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.7.m7.1.1.3.4" xref="S4.SS3.p1.7.m7.1.1.3.4.cmml">D</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.7.m7.1b"><apply id="S4.SS3.p1.7.m7.1.1.cmml" xref="S4.SS3.p1.7.m7.1.1"><csymbol cd="ambiguous" id="S4.SS3.p1.7.m7.1.1.1.cmml" xref="S4.SS3.p1.7.m7.1.1">subscript</csymbol><ci id="S4.SS3.p1.7.m7.1.1.2.cmml" xref="S4.SS3.p1.7.m7.1.1.2">𝑒</ci><apply id="S4.SS3.p1.7.m7.1.1.3.cmml" xref="S4.SS3.p1.7.m7.1.1.3"><times id="S4.SS3.p1.7.m7.1.1.3.1.cmml" xref="S4.SS3.p1.7.m7.1.1.3.1"></times><ci id="S4.SS3.p1.7.m7.1.1.3.2.cmml" xref="S4.SS3.p1.7.m7.1.1.3.2">𝑉</ci><ci id="S4.SS3.p1.7.m7.1.1.3.3.cmml" xref="S4.SS3.p1.7.m7.1.1.3.3">𝑆</ci><ci id="S4.SS3.p1.7.m7.1.1.3.4.cmml" xref="S4.SS3.p1.7.m7.1.1.3.4">𝐷</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.7.m7.1c">e_{VSD}</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.7.m7.1d">italic_e start_POSTSUBSCRIPT italic_V italic_S italic_D end_POSTSUBSCRIPT</annotation></semantics></math> is the Visible Surface Discrepancy error function which focuses on the visible part of the object and evaluates poses with indistinguishable shapes as equivalent, disregarding the color information, <math alttext="e_{MSSD}" class="ltx_Math" display="inline" id="S4.SS3.p1.8.m8.1"><semantics id="S4.SS3.p1.8.m8.1a"><msub id="S4.SS3.p1.8.m8.1.1" xref="S4.SS3.p1.8.m8.1.1.cmml"><mi id="S4.SS3.p1.8.m8.1.1.2" xref="S4.SS3.p1.8.m8.1.1.2.cmml">e</mi><mrow id="S4.SS3.p1.8.m8.1.1.3" xref="S4.SS3.p1.8.m8.1.1.3.cmml"><mi id="S4.SS3.p1.8.m8.1.1.3.2" xref="S4.SS3.p1.8.m8.1.1.3.2.cmml">M</mi><mo id="S4.SS3.p1.8.m8.1.1.3.1" xref="S4.SS3.p1.8.m8.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.8.m8.1.1.3.3" xref="S4.SS3.p1.8.m8.1.1.3.3.cmml">S</mi><mo id="S4.SS3.p1.8.m8.1.1.3.1a" xref="S4.SS3.p1.8.m8.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.8.m8.1.1.3.4" xref="S4.SS3.p1.8.m8.1.1.3.4.cmml">S</mi><mo id="S4.SS3.p1.8.m8.1.1.3.1b" xref="S4.SS3.p1.8.m8.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.8.m8.1.1.3.5" xref="S4.SS3.p1.8.m8.1.1.3.5.cmml">D</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.8.m8.1b"><apply id="S4.SS3.p1.8.m8.1.1.cmml" xref="S4.SS3.p1.8.m8.1.1"><csymbol cd="ambiguous" id="S4.SS3.p1.8.m8.1.1.1.cmml" xref="S4.SS3.p1.8.m8.1.1">subscript</csymbol><ci id="S4.SS3.p1.8.m8.1.1.2.cmml" xref="S4.SS3.p1.8.m8.1.1.2">𝑒</ci><apply id="S4.SS3.p1.8.m8.1.1.3.cmml" xref="S4.SS3.p1.8.m8.1.1.3"><times id="S4.SS3.p1.8.m8.1.1.3.1.cmml" xref="S4.SS3.p1.8.m8.1.1.3.1"></times><ci id="S4.SS3.p1.8.m8.1.1.3.2.cmml" xref="S4.SS3.p1.8.m8.1.1.3.2">𝑀</ci><ci id="S4.SS3.p1.8.m8.1.1.3.3.cmml" xref="S4.SS3.p1.8.m8.1.1.3.3">𝑆</ci><ci id="S4.SS3.p1.8.m8.1.1.3.4.cmml" xref="S4.SS3.p1.8.m8.1.1.3.4">𝑆</ci><ci id="S4.SS3.p1.8.m8.1.1.3.5.cmml" xref="S4.SS3.p1.8.m8.1.1.3.5">𝐷</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.8.m8.1c">e_{MSSD}</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.8.m8.1d">italic_e start_POSTSUBSCRIPT italic_M italic_S italic_S italic_D end_POSTSUBSCRIPT</annotation></semantics></math> is the Maximum Symmetry-Aware Surface Distance that calculates the surface deviation between vertices in the 3D, calculating the maximum distance between model vertices is crucial to know the chance of a successful grasp, while <math alttext="e_{MSPD}" class="ltx_Math" display="inline" id="S4.SS3.p1.9.m9.1"><semantics id="S4.SS3.p1.9.m9.1a"><msub id="S4.SS3.p1.9.m9.1.1" xref="S4.SS3.p1.9.m9.1.1.cmml"><mi id="S4.SS3.p1.9.m9.1.1.2" xref="S4.SS3.p1.9.m9.1.1.2.cmml">e</mi><mrow id="S4.SS3.p1.9.m9.1.1.3" xref="S4.SS3.p1.9.m9.1.1.3.cmml"><mi id="S4.SS3.p1.9.m9.1.1.3.2" xref="S4.SS3.p1.9.m9.1.1.3.2.cmml">M</mi><mo id="S4.SS3.p1.9.m9.1.1.3.1" xref="S4.SS3.p1.9.m9.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.9.m9.1.1.3.3" xref="S4.SS3.p1.9.m9.1.1.3.3.cmml">S</mi><mo id="S4.SS3.p1.9.m9.1.1.3.1a" xref="S4.SS3.p1.9.m9.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.9.m9.1.1.3.4" xref="S4.SS3.p1.9.m9.1.1.3.4.cmml">P</mi><mo id="S4.SS3.p1.9.m9.1.1.3.1b" xref="S4.SS3.p1.9.m9.1.1.3.1.cmml">⁢</mo><mi id="S4.SS3.p1.9.m9.1.1.3.5" xref="S4.SS3.p1.9.m9.1.1.3.5.cmml">D</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.9.m9.1b"><apply id="S4.SS3.p1.9.m9.1.1.cmml" xref="S4.SS3.p1.9.m9.1.1"><csymbol cd="ambiguous" id="S4.SS3.p1.9.m9.1.1.1.cmml" xref="S4.SS3.p1.9.m9.1.1">subscript</csymbol><ci id="S4.SS3.p1.9.m9.1.1.2.cmml" xref="S4.SS3.p1.9.m9.1.1.2">𝑒</ci><apply id="S4.SS3.p1.9.m9.1.1.3.cmml" xref="S4.SS3.p1.9.m9.1.1.3"><times id="S4.SS3.p1.9.m9.1.1.3.1.cmml" xref="S4.SS3.p1.9.m9.1.1.3.1"></times><ci id="S4.SS3.p1.9.m9.1.1.3.2.cmml" xref="S4.SS3.p1.9.m9.1.1.3.2">𝑀</ci><ci id="S4.SS3.p1.9.m9.1.1.3.3.cmml" xref="S4.SS3.p1.9.m9.1.1.3.3">𝑆</ci><ci id="S4.SS3.p1.9.m9.1.1.3.4.cmml" xref="S4.SS3.p1.9.m9.1.1.3.4">𝑃</ci><ci id="S4.SS3.p1.9.m9.1.1.3.5.cmml" xref="S4.SS3.p1.9.m9.1.1.3.5">𝐷</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.9.m9.1c">e_{MSPD}</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.9.m9.1d">italic_e start_POSTSUBSCRIPT italic_M italic_S italic_P italic_D end_POSTSUBSCRIPT</annotation></semantics></math> is the Maximum Symmetry-Aware Projection Distance that considers the object symmetries and calculate the difference in <math alttext="X,Y" class="ltx_Math" display="inline" id="S4.SS3.p1.10.m10.2"><semantics id="S4.SS3.p1.10.m10.2a"><mrow id="S4.SS3.p1.10.m10.2.3.2" xref="S4.SS3.p1.10.m10.2.3.1.cmml"><mi id="S4.SS3.p1.10.m10.1.1" xref="S4.SS3.p1.10.m10.1.1.cmml">X</mi><mo id="S4.SS3.p1.10.m10.2.3.2.1" xref="S4.SS3.p1.10.m10.2.3.1.cmml">,</mo><mi id="S4.SS3.p1.10.m10.2.2" xref="S4.SS3.p1.10.m10.2.2.cmml">Y</mi></mrow><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.10.m10.2b"><list id="S4.SS3.p1.10.m10.2.3.1.cmml" xref="S4.SS3.p1.10.m10.2.3.2"><ci id="S4.SS3.p1.10.m10.1.1.cmml" xref="S4.SS3.p1.10.m10.1.1">𝑋</ci><ci id="S4.SS3.p1.10.m10.2.2.cmml" xref="S4.SS3.p1.10.m10.2.2">𝑌</ci></list></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.10.m10.2c">X,Y</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.10.m10.2d">italic_X , italic_Y</annotation></semantics></math> axes which makes it suitable for methods that rely on RGB data only. Finally, the Recall is defined as the ratio of correctly estimated poses with a total pose error <math alttext="e" class="ltx_Math" display="inline" id="S4.SS3.p1.11.m11.1"><semantics id="S4.SS3.p1.11.m11.1a"><mi id="S4.SS3.p1.11.m11.1.1" xref="S4.SS3.p1.11.m11.1.1.cmml">e</mi><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.11.m11.1b"><ci id="S4.SS3.p1.11.m11.1.1.cmml" xref="S4.SS3.p1.11.m11.1.1">𝑒</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.11.m11.1c">e</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.11.m11.1d">italic_e</annotation></semantics></math> lower than the threshold <math alttext="\theta_{e}" class="ltx_Math" display="inline" id="S4.SS3.p1.12.m12.1"><semantics id="S4.SS3.p1.12.m12.1a"><msub id="S4.SS3.p1.12.m12.1.1" xref="S4.SS3.p1.12.m12.1.1.cmml"><mi id="S4.SS3.p1.12.m12.1.1.2" xref="S4.SS3.p1.12.m12.1.1.2.cmml">θ</mi><mi id="S4.SS3.p1.12.m12.1.1.3" xref="S4.SS3.p1.12.m12.1.1.3.cmml">e</mi></msub><annotation-xml encoding="MathML-Content" id="S4.SS3.p1.12.m12.1b"><apply id="S4.SS3.p1.12.m12.1.1.cmml" xref="S4.SS3.p1.12.m12.1.1"><csymbol cd="ambiguous" id="S4.SS3.p1.12.m12.1.1.1.cmml" xref="S4.SS3.p1.12.m12.1.1">subscript</csymbol><ci id="S4.SS3.p1.12.m12.1.1.2.cmml" xref="S4.SS3.p1.12.m12.1.1.2">𝜃</ci><ci id="S4.SS3.p1.12.m12.1.1.3.cmml" xref="S4.SS3.p1.12.m12.1.1.3">𝑒</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS3.p1.12.m12.1c">\theta_{e}</annotation><annotation encoding="application/x-llamapun" id="S4.SS3.p1.12.m12.1d">italic_θ start_POSTSUBSCRIPT italic_e end_POSTSUBSCRIPT</annotation></semantics></math> across all objects. The Average Recall is then computed by averaging these recall values across various threshold settings.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps" id="S5.1.1">Conclusion</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">We introduce KITchen, a novel object 6D pose estimation benchmark tailored to tackle this task within challenging kitchen environments using only monocular vision from robots’ FOV, with a specific emphasis on real-time performance. To serve this benchmark, we recorded a large-scale real-world dataset, captured from different perspectives of a humanoid robot, featuring multi-objects in structured cluttered scenes in two distinct kitchen environments with diverse lighting conditions. Lastly, we proposed a semi-automated annotation pipeline aimed at streamlining the annotation of such datasets while minimizing manual human effort. We envision our benchmark to promote the development of novel approaches to solve the 6D pose problem on resource-constrained platforms, with an emphasis on real-time and real-world applicability.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx1">
+<h2 class="ltx_title ltx_font_smallcaps ltx_title_section">Acknowledgment</h2>
+<div class="ltx_para" id="Sx1.p1">
+<p class="ltx_p" id="Sx1.p1.1">We would like to thank Diana Burkart and Lisa Joosten for their contributions and assistance during the annotation process of the dataset.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+Anderson, P., Wu, Q., Teney, D., Bruce, J., Johnson, M., Sünderhauf, N., Reid, I., Gould, S., Van Den Hengel, A.: Vision-and-language navigation: Interpreting visually-grounded navigation instructions in real environments. In: Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 3674–3683 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Asfour, T., Wächter, M., Kaul, L., Rader, S., Weiner, P., Ottenhaus, S., Grimm, R., Zhou, Y., Grotz, M., Paus, F.: Armar-6: A high-performance humanoid for human-robot collaboration in real world scenarios. IEEE Robotics &amp; Automation Magazine <span class="ltx_text ltx_font_bold" id="bib.bib2.1.1">26</span>(4), 108–121 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Asfour, T., Waechter, M., Kaul, L., Rader, S., Weiner, P., Ottenhaus, S., Grimm, R., Zhou, Y., Grotz, M., Paus, F.: Armar-6: A high-performance humanoid for human-robot collaboration in real-world scenarios. IEEE Robotics &amp; Automation Magazine <span class="ltx_text ltx_font_bold" id="bib.bib3.1.1">26</span>(4), 108–121 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Birr, T., Pohl, C., Younes, A., Asfour, T.: Autogpt+ p: Affordance-based task planning with large language models. arXiv preprint arXiv:2402.10778 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Brachmann, E., Krull, A., Michel, F., Gumhold, S., Shotton, J., Rother, C.: Learning 6d object pose estimation using 3d object coordinates. In: Computer Vision–ECCV 2014: 13th European Conference, Zurich, Switzerland, September 6-12, 2014, Proceedings, Part II 13. pp. 536–551. Springer (2014)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+Calli, B., Walsman, A., Singh, A., Srinivasa, S., Abbeel, P., Dollar, A.M.: Benchmarking in manipulation research: Using the yale-cmu-berkeley object and model set. IEEE Robotics &amp; Automation Magazine <span class="ltx_text ltx_font_bold" id="bib.bib6.1.1">22</span>(3), 36–52 (2015)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Chang, M., Gervet, T., Khanna, M., Yenamandra, S., Shah, D., Min, S.Y., Shah, K., Paxton, C., Gupta, S., Batra, D., et al.: Goat: Go to any thing. arXiv preprint arXiv:2311.06430 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+Chaplot, D.S., Gandhi, D.P., Gupta, A., Salakhutdinov, R.R.: Object goal navigation using goal-oriented semantic exploration. Advances in Neural Information Processing Systems <span class="ltx_text ltx_font_bold" id="bib.bib8.1.1">33</span>, 4247–4258 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Chen, C., Schissler, C., Garg, S., Kobernik, P., Clegg, A., Calamia, P., Batra, D., Robinson, P., Grauman, K.: Soundspaces 2.0: A simulation platform for visual-acoustic learning. Advances in Neural Information Processing Systems <span class="ltx_text ltx_font_bold" id="bib.bib9.1.1">35</span>, 8896–8911 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Chen, L., Yang, H., Wu, C., Wu, S.: Mp6d: An rgb-d dataset for metal parts’ 6d pose estimation. IEEE Robotics and Automation Letters <span class="ltx_text ltx_font_bold" id="bib.bib10.1.1">7</span>(3), 5912–5919 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Chen, X., Zhang, H., Yu, Z., Opipari, A., Chadwicke Jenkins, O.: Clearpose: Large-scale transparent object dataset and benchmark. In: European Conference on Computer Vision. pp. 381–396. Springer (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Collet, A., Martinez, M., Srinivasa, S.S.: The moped framework: Object recognition and pose estimation for manipulation. The international journal of robotics research <span class="ltx_text ltx_font_bold" id="bib.bib12.1.1">30</span>(10), 1284–1306 (2011)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Collet, A., Srinivasa, S.S.: Efficient multi-view object recognition and full pose estimation. In: 2010 IEEE International Conference on Robotics and Automation. pp. 2050–2055. IEEE (2010)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+Datta, S., Maksymets, O., Hoffman, J., Lee, S., Batra, D., Parikh, D.: Integrating egocentric localization for more realistic point-goal navigation agents. In: Conference on Robot Learning. pp. 313–328. PMLR (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+Denninger, M., Winkelbauer, D., Sundermeyer, M., Boerdijk, W., Knauer, M., Strobl, K.H., Humt, M., Triebel, R.: Blenderproc2: A procedural pipeline for photorealistic rendering. Journal of Open Source Software <span class="ltx_text ltx_font_bold" id="bib.bib15.1.1">8</span>(82),  4901 (2023). https://doi.org/10.21105/joss.04901, <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://doi.org/10.21105/joss.04901" title="">https://doi.org/10.21105/joss.04901</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+Doumanoglou, A., Kouskouridas, R., Malassiotis, S., Kim, T.K.: Recovering 6d object pose and predicting next-best-view in the crowd. In: Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 3583–3592 (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+Drost, B., Ulrich, M., Bergmann, P., Hartinger, P., Steger, C.: Introducing mvtec itodd-a dataset for 3d object recognition in industry. In: Proceedings of the IEEE international conference on computer vision workshops. pp. 2200–2208 (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+Fang, H.S., Wang, C., Gou, M., Lu, C.: Graspnet-1billion: A large-scale benchmark for general object grasping. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 11444–11453 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+Guo, A., Wen, B., Yuan, J., Tremblay, J., Tyree, S., Smith, J., Birchfield, S.: Handal: A dataset of real-world manipulable object categories with pose annotations, affordances, and reconstructions. In: 2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). pp. 11428–11435. IEEE (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+Hinterstoisser, S., Holzer, S., Cagniart, C., Ilic, S., Konolige, K., Navab, N., Lepetit, V.: Multimodal templates for real-time detection of texture-less objects in heavily cluttered scenes. In: 2011 international conference on computer vision. pp. 858–865. IEEE (2011)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+Hinterstoisser, S., Lepetit, V., Ilic, S., Holzer, S., Bradski, G., Konolige, K., Navab, N.: Model based training, detection and pose estimation of texture-less 3d objects in heavily cluttered scenes. In: Computer Vision–ACCV 2012: 11th Asian Conference on Computer Vision, Daejeon, Korea, November 5-9, 2012, Revised Selected Papers, Part I 11. pp. 548–562. Springer (2013)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+Hodan, T., Haluza, P., Obdržálek, Š., Matas, J., Lourakis, M., Zabulis, X.: T-less: An rgb-d dataset for 6d pose estimation of texture-less objects. In: 2017 IEEE Winter Conference on Applications of Computer Vision (WACV). pp. 880–888. IEEE (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+Hodan, T., Michel, F., Brachmann, E., Kehl, W., GlentBuch, A., Kraft, D., Drost, B., Vidal, J., Ihrke, S., Zabulis, X., et al.: Bop: Benchmark for 6d object pose estimation. In: Proceedings of the European conference on computer vision (ECCV). pp. 19–34 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+Hodaň, T., Sundermeyer, M., Drost, B., Labbé, Y., Brachmann, E., Michel, F., Rother, C., Matas, J.: Bop challenge 2020 on 6d object localization. In: Computer Vision–ECCV 2020 Workshops: Glasgow, UK, August 23–28, 2020, Proceedings, Part II 16. pp. 577–594. Springer (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+Hu, Y., Fua, P., Salzmann, M.: Perspective flow aggregation for data-limited 6d object pose estimation. In: European Conference on Computer Vision. pp. 89–106. Springer (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+Jocher, G., Stoken, A., Borovec, J., NanoCode012, ChristopherSTAN, Changyu, L., Laughing, tkianai, Hogan, A., lorenzomammana, yxNONG, AlexWang1900, Diaconu, L., Marc, wanghaoyang0106, ml5ah, Doug, Ingham, F., Frederik, Guilhen, Hatovix, Poznanski, J., Fang, J., Yu, L., changyu98, Wang, M., Gupta, N., Akhtar, O., PetrDvoracek, Rai, P.: ultralytics/yolov5: v3.1 - Bug Fixes and Performance Improvements (Oct 2020). https://doi.org/10.5281/zenodo.4154370, <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://doi.org/10.5281/zenodo.4154370" title="">https://doi.org/10.5281/zenodo.4154370</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+Jurie, F., Dhome, M.: A simple and efficient template matching algorithm. In: Proceedings Eighth IEEE International Conference on Computer Vision. ICCV 2001. vol. 2, pp. 544–549. IEEE (2001)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+Kaskman, R., Zakharov, S., Shugurov, I., Ilic, S.: Homebreweddb: Rgb-d dataset for 6d pose estimation of 3d objects. In: Proceedings of the IEEE/CVF International Conference on Computer Vision Workshops. pp. 0–0 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+Kasper, A., Xue, Z., Dillmann, R.: The kit object models database: An object model database for object recognition, localization and manipulation in service robotics. The International Journal of Robotics Research <span class="ltx_text ltx_font_bold" id="bib.bib29.1.1">31</span>(8), 927–934 (2012)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+Kirillov, A., Mintun, E., Ravi, N., Mao, H., Rolland, C., Gustafson, L., Xiao, T., Whitehead, S., Berg, A.C., Lo, W.Y., Dollár, P., Girshick, R.: Segment anything. arXiv:2304.02643 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+Krebs, F., Meixner, A., Patzer, I., Asfour, T.: The kit bimanual manipulation dataset. In: IEEE/RAS International Conference on Humanoid Robots (Humanoids). pp. 499–506 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+Labbé, Y., Manuelli, L., Mousavian, A., Tyree, S., Birchfield, S., Tremblay, J., Carpentier, J., Aubry, M., Fox, D., Sivic, J.: Megapose: 6d pose estimation of novel objects via render &amp; compare. arXiv preprint arXiv:2212.06870 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+Li, C., Li, L., Jiang, H., Weng, K., Geng, Y., Li, L., Ke, Z., Li, Q., Cheng, M., Nie, W., et al.: Yolov6: A single-stage object detection framework for industrial applications. arXiv preprint arXiv:2209.02976 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock">
+Long, X., Deng, K., Wang, G., Zhang, Y., Dang, Q., Gao, Y., Shen, H., Ren, J., Han, S., Ding, E., et al.: Pp-yolo: An effective and efficient implementation of object detector. arXiv preprint arXiv:2007.12099 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock">
+Mandery, C., Terlemez, O., Do, M., Vahrenkamp, N., Asfour, T.: Unifying representations and large-scale whole-body motion databases for studying human motion. IEEE Transactions on Robotics <span class="ltx_text ltx_font_bold" id="bib.bib35.1.1">32</span>(4), 796–809 (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock">
+Nguyen, V.N., Hu, Y., Xiao, Y., Salzmann, M., Lepetit, V.: Templates for 3d object pose estimation revisited: Generalization to new objects and robustness to occlusions. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 6771–6780 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock">
+Pal, A., Qiu, Y., Christensen, H.: Learning hierarchical relationships for object-goal navigation. In: Conference on Robot Learning. pp. 517–528. PMLR (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock">
+Pauwels, K., Kragic, D.: Simtrack: A simulation-based framework for scalable real-time object pose detection and tracking. In: 2015 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). pp. 1300–1307. IEEE (2015)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock">
+Pohl, C., Reister, F., Peller-Konrad, F., Asfour, T.: Memory-centered and affordance-based framework for mobile manipulation. arXiv preprint arXiv:2401.16899 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock">
+Reister, F., Grotz, M., Asfour, T.: Combining navigation and manipulation costs for time-efficient robot placement in mobile manipulation tasks. IEEE Robotics and Automation Letters <span class="ltx_text ltx_font_bold" id="bib.bib40.1.1">7</span>(4), 9913–9920 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock">
+Su, Y., Saleh, M., Fetzer, T., Rambach, J., Navab, N., Busam, B., Stricker, D., Tombari, F.: Zebrapose: Coarse to fine surface encoding for 6dof object pose estimation. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 6738–6748 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock">
+Sundermeyer, M., Durner, M., Puang, E.Y., Marton, Z.C., Vaskevicius, N., Arras, K.O., Triebel, R.: Multi-path learning for object pose estimation across domains. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 13916–13925 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock">
+Tan, M., Pang, R., Le, Q.V.: Efficientdet: Scalable and efficient object detection. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 10781–10790 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock">
+Tejani, A., Tang, D., Kouskouridas, R., Kim, T.K.: Latent-class hough forests for 3d object detection and pose estimation. In: Computer Vision–ECCV 2014: 13th European Conference, Zurich, Switzerland, September 6-12, 2014, Proceedings, Part VI 13. pp. 462–477. Springer (2014)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_tag_bibitem">[45]</span>
+<span class="ltx_bibblock">
+Thalhammer, S., Bauer, D., Hönig, P., Weibel, J.B., García-Rodríguez, J., Vincze, M.: Challenges for monocular 6d object pose estimation in robotics. arXiv preprint arXiv:2307.12172 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_tag_bibitem">[46]</span>
+<span class="ltx_bibblock">
+Tyree, S., Tremblay, J., To, T., Cheng, J., Mosier, T., Smith, J., Birchfield, S.: 6-dof pose estimation of household objects for robotic manipulation: An accessible dataset and benchmark. In: 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). pp. 13081–13088. IEEE (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_tag_bibitem">[47]</span>
+<span class="ltx_bibblock">
+Wang, C.Y., Yeh, I.H., Liao, H.Y.M.: Yolov9: Learning what you want to learn using programmable gradient information. arXiv preprint arXiv:2402.13616 (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_tag_bibitem">[48]</span>
+<span class="ltx_bibblock">
+Wang, G., Manhardt, F., Tombari, F., Ji, X.: Gdr-net: Geometry-guided direct regression network for monocular 6d object pose estimation. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 16611–16621 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_tag_bibitem">[49]</span>
+<span class="ltx_bibblock">
+Wen, B., Yang, W., Kautz, J., Birchfield, S.: Foundationpose: Unified 6d pose estimation and tracking of novel objects. arXiv preprint arXiv:2312.08344 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_tag_bibitem">[50]</span>
+<span class="ltx_bibblock">
+Xiang, Y., Schmidt, T., Narayanan, V., Fox, D.: Posecnn: A convolutional neural network for 6d object pose estimation in cluttered scenes. arXiv preprint arXiv:1711.00199 (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_tag_bibitem">[51]</span>
+<span class="ltx_bibblock">
+Ye, J., Batra, D., Wijmans, E., Das, A.: Auxiliary tasks speed up learning point goal navigation. In: Conference on Robot Learning. pp. 498–516. PMLR (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_tag_bibitem">[52]</span>
+<span class="ltx_bibblock">
+Younes, A., Honerkamp, D., Welschehold, T., Valada, A.: Catch me if you hear me: Audio-visual navigation in complex unmapped environments with moving sounds. IEEE Robotics and Automation Letters <span class="ltx_text ltx_font_bold" id="bib.bib52.1.1">8</span>(2), 928–935 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_tag_bibitem">[53]</span>
+<span class="ltx_bibblock">
+Zhang, Z., Lu, X., Cao, G., Yang, Y., Jiao, L., Liu, F.: Vit-yolo: Transformer-based yolo for object detection. In: Proceedings of the IEEE/CVF international conference on computer vision. pp. 2799–2808 (2021)
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon Jul 29 09:50:28 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

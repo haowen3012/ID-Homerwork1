@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way</title>
+<!--Generated on Sun Sep 22 19:12:20 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="Pose Estimation,  3D Tracking,  Curved Images,  Geometric Constraints,  Spatial Computing,  Augmented Reality,  Logo detection." lang="en" name="keywords"/>
+<base href="/html/2409.14577v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S1" title="In AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S2" title="In AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Works</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S2.SS1" title="In 2 Related Works ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>General Object Detection</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S2.SS2" title="In 2 Related Works ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>6D Object Pose Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S2.SS3" title="In 2 Related Works ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Convolutional Neural Networks</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S3" title="In AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Dataset</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S3.SS1" title="In 3 Dataset ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Dataset Generation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4" title="In AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4.SS1" title="In 4 Method ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Image Classification &amp; Detection</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4.SS2" title="In 4 Method ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Curvature Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4.SS3" title="In 4 Method ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Finding Feature Correspondences</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4.SS4" title="In 4 Method ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.4 </span>Pose Estimation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S5" title="In AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Evaluation &amp; Result</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S6" title="In AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Discussion, Limitation, and Future Works</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S7" title="In AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line"><span class="ltx_note ltx_role_institutetext" id="id1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">institutetext: </span><span class="ltx_text" id="id1.1" style="font-size:120%;">University of California - Berkeley at Berkeley, CA 94720, USA  
+<br class="ltx_break"/>Northeastern University at Boston, MA 02115, USA </span></span></span></span>
+<h1 class="ltx_title ltx_title_document" style="font-size:173%;">AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"><span class="ltx_text" id="id1.1.id1" style="font-size:120%;">Sining Huang, Yukun Song, Yixiao Kang, Chang Yu</span>
+</span><span class="ltx_author_notes"><span class="ltx_text" id="id2.2.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id3.3.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id4.4.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id5.5.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id6.6.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id7.7.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id8.8.id1" style="font-size:120%;">2</span><span class="ltx_text" id="id9.9.id1" style="font-size:120%;">2</span><span class="ltx_text" id="id10.10.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id11.11.id1" style="font-size:120%;">1</span><span class="ltx_text" id="id12.12.id1" style="font-size:120%;">2</span><span class="ltx_text" id="id13.13.id1" style="font-size:120%;">2</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id14.id1"><span class="ltx_text ltx_font_italic" id="id14.id1.1">In the field of spatial computing, one of the most essential tasks is the pose estimation of 3D objects. While rigid transformations of arbitrary 3D objects are relatively hard to detect due to varying environments introducing factors like insufficient lighting or even occlusion, objects with pre-defined shapes are often easy to track, leveraging geometric constraints. Curved images, with flexible dimensions but a confined shape, are essential shapes often targeted in 3D tracking.
+Traditionally, proprietary algorithms often require specific curvature measures as the input along with the original flattened images to enable pose estimation for a single image target. In this paper, we propose a pipeline that can detect several logo images simultaneously and only requires the original images as the input, unlocking more effects in downstream fields such as Augmented Reality (AR).</span></p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Keywords: </h6>Pose Estimation, 3D Tracking, Curved Images, Geometric Constraints, Spatial Computing, Augmented Reality, Logo detection.
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Augmented reality, with a primary focus on weaving intellectual interfaces and digital arts <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib1" title="">1</a>]</cite> into people’s real lives in a seamless way, has become one important research area as it involves multiple modalities in computation and elicits improvement needs in various fields <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib3" title="">3</a>]</cite>.
+Our objective is to develop an algorithm for tracking curved images by accurately estimating the diameter, transition, and rotation of cylinder-like objects in real time. This algorithm has significant potential for applications such as augmented reality in retail, where it overlays digital information onto curved products, as well as in robotic grasping and human-robot interaction for learning demonstrations. The process involves using YOLOv8 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib6" title="">6</a>]</cite> for logo detection, Convolutional Neural Network (CNN)  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib7" title="">7</a>]</cite> for diameter estimation, and SIFT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib8" title="">8</a>]</cite> for feature extraction, culminating in pose estimation through solving a Perspective-n-Point (PnP) problem  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib9" title="">9</a>]</cite>. This approach enhances the algorithm’s capability to handle complex real-world scenarios effectively.</p>
+</div>
+<figure class="ltx_figure" id="S1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_portrait" height="220" id="S1.F1.g1" src="extracted/5871691/imgs/example_zapworks.png" width="120"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S1.F1.2.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S1.F1.3.2" style="font-size:90%;">AR Effects shown by ZapWorks’ single-image pose-estimation algorithm</span></figcaption>
+</figure>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">ZapWorks currently provides a basic, proprietary tool that supports curved image tracking  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib10" title="">10</a>]</cite>, as depicted in Figure  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">1</span></a>. Given its closed-source nature, our main objective is to develop a comparable model using convolutional networks and traditional estimation methods  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib11" title="">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib12" title="">12</a>]</cite>. A significant limitation of ZapWorks’ solution is its capacity to detect only a single, predetermined image, such as the logo on a wine bottle shown in Figure  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">1</span></a>. To address this, we want to enhance our model’s ability to recognize multiple pre-trained logos autonomously, without the need to input specific logo IDs for each usage. Our ultimate aim is to evolve this model into a few-shot, closed-set algorithm, similar to those found in other pose-estimation frameworks  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib13" title="">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib14" title="">14</a>]</cite>, thus vastly improving its utility and efficacy in a variety of real-world scenarios.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Our work provides the following contributions:</p>
+<ol class="ltx_enumerate" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We synthesize the training &amp; evaluation dataset using Blender, comprising over 20,000 images, enabling model training for curved image detection, tracking, and diameter estimation.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">We introduce a novel framework for 6D pose estimation of curved images, leveraging a combination of SIFT and solving a PnP problem.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">We propose a novel CNN-based architecture tailored for estimating the curvature of images (i.e., the diameter of the underlying cylinder) based on the bounding box of the logo image.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Works</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>General Object Detection</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">In the field of general object detection, methodologies are categorized into one-stage and two-stage detectors. Two-stage detectors, such as R-CNN  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib15" title="">15</a>]</cite> and its variants Fast R-CNN  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib16" title="">16</a>]</cite> and Faster R-CNN  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib17" title="">17</a>]</cite>, initially generate region proposals that likely contain objects, which are subsequently classified and refined in terms of bounding box coordinates  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib18" title="">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib19" title="">19</a>]</cite>. These models are noted for their high accuracy, especially in complex scenes with small or overlapping objects  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib21" title="">21</a>]</cite>, but tend to operate slower due to their two-phased approach. On the other hand, one-stage detectors like You Only Look Once (YOLO) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib4" title="">4</a>]</cite> and Single Shot Multibox Detector (SSD)  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib22" title="">22</a>]</cite> simplify the detection process by directly predicting bounding boxes and class probabilities in a single step, trading some accuracy for significant gains in speed and efficiency. For instance, typical applications such as a self-guided retail checkout process developed by Tan et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib23" title="">23</a>]</cite> showcases the real-time advantage of one-stage detectors like YOLO. Furthermore, an exemplar work by Dang et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib24" title="">24</a>]</cite> demonstrates the strong adaptability of the YOLO. Dang et al.’s work not only fine-tuned the bounding box output using new datasets, but also presented the high-precision classification of small items like pills using the YOLO network. Furthermore, their research, which focuses on recognition targets that share same shape and color (typical barriers to manual classifications), proves the strong generalization ability of the YOLO network and sheds light on how it can be utilized in more complex real-life scenarios.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>6D Object Pose Estimation</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">In the field of pose estimation, methodologies are categorized into traditional geometric techniques and advanced deep-learning approaches  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib25" title="">25</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib26" title="">26</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib27" title="">27</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib28" title="">28</a>]</cite>. Traditional approaches often involve feature extraction and matching with 3D models using Perspective-n-Point (PnP) solutions or Iterative Closest Point (ICP)  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib30" title="">30</a>]</cite> algorithms. Modern deep learning techniques, such as PoseCNN  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib32" title="">32</a>]</cite>, leverage convolutional neural networks to predict object pose directly from RGB images, enhancing efficiency and scalability. Hybrid methods like DenseFusion  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib33" title="">33</a>]</cite> and PVNet  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib34" title="">34</a>]</cite> integrate RGB data with depth information, improving accuracy and robustness in complex scenes  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib35" title="">35</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib37" title="">37</a>]</cite>. These methods can effectively handle occlusions and varying lighting conditions, crucial for applications in augmented reality, robotics, and autonomous navigation.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Convolutional Neural Networks</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">CNNs have been adapted for various complex image-processing tasks by modifying the embedding layers. For instance, in style transfer, CNNs are engineered to encode style and content features separately, combining them to produce new, artistic images. In object detection, adjustments to the embedding layer integrate with region proposal networks to enhance detection accuracy  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib38" title="">38</a>]</cite>. Such modifications improve the network’s ability to extract detailed features crucial for tasks like facial recognition or medical imaging anomaly detection  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib39" title="">39</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib40" title="">40</a>]</cite>. These adaptations underscore the flexibility of CNNs to meet specific operational demands across diverse applications  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib41" title="">41</a>]</cite>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Dataset</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">Given the specificity of our research needs, we opted to create a synthetic dataset using Blender, as no suitable dataset was available online. This dataset includes 20,000 images, generated from 20 different target images, each affixed to cylinders of various diameters and heights. For each cylinder, over 1000 image frames were produced to capture diverse perspectives. Note that, in this dataset, the term ’target image’ specifically refers to any image used to represent a logo.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="117" id="S3.F2.g1" src="extracted/5871691/imgs/logo_collect.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.2.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S3.F2.3.2" style="font-size:90%;">Collection of 20 different target images (some are removed due to anonymization)</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="176" id="S3.F3.g1" src="extracted/5871691/imgs/background_collect.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.2.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S3.F3.3.2" style="font-size:90%;">Sample of Cylinder Object Across Varied Backgrounds</span></figcaption>
+</figure>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Dataset Generation</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">For each iteration, we selected one of the 20 target images in sequence to ensure a comprehensive evaluation across all variations (see all target images in Fig.  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S3.F2" title="Figure 2 ‣ 3 Dataset ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">2</span></a>). To enhance the model’s adaptability to different backgrounds, we incorporated 15 distinct 360-degree background images. For example, the cylinder with the Cal logo can be placed into various backgrounds as shown in Fig.  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S3.F3" title="Figure 3 ‣ 3 Dataset ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">Additionally, we generated cylinders with diameters ranging from one to two times the width of the attached image, placing the target image on the side of the cylinder. The camera was maneuvered around the cylinder to capture images from multiple angles, ensuring that the target image remained visible regardless of perspective. To simulate realistic conditions, such as objects captured off-center as might occur in real-world usage, we varied the cylinder’s position within each image. This methodological diversity is crucial for training our model to accurately detect targets under a variety of conditions.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p3">
+<p class="ltx_p" id="S3.SS1.p3.5">During the synthesis process, we recorded additional training data, including the label width, label height, and the camera’s intrinsic matrix, which are essential for applying the Scale Invariant Feature Transform (SIFT) and calculating the transformation matrix. We documented the ground truth data for each synthesized image, detailing the cylinder’s relative position and rotation, measured by Euler angles, in relation to the camera, as well as its diameter. Additionally, we recorded the camera’s intrinsic matrix, which is a fundamental component in camera calibration. The intrinsic matrix is a 3x3 matrix that transforms 3D coordinates from the camera’s view into 2D image coordinates, facilitating the conversion of real-world measurements to pixel measurements  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib42" title="">42</a>]</cite>. It includes parameters such as the focal lengths (<math alttext="f_{x}" class="ltx_Math" display="inline" id="S3.SS1.p3.1.m1.1"><semantics id="S3.SS1.p3.1.m1.1a"><msub id="S3.SS1.p3.1.m1.1.1" xref="S3.SS1.p3.1.m1.1.1.cmml"><mi id="S3.SS1.p3.1.m1.1.1.2" xref="S3.SS1.p3.1.m1.1.1.2.cmml">f</mi><mi id="S3.SS1.p3.1.m1.1.1.3" xref="S3.SS1.p3.1.m1.1.1.3.cmml">x</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p3.1.m1.1b"><apply id="S3.SS1.p3.1.m1.1.1.cmml" xref="S3.SS1.p3.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS1.p3.1.m1.1.1.1.cmml" xref="S3.SS1.p3.1.m1.1.1">subscript</csymbol><ci id="S3.SS1.p3.1.m1.1.1.2.cmml" xref="S3.SS1.p3.1.m1.1.1.2">𝑓</ci><ci id="S3.SS1.p3.1.m1.1.1.3.cmml" xref="S3.SS1.p3.1.m1.1.1.3">𝑥</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p3.1.m1.1c">f_{x}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p3.1.m1.1d">italic_f start_POSTSUBSCRIPT italic_x end_POSTSUBSCRIPT</annotation></semantics></math> and <math alttext="f_{y}" class="ltx_Math" display="inline" id="S3.SS1.p3.2.m2.1"><semantics id="S3.SS1.p3.2.m2.1a"><msub id="S3.SS1.p3.2.m2.1.1" xref="S3.SS1.p3.2.m2.1.1.cmml"><mi id="S3.SS1.p3.2.m2.1.1.2" xref="S3.SS1.p3.2.m2.1.1.2.cmml">f</mi><mi id="S3.SS1.p3.2.m2.1.1.3" xref="S3.SS1.p3.2.m2.1.1.3.cmml">y</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p3.2.m2.1b"><apply id="S3.SS1.p3.2.m2.1.1.cmml" xref="S3.SS1.p3.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS1.p3.2.m2.1.1.1.cmml" xref="S3.SS1.p3.2.m2.1.1">subscript</csymbol><ci id="S3.SS1.p3.2.m2.1.1.2.cmml" xref="S3.SS1.p3.2.m2.1.1.2">𝑓</ci><ci id="S3.SS1.p3.2.m2.1.1.3.cmml" xref="S3.SS1.p3.2.m2.1.1.3">𝑦</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p3.2.m2.1c">f_{y}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p3.2.m2.1d">italic_f start_POSTSUBSCRIPT italic_y end_POSTSUBSCRIPT</annotation></semantics></math>), which determine the scaling in the x and y directions, the skew coefficient (<math alttext="s" class="ltx_Math" display="inline" id="S3.SS1.p3.3.m3.1"><semantics id="S3.SS1.p3.3.m3.1a"><mi id="S3.SS1.p3.3.m3.1.1" xref="S3.SS1.p3.3.m3.1.1.cmml">s</mi><annotation-xml encoding="MathML-Content" id="S3.SS1.p3.3.m3.1b"><ci id="S3.SS1.p3.3.m3.1.1.cmml" xref="S3.SS1.p3.3.m3.1.1">𝑠</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p3.3.m3.1c">s</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p3.3.m3.1d">italic_s</annotation></semantics></math>), which accounts for any non-rectangularity between the x and y pixel axes, and the principal point coordinates (<math alttext="c_{x}" class="ltx_Math" display="inline" id="S3.SS1.p3.4.m4.1"><semantics id="S3.SS1.p3.4.m4.1a"><msub id="S3.SS1.p3.4.m4.1.1" xref="S3.SS1.p3.4.m4.1.1.cmml"><mi id="S3.SS1.p3.4.m4.1.1.2" xref="S3.SS1.p3.4.m4.1.1.2.cmml">c</mi><mi id="S3.SS1.p3.4.m4.1.1.3" xref="S3.SS1.p3.4.m4.1.1.3.cmml">x</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p3.4.m4.1b"><apply id="S3.SS1.p3.4.m4.1.1.cmml" xref="S3.SS1.p3.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS1.p3.4.m4.1.1.1.cmml" xref="S3.SS1.p3.4.m4.1.1">subscript</csymbol><ci id="S3.SS1.p3.4.m4.1.1.2.cmml" xref="S3.SS1.p3.4.m4.1.1.2">𝑐</ci><ci id="S3.SS1.p3.4.m4.1.1.3.cmml" xref="S3.SS1.p3.4.m4.1.1.3">𝑥</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p3.4.m4.1c">c_{x}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p3.4.m4.1d">italic_c start_POSTSUBSCRIPT italic_x end_POSTSUBSCRIPT</annotation></semantics></math> and <math alttext="c_{y}" class="ltx_Math" display="inline" id="S3.SS1.p3.5.m5.1"><semantics id="S3.SS1.p3.5.m5.1a"><msub id="S3.SS1.p3.5.m5.1.1" xref="S3.SS1.p3.5.m5.1.1.cmml"><mi id="S3.SS1.p3.5.m5.1.1.2" xref="S3.SS1.p3.5.m5.1.1.2.cmml">c</mi><mi id="S3.SS1.p3.5.m5.1.1.3" xref="S3.SS1.p3.5.m5.1.1.3.cmml">y</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p3.5.m5.1b"><apply id="S3.SS1.p3.5.m5.1.1.cmml" xref="S3.SS1.p3.5.m5.1.1"><csymbol cd="ambiguous" id="S3.SS1.p3.5.m5.1.1.1.cmml" xref="S3.SS1.p3.5.m5.1.1">subscript</csymbol><ci id="S3.SS1.p3.5.m5.1.1.2.cmml" xref="S3.SS1.p3.5.m5.1.1.2">𝑐</ci><ci id="S3.SS1.p3.5.m5.1.1.3.cmml" xref="S3.SS1.p3.5.m5.1.1.3">𝑦</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p3.5.m5.1c">c_{y}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p3.5.m5.1d">italic_c start_POSTSUBSCRIPT italic_y end_POSTSUBSCRIPT</annotation></semantics></math>), which indicate the intersection of the optical axis with the image plane. This matrix accurately projects 3D points onto the 2D image plane, allowing for precise image formation and analysis  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib43" title="">43</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p4">
+<p class="ltx_p" id="S3.SS1.p4.1">For clarity and consistency, we define the curvature of the image target as the ratio between the cylinder’s diameter and the height of the image target (HoI). Fig.  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S3.F4" title="Figure 4 ‣ 3.1 Dataset Generation ‣ 3 Dataset ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">4</span></a> illustrates a sample image pair from the dataset, accompanied by its relevant training and testing data, showcasing the dataset’s capacity to thoroughly evaluate our model’s performance.</p>
+</div>
+<figure class="ltx_figure" id="S3.F4">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F4.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="337" id="S3.F4.sf1.g1" src="extracted/5871691/imgs/example_image_input.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F4.sf1.2.1.1" style="font-size:90%;">(a)</span> </span><span class="ltx_text" id="S3.F4.sf1.3.2" style="font-size:90%;">Input image</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F4.sf2">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.F4.sf2.3">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.F4.sf2.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt" id="S3.F4.sf2.1.1.2"><span class="ltx_text ltx_font_bold" id="S3.F4.sf2.1.1.2.1" style="font-size:70%;">Relative Position</span></th>
+<td class="ltx_td ltx_align_left ltx_border_tt" id="S3.F4.sf2.1.1.1"><math alttext="\langle 0.1704,-1.1875,0.203\rangle" class="ltx_Math" display="inline" id="S3.F4.sf2.1.1.1.m1.3"><semantics id="S3.F4.sf2.1.1.1.m1.3a"><mrow id="S3.F4.sf2.1.1.1.m1.3.3.1" xref="S3.F4.sf2.1.1.1.m1.3.3.2.cmml"><mo id="S3.F4.sf2.1.1.1.m1.3.3.1.2" maxsize="70%" minsize="70%" xref="S3.F4.sf2.1.1.1.m1.3.3.2.cmml">⟨</mo><mn id="S3.F4.sf2.1.1.1.m1.1.1" mathsize="70%" xref="S3.F4.sf2.1.1.1.m1.1.1.cmml">0.1704</mn><mo id="S3.F4.sf2.1.1.1.m1.3.3.1.3" mathsize="70%" xref="S3.F4.sf2.1.1.1.m1.3.3.2.cmml">,</mo><mrow id="S3.F4.sf2.1.1.1.m1.3.3.1.1" xref="S3.F4.sf2.1.1.1.m1.3.3.1.1.cmml"><mo id="S3.F4.sf2.1.1.1.m1.3.3.1.1a" mathsize="70%" xref="S3.F4.sf2.1.1.1.m1.3.3.1.1.cmml">−</mo><mn id="S3.F4.sf2.1.1.1.m1.3.3.1.1.2" mathsize="70%" xref="S3.F4.sf2.1.1.1.m1.3.3.1.1.2.cmml">1.1875</mn></mrow><mo id="S3.F4.sf2.1.1.1.m1.3.3.1.4" mathsize="70%" xref="S3.F4.sf2.1.1.1.m1.3.3.2.cmml">,</mo><mn id="S3.F4.sf2.1.1.1.m1.2.2" mathsize="70%" xref="S3.F4.sf2.1.1.1.m1.2.2.cmml">0.203</mn><mo id="S3.F4.sf2.1.1.1.m1.3.3.1.5" maxsize="70%" minsize="70%" xref="S3.F4.sf2.1.1.1.m1.3.3.2.cmml">⟩</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.F4.sf2.1.1.1.m1.3b"><list id="S3.F4.sf2.1.1.1.m1.3.3.2.cmml" xref="S3.F4.sf2.1.1.1.m1.3.3.1"><cn id="S3.F4.sf2.1.1.1.m1.1.1.cmml" type="float" xref="S3.F4.sf2.1.1.1.m1.1.1">0.1704</cn><apply id="S3.F4.sf2.1.1.1.m1.3.3.1.1.cmml" xref="S3.F4.sf2.1.1.1.m1.3.3.1.1"><minus id="S3.F4.sf2.1.1.1.m1.3.3.1.1.1.cmml" xref="S3.F4.sf2.1.1.1.m1.3.3.1.1"></minus><cn id="S3.F4.sf2.1.1.1.m1.3.3.1.1.2.cmml" type="float" xref="S3.F4.sf2.1.1.1.m1.3.3.1.1.2">1.1875</cn></apply><cn id="S3.F4.sf2.1.1.1.m1.2.2.cmml" type="float" xref="S3.F4.sf2.1.1.1.m1.2.2">0.203</cn></list></annotation-xml><annotation encoding="application/x-tex" id="S3.F4.sf2.1.1.1.m1.3c">\langle 0.1704,-1.1875,0.203\rangle</annotation><annotation encoding="application/x-llamapun" id="S3.F4.sf2.1.1.1.m1.3d">⟨ 0.1704 , - 1.1875 , 0.203 ⟩</annotation></semantics></math></td>
+</tr>
+<tr class="ltx_tr" id="S3.F4.sf2.2.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.F4.sf2.2.2.2"><span class="ltx_text ltx_font_bold" id="S3.F4.sf2.2.2.2.1" style="font-size:70%;">Relative Rotation (Euler)</span></th>
+<td class="ltx_td ltx_align_left" id="S3.F4.sf2.2.2.1"><math alttext="\langle-1.6166,-0.1995,-0.1264\rangle" class="ltx_Math" display="inline" id="S3.F4.sf2.2.2.1.m1.3"><semantics id="S3.F4.sf2.2.2.1.m1.3a"><mrow id="S3.F4.sf2.2.2.1.m1.3.3.3" xref="S3.F4.sf2.2.2.1.m1.3.3.4.cmml"><mo id="S3.F4.sf2.2.2.1.m1.3.3.3.4" maxsize="70%" minsize="70%" xref="S3.F4.sf2.2.2.1.m1.3.3.4.cmml">⟨</mo><mrow id="S3.F4.sf2.2.2.1.m1.1.1.1.1" xref="S3.F4.sf2.2.2.1.m1.1.1.1.1.cmml"><mo id="S3.F4.sf2.2.2.1.m1.1.1.1.1a" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.1.1.1.1.cmml">−</mo><mn id="S3.F4.sf2.2.2.1.m1.1.1.1.1.2" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.1.1.1.1.2.cmml">1.6166</mn></mrow><mo id="S3.F4.sf2.2.2.1.m1.3.3.3.5" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.3.3.4.cmml">,</mo><mrow id="S3.F4.sf2.2.2.1.m1.2.2.2.2" xref="S3.F4.sf2.2.2.1.m1.2.2.2.2.cmml"><mo id="S3.F4.sf2.2.2.1.m1.2.2.2.2a" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.2.2.2.2.cmml">−</mo><mn id="S3.F4.sf2.2.2.1.m1.2.2.2.2.2" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.2.2.2.2.2.cmml">0.1995</mn></mrow><mo id="S3.F4.sf2.2.2.1.m1.3.3.3.6" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.3.3.4.cmml">,</mo><mrow id="S3.F4.sf2.2.2.1.m1.3.3.3.3" xref="S3.F4.sf2.2.2.1.m1.3.3.3.3.cmml"><mo id="S3.F4.sf2.2.2.1.m1.3.3.3.3a" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.3.3.3.3.cmml">−</mo><mn id="S3.F4.sf2.2.2.1.m1.3.3.3.3.2" mathsize="70%" xref="S3.F4.sf2.2.2.1.m1.3.3.3.3.2.cmml">0.1264</mn></mrow><mo id="S3.F4.sf2.2.2.1.m1.3.3.3.7" maxsize="70%" minsize="70%" xref="S3.F4.sf2.2.2.1.m1.3.3.4.cmml">⟩</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.F4.sf2.2.2.1.m1.3b"><list id="S3.F4.sf2.2.2.1.m1.3.3.4.cmml" xref="S3.F4.sf2.2.2.1.m1.3.3.3"><apply id="S3.F4.sf2.2.2.1.m1.1.1.1.1.cmml" xref="S3.F4.sf2.2.2.1.m1.1.1.1.1"><minus id="S3.F4.sf2.2.2.1.m1.1.1.1.1.1.cmml" xref="S3.F4.sf2.2.2.1.m1.1.1.1.1"></minus><cn id="S3.F4.sf2.2.2.1.m1.1.1.1.1.2.cmml" type="float" xref="S3.F4.sf2.2.2.1.m1.1.1.1.1.2">1.6166</cn></apply><apply id="S3.F4.sf2.2.2.1.m1.2.2.2.2.cmml" xref="S3.F4.sf2.2.2.1.m1.2.2.2.2"><minus id="S3.F4.sf2.2.2.1.m1.2.2.2.2.1.cmml" xref="S3.F4.sf2.2.2.1.m1.2.2.2.2"></minus><cn id="S3.F4.sf2.2.2.1.m1.2.2.2.2.2.cmml" type="float" xref="S3.F4.sf2.2.2.1.m1.2.2.2.2.2">0.1995</cn></apply><apply id="S3.F4.sf2.2.2.1.m1.3.3.3.3.cmml" xref="S3.F4.sf2.2.2.1.m1.3.3.3.3"><minus id="S3.F4.sf2.2.2.1.m1.3.3.3.3.1.cmml" xref="S3.F4.sf2.2.2.1.m1.3.3.3.3"></minus><cn id="S3.F4.sf2.2.2.1.m1.3.3.3.3.2.cmml" type="float" xref="S3.F4.sf2.2.2.1.m1.3.3.3.3.2">0.1264</cn></apply></list></annotation-xml><annotation encoding="application/x-tex" id="S3.F4.sf2.2.2.1.m1.3c">\langle-1.6166,-0.1995,-0.1264\rangle</annotation><annotation encoding="application/x-llamapun" id="S3.F4.sf2.2.2.1.m1.3d">⟨ - 1.6166 , - 0.1995 , - 0.1264 ⟩</annotation></semantics></math></td>
+</tr>
+<tr class="ltx_tr" id="S3.F4.sf2.3.4.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S3.F4.sf2.3.4.1.1"><span class="ltx_text ltx_font_bold" id="S3.F4.sf2.3.4.1.1.1" style="font-size:70%;">Cylinder Diameter</span></th>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S3.F4.sf2.3.4.1.2"><span class="ltx_text" id="S3.F4.sf2.3.4.1.2.1" style="font-size:70%;">1.64</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.F4.sf2.3.5.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.F4.sf2.3.5.2.1"><span class="ltx_text ltx_font_bold" id="S3.F4.sf2.3.5.2.1.1" style="font-size:70%;">Label Width</span></th>
+<td class="ltx_td ltx_align_left" id="S3.F4.sf2.3.5.2.2"><span class="ltx_text" id="S3.F4.sf2.3.5.2.2.1" style="font-size:70%;">1.3333</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.F4.sf2.3.6.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.F4.sf2.3.6.3.1"><span class="ltx_text ltx_font_bold" id="S3.F4.sf2.3.6.3.1.1" style="font-size:70%;">Label Height</span></th>
+<td class="ltx_td ltx_align_left" id="S3.F4.sf2.3.6.3.2"><span class="ltx_text" id="S3.F4.sf2.3.6.3.2.1" style="font-size:70%;">1.0</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.F4.sf2.3.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_t" id="S3.F4.sf2.3.3.2"><span class="ltx_text ltx_font_bold" id="S3.F4.sf2.3.3.2.1" style="font-size:70%;">Camera Intrinsic Matrix</span></th>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" id="S3.F4.sf2.3.3.1"><math alttext="\begin{bmatrix}2670&amp;0&amp;960\\
+1&amp;2250&amp;540\\
+1&amp;0&amp;1\end{bmatrix}" class="ltx_Math" display="inline" id="S3.F4.sf2.3.3.1.m1.1"><semantics id="S3.F4.sf2.3.3.1.m1.1a"><mrow id="S3.F4.sf2.3.3.1.m1.1.1.3" xref="S3.F4.sf2.3.3.1.m1.1.1.2.cmml"><mo id="S3.F4.sf2.3.3.1.m1.1.1.3.1" xref="S3.F4.sf2.3.3.1.m1.1.1.2.1.cmml">[</mo><mtable columnspacing="5pt" id="S3.F4.sf2.3.3.1.m1.1.1.1.1" rowspacing="0pt" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mtr id="S3.F4.sf2.3.3.1.m1.1.1.1.1a" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1b" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.1.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.1.1.cmml">2670</mn></mtd><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1c" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.2.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.2.1.cmml">0</mn></mtd><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1d" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.3.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.3.1.cmml">960</mn></mtd></mtr><mtr id="S3.F4.sf2.3.3.1.m1.1.1.1.1e" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1f" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.1.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.1.1.cmml">1</mn></mtd><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1g" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.2.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.2.1.cmml">2250</mn></mtd><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1h" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.3.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.3.1.cmml">540</mn></mtd></mtr><mtr id="S3.F4.sf2.3.3.1.m1.1.1.1.1i" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1j" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.1.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.1.1.cmml">1</mn></mtd><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1k" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.2.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.2.1.cmml">0</mn></mtd><mtd id="S3.F4.sf2.3.3.1.m1.1.1.1.1l" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml"><mn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.3.1" mathsize="70%" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.3.1.cmml">1</mn></mtd></mtr></mtable><mo id="S3.F4.sf2.3.3.1.m1.1.1.3.2" xref="S3.F4.sf2.3.3.1.m1.1.1.2.1.cmml">]</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.F4.sf2.3.3.1.m1.1b"><apply id="S3.F4.sf2.3.3.1.m1.1.1.2.cmml" xref="S3.F4.sf2.3.3.1.m1.1.1.3"><csymbol cd="latexml" id="S3.F4.sf2.3.3.1.m1.1.1.2.1.cmml" xref="S3.F4.sf2.3.3.1.m1.1.1.3.1">matrix</csymbol><matrix id="S3.F4.sf2.3.3.1.m1.1.1.1.1.cmml" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1"><matrixrow id="S3.F4.sf2.3.3.1.m1.1.1.1.1a.cmml" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1"><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.1.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.1.1">2670</cn><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.2.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.2.1">0</cn><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.3.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.1.3.1">960</cn></matrixrow><matrixrow id="S3.F4.sf2.3.3.1.m1.1.1.1.1b.cmml" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1"><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.1.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.1.1">1</cn><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.2.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.2.1">2250</cn><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.3.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.2.3.1">540</cn></matrixrow><matrixrow id="S3.F4.sf2.3.3.1.m1.1.1.1.1c.cmml" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1"><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.1.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.1.1">1</cn><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.2.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.2.1">0</cn><cn id="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.3.1.cmml" type="integer" xref="S3.F4.sf2.3.3.1.m1.1.1.1.1.3.3.1">1</cn></matrixrow></matrix></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F4.sf2.3.3.1.m1.1c">\begin{bmatrix}2670&amp;0&amp;960\\
+1&amp;2250&amp;540\\
+1&amp;0&amp;1\end{bmatrix}</annotation><annotation encoding="application/x-llamapun" id="S3.F4.sf2.3.3.1.m1.1d">[ start_ARG start_ROW start_CELL 2670 end_CELL start_CELL 0 end_CELL start_CELL 960 end_CELL end_ROW start_ROW start_CELL 1 end_CELL start_CELL 2250 end_CELL start_CELL 540 end_CELL end_ROW start_ROW start_CELL 1 end_CELL start_CELL 0 end_CELL start_CELL 1 end_CELL end_ROW end_ARG ]</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:70%;"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F4.sf2.7.1.1" style="font-size:129%;">(b)</span> </span><span class="ltx_text" id="S3.F4.sf2.8.2" style="font-size:129%;">Corresponding data</span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F4.2.1.1" style="font-size:90%;">Figure 4</span>: </span><span class="ltx_text" id="S3.F4.3.2" style="font-size:90%;">Synthesized dataset consisting of paired images and corresponding data examples</span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS1.p5">
+<p class="ltx_p" id="S3.SS1.p5.1">As the dataset randomly generated backgrounds and cylinder’s diameter, we split the first 90% of the data into training datasets while the remaining 10% as the validation dataset. The split in the order can avoid backtracking the image index.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Method</h2>
+<figure class="ltx_figure" id="S4.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="184" id="S4.F5.g1" src="extracted/5871691/imgs/Architecture.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F5.2.1.1" style="font-size:90%;">Figure 5</span>: </span><span class="ltx_text" id="S4.F5.3.2" style="font-size:90%;">Our pipeline of curved-image pose-estimation. The pipeline contains a fine-tuned YOLOv8 network <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib4" title="">4</a>]</cite>, a self-trained CNN, a feature matching algorithm using SIFT  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib8" title="">8</a>]</cite>, and an algorithm for PnP  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib9" title="">9</a>]</cite> pose computation</span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">Generally, we divide the problem into four steps, including 1) detecting the bounding box of the image, 2) estimating the curvature of the image, 3) finding correspondences between the flattened image target and the input image capture, and 4) estimating the pose of the image. Fig.  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4.F5" title="Figure 5 ‣ 4 Method ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">5</span></a> presents the pipeline in detail using a training image as an example. The pose of the image is hence referring to the pose of the cylinder, where the image is always attached to (and centered to) the negative y-direction of the cylinder, with the top of the cylinder being the positive z-direction and the right being the positive x-direction.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Image Classification &amp; Detection</h3>
+<figure class="ltx_figure" id="S4.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="166" id="S4.F6.g1" src="extracted/5871691/imgs/yolo_loss.jpg" width="449"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F6.2.1.1" style="font-size:90%;">Figure 6</span>: </span><span class="ltx_text" id="S4.F6.3.2" style="font-size:90%;">The training loss (left) and the validation loss (right) for fine-tuning the YOLOv8 network.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">For step 1), inspired by Tan et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib23" title="">23</a>]</cite>, who leverages the detection head structure from YOLOv8 to conduct high-precision object recognition, we fine-tune a pre-trained YOLOv8 network using the small checkpoint (yolov8s.pt) provided by prior literature to detect the bounding boxes for the images. With a 50-epoch training process using 921 training captures per image target (20 image targets in total in our dataset), the validation box_loss, referring to the regression Complete Intersection over Union (CIoU) loss <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib44" title="">44</a>]</cite>, dropped to 0.14355 as shown in Fig.  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4.F6" title="Figure 6 ‣ 4.1 Image Classification &amp; Detection ‣ 4 Method ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">6</span></a>, representing a decent prediction result. Notice that the YOLOv8 network also performs the image classification in this step.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Curvature Estimation</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.4">For step 2), we propose a new convolution-based network for predicting the curvature of the image. We experimented with two differently-sized networks with both the Huber loss function (<math alttext="\delta=0.4" class="ltx_Math" display="inline" id="S4.SS2.p1.1.m1.1"><semantics id="S4.SS2.p1.1.m1.1a"><mrow id="S4.SS2.p1.1.m1.1.1" xref="S4.SS2.p1.1.m1.1.1.cmml"><mi id="S4.SS2.p1.1.m1.1.1.2" xref="S4.SS2.p1.1.m1.1.1.2.cmml">δ</mi><mo id="S4.SS2.p1.1.m1.1.1.1" xref="S4.SS2.p1.1.m1.1.1.1.cmml">=</mo><mn id="S4.SS2.p1.1.m1.1.1.3" xref="S4.SS2.p1.1.m1.1.1.3.cmml">0.4</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.SS2.p1.1.m1.1b"><apply id="S4.SS2.p1.1.m1.1.1.cmml" xref="S4.SS2.p1.1.m1.1.1"><eq id="S4.SS2.p1.1.m1.1.1.1.cmml" xref="S4.SS2.p1.1.m1.1.1.1"></eq><ci id="S4.SS2.p1.1.m1.1.1.2.cmml" xref="S4.SS2.p1.1.m1.1.1.2">𝛿</ci><cn id="S4.SS2.p1.1.m1.1.1.3.cmml" type="float" xref="S4.SS2.p1.1.m1.1.1.3">0.4</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.p1.1.m1.1c">\delta=0.4</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.p1.1.m1.1d">italic_δ = 0.4</annotation></semantics></math>)  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib45" title="">45</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib46" title="">46</a>]</cite> and the traditional mean squared error (MSE) loss function  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib47" title="">47</a>]</cite>. Both networks include 3 convolution layers, each followed by a max-pooling layer with kernel size <math alttext="2*2" class="ltx_Math" display="inline" id="S4.SS2.p1.2.m2.1"><semantics id="S4.SS2.p1.2.m2.1a"><mrow id="S4.SS2.p1.2.m2.1.1" xref="S4.SS2.p1.2.m2.1.1.cmml"><mn id="S4.SS2.p1.2.m2.1.1.2" xref="S4.SS2.p1.2.m2.1.1.2.cmml">2</mn><mo id="S4.SS2.p1.2.m2.1.1.1" lspace="0.222em" rspace="0.222em" xref="S4.SS2.p1.2.m2.1.1.1.cmml">∗</mo><mn id="S4.SS2.p1.2.m2.1.1.3" xref="S4.SS2.p1.2.m2.1.1.3.cmml">2</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.SS2.p1.2.m2.1b"><apply id="S4.SS2.p1.2.m2.1.1.cmml" xref="S4.SS2.p1.2.m2.1.1"><times id="S4.SS2.p1.2.m2.1.1.1.cmml" xref="S4.SS2.p1.2.m2.1.1.1"></times><cn id="S4.SS2.p1.2.m2.1.1.2.cmml" type="integer" xref="S4.SS2.p1.2.m2.1.1.2">2</cn><cn id="S4.SS2.p1.2.m2.1.1.3.cmml" type="integer" xref="S4.SS2.p1.2.m2.1.1.3">2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.p1.2.m2.1c">2*2</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.p1.2.m2.1d">2 ∗ 2</annotation></semantics></math>, and two fully connected layers, where one layer encodes the kernel output from the prior convolutional layer into vector embedding and the second layer fully connects the first layers’ output and combines into one single output value as the curvature prediction. All layers use the Rectified Linear Unit (ReLU) activation function, which is a standard usage <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib48" title="">48</a>]</cite> for training convolutional networks. Specifically, the small-sized network has convolutional layers with kernels numbers 32, 64, 64, with the kernel size being <math alttext="5*5,3*3,4*4" class="ltx_Math" display="inline" id="S4.SS2.p1.3.m3.3"><semantics id="S4.SS2.p1.3.m3.3a"><mrow id="S4.SS2.p1.3.m3.3.3.3" xref="S4.SS2.p1.3.m3.3.3.4.cmml"><mrow id="S4.SS2.p1.3.m3.1.1.1.1" xref="S4.SS2.p1.3.m3.1.1.1.1.cmml"><mn id="S4.SS2.p1.3.m3.1.1.1.1.2" xref="S4.SS2.p1.3.m3.1.1.1.1.2.cmml">5</mn><mo id="S4.SS2.p1.3.m3.1.1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S4.SS2.p1.3.m3.1.1.1.1.1.cmml">∗</mo><mn id="S4.SS2.p1.3.m3.1.1.1.1.3" xref="S4.SS2.p1.3.m3.1.1.1.1.3.cmml">5</mn></mrow><mo id="S4.SS2.p1.3.m3.3.3.3.4" xref="S4.SS2.p1.3.m3.3.3.4.cmml">,</mo><mrow id="S4.SS2.p1.3.m3.2.2.2.2" xref="S4.SS2.p1.3.m3.2.2.2.2.cmml"><mn id="S4.SS2.p1.3.m3.2.2.2.2.2" xref="S4.SS2.p1.3.m3.2.2.2.2.2.cmml">3</mn><mo id="S4.SS2.p1.3.m3.2.2.2.2.1" lspace="0.222em" rspace="0.222em" xref="S4.SS2.p1.3.m3.2.2.2.2.1.cmml">∗</mo><mn id="S4.SS2.p1.3.m3.2.2.2.2.3" xref="S4.SS2.p1.3.m3.2.2.2.2.3.cmml">3</mn></mrow><mo id="S4.SS2.p1.3.m3.3.3.3.5" xref="S4.SS2.p1.3.m3.3.3.4.cmml">,</mo><mrow id="S4.SS2.p1.3.m3.3.3.3.3" xref="S4.SS2.p1.3.m3.3.3.3.3.cmml"><mn id="S4.SS2.p1.3.m3.3.3.3.3.2" xref="S4.SS2.p1.3.m3.3.3.3.3.2.cmml">4</mn><mo id="S4.SS2.p1.3.m3.3.3.3.3.1" lspace="0.222em" rspace="0.222em" xref="S4.SS2.p1.3.m3.3.3.3.3.1.cmml">∗</mo><mn id="S4.SS2.p1.3.m3.3.3.3.3.3" xref="S4.SS2.p1.3.m3.3.3.3.3.3.cmml">4</mn></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.SS2.p1.3.m3.3b"><list id="S4.SS2.p1.3.m3.3.3.4.cmml" xref="S4.SS2.p1.3.m3.3.3.3"><apply id="S4.SS2.p1.3.m3.1.1.1.1.cmml" xref="S4.SS2.p1.3.m3.1.1.1.1"><times id="S4.SS2.p1.3.m3.1.1.1.1.1.cmml" xref="S4.SS2.p1.3.m3.1.1.1.1.1"></times><cn id="S4.SS2.p1.3.m3.1.1.1.1.2.cmml" type="integer" xref="S4.SS2.p1.3.m3.1.1.1.1.2">5</cn><cn id="S4.SS2.p1.3.m3.1.1.1.1.3.cmml" type="integer" xref="S4.SS2.p1.3.m3.1.1.1.1.3">5</cn></apply><apply id="S4.SS2.p1.3.m3.2.2.2.2.cmml" xref="S4.SS2.p1.3.m3.2.2.2.2"><times id="S4.SS2.p1.3.m3.2.2.2.2.1.cmml" xref="S4.SS2.p1.3.m3.2.2.2.2.1"></times><cn id="S4.SS2.p1.3.m3.2.2.2.2.2.cmml" type="integer" xref="S4.SS2.p1.3.m3.2.2.2.2.2">3</cn><cn id="S4.SS2.p1.3.m3.2.2.2.2.3.cmml" type="integer" xref="S4.SS2.p1.3.m3.2.2.2.2.3">3</cn></apply><apply id="S4.SS2.p1.3.m3.3.3.3.3.cmml" xref="S4.SS2.p1.3.m3.3.3.3.3"><times id="S4.SS2.p1.3.m3.3.3.3.3.1.cmml" xref="S4.SS2.p1.3.m3.3.3.3.3.1"></times><cn id="S4.SS2.p1.3.m3.3.3.3.3.2.cmml" type="integer" xref="S4.SS2.p1.3.m3.3.3.3.3.2">4</cn><cn id="S4.SS2.p1.3.m3.3.3.3.3.3.cmml" type="integer" xref="S4.SS2.p1.3.m3.3.3.3.3.3">4</cn></apply></list></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.p1.3.m3.3c">5*5,3*3,4*4</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.p1.3.m3.3d">5 ∗ 5 , 3 ∗ 3 , 4 ∗ 4</annotation></semantics></math>, followed by a 64-dimension vector embedding layer, while the large-sized network has convolutional kernel numbers being 32, 64, 128, 128, with the kernel size being <math alttext="5*5,3*3,3*3" class="ltx_Math" display="inline" id="S4.SS2.p1.4.m4.3"><semantics id="S4.SS2.p1.4.m4.3a"><mrow id="S4.SS2.p1.4.m4.3.3.3" xref="S4.SS2.p1.4.m4.3.3.4.cmml"><mrow id="S4.SS2.p1.4.m4.1.1.1.1" xref="S4.SS2.p1.4.m4.1.1.1.1.cmml"><mn id="S4.SS2.p1.4.m4.1.1.1.1.2" xref="S4.SS2.p1.4.m4.1.1.1.1.2.cmml">5</mn><mo id="S4.SS2.p1.4.m4.1.1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S4.SS2.p1.4.m4.1.1.1.1.1.cmml">∗</mo><mn id="S4.SS2.p1.4.m4.1.1.1.1.3" xref="S4.SS2.p1.4.m4.1.1.1.1.3.cmml">5</mn></mrow><mo id="S4.SS2.p1.4.m4.3.3.3.4" xref="S4.SS2.p1.4.m4.3.3.4.cmml">,</mo><mrow id="S4.SS2.p1.4.m4.2.2.2.2" xref="S4.SS2.p1.4.m4.2.2.2.2.cmml"><mn id="S4.SS2.p1.4.m4.2.2.2.2.2" xref="S4.SS2.p1.4.m4.2.2.2.2.2.cmml">3</mn><mo id="S4.SS2.p1.4.m4.2.2.2.2.1" lspace="0.222em" rspace="0.222em" xref="S4.SS2.p1.4.m4.2.2.2.2.1.cmml">∗</mo><mn id="S4.SS2.p1.4.m4.2.2.2.2.3" xref="S4.SS2.p1.4.m4.2.2.2.2.3.cmml">3</mn></mrow><mo id="S4.SS2.p1.4.m4.3.3.3.5" xref="S4.SS2.p1.4.m4.3.3.4.cmml">,</mo><mrow id="S4.SS2.p1.4.m4.3.3.3.3" xref="S4.SS2.p1.4.m4.3.3.3.3.cmml"><mn id="S4.SS2.p1.4.m4.3.3.3.3.2" xref="S4.SS2.p1.4.m4.3.3.3.3.2.cmml">3</mn><mo id="S4.SS2.p1.4.m4.3.3.3.3.1" lspace="0.222em" rspace="0.222em" xref="S4.SS2.p1.4.m4.3.3.3.3.1.cmml">∗</mo><mn id="S4.SS2.p1.4.m4.3.3.3.3.3" xref="S4.SS2.p1.4.m4.3.3.3.3.3.cmml">3</mn></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.SS2.p1.4.m4.3b"><list id="S4.SS2.p1.4.m4.3.3.4.cmml" xref="S4.SS2.p1.4.m4.3.3.3"><apply id="S4.SS2.p1.4.m4.1.1.1.1.cmml" xref="S4.SS2.p1.4.m4.1.1.1.1"><times id="S4.SS2.p1.4.m4.1.1.1.1.1.cmml" xref="S4.SS2.p1.4.m4.1.1.1.1.1"></times><cn id="S4.SS2.p1.4.m4.1.1.1.1.2.cmml" type="integer" xref="S4.SS2.p1.4.m4.1.1.1.1.2">5</cn><cn id="S4.SS2.p1.4.m4.1.1.1.1.3.cmml" type="integer" xref="S4.SS2.p1.4.m4.1.1.1.1.3">5</cn></apply><apply id="S4.SS2.p1.4.m4.2.2.2.2.cmml" xref="S4.SS2.p1.4.m4.2.2.2.2"><times id="S4.SS2.p1.4.m4.2.2.2.2.1.cmml" xref="S4.SS2.p1.4.m4.2.2.2.2.1"></times><cn id="S4.SS2.p1.4.m4.2.2.2.2.2.cmml" type="integer" xref="S4.SS2.p1.4.m4.2.2.2.2.2">3</cn><cn id="S4.SS2.p1.4.m4.2.2.2.2.3.cmml" type="integer" xref="S4.SS2.p1.4.m4.2.2.2.2.3">3</cn></apply><apply id="S4.SS2.p1.4.m4.3.3.3.3.cmml" xref="S4.SS2.p1.4.m4.3.3.3.3"><times id="S4.SS2.p1.4.m4.3.3.3.3.1.cmml" xref="S4.SS2.p1.4.m4.3.3.3.3.1"></times><cn id="S4.SS2.p1.4.m4.3.3.3.3.2.cmml" type="integer" xref="S4.SS2.p1.4.m4.3.3.3.3.2">3</cn><cn id="S4.SS2.p1.4.m4.3.3.3.3.3.cmml" type="integer" xref="S4.SS2.p1.4.m4.3.3.3.3.3">3</cn></apply></list></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.p1.4.m4.3c">5*5,3*3,3*3</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.p1.4.m4.3d">5 ∗ 5 , 3 ∗ 3 , 3 ∗ 3</annotation></semantics></math>, and followed by a 128-dimension vector embedding layer. In total, the small-sized network contains 189,057 parameters while the large-sized network contains 684,865 parameters.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">All training processes were set to run for 50 epochs, and an early stopping mechanism was applied when the validation loss stopped decreasing for consecutively 4 epochs. With training results shown in Table  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S4.T1" title="Table 1 ‣ 4.2 Curvature Estimation ‣ 4 Method ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">1</span></a>, the small-sized model with the Huber loss got the best performance. In the following section of evaluation and result, we evaluate both the Small-Size-Huber-Loss model and the Small-Size-MSE-Loss model to give a better indication of the effects of the two different loss functions.</p>
+</div>
+<figure class="ltx_table" id="S4.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T1.3.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S4.T1.4.2" style="font-size:90%;">Value of metrics during training</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S4.T1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T1.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S4.T1.1.1.2"><span class="ltx_text ltx_font_bold" id="S4.T1.1.1.2.1">Model Type</span></th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S4.T1.1.1.3"><span class="ltx_text ltx_font_bold" id="S4.T1.1.1.3.1">Best Epoch</span></th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.1.1.1">Val Loss Huber (<math alttext="\delta=0.4" class="ltx_Math" display="inline" id="S4.T1.1.1.1.1.m1.1"><semantics id="S4.T1.1.1.1.1.m1.1a"><mrow id="S4.T1.1.1.1.1.m1.1.1" xref="S4.T1.1.1.1.1.m1.1.1.cmml"><mi id="S4.T1.1.1.1.1.m1.1.1.2" xref="S4.T1.1.1.1.1.m1.1.1.2.cmml">δ</mi><mo id="S4.T1.1.1.1.1.m1.1.1.1" xref="S4.T1.1.1.1.1.m1.1.1.1.cmml">=</mo><mn id="S4.T1.1.1.1.1.m1.1.1.3" xref="S4.T1.1.1.1.1.m1.1.1.3.cmml">0.4</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.T1.1.1.1.1.m1.1b"><apply id="S4.T1.1.1.1.1.m1.1.1.cmml" xref="S4.T1.1.1.1.1.m1.1.1"><eq id="S4.T1.1.1.1.1.m1.1.1.1.cmml" xref="S4.T1.1.1.1.1.m1.1.1.1"></eq><ci id="S4.T1.1.1.1.1.m1.1.1.2.cmml" xref="S4.T1.1.1.1.1.m1.1.1.2">𝛿</ci><cn id="S4.T1.1.1.1.1.m1.1.1.3.cmml" type="float" xref="S4.T1.1.1.1.1.m1.1.1.3">0.4</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.T1.1.1.1.1.m1.1c">\delta=0.4</annotation><annotation encoding="application/x-llamapun" id="S4.T1.1.1.1.1.m1.1d">italic_δ = 0.4</annotation></semantics></math>)</span></th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T1.1.1.4"><span class="ltx_text ltx_font_bold" id="S4.T1.1.1.4.1">Val Loss MSE</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T1.1.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S4.T1.1.2.1.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.2.1.1.1">Small-Size-Huber-Loss</span></th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_row ltx_border_t" id="S4.T1.1.2.1.2">24</th>
+<td class="ltx_td ltx_nopad_l ltx_align_center ltx_border_t" id="S4.T1.1.2.1.3"><span class="ltx_text ltx_font_bold" id="S4.T1.1.2.1.3.1">0.0266</span></td>
+<td class="ltx_td ltx_nopad_l ltx_align_center ltx_border_t" id="S4.T1.1.2.1.4"><span class="ltx_text ltx_font_bold" id="S4.T1.1.2.1.4.1">0.0787</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.1.3.2.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.3.2.1.1">Large-Size-Huber-Loss</span></th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_row" id="S4.T1.1.3.2.2">5</th>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S4.T1.1.3.2.3">0.0523</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S4.T1.1.3.2.4">0.1175</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.4.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.1.4.3.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.4.3.1.1">Small-Size-MSE-Loss</span></th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_row" id="S4.T1.1.4.3.2">8</th>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S4.T1.1.4.3.3">0.0466</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S4.T1.1.4.3.4">0.1042</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.5.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T1.1.5.4.1"><span class="ltx_text ltx_font_bold" id="S4.T1.1.5.4.1.1">Large-Size-MSE-Loss</span></th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_row" id="S4.T1.1.5.4.2">4</th>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S4.T1.1.5.4.3">0.0640</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S4.T1.1.5.4.4">0.1522</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Finding Feature Correspondences</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">In this step, we utilize the SIFT algorithm to find the image correspondences between the flat image target and the image capture. The Fast Library for Approximate Nearest Neighbors (FLANN) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib49" title="">49</a>]</cite> was then utilized to find the matches between the feature descriptors using the K-nearest-neighbors method <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib50" title="">50</a>]</cite>. A ratio of 0.95 was then used in the ratio test to filter the bad matches.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.4 </span>Pose Estimation</h3>
+<div class="ltx_para" id="S4.SS4.p1">
+<p class="ltx_p" id="S4.SS4.p1.1">Given the curvature prediction, we can easily map the original points in the flat image target onto the curved surface in the cylinders’ coordinate system using the following formula, where <math alttext="r" class="ltx_Math" display="inline" id="S4.SS4.p1.1.m1.1"><semantics id="S4.SS4.p1.1.m1.1a"><mi id="S4.SS4.p1.1.m1.1.1" xref="S4.SS4.p1.1.m1.1.1.cmml">r</mi><annotation-xml encoding="MathML-Content" id="S4.SS4.p1.1.m1.1b"><ci id="S4.SS4.p1.1.m1.1.1.cmml" xref="S4.SS4.p1.1.m1.1.1">𝑟</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS4.p1.1.m1.1c">r</annotation><annotation encoding="application/x-llamapun" id="S4.SS4.p1.1.m1.1d">italic_r</annotation></semantics></math> stands for the radius of the cylinder (notice that all image coordinates are using the unit of HoI.):</p>
+<table class="ltx_equationgroup ltx_eqn_align ltx_eqn_table" id="S7.EGx1">
+<tbody id="S4.Ex1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle\theta" class="ltx_Math" display="inline" id="S4.Ex1.m1.1"><semantics id="S4.Ex1.m1.1a"><mi id="S4.Ex1.m1.1.1" xref="S4.Ex1.m1.1.1.cmml">θ</mi><annotation-xml encoding="MathML-Content" id="S4.Ex1.m1.1b"><ci id="S4.Ex1.m1.1.1.cmml" xref="S4.Ex1.m1.1.1">𝜃</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex1.m1.1c">\displaystyle\theta</annotation><annotation encoding="application/x-llamapun" id="S4.Ex1.m1.1d">italic_θ</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=X_{\text{Target}}-(\frac{TargetWidth}{2})" class="ltx_Math" display="inline" id="S4.Ex1.m2.1"><semantics id="S4.Ex1.m2.1a"><mrow id="S4.Ex1.m2.1.2" xref="S4.Ex1.m2.1.2.cmml"><mi id="S4.Ex1.m2.1.2.2" xref="S4.Ex1.m2.1.2.2.cmml"></mi><mo id="S4.Ex1.m2.1.2.1" xref="S4.Ex1.m2.1.2.1.cmml">=</mo><mrow id="S4.Ex1.m2.1.2.3" xref="S4.Ex1.m2.1.2.3.cmml"><msub id="S4.Ex1.m2.1.2.3.2" xref="S4.Ex1.m2.1.2.3.2.cmml"><mi id="S4.Ex1.m2.1.2.3.2.2" xref="S4.Ex1.m2.1.2.3.2.2.cmml">X</mi><mtext id="S4.Ex1.m2.1.2.3.2.3" xref="S4.Ex1.m2.1.2.3.2.3a.cmml">Target</mtext></msub><mo id="S4.Ex1.m2.1.2.3.1" xref="S4.Ex1.m2.1.2.3.1.cmml">−</mo><mrow id="S4.Ex1.m2.1.2.3.3.2" xref="S4.Ex1.m2.1.1.cmml"><mo id="S4.Ex1.m2.1.2.3.3.2.1" stretchy="false" xref="S4.Ex1.m2.1.1.cmml">(</mo><mstyle displaystyle="true" id="S4.Ex1.m2.1.1" xref="S4.Ex1.m2.1.1.cmml"><mfrac id="S4.Ex1.m2.1.1a" xref="S4.Ex1.m2.1.1.cmml"><mrow id="S4.Ex1.m2.1.1.2" xref="S4.Ex1.m2.1.1.2.cmml"><mi id="S4.Ex1.m2.1.1.2.2" xref="S4.Ex1.m2.1.1.2.2.cmml">T</mi><mo id="S4.Ex1.m2.1.1.2.1" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.3" xref="S4.Ex1.m2.1.1.2.3.cmml">a</mi><mo id="S4.Ex1.m2.1.1.2.1a" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.4" xref="S4.Ex1.m2.1.1.2.4.cmml">r</mi><mo id="S4.Ex1.m2.1.1.2.1b" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.5" xref="S4.Ex1.m2.1.1.2.5.cmml">g</mi><mo id="S4.Ex1.m2.1.1.2.1c" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.6" xref="S4.Ex1.m2.1.1.2.6.cmml">e</mi><mo id="S4.Ex1.m2.1.1.2.1d" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.7" xref="S4.Ex1.m2.1.1.2.7.cmml">t</mi><mo id="S4.Ex1.m2.1.1.2.1e" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.8" xref="S4.Ex1.m2.1.1.2.8.cmml">W</mi><mo id="S4.Ex1.m2.1.1.2.1f" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.9" xref="S4.Ex1.m2.1.1.2.9.cmml">i</mi><mo id="S4.Ex1.m2.1.1.2.1g" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.10" xref="S4.Ex1.m2.1.1.2.10.cmml">d</mi><mo id="S4.Ex1.m2.1.1.2.1h" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.11" xref="S4.Ex1.m2.1.1.2.11.cmml">t</mi><mo id="S4.Ex1.m2.1.1.2.1i" xref="S4.Ex1.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex1.m2.1.1.2.12" xref="S4.Ex1.m2.1.1.2.12.cmml">h</mi></mrow><mn id="S4.Ex1.m2.1.1.3" xref="S4.Ex1.m2.1.1.3.cmml">2</mn></mfrac></mstyle><mo id="S4.Ex1.m2.1.2.3.3.2.2" stretchy="false" xref="S4.Ex1.m2.1.1.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.Ex1.m2.1b"><apply id="S4.Ex1.m2.1.2.cmml" xref="S4.Ex1.m2.1.2"><eq id="S4.Ex1.m2.1.2.1.cmml" xref="S4.Ex1.m2.1.2.1"></eq><csymbol cd="latexml" id="S4.Ex1.m2.1.2.2.cmml" xref="S4.Ex1.m2.1.2.2">absent</csymbol><apply id="S4.Ex1.m2.1.2.3.cmml" xref="S4.Ex1.m2.1.2.3"><minus id="S4.Ex1.m2.1.2.3.1.cmml" xref="S4.Ex1.m2.1.2.3.1"></minus><apply id="S4.Ex1.m2.1.2.3.2.cmml" xref="S4.Ex1.m2.1.2.3.2"><csymbol cd="ambiguous" id="S4.Ex1.m2.1.2.3.2.1.cmml" xref="S4.Ex1.m2.1.2.3.2">subscript</csymbol><ci id="S4.Ex1.m2.1.2.3.2.2.cmml" xref="S4.Ex1.m2.1.2.3.2.2">𝑋</ci><ci id="S4.Ex1.m2.1.2.3.2.3a.cmml" xref="S4.Ex1.m2.1.2.3.2.3"><mtext id="S4.Ex1.m2.1.2.3.2.3.cmml" mathsize="70%" xref="S4.Ex1.m2.1.2.3.2.3">Target</mtext></ci></apply><apply id="S4.Ex1.m2.1.1.cmml" xref="S4.Ex1.m2.1.2.3.3.2"><divide id="S4.Ex1.m2.1.1.1.cmml" xref="S4.Ex1.m2.1.2.3.3.2"></divide><apply id="S4.Ex1.m2.1.1.2.cmml" xref="S4.Ex1.m2.1.1.2"><times id="S4.Ex1.m2.1.1.2.1.cmml" xref="S4.Ex1.m2.1.1.2.1"></times><ci id="S4.Ex1.m2.1.1.2.2.cmml" xref="S4.Ex1.m2.1.1.2.2">𝑇</ci><ci id="S4.Ex1.m2.1.1.2.3.cmml" xref="S4.Ex1.m2.1.1.2.3">𝑎</ci><ci id="S4.Ex1.m2.1.1.2.4.cmml" xref="S4.Ex1.m2.1.1.2.4">𝑟</ci><ci id="S4.Ex1.m2.1.1.2.5.cmml" xref="S4.Ex1.m2.1.1.2.5">𝑔</ci><ci id="S4.Ex1.m2.1.1.2.6.cmml" xref="S4.Ex1.m2.1.1.2.6">𝑒</ci><ci id="S4.Ex1.m2.1.1.2.7.cmml" xref="S4.Ex1.m2.1.1.2.7">𝑡</ci><ci id="S4.Ex1.m2.1.1.2.8.cmml" xref="S4.Ex1.m2.1.1.2.8">𝑊</ci><ci id="S4.Ex1.m2.1.1.2.9.cmml" xref="S4.Ex1.m2.1.1.2.9">𝑖</ci><ci id="S4.Ex1.m2.1.1.2.10.cmml" xref="S4.Ex1.m2.1.1.2.10">𝑑</ci><ci id="S4.Ex1.m2.1.1.2.11.cmml" xref="S4.Ex1.m2.1.1.2.11">𝑡</ci><ci id="S4.Ex1.m2.1.1.2.12.cmml" xref="S4.Ex1.m2.1.1.2.12">ℎ</ci></apply><cn id="S4.Ex1.m2.1.1.3.cmml" type="integer" xref="S4.Ex1.m2.1.1.3">2</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex1.m2.1c">\displaystyle=X_{\text{Target}}-(\frac{TargetWidth}{2})</annotation><annotation encoding="application/x-llamapun" id="S4.Ex1.m2.1d">= italic_X start_POSTSUBSCRIPT Target end_POSTSUBSCRIPT - ( divide start_ARG italic_T italic_a italic_r italic_g italic_e italic_t italic_W italic_i italic_d italic_t italic_h end_ARG start_ARG 2 end_ARG )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S4.Ex2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle x_{\text{Cyl}}" class="ltx_Math" display="inline" id="S4.Ex2.m1.1"><semantics id="S4.Ex2.m1.1a"><msub id="S4.Ex2.m1.1.1" xref="S4.Ex2.m1.1.1.cmml"><mi id="S4.Ex2.m1.1.1.2" xref="S4.Ex2.m1.1.1.2.cmml">x</mi><mtext id="S4.Ex2.m1.1.1.3" xref="S4.Ex2.m1.1.1.3a.cmml">Cyl</mtext></msub><annotation-xml encoding="MathML-Content" id="S4.Ex2.m1.1b"><apply id="S4.Ex2.m1.1.1.cmml" xref="S4.Ex2.m1.1.1"><csymbol cd="ambiguous" id="S4.Ex2.m1.1.1.1.cmml" xref="S4.Ex2.m1.1.1">subscript</csymbol><ci id="S4.Ex2.m1.1.1.2.cmml" xref="S4.Ex2.m1.1.1.2">𝑥</ci><ci id="S4.Ex2.m1.1.1.3a.cmml" xref="S4.Ex2.m1.1.1.3"><mtext id="S4.Ex2.m1.1.1.3.cmml" mathsize="70%" xref="S4.Ex2.m1.1.1.3">Cyl</mtext></ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex2.m1.1c">\displaystyle x_{\text{Cyl}}</annotation><annotation encoding="application/x-llamapun" id="S4.Ex2.m1.1d">italic_x start_POSTSUBSCRIPT Cyl end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=r*sin(\theta)" class="ltx_Math" display="inline" id="S4.Ex2.m2.1"><semantics id="S4.Ex2.m2.1a"><mrow id="S4.Ex2.m2.1.2" xref="S4.Ex2.m2.1.2.cmml"><mi id="S4.Ex2.m2.1.2.2" xref="S4.Ex2.m2.1.2.2.cmml"></mi><mo id="S4.Ex2.m2.1.2.1" xref="S4.Ex2.m2.1.2.1.cmml">=</mo><mrow id="S4.Ex2.m2.1.2.3" xref="S4.Ex2.m2.1.2.3.cmml"><mrow id="S4.Ex2.m2.1.2.3.2" xref="S4.Ex2.m2.1.2.3.2.cmml"><mi id="S4.Ex2.m2.1.2.3.2.2" xref="S4.Ex2.m2.1.2.3.2.2.cmml">r</mi><mo id="S4.Ex2.m2.1.2.3.2.1" lspace="0.222em" rspace="0.222em" xref="S4.Ex2.m2.1.2.3.2.1.cmml">∗</mo><mi id="S4.Ex2.m2.1.2.3.2.3" xref="S4.Ex2.m2.1.2.3.2.3.cmml">s</mi></mrow><mo id="S4.Ex2.m2.1.2.3.1" xref="S4.Ex2.m2.1.2.3.1.cmml">⁢</mo><mi id="S4.Ex2.m2.1.2.3.3" xref="S4.Ex2.m2.1.2.3.3.cmml">i</mi><mo id="S4.Ex2.m2.1.2.3.1a" xref="S4.Ex2.m2.1.2.3.1.cmml">⁢</mo><mi id="S4.Ex2.m2.1.2.3.4" xref="S4.Ex2.m2.1.2.3.4.cmml">n</mi><mo id="S4.Ex2.m2.1.2.3.1b" xref="S4.Ex2.m2.1.2.3.1.cmml">⁢</mo><mrow id="S4.Ex2.m2.1.2.3.5.2" xref="S4.Ex2.m2.1.2.3.cmml"><mo id="S4.Ex2.m2.1.2.3.5.2.1" stretchy="false" xref="S4.Ex2.m2.1.2.3.cmml">(</mo><mi id="S4.Ex2.m2.1.1" xref="S4.Ex2.m2.1.1.cmml">θ</mi><mo id="S4.Ex2.m2.1.2.3.5.2.2" stretchy="false" xref="S4.Ex2.m2.1.2.3.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.Ex2.m2.1b"><apply id="S4.Ex2.m2.1.2.cmml" xref="S4.Ex2.m2.1.2"><eq id="S4.Ex2.m2.1.2.1.cmml" xref="S4.Ex2.m2.1.2.1"></eq><csymbol cd="latexml" id="S4.Ex2.m2.1.2.2.cmml" xref="S4.Ex2.m2.1.2.2">absent</csymbol><apply id="S4.Ex2.m2.1.2.3.cmml" xref="S4.Ex2.m2.1.2.3"><times id="S4.Ex2.m2.1.2.3.1.cmml" xref="S4.Ex2.m2.1.2.3.1"></times><apply id="S4.Ex2.m2.1.2.3.2.cmml" xref="S4.Ex2.m2.1.2.3.2"><times id="S4.Ex2.m2.1.2.3.2.1.cmml" xref="S4.Ex2.m2.1.2.3.2.1"></times><ci id="S4.Ex2.m2.1.2.3.2.2.cmml" xref="S4.Ex2.m2.1.2.3.2.2">𝑟</ci><ci id="S4.Ex2.m2.1.2.3.2.3.cmml" xref="S4.Ex2.m2.1.2.3.2.3">𝑠</ci></apply><ci id="S4.Ex2.m2.1.2.3.3.cmml" xref="S4.Ex2.m2.1.2.3.3">𝑖</ci><ci id="S4.Ex2.m2.1.2.3.4.cmml" xref="S4.Ex2.m2.1.2.3.4">𝑛</ci><ci id="S4.Ex2.m2.1.1.cmml" xref="S4.Ex2.m2.1.1">𝜃</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex2.m2.1c">\displaystyle=r*sin(\theta)</annotation><annotation encoding="application/x-llamapun" id="S4.Ex2.m2.1d">= italic_r ∗ italic_s italic_i italic_n ( italic_θ )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S4.Ex3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle y_{\text{Cyl}}" class="ltx_Math" display="inline" id="S4.Ex3.m1.1"><semantics id="S4.Ex3.m1.1a"><msub id="S4.Ex3.m1.1.1" xref="S4.Ex3.m1.1.1.cmml"><mi id="S4.Ex3.m1.1.1.2" xref="S4.Ex3.m1.1.1.2.cmml">y</mi><mtext id="S4.Ex3.m1.1.1.3" xref="S4.Ex3.m1.1.1.3a.cmml">Cyl</mtext></msub><annotation-xml encoding="MathML-Content" id="S4.Ex3.m1.1b"><apply id="S4.Ex3.m1.1.1.cmml" xref="S4.Ex3.m1.1.1"><csymbol cd="ambiguous" id="S4.Ex3.m1.1.1.1.cmml" xref="S4.Ex3.m1.1.1">subscript</csymbol><ci id="S4.Ex3.m1.1.1.2.cmml" xref="S4.Ex3.m1.1.1.2">𝑦</ci><ci id="S4.Ex3.m1.1.1.3a.cmml" xref="S4.Ex3.m1.1.1.3"><mtext id="S4.Ex3.m1.1.1.3.cmml" mathsize="70%" xref="S4.Ex3.m1.1.1.3">Cyl</mtext></ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex3.m1.1c">\displaystyle y_{\text{Cyl}}</annotation><annotation encoding="application/x-llamapun" id="S4.Ex3.m1.1d">italic_y start_POSTSUBSCRIPT Cyl end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=-r*cos(\theta)" class="ltx_Math" display="inline" id="S4.Ex3.m2.1"><semantics id="S4.Ex3.m2.1a"><mrow id="S4.Ex3.m2.1.2" xref="S4.Ex3.m2.1.2.cmml"><mi id="S4.Ex3.m2.1.2.2" xref="S4.Ex3.m2.1.2.2.cmml"></mi><mo id="S4.Ex3.m2.1.2.1" xref="S4.Ex3.m2.1.2.1.cmml">=</mo><mrow id="S4.Ex3.m2.1.2.3" xref="S4.Ex3.m2.1.2.3.cmml"><mo id="S4.Ex3.m2.1.2.3a" xref="S4.Ex3.m2.1.2.3.cmml">−</mo><mrow id="S4.Ex3.m2.1.2.3.2" xref="S4.Ex3.m2.1.2.3.2.cmml"><mrow id="S4.Ex3.m2.1.2.3.2.2" xref="S4.Ex3.m2.1.2.3.2.2.cmml"><mi id="S4.Ex3.m2.1.2.3.2.2.2" xref="S4.Ex3.m2.1.2.3.2.2.2.cmml">r</mi><mo id="S4.Ex3.m2.1.2.3.2.2.1" lspace="0.222em" rspace="0.222em" xref="S4.Ex3.m2.1.2.3.2.2.1.cmml">∗</mo><mi id="S4.Ex3.m2.1.2.3.2.2.3" xref="S4.Ex3.m2.1.2.3.2.2.3.cmml">c</mi></mrow><mo id="S4.Ex3.m2.1.2.3.2.1" xref="S4.Ex3.m2.1.2.3.2.1.cmml">⁢</mo><mi id="S4.Ex3.m2.1.2.3.2.3" xref="S4.Ex3.m2.1.2.3.2.3.cmml">o</mi><mo id="S4.Ex3.m2.1.2.3.2.1a" xref="S4.Ex3.m2.1.2.3.2.1.cmml">⁢</mo><mi id="S4.Ex3.m2.1.2.3.2.4" xref="S4.Ex3.m2.1.2.3.2.4.cmml">s</mi><mo id="S4.Ex3.m2.1.2.3.2.1b" xref="S4.Ex3.m2.1.2.3.2.1.cmml">⁢</mo><mrow id="S4.Ex3.m2.1.2.3.2.5.2" xref="S4.Ex3.m2.1.2.3.2.cmml"><mo id="S4.Ex3.m2.1.2.3.2.5.2.1" stretchy="false" xref="S4.Ex3.m2.1.2.3.2.cmml">(</mo><mi id="S4.Ex3.m2.1.1" xref="S4.Ex3.m2.1.1.cmml">θ</mi><mo id="S4.Ex3.m2.1.2.3.2.5.2.2" stretchy="false" xref="S4.Ex3.m2.1.2.3.2.cmml">)</mo></mrow></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.Ex3.m2.1b"><apply id="S4.Ex3.m2.1.2.cmml" xref="S4.Ex3.m2.1.2"><eq id="S4.Ex3.m2.1.2.1.cmml" xref="S4.Ex3.m2.1.2.1"></eq><csymbol cd="latexml" id="S4.Ex3.m2.1.2.2.cmml" xref="S4.Ex3.m2.1.2.2">absent</csymbol><apply id="S4.Ex3.m2.1.2.3.cmml" xref="S4.Ex3.m2.1.2.3"><minus id="S4.Ex3.m2.1.2.3.1.cmml" xref="S4.Ex3.m2.1.2.3"></minus><apply id="S4.Ex3.m2.1.2.3.2.cmml" xref="S4.Ex3.m2.1.2.3.2"><times id="S4.Ex3.m2.1.2.3.2.1.cmml" xref="S4.Ex3.m2.1.2.3.2.1"></times><apply id="S4.Ex3.m2.1.2.3.2.2.cmml" xref="S4.Ex3.m2.1.2.3.2.2"><times id="S4.Ex3.m2.1.2.3.2.2.1.cmml" xref="S4.Ex3.m2.1.2.3.2.2.1"></times><ci id="S4.Ex3.m2.1.2.3.2.2.2.cmml" xref="S4.Ex3.m2.1.2.3.2.2.2">𝑟</ci><ci id="S4.Ex3.m2.1.2.3.2.2.3.cmml" xref="S4.Ex3.m2.1.2.3.2.2.3">𝑐</ci></apply><ci id="S4.Ex3.m2.1.2.3.2.3.cmml" xref="S4.Ex3.m2.1.2.3.2.3">𝑜</ci><ci id="S4.Ex3.m2.1.2.3.2.4.cmml" xref="S4.Ex3.m2.1.2.3.2.4">𝑠</ci><ci id="S4.Ex3.m2.1.1.cmml" xref="S4.Ex3.m2.1.1">𝜃</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex3.m2.1c">\displaystyle=-r*cos(\theta)</annotation><annotation encoding="application/x-llamapun" id="S4.Ex3.m2.1d">= - italic_r ∗ italic_c italic_o italic_s ( italic_θ )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+<tbody id="S4.Ex4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle z_{\text{Cyl}}" class="ltx_Math" display="inline" id="S4.Ex4.m1.1"><semantics id="S4.Ex4.m1.1a"><msub id="S4.Ex4.m1.1.1" xref="S4.Ex4.m1.1.1.cmml"><mi id="S4.Ex4.m1.1.1.2" xref="S4.Ex4.m1.1.1.2.cmml">z</mi><mtext id="S4.Ex4.m1.1.1.3" xref="S4.Ex4.m1.1.1.3a.cmml">Cyl</mtext></msub><annotation-xml encoding="MathML-Content" id="S4.Ex4.m1.1b"><apply id="S4.Ex4.m1.1.1.cmml" xref="S4.Ex4.m1.1.1"><csymbol cd="ambiguous" id="S4.Ex4.m1.1.1.1.cmml" xref="S4.Ex4.m1.1.1">subscript</csymbol><ci id="S4.Ex4.m1.1.1.2.cmml" xref="S4.Ex4.m1.1.1.2">𝑧</ci><ci id="S4.Ex4.m1.1.1.3a.cmml" xref="S4.Ex4.m1.1.1.3"><mtext id="S4.Ex4.m1.1.1.3.cmml" mathsize="70%" xref="S4.Ex4.m1.1.1.3">Cyl</mtext></ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex4.m1.1c">\displaystyle z_{\text{Cyl}}</annotation><annotation encoding="application/x-llamapun" id="S4.Ex4.m1.1d">italic_z start_POSTSUBSCRIPT Cyl end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=(\frac{TargetHeight}{2})-Y_{\text{Target}}" class="ltx_Math" display="inline" id="S4.Ex4.m2.1"><semantics id="S4.Ex4.m2.1a"><mrow id="S4.Ex4.m2.1.2" xref="S4.Ex4.m2.1.2.cmml"><mi id="S4.Ex4.m2.1.2.2" xref="S4.Ex4.m2.1.2.2.cmml"></mi><mo id="S4.Ex4.m2.1.2.1" xref="S4.Ex4.m2.1.2.1.cmml">=</mo><mrow id="S4.Ex4.m2.1.2.3" xref="S4.Ex4.m2.1.2.3.cmml"><mrow id="S4.Ex4.m2.1.2.3.2.2" xref="S4.Ex4.m2.1.1.cmml"><mo id="S4.Ex4.m2.1.2.3.2.2.1" stretchy="false" xref="S4.Ex4.m2.1.1.cmml">(</mo><mstyle displaystyle="true" id="S4.Ex4.m2.1.1" xref="S4.Ex4.m2.1.1.cmml"><mfrac id="S4.Ex4.m2.1.1a" xref="S4.Ex4.m2.1.1.cmml"><mrow id="S4.Ex4.m2.1.1.2" xref="S4.Ex4.m2.1.1.2.cmml"><mi id="S4.Ex4.m2.1.1.2.2" xref="S4.Ex4.m2.1.1.2.2.cmml">T</mi><mo id="S4.Ex4.m2.1.1.2.1" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.3" xref="S4.Ex4.m2.1.1.2.3.cmml">a</mi><mo id="S4.Ex4.m2.1.1.2.1a" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.4" xref="S4.Ex4.m2.1.1.2.4.cmml">r</mi><mo id="S4.Ex4.m2.1.1.2.1b" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.5" xref="S4.Ex4.m2.1.1.2.5.cmml">g</mi><mo id="S4.Ex4.m2.1.1.2.1c" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.6" xref="S4.Ex4.m2.1.1.2.6.cmml">e</mi><mo id="S4.Ex4.m2.1.1.2.1d" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.7" xref="S4.Ex4.m2.1.1.2.7.cmml">t</mi><mo id="S4.Ex4.m2.1.1.2.1e" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.8" xref="S4.Ex4.m2.1.1.2.8.cmml">H</mi><mo id="S4.Ex4.m2.1.1.2.1f" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.9" xref="S4.Ex4.m2.1.1.2.9.cmml">e</mi><mo id="S4.Ex4.m2.1.1.2.1g" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.10" xref="S4.Ex4.m2.1.1.2.10.cmml">i</mi><mo id="S4.Ex4.m2.1.1.2.1h" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.11" xref="S4.Ex4.m2.1.1.2.11.cmml">g</mi><mo id="S4.Ex4.m2.1.1.2.1i" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.12" xref="S4.Ex4.m2.1.1.2.12.cmml">h</mi><mo id="S4.Ex4.m2.1.1.2.1j" xref="S4.Ex4.m2.1.1.2.1.cmml">⁢</mo><mi id="S4.Ex4.m2.1.1.2.13" xref="S4.Ex4.m2.1.1.2.13.cmml">t</mi></mrow><mn id="S4.Ex4.m2.1.1.3" xref="S4.Ex4.m2.1.1.3.cmml">2</mn></mfrac></mstyle><mo id="S4.Ex4.m2.1.2.3.2.2.2" stretchy="false" xref="S4.Ex4.m2.1.1.cmml">)</mo></mrow><mo id="S4.Ex4.m2.1.2.3.1" xref="S4.Ex4.m2.1.2.3.1.cmml">−</mo><msub id="S4.Ex4.m2.1.2.3.3" xref="S4.Ex4.m2.1.2.3.3.cmml"><mi id="S4.Ex4.m2.1.2.3.3.2" xref="S4.Ex4.m2.1.2.3.3.2.cmml">Y</mi><mtext id="S4.Ex4.m2.1.2.3.3.3" xref="S4.Ex4.m2.1.2.3.3.3a.cmml">Target</mtext></msub></mrow></mrow><annotation-xml encoding="MathML-Content" id="S4.Ex4.m2.1b"><apply id="S4.Ex4.m2.1.2.cmml" xref="S4.Ex4.m2.1.2"><eq id="S4.Ex4.m2.1.2.1.cmml" xref="S4.Ex4.m2.1.2.1"></eq><csymbol cd="latexml" id="S4.Ex4.m2.1.2.2.cmml" xref="S4.Ex4.m2.1.2.2">absent</csymbol><apply id="S4.Ex4.m2.1.2.3.cmml" xref="S4.Ex4.m2.1.2.3"><minus id="S4.Ex4.m2.1.2.3.1.cmml" xref="S4.Ex4.m2.1.2.3.1"></minus><apply id="S4.Ex4.m2.1.1.cmml" xref="S4.Ex4.m2.1.2.3.2.2"><divide id="S4.Ex4.m2.1.1.1.cmml" xref="S4.Ex4.m2.1.2.3.2.2"></divide><apply id="S4.Ex4.m2.1.1.2.cmml" xref="S4.Ex4.m2.1.1.2"><times id="S4.Ex4.m2.1.1.2.1.cmml" xref="S4.Ex4.m2.1.1.2.1"></times><ci id="S4.Ex4.m2.1.1.2.2.cmml" xref="S4.Ex4.m2.1.1.2.2">𝑇</ci><ci id="S4.Ex4.m2.1.1.2.3.cmml" xref="S4.Ex4.m2.1.1.2.3">𝑎</ci><ci id="S4.Ex4.m2.1.1.2.4.cmml" xref="S4.Ex4.m2.1.1.2.4">𝑟</ci><ci id="S4.Ex4.m2.1.1.2.5.cmml" xref="S4.Ex4.m2.1.1.2.5">𝑔</ci><ci id="S4.Ex4.m2.1.1.2.6.cmml" xref="S4.Ex4.m2.1.1.2.6">𝑒</ci><ci id="S4.Ex4.m2.1.1.2.7.cmml" xref="S4.Ex4.m2.1.1.2.7">𝑡</ci><ci id="S4.Ex4.m2.1.1.2.8.cmml" xref="S4.Ex4.m2.1.1.2.8">𝐻</ci><ci id="S4.Ex4.m2.1.1.2.9.cmml" xref="S4.Ex4.m2.1.1.2.9">𝑒</ci><ci id="S4.Ex4.m2.1.1.2.10.cmml" xref="S4.Ex4.m2.1.1.2.10">𝑖</ci><ci id="S4.Ex4.m2.1.1.2.11.cmml" xref="S4.Ex4.m2.1.1.2.11">𝑔</ci><ci id="S4.Ex4.m2.1.1.2.12.cmml" xref="S4.Ex4.m2.1.1.2.12">ℎ</ci><ci id="S4.Ex4.m2.1.1.2.13.cmml" xref="S4.Ex4.m2.1.1.2.13">𝑡</ci></apply><cn id="S4.Ex4.m2.1.1.3.cmml" type="integer" xref="S4.Ex4.m2.1.1.3">2</cn></apply><apply id="S4.Ex4.m2.1.2.3.3.cmml" xref="S4.Ex4.m2.1.2.3.3"><csymbol cd="ambiguous" id="S4.Ex4.m2.1.2.3.3.1.cmml" xref="S4.Ex4.m2.1.2.3.3">subscript</csymbol><ci id="S4.Ex4.m2.1.2.3.3.2.cmml" xref="S4.Ex4.m2.1.2.3.3.2">𝑌</ci><ci id="S4.Ex4.m2.1.2.3.3.3a.cmml" xref="S4.Ex4.m2.1.2.3.3.3"><mtext id="S4.Ex4.m2.1.2.3.3.3.cmml" mathsize="70%" xref="S4.Ex4.m2.1.2.3.3.3">Target</mtext></ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.Ex4.m2.1c">\displaystyle=(\frac{TargetHeight}{2})-Y_{\text{Target}}</annotation><annotation encoding="application/x-llamapun" id="S4.Ex4.m2.1d">= ( divide start_ARG italic_T italic_a italic_r italic_g italic_e italic_t italic_H italic_e italic_i italic_g italic_h italic_t end_ARG start_ARG 2 end_ARG ) - italic_Y start_POSTSUBSCRIPT Target end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S4.SS4.p2">
+<p class="ltx_p" id="S4.SS4.p2.1">Then, given the correspondences between the extracted image features, we can perform the PnP pose computation as our last step in the pipeline. To make our pipeline more robust against the errors generated during the SIFT feature extraction process (caused by the non-linear image distortion on the curved surface), we utilize the RANSAC method <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib51" title="">51</a>]</cite> to solve the PnP problem and get the pose estimation.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Evaluation &amp; Result</h2>
+<figure class="ltx_figure" id="S5.F7">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="108" id="S5.F7.g1" src="extracted/5871691/imgs/example_image_input.png" width="192"/></div>
+<div class="ltx_flex_cell ltx_flex_size_3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="108" id="S5.F7.g2" src="extracted/5871691/imgs/yolo_result.jpg" width="192"/></div>
+<div class="ltx_flex_cell ltx_flex_size_3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="108" id="S5.F7.g3" src="extracted/5871691/imgs/estimation_result.jpg" width="192"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S5.F7.2.1.1" style="font-size:90%;">Figure 7</span>: </span><span class="ltx_text" id="S5.F7.3.2" style="font-size:90%;">Original Image (left), Yolo Detection (middle), and pose estimation (right) result of our pipeline.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">Our pipeline takes only the target image and the context image as input and accurately predicts the 6D pose (rotation and translation) of the target image using a hypothesized cylindric shape with a predicted diameter. Fig.  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S5.F7" title="Figure 7 ‣ 5 Evaluation &amp; Result ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">7</span></a> demonstrates the visual result of our prediction. Notice that in real use cases, the cylindric shape that the target image curls around does not necessarily need to appear in the context image. Here in the figure, the white cylinder is generated for illustration and comparison purposes only. In addition, we also conducted a quantitative analysis of our models as shown in Table  <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#S5.T2" title="Table 2 ‣ 5 Evaluation &amp; Result ‣ AR Overlay: Training Image Pose Estimation on Curved Surface in a Synthetic Way"><span class="ltx_text ltx_ref_tag">2</span></a>. Using the Small-Size-Huber-Loss and the Small-Size-MSE-Loss model, we can see the significant difference in the error of diameter estimation. The rotation error (based on the inner product of unit quaternions, <math alttext="\Phi_{6}\equiv 2*\Phi_{3}" class="ltx_Math" display="inline" id="S5.p1.1.m1.1"><semantics id="S5.p1.1.m1.1a"><mrow id="S5.p1.1.m1.1.1" xref="S5.p1.1.m1.1.1.cmml"><msub id="S5.p1.1.m1.1.1.2" xref="S5.p1.1.m1.1.1.2.cmml"><mi id="S5.p1.1.m1.1.1.2.2" mathvariant="normal" xref="S5.p1.1.m1.1.1.2.2.cmml">Φ</mi><mn id="S5.p1.1.m1.1.1.2.3" xref="S5.p1.1.m1.1.1.2.3.cmml">6</mn></msub><mo id="S5.p1.1.m1.1.1.1" xref="S5.p1.1.m1.1.1.1.cmml">≡</mo><mrow id="S5.p1.1.m1.1.1.3" xref="S5.p1.1.m1.1.1.3.cmml"><mn id="S5.p1.1.m1.1.1.3.2" xref="S5.p1.1.m1.1.1.3.2.cmml">2</mn><mo id="S5.p1.1.m1.1.1.3.1" lspace="0.222em" rspace="0.222em" xref="S5.p1.1.m1.1.1.3.1.cmml">∗</mo><msub id="S5.p1.1.m1.1.1.3.3" xref="S5.p1.1.m1.1.1.3.3.cmml"><mi id="S5.p1.1.m1.1.1.3.3.2" mathvariant="normal" xref="S5.p1.1.m1.1.1.3.3.2.cmml">Φ</mi><mn id="S5.p1.1.m1.1.1.3.3.3" xref="S5.p1.1.m1.1.1.3.3.3.cmml">3</mn></msub></mrow></mrow><annotation-xml encoding="MathML-Content" id="S5.p1.1.m1.1b"><apply id="S5.p1.1.m1.1.1.cmml" xref="S5.p1.1.m1.1.1"><equivalent id="S5.p1.1.m1.1.1.1.cmml" xref="S5.p1.1.m1.1.1.1"></equivalent><apply id="S5.p1.1.m1.1.1.2.cmml" xref="S5.p1.1.m1.1.1.2"><csymbol cd="ambiguous" id="S5.p1.1.m1.1.1.2.1.cmml" xref="S5.p1.1.m1.1.1.2">subscript</csymbol><ci id="S5.p1.1.m1.1.1.2.2.cmml" xref="S5.p1.1.m1.1.1.2.2">Φ</ci><cn id="S5.p1.1.m1.1.1.2.3.cmml" type="integer" xref="S5.p1.1.m1.1.1.2.3">6</cn></apply><apply id="S5.p1.1.m1.1.1.3.cmml" xref="S5.p1.1.m1.1.1.3"><times id="S5.p1.1.m1.1.1.3.1.cmml" xref="S5.p1.1.m1.1.1.3.1"></times><cn id="S5.p1.1.m1.1.1.3.2.cmml" type="integer" xref="S5.p1.1.m1.1.1.3.2">2</cn><apply id="S5.p1.1.m1.1.1.3.3.cmml" xref="S5.p1.1.m1.1.1.3.3"><csymbol cd="ambiguous" id="S5.p1.1.m1.1.1.3.3.1.cmml" xref="S5.p1.1.m1.1.1.3.3">subscript</csymbol><ci id="S5.p1.1.m1.1.1.3.3.2.cmml" xref="S5.p1.1.m1.1.1.3.3.2">Φ</ci><cn id="S5.p1.1.m1.1.1.3.3.3.cmml" type="integer" xref="S5.p1.1.m1.1.1.3.3.3">3</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.p1.1.m1.1c">\Phi_{6}\equiv 2*\Phi_{3}</annotation><annotation encoding="application/x-llamapun" id="S5.p1.1.m1.1d">roman_Φ start_POSTSUBSCRIPT 6 end_POSTSUBSCRIPT ≡ 2 ∗ roman_Φ start_POSTSUBSCRIPT 3 end_POSTSUBSCRIPT</annotation></semantics></math> in  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib52" title="">52</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib53" title="">53</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib54" title="">54</a>]</cite>), as well as the translation error, are also provided as a reference. Similar methods involving efficient prediction models for different tasks can be found in works such as  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib55" title="">55</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib56" title="">56</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib57" title="">57</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib58" title="">58</a>]</cite>, where data-efficient reinforcement learning, adaptive feature generation  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib59" title="">59</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib60" title="">60</a>]</cite>, and reasoning structures are utilized for optimal results.</p>
+</div>
+<figure class="ltx_table" id="S5.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S5.T2.2.1.1" style="font-size:90%;">Table 2</span>: </span><span class="ltx_text" id="S5.T2.3.2" style="font-size:90%;">Quantitative analysis of the pipeline performance with different models for curvature estimation</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S5.T2.4">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T2.4.1.1">
+<th class="ltx_td ltx_th ltx_th_row ltx_border_tt" id="S5.T2.4.1.1.1"></th>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S5.T2.4.1.1.2"><span class="ltx_text ltx_font_bold" id="S5.T2.4.1.1.2.1">Small-Size</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S5.T2.4.1.1.3"><span class="ltx_text ltx_font_bold" id="S5.T2.4.1.1.3.1">Small-Size</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.4.2.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row" id="S5.T2.4.2.2.1"><span class="ltx_text ltx_font_bold" id="S5.T2.4.2.2.1.1">Metrics</span></th>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.2.2.2"><span class="ltx_text ltx_font_bold" id="S5.T2.4.2.2.2.1">MSE-Loss Model</span></td>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.2.2.3"><span class="ltx_text ltx_font_bold" id="S5.T2.4.2.2.3.1">Huber-Loss Model</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.4.3.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T2.4.3.3.1"><span class="ltx_text ltx_font_bold" id="S5.T2.4.3.3.1.1">YOLO Success Rate</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.4.3.3.2">0.967</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.4.3.3.3">0.967</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.4.4.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.4.4.4.1"><span class="ltx_text ltx_font_bold" id="S5.T2.4.4.4.1.1">IoU</span></th>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.4.4.2">0.963 ± 0.060</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.4.4.3">0.963 ± 0.060</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.4.5.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T2.4.5.5.1"><span class="ltx_text ltx_font_bold" id="S5.T2.4.5.5.1.1">Time Taken (s)</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.4.5.5.2">0.635 ± 0.156</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.4.5.5.3">0.626 ± 0.152</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.4.6.6">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.4.6.6.1"><span class="ltx_text ltx_font_bold" id="S5.T2.4.6.6.1.1">Diameter Error (HoI)</span></th>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.6.6.2">0.247 ± 0.208</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.6.6.3">0.176 ± 0.157</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.4.7.7">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.4.7.7.1"><span class="ltx_text ltx_font_bold" id="S5.T2.4.7.7.1.1">Rotation Error (rad)</span></th>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.7.7.2">2.524 ± 0.557</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.4.7.7.3">2.521 ± 0.558</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.4.8.8">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S5.T2.4.8.8.1"><span class="ltx_text ltx_font_bold" id="S5.T2.4.8.8.1.1">Translation Error (HoI)</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.4.8.8.2">50.445 ± 19.109</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.4.8.8.3">50.731 ± 19.031</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Discussion, Limitation, and Future Works</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">Our pipeline provides the flexibility to simultaneously be compatible with multiple target images, solving the scalability issue in existing public methods <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib10" title="">10</a>]</cite>. Specifically, considering the dataset generation process, our pipeline has the ability to complement the insufficient 3D clues that a single planar image may exhibit, which improves its compatibility in terms of target image categories. Similar processes can be applied to and enhance the performance of existing applications <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib61" title="">61</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib62" title="">62</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib63" title="">63</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib64" title="">64</a>]</cite>, which is not limited to the field of AR. For instance, eye-tracking algorithms <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib65" title="">65</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib66" title="">66</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib67" title="">67</a>]</cite> can also take similar approaches in addition to the machine-learning-primary architecture to refine their results, which could be applied to the manufacturing of head-mounted displays <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib68" title="">68</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib69" title="">69</a>]</cite>. Applications in other fields, such as tracking and classifying irregular-shaped objects in real-time checkout systems mentioned in Tan et al.’s work <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib23" title="">23</a>]</cite> or general-purpose region tracking <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib70" title="">70</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib71" title="">71</a>]</cite>, can also benefit from implementing an additional and synchronous layer of pose estimation.</p>
+</div>
+<div class="ltx_para" id="S6.p2">
+<p class="ltx_p" id="S6.p2.1">During training, we found that Huber loss outperformed Mean Squared Error (MSE) loss in our curvature estimation model. This points to potential improvements by exploring alternative loss functions and refining the model’s architecture for optimal performance. Future efforts can focus on enhancing the model’s real-time performance, integrating advanced machine learning techniques like reinforcement learning or attention mechanisms  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib72" title="">72</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib73" title="">73</a>]</cite>, and expanding the dataset to include a wider variety of shapes and textures. Additionally, we aim to further refine the curvature estimation model, optimizing its architecture for better accuracy and efficiency, similar to the optimization strategies discussed in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib74" title="">74</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib75" title="">75</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.14577v1#bib.bib76" title="">76</a>]</cite> for self-supervised learning.</p>
+</div>
+<div class="ltx_para" id="S6.p3">
+<p class="ltx_p" id="S6.p3.1">Additionally, though our approach to curved image pose estimation shows promise, it has specific limitations that suggest avenues for future research. One key limitation is related to our dataset. Minor errors introduced by Blender’s rendering optimization can cause the intrinsic matrix to inaccurately reflect the camera mapping, leading to discrepancies in pose estimation. A possible way that future work could address this issue is to generate datasets with a white-box rendering pipeline for improved accuracy.</p>
+</div>
+<div class="ltx_para" id="S6.p4">
+<p class="ltx_p" id="S6.p4.1">By addressing these limitations and exploring these future directions, we hope to advance the field of curved image pose estimation, with significant implications for augmented reality and industrial applications.</p>
+</div>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7 </span>Conclusion</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p" id="S7.p1.1">In this paper, we have presented a comprehensive solution to the challenging problem of image pose estimation on a curved surface, offering both a concrete and scalable methodology and an in-depth analysis. Our work is grounded in the creation of a large synthetic dataset consisting of over 20,000 images, which serves as a foundation for training and evaluating our proposed models. We introduced a robust pipeline for 6D pose estimation of curved images, effectively leveraging a combination of YOLOv8 for object detection and a novel Convolutional Neural Network (CNN) architecture tailored for curvature estimation.</p>
+</div>
+<div class="ltx_para" id="S7.p2">
+<p class="ltx_p" id="S7.p2.1">Our approach addresses the limitations of traditional methods that are restricted to single-image detection. By enabling the simultaneous detection of multiple target images, our pipeline significantly enhances the capability of pose estimation systems, paving the way for new possibilities in a variety of downstream applications. This is particularly impactful in the field of AR, where our model’s ability to accurately overlay digital content on physically curved surfaces enhances user engagement and interaction. Additionally, our framework holds promise for broader industrial applications, including robotic manipulation and human-robot interaction, where precise tracking and pose estimation are critical.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kang et al. [2022]</span>
+<span class="ltx_bibblock">
+Y. Kang, Z. Zhang, M. Zhao, X. Yang, and X. Yang, “Tie memories to e-souvenirs: Hybrid tangible ar souvenirs in the museum,” in <em class="ltx_emph ltx_font_italic" id="bib.bib1.1.1">Adjunct Proceedings of the 35th Annual ACM Symposium on User Interface Software and Technology</em>, 2022, pp. 1–3.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yang et al. [2022]</span>
+<span class="ltx_bibblock">
+X. Yang, Y. Kang, and X. Yang, “Retargeting destinations of passive props for enhancing haptic feedback in virtual reality,” in <em class="ltx_emph ltx_font_italic" id="bib.bib2.1.1">2022 IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)</em>.   IEEE, 2022, pp. 618–619.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhu et al. [2023]</span>
+<span class="ltx_bibblock">
+Y. Zhu, C. Honnet, Y. Kang, J. Zhu, A. J. Zheng, K. Heinz, G. Tang, L. Musk, M. Wessely, and S. Mueller, “Demonstration of chromocloth: Re-programmable multi-color textures through flexible and portable light source,” in <em class="ltx_emph ltx_font_italic" id="bib.bib3.1.1">Adjunct Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology</em>, 2023, pp. 1–3.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Redmon et al. [2016]</span>
+<span class="ltx_bibblock">
+J. Redmon, S. Divvala, R. Girshick, and A. Farhadi, “You Only Look Once: Unified, Real-Time Object Detection,” in <em class="ltx_emph ltx_font_italic" id="bib.bib4.1.1">2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>.   Las Vegas, NV, USA: IEEE, Jun. 2016, pp. 779–788. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://ieeexplore.ieee.org/document/7780460/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jocher et al. [2023]</span>
+<span class="ltx_bibblock">
+G. Jocher, A. Chaurasia, and J. Qiu, “Ultralytics YOLO,” Jan. 2023. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://github.com/ultralytics/ultralytics</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ma et al. [2024a]</span>
+<span class="ltx_bibblock">
+D. Ma, S. Li, B. Dang, H. Zang, and X. Dong, “Fostc3net: A lightweight yolov5 based on the network structure optimization,” <em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">Journal of Physics: Conference Series</em>, vol. 2824, no. 1, p. 012004, Aug. 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://dx.doi.org/10.1088/1742-6596/2824/1/012004</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xiang et al. [2024]</span>
+<span class="ltx_bibblock">
+A. Xiang, B. Huang, X. Guo, H. Yang, and T. Zheng, “A neural matrix decomposition recommender system model based on the multimodal large language model,” <em class="ltx_emph ltx_font_italic" id="bib.bib7.1.1">arXiv preprint arXiv:2407.08942</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lowe [1999]</span>
+<span class="ltx_bibblock">
+D. Lowe, “Object recognition from local scale-invariant features,” in <em class="ltx_emph ltx_font_italic" id="bib.bib8.1.1">Proceedings of the Seventh IEEE International Conference on Computer Vision</em>.   Kerkyra, Greece: IEEE, 1999, pp. 1150–1157 vol.2. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://ieeexplore.ieee.org/document/790410/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang [2000]</span>
+<span class="ltx_bibblock">
+Z. Zhang, “A flexible new technique for camera calibration,” <em class="ltx_emph ltx_font_italic" id="bib.bib9.1.1">IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, vol. 22, no. 11, pp. 1330–1334, Nov. 2000. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://ieeexplore.ieee.org/document/888718/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+ZapWorks, “Curved image tracking,” <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://docs.zap.works/designer/tracking/curved-image-tracking</span>, accessed: 2024-05-10.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Malik and Rosenholtz [1997]</span>
+<span class="ltx_bibblock">
+J. Malik and R. Rosenholtz, “Computing local surface orientation and shape from texture for curved surfaces,” 1997.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dan et al. [2024a]</span>
+<span class="ltx_bibblock">
+H.-C. Dan, P. Yan, J. Tan, Y. Zhou, and B. Lu, “Multiple distresses detection for Asphalt Pavement using improved you Only Look Once Algorithm based on convolutional neural network,” <em class="ltx_emph ltx_font_italic" id="bib.bib12.1.1">International Journal of Pavement Engineering</em>, vol. 25, no. 1, p. 2308169, Dec. 2024, publisher: Taylor &amp; Francis _eprint: https://doi.org/10.1080/10298436.2024.2308169. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1080/10298436.2024.2308169</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Feng et al. [2023]</span>
+<span class="ltx_bibblock">
+W. Feng, S. Z. Zhao, C. Pan, A. Chang, Y. Chen, Z. Wang, and A. Y. Yang, “Digital twin tracking dataset (dttd): A new rgb+depth 3d dataset for longer-range object tracking applications,” in <em class="ltx_emph ltx_font_italic" id="bib.bib13.1.1">2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)</em>, 2023, pp. 3289–3298. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1109/CVPRW59228.2023.00331</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">He et al. [2022]</span>
+<span class="ltx_bibblock">
+Y. He, Y. Wang, H. Fan, J. Sun, and Q. Chen, “Fs6d: Few-shot 6d pose estimation of novel objects,” <em class="ltx_emph ltx_font_italic" id="bib.bib14.1.1">arXiv</em>, vol. arXiv:2203.14628, 2022. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2203.14628</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Girshick et al. [2014]</span>
+<span class="ltx_bibblock">
+R. Girshick, J. Donahue, T. Darrell, and J. Malik, “Rich feature hierarchies for accurate object detection and semantic segmentation,” Oct. 2014, arXiv:1311.2524 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1311.2524</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Girshick [2015]</span>
+<span class="ltx_bibblock">
+R. Girshick, “Fast R-CNN,” Sep. 2015, arXiv:1504.08083 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1504.08083</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ren et al. [2016]</span>
+<span class="ltx_bibblock">
+S. Ren, K. He, R. Girshick, and J. Sun, “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks,” Jan. 2016, arXiv:1506.01497 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1506.01497</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tao [2017]</span>
+<span class="ltx_bibblock">
+Y. Tao, “Sqba: sequential query-based attack,” in <em class="ltx_emph ltx_font_italic" id="bib.bib18.1.1">Fifth International Conference on Artificial Intelligence and Computer Science (AICS 2023)</em>, vol. 12803, International Society for Optics and Photonics.   SPIE, 2017, p. 128032Q.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tao [2023]</span>
+<span class="ltx_bibblock">
+——, “Meta learning enabled adversarial defense,” in <em class="ltx_emph ltx_font_italic" id="bib.bib19.1.1">2023 IEEE International Conference on Sensors, Electronics and Computer Engineering (ICSECE)</em>, 2023, pp. 1326–1330.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xin et al. [2024a]</span>
+<span class="ltx_bibblock">
+Y. Xin, J. Du, Q. Wang, Z. Lin, and K. Yan, “Vmt-adapter: Parameter-efficient transfer learning for multi-task dense scene understanding,” in <em class="ltx_emph ltx_font_italic" id="bib.bib20.1.1">Proceedings of the AAAI Conference on Artificial Intelligence</em>, vol. 38, no. 14, 2024, pp. 16 085–16 093.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xin et al. [2024b]</span>
+<span class="ltx_bibblock">
+Y. Xin, J. Du, Q. Wang, K. Yan, and S. Ding, “Mmap: Multi-modal alignment prompt for cross-domain multi-task learning,” in <em class="ltx_emph ltx_font_italic" id="bib.bib21.1.1">Proceedings of the AAAI Conference on Artificial Intelligence</em>, vol. 38, no. 14, 2024, pp. 16 076–16 084.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al. [2016]</span>
+<span class="ltx_bibblock">
+W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.-Y. Fu, and A. C. Berg, “SSD: Single Shot MultiBox Detector,” 2016, vol. 9905, pp. 21–37, arXiv:1512.02325 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1512.02325</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tan et al. [2024a]</span>
+<span class="ltx_bibblock">
+L. Tan, S. Liu, J. Gao, X. Liu, L. Chu, and H. Jiang, “Enhanced self-checkout system for retail based on improved yolov10,” <em class="ltx_emph ltx_font_italic" id="bib.bib23.1.1">arXiv preprint arXiv:2407.21308</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dang et al. [2024]</span>
+<span class="ltx_bibblock">
+B. Dang, W. Zhao, Y. Li, D. Ma, Q. Yu, and E. Y. Zhu, “Real-time pill identification for the visually impaired using deep learning,” <em class="ltx_emph ltx_font_italic" id="bib.bib24.1.1">arXiv preprint arXiv:2405.05983</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dan et al. [2024b]</span>
+<span class="ltx_bibblock">
+H.-C. Dan, B. Lu, and M. Li, “Evaluation of asphalt pavement texture using multiview stereo reconstruction based on deep learning,” <em class="ltx_emph ltx_font_italic" id="bib.bib25.1.1">Construction and Building Materials</em>, vol. 412, p. 134837, Jan. 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.sciencedirect.com/science/article/pii/S0950061823045580</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ma et al. [2024b]</span>
+<span class="ltx_bibblock">
+D. Ma, Y. Yang, Q. Tian, B. Dang, Z. Qi, and A. Xiang, “Comparative analysis of x-ray image classification of pneumonia based on deep learning algorithm,” 08 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. [2022]</span>
+<span class="ltx_bibblock">
+X.-S. Wang, S. A. Moore, J. D. Turner, and B. P. Mann, “A model-free sampling method for basins of attraction using hybrid active learning (hal),” <em class="ltx_emph ltx_font_italic" id="bib.bib27.1.1">Communications in Nonlinear Science and Numerical Simulation</em>, vol. 112, p. 106551, 2022. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.sciencedirect.com/science/article/pii/S1007570422001678</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yan et al. [2024]</span>
+<span class="ltx_bibblock">
+H. Yan, Z. Wang, S. Bo, Y. Zhao, Y. Zhang, and R. Lyu, “Research on image generation optimization based deep learning,” <em class="ltx_emph ltx_font_italic" id="bib.bib28.1.1">Preprints</em>, August 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.20944/preprints202408.0927.v1</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Besl and McKay [1992]</span>
+<span class="ltx_bibblock">
+P. Besl and N. D. McKay, “A method for registration of 3-D shapes,” <em class="ltx_emph ltx_font_italic" id="bib.bib29.1.1">IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, vol. 14, no. 2, pp. 239–256, Feb. 1992. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://ieeexplore.ieee.org/document/121791/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xiang et al. [2023a]</span>
+<span class="ltx_bibblock">
+J. Xiang, J. Chen, and Y. Liu, “Hybrid multiscale search for dynamic planning of multi-agent drone traffic,” <em class="ltx_emph ltx_font_italic" id="bib.bib30.1.1">Journal of Guidance, Control, and Dynamics</em>, vol. 46, no. 10, pp. 1963–1974, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xiang et al. [2018]</span>
+<span class="ltx_bibblock">
+Y. Xiang, T. Schmidt, V. Narayanan, and D. Fox, “PoseCNN: A Convolutional Neural Network for 6D Object Pose Estimation in Cluttered Scenes,” May 2018, arXiv:1711.00199 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1711.00199</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Li and Liu [2024]</span>
+<span class="ltx_bibblock">
+X. Li and S. Liu, “Predicting 30-day hospital readmission in medicare patients: Insights from an lstm deep learning model,” <em class="ltx_emph ltx_font_italic" id="bib.bib32.1.1">medRxiv</em>, 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.medrxiv.org/content/early/2024/09/09/2024.09.08.24313212</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. [2019]</span>
+<span class="ltx_bibblock">
+C. Wang, D. Xu, Y. Zhu, R. Martín-Martín, C. Lu, L. Fei-Fei, and S. Savarese, “Densefusion: 6d object pose estimation by iterative dense fusion,” <em class="ltx_emph ltx_font_italic" id="bib.bib33.1.1">arXiv</em>, vol. arXiv:1901.04780, 2019. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1901.04780</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Peng et al. [2018]</span>
+<span class="ltx_bibblock">
+S. Peng, Y. Liu, Q. Huang, H. Bao, and X. Zhou, “PVNet: Pixel-wise Voting Network for 6DoF Pose Estimation,” Dec. 2018, arXiv:1812.11788 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1812.11788</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Fan and Tao [2024]</span>
+<span class="ltx_bibblock">
+X. Fan and C. Tao, “Towards resilient and efficient llms: A comparative study of efficiency, performance, and adversarial robustness,” <em class="ltx_emph ltx_font_italic" id="bib.bib35.1.1">arXiv preprint arXiv:2408.04585</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al. [2024a]</span>
+<span class="ltx_bibblock">
+X. Liu, Z. Yu, L. Tan, Y. Yan, and G. Shi, “Enhancing skin lesion diagnosis with ensemble learning,” <em class="ltx_emph ltx_font_italic" id="bib.bib36.1.1">arXiv preprint arXiv:2409.04381</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al. [2024b]</span>
+<span class="ltx_bibblock">
+X. Liu, Z. Yu, and L. Tan, “Deep learning for lung disease classification using transfer learning and a customized cnn architecture with attention,” <em class="ltx_emph ltx_font_italic" id="bib.bib37.1.1">arXiv preprint arXiv:2408.13180</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tang et al. [2024]</span>
+<span class="ltx_bibblock">
+X. Tang, Z. Wang, X. Cai, H. Su, and C. Wei, “Research on heterogeneous computation resource allocation based on data-driven method,” <em class="ltx_emph ltx_font_italic" id="bib.bib38.1.1">arXiv preprint arXiv:2408.05671</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">He et al. [2015]</span>
+<span class="ltx_bibblock">
+K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” Dec. 2015, arXiv:1512.03385 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1512.03385</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Song [2019]</span>
+<span class="ltx_bibblock">
+Y. Song, “Deep learning applications in the medical image recognition,” <em class="ltx_emph ltx_font_italic" id="bib.bib40.1.1">American Journal of Computer Science and Technology</em>, vol. 2, no. 2, pp. 22–26, Jul. 2019. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.11648/j.ajcst.20190202.11</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Li et al. [2024]</span>
+<span class="ltx_bibblock">
+M. Li, Y. Zhou, G. Jiang, T. Deng, Y. Wang, and H. Wang, “Ddn-slam: Real-time dense dynamic neural implicit slam with joint semantic encoding,” <em class="ltx_emph ltx_font_italic" id="bib.bib41.1.1">arXiv preprint arXiv:2401.01545</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tan et al. [2024b]</span>
+<span class="ltx_bibblock">
+C. Tan, C. Wang, Z. Lin, S. He, and C. Li, “Editable neural radiance fields convert 2d to 3d furniture texture,” <em class="ltx_emph ltx_font_italic" id="bib.bib42.1.1">International Journal of Engineering and Management Research</em>, vol. 14, no. 3, pp. 62–65, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhou et al. [2024]</span>
+<span class="ltx_bibblock">
+Y. Zhou, Z. Zeng, A. Chen, X. Zhou, H. Ni, S. Zhang, P. Li, L. Liu, M. Zheng, and X. Chen, “Evaluating modern approaches in 3d scene reconstruction: Nerf vs gaussian-based methods,” <em class="ltx_emph ltx_font_italic" id="bib.bib43.1.1">arXiv e-prints</em>, pp. arXiv–2408, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zheng et al. [2021]</span>
+<span class="ltx_bibblock">
+Z. Zheng, P. Wang, D. Ren, W. Liu, R. Ye, Q. Hu, and W. Zuo, “Enhancing Geometric Factors in Model Learning and Inference for Object Detection and Instance Segmentation,” Jul. 2021, arXiv:2005.03572 [cs]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2005.03572</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shen et al. [2024]</span>
+<span class="ltx_bibblock">
+X. Shen, Q. Zhang, H. Zheng, and W. Qi, “Harnessing XGBoost for robust biomarker selection of obsessive-compulsive disorder (OCD) from adolescent brain cognitive development (ABCD) data,” in <em class="ltx_emph ltx_font_italic" id="bib.bib45.1.1">Fourth International Conference on Biomedicine and Bioinformatics Engineering (ICBBE 2024)</em>, P. P. Piccaluga, A. El-Hashash, and X. Guo, Eds., vol. 13252, International Society for Optics and Photonics.   SPIE, 2024, p. 132520U. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1117/12.3044221</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2024a]</span>
+<span class="ltx_bibblock">
+Q. Zhang, W. Qi, H. Zheng, and X. Shen, “Cu-net: a u-net architecture for efficient brain-tumor segmentation on brats 2019 dataset,” 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://arxiv.org/abs/2406.13113</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zheng et al. [2024]</span>
+<span class="ltx_bibblock">
+H. Zheng, Q. Zhang, Y. Gong, Z. Liu, and S. Chen, “Identification of prognostic biomarkers for stage iii non-small cell lung carcinoma in female nonsmokers using machine learning,” <em class="ltx_emph ltx_font_italic" id="bib.bib47.1.1">arXiv preprint arXiv:2408.16068</em>, 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.48550/arXiv.2408.16068</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Agarap [2019]</span>
+<span class="ltx_bibblock">
+A. F. Agarap, “Deep Learning using Rectified Linear Units (ReLU),” Feb. 2019, arXiv:1803.08375 [cs, stat]. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1803.08375</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Muja and Lowe [2009]</span>
+<span class="ltx_bibblock">
+M. Muja and D. G. Lowe, “Fast approximate nearest neighbors with automatic algorithm configuration,” in <em class="ltx_emph ltx_font_italic" id="bib.bib49.1.1">International Conference on Computer Vision Theory and Application VISSAPP’09)</em>.   INSTICC Press, 2009, pp. 331–340.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kaplan and Meier [1958]</span>
+<span class="ltx_bibblock">
+E. L. Kaplan and P. Meier, “Nonparametric Estimation from Incomplete Observations,” <em class="ltx_emph ltx_font_italic" id="bib.bib50.1.1">Journal of the American Statistical Association</em>, vol. 53, no. 282, pp. 457–481, Jun. 1958. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://www.tandfonline.com/doi/abs/10.1080/01621459.1958.10501452</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[51]</span>
+<span class="ltx_bibblock">
+K. G. Derpanis, “Overview of the RANSAC Algorithm.”
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Huynh [2009]</span>
+<span class="ltx_bibblock">
+D. Q. Huynh, “Metrics for 3D Rotations: Comparison and Analysis,” <em class="ltx_emph ltx_font_italic" id="bib.bib52.1.1">Journal of Mathematical Imaging and Vision</em>, vol. 35, no. 2, pp. 155–164, Oct. 2009. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://link.springer.com/10.1007/s10851-009-0161-2</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2024b]</span>
+<span class="ltx_bibblock">
+J. Zhang, X. Wang, W. Ren, L. Jiang, D. Wang, and K. Liu, “Ratt: Athought structure for coherent and correct llmreasoning,” <em class="ltx_emph ltx_font_italic" id="bib.bib53.1.1">arXiv preprint arXiv:2406.02746</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib54">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tao et al. [2019]</span>
+<span class="ltx_bibblock">
+Y. Tao, Y. Jia, N. Wang, and H. Wang, “The fact: Taming latent factor models for explainability with factorization trees,” in <em class="ltx_emph ltx_font_italic" id="bib.bib54.1.1">Proceedings of the 42nd International ACM SIGIR Conference on Research and Development in Information Retrieval</em>, ser. SIGIR’19.   New York, NY, USA: Association for Computing Machinery, 2019, p. 295–304.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib55">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2024c]</span>
+<span class="ltx_bibblock">
+J. Zhang, X. Wang, Y. Jin, C. Chen, X. Zhang, and K. Liu, “Prototypical reward network for data-efficient rlhf,” <em class="ltx_emph ltx_font_italic" id="bib.bib55.1.1">arXiv preprint arXiv:2406.06606</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib56">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ma et al. [2024c]</span>
+<span class="ltx_bibblock">
+D. Ma, M. Wang, A. Xiang, Z. Qi, and Q. Yang, “Transformer-based classification outcome prediction for multimodal stroke treatment,” <em class="ltx_emph ltx_font_italic" id="bib.bib56.1.1">arXiv preprint arXiv:2404.12634</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib57">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Fan et al. [2024]</span>
+<span class="ltx_bibblock">
+X. Fan, C. Tao, and J. Zhao, “Advanced stock price prediction with xlstm-based models: Improving long-term forecasting,” <em class="ltx_emph ltx_font_italic" id="bib.bib57.1.1">Preprints</em>, no. 2024082109, August 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.20944/preprints202408.2109.v1</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib58">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xiang et al. [2023b]</span>
+<span class="ltx_bibblock">
+J. Xiang, J. Xie, and J. Chen, “Landing trajectory prediction for uas based on generative adversarial network,” in <em class="ltx_emph ltx_font_italic" id="bib.bib58.1.1">AIAA SCITECH 2023 Forum</em>, 2023, p. 0127.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib59">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2024d]</span>
+<span class="ltx_bibblock">
+X. Zhang, J. Zhang, B. Rekabdar, Y. Zhou, P. Wang, and K. Liu, “Dynamic and adaptive feature generation with llm,” <em class="ltx_emph ltx_font_italic" id="bib.bib59.1.1">arXiv preprint arXiv:2406.03505</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib60">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2024e]</span>
+<span class="ltx_bibblock">
+X. Zhang, J. Zhang, F. Mo, Y. Chen, and K. Liu, “Tifg: Text-informed feature generation with large language models,” <em class="ltx_emph ltx_font_italic" id="bib.bib60.1.1">arXiv preprint arXiv:2406.11177</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib61">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kang et al. [2021]</span>
+<span class="ltx_bibblock">
+Y. Kang, Y. Xu, C. P. Chen, G. Li, and Z. Cheng, “6: Simultaneous tracking, tagging and mapping for augmented reality,” in <em class="ltx_emph ltx_font_italic" id="bib.bib61.1.1">SID Symposium Digest of Technical Papers</em>, vol. 52.   Wiley Online Library, 2021, pp. 31–33.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib62">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[62]</span>
+<span class="ltx_bibblock">
+A. J. Bray, “Tracking Curved Objects by Perspective Inversion.”
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib63">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Deng et al. [2024a]</span>
+<span class="ltx_bibblock">
+T. Deng, N. Wang, C. Wang, S. Yuan <em class="ltx_emph ltx_font_italic" id="bib.bib63.1.1">et al.</em>, “Incremental joint learning of depth, pose and implicit scene representation on monocular camera in large-scale scenes,” <em class="ltx_emph ltx_font_italic" id="bib.bib63.2.2">arXiv preprint arXiv:2404.06050</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib64">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Weng and Wu [2024a]</span>
+<span class="ltx_bibblock">
+Y. Weng and J. Wu, “Leveraging artificial intelligence to enhance data security and combat cyber attacks,” <em class="ltx_emph ltx_font_italic" id="bib.bib64.1.1">Journal of Artificial Intelligence General science (JAIGS) ISSN: 3006-4023</em>, vol. 5, no. 1, pp. 392–399, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib65">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Valenti and Gevers [2008]</span>
+<span class="ltx_bibblock">
+R. Valenti and T. Gevers, “Accurate eye center location and tracking using isophote curvature,” in <em class="ltx_emph ltx_font_italic" id="bib.bib65.1.1">2008 IEEE Conference on Computer Vision and Pattern Recognition</em>, Jun. 2008, pp. 1–8, iSSN: 1063-6919. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/4587529/?arnumber=4587529</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib66">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Weng and Wu [2024b]</span>
+<span class="ltx_bibblock">
+Y. Weng and J. Wu, “Big data and machine learning in defence,” <em class="ltx_emph ltx_font_italic" id="bib.bib66.1.1">International Journal of Computer Science and Information Technology</em>, vol. 16, no. 2, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib67">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Weng and Wu [2024c]</span>
+<span class="ltx_bibblock">
+——, “Fortifying the global data fortress: a multidimensional examination of cyber security indexes and data protection measures across 193 nations,” <em class="ltx_emph ltx_font_italic" id="bib.bib67.1.1">International Journal of Frontiers in Engineering Technology</em>, vol. 6, no. 2, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib68">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Song et al. [2023]</span>
+<span class="ltx_bibblock">
+Y. Song, P. Arora, R. Singh, S. T. Varadharajan, M. Haynes, and T. Starner, “Going blank comfortably: Positioning monocular head-worn displays when they are inactive,” in <em class="ltx_emph ltx_font_italic" id="bib.bib68.1.1">Proceedings of the 2023 ACM International Symposium on Wearable Computers</em>, ser. ISWC ’23.   New York, NY, USA: Association for Computing Machinery, Oct. 2023, p. 114–118. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1145/3594738.3611375</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib69">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Song et al. [2024]</span>
+<span class="ltx_bibblock">
+Y. Song, P. Arora, S. T. Varadharajan, R. Singh, M. Haynes, and T. Starner, “Looking from a different angle: Placing head-worn displays near the nose,” in <em class="ltx_emph ltx_font_italic" id="bib.bib69.1.1">Proceedings of the Augmented Humans International Conference 2024</em>, ser. AHs ’24.   New York, NY, USA: Association for Computing Machinery, Apr. 2024, p. 28–45. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1145/3652920.3652946</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib70">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Bascle and Deriche [1995]</span>
+<span class="ltx_bibblock">
+B. Bascle and R. Deriche, “Region tracking through image sequences,” in <em class="ltx_emph ltx_font_italic" id="bib.bib70.1.1">Proceedings of IEEE International Conference on Computer Vision</em>, Jun. 1995, pp. 302–307. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/466925/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib71">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Deng et al. [2024b]</span>
+<span class="ltx_bibblock">
+T. Deng, Y. Zhou, W. Wu, M. Li, J. Huang, Liu <em class="ltx_emph ltx_font_italic" id="bib.bib71.1.1">et al.</em>, “Multi-modal uav detection, classification and tracking algorithm,” <em class="ltx_emph ltx_font_italic" id="bib.bib71.2.2">arXiv preprint arXiv:2405.16464</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib72">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xubo et al. [2024]</span>
+<span class="ltx_bibblock">
+W. Xubo, W. Ying, L. Xintao, Y. Zhi, G. Xingxin, W. Zhizhong, and Y. Yuanfang, “Application of Adaptive Machine Learning Systems in Heterogeneous Data Environments,” <em class="ltx_emph ltx_font_italic" id="bib.bib72.1.1">Global Academic Frontiers</em>, vol. 2, no. 3, Jul. 2024. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.5281/zenodo.12684615</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib73">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jin et al. [2024]</span>
+<span class="ltx_bibblock">
+Y. Jin, W. Zhou, M. Wang, M. Li, X. Li, T. Hu, and X. Bu, “Online learning of multiple tasks and their relationships: Testing on spam email data and eeg signals recorded in construction fields,” <em class="ltx_emph ltx_font_italic" id="bib.bib73.1.1">arXiv preprint arXiv:2406.18311</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib74">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhao et al. [2024]</span>
+<span class="ltx_bibblock">
+H. Zhao, Y. Lou, Q. Xu, Z. Feng, Y. Wu, T. Huang, L. Tan, and Z. Li, “Optimization strategies for self-supervised learning in the use of unlabeled data,” <em class="ltx_emph ltx_font_italic" id="bib.bib74.1.1">Journal of Theory and Practice of Engineering Science</em>, vol. 4, no. 05, pp. 30–39, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib75">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Weng et al. [2024]</span>
+<span class="ltx_bibblock">
+Y. Weng, Y. Cao, M. Li, and X. Yang, “The application of big data and ai in risk control models: Safeguarding user security,” <em class="ltx_emph ltx_font_italic" id="bib.bib75.1.1">International Journal of Frontiers in Engineering Technology</em>, vol. 6, no. 3, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib76">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Qiao et al. [2024]</span>
+<span class="ltx_bibblock">
+Y. Qiao, K. Li, J. Lin, R. Wei, C. Jiang, Y. Luo, and H. Yang, “Robust domain generalization for multi-modal object recognition,” <em class="ltx_emph ltx_font_italic" id="bib.bib76.1.1">arXiv preprint arXiv:2408.05831</em>, 2024.
+
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Sep 22 19:12:20 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

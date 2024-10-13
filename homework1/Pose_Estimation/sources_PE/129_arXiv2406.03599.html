@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Hi5 : 2D Hand Pose Estimation with Zero Human Annotation</title>
+<!--Generated on Wed Jun  5 19:39:38 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2406.03599v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S1" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S2" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S2.SS1" title="In 2 Related Work ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Pose Estimation &amp; Hand Pose Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S2.SS2" title="In 2 Related Work ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Synthetic Data for Pose Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S2.SS3" title="In 2 Related Work ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Representation in Data</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Pose-Annotated Hand Image Synthesis</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.SS1" title="In 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Game Engine Setup</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.SS2" title="In 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Data Capture</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.SS3" title="In 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Data Diversity</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.SS4" title="In 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Generated Images</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S4" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Training &amp; Evaluation</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S4.SS1" title="In 4 Training &amp; Evaluation ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Training Setup</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S4.SS2" title="In 4 Training &amp; Evaluation ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Evaluation on Real Data</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S4.SS2.SSS1" title="In 4.2 Evaluation on Real Data ‣ 4 Training &amp; Evaluation ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2.1 </span>Real Data Benchmark</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S4.SS2.SSS2" title="In 4.2 Evaluation on Real Data ‣ 4 Training &amp; Evaluation ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2.2 </span>Perturbation Test</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S4.SS2.SSS3" title="In 4.2 Evaluation on Real Data ‣ 4 Training &amp; Evaluation ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2.3 </span>Evaluation on Different Skin Colors</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Results</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.SS1" title="In 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Numeric Performance</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.SS2" title="In 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Skin Tone Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.SS3" title="In 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3 </span>Visual Results</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S6" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Discussion &amp; Future Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S7" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#A1" title="In Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Appendix</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">
+<span class="ltx_text ltx_font_bold" id="id3.id1">Hi5</span> <img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_portrait" height="14" id="id1.g1" src="extracted/5646952/images/raised-hand.png" width="11"/>: 2D Hand Pose Estimation with <span class="ltx_text ltx_font_italic" id="id4.id2">Zero</span> Human Annotation</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Masum Hasan,
+Cengiz Ozel,
+Nina Long,
+Alexander Martin<span class="ltx_note ltx_role_footnotemark" id="footnotex1"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note">2</span></span></span></span>,
+Samuel Potter<span class="ltx_note ltx_role_footnotemark" id="footnotex2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note">2</span></span></span></span>,
+Tariq Adnan, 
+<br class="ltx_break"/>Sangwu Lee,
+Amir Zadeh,
+Ehsan Hoque<span class="ltx_note ltx_role_footnotemark" id="footnotex3"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note">1</span></span></span></span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id5.2.id1">Department of Computer Science, University of Rochester</span>
+<br class="ltx_break"/>Rochester, NY, USA 
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="id2.1.1">m.hasan@rochester.edu <math alttext="\mid" class="ltx_Math" display="inline" id="id2.1.1.m1.1"><semantics id="id2.1.1.m1.1a"><mo id="id2.1.1.m1.1.1" xref="id2.1.1.m1.1.1.cmml">∣</mo><annotation-xml encoding="MathML-Content" id="id2.1.1.m1.1b"><ci id="id2.1.1.m1.1.1.cmml" xref="id2.1.1.m1.1.1">∣</ci></annotation-xml><annotation encoding="application/x-tex" id="id2.1.1.m1.1c">\mid</annotation><annotation encoding="application/x-llamapun" id="id2.1.1.m1.1d">∣</annotation></semantics></math> mehoque@cs.rochester.edu</span>
+</span><span class="ltx_author_notes">Corresponding authorsEqual contributions, ordered by surname.</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id6.id1">We propose a new large synthetic hand pose estimation dataset, Hi5, and a novel inexpensive method for collecting high-quality synthetic data that requires no human annotation or validation. Leveraging recent advancements in computer graphics, high-fidelity 3D hand models with diverse genders and skin colors, and dynamic environments and camera movements, our data synthesis pipeline allows precise control over data diversity and representation, ensuring robust and fair model training. We generate a dataset with 583,000 images with accurate pose annotation using a single consumer PC that closely represents real-world variability. Pose estimation models trained with Hi5 perform competitively on real-hand benchmarks while surpassing models trained with real data when tested on occlusions and perturbations. Our experiments show promising results for synthetic data as a viable solution for data representation problems in real datasets. Overall, this paper provides a promising new approach to synthetic data creation and annotation that can reduce costs and increase the diversity and quality of data for hand pose estimation.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<figure class="ltx_figure" id="S1.F1">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_minipage ltx_align_center ltx_align_bottom" id="S1.F1.1" style="width:124.2pt;"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="706" id="S1.F1.1.g1" src="extracted/5646952/images/tracking_points_single_hand.png" width="685"/>
+<figcaption class="ltx_caption ltx_centering">(a)</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_minipage ltx_align_center ltx_align_bottom" id="S1.F1.2" style="width:372.6pt;"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="353" id="S1.F1.2.g1" src="extracted/5646952/images/perspective_w_pose.jpg" width="685"/>
+<figcaption class="ltx_caption ltx_centering">(b)</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S1.F1.4.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S1.F1.5.2" style="font-size:90%;">(a) We put invisible marker objects (visualized with red dots) inside a fully rigged (controllable) 3D hand armature. (b) We project the realistic 3D hand model with natural background and lighting into a 2D plane, and project the markers objects to the same 2D plane for automatic pose labeling.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Hand pose estimation is a critical task in computer vision with applications such as human-computer interfaces <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib46" title="">46</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib2" title="">2</a>]</cite>, human-robot interaction<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib15" title="">15</a>]</cite>, interacting with the environments in virtual reality <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib47" title="">47</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib9" title="">9</a>]</cite>, telerehabilitation<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib3" title="">3</a>]</cite>, hand teleportation<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib18" title="">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib28" title="">28</a>]</cite>, or sign language recognition <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib40" title="">40</a>]</cite>. Several clinical research using hand pose estimation for medical diagnostics of movement disorders such as Parkinson’s Disease<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib22" title="">22</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib23" title="">23</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib11" title="">11</a>]</cite>. Despite significant advancements in pose estimation algorithms for human body pose estimation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib55" title="">55</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib43" title="">43</a>]</cite>, existing hand pose estimation models often struggle with low lighting, unusual hand poses, or darker skin color. Existing hand pose estimation datasets are either collected in a particular lab setting <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib44" title="">44</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib35" title="">35</a>]</cite> or gathered from the internet in an uncontrolled, in-the-wild manner <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib50" title="">50</a>]</cite>. They either lack the diversity of real-world images or lack representation of less frequent data, highlighting the need for a more robust, diverse, and easily obtainable dataset to improve model performance across various real-world conditions.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Furthermore, manual annotation of hand pose datasets is labor-intensive, time-consuming, and prone to errors. Ensuring diversity and representation is particularly challenging, leading to potential biases in trained models. The high cost and effort associated with creating and annotating these datasets further exacerbate the problem, hindering progress in the field. While popular computer vision challenges, such as human body pose estimation, have enjoyed large datasets (e.g., COCO <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib30" title="">30</a>]</cite> human body keypoint detection contains over 200K images), the largest hand pose estimation dataset has only a fraction of this size.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">To address these challenges, we propose a novel approach for generating a diverse, and representative, synthetic hand pose estimation dataset generation method that works entirely using consumer-grade hardware. Our method leverages high-fidelity 3D hand models of different genders and skin colors, realistic animations, and dynamic environments and lighting conditions to create a comprehensive and diverse dataset that accurately mirrors real-world variability. This approach not only reduces the cost and time required for data collection but also ensures precise control over data diversity and representation, addressing biases inherent in real-world datasets.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Furthermore, we present Hi5, a realistic hand pose estimation synthetic dataset comprising 583,000 images with accurate hand pose estimation labeling. This dataset is highly diverse and representative, significantly improving model performance. Our experiments demonstrate that models trained on the Hi5 dataset perform competitively with those trained on real-world data on real-world benchmarks. It further shows notable robustness against occlusions and perturbations and effectively handles diverse skin tones.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">Our contributions are threefold:</p>
+<ol class="ltx_enumerate" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We introduce a novel data synthesis pipeline that offers precise control over data diversity and representation, ensuring robust and fair model training.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">We develop the Hi5 dataset, a synthetic hand pose estimation dataset generated using consumer-grade hardware without human annotation.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">We empirically validate the performance of models trained on Hi5, demonstrating competitive results on real-world benchmarks and showcasing the potential of synthetic data to address limitations in traditional data collection methods.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">Our research demonstrates that synthetic data can serve as a viable and effective alternative to real-world data for hand pose estimation. As high-fidelity computer graphics become increasingly accessible, our methodology paves the way for solving various computer vision challenges that lack sufficient datasets. To support further research and development in the field, we will make our source code, 3D environment setup, and data synthesis pipeline (except the hand models), alongside the pose-annotated 583K synthetic dataset and their metadata, publicly available upon acceptance of this paper.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Pose Estimation &amp; Hand Pose Estimation</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">Pose estimation, a crucial task in computer vision, involves identifying the 2D or 3D positions of human keypoints across various applications. The advent of deep learning has significantly advanced the field, particularly through the development of state-of-the-art models such as Vision Transformers (ViT) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib13" title="">13</a>]</cite>. ViTPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib55" title="">55</a>]</cite>, built on the ViT architecture <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib13" title="">13</a>]</cite>, exemplifies this progression by offering superior accuracy and robustness in pose estimation compared to traditional convolutional approaches. This model leverages large-scale annotated datasets to learn fine-grained feature representations, which are essential for accurate pose estimation. Similar to ViTPose, other transformer-based pose estimation models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib49" title="">49</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib54" title="">54</a>]</cite> have also consistently outperformed traditional methods across a wide variety of benchmarks, including more challenging scenarios such as occlusion <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib59" title="">59</a>]</cite>, crowd pose estimation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib17" title="">17</a>]</cite>, and dynamic actions <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib60" title="">60</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">The evolution of pose estimation has been paralleled by the development of comprehensive datasets. While datasets for human pose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib52" title="">52</a>]</cite>, whole body <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib24" title="">24</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib61" title="">61</a>]</cite>, and face pose estimation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib53" title="">53</a>]</cite> are relatively large, those for hand pose estimation like OneHand10k <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib50" title="">50</a>]</cite>, despite their detailed annotations, are significantly smaller. This limitation underscores the challenge in the hand pose estimation subfield – the lack of extensive, diverse datasets that can train models to the same level of reliability as those for full-body pose estimation, particularly in complex real-world scenarios where occlusions and interactions are common.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p" id="S2.SS1.p3.1">Transformer-based models require extensive training datasets to effectively learn complex patterns in data <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib16" title="">16</a>]</cite>, which poses a significant challenge given the costs and efforts associated with creating high-quality pose estimation datasets. The need for precise human annotation to define keypoints adds another layer of complexity and expense <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib5" title="">5</a>]</cite>, making dataset creation a resource-intensive task. On the other hand, the NYU Hand Pose Estimation dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib45" title="">45</a>]</cite>, despite its high-quality annotations, is limited by its collection in a controlled lab setting using depth cameras, which excludes RGB data and lacks diversity in backgrounds and lighting conditions.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Synthetic Data for Pose Estimation</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">The utilization of synthetic data in pose estimation offers a solution to overcome the challenges of scarce real-world annotated datasets and lack of diversity in existing data. Synthetic datasets, created through computer simulations, provide a virtually unlimited source of accurately annotated images, featuring a wide array of scenarios that would be otherwise expensive and complex to collect.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1">One notable example of the advancements in synthetic datasets is presented in the creation of the BEDLAM dataset<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib7" title="">7</a>]</cite>. This dataset aims to improve 3D human pose and shape estimation models by offering a large-scale, diverse source of synthetic data. It notably enhances diversity by including various body shapes, skin tones, and complex motion patterns, all rendered with high fidelity using Unreal Engine<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib39" title="">39</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib25" title="">25</a>]</cite>.
+However, the rendering techniques and motion capture systems employed may now lag behind newer technologies, which could potentially limit its usefulness for future research.
+Additionally, Wood et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib51" title="">51</a>]</cite> has introduced the generation of synthetic data for face analysis. Their approach demonstrates the capability to produce high-quality synthetic data that can train models to perform as well as those trained on real-world datasets. By leveraging detailed parametric models and a vast library of assets, they generate diverse, realistic training data that supports a variety of face-related tasks.
+Another notable contribution is from Mueller et al.<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib36" title="">36</a>]</cite>, who have developed a method for hand pose estimation from egocentric perspectives.
+Their approach uses a photorealistic synthetic dataset to robustly train convolutional neural networks, enabling accurate hand pose estimation in environments cluttered with occlusions, which are typical in virtual and augmented reality settings.
+However, the focus on egocentric views, while innovative, limits the dataset’s applicability to scenarios where cameras are positioned in natural, user-centric viewpoints, potentially diminishing its utility for third-person applications.
+In their development of MediaPipe Hands, the authors utilized both real-world and synthetic datasets to enhance the model’s performance <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib56" title="">56</a>]</cite>. They generated synthetic data using a high-quality 3D hand model, equipped with 24 bones and 36 blendshapes, enabling precise manipulations of finger and palm movements. This model supported five different skin tones and was employed to create video sequences depicting various hand poses. These sequences were rendered under diverse lighting conditions and from multiple camera angles to enrich the training dataset. The combination of real and synthetic datasets led to optimal results, demonstrating the effectiveness of using synthesized data in this research field. However, the synthetic dataset created for this purpose has not been made publicly available, limiting its accessibility for further research and development in the academic community.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Representation in Data</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">In the realm of computer vision, representation plays a crucial role across various applications such as pose estimation, face recognition, action recognition, and scene understanding.
+Models trained on datasets with a balanced representation in terms of demographic properties would ensure fair performance accross different subgroups. For instance, face recognition datasets like LFW <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib27" title="">27</a>]</cite>, Pubfig <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib26" title="">26</a>]</cite>, CelebA <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib32" title="">32</a>]</cite>, IJB-C <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib34" title="">34</a>]</cite>, and IMDB-Face <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib48" title="">48</a>]</cite> have significantly influenced the field due to their extensive usage and the subsequent improvements they have driven in face detection technologies. However, these datasets often exhibit a strong bias towards certain demographic groups, particularly individuals with lighter skin tones and, in datasets like LFW and IJB-C, predominantly male faces.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1">Similar challenges are present in pose estimation datasets, where the diversity in human representation is often lacking. For example, the EgoHands <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib6" title="">6</a>]</cite> dataset, despite its large size, consists of images from only four participants, severely limiting the diversity and thereby the applicability of the derived models to a global population.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Pose-Annotated Hand Image Synthesis</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Game Engine Setup</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">To simulate realistic human hands inside a 3D game engine, we purchased 2 pairs of high-fidelity 3D human hands (1 male, 1 female) models from a 3D object marketplace. The hand models are fully rigged for animation. Each model came with two skin textures: pale and darker. For rendering in a Physically Based Rendering environment, which means a lighting environment that follows real-world optics, the models include Albedo and Roughness textures, and Normal maps for surface detail. Each hand model included a detachable arm, which allowed us to simulate different arm lengths. In our game engine setup, we only simulated the right hand. The left hand was created during data augmentation by mirroring half of the images.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">Specific animation keyframes were configured for each of the hand poses. Interpolation between the keyframes gave us a wider variety of variations of each key pose. Using engine scripting during playback, we rendered each frame to disk, as well as saved keypoint positions and frame metadata.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Data Capture</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">To create 2D RGB images of a human hand along with automatically annotated pose coordinates, we place the 3D hand object inside a High Dynamic Range Imaging (HDRI) environment and capture a picture using a virtual camera. Details about the environment, camera positioning, and animation are discussed in Section <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.SS3" title="3.3 Data Diversity ‣ 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">3.3</span></a>.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.1"><span class="ltx_text ltx_font_bold" id="S3.SS2.p2.1.1">Automatic Pose Labeling:</span> Consistent with prevalent models in the field <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib42" title="">42</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib57" title="">57</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib50" title="">50</a>]</cite>, we selected 21 anatomically relevant points on a typically-abled human hand. We inserted invisible marker objects at each one of these keypoints inside the 3D hand model as demonstrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">1</span></a> (a). These marker objects were constrained in position to the bones of the preexisting 3D armature used for object animation, and would therefore move in tandem with their corresponding part of the hand. Thus, the position of these markers at any instant provides the 3D coordinates of that specific keypoint. This approach ensures accurate and consistent tracking, even during complex animations. All markers are located in hand joints, except for the fingertips which are slightly lowered to match human pose annotations. A bounding box is automatically computed around the hand by finding the leftmost, rightmost, topmost, and bottommost points and adding a percent offset.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<p class="ltx_p" id="S3.SS2.p3.1">As displayed in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">1</span></a> (b), we project the coordinates of the marker objects to the image plane viewed by the camera. We draw straight lines from the marker objects to the camera object, the points where the lines intersect with the image plane, indicate the coordinates of the pose keypoints on the 2D image. This mathematical model also allows us to compute coordinates that are hidden or out of frame.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Data Diversity</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">By fully controlling our data synthesis pipeline, we ensure a comprehensive representation of hand images that mirrors real-world variability. We adjust every element of our data synthesis pipeline, from the detailed 3D models of male and female hands in diverse skin colors to precise camera settings and lighting conditions across varied environments, ensuring each scenario is accurately represented. To further enhance our model’s robustness, our data augmentation strategy employs a variety of color and geometric transformations, ensuring our images are well-suited to diverse applications and can withstand a wide range of challenges in hand-tracking technologies. Additionally, a selection of carefully choreographed animations incorporates diverse hand gestures, ensuring our images encompass all possible movements essential for advanced hand-tracking applications.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="172" id="S3.F2.g1" src="extracted/5646952/images/skin-tones.jpg" width="419"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.2.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S3.F2.3.2" style="font-size:90%;">Our synthetic data pipeline allows us precise control of skin color representation. This figure demonstrates the female hand models used in Hi5 with skin tone ITA values respectively -80, -30, 10, 28, 41, and 55 based on dermatology literature<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib10" title="">10</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib12" title="">12</a>]</cite>.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.6"><span class="ltx_text ltx_font_bold" id="S3.SS3.p2.6.1">Gender and Skin Color Diversity:</span> We incorporated two distinct base hand models—male and female—to ensure gender inclusivity, alongside six meticulously selected skin tones reflective of global populations. The skin tones in our study are chosen based on Individual Typology Angle (ITA) values, a recognized dermatological scale for categorizing skin colors where higher numbers indicate brighter skin tones <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib10" title="">10</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib12" title="">12</a>]</cite>. Specifically, we use ITA values of <math alttext="-80" class="ltx_Math" display="inline" id="S3.SS3.p2.1.m1.1"><semantics id="S3.SS3.p2.1.m1.1a"><mrow id="S3.SS3.p2.1.m1.1.1" xref="S3.SS3.p2.1.m1.1.1.cmml"><mo id="S3.SS3.p2.1.m1.1.1a" xref="S3.SS3.p2.1.m1.1.1.cmml">−</mo><mn id="S3.SS3.p2.1.m1.1.1.2" xref="S3.SS3.p2.1.m1.1.1.2.cmml">80</mn></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.1.m1.1b"><apply id="S3.SS3.p2.1.m1.1.1.cmml" xref="S3.SS3.p2.1.m1.1.1"><minus id="S3.SS3.p2.1.m1.1.1.1.cmml" xref="S3.SS3.p2.1.m1.1.1"></minus><cn id="S3.SS3.p2.1.m1.1.1.2.cmml" type="integer" xref="S3.SS3.p2.1.m1.1.1.2">80</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.1.m1.1c">-80</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.1.m1.1d">- 80</annotation></semantics></math>, <math alttext="-30" class="ltx_Math" display="inline" id="S3.SS3.p2.2.m2.1"><semantics id="S3.SS3.p2.2.m2.1a"><mrow id="S3.SS3.p2.2.m2.1.1" xref="S3.SS3.p2.2.m2.1.1.cmml"><mo id="S3.SS3.p2.2.m2.1.1a" xref="S3.SS3.p2.2.m2.1.1.cmml">−</mo><mn id="S3.SS3.p2.2.m2.1.1.2" xref="S3.SS3.p2.2.m2.1.1.2.cmml">30</mn></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.2.m2.1b"><apply id="S3.SS3.p2.2.m2.1.1.cmml" xref="S3.SS3.p2.2.m2.1.1"><minus id="S3.SS3.p2.2.m2.1.1.1.cmml" xref="S3.SS3.p2.2.m2.1.1"></minus><cn id="S3.SS3.p2.2.m2.1.1.2.cmml" type="integer" xref="S3.SS3.p2.2.m2.1.1.2">30</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.2.m2.1c">-30</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.2.m2.1d">- 30</annotation></semantics></math>, <math alttext="10" class="ltx_Math" display="inline" id="S3.SS3.p2.3.m3.1"><semantics id="S3.SS3.p2.3.m3.1a"><mn id="S3.SS3.p2.3.m3.1.1" xref="S3.SS3.p2.3.m3.1.1.cmml">10</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.3.m3.1b"><cn id="S3.SS3.p2.3.m3.1.1.cmml" type="integer" xref="S3.SS3.p2.3.m3.1.1">10</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.3.m3.1c">10</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.3.m3.1d">10</annotation></semantics></math>, <math alttext="28" class="ltx_Math" display="inline" id="S3.SS3.p2.4.m4.1"><semantics id="S3.SS3.p2.4.m4.1a"><mn id="S3.SS3.p2.4.m4.1.1" xref="S3.SS3.p2.4.m4.1.1.cmml">28</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.4.m4.1b"><cn id="S3.SS3.p2.4.m4.1.1.cmml" type="integer" xref="S3.SS3.p2.4.m4.1.1">28</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.4.m4.1c">28</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.4.m4.1d">28</annotation></semantics></math>, <math alttext="41" class="ltx_Math" display="inline" id="S3.SS3.p2.5.m5.1"><semantics id="S3.SS3.p2.5.m5.1a"><mn id="S3.SS3.p2.5.m5.1.1" xref="S3.SS3.p2.5.m5.1.1.cmml">41</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.5.m5.1b"><cn id="S3.SS3.p2.5.m5.1.1.cmml" type="integer" xref="S3.SS3.p2.5.m5.1.1">41</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.5.m5.1c">41</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.5.m5.1d">41</annotation></semantics></math>, and <math alttext="55" class="ltx_Math" display="inline" id="S3.SS3.p2.6.m6.1"><semantics id="S3.SS3.p2.6.m6.1a"><mn id="S3.SS3.p2.6.m6.1.1" xref="S3.SS3.p2.6.m6.1.1.cmml">55</mn><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.6.m6.1b"><cn id="S3.SS3.p2.6.m6.1.1.cmml" type="integer" xref="S3.SS3.p2.6.m6.1.1">55</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.6.m6.1c">55</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.6.m6.1d">55</annotation></semantics></math>. Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.F2" title="Figure 2 ‣ 3.3 Data Diversity ‣ 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">2</span></a> visually depicts these values, displaying the skin tones of the six female hand models and illustrating the progression from darker to lighter skin tones. We expect the variations in lighting conditions and exposures would naturally encompass the intermediate skin tones in the ITA scale. Additionally, we incorporated variations in arm lengths by including models with and without forearm segments to better simulate realistic anatomical diversity.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p3">
+<p class="ltx_p" id="S3.SS3.p3.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p3.1.1">Dynamic Environment and Lighting:</span>
+Our dataset generation incorporates a wide variety of 111 High Dynamic Range Imaging (HDRI) environments from open-access marketplaces. The HDRIs are 360° scans of real indoor and outdoor environments that include a much higher amount of light information than standard images. Placing a 3D model in an HDRI environment lights the object exactly as it would be in the real environment, and provides far more realistic results than built-in 3D engine lighting. We also apply subsurface scattering on the 3D hand model, simulating the translucency of skin and allowing light to be cast under the skin’s surface, greatly increasing photorealism.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p4">
+<p class="ltx_p" id="S3.SS3.p4.1">For each captured image, a random rotation is applied to the HDRI on the <math alttext="Z" class="ltx_Math" display="inline" id="S3.SS3.p4.1.m1.1"><semantics id="S3.SS3.p4.1.m1.1a"><mi id="S3.SS3.p4.1.m1.1.1" xref="S3.SS3.p4.1.m1.1.1.cmml">Z</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p4.1.m1.1b"><ci id="S3.SS3.p4.1.m1.1.1.cmml" xref="S3.SS3.p4.1.m1.1.1">𝑍</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p4.1.m1.1c">Z</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p4.1.m1.1d">italic_Z</annotation></semantics></math> axis, reducing the chance of a specific hand having the same background twice. To further ensure our 3D model encounters a diverse lighting condition, we randomize the lighting exposure of the HDRI. As our 3D hand texture and HDRI backgrounds are scans of actual hands and environments, the resulting images are close to reality while still being highly configurable.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p5">
+<p class="ltx_p" id="S3.SS3.p5.4"><span class="ltx_text ltx_font_bold" id="S3.SS3.p5.4.1">Camera Position and Angle:</span>
+For each frame, we randomly positioned the camera within the 360-degree space surrounding the 3D hand model at a random distance and random polar coordinate chosen from a normal distribution. The normal distribution is defined empirically to make sure the camera is not either too close or too far away from the hand, and it’s not directly behind the hand model, where fingers are often not visible. The camera is pointed toward the hand model with a small random <math alttext="X" class="ltx_Math" display="inline" id="S3.SS3.p5.1.m1.1"><semantics id="S3.SS3.p5.1.m1.1a"><mi id="S3.SS3.p5.1.m1.1.1" xref="S3.SS3.p5.1.m1.1.1.cmml">X</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.1.m1.1b"><ci id="S3.SS3.p5.1.m1.1.1.cmml" xref="S3.SS3.p5.1.m1.1.1">𝑋</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.1.m1.1c">X</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.1.m1.1d">italic_X</annotation></semantics></math> and <math alttext="Y" class="ltx_Math" display="inline" id="S3.SS3.p5.2.m2.1"><semantics id="S3.SS3.p5.2.m2.1a"><mi id="S3.SS3.p5.2.m2.1.1" xref="S3.SS3.p5.2.m2.1.1.cmml">Y</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.2.m2.1b"><ci id="S3.SS3.p5.2.m2.1.1.cmml" xref="S3.SS3.p5.2.m2.1.1">𝑌</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.2.m2.1c">Y</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.2.m2.1d">italic_Y</annotation></semantics></math> axis polar offset; this makes sure the hand is not always in the center. Additionally, the camera was rotated on the <math alttext="Z" class="ltx_Math" display="inline" id="S3.SS3.p5.3.m3.1"><semantics id="S3.SS3.p5.3.m3.1a"><mi id="S3.SS3.p5.3.m3.1.1" xref="S3.SS3.p5.3.m3.1.1.cmml">Z</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.3.m3.1b"><ci id="S3.SS3.p5.3.m3.1.1.cmml" xref="S3.SS3.p5.3.m3.1.1">𝑍</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.3.m3.1c">Z</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.3.m3.1d">italic_Z</annotation></semantics></math> axis (the axis of the camera direction) with an offset within a range of -45 to +45 degrees, adding a rotation effect to the images. The rotational offsets are chosen from a normal distribution with a center of 0. The randomness in camera positioning inherently ensured coverage of first-person, second-person, and third-person views of the hand. The varied hand-to-camera distance simulates close-up shots to more distant perspectives. This careful attention to scene variation ensures that our dataset covers a comprehensive range of scenarios that can occur in realistic hand-tracking situations [citation needed]. We allow part of the hands to be <math alttext="25\%" class="ltx_Math" display="inline" id="S3.SS3.p5.4.m4.1"><semantics id="S3.SS3.p5.4.m4.1a"><mrow id="S3.SS3.p5.4.m4.1.1" xref="S3.SS3.p5.4.m4.1.1.cmml"><mn id="S3.SS3.p5.4.m4.1.1.2" xref="S3.SS3.p5.4.m4.1.1.2.cmml">25</mn><mo id="S3.SS3.p5.4.m4.1.1.1" xref="S3.SS3.p5.4.m4.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p5.4.m4.1b"><apply id="S3.SS3.p5.4.m4.1.1.cmml" xref="S3.SS3.p5.4.m4.1.1"><csymbol cd="latexml" id="S3.SS3.p5.4.m4.1.1.1.cmml" xref="S3.SS3.p5.4.m4.1.1.1">percent</csymbol><cn id="S3.SS3.p5.4.m4.1.1.2.cmml" type="integer" xref="S3.SS3.p5.4.m4.1.1.2">25</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p5.4.m4.1c">25\%</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p5.4.m4.1d">25 %</annotation></semantics></math> outside the screen in any of the 4 sides, to train our model to make predictions even while part of the hand is not visible.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p6">
+<p class="ltx_p" id="S3.SS3.p6.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p6.1.1">Animation and Puppeteering:</span>
+Our chosen hand models were fully rigged, which means the 3D hand mesh had a digital skeleton attached which could be controlled externally. We created a series of hand poses for our 3D hand models inside Unity, which form a superset of those described in a prior work <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib35" title="">35</a>]</cite>. We turned the static poses into a continuous animation where the hand would gradually move from one pose to another – which allows us to capture the poses we defined, and unique intermediate poses. The complete list of hand postures is provided in the Appendix Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#A1.T4" title="Table 4 ‣ Appendix A Appendix ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">4</span></a>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p7">
+<p class="ltx_p" id="S3.SS3.p7.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p7.1.1">Data Augmentation:</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib51" title="">51</a>]</cite> demonstrates that data augmentation plays a crucial role in reducing domain gaps in 3D synthetic datasets. We use data augmentation methods to enhance the representation and diversity of our dataset and to make the images challenging for the learning model. As generating new images using the game engine is inexpensive, we perform an in-place augmentation, where an image is augmented and the original synthesized image is replaced. Each image in our dataset undergoes multiple independent augmentation steps with a predefined probability. Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#A1.T3" title="Table 3 ‣ Appendix A Appendix ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">3</span></a> demonstrates the distribution of our augmentation techniques. Each augmentation type with a superscript <span class="ltx_text ltx_font_italic" id="S3.SS3.p7.1.2">I</span> is applied independently of each other. The pose coordinates are adjusted as necessary for changes such as size alterations or flips. <math alttext="79.18\%" class="ltx_Math" display="inline" id="S3.SS3.p7.1.m1.1"><semantics id="S3.SS3.p7.1.m1.1a"><mrow id="S3.SS3.p7.1.m1.1.1" xref="S3.SS3.p7.1.m1.1.1.cmml"><mn id="S3.SS3.p7.1.m1.1.1.2" xref="S3.SS3.p7.1.m1.1.1.2.cmml">79.18</mn><mo id="S3.SS3.p7.1.m1.1.1.1" xref="S3.SS3.p7.1.m1.1.1.1.cmml">%</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p7.1.m1.1b"><apply id="S3.SS3.p7.1.m1.1.1.cmml" xref="S3.SS3.p7.1.m1.1.1"><csymbol cd="latexml" id="S3.SS3.p7.1.m1.1.1.1.cmml" xref="S3.SS3.p7.1.m1.1.1.1">percent</csymbol><cn id="S3.SS3.p7.1.m1.1.1.2.cmml" type="float" xref="S3.SS3.p7.1.m1.1.1.2">79.18</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p7.1.m1.1c">79.18\%</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p7.1.m1.1d">79.18 %</annotation></semantics></math> of the synthesized images goes through at least one data augmentation that changes the image property (i.e. excluding flips, as they do not change image properties).</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p8">
+<p class="ltx_p" id="S3.SS3.p8.1">Our augmentations are streamlined into two primary categories—Geometric Transformations and Color Space Operations—along with additional techniques that emphasize essential augmentation methods such as blurring, flipping, and Gaussian erase.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p9">
+<p class="ltx_p" id="S3.SS3.p9.1">Geometric Transformations involve altering the spatial arrangement of pixels within an image. Examples of these transformations include downscale-upscale resampling, scaling, stretching, and translation. These manipulations can help improve the model’s ability to generalize across various spatial configurations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib41" title="">41</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p10">
+<p class="ltx_p" id="S3.SS3.p10.1">Color Space Operations refer to modifications within the color attributes of an image. Techniques under this category include adjusting brightness, altering color balance, enhancing or reducing contrast, equalizing the histogram of the images, and applying various color filters. These operations change the visual appearance of the image, aiding the model in becoming robust against variations in lighting and color distribution <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib62" title="">62</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p11">
+<p class="ltx_p" id="S3.SS3.p11.1">The horizontal and vertical flip ensures equal distribution of left and right hands in the dataset. Different levels of blurring effect reduce details from hand images, forcing the model to learn from the overall shape. Gaussian erase chooses and erases a random rectangle on top of the hand from a 2D Gaussian distribution around the bounding box of the hand.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S3.F3.20">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.F3.5.5">
+<th class="ltx_td ltx_align_justify ltx_align_middle ltx_th ltx_th_column" id="S3.F3.5.5.6" style="width:28.5pt;padding-bottom:5.0pt;">
+<div class="ltx_inline-block ltx_align_top ltx_transformed_outer" id="S3.F3.5.5.6.1" style="width:8.9pt;height:68.8pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:68.8pt;transform:translate(-29.94pt,-28.97pt) rotate(-90deg) ;">
+<p class="ltx_p" id="S3.F3.5.5.6.1.1"><span class="ltx_text ltx_font_bold" id="S3.F3.5.5.6.1.1.1">Image synthesis</span></p>
+</span></div>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column" id="S3.F3.1.1.1" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.1.1.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.1.1.1.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000009106.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column" id="S3.F3.2.2.2" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.2.2.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.2.2.2.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000022524.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column" id="S3.F3.3.3.3" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.3.3.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.3.3.3.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000046029.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column" id="S3.F3.4.4.4" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.4.4.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.4.4.4.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000064636.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle ltx_th ltx_th_column" id="S3.F3.5.5.5" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.5.5.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.5.5.5.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000071024.png" width="598"/>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.F3.10.10">
+<td class="ltx_td ltx_align_justify ltx_align_middle" id="S3.F3.10.10.6" style="width:28.5pt;padding-bottom:5.0pt;">
+<div class="ltx_inline-block ltx_align_top ltx_transformed_outer" id="S3.F3.10.10.6.1" style="width:6.9pt;height:44.1pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:44.1pt;transform:translate(-18.57pt,-18.57pt) rotate(-90deg) ;">
+<p class="ltx_p" id="S3.F3.10.10.6.1.1"><span class="ltx_text ltx_font_bold" id="S3.F3.10.10.6.1.1.1">Pose label</span></p>
+</span></div>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.6.6.1" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.6.6.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.6.6.1.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000009106.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.7.7.2" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.7.7.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.7.7.2.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000022524.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.8.8.3" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.8.8.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.8.8.3.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000046029.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.9.9.4" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.9.9.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.9.9.4.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000064636.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle" id="S3.F3.10.10.5" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.10.10.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.10.10.5.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000071024.png" width="598"/>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.F3.15.15">
+<th class="ltx_td ltx_align_justify ltx_align_middle ltx_th ltx_th_column ltx_border_t" id="S3.F3.15.15.6" style="width:28.5pt;padding-bottom:5.0pt;">
+<div class="ltx_inline-block ltx_align_top ltx_transformed_outer" id="S3.F3.15.15.6.1" style="width:8.9pt;height:68.8pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:68.8pt;transform:translate(-29.94pt,-28.97pt) rotate(-90deg) ;">
+<p class="ltx_p" id="S3.F3.15.15.6.1.1"><span class="ltx_text ltx_font_bold" id="S3.F3.15.15.6.1.1.1">Image synthesis</span></p>
+</span></div>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column ltx_border_t" id="S3.F3.11.11.1" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.11.11.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.11.11.1.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000091817.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column ltx_border_t" id="S3.F3.12.12.2" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.12.12.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.12.12.2.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000093081.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column ltx_border_t" id="S3.F3.13.13.3" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.13.13.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.13.13.3.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000097843.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle ltx_th ltx_th_column ltx_border_t" id="S3.F3.14.14.4" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.14.14.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.14.14.4.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000217858.png" width="598"/>
+</span>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle ltx_th ltx_th_column ltx_border_t" id="S3.F3.15.15.5" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.15.15.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.15.15.5.1.g1" src="extracted/5646952/images/sampledata/diverse_poses/000000250464.png" width="598"/>
+</span>
+</th>
+</tr>
+<tr class="ltx_tr" id="S3.F3.20.20">
+<td class="ltx_td ltx_align_justify ltx_align_middle" id="S3.F3.20.20.6" style="width:28.5pt;padding-bottom:5.0pt;">
+<div class="ltx_inline-block ltx_align_top ltx_transformed_outer" id="S3.F3.20.20.6.1" style="width:6.9pt;height:44.1pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:44.1pt;transform:translate(-18.57pt,-18.57pt) rotate(-90deg) ;">
+<p class="ltx_p" id="S3.F3.20.20.6.1.1"><span class="ltx_text ltx_font_bold" id="S3.F3.20.20.6.1.1.1">Pose label</span></p>
+</span></div>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.16.16.1" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.16.16.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.16.16.1.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000091817.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.17.17.2" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.17.17.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.17.17.2.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000093081.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.18.18.3" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.18.18.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.18.18.3.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000097843.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F3.19.19.4" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.19.19.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.19.19.4.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000217858.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle" id="S3.F3.20.20.5" style="width:74.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F3.20.20.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F3.20.20.5.1.g1" src="extracted/5646952/images/sampledata/diverse_poses_skeleton/000000250464.png" width="598"/>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.22.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S3.F3.23.2" style="font-size:90%;">The odd rows shows sample game engine generated hand pose images in Hi5 dataset, and even rows shows the same images with the generated pose label overlayed. Our method can generate realistic and diverse hand images faithful to the background, and generate perfect pose labeling in difficult or occluded hand poses.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Generated Images</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">Putting it all together, let’s see it from the perspective of a single image.
+All the animations are concatenated into one long smooth animation that plays continuously in 60 frame/second and gradually moves the right hand armature.
+For every frame, we randomly choose a gender, skin color, and arm length for the hand, place the hand model inside a random HDRI environment with a random rotation across 360°, and randomly choose a lighting exposure. Then a camera is placed randomly around the 360°space of the hand and pointed towards the hand with a small random offset in Pitch, Roll, and Yaw for the camera. The moment the virtual camera takes a picture, the 2D-projected coordinates of the hidden markers in the hand armature are also saved. Finally, the image and the pose labels passes a data augmentation process. First, half of the images and their labels are flipped to simulate left-hand images. Then all images with some certain probability, go through different types of transformations and noise injections. Finally, we have an augmented synthetic image with the right pose coordinates.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.1">For our experimentation, we create 3 different sizes of synthetic datasets: Hi5-Large (538,643 images), Hi5-Medium (100,000 images), and Hi5-Small (10,000 images). Hi5-Medium and Hi5-Small are sampled from Hi5-Large. Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.F3" title="Figure 3 ‣ 3.3 Data Diversity ‣ 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">3</span></a> shows some sample images created through our data synthesis pipeline alongside their pose labels. Due to the randomness in our data creation process, the generated images are highly diverse. For example, Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S3.F4" title="Figure 4 ‣ 3.4 Generated Images ‣ 3 Pose-Annotated Hand Image Synthesis ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">4</span></a> displays five hand images with nearly identical hand poses. However, due to the stochasticity in our data creation process, the end images look drastically different from each other.</p>
+</div>
+<figure class="ltx_figure" id="S3.F4">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S3.F4.5">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.F4.5.5">
+<td class="ltx_td ltx_align_justify ltx_align_middle" id="S3.F4.1.1.1" style="width:84.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F4.1.1.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F4.1.1.1.1.g1" src="extracted/5646952/images/sampledata/same_pose/000000268075.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F4.2.2.2" style="width:84.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F4.2.2.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F4.2.2.2.1.g1" src="extracted/5646952/images/sampledata/same_pose/000000268216.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F4.3.3.3" style="width:84.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F4.3.3.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F4.3.3.3.1.g1" src="extracted/5646952/images/sampledata/same_pose/000000268276.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S3.F4.4.4.4" style="width:84.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F4.4.4.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F4.4.4.4.1.g1" src="extracted/5646952/images/sampledata/same_pose/000000268286.png" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle" id="S3.F4.5.5.5" style="width:84.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S3.F4.5.5.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S3.F4.5.5.5.1.g1" src="extracted/5646952/images/sampledata/same_pose/000000268298.png" width="598"/>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F4.7.1.1" style="font-size:90%;">Figure 4</span>: </span><span class="ltx_text" id="S3.F4.8.2" style="font-size:90%;">Nearly identical hand poses in our dataset have a surprisingly diverse image representation.</span></figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Training &amp; Evaluation</h2>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Training Setup</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">This paper aims to demonstrate the effectiveness of our synthetic data creation method on commonly used neural architectures. Therefore, we chose ViTPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib55" title="">55</a>]</cite>, a simple yet effective pose estimation training framework on top of a non-hierarchical vision transformer (ViT) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib14" title="">14</a>]</cite>. ViTPose achieved state-of-the-art in multiple pose estimation benchmarks while being efficient to train. ViTPose appends several simple decoder layers after the pretrained vision transformer backbone to predict the pose estimation. This takes advantage of the generic vision capabilities of the pretrained vision transformer and translates that to pose estimation. We chose the ViT-Small model trained with masked autoencoder (MAE) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib19" title="">19</a>]</cite> as our training backbone as it is lightweight and easy to train.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">We train 4 instances of the same ViTPose Small model following the official implementation<span class="ltx_note ltx_role_footnote" id="footnote1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span><a class="ltx_ref ltx_url ltx_font_typewriter" href="https://github.com/ViTAE-Transformer/ViTPose" title="">https://github.com/ViTAE-Transformer/ViTPose</a></span></span></span>. First, with each of the three different sizes of synthetic dataset: Hi5-Large (538,643 images), Hi5-Medium (100,000 images), Hi5-Small (10,000 images), then one human-annotated hand pose estimation dataset: OneHand10K (10,000 images). In training each model, the checkpoint with the best AUC in the validation set is saved. Each model is trained for a maximum of 400 epochs and stopped early if the performance plateaus.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Evaluation on Real Data</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">ViTPose follows the common top-down setting for pose estimation, which predicts the pose coordinates given the object (e.g. left and right hand) given the object location using a separate detector model. For our training and evaluation, we use the bounding box data from the ground truth, and similar to the original ViTPose paper<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib55" title="">55</a>]</cite> we evaluate the models on pose estimation performance.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">In this section, we evaluate how the models trained with synthetic data perform hand pose estimation on real data, compared to a model trained with real data. For evaluating the model, we use the following metrics,</p>
+<ul class="ltx_itemize" id="S4.I1">
+<li class="ltx_item" id="S4.I1.i1" style="list-style-type:none;">
+<div class="ltx_para" id="S4.I1.i1.p1">
+<p class="ltx_p" id="S4.I1.i1.p1.1"><span class="ltx_text ltx_font_bold" id="S4.I1.i1.p1.1.1">Percentage of Correct Keypoints (PCK)</span> measures the proportion of correctly predicted keypoints within a certain threshold distance. We use, <math alttext="threshold=0.2" class="ltx_Math" display="inline" id="S4.I1.i1.p1.1.m1.1"><semantics id="S4.I1.i1.p1.1.m1.1a"><mrow id="S4.I1.i1.p1.1.m1.1.1" xref="S4.I1.i1.p1.1.m1.1.1.cmml"><mrow id="S4.I1.i1.p1.1.m1.1.1.2" xref="S4.I1.i1.p1.1.m1.1.1.2.cmml"><mi id="S4.I1.i1.p1.1.m1.1.1.2.2" xref="S4.I1.i1.p1.1.m1.1.1.2.2.cmml">t</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.3" xref="S4.I1.i1.p1.1.m1.1.1.2.3.cmml">h</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1a" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.4" xref="S4.I1.i1.p1.1.m1.1.1.2.4.cmml">r</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1b" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.5" xref="S4.I1.i1.p1.1.m1.1.1.2.5.cmml">e</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1c" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.6" xref="S4.I1.i1.p1.1.m1.1.1.2.6.cmml">s</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1d" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.7" xref="S4.I1.i1.p1.1.m1.1.1.2.7.cmml">h</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1e" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.8" xref="S4.I1.i1.p1.1.m1.1.1.2.8.cmml">o</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1f" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.9" xref="S4.I1.i1.p1.1.m1.1.1.2.9.cmml">l</mi><mo id="S4.I1.i1.p1.1.m1.1.1.2.1g" xref="S4.I1.i1.p1.1.m1.1.1.2.1.cmml">⁢</mo><mi id="S4.I1.i1.p1.1.m1.1.1.2.10" xref="S4.I1.i1.p1.1.m1.1.1.2.10.cmml">d</mi></mrow><mo id="S4.I1.i1.p1.1.m1.1.1.1" xref="S4.I1.i1.p1.1.m1.1.1.1.cmml">=</mo><mn id="S4.I1.i1.p1.1.m1.1.1.3" xref="S4.I1.i1.p1.1.m1.1.1.3.cmml">0.2</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.I1.i1.p1.1.m1.1b"><apply id="S4.I1.i1.p1.1.m1.1.1.cmml" xref="S4.I1.i1.p1.1.m1.1.1"><eq id="S4.I1.i1.p1.1.m1.1.1.1.cmml" xref="S4.I1.i1.p1.1.m1.1.1.1"></eq><apply id="S4.I1.i1.p1.1.m1.1.1.2.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2"><times id="S4.I1.i1.p1.1.m1.1.1.2.1.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.1"></times><ci id="S4.I1.i1.p1.1.m1.1.1.2.2.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.2">𝑡</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.3.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.3">ℎ</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.4.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.4">𝑟</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.5.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.5">𝑒</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.6.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.6">𝑠</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.7.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.7">ℎ</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.8.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.8">𝑜</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.9.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.9">𝑙</ci><ci id="S4.I1.i1.p1.1.m1.1.1.2.10.cmml" xref="S4.I1.i1.p1.1.m1.1.1.2.10">𝑑</ci></apply><cn id="S4.I1.i1.p1.1.m1.1.1.3.cmml" type="float" xref="S4.I1.i1.p1.1.m1.1.1.3">0.2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.I1.i1.p1.1.m1.1c">threshold=0.2</annotation><annotation encoding="application/x-llamapun" id="S4.I1.i1.p1.1.m1.1d">italic_t italic_h italic_r italic_e italic_s italic_h italic_o italic_l italic_d = 0.2</annotation></semantics></math>.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i2" style="list-style-type:none;">
+<div class="ltx_para" id="S4.I1.i2.p1">
+<p class="ltx_p" id="S4.I1.i2.p1.1"><span class="ltx_text ltx_font_bold" id="S4.I1.i2.p1.1.1">Area Under the Curve (AUC)</span> calculates the PCK for various thresholds and then computes the area under the resulting curve by averaging these PCK values.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i3" style="list-style-type:none;">
+<div class="ltx_para" id="S4.I1.i3.p1">
+<p class="ltx_p" id="S4.I1.i3.p1.1"><span class="ltx_text ltx_font_bold" id="S4.I1.i3.p1.1.1">End-Point Error (EPE)</span> is the average Euclidean distance of predicted and ground-truth keypoint in pixel.</p>
+</div>
+</li>
+</ul>
+</div>
+<section class="ltx_subsubsection" id="S4.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.2.1 </span>Real Data Benchmark</h4>
+<div class="ltx_para" id="S4.SS2.SSS1.p1">
+<p class="ltx_p" id="S4.SS2.SSS1.p1.1">We take the best model checkpoint from each training discussed in Subsection <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S4.SS1" title="4.1 Training Setup ‣ 4 Training &amp; Evaluation ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">4.1</span></a> and evaluate them on OneHand10K test dataset. OneHand10K test dataset contains 1,703 in-the-wild hand gesture images and human annotation of the pose coordinates. As OneHand10K train and test data are splits from the same data distribution and follow the same annotation scheme by the same annotators, they have a natural advantage to get a high score. However, performing reasonably well in this test set gives us a validation for the effectiveness of the synthetic data. Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.T1" title="Table 1 ‣ 5.1 Numeric Performance ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">1</span></a> shows the performance comparison.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S4.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.2.2 </span>Perturbation Test</h4>
+<div class="ltx_para" id="S4.SS2.SSS2.p1">
+<p class="ltx_p" id="S4.SS2.SSS2.p1.1">Our data synthesis pipeline can simulate labels for part of the image that is corrupted, out of frame, or not visible. This enables a model trained with synthetic data to be more robust to occlusion, noise, or other disturbances. To test this, we perturb the test dataset by deleting exactly half of the hand in every image in the OneHand10k dataset. Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#A1.F6" title="Figure 6 ‣ Appendix A Appendix ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">6</span></a> in the Appendix shows examples of the perturbed dataset. In this test, we keep the label the same as the original images, this challenges each model to predict the full hand pose by only observing half of the hand. Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.T1" title="Table 1 ‣ 5.1 Numeric Performance ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">1</span></a> also shows the result of this perturbation.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S4.SS2.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.2.3 </span>Evaluation on Different Skin Colors</h4>
+<div class="ltx_para" id="S4.SS2.SSS3.p1">
+<p class="ltx_p" id="S4.SS2.SSS3.p1.1">Representation of different skin colors is a major limitation of many computer vision datasets related to humans. However, our synthetic data creation guarantees equal representation of different skin colors. We would like to test our model’s capability on different skin colors, particularly on darker skin colors which are rare in real datasets. In our observation, darker skin color hands are noticeably underrepresented in OneHand10k train and test dataset. Furthermore, the dataset does not come with a skin color label. Hence, for this test, we use 11k Hands dataset<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib1" title="">1</a>]</cite> that contains hand images alongside their skin color, gender, and other biometric labels. The dataset contains 4 categories for skin color with varied representation: <span class="ltx_text ltx_font_italic" id="S4.SS2.SSS3.p1.1.1">Dark, Medium, Fair, Very Fair</span>. We sample some images of each skin color category and create separate test sets. The 11K Hands dataset, however, does not come with hand pose labels. To alleviate this problem, we use MediaPipe<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib33" title="">33</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib57" title="">57</a>]</cite>, a popular hand pose estimation library developed by Google, to extract pose estimation prediction for the images and use this data as ground truth. To make a comparison of the effectiveness of MediaPipe, we also test on OneHand10K test images with MediaPipe predictions as ground truth. The results are shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.T2" title="Table 2 ‣ 5.2 Skin Tone Results ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Results</h2>
+<figure class="ltx_figure" id="S5.F5">
+<table class="ltx_tabular ltx_align_middle" id="S5.F5.12">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.F5.6.6">
+<td class="ltx_td ltx_align_justify ltx_align_middle" id="S5.F5.6.6.7" style="width:28.5pt;padding-bottom:5.0pt;">
+<div class="ltx_inline-block ltx_align_top ltx_transformed_outer" id="S5.F5.6.6.7.1" style="width:8.8pt;height:43.2pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:43.2pt;transform:translate(-17.22pt,-16.25pt) rotate(-90deg) ;">
+<p class="ltx_p" id="S5.F5.6.6.7.1.1"><span class="ltx_text ltx_font_bold" id="S5.F5.6.6.7.1.1.1">Hi5-Large</span></p>
+</span></div>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.1.1.1" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.1.1.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="897" id="S5.F5.1.1.1.1.g1" src="extracted/5646952/images/results/vis_44_hi5.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.2.2.2" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.2.2.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="798" id="S5.F5.2.2.2.1.g1" src="extracted/5646952/images/results/vis_380_hi5.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.3.3.3" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.3.3.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="888" id="S5.F5.3.3.3.1.g1" src="extracted/5646952/images/results/vis_55_hi5.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.4.4.4" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.4.4.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S5.F5.4.4.4.1.g1" src="extracted/5646952/images/results/vis_344_hi5.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.5.5.5" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.5.5.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="447" id="S5.F5.5.5.5.1.g1" src="extracted/5646952/images/results/vis_404_hi5.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle" id="S5.F5.6.6.6" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.6.6.6.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="798" id="S5.F5.6.6.6.1.g1" src="extracted/5646952/images/results/vis_4_hi5.jpg" width="598"/>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.F5.12.12">
+<td class="ltx_td ltx_align_justify ltx_align_middle" id="S5.F5.12.12.7" style="width:28.5pt;padding-bottom:5.0pt;">
+<div class="ltx_inline-block ltx_align_top ltx_transformed_outer" id="S5.F5.12.12.7.1" style="width:6.9pt;height:59.2pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="width:59.2pt;transform:translate(-26.11pt,-26.11pt) rotate(-90deg) ;">
+<p class="ltx_p" id="S5.F5.12.12.7.1.1"><span class="ltx_text ltx_font_bold" id="S5.F5.12.12.7.1.1.1">OneHand10K</span></p>
+</span></div>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.7.7.1" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.7.7.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="897" id="S5.F5.7.7.1.1.g1" src="extracted/5646952/images/results/vis_44_Onehand.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.8.8.2" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.8.8.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="798" id="S5.F5.8.8.2.1.g1" src="extracted/5646952/images/results/vis_380_Onehand.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.9.9.3" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.9.9.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="888" id="S5.F5.9.9.3.1.g1" src="extracted/5646952/images/results/vis_55_Onehand.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.10.10.4" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.10.10.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S5.F5.10.10.4.1.g1" src="extracted/5646952/images/results/vis_344_Onehand.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.11.11.5" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.11.11.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="447" id="S5.F5.11.11.5.1.g1" src="extracted/5646952/images/results/vis_404_Onehand.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle" id="S5.F5.12.12.6" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.12.12.6.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="798" id="S5.F5.12.12.6.1.g1" src="extracted/5646952/images/results/vis_4_Onehand.jpg" width="598"/>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.F5.12.13.1">
+<td class="ltx_td ltx_align_justify ltx_align_middle" id="S5.F5.12.13.1.1" style="width:28.5pt;padding-bottom:5.0pt;"></td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.12.13.1.2" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.12.13.1.2.1">
+<span class="ltx_p" id="S5.F5.12.13.1.2.1.1">(a)</span>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.12.13.1.3" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.12.13.1.3.1">
+<span class="ltx_p" id="S5.F5.12.13.1.3.1.1">(b)</span>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.12.13.1.4" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.12.13.1.4.1">
+<span class="ltx_p" id="S5.F5.12.13.1.4.1.1">(c)</span>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.12.13.1.5" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.12.13.1.5.1">
+<span class="ltx_p" id="S5.F5.12.13.1.5.1.1">(d)</span>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="S5.F5.12.13.1.6" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.12.13.1.6.1">
+<span class="ltx_p" id="S5.F5.12.13.1.6.1.1">(e)</span>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle" id="S5.F5.12.13.1.7" style="width:75.5pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.F5.12.13.1.7.1">
+<span class="ltx_p" id="S5.F5.12.13.1.7.1.1">(f)</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S5.F5.14.1.1" style="font-size:90%;">Figure 5</span>: </span><span class="ltx_text" id="S5.F5.15.2" style="font-size:90%;">Visual results of predictions by ViT Pose Small model trained with Hi5 Large and OneHand10K dataset (best viewed on color and zoomed in).</span></figcaption>
+</figure>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Numeric Performance</h3>
+<div class="ltx_para" id="S5.SS1.p1">
+<p class="ltx_p" id="S5.SS1.p1.1">Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.T1" title="Table 1 ‣ 5.1 Numeric Performance ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">1</span></a> demonstrates the <span class="ltx_text ltx_font_italic" id="S5.SS1.p1.1.1">AUC, EPE,</span> and <span class="ltx_text ltx_font_italic" id="S5.SS1.p1.1.2">PCK</span> performance of ViTPose-S<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib55" title="">55</a>]</cite> model trained with a real human-annotated dataset (OneHand10K) and multiple sizes of synthetic datasets (Hi5-Small, Hi5-Medium, Hi5-Large) tested on OneHand10K test set, and Perturbed OneHand10K test set. We can see in the regular test set, the model trained with OneHand10K dataset performs better in all metrics, which is expected as both the training and test data came from the same distributions of human annotation scheme. However, model trained with Hi5-Large is able to achieve a closer score while having a completely different annotation scheme and being trained entirely with synthetic data. On the other hand, the performance improvement on synthetic data with the increase in training dataset size is notable. This hints that an even larger dataset may be able to close the gap with the model trained with real data. The discrepancy in real and synthetic dataset size implies that there might be a data distillation method that could preserve the model performance with a smaller-size synthetic dataset.</p>
+</div>
+<div class="ltx_para" id="S5.SS1.p2">
+<p class="ltx_p" id="S5.SS1.p2.1">Although all models suffer due to the perturbation of the data, the model trained with Hi5-Large suffers less and achieves the best results in all categories, with Hi5-Medium being a close second. This implies with significant corruption or occlusion of images, our synthetic data creates more robust models.</p>
+</div>
+<figure class="ltx_table" id="S5.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S5.T1.8.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S5.T1.9.2" style="font-size:90%;">Performance Metrics on Test set and Perturbed test set</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S5.T1.6">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T1.6.7.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T1.6.7.1.1" rowspan="2"><span class="ltx_text ltx_font_bold" id="S5.T1.6.7.1.1.1">Training Dataset</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="3" id="S5.T1.6.7.1.2"><span class="ltx_text ltx_font_bold" id="S5.T1.6.7.1.2.1">Test set</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="3" id="S5.T1.6.7.1.3"><span class="ltx_text ltx_font_bold" id="S5.T1.6.7.1.3.1">Perturbed test set</span></th>
+</tr>
+<tr class="ltx_tr" id="S5.T1.6.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1">
+<span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1">AUC</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T1.1.1.1.m1.1"><semantics id="S5.T1.1.1.1.m1.1a"><mo id="S5.T1.1.1.1.m1.1.1" stretchy="false" xref="S5.T1.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T1.1.1.1.m1.1b"><ci id="S5.T1.1.1.1.m1.1.1.cmml" xref="S5.T1.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T1.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T1.1.1.1.m1.1d">↑</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.2.2.2">
+<span class="ltx_text ltx_font_bold" id="S5.T1.2.2.2.1">EPE</span> <math alttext="\downarrow" class="ltx_Math" display="inline" id="S5.T1.2.2.2.m1.1"><semantics id="S5.T1.2.2.2.m1.1a"><mo id="S5.T1.2.2.2.m1.1.1" stretchy="false" xref="S5.T1.2.2.2.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S5.T1.2.2.2.m1.1b"><ci id="S5.T1.2.2.2.m1.1.1.cmml" xref="S5.T1.2.2.2.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T1.2.2.2.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S5.T1.2.2.2.m1.1d">↓</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.3.3.3">
+<span class="ltx_text ltx_font_bold" id="S5.T1.3.3.3.1">PCK</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T1.3.3.3.m1.1"><semantics id="S5.T1.3.3.3.m1.1a"><mo id="S5.T1.3.3.3.m1.1.1" stretchy="false" xref="S5.T1.3.3.3.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T1.3.3.3.m1.1b"><ci id="S5.T1.3.3.3.m1.1.1.cmml" xref="S5.T1.3.3.3.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T1.3.3.3.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T1.3.3.3.m1.1d">↑</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.4.4.4">
+<span class="ltx_text ltx_font_bold" id="S5.T1.4.4.4.1">AUC</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T1.4.4.4.m1.1"><semantics id="S5.T1.4.4.4.m1.1a"><mo id="S5.T1.4.4.4.m1.1.1" stretchy="false" xref="S5.T1.4.4.4.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T1.4.4.4.m1.1b"><ci id="S5.T1.4.4.4.m1.1.1.cmml" xref="S5.T1.4.4.4.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T1.4.4.4.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T1.4.4.4.m1.1d">↑</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.5.5.5">
+<span class="ltx_text ltx_font_bold" id="S5.T1.5.5.5.1">EPE</span> <math alttext="\downarrow" class="ltx_Math" display="inline" id="S5.T1.5.5.5.m1.1"><semantics id="S5.T1.5.5.5.m1.1a"><mo id="S5.T1.5.5.5.m1.1.1" stretchy="false" xref="S5.T1.5.5.5.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S5.T1.5.5.5.m1.1b"><ci id="S5.T1.5.5.5.m1.1.1.cmml" xref="S5.T1.5.5.5.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T1.5.5.5.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S5.T1.5.5.5.m1.1d">↓</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.6.6.6">
+<span class="ltx_text ltx_font_bold" id="S5.T1.6.6.6.1">PCK</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T1.6.6.6.m1.1"><semantics id="S5.T1.6.6.6.m1.1a"><mo id="S5.T1.6.6.6.m1.1.1" stretchy="false" xref="S5.T1.6.6.6.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T1.6.6.6.m1.1b"><ci id="S5.T1.6.6.6.m1.1.1.cmml" xref="S5.T1.6.6.6.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T1.6.6.6.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T1.6.6.6.m1.1d">↑</annotation></semantics></math>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T1.6.8.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T1.6.8.1.1">OneHand10K</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.6.8.1.2"><span class="ltx_text ltx_font_bold" id="S5.T1.6.8.1.2.1">0.4831</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.6.8.1.3"><span class="ltx_text ltx_font_bold" id="S5.T1.6.8.1.3.1">37.6934</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.6.8.1.4"><span class="ltx_text ltx_font_bold" id="S5.T1.6.8.1.4.1">0.9856</span></td>
+<td class="ltx_td ltx_nopad_l ltx_align_center ltx_border_t" id="S5.T1.6.8.1.5">0.2002</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.6.8.1.6">232.3519</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.6.8.1.7">0.6420</td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.6.9.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T1.6.9.2.1">Hi5-Small</th>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.9.2.2">0.3100</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.9.2.3">106.0484</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.9.2.4">0.8723</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S5.T1.6.9.2.5">0.1450</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.9.2.6">246.0686</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.9.2.7">0.5859</td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.6.10.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T1.6.10.3.1">Hi5-Medium</th>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.10.3.2">0.3890</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.10.3.3">75.8657</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.10.3.4">0.9379</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S5.T1.6.10.3.5">0.2099</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.10.3.6">219.0763</td>
+<td class="ltx_td ltx_align_center" id="S5.T1.6.10.3.7">0.6887</td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.6.11.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b" id="S5.T1.6.11.4.1">Hi5-Large</th>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T1.6.11.4.2">0.4068</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T1.6.11.4.3">68.0752</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T1.6.11.4.4">0.9552</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center ltx_border_b" id="S5.T1.6.11.4.5"><span class="ltx_text ltx_font_bold" id="S5.T1.6.11.4.5.1">0.2139</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T1.6.11.4.6"><span class="ltx_text ltx_font_bold" id="S5.T1.6.11.4.6.1">214.5883</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T1.6.11.4.7"><span class="ltx_text ltx_font_bold" id="S5.T1.6.11.4.7.1">0.6940</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Skin Tone Results</h3>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p" id="S5.SS2.p1.1">When models trained with OneHand10K (real) and Hi5-Large (synthetic) dataset are tested on hands of different skin colors, the results are mixed (Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.T2" title="Table 2 ‣ 5.2 Skin Tone Results ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">2</span></a>). In darker hands, the Hi5-Large dataset helped achieve lower <span class="ltx_text ltx_font_italic" id="S5.SS2.p1.1.1">EPE</span> and higher <span class="ltx_text ltx_font_italic" id="S5.SS2.p1.1.2">PCK</span>, however, OneHand10K helped achieve higher <span class="ltx_text ltx_font_italic" id="S5.SS2.p1.1.3">AUC</span>. For hands of the category <span class="ltx_text ltx_font_italic" id="S5.SS2.p1.1.4">Very fair</span>, OneHand10K performs conclusively better, which could be explained by high frequency of fair hands in the dataset. Another interesting finding from Table <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.T2" title="Table 2 ‣ 5.2 Skin Tone Results ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">2</span></a> is that when both models compared against MediaPipe<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib33" title="">33</a>]</cite> generated pose coordinates on OneHand10K test set, their performance becomes relatively similar, with the model trained with Hi5-Large is leading in all metrics. This hints that when the advantage of the train-test same annotation scheme is taken out, synthetic data performs competitively with real data. However, this result is not conclusive as 300 of the 1,703 test data was dropped by MediaPipe during prediction.</p>
+</div>
+<figure class="ltx_table" id="S5.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S5.T2.8.1.1" style="font-size:90%;">Table 2</span>: </span><span class="ltx_text" id="S5.T2.9.2" style="font-size:90%;">Performance metrics for different skin tones compared against MediaPipe Hands<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib57" title="">57</a>]</cite>.</span></figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S5.T2.6">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T2.6.7.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T2.6.7.1.1" rowspan="2"><span class="ltx_text ltx_font_bold" id="S5.T2.6.7.1.1.1">Test Dataset (Size)</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="3" id="S5.T2.6.7.1.2"><span class="ltx_text ltx_font_bold" id="S5.T2.6.7.1.2.1">OneHand10K</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="3" id="S5.T2.6.7.1.3"><span class="ltx_text ltx_font_bold" id="S5.T2.6.7.1.3.1">Hi5-Large</span></th>
+</tr>
+<tr class="ltx_tr" id="S5.T2.6.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1">
+<span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1">AUC</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T2.1.1.1.m1.1"><semantics id="S5.T2.1.1.1.m1.1a"><mo id="S5.T2.1.1.1.m1.1.1" stretchy="false" xref="S5.T2.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T2.1.1.1.m1.1b"><ci id="S5.T2.1.1.1.m1.1.1.cmml" xref="S5.T2.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T2.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T2.1.1.1.m1.1d">↑</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.2.2.2">
+<span class="ltx_text ltx_font_bold" id="S5.T2.2.2.2.1">EPE</span> <math alttext="\downarrow" class="ltx_Math" display="inline" id="S5.T2.2.2.2.m1.1"><semantics id="S5.T2.2.2.2.m1.1a"><mo id="S5.T2.2.2.2.m1.1.1" stretchy="false" xref="S5.T2.2.2.2.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S5.T2.2.2.2.m1.1b"><ci id="S5.T2.2.2.2.m1.1.1.cmml" xref="S5.T2.2.2.2.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T2.2.2.2.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S5.T2.2.2.2.m1.1d">↓</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.3.3.3">
+<span class="ltx_text ltx_font_bold" id="S5.T2.3.3.3.1">PCK</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T2.3.3.3.m1.1"><semantics id="S5.T2.3.3.3.m1.1a"><mo id="S5.T2.3.3.3.m1.1.1" stretchy="false" xref="S5.T2.3.3.3.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T2.3.3.3.m1.1b"><ci id="S5.T2.3.3.3.m1.1.1.cmml" xref="S5.T2.3.3.3.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T2.3.3.3.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T2.3.3.3.m1.1d">↑</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_nopad_l ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.4.4.4">
+<span class="ltx_text ltx_font_bold" id="S5.T2.4.4.4.1">AUC</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T2.4.4.4.m1.1"><semantics id="S5.T2.4.4.4.m1.1a"><mo id="S5.T2.4.4.4.m1.1.1" stretchy="false" xref="S5.T2.4.4.4.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T2.4.4.4.m1.1b"><ci id="S5.T2.4.4.4.m1.1.1.cmml" xref="S5.T2.4.4.4.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T2.4.4.4.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T2.4.4.4.m1.1d">↑</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.5.5.5">
+<span class="ltx_text ltx_font_bold" id="S5.T2.5.5.5.1">EPE</span> <math alttext="\downarrow" class="ltx_Math" display="inline" id="S5.T2.5.5.5.m1.1"><semantics id="S5.T2.5.5.5.m1.1a"><mo id="S5.T2.5.5.5.m1.1.1" stretchy="false" xref="S5.T2.5.5.5.m1.1.1.cmml">↓</mo><annotation-xml encoding="MathML-Content" id="S5.T2.5.5.5.m1.1b"><ci id="S5.T2.5.5.5.m1.1.1.cmml" xref="S5.T2.5.5.5.m1.1.1">↓</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T2.5.5.5.m1.1c">\downarrow</annotation><annotation encoding="application/x-llamapun" id="S5.T2.5.5.5.m1.1d">↓</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.6.6.6">
+<span class="ltx_text ltx_font_bold" id="S5.T2.6.6.6.1">PCK</span> <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T2.6.6.6.m1.1"><semantics id="S5.T2.6.6.6.m1.1a"><mo id="S5.T2.6.6.6.m1.1.1" stretchy="false" xref="S5.T2.6.6.6.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T2.6.6.6.m1.1b"><ci id="S5.T2.6.6.6.m1.1.1.cmml" xref="S5.T2.6.6.6.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T2.6.6.6.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T2.6.6.6.m1.1d">↑</annotation></semantics></math>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T2.6.8.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T2.6.8.1.1">OneHand10K test (1403)</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.6.8.1.2">0.4517</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.6.8.1.3">54.5892</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.6.8.1.4">0.9340</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center ltx_border_t" id="S5.T2.6.8.1.5"><span class="ltx_text ltx_font_bold" id="S5.T2.6.8.1.5.1">0.4585</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.6.8.1.6"><span class="ltx_text ltx_font_bold" id="S5.T2.6.8.1.6.1">52.6380</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.6.8.1.7"><span class="ltx_text ltx_font_bold" id="S5.T2.6.8.1.7.1">0.9375</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.6.9.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.6.9.2.1">Dark (635)</th>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.9.2.2"><span class="ltx_text ltx_font_bold" id="S5.T2.6.9.2.2.1">0.3259</span></td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.9.2.3">29.3596</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.9.2.4">0.9987</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S5.T2.6.9.2.5">0.2970</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.9.2.6"><span class="ltx_text ltx_font_bold" id="S5.T2.6.9.2.6.1">25.7957</span></td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.9.2.7"><span class="ltx_text ltx_font_bold" id="S5.T2.6.9.2.7.1">1.0</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.6.10.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.6.10.3.1">Medium (915)</th>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.10.3.2"><span class="ltx_text ltx_font_bold" id="S5.T2.6.10.3.2.1">0.3282</span></td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.10.3.3">28.4353</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.10.3.4">0.9987</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S5.T2.6.10.3.5">0.2978</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.10.3.6"><span class="ltx_text ltx_font_bold" id="S5.T2.6.10.3.6.1">26.0758</span></td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.10.3.7"><span class="ltx_text ltx_font_bold" id="S5.T2.6.10.3.7.1">0.9992</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.6.11.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.6.11.4.1">Fair (939)</th>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.11.4.2"><span class="ltx_text ltx_font_bold" id="S5.T2.6.11.4.2.1">0.3304</span></td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.11.4.3">27.9544</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.11.4.4">0.9997</td>
+<td class="ltx_td ltx_nopad_l ltx_align_center" id="S5.T2.6.11.4.5">0.3003</td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.11.4.6"><span class="ltx_text ltx_font_bold" id="S5.T2.6.11.4.6.1">25.5552</span></td>
+<td class="ltx_td ltx_align_center" id="S5.T2.6.11.4.7"><span class="ltx_text ltx_font_bold" id="S5.T2.6.11.4.7.1">0.9998</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.6.12.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b" id="S5.T2.6.12.5.1">Very fair (330)</th>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T2.6.12.5.2"><span class="ltx_text ltx_font_bold" id="S5.T2.6.12.5.2.1">0.3953</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T2.6.12.5.3"><span class="ltx_text ltx_font_bold" id="S5.T2.6.12.5.3.1">21.7946</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T2.6.12.5.4"><span class="ltx_text ltx_font_bold" id="S5.T2.6.12.5.4.1">1.0</span></td>
+<td class="ltx_td ltx_nopad_l ltx_align_center ltx_border_b" id="S5.T2.6.12.5.5">0.3228</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T2.6.12.5.6">23.3413</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S5.T2.6.12.5.7"><span class="ltx_text ltx_font_bold" id="S5.T2.6.12.5.7.1">1.0</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S5.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>Visual Results</h3>
+<div class="ltx_para" id="S5.SS3.p1">
+<p class="ltx_p" id="S5.SS3.p1.1">Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.F5" title="Figure 5 ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">5</span></a> demonstrates sample predictions by ViTPose trained with Hi5-Large dataset and OneHand10K respectively. In a large number of cases, such as Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.F5" title="Figure 5 ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">5</span></a> (a), (c), (d), (e), both models predict a correct pose estimation based on their annotation scheme or make similar mistakes as (b) (e.g. both models misidentify pointer finger and middle finger). As seen in the knuckle points of (b), the model trained with synthetic data tends to identify the middle of the bone, while human-annotated model predictions tend to stick to the surface. This will allow the model trained with synthetic data a greater consistency across multiple views of a hand. Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#S5.F5" title="Figure 5 ‣ 5 Results ‣ Hi5 : 2D Hand Pose Estimation with Zero Human Annotation"><span class="ltx_text ltx_ref_tag">5</span></a> (c) and (d) also demonstrate that the model trained with Hi5 can make a close reasonable approximation of the entirely invisible joints. This is a native property of synthetic data, which is very difficult to capture with human annotation. similar to (e), the model trained with Hi5 can reasonably estimate hand-object interaction, while never explicitly being trained on it. We attribute this to our data augmentation/ noise injection methods. On the other hand, if the hand pose derails too far from the hand animations in the Hi5 dataset, the model may predict subpar the model trained with OneHand10k. This implies the importance of having comprehensive hand animations in synthesis.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Discussion &amp; Future Work</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">In this paper, we demonstrate the simplicity of creating high-quality synthetic data for a complex computer vision task such as hand pose estimation using a consumer computer, open-source, and open-access tools. After the initial system development, creating 583K (538K train, 45K test) labeled images for the Hi5 dataset only takes 48 hours of computing time on a computer with NVIDIA 3090 consumer GPU, which would cost approximately $4.15 in electricity cost in the United States. There are several inherent advantages of our synthetic data generation pipeline. It provides a greater geometric consistency over multiple views of the hand, it can provide labels through occlusion, unseen parts of the image, it guarantees diversity and representation, and it can natively create first-person, third-person views. The model trained with our synthetic data is more robust in perturbation and occlusion, and it can predict novel poses and can handle hand-object interaction, and accessories, while never being trained on them.</p>
+</div>
+<div class="ltx_para" id="S6.p2">
+<p class="ltx_p" id="S6.p2.1">However, our method also has a few notable limitations. Animating the hands manually is a tedious process. We experimented with Leap Motion Sensor, a commercial hand-tracking hardware that provided noisy and incorrect animation. In future work, hand-tracking gloves could be experimented with for easy and diverse animations. Although we experimented with different gender and skin colors, other skin properties, such as age, wrinkles, hand shape variation, and accessories, might provide more diversity to the dataset. On the other hand, our dataset also misses contextual information regarding human hand pose – for example, location, activity, and the person the hand belongs to – all of which are much harder to simulate. In the future, we would like to explore the possibility of using generative AI such as a diffusion model<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib37" title="">37</a>]</cite> guided by game-engine-rendered images to add more diversity and variation to the synthetic dataset<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib58" title="">58</a>]</cite>. In that setting, diversity and variation in the images could be controlled by text prompts, instead of hand engineering in 3D objects.</p>
+</div>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7 </span>Conclusion</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p" id="S7.p1.1">In conclusion, our research highlights the effectiveness and potential of using synthetic data for 2D hand pose estimation. The Hi5 dataset, generated entirely on consumer-grade hardware with zero human annotation, demonstrates that synthetic data created with high-fidelity 3D hand models, diverse animations, and realistic environment and lighting, with comprehensive representation, can solve biases common in real datasets while matching and sometimes surpassing their performance. Our experiments show that models trained on Hi5 perform competitively on real-world benchmarks such as OneHand10K, with notable robustness against occlusions and perturbations, particularly in handling diverse skin tones. This approach significantly lowers the cost and time for data collection and annotation, making high-quality hand pose estimation more accessible. Our data synthesis method provides a foundation for creating datasets with precise control over diversity and representation, enabling the training of robust and fair computer vision models.
+
+
+</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.1.1" style="font-size:90%;">
+Mahmoud Afifi.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.2.1" style="font-size:90%;">11k hands: gender recognition and biometric identification using a large dataset of hand images.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib1.3.1" style="font-size:90%;">Multimedia Tools and Applications</span><span class="ltx_text" id="bib.bib1.4.2" style="font-size:90%;">, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.1.1" style="font-size:90%;">
+Ammar Ahmad, Cyrille Migniot, and Albert Dipanda.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.2.1" style="font-size:90%;">Hand pose estimation and tracking in real and virtual interaction: A review.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib2.3.1" style="font-size:90%;">Image and Vision Computing</span><span class="ltx_text" id="bib.bib2.4.2" style="font-size:90%;">, 89:35–49, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.1.1" style="font-size:90%;">
+Giuseppe Airò Farulla, Daniele Pianu, Marco Cempini, Mario Cortese, Ludovico O. Russo, Marco Indaco, Roberto Nerino, Antonio Chimienti, Calogero M. Oddo, and Nicola Vitiello.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.2.1" style="font-size:90%;">Vision-based pose estimation for robot-mediated hand telerehabilitation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib3.3.1" style="font-size:90%;">Sensors</span><span class="ltx_text" id="bib.bib3.4.2" style="font-size:90%;">, 16(2), 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.1.1" style="font-size:90%;">
+Mykhaylo Andriluka, Leonid Pishchulin, Peter Gehler, and Bernt Schiele.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.2.1" style="font-size:90%;">2d human pose estimation: New benchmark and state of the art analysis.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib4.3.1" style="font-size:90%;">2014 IEEE Conference on Computer Vision and Pattern Recognition</span><span class="ltx_text" id="bib.bib4.4.2" style="font-size:90%;">, pages 3686–3693, 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.1.1" style="font-size:90%;">
+Shilpa Arora, Eric Nyberg, and Carolyn Rose.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.2.1" style="font-size:90%;">Estimating annotation cost for active learning in a multi-annotator environment.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib5.4.2" style="font-size:90%;">Proceedings of the NAACL HLT 2009 Workshop on Active Learning for Natural Language Processing</span><span class="ltx_text" id="bib.bib5.5.3" style="font-size:90%;">, pages 18–26, 2009.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.1.1" style="font-size:90%;">
+Sven Bambach, Stefan Lee, David J. Crandall, and Chen Yu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.2.1" style="font-size:90%;">Lending a hand: Detecting hands and recognizing activities in complex egocentric interactions.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib6.4.2" style="font-size:90%;">The IEEE International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib6.5.3" style="font-size:90%;">, December 2015.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.1.1" style="font-size:90%;">
+Michael J Black, Priyanka Patel, Joachim Tesch, and Jinlong Yang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.2.1" style="font-size:90%;">Bedlam: A synthetic dataset of bodies exhibiting detailed lifelike animated motion.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib7.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</span><span class="ltx_text" id="bib.bib7.5.3" style="font-size:90%;">, pages 8726–8737, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.1.1" style="font-size:90%;">
+Gavin Buckingham.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.2.1" style="font-size:90%;">Hand tracking for immersive virtual reality: Opportunities and challenges.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib8.3.1" style="font-size:90%;">Frontiers in Virtual Reality</span><span class="ltx_text" id="bib.bib8.4.2" style="font-size:90%;">, 2, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.1.1" style="font-size:90%;">
+Charles R. Cameron, Louis W. DiValentin, Rohini Manaktala, Adam C. McElhaney, Christopher H. Nostrand, Owen J. Quinlan, Lauren N. Sharpe, Adam C. Slagle, Charles D. Wood, Yang Yang Zheng, and Gregory J. Gerling.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.2.1" style="font-size:90%;">Hand tracking and visualization in a virtual reality simulation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib9.4.2" style="font-size:90%;">2011 IEEE Systems and Information Engineering Design Symposium</span><span class="ltx_text" id="bib.bib9.5.3" style="font-size:90%;">, pages 127–132, 2011.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.1.1" style="font-size:90%;">
+Alain Chardon, Isabelle Cretois, and Colette Hourseau.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.2.1" style="font-size:90%;">Skin colour typology and suntanning pathways.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib10.3.1" style="font-size:90%;">International journal of cosmetic science</span><span class="ltx_text" id="bib.bib10.4.2" style="font-size:90%;">, 13(4):191–208, 1991.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.1.1" style="font-size:90%;">
+Kenny Chen, Paolo Gabriel, Abdulwahab Alasfour, Chenghao Gong, Werner K. Doyle, Orrin Devinsky, Daniel Friedman, Patricia Dugan, Lucia Melloni, Thomas Thesen, David Gonda, Shifteh Sattar, Sonya Wang, and Vikash Gilja.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.2.1" style="font-size:90%;">Patient-specific pose estimation in clinical environments.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib11.3.1" style="font-size:90%;">IEEE Journal of Translational Engineering in Health and Medicine</span><span class="ltx_text" id="bib.bib11.4.2" style="font-size:90%;">, 6:1–11, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.1.1" style="font-size:90%;">
+S. Del Bino and F. Bernerd.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.2.1" style="font-size:90%;">Variations in skin colour and the biological consequences of ultraviolet radiation exposure.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib12.3.1" style="font-size:90%;">British Journal of Dermatology</span><span class="ltx_text" id="bib.bib12.4.2" style="font-size:90%;">, 169(s3):33–40, 10 2013.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.1.1" style="font-size:90%;">
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.2.1" style="font-size:90%;">An image is worth 16x16 words: Transformers for image recognition at scale, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.1.1" style="font-size:90%;">
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.2.1" style="font-size:90%;">An image is worth 16x16 words: Transformers for image recognition at scale, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.1.1" style="font-size:90%;">
+Kristian Ehlers and Konstantin Brama.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.2.1" style="font-size:90%;">A human-robot interaction interface for mobile and stationary robots based on real-time 3d human body and hand-finger pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib15.4.2" style="font-size:90%;">2016 IEEE 21st International Conference on Emerging Technologies and Factory Automation (ETFA)</span><span class="ltx_text" id="bib.bib15.5.3" style="font-size:90%;">, pages 1–6, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.1.1" style="font-size:90%;">
+Anthony Gillioz, Jacky Casas, Elena Mugellini, and Omar Abou Khaled.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.2.1" style="font-size:90%;">Overview of the transformer-based models for nlp tasks.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib16.4.2" style="font-size:90%;">2020 15th Conference on Computer Science and Information Systems (FedCSIS)</span><span class="ltx_text" id="bib.bib16.5.3" style="font-size:90%;">, pages 179–183. IEEE, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.1.1" style="font-size:90%;">
+Thomas Golda, Tobias Kalb, Arne Schumann, and Jürgen Beyerer.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.2.1" style="font-size:90%;">Human pose estimation for real-world crowded scenarios, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.1.1" style="font-size:90%;">
+Francisco Gomez-Donoso, Sergio Orts-Escolano, and Miguel Cazorla.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.2.1" style="font-size:90%;">Accurate and efficient 3d hand pose regression for robot hand teleoperation using a monocular rgb camera.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib18.3.1" style="font-size:90%;">Expert Systems with Applications</span><span class="ltx_text" id="bib.bib18.4.2" style="font-size:90%;">, 136:327–337, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.1.1" style="font-size:90%;">
+Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, and Ross Girshick.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.2.1" style="font-size:90%;">Masked autoencoders are scalable vision learners.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib19.4.2" style="font-size:90%;">2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib19.5.3" style="font-size:90%;">, pages 15979–15988, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.1.1" style="font-size:90%;">
+Gary B. Huang, Manu Ramesh, Tamara Berg, and Erik Learned-Miller.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.2.1" style="font-size:90%;">Labeled faces in the wild: A database for studying face recognition in unconstrained environments.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.3.1" style="font-size:90%;">Technical Report 07-49, University of Massachusetts, Amherst, October 2007.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.1.1" style="font-size:90%;">
+J. Isaacs and S. Foo.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.2.1" style="font-size:90%;">Hand pose estimation for american sign language recognition.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib21.4.2" style="font-size:90%;">Thirty-Sixth Southeastern Symposium on System Theory, 2004. Proceedings of the</span><span class="ltx_text" id="bib.bib21.5.3" style="font-size:90%;">, pages 132–136, 2004.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.1.1" style="font-size:90%;">
+M. Islam, S. Lee, A. Abdelkader, S. Park, and E. Hoque.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.2.1" style="font-size:90%;">Park: Parkinson’s analysis with remote kinetic-tasks.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib22.4.2" style="font-size:90%;">2023 11th International Conference on Affective Computing and Intelligent Interaction Workshops and Demos (ACIIW)</span><span class="ltx_text" id="bib.bib22.5.3" style="font-size:90%;">, pages 1–3, Los Alamitos, CA, USA, sep 2023. IEEE Computer Society.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.1.1" style="font-size:90%;">
+Md Saiful Islam, Wasifur Rahman, Abdelrahman Abdelkader, Sangwu Lee, Phillip T Yang, Jennifer Lynn Purks, Jamie Lynn Adams, Ruth B Schneider, Earl Ray Dorsey, and Ehsan Hoque.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.2.1" style="font-size:90%;">Using ai to measure parkinson’s disease severity at home.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib23.3.1" style="font-size:90%;">npj Digital Medicine</span><span class="ltx_text" id="bib.bib23.4.2" style="font-size:90%;">, 6(1):156, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.1.1" style="font-size:90%;">
+Sheng Jin, Lumin Xu, Jin Xu, Can Wang, Wentao Liu, Chen Qian, Wanli Ouyang, and Ping Luo.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.2.1" style="font-size:90%;">Whole-body human pose estimation in the wild, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.1.1" style="font-size:90%;">
+Brian Karis and Epic Games.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.2.1" style="font-size:90%;">Real shading in unreal engine 4.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib25.3.1" style="font-size:90%;">Proc. Physically Based Shading Theory Practice</span><span class="ltx_text" id="bib.bib25.4.2" style="font-size:90%;">, 4(3):1, 2013.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.1.1" style="font-size:90%;">
+Neeraj Kumar, Alexander C Berg, Peter N Belhumeur, and Shree K Nayar.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.2.1" style="font-size:90%;">Attribute and simile classifiers for face verification.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib26.4.2" style="font-size:90%;">2009 IEEE 12th international conference on computer vision</span><span class="ltx_text" id="bib.bib26.5.3" style="font-size:90%;">, pages 365–372. IEEE, 2009.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.1.1" style="font-size:90%;">
+Gary B. Huang Erik Learned-Miller.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.2.1" style="font-size:90%;">Labeled faces in the wild: Updates and new reportingprocedures.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.3.1" style="font-size:90%;">Technical Report UM-CS-2014-003, University of Massachusetts, Amherst, May 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.1.1" style="font-size:90%;">
+Rui Li, Hongyu Wang, and Zhenyu Liu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.2.1" style="font-size:90%;">Survey on mapping human hand motion to robotic hands for teleoperation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib28.3.1" style="font-size:90%;">IEEE Transactions on Circuits and Systems for Video Technology</span><span class="ltx_text" id="bib.bib28.4.2" style="font-size:90%;">, 32(5):2647–2665, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib29.1.1" style="font-size:90%;">
+Tsung-Yi Lin, Michael Maire, Serge Belongie, Lubomir Bourdev, Ross Girshick, James Hays, Pietro Perona, Deva Ramanan, C. Lawrence Zitnick, and Piotr Dollár.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib29.2.1" style="font-size:90%;">Microsoft coco: Common objects in context, 2015.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.1.1" style="font-size:90%;">
+Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C. Lawrence Zitnick.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.2.1" style="font-size:90%;">Microsoft coco: Common objects in context.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.3.1" style="font-size:90%;">In David Fleet, Tomas Pajdla, Bernt Schiele, and Tinne Tuytelaars, editors, </span><span class="ltx_text ltx_font_italic" id="bib.bib30.4.2" style="font-size:90%;">Computer Vision – ECCV 2014</span><span class="ltx_text" id="bib.bib30.5.3" style="font-size:90%;">, pages 740–755, Cham, 2014. Springer International Publishing.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib31.1.1" style="font-size:90%;">
+Huajun Liu, Fuqiang Liu, Xinyi Fan, and Dong Huang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib31.2.1" style="font-size:90%;">Polarized self-attention: Towards high-quality pixel-wise regression, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.1.1" style="font-size:90%;">
+Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.2.1" style="font-size:90%;">Deep learning face attributes in the wild.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib32.4.2" style="font-size:90%;">Proceedings of International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib32.5.3" style="font-size:90%;">, December 2015.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.1.1" style="font-size:90%;">
+Camillo Lugaresi, Jiuqiang Tang, Hadon Nash, Chris McClanahan, Esha Uboweja, Michael Hays, Fan Zhang, Chuo-Ling Chang, Ming Yong, Juhyun Lee, Wan-Teh Chang, Wei Hua, Manfred Georg, and Matthias Grundmann.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.2.1" style="font-size:90%;">Mediapipe: A framework for perceiving and processing reality.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib33.4.2" style="font-size:90%;">Third Workshop on Computer Vision for AR/VR at IEEE Computer Vision and Pattern Recognition (CVPR) 2019</span><span class="ltx_text" id="bib.bib33.5.3" style="font-size:90%;">, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.1.1" style="font-size:90%;">
+Brianna Maze, Jocelyn Adams, James A Duncan, Nathan Kalka, Tim Miller, Charles Otto, Anil K Jain, W Tyler Niggel, Janet Anderson, Jordan Cheney, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.2.1" style="font-size:90%;">Iarpa janus benchmark-c: Face dataset and protocol.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib34.4.2" style="font-size:90%;">2018 international conference on biometrics (ICB)</span><span class="ltx_text" id="bib.bib34.5.3" style="font-size:90%;">, pages 158–165. IEEE, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.1.1" style="font-size:90%;">
+Gyeongsik Moon, Shoou-I Yu, He Wen, Takaaki Shiratori, and Kyoung Mu Lee.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.2.1" style="font-size:90%;">Interhand2.6m: A dataset and baseline for 3d interacting hand pose estimation from a single rgb image.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.3.1" style="font-size:90%;">In Andrea Vedaldi, Horst Bischof, Thomas Brox, and Jan-Michael Frahm, editors, </span><span class="ltx_text ltx_font_italic" id="bib.bib35.4.2" style="font-size:90%;">Computer Vision – ECCV 2020</span><span class="ltx_text" id="bib.bib35.5.3" style="font-size:90%;">, pages 548–564, Cham, 2020. Springer International Publishing.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.1.1" style="font-size:90%;">
+Franziska Mueller, Dushyant Mehta, Oleksandr Sotnychenko, Srinath Sridhar, Dan Casas, and Christian Theobalt.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.2.1" style="font-size:90%;">Real-time hand tracking under occlusion from an egocentric rgb-d sensor.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib36.4.2" style="font-size:90%;">Proceedings of International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib36.5.3" style="font-size:90%;">, October 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.1.1" style="font-size:90%;">
+R. Rombach, A. Blattmann, D. Lorenz, P. Esser, and B. Ommer.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.2.1" style="font-size:90%;">High-resolution image synthesis with latent diffusion models.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib37.4.2" style="font-size:90%;">2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib37.5.3" style="font-size:90%;">, pages 10674–10685, Los Alamitos, CA, USA, jun 2022. IEEE Computer Society.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib38.1.1" style="font-size:90%;">
+Christos Sagonas, Georgios Tzimiropoulos, Stefanos Zafeiriou, and Maja Pantic.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib38.2.1" style="font-size:90%;">300 faces in-the-wild challenge: The first facial landmark localization challenge.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib38.3.1" style="font-size:90%;">2013 IEEE International Conference on Computer Vision Workshops</span><span class="ltx_text" id="bib.bib38.4.2" style="font-size:90%;">, pages 397–403, 2013.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib39.1.1" style="font-size:90%;">
+Andrew Sanders.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib39.2.1" style="font-size:90%;">An introduction to Unreal engine 4</span><span class="ltx_text" id="bib.bib39.3.2" style="font-size:90%;">.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib39.4.1" style="font-size:90%;">AK Peters/CRC Press, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib40.1.1" style="font-size:90%;">
+Jungpil Shin, Akitaka Matsuoka, Md. Al Mehedi Hasan, and Azmain Yakin Srizon.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib40.2.1" style="font-size:90%;">American sign language alphabet recognition by extracting feature from hand pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib40.3.1" style="font-size:90%;">Sensors</span><span class="ltx_text" id="bib.bib40.4.2" style="font-size:90%;">, 21(17), 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib41.1.1" style="font-size:90%;">
+Connor Shorten and Taghi M Khoshgoftaar.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib41.2.1" style="font-size:90%;">A survey on image data augmentation for deep learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib41.3.1" style="font-size:90%;">Journal of big data</span><span class="ltx_text" id="bib.bib41.4.2" style="font-size:90%;">, 6(1):1–48, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib42.1.1" style="font-size:90%;">
+Tomas Simon, Hanbyul Joo, Iain Matthews, and Yaser Sheikh.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib42.2.1" style="font-size:90%;">Hand keypoint detection in single images using multiview bootstrapping.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib42.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib42.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib42.5.3" style="font-size:90%;">, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib43.1.1" style="font-size:90%;">
+Ke Sun, Bin Xiao, Dong Liu, and Jingdong Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib43.2.1" style="font-size:90%;">Deep high-resolution representation learning for human pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib43.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib43.4.2" style="font-size:90%;">2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib43.5.3" style="font-size:90%;">, pages 5686–5696, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib44.1.1" style="font-size:90%;">
+Jonathan Tompson, Murphy Stein, Yann Lecun, and Ken Perlin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib44.2.1" style="font-size:90%;">Real-time continuous pose recovery of human hands using convolutional networks.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib44.3.1" style="font-size:90%;">ACM Transactions on Graphics</span><span class="ltx_text" id="bib.bib44.4.2" style="font-size:90%;">, 33, August 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_tag_bibitem">[45]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib45.1.1" style="font-size:90%;">
+Jonathan Tompson, Murphy Stein, Yann Lecun, and Ken Perlin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib45.2.1" style="font-size:90%;">Real-time continuous pose recovery of human hands using convolutional networks.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib45.3.1" style="font-size:90%;">ACM Transactions on Graphics (ToG)</span><span class="ltx_text" id="bib.bib45.4.2" style="font-size:90%;">, 33(5):1–10, 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_tag_bibitem">[46]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib46.1.1" style="font-size:90%;">
+E. Ueda, Y. Matsumoto, M. Imai, and T. Ogasawara.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib46.2.1" style="font-size:90%;">A hand-pose estimation for vision-based human interfaces.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib46.3.1" style="font-size:90%;">IEEE Transactions on Industrial Electronics</span><span class="ltx_text" id="bib.bib46.4.2" style="font-size:90%;">, 50(4):676–684, 2003.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_tag_bibitem">[47]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib47.1.1" style="font-size:90%;">
+Jan-Niklas Voigt-Antons, Tanja Kojic, Danish Ali, and Sebastian Möller.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib47.2.1" style="font-size:90%;">Influence of hand tracking as a way of interaction in virtual reality on user experience.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib47.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib47.4.2" style="font-size:90%;">2020 Twelfth International Conference on Quality of Multimedia Experience (QoMEX)</span><span class="ltx_text" id="bib.bib47.5.3" style="font-size:90%;">, pages 1–4, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_tag_bibitem">[48]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib48.1.1" style="font-size:90%;">
+Fei Wang, Liren Chen, Cheng Li, Shiyao Huang, Yanjie Chen, Chen Qian, and Chen Change Loy.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib48.2.1" style="font-size:90%;">The devil of face recognition is in the noise.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib48.3.1" style="font-size:90%;">arXiv preprint arXiv:1807.11649</span><span class="ltx_text" id="bib.bib48.4.2" style="font-size:90%;">, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_tag_bibitem">[49]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib49.1.1" style="font-size:90%;">
+Jingdong Wang, Ke Sun, Tianheng Cheng, Borui Jiang, Chaorui Deng, Yang Zhao, Dong Liu, Yadong Mu, Mingkui Tan, Xinggang Wang, Wenyu Liu, and Bin Xiao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib49.2.1" style="font-size:90%;">Deep high-resolution representation learning for visual recognition, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_tag_bibitem">[50]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib50.1.1" style="font-size:90%;">
+Yangang Wang, Cong Peng, and Yebin Liu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib50.2.1" style="font-size:90%;">Mask-pose cascaded cnn for 2d hand pose estimation from single color image.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib50.3.1" style="font-size:90%;">IEEE Transactions on Circuits and Systems for Video Technology</span><span class="ltx_text" id="bib.bib50.4.2" style="font-size:90%;">, 29(11):3258–3268, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_tag_bibitem">[51]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib51.1.1" style="font-size:90%;">
+Erroll Wood, Tadas Baltrušaitis, Charlie Hewitt, Sebastian Dziadzio, Matthew Johnson, Virginia Estellers, Thomas J. Cashman, and Jamie Shotton.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib51.2.1" style="font-size:90%;">Fake it till you make it: Face analysis in the wild using synthetic data alone, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_tag_bibitem">[52]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib52.1.1" style="font-size:90%;">
+Jiahong Wu, He Zheng, Bo Zhao, Yixin Li, Baoming Yan, Rui Liang, Wenjia Wang, Shipei Zhou, Guosen Lin, Yanwei Fu, Yizhou Wang, and Yonggang Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib52.2.1" style="font-size:90%;">Large-scale datasets for going deeper in image understanding.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib52.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib52.4.2" style="font-size:90%;">2019 IEEE International Conference on Multimedia and Expo (ICME)</span><span class="ltx_text" id="bib.bib52.5.3" style="font-size:90%;">. IEEE, jul 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_tag_bibitem">[53]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib53.1.1" style="font-size:90%;">
+Wayne Wu, Chen Qian, Shuo Yang, Quan Wang, Yici Cai, and Qiang Zhou.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib53.2.1" style="font-size:90%;">Look at boundary: A boundary-aware face alignment algorithm, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib54">
+<span class="ltx_tag ltx_tag_bibitem">[54]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib54.1.1" style="font-size:90%;">
+Zhenda Xie, Zigang Geng, Jingcheng Hu, Zheng Zhang, Han Hu, and Yue Cao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib54.2.1" style="font-size:90%;">Revealing the dark secrets of masked image modeling, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib55">
+<span class="ltx_tag ltx_tag_bibitem">[55]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib55.1.1" style="font-size:90%;">
+Yufei Xu, Jing Zhang, Qiming Zhang, and Dacheng Tao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib55.2.1" style="font-size:90%;">Vitpose: Simple vision transformer baselines for human pose estimation, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib56">
+<span class="ltx_tag ltx_tag_bibitem">[56]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib56.1.1" style="font-size:90%;">
+Fan Zhang, Valentin Bazarevsky, Andrey Vakunov, Andrei Tkachenka, George Sung, Chuo-Ling Chang, and Matthias Grundmann.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib56.2.1" style="font-size:90%;">Mediapipe hands: On-device real-time hand tracking.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib56.3.1" style="font-size:90%;">arXiv preprint arXiv:2006.10214</span><span class="ltx_text" id="bib.bib56.4.2" style="font-size:90%;">, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib57">
+<span class="ltx_tag ltx_tag_bibitem">[57]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib57.1.1" style="font-size:90%;">
+Fan Zhang, Valentin Bazarevsky, Andrey Vakunov, Andrei Tkachenka, George Sung, Chuo-Ling Chang, and Matthias Grundmann.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib57.2.1" style="font-size:90%;">Mediapipe hands: On-device real-time hand tracking.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib57.3.1" style="font-size:90%;">arXiv preprint arXiv:2006.10214</span><span class="ltx_text" id="bib.bib57.4.2" style="font-size:90%;">, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib58">
+<span class="ltx_tag ltx_tag_bibitem">[58]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib58.1.1" style="font-size:90%;">
+Lvmin Zhang, Anyi Rao, and Maneesh Agrawala.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib58.2.1" style="font-size:90%;">Adding conditional control to text-to-image diffusion models.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib58.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib58.4.2" style="font-size:90%;">2023 IEEE/CVF International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib58.5.3" style="font-size:90%;">, pages 3813–3824, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib59">
+<span class="ltx_tag ltx_tag_bibitem">[59]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib59.1.1" style="font-size:90%;">
+Song-Hai Zhang, Ruilong Li, Xin Dong, Paul L. Rosin, Zixi Cai, Han Xi, Dingcheng Yang, Hao-Zhi Huang, and Shi-Min Hu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib59.2.1" style="font-size:90%;">Pose2seg: Detection free human instance segmentation, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib60">
+<span class="ltx_tag ltx_tag_bibitem">[60]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib60.1.1" style="font-size:90%;">
+Weiyu Zhang, Menglong Zhu, and Konstantinos G. Derpanis.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib60.2.1" style="font-size:90%;">From actemes to action: A strongly-supervised representation for detailed action understanding.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib60.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib60.4.2" style="font-size:90%;">2013 IEEE International Conference on Computer Vision</span><span class="ltx_text" id="bib.bib60.5.3" style="font-size:90%;">, pages 2248–2255, 2013.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib61">
+<span class="ltx_tag ltx_tag_bibitem">[61]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib61.1.1" style="font-size:90%;">
+Yue Zhu, Nermin Samet, and David Picard.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib61.2.1" style="font-size:90%;">H3wb: Human3.6m 3d wholebody dataset and benchmark, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib62">
+<span class="ltx_tag ltx_tag_bibitem">[62]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib62.1.1" style="font-size:90%;">
+Barret Zoph, Ekin D Cubuk, Golnaz Ghiasi, Tsung-Yi Lin, Jonathon Shlens, and Quoc V Le.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib62.2.1" style="font-size:90%;">Learning data augmentation strategies for object detection.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib62.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib62.4.2" style="font-size:90%;">Computer Vision–ECCV 2020: 16th European Conference, Glasgow, UK, August 23–28, 2020, Proceedings, Part XXVII 16</span><span class="ltx_text" id="bib.bib62.5.3" style="font-size:90%;">, pages 566–583. Springer, 2020.
+</span>
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<section class="ltx_appendix" id="A1">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Appendix</h2>
+<figure class="ltx_table" id="A1.T3">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="A1.T3.3.1.1" style="font-size:90%;">Table 3</span>: </span><span class="ltx_text" id="A1.T3.4.2" style="font-size:90%;">Distribution of the data augmentation techniques. Superscript <span class="ltx_text ltx_font_italic" id="A1.T3.4.2.1">I</span> indicates that the augmentation was selected independently. Total augmentation calculation excludes the flip operations.</span></figcaption>
+<table class="ltx_tabular ltx_align_middle" id="A1.T3.5">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.T3.5.1.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_tt" id="A1.T3.5.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.1.1.1.1">
+<span class="ltx_p" id="A1.T3.5.1.1.1.1.1" style="width:173.9pt;"><span class="ltx_text ltx_font_bold" id="A1.T3.5.1.1.1.1.1.1">Category</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_tt" id="A1.T3.5.1.1.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.1.1.2.1">
+<span class="ltx_p" id="A1.T3.5.1.1.2.1.1" style="width:173.9pt;"><span class="ltx_text ltx_font_bold" id="A1.T3.5.1.1.2.1.1.1">Technique</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_tt" id="A1.T3.5.1.1.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.1.1.3.1">
+<span class="ltx_p" id="A1.T3.5.1.1.3.1.1" style="width:99.4pt;"><span class="ltx_text ltx_font_bold" id="A1.T3.5.1.1.3.1.1.1">Percentage</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.2.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="A1.T3.5.2.2.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.2.2.1.1">
+<span class="ltx_p" id="A1.T3.5.2.2.1.1.1" style="width:173.9pt;"><span class="ltx_text" id="A1.T3.5.2.2.1.1.1.1">Geometric Transformations<sup class="ltx_sup" id="A1.T3.5.2.2.1.1.1.1.1">I</sup> (30%)</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="A1.T3.5.2.2.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.2.2.2.1">
+<span class="ltx_p" id="A1.T3.5.2.2.2.1.1" style="width:173.9pt;">Downscale/Upscale</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="A1.T3.5.2.2.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.2.2.3.1">
+<span class="ltx_p" id="A1.T3.5.2.2.3.1.1" style="width:99.4pt;">7.50%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.3.3">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.3.3.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.3.3.1.1">
+<span class="ltx_p" id="A1.T3.5.3.3.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.3.3.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.3.3.2.1">
+<span class="ltx_p" id="A1.T3.5.3.3.2.1.1" style="width:173.9pt;">Scale</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.3.3.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.3.3.3.1">
+<span class="ltx_p" id="A1.T3.5.3.3.3.1.1" style="width:99.4pt;">7.50%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.4.4">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.4.4.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.4.4.1.1">
+<span class="ltx_p" id="A1.T3.5.4.4.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.4.4.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.4.4.2.1">
+<span class="ltx_p" id="A1.T3.5.4.4.2.1.1" style="width:173.9pt;">Stretch</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.4.4.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.4.4.3.1">
+<span class="ltx_p" id="A1.T3.5.4.4.3.1.1" style="width:99.4pt;">7.50%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.5.5">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.5.5.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.5.5.1.1">
+<span class="ltx_p" id="A1.T3.5.5.5.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.5.5.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.5.5.2.1">
+<span class="ltx_p" id="A1.T3.5.5.5.2.1.1" style="width:173.9pt;">Translate</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.5.5.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.5.5.3.1">
+<span class="ltx_p" id="A1.T3.5.5.5.3.1.1" style="width:99.4pt;">7.50%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.6.6">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="A1.T3.5.6.6.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.6.6.1.1">
+<span class="ltx_p" id="A1.T3.5.6.6.1.1.1" style="width:173.9pt;"><span class="ltx_text" id="A1.T3.5.6.6.1.1.1.1">Color Space Operations<sup class="ltx_sup" id="A1.T3.5.6.6.1.1.1.1.1">I</sup> (30%)</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="A1.T3.5.6.6.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.6.6.2.1">
+<span class="ltx_p" id="A1.T3.5.6.6.2.1.1" style="width:173.9pt;">Brightness</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="A1.T3.5.6.6.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.6.6.3.1">
+<span class="ltx_p" id="A1.T3.5.6.6.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.7.7">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.7.7.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.7.7.1.1">
+<span class="ltx_p" id="A1.T3.5.7.7.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.7.7.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.7.7.2.1">
+<span class="ltx_p" id="A1.T3.5.7.7.2.1.1" style="width:173.9pt;">Color Balance</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.7.7.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.7.7.3.1">
+<span class="ltx_p" id="A1.T3.5.7.7.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.8.8">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.8.8.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.8.8.1.1">
+<span class="ltx_p" id="A1.T3.5.8.8.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.8.8.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.8.8.2.1">
+<span class="ltx_p" id="A1.T3.5.8.8.2.1.1" style="width:173.9pt;">Contrast</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.8.8.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.8.8.3.1">
+<span class="ltx_p" id="A1.T3.5.8.8.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.9.9">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.9.9.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.9.9.1.1">
+<span class="ltx_p" id="A1.T3.5.9.9.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.9.9.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.9.9.2.1">
+<span class="ltx_p" id="A1.T3.5.9.9.2.1.1" style="width:173.9pt;">Equalize</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.9.9.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.9.9.3.1">
+<span class="ltx_p" id="A1.T3.5.9.9.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.10.10">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.10.10.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.10.10.1.1">
+<span class="ltx_p" id="A1.T3.5.10.10.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.10.10.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.10.10.2.1">
+<span class="ltx_p" id="A1.T3.5.10.10.2.1.1" style="width:173.9pt;">Kernel Filter</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.10.10.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.10.10.3.1">
+<span class="ltx_p" id="A1.T3.5.10.10.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.11.11">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.11.11.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.11.11.1.1">
+<span class="ltx_p" id="A1.T3.5.11.11.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.11.11.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.11.11.2.1">
+<span class="ltx_p" id="A1.T3.5.11.11.2.1.1" style="width:173.9pt;">Noise Injection</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.11.11.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.11.11.3.1">
+<span class="ltx_p" id="A1.T3.5.11.11.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.12.12">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.12.12.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.12.12.1.1">
+<span class="ltx_p" id="A1.T3.5.12.12.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.12.12.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.12.12.2.1">
+<span class="ltx_p" id="A1.T3.5.12.12.2.1.1" style="width:173.9pt;">Patch Shuffle</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.12.12.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.12.12.3.1">
+<span class="ltx_p" id="A1.T3.5.12.12.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.13.13">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.13.13.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.13.13.1.1">
+<span class="ltx_p" id="A1.T3.5.13.13.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.13.13.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.13.13.2.1">
+<span class="ltx_p" id="A1.T3.5.13.13.2.1.1" style="width:173.9pt;">Solarize</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.13.13.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.13.13.3.1">
+<span class="ltx_p" id="A1.T3.5.13.13.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.14.14">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.14.14.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.14.14.1.1">
+<span class="ltx_p" id="A1.T3.5.14.14.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.14.14.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.14.14.2.1">
+<span class="ltx_p" id="A1.T3.5.14.14.2.1.1" style="width:173.9pt;">Solarize Add</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.14.14.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.14.14.3.1">
+<span class="ltx_p" id="A1.T3.5.14.14.3.1.1" style="width:99.4pt;">3.33%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.15.15">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="A1.T3.5.15.15.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.15.15.1.1">
+<span class="ltx_p" id="A1.T3.5.15.15.1.1.1" style="width:173.9pt;"><span class="ltx_text" id="A1.T3.5.15.15.1.1.1.1">Other Augmentations</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="A1.T3.5.15.15.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.15.15.2.1">
+<span class="ltx_p" id="A1.T3.5.15.15.2.1.1" style="width:173.9pt;">Blur<sup class="ltx_sup ltx_align_left" id="A1.T3.5.15.15.2.1.1.1">I</sup></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="A1.T3.5.15.15.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.15.15.3.1">
+<span class="ltx_p" id="A1.T3.5.15.15.3.1.1" style="width:99.4pt;">50.00%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.16.16">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.16.16.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.16.16.1.1">
+<span class="ltx_p" id="A1.T3.5.16.16.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.16.16.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.16.16.2.1">
+<span class="ltx_p" id="A1.T3.5.16.16.2.1.1" style="width:173.9pt;">Vertical Flip<sup class="ltx_sup ltx_align_left" id="A1.T3.5.16.16.2.1.1.1">I</sup></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.16.16.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.16.16.3.1">
+<span class="ltx_p" id="A1.T3.5.16.16.3.1.1" style="width:99.4pt;">50.00%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.17.17">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.17.17.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.17.17.1.1">
+<span class="ltx_p" id="A1.T3.5.17.17.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.17.17.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.17.17.2.1">
+<span class="ltx_p" id="A1.T3.5.17.17.2.1.1" style="width:173.9pt;">Horizontal Flip<sup class="ltx_sup ltx_align_left" id="A1.T3.5.17.17.2.1.1.1">I</sup></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.17.17.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.17.17.3.1">
+<span class="ltx_p" id="A1.T3.5.17.17.3.1.1" style="width:99.4pt;">50.00%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.18.18">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.18.18.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.18.18.1.1">
+<span class="ltx_p" id="A1.T3.5.18.18.1.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r" id="A1.T3.5.18.18.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.18.18.2.1">
+<span class="ltx_p" id="A1.T3.5.18.18.2.1.1" style="width:173.9pt;">Gaussian Erase<sup class="ltx_sup ltx_align_left" id="A1.T3.5.18.18.2.1.1.1">I</sup></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T3.5.18.18.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.18.18.3.1">
+<span class="ltx_p" id="A1.T3.5.18.18.3.1.1" style="width:99.4pt;">15.00%</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.5.19.19">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_bb ltx_border_r ltx_border_t" id="A1.T3.5.19.19.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.19.19.1.1">
+<span class="ltx_p" id="A1.T3.5.19.19.1.1.1" style="width:173.9pt;"><span class="ltx_text ltx_font_bold" id="A1.T3.5.19.19.1.1.1.1">At least one augmentation applied</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_bb ltx_border_r ltx_border_t" id="A1.T3.5.19.19.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.19.19.2.1">
+<span class="ltx_p" id="A1.T3.5.19.19.2.1.1" style="width:173.9pt;"></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_bb ltx_border_t" id="A1.T3.5.19.19.3">
+<span class="ltx_inline-block ltx_align_top" id="A1.T3.5.19.19.3.1">
+<span class="ltx_p" id="A1.T3.5.19.19.3.1.1" style="width:99.4pt;"><span class="ltx_text ltx_font_bold" id="A1.T3.5.19.19.3.1.1.1">79.18%</span></span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_figure" id="A1.F6">
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="A1.F6.5">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.F6.5.5">
+<td class="ltx_td ltx_align_justify ltx_align_middle" id="A1.F6.1.1.1" style="width:89.4pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="A1.F6.1.1.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="802" id="A1.F6.1.1.1.1.g1" src="extracted/5646952/images/perturbed/238.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="A1.F6.2.2.2" style="width:89.4pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="A1.F6.2.2.2.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="762" id="A1.F6.2.2.2.1.g1" src="extracted/5646952/images/perturbed/104.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="A1.F6.3.3.3" style="width:89.4pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="A1.F6.3.3.3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="798" id="A1.F6.3.3.3.1.g1" src="extracted/5646952/images/perturbed/182.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_align_justify ltx_align_middle" id="A1.F6.4.4.4" style="width:89.4pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="A1.F6.4.4.4.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="743" id="A1.F6.4.4.4.1.g1" src="extracted/5646952/images/perturbed/75.jpg" width="598"/>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_middle" id="A1.F6.5.5.5" style="width:89.4pt;padding-bottom:5.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="A1.F6.5.5.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="798" id="A1.F6.5.5.5.1.g1" src="extracted/5646952/images/perturbed/131.jpg" width="598"/>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F6.7.1.1" style="font-size:90%;">Figure 6</span>: </span><span class="ltx_text" id="A1.F6.8.2" style="font-size:90%;">Sample images from perturbation test, where half of the hand in each image is hidden.</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="A1.F7">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel ltx_minipage ltx_align_center ltx_align_middle" id="A1.F7.1" style="width:119.2pt;"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="514" id="A1.F7.1.g1" src="extracted/5646952/images/skincolor/dark.jpg" width="685"/>
+<figcaption class="ltx_caption ltx_centering">Dark</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel ltx_minipage ltx_align_center ltx_align_middle" id="A1.F7.2" style="width:119.2pt;"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="514" id="A1.F7.2.g1" src="extracted/5646952/images/skincolor/medium.jpg" width="685"/>
+<figcaption class="ltx_caption ltx_centering">Medium</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel ltx_minipage ltx_align_center ltx_align_middle" id="A1.F7.3" style="width:119.2pt;"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="514" id="A1.F7.3.g1" src="extracted/5646952/images/skincolor/fair.jpg" width="685"/>
+<figcaption class="ltx_caption ltx_centering">Fair</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel ltx_minipage ltx_align_center ltx_align_middle" id="A1.F7.4" style="width:119.2pt;"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="514" id="A1.F7.4.g1" src="extracted/5646952/images/skincolor/very-fair.jpg" width="685"/>
+<figcaption class="ltx_caption ltx_centering">Very fair</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F7.6.1.1" style="font-size:90%;">Figure 7</span>: </span><span class="ltx_text" id="A1.F7.7.2" style="font-size:90%;">4 different skin colors in 11K Hands dataset<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.03599v1#bib.bib1" title="">1</a>]</cite>.</span></figcaption>
+</figure>
+<figure class="ltx_table" id="A1.T4">
+<table class="ltx_tabular ltx_align_middle" id="A1.T4.2">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.T4.2.1.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="A1.T4.2.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T4.2.1.1.1.1">
+<span class="ltx_p" id="A1.T4.2.1.1.1.1.1" style="width:195.1pt;"><span class="ltx_text ltx_font_bold" id="A1.T4.2.1.1.1.1.1.1">Static poses</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="A1.T4.2.1.1.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T4.2.1.1.2.1">
+<span class="ltx_p" id="A1.T4.2.1.1.2.1.1" style="width:195.1pt;">Neutral relaxed, neutral rigid, good luck, fake gun, star trek, star trek extended thumb, thumb up relaxed, thumb up normal, thumb up rigid, thumb tuck normal, thumb tuck rigid, aokay, aokay upright, surfer, rocker, rocker front, rocker back, fist, fist rigid, alligator closed, one count, two count, three count, four count, five count, index tip, middle tip, ring tip, pinky tip, palm up, finger spread relaxed, finger spread normal, finger spread rigid, capisce, claws, peacock, cup, shakespearesyorick, dinosaur, middle finger</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T4.2.2.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="A1.T4.2.2.2.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T4.2.2.2.1.1">
+<span class="ltx_p" id="A1.T4.2.2.2.1.1.1" style="width:195.1pt;"><span class="ltx_text ltx_font_bold" id="A1.T4.2.2.2.1.1.1.1">Motions</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="A1.T4.2.2.2.2">
+<span class="ltx_inline-block ltx_align_top" id="A1.T4.2.2.2.2.1">
+<span class="ltx_p" id="A1.T4.2.2.2.2.1.1" style="width:195.1pt;">Relaxed wave, fist wave, prom wave</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="A1.T4.3.1.1" style="font-size:90%;">Table 4</span>: </span><span class="ltx_text" id="A1.T4.4.2" style="font-size:90%;">List of Poses and Motions used in the creation of Hi5</span></figcaption>
+</figure>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Jun  5 19:39:38 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

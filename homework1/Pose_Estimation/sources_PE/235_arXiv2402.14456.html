@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Appendix A Appendix</title>
+<!--Generated on Thu Feb 22 11:21:58 2024 by LaTeXML (version 0.8.7) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv_0.7.4.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2402.14456v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_appendix">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1" title="Appendix A Appendix"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Appendix</span></a>
+<ol class="ltx_toclist ltx_toclist_appendix">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.SS1" title="A.1 Vision-Language Decoder ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.1 </span>Vision-Language Decoder</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.SS2" title="A.2 Text prompt ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2 </span>Text prompt</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.SS3" title="A.3 Detailed performance ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.3 </span>Detailed performance</span></a></li>
+</ol>
+</li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<div aria-label="Conversion errors have been found" class="package-alerts ltx_document" role="status">
+<button aria-label="Dismiss alert" onclick="closePopup()">
+<span aria-hidden="true"><svg aria-hidden="true" focusable="false" height="20" role="presentation" viewbox="0 0 44 44" width="20">
+<path d="M0.549989 4.44999L4.44999 0.549988L43.45 39.55L39.55 43.45L0.549989 4.44999Z"></path>
+<path d="M39.55 0.549988L43.45 4.44999L4.44999 43.45L0.549988 39.55L39.55 0.549988Z"></path>
+</svg></span>
+</button>
+<p>HTML conversions <a href="https://info.dev.arxiv.org/about/accessibility_html_error_messages.html" target="_blank">sometimes display errors</a> due to content that did not convert correctly from the source. This paper uses the following packages that are not yet supported by the HTML conversion tool. Feedback on these issues are not necessary; they are known and are being worked on.</p>
+<ul arial-label="Unsupported packages used in this paper">
+<li>failed: epic</li>
+</ul>
+<p>Authors: achieve the best HTML results from your LaTeX submissions by following these <a href="https://info.arxiv.org/help/submit_latex_best_practices.html" target="_blank">best practices</a>.</p>
+</div><div class="section" id="target-section"><div id="license-tr">License: arXiv.org perpetual non-exclusive license</div><div id="watermark-tr">arXiv:2402.14456v1 [cs.CV] 22 Feb 2024</div></div>
+<script>
+            function closePopup() {
+                document.querySelector('.package-alerts').style.display = 'none';
+            }
+        </script>
+<article class="ltx_document">
+<section class="ltx_appendix" id="A1">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Appendix</h2>
+<div class="ltx_para" id="A1.p1">
+<p class="ltx_p" id="A1.p1.1">This appendix comprises an exploration of additional vision-language encoder structures (<a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.SS1" title="A.1 Vision-Language Decoder ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">A.1</span></a>), detailed customized prompts for each category (<a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.SS2" title="A.2 Text prompt ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">A.2</span></a>), and in-depth performance analysis for each category (<a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.SS3" title="A.3 Detailed performance ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">A.3</span></a>).</p>
+</div>
+<section class="ltx_subsection" id="A1.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.1 </span>Vision-Language Decoder</h3>
+<div class="ltx_para" id="A1.SS1.p1">
+<p class="ltx_p" id="A1.SS1.p1.1">Due to space constraints, we have only introduced three empirically validated vision-language decoder structures in the paper. In the appendix, we further delve into additional strategies for fusing multi-modal knowledge.</p>
+</div>
+<div class="ltx_para" id="A1.SS1.p2">
+<p class="ltx_p" id="A1.SS1.p2.1">The vision-language decoder comprises a primary branch and an auxiliary branch, each composed of two blocks. Each block includes a deconvolutional layer, batch normalization, and ReLU activation. The blocks perform upsampling and use a convolution layer with a <math alttext="1\times 1" class="ltx_Math" display="inline" id="A1.SS1.p2.1.m1.1"><semantics id="A1.SS1.p2.1.m1.1a"><mrow id="A1.SS1.p2.1.m1.1.1" xref="A1.SS1.p2.1.m1.1.1.cmml"><mn id="A1.SS1.p2.1.m1.1.1.2" xref="A1.SS1.p2.1.m1.1.1.2.cmml">1</mn><mo id="A1.SS1.p2.1.m1.1.1.1" lspace="0.222em" rspace="0.222em" xref="A1.SS1.p2.1.m1.1.1.1.cmml">×</mo><mn id="A1.SS1.p2.1.m1.1.1.3" xref="A1.SS1.p2.1.m1.1.1.3.cmml">1</mn></mrow><annotation-xml encoding="MathML-Content" id="A1.SS1.p2.1.m1.1b"><apply id="A1.SS1.p2.1.m1.1.1.cmml" xref="A1.SS1.p2.1.m1.1.1"><times id="A1.SS1.p2.1.m1.1.1.1.cmml" xref="A1.SS1.p2.1.m1.1.1.1"></times><cn id="A1.SS1.p2.1.m1.1.1.2.cmml" type="integer" xref="A1.SS1.p2.1.m1.1.1.2">1</cn><cn id="A1.SS1.p2.1.m1.1.1.3.cmml" type="integer" xref="A1.SS1.p2.1.m1.1.1.3">1</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="A1.SS1.p2.1.m1.1c">1\times 1</annotation><annotation encoding="application/x-llamapun" id="A1.SS1.p2.1.m1.1d">1 × 1</annotation></semantics></math> kernel to generate localization heatmaps for key points. We use the terms <span class="ltx_text ltx_font_italic" id="A1.SS1.p2.1.1">First</span>, <span class="ltx_text ltx_font_italic" id="A1.SS1.p2.1.2">Middle</span>, and <span class="ltx_text ltx_font_italic" id="A1.SS1.p2.1.3">Final</span> to represent different positions of multi-modal knowledge fusion, denoting before the first block, between the two blocks, and after the second block, respectively. By default, knowledge is injected from the auxiliary branch into the primary branch, denoted as <span class="ltx_text ltx_font_italic" id="A1.SS1.p2.1.4">A</span> for injecting from the primary branch into the auxiliary branch. Following this naming convention, we explore various vision-language decoder structures as illustrated in <a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.F1" title="Figure A1 ‣ A.1 Vision-Language Decoder ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">A1</span></a>.</p>
+</div>
+<div class="ltx_para" id="A1.SS1.p3">
+<p class="ltx_p" id="A1.SS1.p3.1">We conducted ablation experiments for these structures, and the results are presented in <a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.T1" title="Table A1 ‣ A.1 Vision-Language Decoder ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">A1</span></a>. The findings indicate that the <span class="ltx_text ltx_font_italic" id="A1.SS1.p3.1.1">First-Middle-Final-Injector</span> structure is the most beneficial for fusing knowledge from both modalities. Consequently, we adopt this structure, visually depicted in <a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.F1" title="Figure A1 ‣ A.1 Vision-Language Decoder ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">A1</span></a>(l). In the main text, this structure is referred to by the simplified name <span class="ltx_text ltx_font_italic" id="A1.SS1.p3.1.2">Dual Extractor-Injector Decoder</span>.</p>
+</div>
+<figure class="ltx_figure" id="A1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="296" id="A1.F1.g1" src="x1.png" width="592"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F1.9.1.1" style="font-size:90%;">Figure A1</span>: </span><span class="ltx_text" id="A1.F1.10.2" style="font-size:90%;">A spectrum of decoder architectures. <span class="ltx_text ltx_font_italic" id="A1.F1.10.2.1">First</span>, <span class="ltx_text ltx_font_italic" id="A1.F1.10.2.2">Middle</span>, and <span class="ltx_text ltx_font_italic" id="A1.F1.10.2.3">Final</span> signify various positions of multimodal knowledge fusion. <span class="ltx_text ltx_font_italic" id="A1.F1.10.2.4">First</span> refers to the point before the first block, <span class="ltx_text ltx_font_italic" id="A1.F1.10.2.5">Middle</span> signifies the fusion between the two blocks, and <span class="ltx_text ltx_font_italic" id="A1.F1.10.2.6">Final</span> represents the stage after the second block. By default, knowledge is integrated from the auxiliary branch into the primary branch, denoted as <span class="ltx_text ltx_font_italic" id="A1.F1.10.2.7">A</span> for integration from the primary branch into the auxiliary branch.</span></figcaption>
+</figure>
+<figure class="ltx_table" id="A1.T1">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="A1.T1.2">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="A1.T1.2.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" id="A1.T1.2.1.1.1" style="padding-left:2.8pt;padding-right:2.8pt;">model</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T1.2.1.1.2" style="padding-left:2.8pt;padding-right:2.8pt;">AP</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T1.2.1.1.3" style="padding-left:2.8pt;padding-right:2.8pt;">AP50</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T1.2.1.1.4" style="padding-left:2.8pt;padding-right:2.8pt;">AP75</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T1.2.1.1.5" style="padding-left:2.8pt;padding-right:2.8pt;">AR</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T1.2.1.1.6" style="padding-left:2.8pt;padding-right:2.8pt;">AR50</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.T1.2.2.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="A1.T1.2.2.1.1" style="padding-left:2.8pt;padding-right:2.8pt;">Baseline</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T1.2.2.1.2" style="padding-left:2.8pt;padding-right:2.8pt;">36.45</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T1.2.2.1.3" style="padding-left:2.8pt;padding-right:2.8pt;">52.60</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T1.2.2.1.4" style="padding-left:2.8pt;padding-right:2.8pt;">38.56</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T1.2.2.1.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.12</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T1.2.2.1.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.28</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.3.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.3.2.1" style="padding-left:2.8pt;padding-right:2.8pt;">First</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.3.2.2" style="padding-left:2.8pt;padding-right:2.8pt;">36.93</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.3.2.3" style="padding-left:2.8pt;padding-right:2.8pt;">52.86</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.3.2.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.34</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.3.2.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.48</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.3.2.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.55</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.4.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.4.3.1" style="padding-left:2.8pt;padding-right:2.8pt;">Final</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.4.3.2" style="padding-left:2.8pt;padding-right:2.8pt;">37.09</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.4.3.3" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_font_bold" id="A1.T1.2.4.3.3.1">53.36</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.4.3.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.22</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.4.3.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.70</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.4.3.6" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_font_bold" id="A1.T1.2.4.3.6.1">60.01</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.5.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.5.4.1" style="padding-left:2.8pt;padding-right:2.8pt;">Middle-Final</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.5.4.2" style="padding-left:2.8pt;padding-right:2.8pt;">37.01</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.5.4.3" style="padding-left:2.8pt;padding-right:2.8pt;">52.81</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.5.4.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.28</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.5.4.5" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_ulem_uline" id="A1.T1.2.5.4.5.1">43.73</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.5.4.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.86</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.6.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.6.5.1" style="padding-left:2.8pt;padding-right:2.8pt;">First-Final</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.6.5.2" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_ulem_uline" id="A1.T1.2.6.5.2.1">37.13</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.6.5.3" style="padding-left:2.8pt;padding-right:2.8pt;">53.08</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.6.5.4" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_font_bold" id="A1.T1.2.6.5.4.1">39.47</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.6.5.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.63</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.6.5.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.48</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.7.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.7.6.1" style="padding-left:2.8pt;padding-right:2.8pt;">First-Middle</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.7.6.2" style="padding-left:2.8pt;padding-right:2.8pt;">37.01</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.7.6.3" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_ulem_uline" id="A1.T1.2.7.6.3.1">53.27</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.7.6.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.19</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.7.6.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.57</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.7.6.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.53</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.8.7">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.8.7.1" style="padding-left:2.8pt;padding-right:2.8pt;">First-Middle-Final</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.8.7.2" style="padding-left:2.8pt;padding-right:2.8pt;">37.02</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.8.7.3" style="padding-left:2.8pt;padding-right:2.8pt;">52.88</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.8.7.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.35</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.8.7.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.54</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.8.7.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.59</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.9.8">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.9.8.1" style="padding-left:2.8pt;padding-right:2.8pt;">AFirst-Middle-Final</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.9.8.2" style="padding-left:2.8pt;padding-right:2.8pt;">36.98</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.9.8.3" style="padding-left:2.8pt;padding-right:2.8pt;">52.92</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.9.8.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.33</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.9.8.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.51</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.9.8.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.61</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.10.9">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.10.9.1" style="padding-left:2.8pt;padding-right:2.8pt;">AFirst-Final</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.10.9.2" style="padding-left:2.8pt;padding-right:2.8pt;">37.10</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.10.9.3" style="padding-left:2.8pt;padding-right:2.8pt;">53.02</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.10.9.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.40</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.10.9.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.57</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.10.9.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.66</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.11.10">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T1.2.11.10.1" style="padding-left:2.8pt;padding-right:2.8pt;">AFirst-Middle</th>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.11.10.2" style="padding-left:2.8pt;padding-right:2.8pt;">37.02</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.11.10.3" style="padding-left:2.8pt;padding-right:2.8pt;">53.21</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.11.10.4" style="padding-left:2.8pt;padding-right:2.8pt;">39.28</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.11.10.5" style="padding-left:2.8pt;padding-right:2.8pt;">43.62</td>
+<td class="ltx_td ltx_align_center" id="A1.T1.2.11.10.6" style="padding-left:2.8pt;padding-right:2.8pt;">59.89</td>
+</tr>
+<tr class="ltx_tr" id="A1.T1.2.12.11" style="background-color:#E6E6E6;">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r" id="A1.T1.2.12.11.1" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text" id="A1.T1.2.12.11.1.1" style="background-color:#E6E6E6;">First-AMiddle-Final</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T1.2.12.11.2" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_font_bold" id="A1.T1.2.12.11.2.1" style="background-color:#E6E6E6;">37.16</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T1.2.12.11.3" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text" id="A1.T1.2.12.11.3.1" style="background-color:#E6E6E6;">53.14</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T1.2.12.11.4" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_ulem_uline" id="A1.T1.2.12.11.4.1" style="background-color:#E6E6E6;">39.43</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T1.2.12.11.5" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_font_bold" id="A1.T1.2.12.11.5.1" style="background-color:#E6E6E6;">43.76</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T1.2.12.11.6" style="padding-left:2.8pt;padding-right:2.8pt;"><span class="ltx_text ltx_ulem_uline" id="A1.T1.2.12.11.6.1" style="background-color:#E6E6E6;">59.90</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="A1.T1.10.1.1" style="font-size:90%;">Table A1</span>: </span><span class="ltx_text" id="A1.T1.11.2" style="font-size:90%;">Ablation experiments on various vision-language pose decoder structure. <span class="ltx_text ltx_font_italic" id="A1.T1.11.2.1">First</span>, <span class="ltx_text ltx_font_italic" id="A1.T1.11.2.2">Middle</span>, and <span class="ltx_text ltx_font_italic" id="A1.T1.11.2.3">Final</span> signify various positions of multimodal knowledge fusion. <span class="ltx_text ltx_font_italic" id="A1.T1.11.2.4">First</span> refers to the point before the first block, <span class="ltx_text ltx_font_italic" id="A1.T1.11.2.5">Middle</span> signifies the fusion between the two blocks, and <span class="ltx_text ltx_font_italic" id="A1.T1.11.2.6">Final</span> represents the stage after the second block. By default, knowledge is integrated from the auxiliary branch into the primary branch, denoted as <span class="ltx_text ltx_font_italic" id="A1.T1.11.2.7">A</span> for integration from the primary branch into the auxiliary branch.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="A1.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.2 </span>Text prompt</h3>
+<div class="ltx_para" id="A1.SS2.p1">
+<p class="ltx_p" id="A1.SS2.p1.1">In the main text, we have demonstrated the significant impact of tailoring prompts to individual semantic contexts, resulting in notable performance improvements. In this section, we provide an example list of customized prompts for each specific category, as outlined in <a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.T2" title="Table A2 ‣ A.2 Text prompt ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">A2</span></a>.</p>
+</div>
+<figure class="ltx_table" id="A1.T2">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="A1.T2.2">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="A1.T2.2.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" id="A1.T2.2.1.1.1" style="padding-left:5.7pt;padding-right:5.7pt;">id</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="A1.T2.2.1.1.2" style="padding-left:5.7pt;padding-right:5.7pt;">category</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="A1.T2.2.1.1.3" style="padding-left:5.7pt;padding-right:5.7pt;">text prompt</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.T2.2.2.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="A1.T2.2.2.1.1" style="padding-left:5.7pt;padding-right:5.7pt;">1</th>
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t" id="A1.T2.2.2.1.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.2.1.2.1">cartoon</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="A1.T2.2.2.1.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.2.1.3.1">a cartoon human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.3.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.3.2.1" style="padding-left:5.7pt;padding-right:5.7pt;">2</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.3.2.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.3.2.2.1">digital art</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.3.2.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.3.2.3.1">a digital art human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.4.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.4.3.1" style="padding-left:5.7pt;padding-right:5.7pt;">3</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.4.3.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.4.3.2.1">ink painting</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.4.3.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.4.3.3.1">a ink-painting human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.5.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.5.4.1" style="padding-left:5.7pt;padding-right:5.7pt;">4</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.5.4.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.5.4.2.1">kids drawing</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.5.4.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.5.4.3.1">a kids-drawing human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.6.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.6.5.1" style="padding-left:5.7pt;padding-right:5.7pt;">5</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.6.5.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.6.5.2.1">mural</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.6.5.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.6.5.3.1">a mural human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.7.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.7.6.1" style="padding-left:5.7pt;padding-right:5.7pt;">6</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.7.6.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.7.6.2.1">oil painting</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.7.6.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.7.6.3.1">a oil-painting human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.8.7">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.8.7.1" style="padding-left:5.7pt;padding-right:5.7pt;">7</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.8.7.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.8.7.2.1">shadow play</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.8.7.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.8.7.3.1">a shadow-play human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.9.8">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.9.8.1" style="padding-left:5.7pt;padding-right:5.7pt;">8</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.9.8.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.9.8.2.1">sketch</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.9.8.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.9.8.3.1">a sketch human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.10.9">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.10.9.1" style="padding-left:5.7pt;padding-right:5.7pt;">9</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.10.9.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.10.9.2.1">stained glass</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.10.9.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.10.9.3.1">a stained glass human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.11.10">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.11.10.1" style="padding-left:5.7pt;padding-right:5.7pt;">10</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.11.10.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.11.10.2.1">ukiyoe</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.11.10.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.11.10.3.1">a ukiyoe human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.12.11">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.12.11.1" style="padding-left:5.7pt;padding-right:5.7pt;">11</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.12.11.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.12.11.2.1">watercolor</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.12.11.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.12.11.3.1">a watercolor human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.13.12">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.13.12.1" style="padding-left:5.7pt;padding-right:5.7pt;">12</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.13.12.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.13.12.2.1">garage kits</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.13.12.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.13.12.3.1">a garage-kits human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.14.13">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.14.13.1" style="padding-left:5.7pt;padding-right:5.7pt;">13</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.14.13.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.14.13.2.1">relief</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.14.13.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.14.13.3.1">a relief human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.15.14">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.15.14.1" style="padding-left:5.7pt;padding-right:5.7pt;">14</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.15.14.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.15.14.2.1">sculpture</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.15.14.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.15.14.3.1">a sculpture human</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.16.15">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.16.15.1" style="padding-left:5.7pt;padding-right:5.7pt;">15</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.16.15.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.16.15.2.1">acrobatics</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.16.15.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.16.15.3.1">a acrobaticsing human photo</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.17.16">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.17.16.1" style="padding-left:5.7pt;padding-right:5.7pt;">16</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.17.16.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.17.16.2.1">cosplay</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.17.16.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.17.16.3.1">a cosplaying human photo</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.18.17">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.18.17.1" style="padding-left:5.7pt;padding-right:5.7pt;">17</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.18.17.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.18.17.2.1">dance</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.18.17.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.18.17.3.1">a dancing human photo</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.19.18">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.2.19.18.1" style="padding-left:5.7pt;padding-right:5.7pt;">18</th>
+<td class="ltx_td ltx_align_left ltx_border_r" id="A1.T2.2.19.18.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.19.18.2.1">drama</span></td>
+<td class="ltx_td ltx_align_left" id="A1.T2.2.19.18.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.19.18.3.1">a photo of a human in a drama</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T2.2.20.19">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r" id="A1.T2.2.20.19.1" style="padding-left:5.7pt;padding-right:5.7pt;">19</th>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_r" id="A1.T2.2.20.19.2" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.20.19.2.1">movie</span></td>
+<td class="ltx_td ltx_align_left ltx_border_bb" id="A1.T2.2.20.19.3" style="padding-left:5.7pt;padding-right:5.7pt;"><span class="ltx_text ltx_font_italic" id="A1.T2.2.20.19.3.1">a photo of a human in a movie</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="A1.T2.3.1.1" style="font-size:90%;">Table A2</span>: </span><span class="ltx_text" id="A1.T2.4.2" style="font-size:90%;">Individually tailored prompt examples for each distinct category.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="A1.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.3 </span>Detailed performance</h3>
+<div class="ltx_para" id="A1.SS3.p1">
+<p class="ltx_p" id="A1.SS3.p1.1">We present our performance on each HumanArt category in <a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.T3" title="Table A3 ‣ A.3 Detailed performance ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">A3</span></a> to provide a more detailed insight. The correspondence between category numbers and categories is shown in <a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.T2" title="Table A2 ‣ A.2 Text prompt ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">A2</span></a>. Our method shows a particularly significant improvement in ViT-H in challenging art categories, including shadow play (5.3%), sketch (3.4%), stained glass (4.7%), and ukiyoe (8.2%). The same trend was observed across different model sizes, indicating that our method demonstrates strong generalization capabilities for challenging artistic human poses.</p>
+</div>
+<figure class="ltx_table" id="A1.T3">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="A1.T3.2">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="A1.T3.2.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" id="A1.T3.2.1.1.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.1.1" style="font-size:90%;">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.2.1" style="font-size:90%;">1</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.3.1" style="font-size:90%;">2</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.4.1" style="font-size:90%;">3</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.5.1" style="font-size:90%;">4</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.6.1" style="font-size:90%;">5</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.7.1" style="font-size:90%;">6</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.8.1" style="font-size:90%;">7</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.9.1" style="font-size:90%;">8</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.10.1" style="font-size:90%;">9</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.11.1" style="font-size:90%;">10</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.12.1" style="font-size:90%;">11</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.13.1" style="font-size:90%;">12</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.14.1" style="font-size:90%;">13</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.15.1" style="font-size:90%;">14</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.16.1" style="font-size:90%;">15</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.17.1" style="font-size:90%;">16</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.18.1" style="font-size:90%;">17</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.19.1" style="font-size:90%;">18</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="A1.T3.2.1.1.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.20.1" style="font-size:90%;">19</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T3.2.1.1.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.1.1.21.1" style="font-size:90%;">Average</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.T3.2.2.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="A1.T3.2.2.1.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.1.1" style="font-size:90%;">ViTPose-S (sc)</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.2.1" style="font-size:90%;">17.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.3.1" style="font-size:90%;">22.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.4.1" style="font-size:90%;">6.9</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.5.1" style="font-size:90%;">14.7</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.6.1" style="font-size:90%;">13.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.7.1" style="font-size:90%;">28.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.8.1" style="font-size:90%;">11.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.9.1" style="font-size:90%;">14.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.10.1" style="font-size:90%;">9.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.11.1" style="font-size:90%;">15.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.12.1" style="font-size:90%;">26.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.13.1" style="font-size:90%;">42.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.14.1" style="font-size:90%;">14.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.15.1" style="font-size:90%;">39.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.16.1" style="font-size:90%;">37.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.17.1" style="font-size:90%;">66.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.18.1" style="font-size:90%;">37.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.19.1" style="font-size:90%;">40.8</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="A1.T3.2.2.1.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.20.1" style="font-size:90%;">44.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A1.T3.2.2.1.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.2.1.21.1" style="font-size:90%;">22.8</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.3.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.3.2.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.1.1" style="font-size:90%;">ViTPose-S (ft)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.2.1" style="font-size:90%;">24.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.3.1" style="font-size:90%;">25.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.4.1" style="font-size:90%;">8.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.5.1" style="font-size:90%;">26.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.6.1" style="font-size:90%;">16.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.7.1" style="font-size:90%;">31.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.8.1" style="font-size:90%;">35.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.9.1" style="font-size:90%;">22.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.10.1" style="font-size:90%;">17.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.11.1" style="font-size:90%;">33.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.12.1" style="font-size:90%;">28.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.13.1" style="font-size:90%;">69.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.14.1" style="font-size:90%;">19.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.15.1" style="font-size:90%;">46.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.16.1" style="font-size:90%;">45.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.17.1" style="font-size:90%;">69.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.18.1" style="font-size:90%;">41.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.19.1" style="font-size:90%;">42.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.3.2.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.20.1" style="font-size:90%;">45.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.3.2.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.3.2.21.1" style="font-size:90%;">28.1</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.4.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.4.3.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.1.1" style="font-size:90%;">ViTPose-S (pt)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.2.1" style="font-size:90%;">23.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.3.1" style="font-size:90%;">24.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.4.1" style="font-size:90%;">7.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.5.1" style="font-size:90%;">24.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.6.1" style="font-size:90%;">16.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.7.1" style="font-size:90%;">29.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.8.1" style="font-size:90%;">30.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.9.1" style="font-size:90%;">21.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.10.1" style="font-size:90%;">15.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.11.1" style="font-size:90%;">26.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.12.1" style="font-size:90%;">29.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.13.1" style="font-size:90%;">62.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.14.1" style="font-size:90%;">18.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.15.1" style="font-size:90%;">44.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.16.1" style="font-size:90%;">41.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.17.1" style="font-size:90%;">67.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.18.1" style="font-size:90%;">39.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.19.1" style="font-size:90%;">42.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.4.3.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.20.1" style="font-size:90%;">44.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.4.3.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.4.3.21.1" style="font-size:90%;">28.1</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.5.4" style="background-color:#E6E6E6;">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.5.4.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.1.1" style="font-size:90%;background-color:#E6E6E6;">VLPose-S</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.2.1" style="font-size:90%;background-color:#E6E6E6;">26.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.3.1" style="font-size:90%;background-color:#E6E6E6;">24.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.4.1" style="font-size:90%;background-color:#E6E6E6;">7.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.5.1" style="font-size:90%;background-color:#E6E6E6;">26.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.6.1" style="font-size:90%;background-color:#E6E6E6;">17.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.7.1" style="font-size:90%;background-color:#E6E6E6;">31.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.8.1" style="font-size:90%;background-color:#E6E6E6;">33.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.9.1" style="font-size:90%;background-color:#E6E6E6;">27.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.10.1" style="font-size:90%;background-color:#E6E6E6;">19.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.11.1" style="font-size:90%;background-color:#E6E6E6;">34.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.12.1" style="font-size:90%;background-color:#E6E6E6;">30.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.13.1" style="font-size:90%;background-color:#E6E6E6;">68.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.14.1" style="font-size:90%;background-color:#E6E6E6;">21.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.15.1" style="font-size:90%;background-color:#E6E6E6;">46.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.16.1" style="font-size:90%;background-color:#E6E6E6;">43.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.17.1" style="font-size:90%;background-color:#E6E6E6;">69.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.18.1" style="font-size:90%;background-color:#E6E6E6;">40.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.19.1" style="font-size:90%;background-color:#E6E6E6;">42.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.5.4.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.20.1" style="font-size:90%;background-color:#E6E6E6;">44.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.5.4.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.5.4.21.1" style="font-size:90%;background-color:#E6E6E6;">30.6</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.6.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.6.5.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.1.1" style="font-size:90%;">ViTPose-B (sc)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.2.1" style="font-size:90%;">20.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.3.1" style="font-size:90%;">25.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.4.1" style="font-size:90%;">7.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.5.1" style="font-size:90%;">22.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.6.1" style="font-size:90%;">16.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.7.1" style="font-size:90%;">31.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.8.1" style="font-size:90%;">12.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.9.1" style="font-size:90%;">17.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.10.1" style="font-size:90%;">12.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.11.1" style="font-size:90%;">22.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.12.1" style="font-size:90%;">30.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.13.1" style="font-size:90%;">52.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.14.1" style="font-size:90%;">17.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.15.1" style="font-size:90%;">44.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.16.1" style="font-size:90%;">44.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.17.1" style="font-size:90%;">72.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.18.1" style="font-size:90%;">42.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.19.1" style="font-size:90%;">44.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.6.5.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.20.1" style="font-size:90%;">49.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.6.5.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.6.5.21.1" style="font-size:90%;">27.0</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.7.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.7.6.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.1.1" style="font-size:90%;">ViTPose-B (ft)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.2.1" style="font-size:90%;">28.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.3.1" style="font-size:90%;">28.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.4.1" style="font-size:90%;">8.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.5.1" style="font-size:90%;">32.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.6.1" style="font-size:90%;">19.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.7.1" style="font-size:90%;">34.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.8.1" style="font-size:90%;">38.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.9.1" style="font-size:90%;">27.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.10.1" style="font-size:90%;">21.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.11.1" style="font-size:90%;">38.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.12.1" style="font-size:90%;">33.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.13.1" style="font-size:90%;">74.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.14.1" style="font-size:90%;">22.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.15.1" style="font-size:90%;">50.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.16.1" style="font-size:90%;">51.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.17.1" style="font-size:90%;">74.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.18.1" style="font-size:90%;">45.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.19.1" style="font-size:90%;">46.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.7.6.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.20.1" style="font-size:90%;">48.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.7.6.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.7.6.21.1" style="font-size:90%;">32.6</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.8.7">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.8.7.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.1.1" style="font-size:90%;">ViTPose-B (pt)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.2.1" style="font-size:90%;">21.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.3.1" style="font-size:90%;">23.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.4.1" style="font-size:90%;">6.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.5.1" style="font-size:90%;">19.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.6.1" style="font-size:90%;">14.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.7.1" style="font-size:90%;">28.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.8.1" style="font-size:90%;">31.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.9.1" style="font-size:90%;">15.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.10.1" style="font-size:90%;">14.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.11.1" style="font-size:90%;">24.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.12.1" style="font-size:90%;">26.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.13.1" style="font-size:90%;">63.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.14.1" style="font-size:90%;">14.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.15.1" style="font-size:90%;">42.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.16.1" style="font-size:90%;">40.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.17.1" style="font-size:90%;">67.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.18.1" style="font-size:90%;">37.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.19.1" style="font-size:90%;">40.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.8.7.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.20.1" style="font-size:90%;">43.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.8.7.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.8.7.21.1" style="font-size:90%;">26.9</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.9.8" style="background-color:#E6E6E6;">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.9.8.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.1.1" style="font-size:90%;background-color:#E6E6E6;">VLPose-B</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.2.1" style="font-size:90%;background-color:#E6E6E6;">29.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.3.1" style="font-size:90%;background-color:#E6E6E6;">28.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.4.1" style="font-size:90%;background-color:#E6E6E6;">9.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.5.1" style="font-size:90%;background-color:#E6E6E6;">30.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.6.1" style="font-size:90%;background-color:#E6E6E6;">20.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.7.1" style="font-size:90%;background-color:#E6E6E6;">35.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.8.1" style="font-size:90%;background-color:#E6E6E6;">36.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.9.1" style="font-size:90%;background-color:#E6E6E6;">30.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.10.1" style="font-size:90%;background-color:#E6E6E6;">22.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.11.1" style="font-size:90%;background-color:#E6E6E6;">38.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.12.1" style="font-size:90%;background-color:#E6E6E6;">33.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.13.1" style="font-size:90%;background-color:#E6E6E6;">73.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.14.1" style="font-size:90%;background-color:#E6E6E6;">25.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.15.1" style="font-size:90%;background-color:#E6E6E6;">49.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.16.1" style="font-size:90%;background-color:#E6E6E6;">50.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.17.1" style="font-size:90%;background-color:#E6E6E6;">73.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.18.1" style="font-size:90%;background-color:#E6E6E6;">45.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.19.1" style="font-size:90%;background-color:#E6E6E6;">46.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.9.8.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.20.1" style="font-size:90%;background-color:#E6E6E6;">48.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.9.8.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.9.8.21.1" style="font-size:90%;background-color:#E6E6E6;">34.3</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.10.9">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.10.9.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.1.1" style="font-size:90%;">ViTPose-L (sc)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.2.1" style="font-size:90%;">27.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.3.1" style="font-size:90%;">31.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.4.1" style="font-size:90%;">10.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.5.1" style="font-size:90%;">32.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.6.1" style="font-size:90%;">21.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.7.1" style="font-size:90%;">37.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.8.1" style="font-size:90%;">13.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.9.1" style="font-size:90%;">25.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.10.1" style="font-size:90%;">17.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.11.1" style="font-size:90%;">32.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.12.1" style="font-size:90%;">37.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.13.1" style="font-size:90%;">68.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.14.1" style="font-size:90%;">26.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.15.1" style="font-size:90%;">54.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.16.1" style="font-size:90%;">56.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.17.1" style="font-size:90%;">76.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.18.1" style="font-size:90%;">51.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.19.1" style="font-size:90%;">50.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.10.9.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.20.1" style="font-size:90%;">54.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.10.9.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.10.9.21.1" style="font-size:90%;">34.2</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.11.10">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.11.10.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.1.1" style="font-size:90%;">ViTPose-L (ft)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.2.1" style="font-size:90%;">34.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.3.1" style="font-size:90%;">32.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.4.1" style="font-size:90%;">10.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.5.1" style="font-size:90%;">39.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.6.1" style="font-size:90%;">23.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.7.1" style="font-size:90%;">40.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.8.1" style="font-size:90%;">38.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.9.1" style="font-size:90%;">32.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.10.1" style="font-size:90%;">26.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.11.1" style="font-size:90%;">44.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.12.1" style="font-size:90%;">39.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.13.1" style="font-size:90%;">79.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.14.1" style="font-size:90%;">30.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.15.1" style="font-size:90%;">57.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.16.1" style="font-size:90%;">62.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.17.1" style="font-size:90%;">79.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.18.1" style="font-size:90%;">53.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.19.1" style="font-size:90%;">52.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.11.10.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.20.1" style="font-size:90%;">55.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.11.10.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.11.10.21.1" style="font-size:90%;">38.5</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.12.11">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.12.11.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.1.1" style="font-size:90%;">ViTPose-L (pt)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.2.1" style="font-size:90%;">29.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.3.1" style="font-size:90%;">28.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.4.1" style="font-size:90%;">8.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.5.1" style="font-size:90%;">29.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.6.1" style="font-size:90%;">18.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.7.1" style="font-size:90%;">36.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.8.1" style="font-size:90%;">34.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.9.1" style="font-size:90%;">18.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.10.1" style="font-size:90%;">20.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.11.1" style="font-size:90%;">31.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.12.1" style="font-size:90%;">33.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.13.1" style="font-size:90%;">71.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.14.1" style="font-size:90%;">21.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.15.1" style="font-size:90%;">52.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.16.1" style="font-size:90%;">53.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.17.1" style="font-size:90%;">75.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.18.1" style="font-size:90%;">48.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.19.1" style="font-size:90%;">48.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.12.11.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.20.1" style="font-size:90%;">52.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.12.11.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.12.11.21.1" style="font-size:90%;">32.8</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.13.12" style="background-color:#E6E6E6;">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.13.12.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.1.1" style="font-size:90%;background-color:#E6E6E6;">VLPose-L</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.2.1" style="font-size:90%;background-color:#E6E6E6;">36.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.3.1" style="font-size:90%;background-color:#E6E6E6;">33.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.4.1" style="font-size:90%;background-color:#E6E6E6;">11.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.5.1" style="font-size:90%;background-color:#E6E6E6;">35.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.6.1" style="font-size:90%;background-color:#E6E6E6;">24.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.7.1" style="font-size:90%;background-color:#E6E6E6;">41.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.8.1" style="font-size:90%;background-color:#E6E6E6;">40.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.9.1" style="font-size:90%;background-color:#E6E6E6;">37.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.10.1" style="font-size:90%;background-color:#E6E6E6;">27.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.11.1" style="font-size:90%;background-color:#E6E6E6;">47.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.12.1" style="font-size:90%;background-color:#E6E6E6;">40.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.13.1" style="font-size:90%;background-color:#E6E6E6;">79.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.14.1" style="font-size:90%;background-color:#E6E6E6;">32.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.15.1" style="font-size:90%;background-color:#E6E6E6;">58.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.16.1" style="font-size:90%;background-color:#E6E6E6;">61.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.17.1" style="font-size:90%;background-color:#E6E6E6;">78.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.18.1" style="font-size:90%;background-color:#E6E6E6;">53.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.19.1" style="font-size:90%;background-color:#E6E6E6;">50.9</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.13.12.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.20.1" style="font-size:90%;background-color:#E6E6E6;">54.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.13.12.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.13.12.21.1" style="font-size:90%;background-color:#E6E6E6;">40.2</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.14.13">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.14.13.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.1.1" style="font-size:90%;">ViTPose-H (sc)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.2.1" style="font-size:90%;">31.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.3.1" style="font-size:90%;">33.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.4.1" style="font-size:90%;">11.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.5.1" style="font-size:90%;">36.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.6.1" style="font-size:90%;">23.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.7.1" style="font-size:90%;">40.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.8.1" style="font-size:90%;">16.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.9.1" style="font-size:90%;">32.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.10.1" style="font-size:90%;">21.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.11.1" style="font-size:90%;">37.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.12.1" style="font-size:90%;">40.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.13.1" style="font-size:90%;">72.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.14.1" style="font-size:90%;">30.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.15.1" style="font-size:90%;">55.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.16.1" style="font-size:90%;">60.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.17.1" style="font-size:90%;">80.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.18.1" style="font-size:90%;">54.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.19.1" style="font-size:90%;">52.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.14.13.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.20.1" style="font-size:90%;">55.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.14.13.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.14.13.21.1" style="font-size:90%;">37.7</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.15.14">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.15.14.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.1.1" style="font-size:90%;">ViTPose-H (ft)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.2.1" style="font-size:90%;">37.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.3.1" style="font-size:90%;">35.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.4.1" style="font-size:90%;">11.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.5.1" style="font-size:90%;">40.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.6.1" style="font-size:90%;">25.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.7.1" style="font-size:90%;">42.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.8.1" style="font-size:90%;">37.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.9.1" style="font-size:90%;">36.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.10.1" style="font-size:90%;">26.6</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.11.1" style="font-size:90%;">46.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.12.1" style="font-size:90%;">41.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.13.1" style="font-size:90%;">80.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.14.1" style="font-size:90%;">32.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.15.1" style="font-size:90%;">58.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.16.1" style="font-size:90%;">64.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.17.1" style="font-size:90%;">81.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.18.1" style="font-size:90%;">56.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.19.1" style="font-size:90%;">55.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.15.14.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.20.1" style="font-size:90%;">57.9</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.15.14.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.15.14.21.1" style="font-size:90%;">40.8</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.16.15">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T3.2.16.15.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.1.1" style="font-size:90%;">ViTPose-H (pt)</span></th>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.2.1" style="font-size:90%;">36.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.3.1" style="font-size:90%;">34.8</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.4.1" style="font-size:90%;">11.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.5.1" style="font-size:90%;">39.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.6.1" style="font-size:90%;">25.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.7.1" style="font-size:90%;">42.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.8.1" style="font-size:90%;">35.3</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.9.1" style="font-size:90%;">35.7</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.10.1" style="font-size:90%;">25.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.11.1" style="font-size:90%;">43.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.12.1" style="font-size:90%;">41.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.13.1" style="font-size:90%;">78.4</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.14.1" style="font-size:90%;">33.5</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.15.1" style="font-size:90%;">59.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.16.1" style="font-size:90%;">63.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.17.1" style="font-size:90%;">80.1</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.18.1" style="font-size:90%;">56.0</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.19.1" style="font-size:90%;">55.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="A1.T3.2.16.15.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.20.1" style="font-size:90%;">58.2</span></td>
+<td class="ltx_td ltx_align_center" id="A1.T3.2.16.15.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.16.15.21.1" style="font-size:90%;">40.8</span></td>
+</tr>
+<tr class="ltx_tr" id="A1.T3.2.17.16" style="background-color:#E6E6E6;">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r" id="A1.T3.2.17.16.1" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.1.1" style="font-size:90%;background-color:#E6E6E6;">VLPose-H</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.2" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.2.1" style="font-size:90%;background-color:#E6E6E6;">38.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.3" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.3.1" style="font-size:90%;background-color:#E6E6E6;">36.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.4" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.4.1" style="font-size:90%;background-color:#E6E6E6;">12.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.5" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.5.1" style="font-size:90%;background-color:#E6E6E6;">39.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.6" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.6.1" style="font-size:90%;background-color:#E6E6E6;">26.7</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.7" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.7.1" style="font-size:90%;background-color:#E6E6E6;">44.4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.8" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.8.1" style="font-size:90%;background-color:#E6E6E6;">40.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.9" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.9.1" style="font-size:90%;background-color:#E6E6E6;">39.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.10" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.10.1" style="font-size:90%;background-color:#E6E6E6;">29.8</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.11" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.11.1" style="font-size:90%;background-color:#E6E6E6;">51.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.12" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.12.1" style="font-size:90%;background-color:#E6E6E6;">42.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.13" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.13.1" style="font-size:90%;background-color:#E6E6E6;">81.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.14" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.14.1" style="font-size:90%;background-color:#E6E6E6;">35.2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.15" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.15.1" style="font-size:90%;background-color:#E6E6E6;">61.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.16" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.16.1" style="font-size:90%;background-color:#E6E6E6;">64.5</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.17" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.17.1" style="font-size:90%;background-color:#E6E6E6;">81.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.18" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.18.1" style="font-size:90%;background-color:#E6E6E6;">56.9</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.19" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.19.1" style="font-size:90%;background-color:#E6E6E6;">54.7</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" id="A1.T3.2.17.16.20" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.20.1" style="font-size:90%;background-color:#E6E6E6;">58.1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A1.T3.2.17.16.21" style="padding-left:2.0pt;padding-right:2.0pt;"><span class="ltx_text" id="A1.T3.2.17.16.21.1" style="font-size:90%;background-color:#E6E6E6;">43.0</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table">Table A3: </span>Comparison of Average Precision (AP) of each category among widely used human pose estimation models. The correspondence between category numbers and categories is shown in <a class="ltx_ref" href="https://arxiv.org/html/2402.14456v1#A1.T2" title="Table A2 ‣ A.2 Text prompt ‣ Appendix A Appendix"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">A2</span></a>. <span class="ltx_text ltx_font_italic" id="A1.T3.12.1">sc</span>: scratch model pre-trained on COCO. <span class="ltx_text ltx_font_italic" id="A1.T3.13.2">ft</span>: finetune the last layer of the model on HumanArt. <span class="ltx_text ltx_font_italic" id="A1.T3.14.3">ft</span>: prompt tuning on HumanArt.</figcaption>
+</figure>
+</section>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Thu Feb 22 11:21:58 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span style="font-size:70%;position:relative; bottom:2.2pt;">A</span>T<span style="position:relative; bottom:-0.4ex;">E</span></span><span class="ltx_font_smallcaps">xml</span><img alt="[LOGO]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

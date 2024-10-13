@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation</title>
+<!--Generated on Sat Jun  1 09:49:15 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2406.00384v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S1" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S2" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S2.SS1" title="In 2 Related Work ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Category-Agnostic Pose Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S2.SS2" title="In 2 Related Work ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Open-Vocabulary Models</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S3" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S3.SS1" title="In 3 Method ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Open-Vocabulary Keypoint Detection</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S3.SS2" title="In 3 Method ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Text Prompts as Visual Queues</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.SS0.SSS0.Px1" title="In 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title">Implementation Details</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.SS1" title="In 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Benchmark Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.SS2" title="In 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Ablation Study</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.SS2.SSS0.Px1" title="In 4.2 Ablation Study ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title">Text Modifications</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.SS2.SSS0.Px2" title="In 4.2 Ablation Study ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title">Occlusions and Levels of Abstraction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.SS2.SSS0.Px3" title="In 4.2 Ablation Study ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title">Out of Distribution Query Images</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S5" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Limitations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S6" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Broader impact</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S7" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Conclusions</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1" title="In CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Appendix / Supplemental Material</span></a>
+<ol class="ltx_toclist ltx_toclist_appendix">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.SS1" title="In Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.1 </span>Disadvantages of Visual Prompts in CAPE</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.SS2" title="In Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2 </span>Additional Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.SS2.SSS1" title="In A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2.1 </span>Different Architectures</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.SS2.SSS2" title="In A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2.2 </span>Adaptability to Support Text Modifications</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.SS2.SSS3" title="In A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2.3 </span>Occlusions and levels of abstraction</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Matan Rusanovsky    Or Hirschorn    Shai Avidan
+<br class="ltx_break"/>
+<br class="ltx_break"/>Tel Aviv University
+<br class="ltx_break"/>
+<br class="ltx_break"/><a class="ltx_ref ltx_href ltx_font_sansserif" href="https://github.com/matanr/capex" style="color:#0000FF;" title="">https://github.com/matanr/capex</a><span class="ltx_text ltx_font_sansserif" id="id1.1.id1" style="color:#0000FF;">
+</span>
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id2.id1">Conventional 2D pose estimation models are constrained by their design to specific object categories. This limits their applicability to predefined objects. To overcome these limitations, category-agnostic pose estimation (CAPE) emerged as a solution. CAPE aims to facilitate keypoint localization for diverse object categories using a unified model, which can generalize from minimal annotated support images.
+Recent CAPE works have produced object poses based on arbitrary keypoint definitions annotated on a user-provided support image. Our work departs from conventional CAPE methods, which require a support image, by adopting a text-based approach instead of the support image.
+Specifically, we use a pose-graph, where nodes represent keypoints that are described with text. This representation takes advantage of the abstraction of text descriptions and the structure imposed by the graph.
+Our approach effectively breaks symmetry, preserves structure, and improves occlusion handling.
+We validate our novel approach using the MP-100 benchmark, a comprehensive dataset spanning over 100 categories and 18,000 images. Under a 1-shot setting, our solution achieves a notable performance boost of 1.07%, establishing a new state-of-the-art for CAPE. Additionally, we enrich the dataset by providing text description annotations, further enhancing its utility for future research.</p>
+</div>
+<figure class="ltx_figure" id="S0.F1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="394" id="S0.F1.g1" src="x1.png" width="830"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S0.F1.6.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text ltx_font_bold" id="S0.F1.7.2" style="font-size:90%;">CapeX in action:<span class="ltx_text ltx_font_medium" id="S0.F1.7.2.1"> Given support keypoints text descriptions (in <span class="ltx_text" id="S0.F1.7.2.1.1" style="color:#FFBFBF;">pink</span>) and a corresponding skeleton (not shown), our model localizes the skeleton on query images. In the first row, there are few input support text descriptions, and below each support input, there is a query image from the test set on the left (<span class="ltx_text" id="S0.F1.7.2.1.2" style="color:#00FF00;">green</span>), and an AI generated query image on the right (<span class="ltx_text" id="S0.F1.7.2.1.3" style="color:#0000FF;">blue</span>). Our approach does not require a support image. Instead, it utilizes the abstraction power of text to improve keypoint localization.</span></span></figcaption>
+</figure>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Pose estimation deals with the prediction of semantic parts’ positions within objects depicted in images, a task crucial for applications like zoology, autonomous driving, virtual reality, and robotics <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite>.
+Previous pose estimation methods were typically constrained by their reliance on category-specific datasets for training. Consequently, when confronted with novel objects, these methods often exhibit limited efficacy due to their lack of adaptability.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">To address this challenge, recent research has introduced category-agnostic pose estimation (CAPE) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite>, a paradigm capable of localizing semantic parts across diverse object categories, based on a single or few support examples. All previous CAPE works require a small set of support images annotated with the keypoints of interest. These support images are used in order to find the best spatial arrangement of the keypoints in the query image, based on latent visual correspondence to the annotated support keypoints.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">This raises two challenges. First, the need to provide annotated support image(s) is cumbersome. Second, relying solely on visual correspondence between keypoints in different images, even from the same category, may lead to suboptimal results. This is because no two distinct images share parts with the exact same appearance. Still, both images should share parts with the same semantic meaning. For example, all cats have a head, legs, and a tail, but they never look the same. This idea is even more crucial when the objective is to estimate poses of objects in images from novel categories (i.e., dogs), as in CAPE.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">We cope with these limitations by adopting a holistic approach to pose estimation, based on a support graph as input, with open-vocabulary textual descriptions on its nodes. No support images are needed. Instead of exclusively relying on visual support data, we leverage the abstraction power of textual data. This comprehensive view enables us to match the query keypoints’ appearance to the textual description of the support keypoints, eliminating the need for support images altogether.
+Furthermore, following Pose Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite>, instead of treating the input keypoints as isolated entities, we treat them as structure-aware connected nodes of a graph.
+By doing so, we effectively leverage the inherent relationships and dependencies between keypoints, enhancing the overall performance, breaking symmetry, preserving structure, and better handling occlusions. Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S0.F1" title="Figure 1 ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">1</span></a> demonstrates our approach.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">To evaluate the efficacy of our proposed method, we utilize the extended version <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite> of the CAPE benchmark, MP-100 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite>. This dataset consists of more than 18,000 images spanning 100 categories, encompassing diverse subjects such as animals, vehicles, furniture, and clothes.
+As some of the categories miss the keypoints’ text descriptions, we collected and unified the text descriptions of the keypoints in all categories.
+Our method is evaluated against previous CAPE methodologies. Notably, our approach surpasses the performance of existing methods, showcasing a new state-of-the-art performance under the 1-shot setting.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">In summary, our contributions can be outlined as follows:</p>
+<ul class="ltx_itemize" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We propose modeling the support keypoints using connected graph nodes coupled with text descriptions as opposed to previous methods that rely on visual signals. This methodology matches the support to the query keypoints, thanks to the abstraction power of text and graphs. Furthermore, this approach does not require support images for either training or inference.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">We provide an enhanced version of the MP-100 dataset with textual annotations for the keypoints in all categories, enriching the benchmarking capabilities for category-agnostic pose estimation.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">We establish new benchmarks in category-agnostic pose estimation, showcasing state-of-the-art performance on the MP-100 dataset, without finetuning the support feature extraction.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Category-Agnostic Pose Estimation</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">The primary aim of pose estimation is to localize the semantic keypoints of objects or instances precisely. Traditionally, pose estimation methods have been largely tailored to specific categories, such as humans <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib38" title="">38</a>]</cite>, animals <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib40" title="">40</a>]</cite>, or vehicles <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib28" title="">28</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib23" title="">23</a>]</cite>. However, these prior works are constrained to object categories encountered during training.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">An emerging aspect in this field is category-independent pose estimation, as introduced by POMNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite>. This few-shot approach predicts keypoints by comparing support keypoints with query images in the embedding space, addressing the challenge of object categories not seen during training.
+POMNet employs a transformer to encode the support keypoints and query images. It uses a regression head to predict similarity from the extracted features.
+CapeFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib25" title="">25</a>]</cite> extends this matching paradigm to a two-stage framework, refining unreliable matching outcomes to improve prediction precision.
+Pose Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite> presented a significant departure from previous CAPE methods, which refer to keypoints as isolated entities, by treating the input pose data as a graph.
+It utilizes Graph Convolutional Networks (GCNs) to leverage the inherent object’s structure to break symmetry, preserve the structure, and better handle occlusions. However, similar to previous CAPE models, it relies solely on visual features.
+Our work builds upon Pose Anything, utilizing its structure-aware architecture, while introducing the abstraction power of text.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Open-Vocabulary Models</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">A growing area in computer vision called Open-Vocabulary learning is being explored in various vision tasks. These new methods aim to localize and recognize categories beyond the labeled space. The open-vocabulary approach is broader, more practical, and more efficient compared to weakly supervised setups <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib33" title="">33</a>]</cite>.
+Large-scale vision-language models (VLMs) like CLIP <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib22" title="">22</a>]</cite> and ALIGN <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib11" title="">11</a>]</cite> have shown promise in handling both visual and text data, and proved useful for open-vocabulary tasks.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1">Open-vocabulary object detection (OVOD) using VLMs was utilized by performing object-centric alignment of language embeddings from the CLIP model <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib1" title="">1</a>]</cite>. Zang et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib42" title="">42</a>]</cite> suggested a DETR (common transformer-based architecture) based detector, able to detect any object given its class name. In addition, LLMs were also used to generate informative language descriptions for object classes and construct powerful text-based annotations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib12" title="">12</a>]</cite>.
+Another task that recently achieved significant progress is open-vocabulary semantic segmentation (OVSS), which aims to segment objects with arbitrary text. One line of research <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib37" title="">37</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib34" title="">34</a>]</cite> combines powerful segmentation models like MaskFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib3" title="">3</a>]</cite> with CLIP <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib35" title="">35</a>]</cite> while others <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib44" title="">44</a>]</cite> utilize foundation segmentation models like SAM <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib14" title="">14</a>]</cite>.
+Recently, Wei et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib30" title="">30</a>]</cite> suggested a new benchmark for Open-Vocabulary Part Segmentation, to further enhance open-vocabulary capabilities.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.1">Yet, there’s still limited exploration into open-vocabulary keypoint detection.
+Recently, CLAMP <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib43" title="">43</a>]</cite> leveraged CLIP to prompt animal keypoints. They found that establishing effective connections between pre-trained language models and visual animal keypoints is challenging due to the substantial disparity between text-based descriptions and keypoint visual features. CLAMP attempts to narrow this gap by using contrastive learning to align the text prompts with the animal keypoints during training.
+Our approach aims for general keypoint estimation of any category while taking advantage of structure as a prior for localization by treating the input prompts as a graph.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Method</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Open-Vocabulary Keypoint Detection</h3>
+<figure class="ltx_figure" id="S3.F2">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F2.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="598" id="S3.F2.sf1.g1" src="extracted/5636531/Figures/horse/part_detection.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.sf1.2.1.1" style="font-size:90%;">(a)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F2.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="598" id="S3.F2.sf2.g1" src="extracted/5636531/Figures/horse/part_seg.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.sf2.2.1.1" style="font-size:90%;">(b)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="S3.F2.sf3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="598" id="S3.F2.sf3.g1" src="extracted/5636531/Figures/horse/pose.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.sf3.2.1.1" style="font-size:90%;">(c)</span> </span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.3.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text ltx_font_bold" id="S3.F2.4.2" style="font-size:90%;">Different Open-Vocabulary Tasks:<span class="ltx_text ltx_font_medium" id="S3.F2.4.2.1"> We show three different open-vocabulary tasks: (a) object detection, (b) part segmentation, and (c) keypoint detection. Object detection identifies objects and locations, segmentation provides pixel-level semantic details, and keypoint detection offers finer localization than object detection while being more practical for localization than segmentation.
+</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">Open-vocabulary learning seeks to localize and recognize categories beyond those included in annotated labels. While open-vocabulary object detection and segmentation have gained attraction, keypoint detection has largely been overlooked.
+Segmentation offers pixel-level details about semantic regions, whereas object detection identifies specific objects and their locations. Keypoint detection lies between these two, offering finer semantic localization than object detection, yet being more lightweight and practical for parts localization compared to segmentation. Figure  <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S3.F2" title="Figure 2 ‣ 3.1 Open-Vocabulary Keypoint Detection ‣ 3 Method ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">2</span></a> demonstrates the differences between the three tasks.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="424" id="S3.F3.g1" src="x2.png" width="830"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.3.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text ltx_font_bold" id="S3.F3.4.2" style="font-size:90%;">Architecture overview:<span class="ltx_text ltx_font_medium" id="S3.F3.4.2.1"> Our framework uses image and text backbones benefiting from both accurate and abstract descriptions respectively. The extracted feature descriptors are forwarded into the transformer encoder that refines them. The refined features are passed into the proposal generator alongside the graph transformer decoder, utilizing the graph structure within the data.
+</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">Open-vocabulary keypoint detection aims to use natural language to identify any keypoints in images, even if those key categories were not part of the training data. Advances in vision-language models such as CLIP allow keypoint detectors to harness powerful language models to perform language-driven tasks.
+We introduce a new open-vocabulary keypoint detector inspired by CAPE, a few-shot task of localizing keypoints in unseen categories using a few annotated images.
+The core idea of our work is that for the task of CAPE, it is more beneficial to describe the searched points in the query image using text description instead of relying only on the visual features of the support images. This is because text allows a higher level of abstraction and offers a looser restriction to the support request. This is true even when the support and query images are from the same category - for example, no two cats share visually the exact same <span class="ltx_text ltx_font_italic" id="S3.SS1.p2.1.1">front left leg</span>, but both cats have a part within them that follows the same text description: <span class="ltx_text ltx_font_italic" id="S3.SS1.p2.1.2">front left leg</span>. This distinction is even more significant when dealing with images from different categories as in CAPE. We present in the supplemental Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F10" title="Figure 10 ‣ A.1 Disadvantages of Visual Prompts in CAPE ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">10</span></a> how a support image-based CAPE solution might suffer from incorrect pose estimation due to visually inconsistent support images.
+Bottom left in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S3.F3" title="Figure 3 ‣ 3.1 Open-Vocabulary Keypoint Detection ‣ 3 Method ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">3</span></a> is an example of a support text-graph that our system utilizes.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Text Prompts as Visual Queues</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">Our framework extracts visual features from the query image and matches them to the textual features that are extracted from the support text-graph. We incorporated this notion by introducing text comprehension into Pose Anything’s framework <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.5">A pre-trained and fine-tuned SwinV2-S <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib19" title="">19</a>]</cite> is utilized for extracting image features from the input query image producing the feature map <math alttext="\hat{\mathcal{I}}_{q}\in\mathbb{R}^{hw\times C_{i}}" class="ltx_Math" display="inline" id="S3.SS2.p2.1.m1.1"><semantics id="S3.SS2.p2.1.m1.1a"><mrow id="S3.SS2.p2.1.m1.1.1" xref="S3.SS2.p2.1.m1.1.1.cmml"><msub id="S3.SS2.p2.1.m1.1.1.2" xref="S3.SS2.p2.1.m1.1.1.2.cmml"><mover accent="true" id="S3.SS2.p2.1.m1.1.1.2.2" xref="S3.SS2.p2.1.m1.1.1.2.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p2.1.m1.1.1.2.2.2" xref="S3.SS2.p2.1.m1.1.1.2.2.2.cmml">ℐ</mi><mo id="S3.SS2.p2.1.m1.1.1.2.2.1" xref="S3.SS2.p2.1.m1.1.1.2.2.1.cmml">^</mo></mover><mi id="S3.SS2.p2.1.m1.1.1.2.3" xref="S3.SS2.p2.1.m1.1.1.2.3.cmml">q</mi></msub><mo id="S3.SS2.p2.1.m1.1.1.1" xref="S3.SS2.p2.1.m1.1.1.1.cmml">∈</mo><msup id="S3.SS2.p2.1.m1.1.1.3" xref="S3.SS2.p2.1.m1.1.1.3.cmml"><mi id="S3.SS2.p2.1.m1.1.1.3.2" xref="S3.SS2.p2.1.m1.1.1.3.2.cmml">ℝ</mi><mrow id="S3.SS2.p2.1.m1.1.1.3.3" xref="S3.SS2.p2.1.m1.1.1.3.3.cmml"><mrow id="S3.SS2.p2.1.m1.1.1.3.3.2" xref="S3.SS2.p2.1.m1.1.1.3.3.2.cmml"><mi id="S3.SS2.p2.1.m1.1.1.3.3.2.2" xref="S3.SS2.p2.1.m1.1.1.3.3.2.2.cmml">h</mi><mo id="S3.SS2.p2.1.m1.1.1.3.3.2.1" xref="S3.SS2.p2.1.m1.1.1.3.3.2.1.cmml">⁢</mo><mi id="S3.SS2.p2.1.m1.1.1.3.3.2.3" xref="S3.SS2.p2.1.m1.1.1.3.3.2.3.cmml">w</mi></mrow><mo id="S3.SS2.p2.1.m1.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS2.p2.1.m1.1.1.3.3.1.cmml">×</mo><msub id="S3.SS2.p2.1.m1.1.1.3.3.3" xref="S3.SS2.p2.1.m1.1.1.3.3.3.cmml"><mi id="S3.SS2.p2.1.m1.1.1.3.3.3.2" xref="S3.SS2.p2.1.m1.1.1.3.3.3.2.cmml">C</mi><mi id="S3.SS2.p2.1.m1.1.1.3.3.3.3" xref="S3.SS2.p2.1.m1.1.1.3.3.3.3.cmml">i</mi></msub></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.1.m1.1b"><apply id="S3.SS2.p2.1.m1.1.1.cmml" xref="S3.SS2.p2.1.m1.1.1"><in id="S3.SS2.p2.1.m1.1.1.1.cmml" xref="S3.SS2.p2.1.m1.1.1.1"></in><apply id="S3.SS2.p2.1.m1.1.1.2.cmml" xref="S3.SS2.p2.1.m1.1.1.2"><csymbol cd="ambiguous" id="S3.SS2.p2.1.m1.1.1.2.1.cmml" xref="S3.SS2.p2.1.m1.1.1.2">subscript</csymbol><apply id="S3.SS2.p2.1.m1.1.1.2.2.cmml" xref="S3.SS2.p2.1.m1.1.1.2.2"><ci id="S3.SS2.p2.1.m1.1.1.2.2.1.cmml" xref="S3.SS2.p2.1.m1.1.1.2.2.1">^</ci><ci id="S3.SS2.p2.1.m1.1.1.2.2.2.cmml" xref="S3.SS2.p2.1.m1.1.1.2.2.2">ℐ</ci></apply><ci id="S3.SS2.p2.1.m1.1.1.2.3.cmml" xref="S3.SS2.p2.1.m1.1.1.2.3">𝑞</ci></apply><apply id="S3.SS2.p2.1.m1.1.1.3.cmml" xref="S3.SS2.p2.1.m1.1.1.3"><csymbol cd="ambiguous" id="S3.SS2.p2.1.m1.1.1.3.1.cmml" xref="S3.SS2.p2.1.m1.1.1.3">superscript</csymbol><ci id="S3.SS2.p2.1.m1.1.1.3.2.cmml" xref="S3.SS2.p2.1.m1.1.1.3.2">ℝ</ci><apply id="S3.SS2.p2.1.m1.1.1.3.3.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3"><times id="S3.SS2.p2.1.m1.1.1.3.3.1.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.1"></times><apply id="S3.SS2.p2.1.m1.1.1.3.3.2.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.2"><times id="S3.SS2.p2.1.m1.1.1.3.3.2.1.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.2.1"></times><ci id="S3.SS2.p2.1.m1.1.1.3.3.2.2.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.2.2">ℎ</ci><ci id="S3.SS2.p2.1.m1.1.1.3.3.2.3.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.2.3">𝑤</ci></apply><apply id="S3.SS2.p2.1.m1.1.1.3.3.3.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.3"><csymbol cd="ambiguous" id="S3.SS2.p2.1.m1.1.1.3.3.3.1.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.3">subscript</csymbol><ci id="S3.SS2.p2.1.m1.1.1.3.3.3.2.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.3.2">𝐶</ci><ci id="S3.SS2.p2.1.m1.1.1.3.3.3.3.cmml" xref="S3.SS2.p2.1.m1.1.1.3.3.3.3">𝑖</ci></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.1.m1.1c">\hat{\mathcal{I}}_{q}\in\mathbb{R}^{hw\times C_{i}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.1.m1.1d">over^ start_ARG caligraphic_I end_ARG start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_h italic_w × italic_C start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT end_POSTSUPERSCRIPT</annotation></semantics></math>, where <math alttext="hw" class="ltx_Math" display="inline" id="S3.SS2.p2.2.m2.1"><semantics id="S3.SS2.p2.2.m2.1a"><mrow id="S3.SS2.p2.2.m2.1.1" xref="S3.SS2.p2.2.m2.1.1.cmml"><mi id="S3.SS2.p2.2.m2.1.1.2" xref="S3.SS2.p2.2.m2.1.1.2.cmml">h</mi><mo id="S3.SS2.p2.2.m2.1.1.1" xref="S3.SS2.p2.2.m2.1.1.1.cmml">⁢</mo><mi id="S3.SS2.p2.2.m2.1.1.3" xref="S3.SS2.p2.2.m2.1.1.3.cmml">w</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.2.m2.1b"><apply id="S3.SS2.p2.2.m2.1.1.cmml" xref="S3.SS2.p2.2.m2.1.1"><times id="S3.SS2.p2.2.m2.1.1.1.cmml" xref="S3.SS2.p2.2.m2.1.1.1"></times><ci id="S3.SS2.p2.2.m2.1.1.2.cmml" xref="S3.SS2.p2.2.m2.1.1.2">ℎ</ci><ci id="S3.SS2.p2.2.m2.1.1.3.cmml" xref="S3.SS2.p2.2.m2.1.1.3">𝑤</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.2.m2.1c">hw</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.2.m2.1d">italic_h italic_w</annotation></semantics></math> is the total number of patches and <math alttext="C_{i}" class="ltx_Math" display="inline" id="S3.SS2.p2.3.m3.1"><semantics id="S3.SS2.p2.3.m3.1a"><msub id="S3.SS2.p2.3.m3.1.1" xref="S3.SS2.p2.3.m3.1.1.cmml"><mi id="S3.SS2.p2.3.m3.1.1.2" xref="S3.SS2.p2.3.m3.1.1.2.cmml">C</mi><mi id="S3.SS2.p2.3.m3.1.1.3" xref="S3.SS2.p2.3.m3.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.3.m3.1b"><apply id="S3.SS2.p2.3.m3.1.1.cmml" xref="S3.SS2.p2.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS2.p2.3.m3.1.1.1.cmml" xref="S3.SS2.p2.3.m3.1.1">subscript</csymbol><ci id="S3.SS2.p2.3.m3.1.1.2.cmml" xref="S3.SS2.p2.3.m3.1.1.2">𝐶</ci><ci id="S3.SS2.p2.3.m3.1.1.3.cmml" xref="S3.SS2.p2.3.m3.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.3.m3.1c">C_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.3.m3.1d">italic_C start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> is the image embedding dimension. Then <math alttext="\hat{\mathcal{I}}_{q}" class="ltx_Math" display="inline" id="S3.SS2.p2.4.m4.1"><semantics id="S3.SS2.p2.4.m4.1a"><msub id="S3.SS2.p2.4.m4.1.1" xref="S3.SS2.p2.4.m4.1.1.cmml"><mover accent="true" id="S3.SS2.p2.4.m4.1.1.2" xref="S3.SS2.p2.4.m4.1.1.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p2.4.m4.1.1.2.2" xref="S3.SS2.p2.4.m4.1.1.2.2.cmml">ℐ</mi><mo id="S3.SS2.p2.4.m4.1.1.2.1" xref="S3.SS2.p2.4.m4.1.1.2.1.cmml">^</mo></mover><mi id="S3.SS2.p2.4.m4.1.1.3" xref="S3.SS2.p2.4.m4.1.1.3.cmml">q</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.4.m4.1b"><apply id="S3.SS2.p2.4.m4.1.1.cmml" xref="S3.SS2.p2.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS2.p2.4.m4.1.1.1.cmml" xref="S3.SS2.p2.4.m4.1.1">subscript</csymbol><apply id="S3.SS2.p2.4.m4.1.1.2.cmml" xref="S3.SS2.p2.4.m4.1.1.2"><ci id="S3.SS2.p2.4.m4.1.1.2.1.cmml" xref="S3.SS2.p2.4.m4.1.1.2.1">^</ci><ci id="S3.SS2.p2.4.m4.1.1.2.2.cmml" xref="S3.SS2.p2.4.m4.1.1.2.2">ℐ</ci></apply><ci id="S3.SS2.p2.4.m4.1.1.3.cmml" xref="S3.SS2.p2.4.m4.1.1.3">𝑞</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.4.m4.1c">\hat{\mathcal{I}}_{q}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.4.m4.1d">over^ start_ARG caligraphic_I end_ARG start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT</annotation></semantics></math> is passed through a 1x1 convolutional layer, resulting in <math alttext="\mathcal{I}_{q}\in\mathbb{R}^{hw\times C}" class="ltx_Math" display="inline" id="S3.SS2.p2.5.m5.1"><semantics id="S3.SS2.p2.5.m5.1a"><mrow id="S3.SS2.p2.5.m5.1.1" xref="S3.SS2.p2.5.m5.1.1.cmml"><msub id="S3.SS2.p2.5.m5.1.1.2" xref="S3.SS2.p2.5.m5.1.1.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p2.5.m5.1.1.2.2" xref="S3.SS2.p2.5.m5.1.1.2.2.cmml">ℐ</mi><mi id="S3.SS2.p2.5.m5.1.1.2.3" xref="S3.SS2.p2.5.m5.1.1.2.3.cmml">q</mi></msub><mo id="S3.SS2.p2.5.m5.1.1.1" xref="S3.SS2.p2.5.m5.1.1.1.cmml">∈</mo><msup id="S3.SS2.p2.5.m5.1.1.3" xref="S3.SS2.p2.5.m5.1.1.3.cmml"><mi id="S3.SS2.p2.5.m5.1.1.3.2" xref="S3.SS2.p2.5.m5.1.1.3.2.cmml">ℝ</mi><mrow id="S3.SS2.p2.5.m5.1.1.3.3" xref="S3.SS2.p2.5.m5.1.1.3.3.cmml"><mrow id="S3.SS2.p2.5.m5.1.1.3.3.2" xref="S3.SS2.p2.5.m5.1.1.3.3.2.cmml"><mi id="S3.SS2.p2.5.m5.1.1.3.3.2.2" xref="S3.SS2.p2.5.m5.1.1.3.3.2.2.cmml">h</mi><mo id="S3.SS2.p2.5.m5.1.1.3.3.2.1" xref="S3.SS2.p2.5.m5.1.1.3.3.2.1.cmml">⁢</mo><mi id="S3.SS2.p2.5.m5.1.1.3.3.2.3" xref="S3.SS2.p2.5.m5.1.1.3.3.2.3.cmml">w</mi></mrow><mo id="S3.SS2.p2.5.m5.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS2.p2.5.m5.1.1.3.3.1.cmml">×</mo><mi id="S3.SS2.p2.5.m5.1.1.3.3.3" xref="S3.SS2.p2.5.m5.1.1.3.3.3.cmml">C</mi></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.5.m5.1b"><apply id="S3.SS2.p2.5.m5.1.1.cmml" xref="S3.SS2.p2.5.m5.1.1"><in id="S3.SS2.p2.5.m5.1.1.1.cmml" xref="S3.SS2.p2.5.m5.1.1.1"></in><apply id="S3.SS2.p2.5.m5.1.1.2.cmml" xref="S3.SS2.p2.5.m5.1.1.2"><csymbol cd="ambiguous" id="S3.SS2.p2.5.m5.1.1.2.1.cmml" xref="S3.SS2.p2.5.m5.1.1.2">subscript</csymbol><ci id="S3.SS2.p2.5.m5.1.1.2.2.cmml" xref="S3.SS2.p2.5.m5.1.1.2.2">ℐ</ci><ci id="S3.SS2.p2.5.m5.1.1.2.3.cmml" xref="S3.SS2.p2.5.m5.1.1.2.3">𝑞</ci></apply><apply id="S3.SS2.p2.5.m5.1.1.3.cmml" xref="S3.SS2.p2.5.m5.1.1.3"><csymbol cd="ambiguous" id="S3.SS2.p2.5.m5.1.1.3.1.cmml" xref="S3.SS2.p2.5.m5.1.1.3">superscript</csymbol><ci id="S3.SS2.p2.5.m5.1.1.3.2.cmml" xref="S3.SS2.p2.5.m5.1.1.3.2">ℝ</ci><apply id="S3.SS2.p2.5.m5.1.1.3.3.cmml" xref="S3.SS2.p2.5.m5.1.1.3.3"><times id="S3.SS2.p2.5.m5.1.1.3.3.1.cmml" xref="S3.SS2.p2.5.m5.1.1.3.3.1"></times><apply id="S3.SS2.p2.5.m5.1.1.3.3.2.cmml" xref="S3.SS2.p2.5.m5.1.1.3.3.2"><times id="S3.SS2.p2.5.m5.1.1.3.3.2.1.cmml" xref="S3.SS2.p2.5.m5.1.1.3.3.2.1"></times><ci id="S3.SS2.p2.5.m5.1.1.3.3.2.2.cmml" xref="S3.SS2.p2.5.m5.1.1.3.3.2.2">ℎ</ci><ci id="S3.SS2.p2.5.m5.1.1.3.3.2.3.cmml" xref="S3.SS2.p2.5.m5.1.1.3.3.2.3">𝑤</ci></apply><ci id="S3.SS2.p2.5.m5.1.1.3.3.3.cmml" xref="S3.SS2.p2.5.m5.1.1.3.3.3">𝐶</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.5.m5.1c">\mathcal{I}_{q}\in\mathbb{R}^{hw\times C}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.5.m5.1d">caligraphic_I start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_h italic_w × italic_C end_POSTSUPERSCRIPT</annotation></semantics></math>.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<p class="ltx_p" id="S3.SS2.p3.7">The support keypoint text descriptions are embedded in our model using a pre-trained gte-base-v1.5 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib17" title="">17</a>]</cite>. The text embeddings of all <math alttext="K_{s}" class="ltx_Math" display="inline" id="S3.SS2.p3.1.m1.1"><semantics id="S3.SS2.p3.1.m1.1a"><msub id="S3.SS2.p3.1.m1.1.1" xref="S3.SS2.p3.1.m1.1.1.cmml"><mi id="S3.SS2.p3.1.m1.1.1.2" xref="S3.SS2.p3.1.m1.1.1.2.cmml">K</mi><mi id="S3.SS2.p3.1.m1.1.1.3" xref="S3.SS2.p3.1.m1.1.1.3.cmml">s</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.1.m1.1b"><apply id="S3.SS2.p3.1.m1.1.1.cmml" xref="S3.SS2.p3.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.1.m1.1.1.1.cmml" xref="S3.SS2.p3.1.m1.1.1">subscript</csymbol><ci id="S3.SS2.p3.1.m1.1.1.2.cmml" xref="S3.SS2.p3.1.m1.1.1.2">𝐾</ci><ci id="S3.SS2.p3.1.m1.1.1.3.cmml" xref="S3.SS2.p3.1.m1.1.1.3">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.1.m1.1c">K_{s}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.1.m1.1d">italic_K start_POSTSUBSCRIPT italic_s end_POSTSUBSCRIPT</annotation></semantics></math> keypoints of the provided support sample are then normalized. The normalized keypoints are padded with zeros, effectively resulting in <math alttext="K" class="ltx_Math" display="inline" id="S3.SS2.p3.2.m2.1"><semantics id="S3.SS2.p3.2.m2.1a"><mi id="S3.SS2.p3.2.m2.1.1" xref="S3.SS2.p3.2.m2.1.1.cmml">K</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.2.m2.1b"><ci id="S3.SS2.p3.2.m2.1.1.cmml" xref="S3.SS2.p3.2.m2.1.1">𝐾</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.2.m2.1c">K</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.2.m2.1d">italic_K</annotation></semantics></math> keypoints, where <math alttext="K" class="ltx_Math" display="inline" id="S3.SS2.p3.3.m3.1"><semantics id="S3.SS2.p3.3.m3.1a"><mi id="S3.SS2.p3.3.m3.1.1" xref="S3.SS2.p3.3.m3.1.1.cmml">K</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.3.m3.1b"><ci id="S3.SS2.p3.3.m3.1.1.cmml" xref="S3.SS2.p3.3.m3.1.1">𝐾</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.3.m3.1c">K</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.3.m3.1d">italic_K</annotation></semantics></math> is defined to be the maximum amount of possible keypoints in the dataset. The final text feature map is of the form <math alttext="\hat{\mathcal{T}}_{s}\in\mathbb{R}^{K\times C_{t}}" class="ltx_Math" display="inline" id="S3.SS2.p3.4.m4.1"><semantics id="S3.SS2.p3.4.m4.1a"><mrow id="S3.SS2.p3.4.m4.1.1" xref="S3.SS2.p3.4.m4.1.1.cmml"><msub id="S3.SS2.p3.4.m4.1.1.2" xref="S3.SS2.p3.4.m4.1.1.2.cmml"><mover accent="true" id="S3.SS2.p3.4.m4.1.1.2.2" xref="S3.SS2.p3.4.m4.1.1.2.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.4.m4.1.1.2.2.2" xref="S3.SS2.p3.4.m4.1.1.2.2.2.cmml">𝒯</mi><mo id="S3.SS2.p3.4.m4.1.1.2.2.1" xref="S3.SS2.p3.4.m4.1.1.2.2.1.cmml">^</mo></mover><mi id="S3.SS2.p3.4.m4.1.1.2.3" xref="S3.SS2.p3.4.m4.1.1.2.3.cmml">s</mi></msub><mo id="S3.SS2.p3.4.m4.1.1.1" xref="S3.SS2.p3.4.m4.1.1.1.cmml">∈</mo><msup id="S3.SS2.p3.4.m4.1.1.3" xref="S3.SS2.p3.4.m4.1.1.3.cmml"><mi id="S3.SS2.p3.4.m4.1.1.3.2" xref="S3.SS2.p3.4.m4.1.1.3.2.cmml">ℝ</mi><mrow id="S3.SS2.p3.4.m4.1.1.3.3" xref="S3.SS2.p3.4.m4.1.1.3.3.cmml"><mi id="S3.SS2.p3.4.m4.1.1.3.3.2" xref="S3.SS2.p3.4.m4.1.1.3.3.2.cmml">K</mi><mo id="S3.SS2.p3.4.m4.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS2.p3.4.m4.1.1.3.3.1.cmml">×</mo><msub id="S3.SS2.p3.4.m4.1.1.3.3.3" xref="S3.SS2.p3.4.m4.1.1.3.3.3.cmml"><mi id="S3.SS2.p3.4.m4.1.1.3.3.3.2" xref="S3.SS2.p3.4.m4.1.1.3.3.3.2.cmml">C</mi><mi id="S3.SS2.p3.4.m4.1.1.3.3.3.3" xref="S3.SS2.p3.4.m4.1.1.3.3.3.3.cmml">t</mi></msub></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.4.m4.1b"><apply id="S3.SS2.p3.4.m4.1.1.cmml" xref="S3.SS2.p3.4.m4.1.1"><in id="S3.SS2.p3.4.m4.1.1.1.cmml" xref="S3.SS2.p3.4.m4.1.1.1"></in><apply id="S3.SS2.p3.4.m4.1.1.2.cmml" xref="S3.SS2.p3.4.m4.1.1.2"><csymbol cd="ambiguous" id="S3.SS2.p3.4.m4.1.1.2.1.cmml" xref="S3.SS2.p3.4.m4.1.1.2">subscript</csymbol><apply id="S3.SS2.p3.4.m4.1.1.2.2.cmml" xref="S3.SS2.p3.4.m4.1.1.2.2"><ci id="S3.SS2.p3.4.m4.1.1.2.2.1.cmml" xref="S3.SS2.p3.4.m4.1.1.2.2.1">^</ci><ci id="S3.SS2.p3.4.m4.1.1.2.2.2.cmml" xref="S3.SS2.p3.4.m4.1.1.2.2.2">𝒯</ci></apply><ci id="S3.SS2.p3.4.m4.1.1.2.3.cmml" xref="S3.SS2.p3.4.m4.1.1.2.3">𝑠</ci></apply><apply id="S3.SS2.p3.4.m4.1.1.3.cmml" xref="S3.SS2.p3.4.m4.1.1.3"><csymbol cd="ambiguous" id="S3.SS2.p3.4.m4.1.1.3.1.cmml" xref="S3.SS2.p3.4.m4.1.1.3">superscript</csymbol><ci id="S3.SS2.p3.4.m4.1.1.3.2.cmml" xref="S3.SS2.p3.4.m4.1.1.3.2">ℝ</ci><apply id="S3.SS2.p3.4.m4.1.1.3.3.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3"><times id="S3.SS2.p3.4.m4.1.1.3.3.1.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3.1"></times><ci id="S3.SS2.p3.4.m4.1.1.3.3.2.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3.2">𝐾</ci><apply id="S3.SS2.p3.4.m4.1.1.3.3.3.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3.3"><csymbol cd="ambiguous" id="S3.SS2.p3.4.m4.1.1.3.3.3.1.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3.3">subscript</csymbol><ci id="S3.SS2.p3.4.m4.1.1.3.3.3.2.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3.3.2">𝐶</ci><ci id="S3.SS2.p3.4.m4.1.1.3.3.3.3.cmml" xref="S3.SS2.p3.4.m4.1.1.3.3.3.3">𝑡</ci></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.4.m4.1c">\hat{\mathcal{T}}_{s}\in\mathbb{R}^{K\times C_{t}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.4.m4.1d">over^ start_ARG caligraphic_T end_ARG start_POSTSUBSCRIPT italic_s end_POSTSUBSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_K × italic_C start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT end_POSTSUPERSCRIPT</annotation></semantics></math> where <math alttext="C_{t}" class="ltx_Math" display="inline" id="S3.SS2.p3.5.m5.1"><semantics id="S3.SS2.p3.5.m5.1a"><msub id="S3.SS2.p3.5.m5.1.1" xref="S3.SS2.p3.5.m5.1.1.cmml"><mi id="S3.SS2.p3.5.m5.1.1.2" xref="S3.SS2.p3.5.m5.1.1.2.cmml">C</mi><mi id="S3.SS2.p3.5.m5.1.1.3" xref="S3.SS2.p3.5.m5.1.1.3.cmml">t</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.5.m5.1b"><apply id="S3.SS2.p3.5.m5.1.1.cmml" xref="S3.SS2.p3.5.m5.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.5.m5.1.1.1.cmml" xref="S3.SS2.p3.5.m5.1.1">subscript</csymbol><ci id="S3.SS2.p3.5.m5.1.1.2.cmml" xref="S3.SS2.p3.5.m5.1.1.2">𝐶</ci><ci id="S3.SS2.p3.5.m5.1.1.3.cmml" xref="S3.SS2.p3.5.m5.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.5.m5.1c">C_{t}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.5.m5.1d">italic_C start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT</annotation></semantics></math> is the text embedding dimension. Then <math alttext="\hat{\mathcal{T}}_{s}" class="ltx_Math" display="inline" id="S3.SS2.p3.6.m6.1"><semantics id="S3.SS2.p3.6.m6.1a"><msub id="S3.SS2.p3.6.m6.1.1" xref="S3.SS2.p3.6.m6.1.1.cmml"><mover accent="true" id="S3.SS2.p3.6.m6.1.1.2" xref="S3.SS2.p3.6.m6.1.1.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.6.m6.1.1.2.2" xref="S3.SS2.p3.6.m6.1.1.2.2.cmml">𝒯</mi><mo id="S3.SS2.p3.6.m6.1.1.2.1" xref="S3.SS2.p3.6.m6.1.1.2.1.cmml">^</mo></mover><mi id="S3.SS2.p3.6.m6.1.1.3" xref="S3.SS2.p3.6.m6.1.1.3.cmml">s</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.6.m6.1b"><apply id="S3.SS2.p3.6.m6.1.1.cmml" xref="S3.SS2.p3.6.m6.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.6.m6.1.1.1.cmml" xref="S3.SS2.p3.6.m6.1.1">subscript</csymbol><apply id="S3.SS2.p3.6.m6.1.1.2.cmml" xref="S3.SS2.p3.6.m6.1.1.2"><ci id="S3.SS2.p3.6.m6.1.1.2.1.cmml" xref="S3.SS2.p3.6.m6.1.1.2.1">^</ci><ci id="S3.SS2.p3.6.m6.1.1.2.2.cmml" xref="S3.SS2.p3.6.m6.1.1.2.2">𝒯</ci></apply><ci id="S3.SS2.p3.6.m6.1.1.3.cmml" xref="S3.SS2.p3.6.m6.1.1.3">𝑠</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.6.m6.1c">\hat{\mathcal{T}}_{s}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.6.m6.1d">over^ start_ARG caligraphic_T end_ARG start_POSTSUBSCRIPT italic_s end_POSTSUBSCRIPT</annotation></semantics></math> is passed through a linear layer resulting in <math alttext="\mathcal{T}_{s}\in\mathbb{R}^{K\times C}" class="ltx_Math" display="inline" id="S3.SS2.p3.7.m7.1"><semantics id="S3.SS2.p3.7.m7.1a"><mrow id="S3.SS2.p3.7.m7.1.1" xref="S3.SS2.p3.7.m7.1.1.cmml"><msub id="S3.SS2.p3.7.m7.1.1.2" xref="S3.SS2.p3.7.m7.1.1.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.7.m7.1.1.2.2" xref="S3.SS2.p3.7.m7.1.1.2.2.cmml">𝒯</mi><mi id="S3.SS2.p3.7.m7.1.1.2.3" xref="S3.SS2.p3.7.m7.1.1.2.3.cmml">s</mi></msub><mo id="S3.SS2.p3.7.m7.1.1.1" xref="S3.SS2.p3.7.m7.1.1.1.cmml">∈</mo><msup id="S3.SS2.p3.7.m7.1.1.3" xref="S3.SS2.p3.7.m7.1.1.3.cmml"><mi id="S3.SS2.p3.7.m7.1.1.3.2" xref="S3.SS2.p3.7.m7.1.1.3.2.cmml">ℝ</mi><mrow id="S3.SS2.p3.7.m7.1.1.3.3" xref="S3.SS2.p3.7.m7.1.1.3.3.cmml"><mi id="S3.SS2.p3.7.m7.1.1.3.3.2" xref="S3.SS2.p3.7.m7.1.1.3.3.2.cmml">K</mi><mo id="S3.SS2.p3.7.m7.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS2.p3.7.m7.1.1.3.3.1.cmml">×</mo><mi id="S3.SS2.p3.7.m7.1.1.3.3.3" xref="S3.SS2.p3.7.m7.1.1.3.3.3.cmml">C</mi></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.7.m7.1b"><apply id="S3.SS2.p3.7.m7.1.1.cmml" xref="S3.SS2.p3.7.m7.1.1"><in id="S3.SS2.p3.7.m7.1.1.1.cmml" xref="S3.SS2.p3.7.m7.1.1.1"></in><apply id="S3.SS2.p3.7.m7.1.1.2.cmml" xref="S3.SS2.p3.7.m7.1.1.2"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.1.1.2.1.cmml" xref="S3.SS2.p3.7.m7.1.1.2">subscript</csymbol><ci id="S3.SS2.p3.7.m7.1.1.2.2.cmml" xref="S3.SS2.p3.7.m7.1.1.2.2">𝒯</ci><ci id="S3.SS2.p3.7.m7.1.1.2.3.cmml" xref="S3.SS2.p3.7.m7.1.1.2.3">𝑠</ci></apply><apply id="S3.SS2.p3.7.m7.1.1.3.cmml" xref="S3.SS2.p3.7.m7.1.1.3"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.1.1.3.1.cmml" xref="S3.SS2.p3.7.m7.1.1.3">superscript</csymbol><ci id="S3.SS2.p3.7.m7.1.1.3.2.cmml" xref="S3.SS2.p3.7.m7.1.1.3.2">ℝ</ci><apply id="S3.SS2.p3.7.m7.1.1.3.3.cmml" xref="S3.SS2.p3.7.m7.1.1.3.3"><times id="S3.SS2.p3.7.m7.1.1.3.3.1.cmml" xref="S3.SS2.p3.7.m7.1.1.3.3.1"></times><ci id="S3.SS2.p3.7.m7.1.1.3.3.2.cmml" xref="S3.SS2.p3.7.m7.1.1.3.3.2">𝐾</ci><ci id="S3.SS2.p3.7.m7.1.1.3.3.3.cmml" xref="S3.SS2.p3.7.m7.1.1.3.3.3">𝐶</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.7.m7.1c">\mathcal{T}_{s}\in\mathbb{R}^{K\times C}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.7.m7.1d">caligraphic_T start_POSTSUBSCRIPT italic_s end_POSTSUBSCRIPT ∈ blackboard_R start_POSTSUPERSCRIPT italic_K × italic_C end_POSTSUPERSCRIPT</annotation></semantics></math>.
+During training, the text backbone is frozen.
+This approach also offers a lighter optimization procedure, as the gradients of the text features are ignored. An architecture overview is presented in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S3.F3" title="Figure 3 ‣ 3.1 Open-Vocabulary Keypoint Detection ‣ 3 Method ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p4">
+<p class="ltx_p" id="S3.SS2.p4.1">The extracted query image features and the support descriptions features are then refined using the transformer encoder. This encoder comprises three transformer blocks. Since the embedding spaces of the support text and query image differs, the support and query features are first fused together and then separated again. This practice aids in closing the gap between their representations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib25" title="">25</a>]</cite> using self-attention layers.
+Then, similarity heatmaps between the query and support features are formed, using the proposal generator. The proposal generator utilizes a trainable inner-product mechanism <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib26" title="">26</a>]</cite> to explicitly represent similarity. Peaks are then chosen from these maps to act as the basis for similarity-aware proposals.
+A graph transformer decoder network receives these initial proposals, processes them using a combination of attention and Graph Convolutional Network (GCN) layers, and predicts the final estimated keypoints locations.
+Utilizing GCN layers allows for the explicit consideration of semantic connections between keypoints, thereby benefiting CAPE tasks.
+We visualize cross-attention maps from the decoder trained with text prompts compared to visual prompts in the supplemental (Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F11" title="Figure 11 ‣ A.1 Disadvantages of Visual Prompts in CAPE ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">11</span></a>).</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p5">
+<p class="ltx_p" id="S3.SS2.p5.2">To train our end-to-end method we use two loss terms: <math alttext="\mathcal{L}_{heatmap}" class="ltx_Math" display="inline" id="S3.SS2.p5.1.m1.1"><semantics id="S3.SS2.p5.1.m1.1a"><msub id="S3.SS2.p5.1.m1.1.1" xref="S3.SS2.p5.1.m1.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p5.1.m1.1.1.2" xref="S3.SS2.p5.1.m1.1.1.2.cmml">ℒ</mi><mrow id="S3.SS2.p5.1.m1.1.1.3" xref="S3.SS2.p5.1.m1.1.1.3.cmml"><mi id="S3.SS2.p5.1.m1.1.1.3.2" xref="S3.SS2.p5.1.m1.1.1.3.2.cmml">h</mi><mo id="S3.SS2.p5.1.m1.1.1.3.1" xref="S3.SS2.p5.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.1.m1.1.1.3.3" xref="S3.SS2.p5.1.m1.1.1.3.3.cmml">e</mi><mo id="S3.SS2.p5.1.m1.1.1.3.1a" xref="S3.SS2.p5.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.1.m1.1.1.3.4" xref="S3.SS2.p5.1.m1.1.1.3.4.cmml">a</mi><mo id="S3.SS2.p5.1.m1.1.1.3.1b" xref="S3.SS2.p5.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.1.m1.1.1.3.5" xref="S3.SS2.p5.1.m1.1.1.3.5.cmml">t</mi><mo id="S3.SS2.p5.1.m1.1.1.3.1c" xref="S3.SS2.p5.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.1.m1.1.1.3.6" xref="S3.SS2.p5.1.m1.1.1.3.6.cmml">m</mi><mo id="S3.SS2.p5.1.m1.1.1.3.1d" xref="S3.SS2.p5.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.1.m1.1.1.3.7" xref="S3.SS2.p5.1.m1.1.1.3.7.cmml">a</mi><mo id="S3.SS2.p5.1.m1.1.1.3.1e" xref="S3.SS2.p5.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.1.m1.1.1.3.8" xref="S3.SS2.p5.1.m1.1.1.3.8.cmml">p</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.1.m1.1b"><apply id="S3.SS2.p5.1.m1.1.1.cmml" xref="S3.SS2.p5.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS2.p5.1.m1.1.1.1.cmml" xref="S3.SS2.p5.1.m1.1.1">subscript</csymbol><ci id="S3.SS2.p5.1.m1.1.1.2.cmml" xref="S3.SS2.p5.1.m1.1.1.2">ℒ</ci><apply id="S3.SS2.p5.1.m1.1.1.3.cmml" xref="S3.SS2.p5.1.m1.1.1.3"><times id="S3.SS2.p5.1.m1.1.1.3.1.cmml" xref="S3.SS2.p5.1.m1.1.1.3.1"></times><ci id="S3.SS2.p5.1.m1.1.1.3.2.cmml" xref="S3.SS2.p5.1.m1.1.1.3.2">ℎ</ci><ci id="S3.SS2.p5.1.m1.1.1.3.3.cmml" xref="S3.SS2.p5.1.m1.1.1.3.3">𝑒</ci><ci id="S3.SS2.p5.1.m1.1.1.3.4.cmml" xref="S3.SS2.p5.1.m1.1.1.3.4">𝑎</ci><ci id="S3.SS2.p5.1.m1.1.1.3.5.cmml" xref="S3.SS2.p5.1.m1.1.1.3.5">𝑡</ci><ci id="S3.SS2.p5.1.m1.1.1.3.6.cmml" xref="S3.SS2.p5.1.m1.1.1.3.6">𝑚</ci><ci id="S3.SS2.p5.1.m1.1.1.3.7.cmml" xref="S3.SS2.p5.1.m1.1.1.3.7">𝑎</ci><ci id="S3.SS2.p5.1.m1.1.1.3.8.cmml" xref="S3.SS2.p5.1.m1.1.1.3.8">𝑝</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.1.m1.1c">\mathcal{L}_{heatmap}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.1.m1.1d">caligraphic_L start_POSTSUBSCRIPT italic_h italic_e italic_a italic_t italic_m italic_a italic_p end_POSTSUBSCRIPT</annotation></semantics></math> and <math alttext="\mathcal{L}_{offset}" class="ltx_Math" display="inline" id="S3.SS2.p5.2.m2.1"><semantics id="S3.SS2.p5.2.m2.1a"><msub id="S3.SS2.p5.2.m2.1.1" xref="S3.SS2.p5.2.m2.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p5.2.m2.1.1.2" xref="S3.SS2.p5.2.m2.1.1.2.cmml">ℒ</mi><mrow id="S3.SS2.p5.2.m2.1.1.3" xref="S3.SS2.p5.2.m2.1.1.3.cmml"><mi id="S3.SS2.p5.2.m2.1.1.3.2" xref="S3.SS2.p5.2.m2.1.1.3.2.cmml">o</mi><mo id="S3.SS2.p5.2.m2.1.1.3.1" xref="S3.SS2.p5.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.2.m2.1.1.3.3" xref="S3.SS2.p5.2.m2.1.1.3.3.cmml">f</mi><mo id="S3.SS2.p5.2.m2.1.1.3.1a" xref="S3.SS2.p5.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.2.m2.1.1.3.4" xref="S3.SS2.p5.2.m2.1.1.3.4.cmml">f</mi><mo id="S3.SS2.p5.2.m2.1.1.3.1b" xref="S3.SS2.p5.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.2.m2.1.1.3.5" xref="S3.SS2.p5.2.m2.1.1.3.5.cmml">s</mi><mo id="S3.SS2.p5.2.m2.1.1.3.1c" xref="S3.SS2.p5.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.2.m2.1.1.3.6" xref="S3.SS2.p5.2.m2.1.1.3.6.cmml">e</mi><mo id="S3.SS2.p5.2.m2.1.1.3.1d" xref="S3.SS2.p5.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS2.p5.2.m2.1.1.3.7" xref="S3.SS2.p5.2.m2.1.1.3.7.cmml">t</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.2.m2.1b"><apply id="S3.SS2.p5.2.m2.1.1.cmml" xref="S3.SS2.p5.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS2.p5.2.m2.1.1.1.cmml" xref="S3.SS2.p5.2.m2.1.1">subscript</csymbol><ci id="S3.SS2.p5.2.m2.1.1.2.cmml" xref="S3.SS2.p5.2.m2.1.1.2">ℒ</ci><apply id="S3.SS2.p5.2.m2.1.1.3.cmml" xref="S3.SS2.p5.2.m2.1.1.3"><times id="S3.SS2.p5.2.m2.1.1.3.1.cmml" xref="S3.SS2.p5.2.m2.1.1.3.1"></times><ci id="S3.SS2.p5.2.m2.1.1.3.2.cmml" xref="S3.SS2.p5.2.m2.1.1.3.2">𝑜</ci><ci id="S3.SS2.p5.2.m2.1.1.3.3.cmml" xref="S3.SS2.p5.2.m2.1.1.3.3">𝑓</ci><ci id="S3.SS2.p5.2.m2.1.1.3.4.cmml" xref="S3.SS2.p5.2.m2.1.1.3.4">𝑓</ci><ci id="S3.SS2.p5.2.m2.1.1.3.5.cmml" xref="S3.SS2.p5.2.m2.1.1.3.5">𝑠</ci><ci id="S3.SS2.p5.2.m2.1.1.3.6.cmml" xref="S3.SS2.p5.2.m2.1.1.3.6">𝑒</ci><ci id="S3.SS2.p5.2.m2.1.1.3.7.cmml" xref="S3.SS2.p5.2.m2.1.1.3.7">𝑡</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.2.m2.1c">\mathcal{L}_{offset}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.2.m2.1d">caligraphic_L start_POSTSUBSCRIPT italic_o italic_f italic_f italic_s italic_e italic_t end_POSTSUBSCRIPT</annotation></semantics></math>. The former penalizes the similarity metric while the latter penalizes the localization output:</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{L}_{heatmap}=\frac{1}{(K\cdot H\cdot W)}\sum_{i=1}^{K}{||\sigma(M_{i}%
+)-H_{i}||}" class="ltx_Math" display="block" id="S3.E1.m1.2"><semantics id="S3.E1.m1.2a"><mrow id="S3.E1.m1.2.2" xref="S3.E1.m1.2.2.cmml"><msub id="S3.E1.m1.2.2.3" xref="S3.E1.m1.2.2.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E1.m1.2.2.3.2" xref="S3.E1.m1.2.2.3.2.cmml">ℒ</mi><mrow id="S3.E1.m1.2.2.3.3" xref="S3.E1.m1.2.2.3.3.cmml"><mi id="S3.E1.m1.2.2.3.3.2" xref="S3.E1.m1.2.2.3.3.2.cmml">h</mi><mo id="S3.E1.m1.2.2.3.3.1" xref="S3.E1.m1.2.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.2.2.3.3.3" xref="S3.E1.m1.2.2.3.3.3.cmml">e</mi><mo id="S3.E1.m1.2.2.3.3.1a" xref="S3.E1.m1.2.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.2.2.3.3.4" xref="S3.E1.m1.2.2.3.3.4.cmml">a</mi><mo id="S3.E1.m1.2.2.3.3.1b" xref="S3.E1.m1.2.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.2.2.3.3.5" xref="S3.E1.m1.2.2.3.3.5.cmml">t</mi><mo id="S3.E1.m1.2.2.3.3.1c" xref="S3.E1.m1.2.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.2.2.3.3.6" xref="S3.E1.m1.2.2.3.3.6.cmml">m</mi><mo id="S3.E1.m1.2.2.3.3.1d" xref="S3.E1.m1.2.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.2.2.3.3.7" xref="S3.E1.m1.2.2.3.3.7.cmml">a</mi><mo id="S3.E1.m1.2.2.3.3.1e" xref="S3.E1.m1.2.2.3.3.1.cmml">⁢</mo><mi id="S3.E1.m1.2.2.3.3.8" xref="S3.E1.m1.2.2.3.3.8.cmml">p</mi></mrow></msub><mo id="S3.E1.m1.2.2.2" xref="S3.E1.m1.2.2.2.cmml">=</mo><mrow id="S3.E1.m1.2.2.1" xref="S3.E1.m1.2.2.1.cmml"><mfrac id="S3.E1.m1.1.1" xref="S3.E1.m1.1.1.cmml"><mn id="S3.E1.m1.1.1.3" xref="S3.E1.m1.1.1.3.cmml">1</mn><mrow id="S3.E1.m1.1.1.1.1" xref="S3.E1.m1.1.1.1.1.1.cmml"><mo id="S3.E1.m1.1.1.1.1.2" stretchy="false" xref="S3.E1.m1.1.1.1.1.1.cmml">(</mo><mrow id="S3.E1.m1.1.1.1.1.1" xref="S3.E1.m1.1.1.1.1.1.cmml"><mi id="S3.E1.m1.1.1.1.1.1.2" xref="S3.E1.m1.1.1.1.1.1.2.cmml">K</mi><mo id="S3.E1.m1.1.1.1.1.1.1" lspace="0.222em" rspace="0.222em" xref="S3.E1.m1.1.1.1.1.1.1.cmml">⋅</mo><mi id="S3.E1.m1.1.1.1.1.1.3" xref="S3.E1.m1.1.1.1.1.1.3.cmml">H</mi><mo id="S3.E1.m1.1.1.1.1.1.1a" lspace="0.222em" rspace="0.222em" xref="S3.E1.m1.1.1.1.1.1.1.cmml">⋅</mo><mi id="S3.E1.m1.1.1.1.1.1.4" xref="S3.E1.m1.1.1.1.1.1.4.cmml">W</mi></mrow><mo id="S3.E1.m1.1.1.1.1.3" stretchy="false" xref="S3.E1.m1.1.1.1.1.1.cmml">)</mo></mrow></mfrac><mo id="S3.E1.m1.2.2.1.2" xref="S3.E1.m1.2.2.1.2.cmml">⁢</mo><mrow id="S3.E1.m1.2.2.1.1" xref="S3.E1.m1.2.2.1.1.cmml"><munderover id="S3.E1.m1.2.2.1.1.2" xref="S3.E1.m1.2.2.1.1.2.cmml"><mo id="S3.E1.m1.2.2.1.1.2.2.2" movablelimits="false" rspace="0em" xref="S3.E1.m1.2.2.1.1.2.2.2.cmml">∑</mo><mrow id="S3.E1.m1.2.2.1.1.2.2.3" xref="S3.E1.m1.2.2.1.1.2.2.3.cmml"><mi id="S3.E1.m1.2.2.1.1.2.2.3.2" xref="S3.E1.m1.2.2.1.1.2.2.3.2.cmml">i</mi><mo id="S3.E1.m1.2.2.1.1.2.2.3.1" xref="S3.E1.m1.2.2.1.1.2.2.3.1.cmml">=</mo><mn id="S3.E1.m1.2.2.1.1.2.2.3.3" xref="S3.E1.m1.2.2.1.1.2.2.3.3.cmml">1</mn></mrow><mi id="S3.E1.m1.2.2.1.1.2.3" xref="S3.E1.m1.2.2.1.1.2.3.cmml">K</mi></munderover><mrow id="S3.E1.m1.2.2.1.1.1.1" xref="S3.E1.m1.2.2.1.1.1.2.cmml"><mo id="S3.E1.m1.2.2.1.1.1.1.2" stretchy="false" xref="S3.E1.m1.2.2.1.1.1.2.1.cmml">‖</mo><mrow id="S3.E1.m1.2.2.1.1.1.1.1" xref="S3.E1.m1.2.2.1.1.1.1.1.cmml"><mrow id="S3.E1.m1.2.2.1.1.1.1.1.1" xref="S3.E1.m1.2.2.1.1.1.1.1.1.cmml"><mi id="S3.E1.m1.2.2.1.1.1.1.1.1.3" xref="S3.E1.m1.2.2.1.1.1.1.1.1.3.cmml">σ</mi><mo id="S3.E1.m1.2.2.1.1.1.1.1.1.2" xref="S3.E1.m1.2.2.1.1.1.1.1.1.2.cmml">⁢</mo><mrow id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.cmml"><mo id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.2" stretchy="false" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.cmml">(</mo><msub id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.cmml"><mi id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.2" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.2.cmml">M</mi><mi id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.3" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.3.cmml">i</mi></msub><mo id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.3" stretchy="false" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.cmml">)</mo></mrow></mrow><mo id="S3.E1.m1.2.2.1.1.1.1.1.2" xref="S3.E1.m1.2.2.1.1.1.1.1.2.cmml">−</mo><msub id="S3.E1.m1.2.2.1.1.1.1.1.3" xref="S3.E1.m1.2.2.1.1.1.1.1.3.cmml"><mi id="S3.E1.m1.2.2.1.1.1.1.1.3.2" xref="S3.E1.m1.2.2.1.1.1.1.1.3.2.cmml">H</mi><mi id="S3.E1.m1.2.2.1.1.1.1.1.3.3" xref="S3.E1.m1.2.2.1.1.1.1.1.3.3.cmml">i</mi></msub></mrow><mo id="S3.E1.m1.2.2.1.1.1.1.3" stretchy="false" xref="S3.E1.m1.2.2.1.1.1.2.1.cmml">‖</mo></mrow></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E1.m1.2b"><apply id="S3.E1.m1.2.2.cmml" xref="S3.E1.m1.2.2"><eq id="S3.E1.m1.2.2.2.cmml" xref="S3.E1.m1.2.2.2"></eq><apply id="S3.E1.m1.2.2.3.cmml" xref="S3.E1.m1.2.2.3"><csymbol cd="ambiguous" id="S3.E1.m1.2.2.3.1.cmml" xref="S3.E1.m1.2.2.3">subscript</csymbol><ci id="S3.E1.m1.2.2.3.2.cmml" xref="S3.E1.m1.2.2.3.2">ℒ</ci><apply id="S3.E1.m1.2.2.3.3.cmml" xref="S3.E1.m1.2.2.3.3"><times id="S3.E1.m1.2.2.3.3.1.cmml" xref="S3.E1.m1.2.2.3.3.1"></times><ci id="S3.E1.m1.2.2.3.3.2.cmml" xref="S3.E1.m1.2.2.3.3.2">ℎ</ci><ci id="S3.E1.m1.2.2.3.3.3.cmml" xref="S3.E1.m1.2.2.3.3.3">𝑒</ci><ci id="S3.E1.m1.2.2.3.3.4.cmml" xref="S3.E1.m1.2.2.3.3.4">𝑎</ci><ci id="S3.E1.m1.2.2.3.3.5.cmml" xref="S3.E1.m1.2.2.3.3.5">𝑡</ci><ci id="S3.E1.m1.2.2.3.3.6.cmml" xref="S3.E1.m1.2.2.3.3.6">𝑚</ci><ci id="S3.E1.m1.2.2.3.3.7.cmml" xref="S3.E1.m1.2.2.3.3.7">𝑎</ci><ci id="S3.E1.m1.2.2.3.3.8.cmml" xref="S3.E1.m1.2.2.3.3.8">𝑝</ci></apply></apply><apply id="S3.E1.m1.2.2.1.cmml" xref="S3.E1.m1.2.2.1"><times id="S3.E1.m1.2.2.1.2.cmml" xref="S3.E1.m1.2.2.1.2"></times><apply id="S3.E1.m1.1.1.cmml" xref="S3.E1.m1.1.1"><divide id="S3.E1.m1.1.1.2.cmml" xref="S3.E1.m1.1.1"></divide><cn id="S3.E1.m1.1.1.3.cmml" type="integer" xref="S3.E1.m1.1.1.3">1</cn><apply id="S3.E1.m1.1.1.1.1.1.cmml" xref="S3.E1.m1.1.1.1.1"><ci id="S3.E1.m1.1.1.1.1.1.1.cmml" xref="S3.E1.m1.1.1.1.1.1.1">⋅</ci><ci id="S3.E1.m1.1.1.1.1.1.2.cmml" xref="S3.E1.m1.1.1.1.1.1.2">𝐾</ci><ci id="S3.E1.m1.1.1.1.1.1.3.cmml" xref="S3.E1.m1.1.1.1.1.1.3">𝐻</ci><ci id="S3.E1.m1.1.1.1.1.1.4.cmml" xref="S3.E1.m1.1.1.1.1.1.4">𝑊</ci></apply></apply><apply id="S3.E1.m1.2.2.1.1.cmml" xref="S3.E1.m1.2.2.1.1"><apply id="S3.E1.m1.2.2.1.1.2.cmml" xref="S3.E1.m1.2.2.1.1.2"><csymbol cd="ambiguous" id="S3.E1.m1.2.2.1.1.2.1.cmml" xref="S3.E1.m1.2.2.1.1.2">superscript</csymbol><apply id="S3.E1.m1.2.2.1.1.2.2.cmml" xref="S3.E1.m1.2.2.1.1.2"><csymbol cd="ambiguous" id="S3.E1.m1.2.2.1.1.2.2.1.cmml" xref="S3.E1.m1.2.2.1.1.2">subscript</csymbol><sum id="S3.E1.m1.2.2.1.1.2.2.2.cmml" xref="S3.E1.m1.2.2.1.1.2.2.2"></sum><apply id="S3.E1.m1.2.2.1.1.2.2.3.cmml" xref="S3.E1.m1.2.2.1.1.2.2.3"><eq id="S3.E1.m1.2.2.1.1.2.2.3.1.cmml" xref="S3.E1.m1.2.2.1.1.2.2.3.1"></eq><ci id="S3.E1.m1.2.2.1.1.2.2.3.2.cmml" xref="S3.E1.m1.2.2.1.1.2.2.3.2">𝑖</ci><cn id="S3.E1.m1.2.2.1.1.2.2.3.3.cmml" type="integer" xref="S3.E1.m1.2.2.1.1.2.2.3.3">1</cn></apply></apply><ci id="S3.E1.m1.2.2.1.1.2.3.cmml" xref="S3.E1.m1.2.2.1.1.2.3">𝐾</ci></apply><apply id="S3.E1.m1.2.2.1.1.1.2.cmml" xref="S3.E1.m1.2.2.1.1.1.1"><csymbol cd="latexml" id="S3.E1.m1.2.2.1.1.1.2.1.cmml" xref="S3.E1.m1.2.2.1.1.1.1.2">norm</csymbol><apply id="S3.E1.m1.2.2.1.1.1.1.1.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1"><minus id="S3.E1.m1.2.2.1.1.1.1.1.2.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.2"></minus><apply id="S3.E1.m1.2.2.1.1.1.1.1.1.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.1"><times id="S3.E1.m1.2.2.1.1.1.1.1.1.2.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.1.2"></times><ci id="S3.E1.m1.2.2.1.1.1.1.1.1.3.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.1.3">𝜎</ci><apply id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1">subscript</csymbol><ci id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.2">𝑀</ci><ci id="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.3.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.1.1.1.1.3">𝑖</ci></apply></apply><apply id="S3.E1.m1.2.2.1.1.1.1.1.3.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E1.m1.2.2.1.1.1.1.1.3.1.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.3">subscript</csymbol><ci id="S3.E1.m1.2.2.1.1.1.1.1.3.2.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.3.2">𝐻</ci><ci id="S3.E1.m1.2.2.1.1.1.1.1.3.3.cmml" xref="S3.E1.m1.2.2.1.1.1.1.1.3.3">𝑖</ci></apply></apply></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E1.m1.2c">\mathcal{L}_{heatmap}=\frac{1}{(K\cdot H\cdot W)}\sum_{i=1}^{K}{||\sigma(M_{i}%
+)-H_{i}||}</annotation><annotation encoding="application/x-llamapun" id="S3.E1.m1.2d">caligraphic_L start_POSTSUBSCRIPT italic_h italic_e italic_a italic_t italic_m italic_a italic_p end_POSTSUBSCRIPT = divide start_ARG 1 end_ARG start_ARG ( italic_K ⋅ italic_H ⋅ italic_W ) end_ARG ∑ start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_K end_POSTSUPERSCRIPT | | italic_σ ( italic_M start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT ) - italic_H start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT | |</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<table class="ltx_equation ltx_eqn_table" id="S3.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{L}_{offset}=\frac{1}{L}\sum_{i=1}^{L}{\sum_{i=1}^{K}{|P_{i}^{l}-\hat{%
+P_{i}}|}}" class="ltx_Math" display="block" id="S3.E2.m1.1"><semantics id="S3.E2.m1.1a"><mrow id="S3.E2.m1.1.1" xref="S3.E2.m1.1.1.cmml"><msub id="S3.E2.m1.1.1.3" xref="S3.E2.m1.1.1.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E2.m1.1.1.3.2" xref="S3.E2.m1.1.1.3.2.cmml">ℒ</mi><mrow id="S3.E2.m1.1.1.3.3" xref="S3.E2.m1.1.1.3.3.cmml"><mi id="S3.E2.m1.1.1.3.3.2" xref="S3.E2.m1.1.1.3.3.2.cmml">o</mi><mo id="S3.E2.m1.1.1.3.3.1" xref="S3.E2.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E2.m1.1.1.3.3.3" xref="S3.E2.m1.1.1.3.3.3.cmml">f</mi><mo id="S3.E2.m1.1.1.3.3.1a" xref="S3.E2.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E2.m1.1.1.3.3.4" xref="S3.E2.m1.1.1.3.3.4.cmml">f</mi><mo id="S3.E2.m1.1.1.3.3.1b" xref="S3.E2.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E2.m1.1.1.3.3.5" xref="S3.E2.m1.1.1.3.3.5.cmml">s</mi><mo id="S3.E2.m1.1.1.3.3.1c" xref="S3.E2.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E2.m1.1.1.3.3.6" xref="S3.E2.m1.1.1.3.3.6.cmml">e</mi><mo id="S3.E2.m1.1.1.3.3.1d" xref="S3.E2.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E2.m1.1.1.3.3.7" xref="S3.E2.m1.1.1.3.3.7.cmml">t</mi></mrow></msub><mo id="S3.E2.m1.1.1.2" xref="S3.E2.m1.1.1.2.cmml">=</mo><mrow id="S3.E2.m1.1.1.1" xref="S3.E2.m1.1.1.1.cmml"><mfrac id="S3.E2.m1.1.1.1.3" xref="S3.E2.m1.1.1.1.3.cmml"><mn id="S3.E2.m1.1.1.1.3.2" xref="S3.E2.m1.1.1.1.3.2.cmml">1</mn><mi id="S3.E2.m1.1.1.1.3.3" xref="S3.E2.m1.1.1.1.3.3.cmml">L</mi></mfrac><mo id="S3.E2.m1.1.1.1.2" xref="S3.E2.m1.1.1.1.2.cmml">⁢</mo><mrow id="S3.E2.m1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.cmml"><munderover id="S3.E2.m1.1.1.1.1.2" xref="S3.E2.m1.1.1.1.1.2.cmml"><mo id="S3.E2.m1.1.1.1.1.2.2.2" movablelimits="false" rspace="0em" xref="S3.E2.m1.1.1.1.1.2.2.2.cmml">∑</mo><mrow id="S3.E2.m1.1.1.1.1.2.2.3" xref="S3.E2.m1.1.1.1.1.2.2.3.cmml"><mi id="S3.E2.m1.1.1.1.1.2.2.3.2" xref="S3.E2.m1.1.1.1.1.2.2.3.2.cmml">i</mi><mo id="S3.E2.m1.1.1.1.1.2.2.3.1" xref="S3.E2.m1.1.1.1.1.2.2.3.1.cmml">=</mo><mn id="S3.E2.m1.1.1.1.1.2.2.3.3" xref="S3.E2.m1.1.1.1.1.2.2.3.3.cmml">1</mn></mrow><mi id="S3.E2.m1.1.1.1.1.2.3" xref="S3.E2.m1.1.1.1.1.2.3.cmml">L</mi></munderover><mrow id="S3.E2.m1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.cmml"><munderover id="S3.E2.m1.1.1.1.1.1.2" xref="S3.E2.m1.1.1.1.1.1.2.cmml"><mo id="S3.E2.m1.1.1.1.1.1.2.2.2" movablelimits="false" rspace="0em" xref="S3.E2.m1.1.1.1.1.1.2.2.2.cmml">∑</mo><mrow id="S3.E2.m1.1.1.1.1.1.2.2.3" xref="S3.E2.m1.1.1.1.1.1.2.2.3.cmml"><mi id="S3.E2.m1.1.1.1.1.1.2.2.3.2" xref="S3.E2.m1.1.1.1.1.1.2.2.3.2.cmml">i</mi><mo id="S3.E2.m1.1.1.1.1.1.2.2.3.1" xref="S3.E2.m1.1.1.1.1.1.2.2.3.1.cmml">=</mo><mn id="S3.E2.m1.1.1.1.1.1.2.2.3.3" xref="S3.E2.m1.1.1.1.1.1.2.2.3.3.cmml">1</mn></mrow><mi id="S3.E2.m1.1.1.1.1.1.2.3" xref="S3.E2.m1.1.1.1.1.1.2.3.cmml">K</mi></munderover><mrow id="S3.E2.m1.1.1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.1.2.cmml"><mo id="S3.E2.m1.1.1.1.1.1.1.1.2" stretchy="false" xref="S3.E2.m1.1.1.1.1.1.1.2.1.cmml">|</mo><mrow id="S3.E2.m1.1.1.1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.1.1.1.cmml"><msubsup id="S3.E2.m1.1.1.1.1.1.1.1.1.2" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2.cmml"><mi id="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.2" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.2.cmml">P</mi><mi id="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.3" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.3.cmml">i</mi><mi id="S3.E2.m1.1.1.1.1.1.1.1.1.2.3" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2.3.cmml">l</mi></msubsup><mo id="S3.E2.m1.1.1.1.1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.1.1.1.1.cmml">−</mo><mover accent="true" id="S3.E2.m1.1.1.1.1.1.1.1.1.3" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.cmml"><msub id="S3.E2.m1.1.1.1.1.1.1.1.1.3.2" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.cmml"><mi id="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.2" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.2.cmml">P</mi><mi id="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.3" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.3.cmml">i</mi></msub><mo id="S3.E2.m1.1.1.1.1.1.1.1.1.3.1" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.1.cmml">^</mo></mover></mrow><mo id="S3.E2.m1.1.1.1.1.1.1.1.3" stretchy="false" xref="S3.E2.m1.1.1.1.1.1.1.2.1.cmml">|</mo></mrow></mrow></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E2.m1.1b"><apply id="S3.E2.m1.1.1.cmml" xref="S3.E2.m1.1.1"><eq id="S3.E2.m1.1.1.2.cmml" xref="S3.E2.m1.1.1.2"></eq><apply id="S3.E2.m1.1.1.3.cmml" xref="S3.E2.m1.1.1.3"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.3.1.cmml" xref="S3.E2.m1.1.1.3">subscript</csymbol><ci id="S3.E2.m1.1.1.3.2.cmml" xref="S3.E2.m1.1.1.3.2">ℒ</ci><apply id="S3.E2.m1.1.1.3.3.cmml" xref="S3.E2.m1.1.1.3.3"><times id="S3.E2.m1.1.1.3.3.1.cmml" xref="S3.E2.m1.1.1.3.3.1"></times><ci id="S3.E2.m1.1.1.3.3.2.cmml" xref="S3.E2.m1.1.1.3.3.2">𝑜</ci><ci id="S3.E2.m1.1.1.3.3.3.cmml" xref="S3.E2.m1.1.1.3.3.3">𝑓</ci><ci id="S3.E2.m1.1.1.3.3.4.cmml" xref="S3.E2.m1.1.1.3.3.4">𝑓</ci><ci id="S3.E2.m1.1.1.3.3.5.cmml" xref="S3.E2.m1.1.1.3.3.5">𝑠</ci><ci id="S3.E2.m1.1.1.3.3.6.cmml" xref="S3.E2.m1.1.1.3.3.6">𝑒</ci><ci id="S3.E2.m1.1.1.3.3.7.cmml" xref="S3.E2.m1.1.1.3.3.7">𝑡</ci></apply></apply><apply id="S3.E2.m1.1.1.1.cmml" xref="S3.E2.m1.1.1.1"><times id="S3.E2.m1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.2"></times><apply id="S3.E2.m1.1.1.1.3.cmml" xref="S3.E2.m1.1.1.1.3"><divide id="S3.E2.m1.1.1.1.3.1.cmml" xref="S3.E2.m1.1.1.1.3"></divide><cn id="S3.E2.m1.1.1.1.3.2.cmml" type="integer" xref="S3.E2.m1.1.1.1.3.2">1</cn><ci id="S3.E2.m1.1.1.1.3.3.cmml" xref="S3.E2.m1.1.1.1.3.3">𝐿</ci></apply><apply id="S3.E2.m1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1"><apply id="S3.E2.m1.1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.2.1.cmml" xref="S3.E2.m1.1.1.1.1.2">superscript</csymbol><apply id="S3.E2.m1.1.1.1.1.2.2.cmml" xref="S3.E2.m1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.2.2.1.cmml" xref="S3.E2.m1.1.1.1.1.2">subscript</csymbol><sum id="S3.E2.m1.1.1.1.1.2.2.2.cmml" xref="S3.E2.m1.1.1.1.1.2.2.2"></sum><apply id="S3.E2.m1.1.1.1.1.2.2.3.cmml" xref="S3.E2.m1.1.1.1.1.2.2.3"><eq id="S3.E2.m1.1.1.1.1.2.2.3.1.cmml" xref="S3.E2.m1.1.1.1.1.2.2.3.1"></eq><ci id="S3.E2.m1.1.1.1.1.2.2.3.2.cmml" xref="S3.E2.m1.1.1.1.1.2.2.3.2">𝑖</ci><cn id="S3.E2.m1.1.1.1.1.2.2.3.3.cmml" type="integer" xref="S3.E2.m1.1.1.1.1.2.2.3.3">1</cn></apply></apply><ci id="S3.E2.m1.1.1.1.1.2.3.cmml" xref="S3.E2.m1.1.1.1.1.2.3">𝐿</ci></apply><apply id="S3.E2.m1.1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1.1"><apply id="S3.E2.m1.1.1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.2.1.cmml" xref="S3.E2.m1.1.1.1.1.1.2">superscript</csymbol><apply id="S3.E2.m1.1.1.1.1.1.2.2.cmml" xref="S3.E2.m1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.2.2.1.cmml" xref="S3.E2.m1.1.1.1.1.1.2">subscript</csymbol><sum id="S3.E2.m1.1.1.1.1.1.2.2.2.cmml" xref="S3.E2.m1.1.1.1.1.1.2.2.2"></sum><apply id="S3.E2.m1.1.1.1.1.1.2.2.3.cmml" xref="S3.E2.m1.1.1.1.1.1.2.2.3"><eq id="S3.E2.m1.1.1.1.1.1.2.2.3.1.cmml" xref="S3.E2.m1.1.1.1.1.1.2.2.3.1"></eq><ci id="S3.E2.m1.1.1.1.1.1.2.2.3.2.cmml" xref="S3.E2.m1.1.1.1.1.1.2.2.3.2">𝑖</ci><cn id="S3.E2.m1.1.1.1.1.1.2.2.3.3.cmml" type="integer" xref="S3.E2.m1.1.1.1.1.1.2.2.3.3">1</cn></apply></apply><ci id="S3.E2.m1.1.1.1.1.1.2.3.cmml" xref="S3.E2.m1.1.1.1.1.1.2.3">𝐾</ci></apply><apply id="S3.E2.m1.1.1.1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1"><abs id="S3.E2.m1.1.1.1.1.1.1.2.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.2"></abs><apply id="S3.E2.m1.1.1.1.1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1"><minus id="S3.E2.m1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.1"></minus><apply id="S3.E2.m1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.1.1.1.2.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2">superscript</csymbol><apply id="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2">subscript</csymbol><ci id="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.2.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.2">𝑃</ci><ci id="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.3.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2.2.3">𝑖</ci></apply><ci id="S3.E2.m1.1.1.1.1.1.1.1.1.2.3.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.2.3">𝑙</ci></apply><apply id="S3.E2.m1.1.1.1.1.1.1.1.1.3.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3"><ci id="S3.E2.m1.1.1.1.1.1.1.1.1.3.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.1">^</ci><apply id="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.2">subscript</csymbol><ci id="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.2.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.2">𝑃</ci><ci id="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.3.cmml" xref="S3.E2.m1.1.1.1.1.1.1.1.1.3.2.3">𝑖</ci></apply></apply></apply></apply></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E2.m1.1c">\mathcal{L}_{offset}=\frac{1}{L}\sum_{i=1}^{L}{\sum_{i=1}^{K}{|P_{i}^{l}-\hat{%
+P_{i}}|}}</annotation><annotation encoding="application/x-llamapun" id="S3.E2.m1.1d">caligraphic_L start_POSTSUBSCRIPT italic_o italic_f italic_f italic_s italic_e italic_t end_POSTSUBSCRIPT = divide start_ARG 1 end_ARG start_ARG italic_L end_ARG ∑ start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_L end_POSTSUPERSCRIPT ∑ start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_K end_POSTSUPERSCRIPT | italic_P start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_l end_POSTSUPERSCRIPT - over^ start_ARG italic_P start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT end_ARG |</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS2.p5.9">where <math alttext="\sigma" class="ltx_Math" display="inline" id="S3.SS2.p5.3.m1.1"><semantics id="S3.SS2.p5.3.m1.1a"><mi id="S3.SS2.p5.3.m1.1.1" xref="S3.SS2.p5.3.m1.1.1.cmml">σ</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.3.m1.1b"><ci id="S3.SS2.p5.3.m1.1.1.cmml" xref="S3.SS2.p5.3.m1.1.1">𝜎</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.3.m1.1c">\sigma</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.3.m1.1d">italic_σ</annotation></semantics></math> is the sigmoid function, and for each point <math alttext="i" class="ltx_Math" display="inline" id="S3.SS2.p5.4.m2.1"><semantics id="S3.SS2.p5.4.m2.1a"><mi id="S3.SS2.p5.4.m2.1.1" xref="S3.SS2.p5.4.m2.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.4.m2.1b"><ci id="S3.SS2.p5.4.m2.1.1.cmml" xref="S3.SS2.p5.4.m2.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.4.m2.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.4.m2.1d">italic_i</annotation></semantics></math>, <math alttext="M_{i}" class="ltx_Math" display="inline" id="S3.SS2.p5.5.m3.1"><semantics id="S3.SS2.p5.5.m3.1a"><msub id="S3.SS2.p5.5.m3.1.1" xref="S3.SS2.p5.5.m3.1.1.cmml"><mi id="S3.SS2.p5.5.m3.1.1.2" xref="S3.SS2.p5.5.m3.1.1.2.cmml">M</mi><mi id="S3.SS2.p5.5.m3.1.1.3" xref="S3.SS2.p5.5.m3.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.5.m3.1b"><apply id="S3.SS2.p5.5.m3.1.1.cmml" xref="S3.SS2.p5.5.m3.1.1"><csymbol cd="ambiguous" id="S3.SS2.p5.5.m3.1.1.1.cmml" xref="S3.SS2.p5.5.m3.1.1">subscript</csymbol><ci id="S3.SS2.p5.5.m3.1.1.2.cmml" xref="S3.SS2.p5.5.m3.1.1.2">𝑀</ci><ci id="S3.SS2.p5.5.m3.1.1.3.cmml" xref="S3.SS2.p5.5.m3.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.5.m3.1c">M_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.5.m3.1d">italic_M start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> is the output similarity heatmap of the proposal generator, <math alttext="H_{i}" class="ltx_Math" display="inline" id="S3.SS2.p5.6.m4.1"><semantics id="S3.SS2.p5.6.m4.1a"><msub id="S3.SS2.p5.6.m4.1.1" xref="S3.SS2.p5.6.m4.1.1.cmml"><mi id="S3.SS2.p5.6.m4.1.1.2" xref="S3.SS2.p5.6.m4.1.1.2.cmml">H</mi><mi id="S3.SS2.p5.6.m4.1.1.3" xref="S3.SS2.p5.6.m4.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.6.m4.1b"><apply id="S3.SS2.p5.6.m4.1.1.cmml" xref="S3.SS2.p5.6.m4.1.1"><csymbol cd="ambiguous" id="S3.SS2.p5.6.m4.1.1.1.cmml" xref="S3.SS2.p5.6.m4.1.1">subscript</csymbol><ci id="S3.SS2.p5.6.m4.1.1.2.cmml" xref="S3.SS2.p5.6.m4.1.1.2">𝐻</ci><ci id="S3.SS2.p5.6.m4.1.1.3.cmml" xref="S3.SS2.p5.6.m4.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.6.m4.1c">H_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.6.m4.1d">italic_H start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> is the ground truth heatmap, <math alttext="P_{i}^{l}" class="ltx_Math" display="inline" id="S3.SS2.p5.7.m5.1"><semantics id="S3.SS2.p5.7.m5.1a"><msubsup id="S3.SS2.p5.7.m5.1.1" xref="S3.SS2.p5.7.m5.1.1.cmml"><mi id="S3.SS2.p5.7.m5.1.1.2.2" xref="S3.SS2.p5.7.m5.1.1.2.2.cmml">P</mi><mi id="S3.SS2.p5.7.m5.1.1.2.3" xref="S3.SS2.p5.7.m5.1.1.2.3.cmml">i</mi><mi id="S3.SS2.p5.7.m5.1.1.3" xref="S3.SS2.p5.7.m5.1.1.3.cmml">l</mi></msubsup><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.7.m5.1b"><apply id="S3.SS2.p5.7.m5.1.1.cmml" xref="S3.SS2.p5.7.m5.1.1"><csymbol cd="ambiguous" id="S3.SS2.p5.7.m5.1.1.1.cmml" xref="S3.SS2.p5.7.m5.1.1">superscript</csymbol><apply id="S3.SS2.p5.7.m5.1.1.2.cmml" xref="S3.SS2.p5.7.m5.1.1"><csymbol cd="ambiguous" id="S3.SS2.p5.7.m5.1.1.2.1.cmml" xref="S3.SS2.p5.7.m5.1.1">subscript</csymbol><ci id="S3.SS2.p5.7.m5.1.1.2.2.cmml" xref="S3.SS2.p5.7.m5.1.1.2.2">𝑃</ci><ci id="S3.SS2.p5.7.m5.1.1.2.3.cmml" xref="S3.SS2.p5.7.m5.1.1.2.3">𝑖</ci></apply><ci id="S3.SS2.p5.7.m5.1.1.3.cmml" xref="S3.SS2.p5.7.m5.1.1.3">𝑙</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.7.m5.1c">P_{i}^{l}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.7.m5.1d">italic_P start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_l end_POSTSUPERSCRIPT</annotation></semantics></math> is the output location from layer <math alttext="l" class="ltx_Math" display="inline" id="S3.SS2.p5.8.m6.1"><semantics id="S3.SS2.p5.8.m6.1a"><mi id="S3.SS2.p5.8.m6.1.1" xref="S3.SS2.p5.8.m6.1.1.cmml">l</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.8.m6.1b"><ci id="S3.SS2.p5.8.m6.1.1.cmml" xref="S3.SS2.p5.8.m6.1.1">𝑙</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.8.m6.1c">l</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.8.m6.1d">italic_l</annotation></semantics></math> and <math alttext="\hat{P_{i}}" class="ltx_Math" display="inline" id="S3.SS2.p5.9.m7.1"><semantics id="S3.SS2.p5.9.m7.1a"><mover accent="true" id="S3.SS2.p5.9.m7.1.1" xref="S3.SS2.p5.9.m7.1.1.cmml"><msub id="S3.SS2.p5.9.m7.1.1.2" xref="S3.SS2.p5.9.m7.1.1.2.cmml"><mi id="S3.SS2.p5.9.m7.1.1.2.2" xref="S3.SS2.p5.9.m7.1.1.2.2.cmml">P</mi><mi id="S3.SS2.p5.9.m7.1.1.2.3" xref="S3.SS2.p5.9.m7.1.1.2.3.cmml">i</mi></msub><mo id="S3.SS2.p5.9.m7.1.1.1" xref="S3.SS2.p5.9.m7.1.1.1.cmml">^</mo></mover><annotation-xml encoding="MathML-Content" id="S3.SS2.p5.9.m7.1b"><apply id="S3.SS2.p5.9.m7.1.1.cmml" xref="S3.SS2.p5.9.m7.1.1"><ci id="S3.SS2.p5.9.m7.1.1.1.cmml" xref="S3.SS2.p5.9.m7.1.1.1">^</ci><apply id="S3.SS2.p5.9.m7.1.1.2.cmml" xref="S3.SS2.p5.9.m7.1.1.2"><csymbol cd="ambiguous" id="S3.SS2.p5.9.m7.1.1.2.1.cmml" xref="S3.SS2.p5.9.m7.1.1.2">subscript</csymbol><ci id="S3.SS2.p5.9.m7.1.1.2.2.cmml" xref="S3.SS2.p5.9.m7.1.1.2.2">𝑃</ci><ci id="S3.SS2.p5.9.m7.1.1.2.3.cmml" xref="S3.SS2.p5.9.m7.1.1.2.3">𝑖</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p5.9.m7.1c">\hat{P_{i}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p5.9.m7.1d">over^ start_ARG italic_P start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT end_ARG</annotation></semantics></math> is the ground truth location. The overall loss is:</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{L}=\lambda_{heatmap}\cdot\mathcal{L}_{heatmap}+\mathcal{L}_{offset}" class="ltx_Math" display="block" id="S3.E3.m1.1"><semantics id="S3.E3.m1.1a"><mrow id="S3.E3.m1.1.1" xref="S3.E3.m1.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.2" xref="S3.E3.m1.1.1.2.cmml">ℒ</mi><mo id="S3.E3.m1.1.1.1" xref="S3.E3.m1.1.1.1.cmml">=</mo><mrow id="S3.E3.m1.1.1.3" xref="S3.E3.m1.1.1.3.cmml"><mrow id="S3.E3.m1.1.1.3.2" xref="S3.E3.m1.1.1.3.2.cmml"><msub id="S3.E3.m1.1.1.3.2.2" xref="S3.E3.m1.1.1.3.2.2.cmml"><mi id="S3.E3.m1.1.1.3.2.2.2" xref="S3.E3.m1.1.1.3.2.2.2.cmml">λ</mi><mrow id="S3.E3.m1.1.1.3.2.2.3" xref="S3.E3.m1.1.1.3.2.2.3.cmml"><mi id="S3.E3.m1.1.1.3.2.2.3.2" xref="S3.E3.m1.1.1.3.2.2.3.2.cmml">h</mi><mo id="S3.E3.m1.1.1.3.2.2.3.1" xref="S3.E3.m1.1.1.3.2.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.2.3.3" xref="S3.E3.m1.1.1.3.2.2.3.3.cmml">e</mi><mo id="S3.E3.m1.1.1.3.2.2.3.1a" xref="S3.E3.m1.1.1.3.2.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.2.3.4" xref="S3.E3.m1.1.1.3.2.2.3.4.cmml">a</mi><mo id="S3.E3.m1.1.1.3.2.2.3.1b" xref="S3.E3.m1.1.1.3.2.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.2.3.5" xref="S3.E3.m1.1.1.3.2.2.3.5.cmml">t</mi><mo id="S3.E3.m1.1.1.3.2.2.3.1c" xref="S3.E3.m1.1.1.3.2.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.2.3.6" xref="S3.E3.m1.1.1.3.2.2.3.6.cmml">m</mi><mo id="S3.E3.m1.1.1.3.2.2.3.1d" xref="S3.E3.m1.1.1.3.2.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.2.3.7" xref="S3.E3.m1.1.1.3.2.2.3.7.cmml">a</mi><mo id="S3.E3.m1.1.1.3.2.2.3.1e" xref="S3.E3.m1.1.1.3.2.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.2.3.8" xref="S3.E3.m1.1.1.3.2.2.3.8.cmml">p</mi></mrow></msub><mo id="S3.E3.m1.1.1.3.2.1" lspace="0.222em" rspace="0.222em" xref="S3.E3.m1.1.1.3.2.1.cmml">⋅</mo><msub id="S3.E3.m1.1.1.3.2.3" xref="S3.E3.m1.1.1.3.2.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.3.2.3.2" xref="S3.E3.m1.1.1.3.2.3.2.cmml">ℒ</mi><mrow id="S3.E3.m1.1.1.3.2.3.3" xref="S3.E3.m1.1.1.3.2.3.3.cmml"><mi id="S3.E3.m1.1.1.3.2.3.3.2" xref="S3.E3.m1.1.1.3.2.3.3.2.cmml">h</mi><mo id="S3.E3.m1.1.1.3.2.3.3.1" xref="S3.E3.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.3.3.3" xref="S3.E3.m1.1.1.3.2.3.3.3.cmml">e</mi><mo id="S3.E3.m1.1.1.3.2.3.3.1a" xref="S3.E3.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.3.3.4" xref="S3.E3.m1.1.1.3.2.3.3.4.cmml">a</mi><mo id="S3.E3.m1.1.1.3.2.3.3.1b" xref="S3.E3.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.3.3.5" xref="S3.E3.m1.1.1.3.2.3.3.5.cmml">t</mi><mo id="S3.E3.m1.1.1.3.2.3.3.1c" xref="S3.E3.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.3.3.6" xref="S3.E3.m1.1.1.3.2.3.3.6.cmml">m</mi><mo id="S3.E3.m1.1.1.3.2.3.3.1d" xref="S3.E3.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.3.3.7" xref="S3.E3.m1.1.1.3.2.3.3.7.cmml">a</mi><mo id="S3.E3.m1.1.1.3.2.3.3.1e" xref="S3.E3.m1.1.1.3.2.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.3.3.8" xref="S3.E3.m1.1.1.3.2.3.3.8.cmml">p</mi></mrow></msub></mrow><mo id="S3.E3.m1.1.1.3.1" xref="S3.E3.m1.1.1.3.1.cmml">+</mo><msub id="S3.E3.m1.1.1.3.3" xref="S3.E3.m1.1.1.3.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.3.3.2" xref="S3.E3.m1.1.1.3.3.2.cmml">ℒ</mi><mrow id="S3.E3.m1.1.1.3.3.3" xref="S3.E3.m1.1.1.3.3.3.cmml"><mi id="S3.E3.m1.1.1.3.3.3.2" xref="S3.E3.m1.1.1.3.3.3.2.cmml">o</mi><mo id="S3.E3.m1.1.1.3.3.3.1" xref="S3.E3.m1.1.1.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.3" xref="S3.E3.m1.1.1.3.3.3.3.cmml">f</mi><mo id="S3.E3.m1.1.1.3.3.3.1a" xref="S3.E3.m1.1.1.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.4" xref="S3.E3.m1.1.1.3.3.3.4.cmml">f</mi><mo id="S3.E3.m1.1.1.3.3.3.1b" xref="S3.E3.m1.1.1.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.5" xref="S3.E3.m1.1.1.3.3.3.5.cmml">s</mi><mo id="S3.E3.m1.1.1.3.3.3.1c" xref="S3.E3.m1.1.1.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.6" xref="S3.E3.m1.1.1.3.3.3.6.cmml">e</mi><mo id="S3.E3.m1.1.1.3.3.3.1d" xref="S3.E3.m1.1.1.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.7" xref="S3.E3.m1.1.1.3.3.3.7.cmml">t</mi></mrow></msub></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E3.m1.1b"><apply id="S3.E3.m1.1.1.cmml" xref="S3.E3.m1.1.1"><eq id="S3.E3.m1.1.1.1.cmml" xref="S3.E3.m1.1.1.1"></eq><ci id="S3.E3.m1.1.1.2.cmml" xref="S3.E3.m1.1.1.2">ℒ</ci><apply id="S3.E3.m1.1.1.3.cmml" xref="S3.E3.m1.1.1.3"><plus id="S3.E3.m1.1.1.3.1.cmml" xref="S3.E3.m1.1.1.3.1"></plus><apply id="S3.E3.m1.1.1.3.2.cmml" xref="S3.E3.m1.1.1.3.2"><ci id="S3.E3.m1.1.1.3.2.1.cmml" xref="S3.E3.m1.1.1.3.2.1">⋅</ci><apply id="S3.E3.m1.1.1.3.2.2.cmml" xref="S3.E3.m1.1.1.3.2.2"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.2.2.1.cmml" xref="S3.E3.m1.1.1.3.2.2">subscript</csymbol><ci id="S3.E3.m1.1.1.3.2.2.2.cmml" xref="S3.E3.m1.1.1.3.2.2.2">𝜆</ci><apply id="S3.E3.m1.1.1.3.2.2.3.cmml" xref="S3.E3.m1.1.1.3.2.2.3"><times id="S3.E3.m1.1.1.3.2.2.3.1.cmml" xref="S3.E3.m1.1.1.3.2.2.3.1"></times><ci id="S3.E3.m1.1.1.3.2.2.3.2.cmml" xref="S3.E3.m1.1.1.3.2.2.3.2">ℎ</ci><ci id="S3.E3.m1.1.1.3.2.2.3.3.cmml" xref="S3.E3.m1.1.1.3.2.2.3.3">𝑒</ci><ci id="S3.E3.m1.1.1.3.2.2.3.4.cmml" xref="S3.E3.m1.1.1.3.2.2.3.4">𝑎</ci><ci id="S3.E3.m1.1.1.3.2.2.3.5.cmml" xref="S3.E3.m1.1.1.3.2.2.3.5">𝑡</ci><ci id="S3.E3.m1.1.1.3.2.2.3.6.cmml" xref="S3.E3.m1.1.1.3.2.2.3.6">𝑚</ci><ci id="S3.E3.m1.1.1.3.2.2.3.7.cmml" xref="S3.E3.m1.1.1.3.2.2.3.7">𝑎</ci><ci id="S3.E3.m1.1.1.3.2.2.3.8.cmml" xref="S3.E3.m1.1.1.3.2.2.3.8">𝑝</ci></apply></apply><apply id="S3.E3.m1.1.1.3.2.3.cmml" xref="S3.E3.m1.1.1.3.2.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.2.3.1.cmml" xref="S3.E3.m1.1.1.3.2.3">subscript</csymbol><ci id="S3.E3.m1.1.1.3.2.3.2.cmml" xref="S3.E3.m1.1.1.3.2.3.2">ℒ</ci><apply id="S3.E3.m1.1.1.3.2.3.3.cmml" xref="S3.E3.m1.1.1.3.2.3.3"><times id="S3.E3.m1.1.1.3.2.3.3.1.cmml" xref="S3.E3.m1.1.1.3.2.3.3.1"></times><ci id="S3.E3.m1.1.1.3.2.3.3.2.cmml" xref="S3.E3.m1.1.1.3.2.3.3.2">ℎ</ci><ci id="S3.E3.m1.1.1.3.2.3.3.3.cmml" xref="S3.E3.m1.1.1.3.2.3.3.3">𝑒</ci><ci id="S3.E3.m1.1.1.3.2.3.3.4.cmml" xref="S3.E3.m1.1.1.3.2.3.3.4">𝑎</ci><ci id="S3.E3.m1.1.1.3.2.3.3.5.cmml" xref="S3.E3.m1.1.1.3.2.3.3.5">𝑡</ci><ci id="S3.E3.m1.1.1.3.2.3.3.6.cmml" xref="S3.E3.m1.1.1.3.2.3.3.6">𝑚</ci><ci id="S3.E3.m1.1.1.3.2.3.3.7.cmml" xref="S3.E3.m1.1.1.3.2.3.3.7">𝑎</ci><ci id="S3.E3.m1.1.1.3.2.3.3.8.cmml" xref="S3.E3.m1.1.1.3.2.3.3.8">𝑝</ci></apply></apply></apply><apply id="S3.E3.m1.1.1.3.3.cmml" xref="S3.E3.m1.1.1.3.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.3.1.cmml" xref="S3.E3.m1.1.1.3.3">subscript</csymbol><ci id="S3.E3.m1.1.1.3.3.2.cmml" xref="S3.E3.m1.1.1.3.3.2">ℒ</ci><apply id="S3.E3.m1.1.1.3.3.3.cmml" xref="S3.E3.m1.1.1.3.3.3"><times id="S3.E3.m1.1.1.3.3.3.1.cmml" xref="S3.E3.m1.1.1.3.3.3.1"></times><ci id="S3.E3.m1.1.1.3.3.3.2.cmml" xref="S3.E3.m1.1.1.3.3.3.2">𝑜</ci><ci id="S3.E3.m1.1.1.3.3.3.3.cmml" xref="S3.E3.m1.1.1.3.3.3.3">𝑓</ci><ci id="S3.E3.m1.1.1.3.3.3.4.cmml" xref="S3.E3.m1.1.1.3.3.3.4">𝑓</ci><ci id="S3.E3.m1.1.1.3.3.3.5.cmml" xref="S3.E3.m1.1.1.3.3.3.5">𝑠</ci><ci id="S3.E3.m1.1.1.3.3.3.6.cmml" xref="S3.E3.m1.1.1.3.3.3.6">𝑒</ci><ci id="S3.E3.m1.1.1.3.3.3.7.cmml" xref="S3.E3.m1.1.1.3.3.3.7">𝑡</ci></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E3.m1.1c">\mathcal{L}=\lambda_{heatmap}\cdot\mathcal{L}_{heatmap}+\mathcal{L}_{offset}</annotation><annotation encoding="application/x-llamapun" id="S3.E3.m1.1d">caligraphic_L = italic_λ start_POSTSUBSCRIPT italic_h italic_e italic_a italic_t italic_m italic_a italic_p end_POSTSUBSCRIPT ⋅ caligraphic_L start_POSTSUBSCRIPT italic_h italic_e italic_a italic_t italic_m italic_a italic_p end_POSTSUBSCRIPT + caligraphic_L start_POSTSUBSCRIPT italic_o italic_f italic_f italic_s italic_e italic_t end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experiments</h2>
+<figure class="ltx_table" id="S4.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T1.6.2.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S4.T1.2.1" style="font-size:90%;">
+<span class="ltx_text ltx_font_bold" id="S4.T1.2.1.1">MP-100 results:</span> PCK<sub class="ltx_sub" id="S4.T1.2.1.2"><span class="ltx_text ltx_font_italic" id="S4.T1.2.1.2.1">0.2</span></sub> performance under the 1-shot setting. Our approach outperforms other methods on average.</span></figcaption>
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S4.T1.7" style="width:433.6pt;height:152.4pt;vertical-align:-0.9pt;"><span class="ltx_transformed_inner" style="transform:translate(-15.0pt,5.2pt) scale(0.93542,0.93542) ;">
+<p class="ltx_p" id="S4.T1.7.1"><span class="ltx_text" id="S4.T1.7.1.1">
+<span class="ltx_inline-block ltx_transformed_outer" id="S4.T1.7.1.1.1" style="width:463.6pt;height:163pt;vertical-align:-1.0pt;"><span class="ltx_transformed_inner" style="transform:translate(0.0pt,0.0pt) scale(1,1) ;">
+<span class="ltx_p" id="S4.T1.7.1.1.1.1"><span class="ltx_text" id="S4.T1.7.1.1.1.1.1">
+<span class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S4.T1.7.1.1.1.1.1.1">
+<span class="ltx_thead">
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.1.1">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" id="S4.T1.7.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.1.1.1.1">Model</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T1.7.1.1.1.1.1.1.1.1.2">Split 1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T1.7.1.1.1.1.1.1.1.1.3">Split 2</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T1.7.1.1.1.1.1.1.1.1.4">Split 3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T1.7.1.1.1.1.1.1.1.1.5">Split 4</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="S4.T1.7.1.1.1.1.1.1.1.1.6">Split 5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.T1.7.1.1.1.1.1.1.1.1.7">Avg</span></span>
+</span>
+<span class="ltx_tbody">
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.2.1">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.2.1.1">ProtoNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib27" title="">27</a>]</cite></span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.2.1.2">46.05</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.2.1.3">40.84</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.2.1.4">49.13</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.2.1.5">43.34</span>
+<span class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.2.1.6">44.54</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.2.1.7">44.78</span></span>
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.3.2">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.3.2.1">MAML <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib7" title="">7</a>]</cite></span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.3.2.2">68.14</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.3.2.3">54.72</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.3.2.4">64.19</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.3.2.5">63.24</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.3.2.6">57.20</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.3.2.7">61.50</span></span>
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.4.3">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.4.3.1">Fine-tuned <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib20" title="">20</a>]</cite></span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.4.3.2">70.60</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.4.3.3">57.04</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.4.3.4">66.06</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.4.3.5">65.00</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.4.3.6">59.20</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.4.3.7">63.58</span></span>
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.5.4">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.5.4.1">POMNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite></span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.5.4.2">84.23</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.5.4.3">78.25</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.5.4.4">78.17</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.5.4.5">78.68</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.5.4.6">79.17</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.5.4.7">79.70</span></span>
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.6.5">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.6.5.1">CapeFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib25" title="">25</a>]</cite></span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.6.5.2">89.45</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.6.5.3">84.88</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.6.5.4">83.59</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.6.5.5">83.53</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.6.5.6">85.09</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.6.5.7">85.31</span></span>
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.7.6">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.7.6.1">CapeFormer-S <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite></span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.7.6.2">92.88</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.7.6.3">89.11</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.7.6.4">89.16</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.7.6.5">87.19</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.7.6.6">88.73</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.7.6.7">89.41</span></span>
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.8.7">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.8.7.1">Pose Anything-S <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite></span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.8.7.2">93.66</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.8.7.3">90.42</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.8.7.4"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.8.7.4.1">89.79</span></span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.8.7.5">88.68</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="S4.T1.7.1.1.1.1.1.1.8.7.6">89.61</span>
+<span class="ltx_td ltx_align_center" id="S4.T1.7.1.1.1.1.1.1.8.7.7">90.43</span></span>
+<span class="ltx_tr" id="S4.T1.7.1.1.1.1.1.1.9.8">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.9.8.1"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.9.8.1.1">CapeX</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.9.8.2"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.9.8.2.1">95.62</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.9.8.3"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.9.8.3.1">90.94</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.9.8.4">88.95</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.9.8.5"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.9.8.5.1">89.43</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.9.8.6"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.9.8.6.1">92.57</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S4.T1.7.1.1.1.1.1.1.9.8.7"><span class="ltx_text ltx_font_bold" id="S4.T1.7.1.1.1.1.1.1.9.8.7.1">91.50</span></span></span>
+</span>
+</span></span></span>
+</span></span></span></p>
+</span></div>
+</figure>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">In line with prior CAPE studies, we utilize the MP-100 dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite> as both our training and evaluation dataset, which comprises samples sourced from existing category-specific pose estimation datasets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib18" title="">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib24" title="">24</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib15" title="">15</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib16" title="">16</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib9" title="">9</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib23" title="">23</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib13" title="">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib32" title="">32</a>]</cite>. This dataset consists of over 18K images spread across 100 distinct sub-categories and 8 super-categories (human hand &amp; face &amp; body, animal face &amp; body, clothes, furniture and vehicle), featuring varying numbers of keypoints, ranging from 8 to 68 keypoints.</p>
+</div>
+<div class="ltx_para" id="S4.p2">
+<p class="ltx_p" id="S4.p2.1">The dataset is divided into five separate splits for training and evaluation. Importantly, each split ensures that the categories used for training, validation, and testing are mutually exclusive, ensuring that the categories used for evaluation are unseen during the training phase.</p>
+</div>
+<div class="ltx_para" id="S4.p3">
+<p class="ltx_p" id="S4.p3.1">The original dataset comes with partial skeleton annotations in different formats, including variations in the keypoint indexing. We use the updated version of Pose Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite> that includes unified skeleton definitions for all categories. The updated version predominantly featured brief text sentences describing each point within most categories. However, certain categories exhibited text descriptions with distinct characteristics, such as the use of underscores between words instead of spaces, while others lacked any text descriptions altogether.
+We annotated and standardized the text descriptions of all points in all categories, offering a new supervision capability to the updated version of <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite> of the original MP-100.</p>
+</div>
+<div class="ltx_para" id="S4.p4">
+<p class="ltx_p" id="S4.p4.1">To assess our model’s performance, we employ the Probability of Correct Keypoint (PCK) metric <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib39" title="">39</a>]</cite>, setting a PCK threshold of 0.2, following the conventions established by Pose Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite>, POMNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite> and CapeFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib25" title="">25</a>]</cite>.
+More design choices and evaluations are in the supplementary.</p>
+</div>
+<section class="ltx_paragraph" id="S4.SS0.SSS0.Px1">
+<h5 class="ltx_title ltx_title_paragraph">Implementation Details</h5>
+<div class="ltx_para" id="S4.SS0.SSS0.Px1.p1">
+<p class="ltx_p" id="S4.SS0.SSS0.Px1.p1.9">To ensure a fair comparison, except for the text backbone, the configuration settings remain consistent with Pose Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite> and CapeFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib25" title="">25</a>]</cite>. The trainable features of the framework remain exactly the same as in Pose Anything (except for the new linear layer) since the text backbone is frozen during training in our framework. However, we also evaluate and present the performance of the framework with an unfrozen text backbone in the supplemental Table <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.T2" title="Table 2 ‣ A.2.1 Different Architectures ‣ A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">2</span></a>. <math alttext="C_{i}" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.1.m1.1"><semantics id="S4.SS0.SSS0.Px1.p1.1.m1.1a"><msub id="S4.SS0.SSS0.Px1.p1.1.m1.1.1" xref="S4.SS0.SSS0.Px1.p1.1.m1.1.1.cmml"><mi id="S4.SS0.SSS0.Px1.p1.1.m1.1.1.2" xref="S4.SS0.SSS0.Px1.p1.1.m1.1.1.2.cmml">C</mi><mi id="S4.SS0.SSS0.Px1.p1.1.m1.1.1.3" xref="S4.SS0.SSS0.Px1.p1.1.m1.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.1.m1.1b"><apply id="S4.SS0.SSS0.Px1.p1.1.m1.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S4.SS0.SSS0.Px1.p1.1.m1.1.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.1.m1.1.1">subscript</csymbol><ci id="S4.SS0.SSS0.Px1.p1.1.m1.1.1.2.cmml" xref="S4.SS0.SSS0.Px1.p1.1.m1.1.1.2">𝐶</ci><ci id="S4.SS0.SSS0.Px1.p1.1.m1.1.1.3.cmml" xref="S4.SS0.SSS0.Px1.p1.1.m1.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.1.m1.1c">C_{i}</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.1.m1.1d">italic_C start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> is 768 in SwinV2-S, <math alttext="C_{t}" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.2.m2.1"><semantics id="S4.SS0.SSS0.Px1.p1.2.m2.1a"><msub id="S4.SS0.SSS0.Px1.p1.2.m2.1.1" xref="S4.SS0.SSS0.Px1.p1.2.m2.1.1.cmml"><mi id="S4.SS0.SSS0.Px1.p1.2.m2.1.1.2" xref="S4.SS0.SSS0.Px1.p1.2.m2.1.1.2.cmml">C</mi><mi id="S4.SS0.SSS0.Px1.p1.2.m2.1.1.3" xref="S4.SS0.SSS0.Px1.p1.2.m2.1.1.3.cmml">t</mi></msub><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.2.m2.1b"><apply id="S4.SS0.SSS0.Px1.p1.2.m2.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S4.SS0.SSS0.Px1.p1.2.m2.1.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.2.m2.1.1">subscript</csymbol><ci id="S4.SS0.SSS0.Px1.p1.2.m2.1.1.2.cmml" xref="S4.SS0.SSS0.Px1.p1.2.m2.1.1.2">𝐶</ci><ci id="S4.SS0.SSS0.Px1.p1.2.m2.1.1.3.cmml" xref="S4.SS0.SSS0.Px1.p1.2.m2.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.2.m2.1c">C_{t}</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.2.m2.1d">italic_C start_POSTSUBSCRIPT italic_t end_POSTSUBSCRIPT</annotation></semantics></math> is 768 in gte-base-v1.5. <math alttext="C" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.3.m3.1"><semantics id="S4.SS0.SSS0.Px1.p1.3.m3.1a"><mi id="S4.SS0.SSS0.Px1.p1.3.m3.1.1" xref="S4.SS0.SSS0.Px1.p1.3.m3.1.1.cmml">C</mi><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.3.m3.1b"><ci id="S4.SS0.SSS0.Px1.p1.3.m3.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.3.m3.1.1">𝐶</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.3.m3.1c">C</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.3.m3.1d">italic_C</annotation></semantics></math> and <math alttext="K" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.4.m4.1"><semantics id="S4.SS0.SSS0.Px1.p1.4.m4.1a"><mi id="S4.SS0.SSS0.Px1.p1.4.m4.1.1" xref="S4.SS0.SSS0.Px1.p1.4.m4.1.1.cmml">K</mi><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.4.m4.1b"><ci id="S4.SS0.SSS0.Px1.p1.4.m4.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.4.m4.1.1">𝐾</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.4.m4.1c">K</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.4.m4.1d">italic_K</annotation></semantics></math> are set to <math alttext="256" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.5.m5.1"><semantics id="S4.SS0.SSS0.Px1.p1.5.m5.1a"><mn id="S4.SS0.SSS0.Px1.p1.5.m5.1.1" xref="S4.SS0.SSS0.Px1.p1.5.m5.1.1.cmml">256</mn><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.5.m5.1b"><cn id="S4.SS0.SSS0.Px1.p1.5.m5.1.1.cmml" type="integer" xref="S4.SS0.SSS0.Px1.p1.5.m5.1.1">256</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.5.m5.1c">256</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.5.m5.1d">256</annotation></semantics></math> and <math alttext="100" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.6.m6.1"><semantics id="S4.SS0.SSS0.Px1.p1.6.m6.1a"><mn id="S4.SS0.SSS0.Px1.p1.6.m6.1.1" xref="S4.SS0.SSS0.Px1.p1.6.m6.1.1.cmml">100</mn><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.6.m6.1b"><cn id="S4.SS0.SSS0.Px1.p1.6.m6.1.1.cmml" type="integer" xref="S4.SS0.SSS0.Px1.p1.6.m6.1.1">100</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.6.m6.1c">100</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.6.m6.1d">100</annotation></semantics></math>, respectively.
+The architecture is implemented within the MMPose framework <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib4" title="">4</a>]</cite>, trained using the Adam optimizer for 200 epochs with a batch size of 16. The initial learning rate is <math alttext="10^{-5}" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.7.m7.1"><semantics id="S4.SS0.SSS0.Px1.p1.7.m7.1a"><msup id="S4.SS0.SSS0.Px1.p1.7.m7.1.1" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.cmml"><mn id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.2" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.2.cmml">10</mn><mrow id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.cmml"><mo id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3a" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.cmml">−</mo><mn id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.2" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.2.cmml">5</mn></mrow></msup><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.7.m7.1b"><apply id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1"><csymbol cd="ambiguous" id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.1.cmml" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1">superscript</csymbol><cn id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.2.cmml" type="integer" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.2">10</cn><apply id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.cmml" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3"><minus id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.1.cmml" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3"></minus><cn id="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.2.cmml" type="integer" xref="S4.SS0.SSS0.Px1.p1.7.m7.1.1.3.2">5</cn></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.7.m7.1c">10^{-5}</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.7.m7.1d">10 start_POSTSUPERSCRIPT - 5 end_POSTSUPERSCRIPT</annotation></semantics></math>, reducing by a factor of 10 at the 160th and 180th epochs. All experiments in our work were carried out using a machine equipped with an NVIDIA RTX A5000 GPU. Our model required <math alttext="10" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.8.m8.1"><semantics id="S4.SS0.SSS0.Px1.p1.8.m8.1a"><mn id="S4.SS0.SSS0.Px1.p1.8.m8.1.1" xref="S4.SS0.SSS0.Px1.p1.8.m8.1.1.cmml">10</mn><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.8.m8.1b"><cn id="S4.SS0.SSS0.Px1.p1.8.m8.1.1.cmml" type="integer" xref="S4.SS0.SSS0.Px1.p1.8.m8.1.1">10</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.8.m8.1c">10</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.8.m8.1d">10</annotation></semantics></math> GB of GPU memory and took roughly <math alttext="20" class="ltx_Math" display="inline" id="S4.SS0.SSS0.Px1.p1.9.m9.1"><semantics id="S4.SS0.SSS0.Px1.p1.9.m9.1a"><mn id="S4.SS0.SSS0.Px1.p1.9.m9.1.1" xref="S4.SS0.SSS0.Px1.p1.9.m9.1.1.cmml">20</mn><annotation-xml encoding="MathML-Content" id="S4.SS0.SSS0.Px1.p1.9.m9.1b"><cn id="S4.SS0.SSS0.Px1.p1.9.m9.1.1.cmml" type="integer" xref="S4.SS0.SSS0.Px1.p1.9.m9.1.1">20</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS0.SSS0.Px1.p1.9.m9.1c">20</annotation><annotation encoding="application/x-llamapun" id="S4.SS0.SSS0.Px1.p1.9.m9.1d">20</annotation></semantics></math> hours to train for each split.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Benchmark Results</h3>
+<figure class="ltx_figure" id="S4.F4"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="330" id="S4.F4.g1" src="x3.png" width="830"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F4.3.1.1" style="font-size:90%;">Figure 4</span>: </span><span class="ltx_text ltx_font_bold" id="S4.F4.4.2" style="font-size:90%;">Qualitative results:<span class="ltx_text ltx_font_medium" id="S4.F4.4.2.1"> From left to right: support images that are used by the competitors, CapeFormer-S, Pose Anything-S, our model, and the GT. Support text descriptions used by our model are not shown. Main differences are pointed out using arrows.
+</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">We conduct a comparative analysis of our approach with gte-base-v1.5 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib17" title="">17</a>]</cite> as the freezed text backbone, against Pose Anything <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite>, as well as prior CAPE methodologies such as CapeFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib25" title="">25</a>]</cite> and its enhanced version CapeFormer-T from <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite>, POMNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite>, ProtoNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib27" title="">27</a>]</cite>, MAML <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib7" title="">7</a>]</cite>, and Fine-tuned <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib20" title="">20</a>]</cite>. For a comprehensive understanding of these models’ performance, additional details can be found in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib36" title="">36</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">Our evaluation is based on the MP-100 dataset, considering the 1-shot scenario. While traditionally 1-shot refers to a single required support image, our framework uses a single text-graph instead. We do not report the 5-shot results, because we do not use 5 different support images. The results are presented in Table <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.T1" title="Table 1 ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">1</span></a>. Notably, our text-based approach outperforms Pose Anything on most splits, with an average improvement of 1.07% under the 1-shot setting. These results establish a new state-of-the-art result, showcasing the efficacy of utilizing text-graphs for CAPE.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1">A qualitative comparison of our model against CapeFormer-S and Pose Anything-S in presented in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.F4" title="Figure 4 ‣ 4.1 Benchmark Results ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">4</span></a>. Our model performs well given the support text-graph input (not shown), while the support image-based techniques are sensitive to the inconsistencies between the
+support and query images.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Ablation Study</h3>
+<section class="ltx_paragraph" id="S4.SS2.SSS0.Px1">
+<h5 class="ltx_title ltx_title_paragraph">Text Modifications</h5>
+<figure class="ltx_figure" id="S4.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="329" id="S4.F5.g1" src="x4.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F5.6.1.1" style="font-size:90%;">Figure 5</span>: </span><span class="ltx_text ltx_font_bold" id="S4.F5.7.2" style="font-size:90%;">Modified text descriptions:<span class="ltx_text ltx_font_medium" id="S4.F5.7.2.1"> Top is the support keypoints text descriptions.
+Left is a </span>synonym<span class="ltx_text ltx_font_medium" id="S4.F5.7.2.2"> words test, middle is a </span>translation<span class="ltx_text ltx_font_medium" id="S4.F5.7.2.3"> test and right is </span>typo<span class="ltx_text ltx_font_medium" id="S4.F5.7.2.4"> test. Below each description, query output(s) are presented. Each node in the presented graph is the average positions between the original and modified text descriptions. The diameter represents the distance between the positions.</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.SSS0.Px1.p1">
+<p class="ltx_p" id="S4.SS2.SSS0.Px1.p1.4">The fact that the text backbone was not fine-tuned during the training of our model, keeps it from overfitting to text descriptions from the training set. On the contrary, the model demonstrates its effectiveness across modified text inputs, while preserving similar estimated poses overall. We test the robustness of our model on different types of modifications for the keypoint descriptions in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.F5" title="Figure 5 ‣ Text Modifications ‣ 4.2 Ablation Study ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">5</span></a>. Specifically, we test the adaptability of the model to synonym descriptions (left), to translation to another language and back to English (middle), and to typos (right).
+Notably, all average keypoints are placed in acceptable positions.
+The main differences in the two synonym test examples are in keypoints 7, 8 (’elbow’ <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S4.SS2.SSS0.Px1.p1.1.m1.1"><semantics id="S4.SS2.SSS0.Px1.p1.1.m1.1a"><mo id="S4.SS2.SSS0.Px1.p1.1.m1.1.1" stretchy="false" xref="S4.SS2.SSS0.Px1.p1.1.m1.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S4.SS2.SSS0.Px1.p1.1.m1.1b"><ci id="S4.SS2.SSS0.Px1.p1.1.m1.1.1.cmml" xref="S4.SS2.SSS0.Px1.p1.1.m1.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.SSS0.Px1.p1.1.m1.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.SSS0.Px1.p1.1.m1.1d">→</annotation></semantics></math> ’middle of the arm’) and 13, 14 (’knee’ <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S4.SS2.SSS0.Px1.p1.2.m2.1"><semantics id="S4.SS2.SSS0.Px1.p1.2.m2.1a"><mo id="S4.SS2.SSS0.Px1.p1.2.m2.1.1" stretchy="false" xref="S4.SS2.SSS0.Px1.p1.2.m2.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S4.SS2.SSS0.Px1.p1.2.m2.1b"><ci id="S4.SS2.SSS0.Px1.p1.2.m2.1.1.cmml" xref="S4.SS2.SSS0.Px1.p1.2.m2.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.SSS0.Px1.p1.2.m2.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.SSS0.Px1.p1.2.m2.1d">→</annotation></semantics></math> ’middle of the leg’). In the translation test, the main differences are in keypoints 5-7 and 9-11 (’top/bottom side of the right/left jaw/cheek’ <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S4.SS2.SSS0.Px1.p1.3.m3.1"><semantics id="S4.SS2.SSS0.Px1.p1.3.m3.1a"><mo id="S4.SS2.SSS0.Px1.p1.3.m3.1.1" stretchy="false" xref="S4.SS2.SSS0.Px1.p1.3.m3.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S4.SS2.SSS0.Px1.p1.3.m3.1b"><ci id="S4.SS2.SSS0.Px1.p1.3.m3.1.1.cmml" xref="S4.SS2.SSS0.Px1.p1.3.m3.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.SSS0.Px1.p1.3.m3.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.SSS0.Px1.p1.3.m3.1d">→</annotation></semantics></math> ’upper/lower side of the right/left jaw/cheek’) and 27 (’top side of the nose’ <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S4.SS2.SSS0.Px1.p1.4.m4.1"><semantics id="S4.SS2.SSS0.Px1.p1.4.m4.1a"><mo id="S4.SS2.SSS0.Px1.p1.4.m4.1.1" stretchy="false" xref="S4.SS2.SSS0.Px1.p1.4.m4.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S4.SS2.SSS0.Px1.p1.4.m4.1b"><ci id="S4.SS2.SSS0.Px1.p1.4.m4.1.1.cmml" xref="S4.SS2.SSS0.Px1.p1.4.m4.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.SSS0.Px1.p1.4.m4.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.SSS0.Px1.p1.4.m4.1d">→</annotation></semantics></math> ’upper side of the nose’). In the typos test, the significant inconsistencies are in the head (keypoints 0,2 and 3), while minor differences are spotted also in the leg joints (keypoints 5,6 and 12).
+All these differences are compatible with the discrepancy imposed by the different descriptions.</p>
+</div>
+<figure class="ltx_figure" id="S4.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="239" id="S4.F6.g1" src="x5.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F6.3.1.1" style="font-size:90%;">Figure 6</span>: </span><span class="ltx_text ltx_font_bold" id="S4.F6.4.2" style="font-size:90%;">Text Abstractions:<span class="ltx_text ltx_font_medium" id="S4.F6.4.2.1"> Model performance over different levels of text-pose abstractions.</span></span></figcaption>
+</figure>
+</section>
+<section class="ltx_paragraph" id="S4.SS2.SSS0.Px2">
+<h5 class="ltx_title ltx_title_paragraph">Occlusions and Levels of Abstraction</h5>
+<div class="ltx_para" id="S4.SS2.SSS0.Px2.p1">
+<p class="ltx_p" id="S4.SS2.SSS0.Px2.p1.1">We test the robustness of our model on keypoints that are described using different levels of text and pose-graphs abstractions. Results are in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.F6" title="Figure 6 ‣ Text Modifications ‣ 4.2 Ablation Study ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">6</span></a>. Although not trained with the prompted text descriptions and pose-graphs, the model presents satisfactory results in both examples.</p>
+</div>
+<figure class="ltx_figure" id="S4.F7"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="249" id="S4.F7.g1" src="x6.png" width="498"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F7.6.2.1" style="font-size:90%;">Figure 7</span>: </span><span class="ltx_text ltx_font_bold" id="S4.F7.2.1" style="font-size:90%;">Masking the query image:<span class="ltx_text ltx_font_medium" id="S4.F7.2.1.1"> PCK<sub class="ltx_sub" id="S4.F7.2.1.1.1"><span class="ltx_text ltx_font_italic" id="S4.F7.2.1.1.1.1">0.2</span></sub> performance as a function of the masking percentage.</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.SSS0.Px2.p2">
+<p class="ltx_p" id="S4.SS2.SSS0.Px2.p2.1">Furthermore, we assess the effectiveness of text-graphs in handling occlusions within query images by applying random masks to them before estimating the support keypoints. Quantitative results are in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.F7" title="Figure 7 ‣ Occlusions and Levels of Abstraction ‣ 4.2 Ablation Study ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">7</span></a>, and a qualitative comparison is presented in the supplemental Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F13" title="Figure 13 ‣ A.2.3 Occlusions and levels of abstraction ‣ A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">13</span></a>. Our method demonstrates superior performance over Pose Anything-S and CapeFormer-S in the entire presented occlusion range while maintaining similar degradation levels between 0% to 25%. The improved performance at lower masking percentages can be attributed to the text-graphs’ abstraction capability and their ability to estimate missing keypoints relative to the visible ones. However, as our approach does not utilize a support image as input, performance significantly drops and matches the competitors, when a substantial portion of the image is occluded (50%). This is because the absence of the query image leaves the model with insufficient information to operate effectively. This stands in contrast to traditional CAPE methodologies that incorporate a support image, which provides crucial structural cues. In such frameworks, the support image aids the model in hallucinating and extrapolating matching keypoints within the query, particularly when considering graph structures as in Pose Anything.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S4.SS2.SSS0.Px3">
+<h5 class="ltx_title ltx_title_paragraph">Out of Distribution Query Images</h5>
+<figure class="ltx_figure" id="S4.F8"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="261" id="S4.F8.g1" src="x7.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F8.3.1.1" style="font-size:90%;">Figure 8</span>: </span><span class="ltx_text ltx_font_bold" id="S4.F8.4.2" style="font-size:90%;">Out of distribution performance:<span class="ltx_text ltx_font_medium" id="S4.F8.4.2.1"> Top is the support keypoints text descriptions. Below each description, we present the query output.
+</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.SSS0.Px3.p1">
+<p class="ltx_p" id="S4.SS2.SSS0.Px3.p1.1">We evaluate the resilience of our model to out-of-distribution query images generated via diffusion models. In Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S4.F8" title="Figure 8 ‣ Out of Distribution Query Images ‣ 4.2 Ablation Study ‣ 4 Experiments ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">8</span></a>, we examine novel styles, categories, poses, and even imaging methods. While the estimated poses generally align coherently with both the query and the support text-graph, there are notable inconsistencies. For example, the model appears to inaccurately localize ’knees’ in both two left query outputs and fails to localize the ’front paws’ in the zebra query output.</p>
+</div>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Limitations</h2>
+<figure class="ltx_figure" id="S5.F9"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="327" id="S5.F9.g1" src="x8.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S5.F9.3.1.1" style="font-size:90%;">Figure 9</span>: </span><span class="ltx_text ltx_font_bold" id="S5.F9.4.2" style="font-size:90%;">Failure cases:<span class="ltx_text ltx_font_medium" id="S5.F9.4.2.1"> From left to right: a category outside of the dataset, introducing vastly new keypoint descriptions, and cross-category descriptions.
+</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">We stress that although our model strives for full open-vocabulary performance, it is still trained on a relatively small training set over arguably a short time period, compared to the state-of-the-art large vision-language foundation models. We present in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#S5.F9" title="Figure 9 ‣ 5 Limitations ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">9</span></a> a few failure cases that may be addressed in future research. Our model does not handle new categories with novel text-graphs well, as can be seen in the plane example on the left. In addition, prompting with vastly new parts may lead to incorrect localizations as can be seen in the car example on the middle (for example, driver/passenger-side door). Lastly, the model incorrectly executes semantically challenging descriptions. For example, the model can not localize a ’seat’ in a horse, even though riders may seat on it. Instead, it hallucinates a pose of a chair that it has seen in the training set.</p>
+</div>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Broader impact</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">Advancements in pose estimation technology can revolutionize fields such as autonomous driving, smart cities, sports, etc., by enabling precise movement analysis. However, when a pose estimation tool is used, specifically in fields such as surveillance, it is crucial to address privacy concerns and establish ethical guidelines to protect sensitive personal data and ensure responsible use.</p>
+</div>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7 </span>Conclusions</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p" id="S7.p1.1">CapeX is a Category Agnostic Pose Estimation (CAPE) approach that is based on text input. In particular, CapeX takes a pose-graph, where text descriptions are attached to its nodes, and finds these keypoints in a query image. This stands in contrast to previous CAPE approaches that require support image with annotated pose-graph as part of the input. CapeX can be viewed as an Open Vocabulary Kepoint Detection algorithm, closing the gap between Open Vocabulary Object Detection and Open Vocabulary Segmentation.</p>
+</div>
+<div class="ltx_para" id="S7.p2">
+<p class="ltx_p" id="S7.p2.1">CapeX was tested on the standard MP-100 dataset and achieves a new state of the art result, surpassing previous CAPE methods that rely on support image as input instead of text.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx1">
+<h2 class="ltx_title ltx_title_section">Acknowledgments and Disclosure of Funding</h2>
+<div class="ltx_para" id="Sx1.p1">
+<p class="ltx_p" id="Sx1.p1.1">This work was partly funded by the Weinstein Institute.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+Bangalath, H., Maaz, M., Khattak, M.U., Khan, S.H., Shahbaz Khan, F.: Bridging the gap between object and image-level representations for open-vocabulary detection. Advances in Neural Information Processing Systems <span class="ltx_text ltx_font_bold" id="bib.bib1.1.1">35</span>, 33781–33794 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Cao, Z., Hidalgo Martinez, G., Simon, T., Wei, S., Sheikh, Y.A.: Openpose: Realtime multi-person 2d pose estimation using part affinity fields. IEEE Transactions on Pattern Analysis and Machine Intelligence (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Cheng, B., Schwing, A., Kirillov, A.: Per-pixel classification is not all you need for semantic segmentation. Advances in neural information processing systems <span class="ltx_text ltx_font_bold" id="bib.bib3.1.1">34</span>, 17864–17875 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Contributors, M.: Openmmlab pose estimation toolbox and benchmark. <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://github.com/open-mmlab/mmpose" title="">https://github.com/open-mmlab/mmpose</a> (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Ding, J., Xue, N., Xia, G.S., Dai, D.: Decoupling zero-shot semantic segmentation. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 11583–11592 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+Fang, H.S., Li, J., Tang, H., Xu, C., Zhu, H., Xiu, Y., Li, Y.L., Lu, C.: Alphapose: Whole-body regional multi-person pose estimation and tracking in real-time. IEEE Transactions on Pattern Analysis and Machine Intelligence (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Finn, C., Abbeel, P., Levine, S.: Model-agnostic meta-learning for fast adaptation of deep networks. In: ICML (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+Ge, Y., Zhang, R., Wang, X., Tang, X., Luo, P.: Deepfashion2: A versatile benchmark for detection, pose estimation, segmentation and re-identification of clothing images. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 5337–5345 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Graving, J.M., Chae, D., Naik, H., Li, L., Koger, B., Costelloe, B.R., Couzin, I.D.: Deepposekit, a software toolkit for fast and robust animal pose estimation using deep learning. Elife <span class="ltx_text ltx_font_bold" id="bib.bib9.1.1">8</span>, e47994 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Hirschorn, O., Avidan, S.: Pose anything: A graph-based approach for category-agnostic pose estimation. arXiv preprint arXiv:2311.17891 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Jia, C., Yang, Y., Xia, Y., Chen, Y.T., Parekh, Z., Pham, H., Le, Q., Sung, Y.H., Li, Z., Duerig, T.: Scaling up visual and vision-language representation learning with noisy text supervision. In: International conference on machine learning. pp. 4904–4916. PMLR (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Kaul, P., Xie, W., Zisserman, A.: Multi-modal classifiers for open-vocabulary object detection. In: International Conference on Machine Learning. pp. 15946–15969. PMLR (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Khan, M.H., McDonagh, J., Khan, S., Shahabuddin, M., Arora, A., Khan, F.S., Shao, L., Tzimiropoulos, G.: Animalweb: A large-scale hierarchical dataset of annotated animal faces. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 6939–6948 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+Kirillov, A., Mintun, E., Ravi, N., Mao, H., Rolland, C., Gustafson, L., Xiao, T., Whitehead, S., Berg, A.C., Lo, W.Y., et al.: Segment anything. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 4015–4026 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+Koestinger, M., Wohlhart, P., Roth, P.M., Bischof, H.: Annotated facial landmarks in the wild: A large-scale, real-world database for facial landmark localization. In: 2011 IEEE international conference on computer vision workshops (ICCV workshops). pp. 2144–2151. IEEE (2011)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+Labuguen, R., Matsumoto, J., Negrete, S.B., Nishimaru, H., Nishijo, H., Takada, M., Go, Y., Inoue, K.i., Shibata, T.: Macaquepose: a novel “in the wild” macaque monkey pose dataset for markerless motion capture. Frontiers in behavioral neuroscience <span class="ltx_text ltx_font_bold" id="bib.bib16.1.1">14</span>, 581154 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+Li, Z., Zhang, X., Zhang, Y., Long, D., Xie, P., Zhang, M.: Towards general text embeddings with multi-stage contrastive learning. arXiv preprint arXiv:2308.03281 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+Lin, T.Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., Zitnick, C.L.: Microsoft coco: Common objects in context. In: Computer Vision–ECCV 2014: 13th European Conference, Zurich, Switzerland, September 6-12, 2014, Proceedings, Part V 13. pp. 740–755. Springer (2014)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao, Y., Zhang, Z., Dong, L., et al.: Swin transformer v2: Scaling up capacity and resolution. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. pp. 12009–12019 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+Nakamura, A., Harada, T.: Revisiting fine-tuning for few-shot learning. arXiv preprint arXiv:1910.00216 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+Pereira, T.D., Aldarondo, D.E., Willmore, L., Kislin, M., Wang, S.S.H., Murthy, M., Shaevitz, J.W.: Fast animal pose estimation using deep neural networks. Nature methods <span class="ltx_text ltx_font_bold" id="bib.bib21.1.1">16</span>(1), 117–125 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+Radford, A., Kim, J.W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., et al.: Learning transferable visual models from natural language supervision. In: International conference on machine learning. pp. 8748–8763. PMLR (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+Reddy, N.D., Vo, M., Narasimhan, S.G.: Carfusion: Combining point tracking and part detection for dynamic 3d reconstruction of vehicles. In: Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 1906–1915 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+Sagonas, C., Antonakos, E., Tzimiropoulos, G., Zafeiriou, S., Pantic, M.: 300 faces in-the-wild challenge: Database and results. Image and vision computing <span class="ltx_text ltx_font_bold" id="bib.bib24.1.1">47</span>, 3–18 (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+Shi, M., Huang, Z., Ma, X., Hu, X., Cao, Z.: Matching is not enough: A two-stage framework for category-agnostic pose estimation. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 7308–7317 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+Shi, M., Lu, H., Feng, C., Liu, C., Cao, Z.: Represent, compare, and learn: A similarity-aware framework for class-agnostic counting. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 9529–9538 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+Snell, J., Swersky, K., Zemel, R.: Prototypical networks for few-shot learning. NIPS (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+Song, X., Wang, P., Zhou, D., Zhu, R., Guan, C., Dai, Y., Su, H., Li, H., Yang, R.: Apollocar3d: A large 3d car instance understanding benchmark for autonomous driving. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 5452–5462 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+Wang, Y., Peng, C., Liu, Y.: Mask-pose cascaded cnn for 2d hand pose estimation from single color image. IEEE Transactions on Circuits and Systems for Video Technology <span class="ltx_text ltx_font_bold" id="bib.bib29.1.1">29</span>(11), 3258–3268 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+Wei, M., Yue, X., Zhang, W., Kong, S., Liu, X., Pang, J.: Ov-parts: Towards open-vocabulary part segmentation. Advances in Neural Information Processing Systems <span class="ltx_text ltx_font_bold" id="bib.bib30.1.1">36</span> (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+Welinder, P., Branson, S., Mita, T., Wah, C., Schroff, F., Belongie, S., Perona, P.: Caltech-ucsd birds 200 (2010)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+Wu, J., Xue, T., Lim, J.J., Tian, Y., Tenenbaum, J.B., Torralba, A., Freeman, W.T.: Single image 3d interpreter network. In: Computer Vision–ECCV 2016: 14th European Conference, Amsterdam, The Netherlands, October 11-14, 2016, Proceedings, Part VI 14. pp. 365–382. Springer (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+Wu, J., Li, X., Xu, S., Yuan, H., Ding, H., Yang, Y., Li, X., Zhang, J., Tong, Y., Jiang, X., et al.: Towards open vocabulary learning: A survey. IEEE Transactions on Pattern Analysis and Machine Intelligence (2024)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock">
+Xu, J., Liu, S., Vahdat, A., Byeon, W., Wang, X., De Mello, S.: Open-vocabulary panoptic segmentation with text-to-image diffusion models. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 2955–2966 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock">
+Xu, J., Liu, S., Vahdat, A., Byeon, W., Wang, X., De Mello, S.: Open-vocabulary panoptic segmentation with text-to-image diffusion models. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). pp. 2955–2966 (June 2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock">
+Xu, L., Jin, S., Zeng, W., Liu, W., Qian, C., Ouyang, W., Luo, P., Wang, X.: Pose for everything: Towards category-agnostic pose estimation. In: European conference on computer vision. pp. 398–416. Springer (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock">
+Xu, M., Zhang, Z., Wei, F., Lin, Y., Cao, Y., Hu, H., Bai, X.: A simple baseline for open-vocabulary semantic segmentation with pre-trained vision-language model. In: European Conference on Computer Vision. pp. 736–753. Springer (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock">
+Yang, S., Quan, Z., Nie, M., Yang, W.: Transpose: Keypoint localization via transformer. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 11802–11812 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock">
+Yang, Y., Ramanan, D.: Articulated human detection with flexible mixtures of parts. IEEE transactions on pattern analysis and machine intelligence <span class="ltx_text ltx_font_bold" id="bib.bib39.1.1">35</span>(12), 2878–2890 (2012)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock">
+Yang, Y., Yang, J., Xu, Y., Zhang, J., Lan, L., Tao, D.: Apt-36k: A large-scale benchmark for animal pose estimation and tracking. Advances in Neural Information Processing Systems <span class="ltx_text ltx_font_bold" id="bib.bib40.1.1">35</span>, 17301–17313 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock">
+Yu, H., Xu, Y., Zhang, J., Zhao, W., Guan, Z., Tao, D.: Ap-10k: A benchmark for animal pose estimation in the wild. In: Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2) (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock">
+Zang, Y., Li, W., Zhou, K., Huang, C., Loy, C.C.: Open-vocabulary detr with conditional matching. In: European Conference on Computer Vision. pp. 106–122. Springer (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock">
+Zhang, X., Wang, W., Chen, Z., Xu, Y., Zhang, J., Tao, D.: Clamp: Prompt-based contrastive learning for connecting language and animal pose. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp. 23272–23281 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock">
+Zou, X., Yang, J., Zhang, H., Li, F., Li, L., Wang, J., Wang, L., Gao, J., Lee, Y.J.: Segment everything everywhere all at once. Advances in Neural Information Processing Systems <span class="ltx_text ltx_font_bold" id="bib.bib44.1.1">36</span> (2024)
+
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<section class="ltx_appendix" id="A1">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Appendix / Supplemental Material</h2>
+<section class="ltx_subsection" id="A1.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.1 </span>Disadvantages of Visual Prompts in CAPE</h3>
+<figure class="ltx_figure" id="A1.F10">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="A1.F10.8">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="A1.F10.8.9.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="A1.F10.8.9.1.1">Support</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="A1.F10.8.9.1.2">Query</th>
+<th class="ltx_td ltx_th ltx_th_column" id="A1.F10.8.9.1.3"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="A1.F10.8.9.1.4">Support</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column" id="A1.F10.8.9.1.5">Query</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.F10.4.4">
+<td class="ltx_td ltx_align_center" id="A1.F10.1.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="91" id="A1.F10.1.1.1.g1" src="extracted/5636531/Figures/same_query/000000043182_0.png" width="77"/></td>
+<td class="ltx_td ltx_align_center" id="A1.F10.2.2.2"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="91" id="A1.F10.2.2.2.g1" src="extracted/5636531/Figures/same_query/000000043182_1.png" width="87"/></td>
+<td class="ltx_td" id="A1.F10.4.4.5"></td>
+<td class="ltx_td ltx_align_center" id="A1.F10.3.3.3"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="91" id="A1.F10.3.3.3.g1" src="extracted/5636531/Figures/same_query/000000043236_0.png" width="106"/></td>
+<td class="ltx_td ltx_align_center" id="A1.F10.4.4.4"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="91" id="A1.F10.4.4.4.g1" src="extracted/5636531/Figures/same_query/000000043236_1.png" width="87"/></td>
+</tr>
+<tr class="ltx_tr" id="A1.F10.8.8">
+<td class="ltx_td ltx_align_center" id="A1.F10.5.5.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="91" id="A1.F10.5.5.1.g1" src="extracted/5636531/Figures/same_query/000000043191_0.png" width="84"/></td>
+<td class="ltx_td ltx_align_center" id="A1.F10.6.6.2"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="91" id="A1.F10.6.6.2.g1" src="extracted/5636531/Figures/same_query/000000043191_1.png" width="87"/></td>
+<td class="ltx_td" id="A1.F10.8.8.5"></td>
+<td class="ltx_td ltx_align_center" id="A1.F10.7.7.3"><img alt="Refer to caption" class="ltx_graphics ltx_img_portrait" height="91" id="A1.F10.7.7.3.g1" src="extracted/5636531/Figures/same_query/000000043183_0.png" width="63"/></td>
+<td class="ltx_td ltx_align_center" id="A1.F10.8.8.4"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="91" id="A1.F10.8.8.4.g1" src="extracted/5636531/Figures/same_query/000000043183_1.png" width="88"/></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F10.11.1.1" style="font-size:90%;">Figure 10</span>: </span><span class="ltx_text ltx_font_bold" id="A1.F10.12.2" style="font-size:90%;">Visual Prompts Inconsistencies:<span class="ltx_text ltx_font_medium" id="A1.F10.12.2.1"> We show different results using Pose Anything model, for the same query image using different support images. Keypoints definitions and skeletons are the same. Using visual features impairs the ability to describe abstract semantic parts.
+</span></span></figcaption>
+</figure>
+<figure class="ltx_figure" id="A1.F11">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="A1.F11.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="598" id="A1.F11.sf1.g1" src="extracted/5636531/Figures/attention_maps/helen_face_attn_GRAPH_top_right_side_of_the_left_eye.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F11.sf1.2.1.1" style="font-size:90%;">(a)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel ltx_align_center" id="A1.F11.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="598" id="A1.F11.sf2.g1" src="extracted/5636531/Figures/attention_maps/helen_face_attn_PoseAnything.png.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F11.sf2.2.1.1" style="font-size:90%;">(b)</span> </span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F11.3.1.1" style="font-size:90%;">Figure 11</span>: </span><span class="ltx_text ltx_font_bold" id="A1.F11.4.2" style="font-size:90%;">Cross-attention maps:<span class="ltx_text ltx_font_medium" id="A1.F11.4.2.1"> comparison between the query image and the ’top right side of the left eye’ keypoint. (a) is our model
+, and (b) is PoseAnything-S. Our model demonstrates in (a) better performance at breaking symmetry and distinguishing between left and right, compared to Pose Anything-S in (b), that attends more to the right eye and the nose.
+</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="A1.SS1.p1">
+<p class="ltx_p" id="A1.SS1.p1.1">We exemplify the key disadvantage of support image-based CAPE approaches in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F10" title="Figure 10 ‣ A.1 Disadvantages of Visual Prompts in CAPE ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">10</span></a>. Specifically, Pose Anything-S, suffers from incorrect pose estimations when prompted with visually inconsistent support images.</p>
+</div>
+<div class="ltx_para" id="A1.SS1.p2">
+<p class="ltx_p" id="A1.SS1.p2.1">We also compare our models with regards to localization and symmetry breaking. We visualize cross-attention maps from the decoder trained with text prompts compared to visual prompts in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F11" title="Figure 11 ‣ A.1 Disadvantages of Visual Prompts in CAPE ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">11</span></a>. Our model breaks symmetry and distinguishes better between left and right, compared to Pose Anything. This can be seen by the lower attention to the right eye, when prompted with the keypoint ’top right side of the left eye’.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="A1.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.2 </span>Additional Experiments</h3>
+<section class="ltx_subsubsection" id="A1.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">A.2.1 </span>Different Architectures</h4>
+<figure class="ltx_table" id="A1.T2">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="A1.T2.6.2.1" style="font-size:90%;">Table 2</span>: </span><span class="ltx_text" id="A1.T2.2.1" style="font-size:90%;">
+<span class="ltx_text ltx_font_bold" id="A1.T2.2.1.1">Ablation experiments:</span> Tuning (T) VS. Freezing (F) the text backbone in model training, utilizing the graph transformer decoder or the original mlp transformer decoder. PCK<sub class="ltx_sub" id="A1.T2.2.1.2"><span class="ltx_text ltx_font_italic" id="A1.T2.2.1.2.1">0.2</span></sub> performance under 1-shot setting, with gte-base-v1.5 or CLIP ViT-B/32 as the text backbone.
+</span></figcaption>
+<p class="ltx_p ltx_align_center" id="A1.T2.7"><span class="ltx_text" id="A1.T2.7.1">
+<span class="ltx_inline-block ltx_transformed_outer" id="A1.T2.7.1.1" style="width:350.7pt;height:108pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="transform:translate(0.0pt,0.0pt) scale(1,1) ;">
+<span class="ltx_p" id="A1.T2.7.1.1.1"><span class="ltx_text" id="A1.T2.7.1.1.1.1">
+<span class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="A1.T2.7.1.1.1.1.1">
+<span class="ltx_thead">
+<span class="ltx_tr" id="A1.T2.7.1.1.1.1.1.1.1">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" id="A1.T2.7.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.1.1.1.1">Model</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T2.7.1.1.1.1.1.1.1.2">Split 1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T2.7.1.1.1.1.1.1.1.3">Split 2</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T2.7.1.1.1.1.1.1.1.4">Split 3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T2.7.1.1.1.1.1.1.1.5">Split 4</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" id="A1.T2.7.1.1.1.1.1.1.1.6">Split 5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A1.T2.7.1.1.1.1.1.1.1.7">Avg</span></span>
+</span>
+<span class="ltx_tbody">
+<span class="ltx_tr" id="A1.T2.7.1.1.1.1.1.2.1">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="A1.T2.7.1.1.1.1.1.2.1.1">CapeX-CLIP-T-graph</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="A1.T2.7.1.1.1.1.1.2.1.2">94.55</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="A1.T2.7.1.1.1.1.1.2.1.3">88.71</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="A1.T2.7.1.1.1.1.1.2.1.4">87.29</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="A1.T2.7.1.1.1.1.1.2.1.5">88.54</span>
+<span class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="A1.T2.7.1.1.1.1.1.2.1.6">91.65</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="A1.T2.7.1.1.1.1.1.2.1.7">90.15</span></span>
+<span class="ltx_tr" id="A1.T2.7.1.1.1.1.1.3.2">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.7.1.1.1.1.1.3.2.1">CapeX-CLIP-F-graph</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.3.2.2">95.17</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.3.2.3">88.88</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.3.2.4">87.72</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.3.2.5">88.24</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="A1.T2.7.1.1.1.1.1.3.2.6">91.81</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.3.2.7">90.37</span></span>
+<span class="ltx_tr" id="A1.T2.7.1.1.1.1.1.4.3">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.7.1.1.1.1.1.4.3.1">CapeX-gte-T-graph</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.4.3.2"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.4.3.2.1">96.28</span></span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.4.3.3">89.15</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.4.3.4"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.4.3.4.1">89.17</span></span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.4.3.5">87.66</span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="A1.T2.7.1.1.1.1.1.4.3.6">92.62</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.4.3.7">90.98</span></span>
+<span class="ltx_tr" id="A1.T2.7.1.1.1.1.1.5.4">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="A1.T2.7.1.1.1.1.1.5.4.1">CapeX-gte-F-mlp</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.5.4.2">94.69</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.5.4.3">89.99</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.5.4.4">89.08</span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.5.4.5"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.5.4.5.1">89.55</span></span>
+<span class="ltx_td ltx_align_center ltx_border_r" id="A1.T2.7.1.1.1.1.1.5.4.6"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.5.4.6.1">92.79</span></span>
+<span class="ltx_td ltx_align_center" id="A1.T2.7.1.1.1.1.1.5.4.7">91.22</span></span>
+<span class="ltx_tr" id="A1.T2.7.1.1.1.1.1.6.5">
+<span class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t" id="A1.T2.7.1.1.1.1.1.6.5.1"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.6.5.1.1">CapeX-gte-F-graph</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="A1.T2.7.1.1.1.1.1.6.5.2">95.62</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="A1.T2.7.1.1.1.1.1.6.5.3"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.6.5.3.1">90.94</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="A1.T2.7.1.1.1.1.1.6.5.4">88.95</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="A1.T2.7.1.1.1.1.1.6.5.5">89.43</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t" id="A1.T2.7.1.1.1.1.1.6.5.6">92.57</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="A1.T2.7.1.1.1.1.1.6.5.7"><span class="ltx_text ltx_font_bold" id="A1.T2.7.1.1.1.1.1.6.5.7.1">91.50</span></span></span>
+</span>
+</span></span></span>
+</span></span></span></p>
+</figure>
+<div class="ltx_para" id="A1.SS2.SSS1.p1">
+<p class="ltx_p" id="A1.SS2.SSS1.p1.5">We assess the framework’s performance with or without fine-tuning applied to the text backbone. We explore two potential text backbones: gte-base-v1.5 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib17" title="">17</a>]</cite> and CLIP ViT-B/32 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib22" title="">22</a>]</cite>.
+The optimal configuration appears to be the frozen gte-base-v1.5 as the text backbone, yielding superior performance. Interestingly, although gte-base-v1.5 boasts approximately 139 million trainable parameters compared to the 63 million parameters in the text module of CLIP ViT-B/32 (totaling 150 million parameters), training with either as a frozen text backbone consumed similar execution times, lasting roughly <math alttext="20" class="ltx_Math" display="inline" id="A1.SS2.SSS1.p1.1.m1.1"><semantics id="A1.SS2.SSS1.p1.1.m1.1a"><mn id="A1.SS2.SSS1.p1.1.m1.1.1" xref="A1.SS2.SSS1.p1.1.m1.1.1.cmml">20</mn><annotation-xml encoding="MathML-Content" id="A1.SS2.SSS1.p1.1.m1.1b"><cn id="A1.SS2.SSS1.p1.1.m1.1.1.cmml" type="integer" xref="A1.SS2.SSS1.p1.1.m1.1.1">20</cn></annotation-xml><annotation encoding="application/x-tex" id="A1.SS2.SSS1.p1.1.m1.1c">20</annotation><annotation encoding="application/x-llamapun" id="A1.SS2.SSS1.p1.1.m1.1d">20</annotation></semantics></math> hours. Memory usage for loading both models required a similar volume of <math alttext="10" class="ltx_Math" display="inline" id="A1.SS2.SSS1.p1.2.m2.1"><semantics id="A1.SS2.SSS1.p1.2.m2.1a"><mn id="A1.SS2.SSS1.p1.2.m2.1.1" xref="A1.SS2.SSS1.p1.2.m2.1.1.cmml">10</mn><annotation-xml encoding="MathML-Content" id="A1.SS2.SSS1.p1.2.m2.1b"><cn id="A1.SS2.SSS1.p1.2.m2.1.1.cmml" type="integer" xref="A1.SS2.SSS1.p1.2.m2.1.1">10</cn></annotation-xml><annotation encoding="application/x-tex" id="A1.SS2.SSS1.p1.2.m2.1c">10</annotation><annotation encoding="application/x-llamapun" id="A1.SS2.SSS1.p1.2.m2.1d">10</annotation></semantics></math> GB.
+However, fine-tuning both models incurred substantial costs in terms of memory: <math alttext="15" class="ltx_Math" display="inline" id="A1.SS2.SSS1.p1.3.m3.1"><semantics id="A1.SS2.SSS1.p1.3.m3.1a"><mn id="A1.SS2.SSS1.p1.3.m3.1.1" xref="A1.SS2.SSS1.p1.3.m3.1.1.cmml">15</mn><annotation-xml encoding="MathML-Content" id="A1.SS2.SSS1.p1.3.m3.1b"><cn id="A1.SS2.SSS1.p1.3.m3.1.1.cmml" type="integer" xref="A1.SS2.SSS1.p1.3.m3.1.1">15</cn></annotation-xml><annotation encoding="application/x-tex" id="A1.SS2.SSS1.p1.3.m3.1c">15</annotation><annotation encoding="application/x-llamapun" id="A1.SS2.SSS1.p1.3.m3.1d">15</annotation></semantics></math> in gte and <math alttext="30" class="ltx_Math" display="inline" id="A1.SS2.SSS1.p1.4.m4.1"><semantics id="A1.SS2.SSS1.p1.4.m4.1a"><mn id="A1.SS2.SSS1.p1.4.m4.1.1" xref="A1.SS2.SSS1.p1.4.m4.1.1.cmml">30</mn><annotation-xml encoding="MathML-Content" id="A1.SS2.SSS1.p1.4.m4.1b"><cn id="A1.SS2.SSS1.p1.4.m4.1.1.cmml" type="integer" xref="A1.SS2.SSS1.p1.4.m4.1.1">30</cn></annotation-xml><annotation encoding="application/x-tex" id="A1.SS2.SSS1.p1.4.m4.1c">30</annotation><annotation encoding="application/x-llamapun" id="A1.SS2.SSS1.p1.4.m4.1d">30</annotation></semantics></math> GB in CLIP, as well as in execution time: <math alttext="35" class="ltx_Math" display="inline" id="A1.SS2.SSS1.p1.5.m5.1"><semantics id="A1.SS2.SSS1.p1.5.m5.1a"><mn id="A1.SS2.SSS1.p1.5.m5.1.1" xref="A1.SS2.SSS1.p1.5.m5.1.1.cmml">35</mn><annotation-xml encoding="MathML-Content" id="A1.SS2.SSS1.p1.5.m5.1b"><cn id="A1.SS2.SSS1.p1.5.m5.1.1.cmml" type="integer" xref="A1.SS2.SSS1.p1.5.m5.1.1">35</cn></annotation-xml><annotation encoding="application/x-tex" id="A1.SS2.SSS1.p1.5.m5.1c">35</annotation><annotation encoding="application/x-llamapun" id="A1.SS2.SSS1.p1.5.m5.1d">35</annotation></semantics></math> hours for both architectures, without yielding any performance improvements in both text backbones.
+The drop in performance can possibly be attributed to the fact that the text backbones suffer from overfitting during their tuning. This is somewhat expected as language models usually train on larger datasets over longer training sessions.</p>
+</div>
+<div class="ltx_para" id="A1.SS2.SSS1.p2">
+<p class="ltx_p" id="A1.SS2.SSS1.p2.1">We also tested the original MLP transformer decoder architecture as in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib25" title="">25</a>]</cite> with the best performing setting. Memory consumption and execution time using this transformer decoder were comparable to the graph transformer decoder. We find that utilizing the graph structure via the graph transformer decoder as in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#bib.bib10" title="">10</a>]</cite> slightly boosts the performance. Full results are presented in Table <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.T2" title="Table 2 ‣ A.2.1 Different Architectures ‣ A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="A1.F12"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="398" id="A1.F12.g1" src="x9.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F12.3.1.1" style="font-size:90%;">Figure 12</span>: </span><span class="ltx_text ltx_font_bold" id="A1.F12.4.2" style="font-size:90%;">Modified text descriptions:<span class="ltx_text ltx_font_medium" id="A1.F12.4.2.1"> Top is the support keypoints text descriptions.
+Left is a synonym words test, middle is a translation test and right is typo test. Below each description, query output(s) are presented. Each node in the presented graph is the average positions of the original and modified text descriptions. The diameter represents the distance between the positions.</span></span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="A1.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">A.2.2 </span>Adaptability to Support Text Modifications</h4>
+<div class="ltx_para" id="A1.SS2.SSS2.p1">
+<p class="ltx_p" id="A1.SS2.SSS2.p1.1">We provide additional examples of the ability of our model to adapt to different types of text modifications in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F12" title="Figure 12 ‣ A.2.1 Different Architectures ‣ A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">12</span></a>.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="A1.SS2.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">A.2.3 </span>Occlusions and levels of abstraction</h4>
+<figure class="ltx_figure" id="A1.F13"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="435" id="A1.F13.g1" src="x10.png" width="664"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F13.3.1.1" style="font-size:90%;">Figure 13</span>: </span><span class="ltx_text ltx_font_bold" id="A1.F13.4.2" style="font-size:90%;">Comparison to Pose Anything-S:<span class="ltx_text ltx_font_medium" id="A1.F13.4.2.1"> Qualitative comparison between our model and Pose Anything-S on masked queries. CapeX does not require support images and can handle masked occlusions. Support images and text-graphs are not shown.
+</span></span></figcaption>
+</figure>
+<figure class="ltx_figure" id="A1.F14"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="291" id="A1.F14.g1" src="x11.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="A1.F14.3.1.1" style="font-size:90%;">Figure 14</span>: </span><span class="ltx_text ltx_font_bold" id="A1.F14.4.2" style="font-size:90%;">Text Abstractions:<span class="ltx_text ltx_font_medium" id="A1.F14.4.2.1"> Model performance over different levels of text-pose abstractions.</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="A1.SS2.SSS3.p1">
+<p class="ltx_p" id="A1.SS2.SSS3.p1.1">We present qualitative comparison between our support text-based framework and Pose Anything-S’s support image-based framework in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F13" title="Figure 13 ‣ A.2.3 Occlusions and levels of abstraction ‣ A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">13</span></a>. Our model demonstrates better performance due to the abstraction power of text-graphs, compared to the use of support image which may be more restrictive.</p>
+</div>
+<div class="ltx_para" id="A1.SS2.SSS3.p2">
+<p class="ltx_p" id="A1.SS2.SSS3.p2.1">We include additional results of our model’s performance on different levels of abstractions in Figure <a class="ltx_ref" href="https://arxiv.org/html/2406.00384v1#A1.F14" title="Figure 14 ‣ A.2.3 Occlusions and levels of abstraction ‣ A.2 Additional Experiments ‣ Appendix A Appendix / Supplemental Material ‣ CapeX: Category-Agnostic Pose Estimation from Textual Point Explanation"><span class="ltx_text ltx_ref_tag">14</span></a>.</p>
+</div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+</section>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sat Jun  1 09:49:15 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

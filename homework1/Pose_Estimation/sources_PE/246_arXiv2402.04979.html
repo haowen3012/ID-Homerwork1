@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training</title>
+<!--Generated on Wed Feb  7 15:51:15 2024 by LaTeXML (version 0.8.7) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv_0.7.4.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="6d Object Pose Estimation Augmented Reality Sim2Real Domain Gap" lang="en" name="keywords"/>
+<base href="/html/2402.04979v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S1" title="1 Introduction ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S2" title="2 Related Work ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S2.SS1" title="2.1 AR and HMD ‣ 2 Related Work ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>AR and HMD</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S2.SS2" title="2.2 Object Pose Estimation ‣ 2 Related Work ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Object Pose Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S2.SS3" title="2.3 Domain Gap ‣ 2 Related Work ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Domain Gap</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3" title="3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Approach</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS1" title="3.1 Data Generation ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Data Generation</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS1.SSS1" title="3.1.1 Target Object Description ‣ 3.1 Data Generation ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1.1 </span>Target Object Description</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS1.SSS2" title="3.1.2 Manufacturing Documents to 3D Models ‣ 3.1 Data Generation ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1.2 </span>Manufacturing Documents to 3D Models</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS1.SSS3" title="3.1.3 Training Data Generation ‣ 3.1 Data Generation ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1.3 </span>Training Data Generation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS2" title="3.2 Architecture Selection ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Architecture Selection</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS3" title="3.3 Training Details ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Training Details</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS4" title="3.4 Sorting App ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Sorting App</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S4" title="4 Qualitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Qualitative Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5" title="5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Quantitative Results</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.SS1" title="5.1 Detection ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Detection</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.SS1.SSS1" title="5.1.1 Determining Model Size and Parameters ‣ 5.1 Detection ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1.1 </span>Determining Model Size and Parameters</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.SS1.SSS2" title="5.1.2 Evaluation of our Model ‣ 5.1 Detection ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1.2 </span>Evaluation of our Model</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.SS2" title="5.2 Pose Estimation ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Pose Estimation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.SS3" title="5.3 Discussion ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3 </span>Discussion</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S6" title="6 Conclusion and Future Work ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusion and Future Work</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content"><div class="section" id="target-section"><div id="license-tr">License: arXiv.org perpetual non-exclusive license</div><div id="watermark-tr">arXiv:2402.04979v1 [cs.CV] 07 Feb 2024</div></div>
+<article class="ltx_document ltx_authors_1line"><span class="ltx_note ltx_role_institutetext" id="id1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">institutetext: </span>Fraunhofer Institute for Computer Graphics Research IGD, Germany </span></span></span><span class="ltx_note ltx_role_institutetext" id="id2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">institutetext: </span>Interactive Graphics Research Group, TU Darmstadt, Germany
+<span class="ltx_note ltx_role_email" id="id2.1"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">email: </span>{thomas.poellabauer,fabian.ruecker,andreas.franek,felix.gorschlueter}
+<br class="ltx_break"/>@igd.fraunhofer.de</span></span></span>
+</span></span></span>
+<h1 class="ltx_title ltx_title_document">Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Thomas Pöllabauer
+</span><span class="ltx_author_notes">1122
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-0075-1181" title="ORCID identifier">0000-0003-0075-1181</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<br class="ltx_break"/>Fabian Rücker
+</span><span class="ltx_author_notes">11
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-4071-8642" title="ORCID identifier">0000-0003-4071-8642</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<br class="ltx_break"/>Andreas Franek
+</span><span class="ltx_author_notes">11
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0009-0009-6823-8414" title="ORCID identifier">0009-0009-6823-8414</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<br class="ltx_break"/>Felix Gorschlüter
+</span><span class="ltx_author_notes">11
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-2897-1899" title="ORCID identifier">0000-0003-2897-1899</a></span>
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id1.id1">Current state-of-the-art 6d pose estimation is too compute intensive to be deployed on edge devices, such as Microsoft HoloLens (2) or Apple iPad, both used for an increasing number of augmented reality applications. The quality of AR is greatly dependent on its capabilities to detect and overlay geometry within the scene. We propose a synthetically trained client-server-based augmented reality application, demonstrating state-of-the-art object pose estimation of metallic and texture-less industry objects on edge devices. Synthetic data enables training without real photographs, i.e. for yet-to-be-manufactured objects. Our qualitative evaluation on an AR-assisted sorting task, and quantitative evaluation on both renderings, as well as real-world data recorded on HoloLens 2, sheds light on its real-world applicability.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Keywords: </h6>6d Object Pose Estimation Augmented Reality Sim2Real Domain Gap
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Supporting manual industrial sorting tasks digitally is an important challenge for the digitalization of industrial processes. Detecting relevant objects is difficult even in use cases with re-occurring shapes, such as in retail, but even more so when providing on-demand custom products with potentially only a single instance being produced. One part of the problem is lacking automation: with a potentially endless amount of shape variations, labelling manually becomes next to infeasible. Another problem is the inability to train detectors and classifiers of the yet-to-be-manufactured objects, i.e. without any real-world (and correctly annotated) image data. Finally, one has to make this tool accessible and easy to use for productive work. Augmented reality, the visual enrichment of the real-world, allows to elegantly deliver this assistance, but is most often used on hand-held devices, such as smartphones, which interferes with the sorting-by-hand process.
+<br class="ltx_break"/>This work uses single-view RGB-only pose estimation to propose a system for user guidance in a productive environment. We address all of the problems listed above: We automatically extract all required information from the available manufacturing documents, requiring no manual oversight. Using this data, we derive all necessary information to train an object detector and a state-of-the-art 6D (rotation + translation) object pose estimator. Lastly, we demonstrate a graphical user interface on a head mounted display (HMD) or tablet to support the sorting of objects, the user has not yet seen. 
+<br class="ltx_break"/>Our contribution is the qualitative and quantitative demonstration of current deep learning algorithms on flat, texture-less objects requiring no real-world data, only two-dimensional vector representations taken from the manufacturing documents. We explicitly shed light on the applicability on real-world industry objects, implementing an augmented reality assistance application for object sorting. All of our training is conducted using only synthetic data, i.e. renderings of our automatically constructed meshes. By adopting a client-server solution, we stream the video images from the device to a backbone for computation, alleviating the computation constraints and bringing workstation-level performance to low-power edge devices. Finally, our approach is highly modular, allowing to swap individual components to better suit specific problem domains. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">This work is structured as follows: First we give an overview on the relevant literature on AR, object pose estimation, and the major problem when training with synthetic data, domain gap. Next we present our approach, followed by qualitative, as well as quantitative results. Finally we discuss some limitations and future work.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">We will introduce relevant work in augmented reality applications using head mounted displays, as well as work tackling the detection and pose estimation problem. Finally, we present relevant work dealing with the domain gap between real-world and synthetic images.</p>
+</div>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>AR and HMD</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">Augmented Reality is a technology that extends the perceived reality digitally <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib2" title="">2</a>]</cite> e.g. by adding contextual information or highlighting points of interest. When using a handheld device (e.g. a tablet or smartphone), this is achieved by rendering digital content on top of the live camera feed <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib27" title="">27</a>]</cite>. Therefore the digital overlay is only visible when the user looks at the device and the respective object is captured by the device’s camera.
+<br class="ltx_break"/>Alternatively Head-Mounted-Displays (HMD’s) can be used for AR applications. These augment the environment directly within the user’s field of view, either by modifying a displayed camera live-feed (video see-through), or by superimposing digital content over the environment that is perceived through transparent lenses (optical see-through) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib35" title="">35</a>]</cite>. Common AR-HMD’s are for example Microsoft HoloLens (2), Magic Leap or Nreal Light. All mentioned devices offer an optical see-through experience with a restricted field of view for digital content (30-52° diagonal FoV). Because the device does not need to be held, the user’s hands are free for other tasks.
+<br class="ltx_break"/>Besides entertainment use-cases (e.g. displaying contextual information during sports events), augmented reality is increasingly relevant for industrial use-cases <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib5" title="">5</a>]</cite> namely quality assurance, manufacturing and assembly procedures <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib28" title="">28</a>]</cite>.
+Since neural networks require high computing performance, current state-of-the-art pose estimators cannot run locally on an AR-HMD. Instead the device is used for visualization only, receiving and displaying the results from the AI-cloud. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib1" title="">1</a>]</cite> uses such an approach to solve object detection (2D), but not 6D pose estimation, like we do. To the best of our knowledge the closest work to ours is <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib10" title="">10</a>]</cite>: They present 6D detection and tracking for similar and non-textured objects trained on synthetic data. The main differences are:</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<ul class="ltx_itemize" id="S2.I1">
+<li class="ltx_item" id="S2.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i1.p1">
+<p class="ltx_p" id="S2.I1.i1.p1.1">Ours is a single/one-shot pipeline, easily adapted for
+specific use cases, while they specifically extend PVNet and rely on
+multiple images for refinement.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i2.p1">
+<p class="ltx_p" id="S2.I1.i2.p1.1">We use real industry objects and
+can deal with rotationally symmetric objects, which they specifically say, should be avoided.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i3.p1">
+<p class="ltx_p" id="S2.I1.i3.p1.1">Our approach can work with identical objects of different color, while they exclusively use gray-scale
+images, discarding most color information.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i4.p1">
+<p class="ltx_p" id="S2.I1.i4.p1.1">They rely on object geometry edges for refinement, while we could use realistic
+textures, if available.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i5.p1">
+<p class="ltx_p" id="S2.I1.i5.p1.1">Finally, we illustrate our solution on the relevant hardware and evaluate on real-world HoloLens 2 images.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p" id="S2.SS1.p3.1">In summary, our pipeline is a more general approach on how state-of-the-art 6D pose estimation can be made available on edge devices.
+</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Object Pose Estimation</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">Estimating the 6D pose of an object from an image is one of the major challenges for augmented reality applications. In order to accurately render additional information on top of the object in the scene, one requires a low degree of error due to the negative influence on user experience. Among the solutions for this problem the most prominent in recent literature rely heavily on deep learning. A good overview across different state-of-the-art approaches is presented in the BOP Challenge <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib18" title="">18</a>]</cite>.
+Among the different approaches the most important differences, aside of the distinction between non deep learning and deep learning-based methods, are in the modalities used (i.e. RGB-only or additional information such as depth), single- <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib43" title="">43</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib21" title="">21</a>]</cite> versus multi-stage <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib46" title="">46</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib36" title="">36</a>]</cite>, monocular versus stereo <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib24" title="">24</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib23" title="">23</a>]</cite>, template-based approaches <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib14" title="">14</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib19" title="">19</a>]</cite> versus local feature-based methods <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib46" title="">46</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib43" title="">43</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib8" title="">8</a>]</cite>, and, with the rise of differentiable rendering, as well as neural rendering, analysis-by-synthesis approaches, such as NeRF-based approaches <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib44" title="">44</a>]</cite>. Also, the rise of the transformer model in the domain of neural language processing begins to find its way into vision as well, resulting in the adaption of transformer architectures in applications such as image classification, object detection, segmentation, image inpainting, and image generation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib25" title="">25</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib30" title="">30</a>]</cite>.
+Since our application was to be run on HoloLens, we were limited by its sensors, restricting us to RGB-only methods. Also, we wanted to be able to work with a single image, leading us to focus on single-view or single-shot approaches.
+Among the suitable approaches SingleShot<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib38" title="">38</a>]</cite> is arguably the simplest, extending the YOLOv2 object detector to, instead of predicting only the 2D bounding box, predict the projections of the 8 3D bounding box corners and the centroid of the object, before applying Perspective-n-Point (PnP). Pix2Pose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib31" title="">31</a>]</cite> similarly predicts pixel-wise 3D coordinates and estimates the pose via PnP and RANSAC. EPOS <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib17" title="">17</a>]</cite> again uses PnP+RANSAC, but predicts correspondences between pixels and object surface fragments. HybridPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib36" title="">36</a>]</cite> is a multi-step pipeline, first predicting keypoints, edge vectors, and symmetry correspondences, before making a coarse prediction, followed by a refinement step. All previous three approaches leverage encoder-decoder networks. PVNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib32" title="">32</a>]</cite> introduces a voting scheme, requiring pixels to vote for keypoint locations, making the predictions more robust to occlusion and truncation. It again, uses a PnP solver. DPOD <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib46" title="">46</a>]</cite> predicts a mask and 2D-3D correspondences. Also, they compare training on synthetic and real data. GDR-Net <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib43" title="">43</a>]</cite>, similarly to EPOS, leverages surface regions as well as 2D-3D correspondences, but replaces the conventional PnP solver with a learnable Patch-PnP alternative, coming up with an end-to-end trainable estimator. SO-Pose<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib8" title="">8</a>]</cite> predicts 2D-3D correspondences plus an object mask, as well as self-occlusion maps, again in an end-to-end trainable estimator. DeepIM <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib21" title="">21</a>]</cite> uses an iterative matching procedure, estimating the delta pose between the rendering of an initial pose estimate with the target view. CosyPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib20" title="">20</a>]</cite> builds upon DeepIM by reformulating the loss function and using the iterative matching process as phase one out of three. The output of phase 1 are object candidates per image. CosyPose, being a multi-view solution, uses these candidates in phase 2 and 3 to first, match objects across views, before finally optimizing to get a global solution for the scene. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib22" title="">22</a>]</cite> again uses an iterative refinement strategy, but introduces end-to-end differentiability optimizing both correspondences as well as pose estimates.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Domain Gap</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">Synthetically producing the data required to train ever larger networks attracted a lot of interest. In computer vision, the idea to use rendering, the well established science of how to produce two-dimensional images of 3D scenes, is an obvious solution to train models in domains with little or no real photographs. Doing so introduces a new problem called domain gap: the difference between a photograph of a real 3D scene and the rendering of digital 3D geometry. Sources of domain gap include unrealistic materials, physically incorrect lighting transport with rasterization pipelines, the placement of objects, etc. Relevant work, dealing with or circumventing the domain gap problem, includes <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib15" title="">15</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib16" title="">16</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib39" title="">39</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib40" title="">40</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib9" title="">9</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib45" title="">45</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib33" title="">33</a>]</cite>. The first work introduces the idea of freezing a network pre-trained on real images, the second highlights (among other contributions) the importance of meaningful 3D-scenes, i.e. foreground and background depict the same lighting, the third and fourth deal with data set composition and combining non-realistic and realistic images, the fifth and sixth propose the use of gradient reversal for active domain adaptation (the bridging between two domains) during training, and the last one uses features shared between synthetic and real data, i.e. object corners. Finally, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib42" title="">42</a>]</cite> proposes to circumvent the problem using unsupervised learning, an approach, we cannot adopt for lack of any real images prior to manufacturing.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Approach</h2>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="220" id="S3.F1.g1" src="extracted/5393100/images/Trumpf_Paper_Diagram_neu.jpeg" width="479"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>
+Functional blocks in our approach. First we extract the shapes (curves) from the manufacturing documents (Splines). Next, we create meshes from the extracted shapes (Geometry Generation) and use them to create our physically-based, photo-realistic training dataset, as well as our non-photorealistic dataset (Rendering). Combining both datasets, we train our object detector and pose estimation pipeline. At inference, given a real-world camera stream, we process the data image-per-image and get per image detections and 6D pose vectors, which are displayed either on HoloLens 2 or iPad.</figcaption>
+</figure>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">Our goal is to detect yet-to-be-manufactured objects and estimate their pose. In addition, we can only rely on the manufacturing documents, which are fed to the machine that is cutting the objects from a metal sheet. These schematics contain the patterns in form of splines.
+</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<p class="ltx_p" id="S3.p2.1">Our solution (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.F1" title="Figure 1 ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">1</span></a>) consists of five main stages: First, process the manufacturing documents to derive data for training (<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS1.SSS2" title="3.1.2 Manufacturing Documents to 3D Models ‣ 3.1 Data Generation ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">3.1.2</span></a>). Second, generate training data for object detection and object pose estimation (<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS1.SSS3" title="3.1.3 Training Data Generation ‣ 3.1 Data Generation ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">3.1.3</span></a>). Third, selecting our network architectures and algorithms (<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS2" title="3.2 Architecture Selection ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">3.2</span></a>), and fourth, training of our networks (<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.SS3" title="3.3 Training Details ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">3.3</span></a>). Finally, our frontend application, running on the edge device (<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S4" title="4 Qualitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">4</span></a>).</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="156" id="S3.F2.g1" src="extracted/5393100/images/trumpf_train_samples_001.jpg" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>
+Samples of our synthetic training data. Note that we make very few assumptions about material or lighting: we randomly choose the coefficients for specular and diffuse reflection, apply random textures, and a random number of (randomly placed) light sources. Also, one sees the effect of mosaic augmentation (as proposed in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib3" title="">3</a>]</cite>).</figcaption>
+</figure>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Data Generation</h3>
+<section class="ltx_subsubsection" id="S3.SS1.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.1.1 </span>Target Object Description</h4>
+<div class="ltx_para" id="S3.SS1.SSS1.p1">
+<p class="ltx_p" id="S3.SS1.SSS1.p1.1">Our objects are a representative sample of shapes produced at a leading industry supplier. The shapes are cut from a 1mm strong metal sheet. For our application we assumed the objects to be rigid, an assumption that proved to be appropriate for all but the longest objects (08, 15 as depicted in Table <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.T2" title="Table 2 ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">2</span></a>) when held in hand. Also we chose not to use the fact, that the objects can be considered 2-dimensional, so that our approach can be adopted for more general 3-dimensional objects.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS1.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.1.2 </span>Manufacturing Documents to 3D Models</h4>
+<div class="ltx_para" id="S3.SS1.SSS2.p1">
+<p class="ltx_p" id="S3.SS1.SSS2.p1.1">In order to train our image processing pipeline, we first have to create geometry based on the provided data. The manufacturing documents are available in an xml file-format, which contains SVG descriptions of the objects to be detected, together with their respective object category. A data preparation pipeline imports the xml-file, exports the different objects as individual SVG files, and produces meshes via the 3D modeling software Blender (<a class="ltx_ref ltx_url" href="www.blender.org" style="color:#0000FF;" title="">www.blender.org</a>) by adding the metal sheet’s thickness to the base shape. The 3D models are used to generate our training data in the next step.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS1.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.1.3 </span>Training Data Generation</h4>
+<div class="ltx_para" id="S3.SS1.SSS3.p1">
+<p class="ltx_p" id="S3.SS1.SSS3.p1.1">We used two rendering solutions, with which we rendered two sets of images comprising our training data. This approach was inspired by work done at Nvidia <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib40" title="">40</a>]</cite>. First, we render non-photorealistic images on top of random real world photographs. Second, we add a second set of photo-realistic images together with physics-based object placement, produced by Blender’s raytracing solution Cycles. The first set of non-photorealistic images is produced using the render solution deployed by CosyPose (pybullet). For our photo-realistic set we use the open source BlenderProc solution <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib7" title="">7</a>]</cite> to generate BOP compatible datasets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib18" title="">18</a>]</cite>. Samples of our training set are shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S3.F2" title="Figure 2 ‣ 3 Approach ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Architecture Selection</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">For our object detection, we took a closer look at Mask R-CNN <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib13" title="">13</a>]</cite>, as well as YOLOv3 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib34" title="">34</a>]</cite>, YOLOv4 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib3" title="">3</a>]</cite>, and YOLOv5 (<a class="ltx_ref ltx_url" href="https://github.com/ultralytics/yolov5" style="color:#0000FF;" title="">https://github.com/ultralytics/yolov5</a>). We decided on YOLOv5, since it reported highest performance, as also stated by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib29" title="">29</a>]</cite>. The detector can, however, easily be swapped for an existing architecture or some other algorithm, such as Scaled Yolov4 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib41" title="">41</a>]</cite> and/or EfficientDet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib37" title="">37</a>]</cite>) or one of the many new flavors of YOLO, such as YOLOX <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib11" title="">11</a>]</cite>, YOLOR (<a class="ltx_ref ltx_url" href="https://viso.ai/deep-learning/yolor/" style="color:#0000FF;" title="">https://viso.ai/deep-learning/yolor/</a>), or PP-YOLO <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib26" title="">26</a>]</cite>.
+<br class="ltx_break"/>As for pose estimation, we considered a range of different algorithms, such as SingleShot <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib38" title="">38</a>]</cite>, Pix2Pose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib31" title="">31</a>]</cite>, HybridPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib36" title="">36</a>]</cite>, EfficientPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib4" title="">4</a>]</cite>, EPOS <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib17" title="">17</a>]</cite>, and CosyPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib20" title="">20</a>]</cite>. Tested on individual objects, SingleShot failed to produce usable results, while EfficientPose struggled with occlusion and rotation. We dropped HybridPose for its complexity. Among the remaining approaches, we preferred CosyPose mainly for four reasons: its modularity, which allows to easily swap out the detector (unlike EPOS), the better ratio between speed and prediction quality, as well as the possibility to combine multiple views for estimation, in case we wanted to do so at a later time. Finally, it outperformed the other approaches in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib18" title="">18</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Training Details</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">We train YOLOv5 in its largest configuration (X) on 28.401 images containing target objects and add 30.425 images without. The high amount of ”empty” images greatly reduces the false positive rate, which would lead to wrong detections popping up, which is very distracting when using an AR application. Our training set of 28.401 images consists of roughly 22.000 physically-based renderings (rendered with Cycles) and 7.000 images with objects cropped onto random backgrounds. 
+<br class="ltx_break"/>We varied the image size from 512x512 to 1536x1536 pixels during training to increase scale invariance, used a batch size of 8, and SGD for optimization. As for augmentation, aside from our background replacement within the training data (masking the object and using random natural images as background), we only used the defaults of YOLOv5, such as mosaic augmentation (desribed in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib3" title="">3</a>]</cite>). For initialization we resorted to using weights pre-trained on COCO. 
+<br class="ltx_break"/>For CosyPose, we experimented with different sizes of EfficientNet (B0, B3, B6), but in the end went with B3 as used in the original paper making a comparison of results more meaningful.
+We generated 250.000 images using the provided rendering script, and added these to our raytraced images used to train YOLO. Then we trained for 270 (coarse) / 350 (refiner) epochs, rescaling the input to 960x960 pixels. Parameter-wise we mostly relied on the original paper’s values, only scaling the learning rate warm-up and the learning rate decay phases. Also, these networks were trained from scratch.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Sorting App</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">The sorting application facilitates the manual sorting process by guiding the user with color-cues. Different colors represent different object categories and each object is overlayed with the color of their respective category. An illustration is given in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S4.F3" title="Figure 3 ‣ 4 Qualitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">3</span></a>. The overlay of the object is the respective colored 3D model, which is placed based on the pose estimation of the neural network and anchored to the HoloLens’s coordinate system. Anchoring the object reduces the need for object tracking as long as the real object stays in place. Nevertheless, since the objects are moved around and picked up during the sorting process, the pose estimation needs to be updated regularly and cannot be reduced to finding the object on a plane table.
+We chose a parameterization to achieve roughly 5 pose updates per second, which we find is a good compromise between the quality of the pose estimates and responsiveness on the front end.
+All in all the complexity of the sorting task, from the user perspective, is reduced to sorting scattered objects by color, which is much easier for human beings than sorting purely based on geometry.
+<br class="ltx_break"/>To make the choice of the final display device independent of the computation requirements, we use a server-client architecture. All heavy computing (detection + pose estimation) is done on the server side, whereas the end user device (in our case HoloLens 2 or iPad) only sends images, receives and renders results. This approach enables deploying the solution to a wide variety of devices, as well as to incorporate it in a wider service architecture.
+<br class="ltx_break"/>Currently both - our HoloLens and our iPad application - use the Unity Game Engine (<a class="ltx_ref ltx_url" href="www.unity.com" style="color:#0000FF;" title="">www.unity.com</a>) for providing the frontend. </p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Qualitative Results</h2>
+<figure class="ltx_figure" id="S4.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="257" id="S4.F3.g1" src="extracted/5393100/images/Sheet_001.jpg" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Qualitative results of our end-to-end results on HoloLens 2. Note that we do not use tracking at this point, only single-shot results. We do, however, place the colored objects with regards to the real world coordinate system, which makes them stay in place when the user moves. This makes our solution ”real-time capable” although only 3-4 images are processed in the backend.
+<a class="ltx_ref ltx_href" href="https://www.dropbox.com/s/gasisytmtuvi1sa/TeaserARSorting_v2.mp4?dl=0" title="">Please watch the video version</a>.
+</figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">The AR application seeks to provide an easy and intuitive sorting experience, where the user only needs to group the objects by color. Our provided videos show the functionality and user experience.
+<br class="ltx_break"/>We present qualitative results from the detection network on HoloLens 2 video data in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.F4" title="Figure 4 ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">4</span></a> and from our end-to-end application in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S4.F3" title="Figure 3 ‣ 4 Qualitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">3</span></a>. Please note that the latter results depict the real user experience, i.e. including latency caused by sending and receiving results to and from the backbone. To get a better impression, please have a look at the provided <a class="ltx_ref ltx_href" href="https://www.dropbox.com/s/gasisytmtuvi1sa/TeaserARSorting_v2.mp4?dl=0" title="">sample video</a>.
+<br class="ltx_break"/>We see strong detection performance both for predicting 2D bounding boxes, as well as end-to-end. Problems arise with fast camera movements, in which the HoloLens camera introduces blur, as well as with very flat viewing angles (failure case: Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.F4" title="Figure 4 ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">4</span></a>, bottom right). End-to-end the pose estimates are overall sufficiently accurate for assistance purposes. The main issue is that, because of latency, the overlays are positioned inaccurately, while the objects are being moved.</p>
+</div>
+<figure class="ltx_table" id="S4.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>
+Effect of detector model size and number of training epochs on performance on real test data. Model M seems to reach a saturation point somewhere between 1000 and 2500 epochs, while model L and X further improve the results. Performance is measured in mean average precision (mAP), higher is better.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S4.T1.1">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T1.1.1">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" colspan="5" id="S4.T1.1.1.1">Effect of Model Size (mAP@0.5 <math alttext="\uparrow" class="ltx_Math" display="inline" id="S4.T1.1.1.1.m1.1"><semantics id="S4.T1.1.1.1.m1.1a"><mo id="S4.T1.1.1.1.m1.1.1" stretchy="false" xref="S4.T1.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S4.T1.1.1.1.m1.1b"><ci id="S4.T1.1.1.1.m1.1.1.cmml" xref="S4.T1.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S4.T1.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S4.T1.1.1.1.m1.1d">↑</annotation></semantics></math>)</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.2.1">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.1.2.1.1" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.2.1.1.1">M @ 1000</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S4.T1.1.2.1.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.2.1.2.1">M @ 2500</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S4.T1.1.2.1.3" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.2.1.3.1">L @ 1000</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S4.T1.1.2.1.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.2.1.4.1">L @ 2500</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S4.T1.1.2.1.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.2.1.5.1">X @ 500</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.1.3.2">
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S4.T1.1.3.2.1" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.3.2.1.1">0.615</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r ltx_border_t" id="S4.T1.1.3.2.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.3.2.2.1">0.625</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r ltx_border_t" id="S4.T1.1.3.2.3" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.3.2.3.1">0.669</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r ltx_border_t" id="S4.T1.1.3.2.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S4.T1.1.3.2.4.1">0.693</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r ltx_border_t" id="S4.T1.1.3.2.5" style="width:34.1pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S4.T1.1.3.2.5.1">0.758</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Quantitative Results</h2>
+<figure class="ltx_figure" id="S5.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="110" id="S5.F4.g1" src="extracted/5393100/images/detection_results1.png" width="586"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Impression of our detection results. We achieve a high recall and good classification (see Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.F5" title="Figure 5 ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">5</span></a> for quantified results). We note 2 problems: First, with very flat viewing points performance drops drastically (rightmost image). Second, some camera movements lead to strong blurring and to the detector finding next to (or absolutely) nothing. <a class="ltx_ref ltx_href" href="https://www.dropbox.com/s/03gvn69vdrs53zs/Qualitative%20detection%20results2.mp4?dl=0" title="">Please watch the video version for illustration</a>.
+</figcaption>
+</figure>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">We evaluate our synthetically trained models on both a disjunct set of renderings with unseen object appearances, as well as on real-world photographs. All of our photographs are taken with the HoloLens 2 main camera, the ground truth poses are registered via fiducial markers and OpenCV. Initially, we also wanted to provide a third set of images using the depth sensor of the Microsoft Azure Kinect, but due to the parts being made of sheet metal (specular reflection), registering our models with the objects failed. The benefit of using the HoloLens camera is that the results are representative for the real-world scenario. Our real test set consists of 207 images randomly taken from our video sequence, but all fulfilling the condition that at least 2 objects are visible. For our synthetic test set, we created a metal material and rendered 2500 images with natural object placement using gravity and collision calculation. We test the detection step individually, as well as the pose estimation end-to-end. Also we report the detection results per object class and provide all shapes to show how different geometries perform.</p>
+</div>
+<figure class="ltx_table" id="S5.T2">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>
+Object detection results (mAP@0.5, higher is better. Best results in <span class="ltx_text ltx_font_bold" id="S5.T2.18.1">bold font</span>.) per object at 3 different numbers of epochs, together with a depiction of the shape, and its dimensions in millimeter. There are clearly more difficult (such as 01, 02, 06, 13, 14) and less difficult objects (08, 09, 11, 15) when measuring difficulty by the speed with which a high-recall is reached per object. Notably, the arguably easier to detect objects are recalled after only a few epochs (10 epochs) and do not improve much, whereas the more difficult objects benefit a lot from continued training. We do not witness any signs of overfitting. Note, that all objects are equally represented in our training data. Evaluated on real-world test data.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S5.T2.16">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T2.1.1">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" colspan="12" id="S5.T2.1.1.1">Detection Results (mAP0.5 <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T2.1.1.1.m1.1"><semantics id="S5.T2.1.1.1.m1.1a"><mo id="S5.T2.1.1.1.m1.1.1" stretchy="false" xref="S5.T2.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T2.1.1.1.m1.1b"><ci id="S5.T2.1.1.1.m1.1.1.cmml" xref="S5.T2.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T2.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T2.1.1.1.m1.1d">↑</annotation></semantics></math>)</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.16.17.1">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r ltx_border_t" id="S5.T2.16.17.1.1" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.1.1">ID</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.2.1">Shape</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.3" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.3.1">Dim.</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.4" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.4.1">10</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.5.1">80</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr ltx_border_t" id="S5.T2.16.17.1.6" style="width:25.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.6.1">500</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.7" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.7.1">ID</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.8" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.8.1">Shape</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.9.1">Dim.</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.10.1">10</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.11.1">80</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.16.17.1.12" style="width:25.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.17.1.12.1">500</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.3.3">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r ltx_border_t" id="S5.T2.3.3.3" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.3.1">01</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.2.2.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.2.2.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="11" id="S5.T2.2.2.1.1.1.1.g1" src="extracted/5393100/DetectionObjects/01.png" width="55"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.4.1">260 x 35</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.5.1">0.400</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.6" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.6.1">0.610</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr ltx_border_t" id="S5.T2.3.3.7" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.3.3.7.1">0.709</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.8" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.8.1">09</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.2" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.3.3.2.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="28" id="S5.T2.3.3.2.1.1.1.g1" src="extracted/5393100/DetectionObjects/09.png" width="42"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.9.1">159 x 99</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.10.1">0.901</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.3.3.11.1">0.957</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T2.3.3.12" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.3.3.12.1">0.980</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.5.5">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T2.5.5.3" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.3.1">02</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.4.4.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.4.4.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="20" id="S5.T2.4.4.1.1.1.1.g1" src="extracted/5393100/DetectionObjects/02.png" width="55"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.4.1">191 x 57</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.5.1">0.418</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.6" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.6.1">0.520</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr" id="S5.T2.5.5.7" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.5.5.7.1">0.584</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.8" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.8.1">10</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.2" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.5.5.2.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="28" id="S5.T2.5.5.2.1.1.1.g1" src="extracted/5393100/DetectionObjects/10.png" width="38"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.9.1">60 x 38</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.10.1">0.477</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.5.5.11.1">0.554</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.5.5.12" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.5.5.12.1">0.627</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.7.7">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T2.7.7.3" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.3.1">03</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.6.6.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.6.6.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="7" id="S5.T2.6.6.1.1.1.1.g1" src="extracted/5393100/DetectionObjects/03.png" width="55"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.4.1">794 x 81</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.5.1">0.604</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.6" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.6.1">0.757</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr" id="S5.T2.7.7.7" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.7.7.7.1">0.854</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.8" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.8.1">11</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.2" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.7.7.2.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="28" id="S5.T2.7.7.2.1.1.1.g1" src="extracted/5393100/DetectionObjects/11.png" width="48"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.9.1">394 x 220</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.10.1">0.909</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.7.7.11.1">0.915</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.7.7.12" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.7.7.12.1">0.937</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.9.9">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T2.9.9.3" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.3.1">04</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.8.8.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.8.8.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="28" id="S5.T2.8.8.1.1.1.1.g1" src="extracted/5393100/DetectionObjects/04.png" width="43"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.4.1">92 x 53</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.5.1">0.458</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.6" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.6.1">0.529</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr" id="S5.T2.9.9.7" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.9.9.7.1">0.676</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.8" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.8.1">12</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.2" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.9.9.2.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="21" id="S5.T2.9.9.2.1.1.1.g1" src="extracted/5393100/DetectionObjects/12.png" width="55"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.9.1">89 x 20</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.10.1">0.690</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.9.9.11.1">0.809</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.9.9.12" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.9.9.12.1">0.875</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.11.11">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T2.11.11.3" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.3.1">05</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.10.10.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.10.10.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="28" id="S5.T2.10.10.1.1.1.1.g1" src="extracted/5393100/DetectionObjects/05.png" width="49"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.4.1">120 x 60</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.5.1">0.807</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.6" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.6.1">0.901</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr" id="S5.T2.11.11.7" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.11.11.7.1">0.934</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.8" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.8.1">13</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.2" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.11.11.2.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="28" id="S5.T2.11.11.2.1.1.1.g1" src="extracted/5393100/DetectionObjects/13.png" width="54"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.9.1">125 x 55</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.10.1">0.163</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.11.11.11.1">0.403</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.11.11.12" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.11.11.12.1">0.513</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.13.13">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T2.13.13.3" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.3.1">06</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.12.12.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.12.12.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="27" id="S5.T2.12.12.1.1.1.1.g1" src="x1.png" width="34"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.4.1">150 x 118</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.5.1">0.449</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.6" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.6.1">0.756</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr" id="S5.T2.13.13.7" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.13.13.7.1">0.779</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.8" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.8.1">14</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.2" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.13.13.2.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="28" id="S5.T2.13.13.2.1.1.1.g1" src="extracted/5393100/DetectionObjects/14.png" width="27"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.9.1">46 x 49</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.10.1">0.034</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.13.13.11.1">0.266</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.13.13.12" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.13.13.12.1">0.378</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.15.15">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T2.15.15.3" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.3.1">07</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.14.14.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.14.14.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="27" id="S5.T2.14.14.1.1.1.1.g1" src="x2.png" width="35"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.4" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.4.1">156 x 117</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.5.1">0.425</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.6" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.6.1">0.537</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_rr" id="S5.T2.15.15.7" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.15.15.7.1">0.638</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.8" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.8.1">15</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.2" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.15.15.2.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="12" id="S5.T2.15.15.2.1.1.1.g1" src="extracted/5393100/DetectionObjects/00.png" width="55"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.9" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.9.1">609 x 117</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.10" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.10.1">0.871</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.11" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.15.15.11.1">0.904</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T2.15.15.12" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.15.15.12.1">0.948</span></td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.16.16">
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_l ltx_border_r" id="S5.T2.16.16.2" style="width:11.4pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.16.2.1">08</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T2.16.16.1" style="width:39.8pt;"><span class="ltx_text ltx_align_top" id="S5.T2.16.16.1.1.1.1" style="position:relative; bottom:-0.5pt;"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_landscape" height="20" id="S5.T2.16.16.1.1.1.1.g1" src="extracted/5393100/DetectionObjects/08.png" width="55"/></span></td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T2.16.16.3" style="width:37.0pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.16.3.1">364 x 116</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T2.16.16.4" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.16.4.1">0.848</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T2.16.16.5" style="width:22.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T2.16.16.5.1">0.908</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_rr" id="S5.T2.16.16.6" style="width:25.6pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T2.16.16.6.1">0.933</span></td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T2.16.16.7" style="width:11.4pt;"></td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T2.16.16.8" style="width:39.8pt;"></td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T2.16.16.9" style="width:37.0pt;"></td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T2.16.16.10" style="width:22.8pt;"></td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T2.16.16.11" style="width:22.8pt;"></td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T2.16.16.12" style="width:25.6pt;"></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_figure" id="S5.F5">
+<p class="ltx_p ltx_align_center" id="S5.F5.2"><span class="ltx_text" id="S5.F5.2.1"></span>
+<img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="196" id="S5.F5.1.g1" src="extracted/5393100/yolo_x_results/26d/PR_curve.png" width="293"/>
+<img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="220" id="S5.F5.2.g2" src="extracted/5393100/yolo_x_results/26d/confusion_matrix.png" width="293"/></p>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Precision-recall curves per object and confusion matrices of our objects. As seen in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.T2" title="Table 2 ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">2</span></a> for most objects, the network learns a meaningful representation in only a few epochs, but still improves even close to 500 epochs. Especially the worst performers, such as obj14, improve significantly between epoch 80 and epoch 500. The confusion matrices show that our model usually errs on the side of not detecting an object occurrence (false negative) and much less so on providing erroneous detections (false positives). There are hardly any mix-ups between objects (errors in object class). Evaluated on real-world data. </figcaption>
+</figure>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Detection</h3>
+<section class="ltx_subsubsection" id="S5.SS1.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.1.1 </span>Determining Model Size and Parameters</h4>
+<div class="ltx_para" id="S5.SS1.SSS1.p1">
+<p class="ltx_p" id="S5.SS1.SSS1.p1.1">We evaluated various model sizes, parameter choices, and dataset sizes and compositions to train our object detector. Performance with various model sizes is presented in Table <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S4.T1" title="Table 1 ‣ 4 Qualitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">1</span></a>. Since we train exclusively on renderings of our objects, we experimented with freezing various numbers of layers, following the idea of <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib15" title="">15</a>]</cite>. Table <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.T3" title="Table 3 ‣ 5.1.1 Determining Model Size and Parameters ‣ 5.1 Detection ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">3</span></a> shows a comparison of the effect of freezing a different number of layers on model size X versus keeping all parameters trainable. However, contrary to the finding of the above paper, our performance drops significantly, even when only freezing the first stage of the feature extractor, and even more drastically when freezing an increasing percentage of the network. Interestingly, when freezing more than just the feature extractor, the performance increases between (9, 12, and 17), before falling off again with freezing more layers (23). We suppose our high quality training data generalizes well to our real world HoloLens 2 images. Given this premise, freezing bigger portions of the network decreases its potential to fit the target objects and thereby leads to reduced performance. As for why freezing more than just the feature extractor can increase performance, compared to freezing fewer layers, is a question we want to look into in future work. 
+<br class="ltx_break"/>We do not use a validation set for early stopping (or to derive any other information for that matter), because of the constraint of not using any real-world data. One could validate on a split of the training data, but we did not notice an improvement in our results, when testing this approach.</p>
+</div>
+<figure class="ltx_table" id="S5.T3">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>
+Effect of freezing different numbers of layers of the network (configuration X) and training for 500 epochs versus no freezing. Columns labeled ”Blocks” specify up to which layer block the model has been freezed: 0 means fully trainable, 3 means freezed up to (and including) block 3, and so on. Note that a block represents a set of layers, such as multiple convolutions. Blocks 1-9 represent the feature extractor/backbone (CSP-Darknet53), followed by the neck, and the head (13-24). The exact architecture and mapping of blocks to underlying layers can be found <a class="ltx_ref ltx_href" href="https://github.com/ultralytics/yolov5/blob/master/models/yolov5x.yaml" title="">here</a>. Note that we double-checked results for freezing up to (and including) block 17: mAP@0.5 indeed increases, like it did (much more slightly) between 9 and 12. Evaluated on real-world test data. Best result in <span class="ltx_text ltx_font_bold" id="S5.T3.3.1">bold font</span>.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S5.T3.1">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T3.1.1">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" colspan="6" id="S5.T3.1.1.1">Effect of Freezing different Numbers of Layers (mAP@0.5 <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T3.1.1.1.m1.1"><semantics id="S5.T3.1.1.1.m1.1a"><mo id="S5.T3.1.1.1.m1.1.1" stretchy="false" xref="S5.T3.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T3.1.1.1.m1.1b"><ci id="S5.T3.1.1.1.m1.1.1.cmml" xref="S5.T3.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T3.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T3.1.1.1.m1.1d">↑</annotation></semantics></math>)</td>
+</tr>
+<tr class="ltx_tr" id="S5.T3.1.2.1">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r ltx_border_t" id="S5.T3.1.2.1.1" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.2.1.1.1">#Blocks</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.2.1.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.2.1.2.1">Result</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.2.1.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.2.1.3.1">#Blocks</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.2.1.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.2.1.4.1">Result</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.2.1.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.2.1.5.1">#Blocks</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.2.1.6" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.2.1.6.1">Result</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T3.1.3.2">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r ltx_border_t" id="S5.T3.1.3.2.1" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.3.2.1.1">0</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.3.2.2" style="width:34.1pt;"><span class="ltx_text ltx_font_bold ltx_align_top" id="S5.T3.1.3.2.2.1">0.758</span></td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.3.2.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.3.2.3.1">7</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.3.2.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.3.2.4.1">0.399</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.3.2.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.3.2.5.1">17</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T3.1.3.2.6" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.3.2.6.1">0.511</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T3.1.4.3">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T3.1.4.3.1" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.4.3.1.1">3</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.4.3.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.4.3.2.1">0.72</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.4.3.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.4.3.3.1">8</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.4.3.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.4.3.4.1">0.445</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.4.3.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.4.3.5.1">23</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.4.3.6" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.4.3.6.1">0.103</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T3.1.5.4">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r" id="S5.T3.1.5.4.1" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.5.4.1.1">5</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.5.4.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.5.4.2.1">0.631</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.5.4.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.5.4.3.1">9</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T3.1.5.4.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.5.4.4.1">0.351</p>
+</td>
+<td class="ltx_td ltx_border_r" id="S5.T3.1.5.4.5" style="width:34.1pt;"></td>
+<td class="ltx_td ltx_border_r" id="S5.T3.1.5.4.6" style="width:34.1pt;"></td>
+</tr>
+<tr class="ltx_tr" id="S5.T3.1.6.5">
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_l ltx_border_r" id="S5.T3.1.6.5.1" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.6.5.1.1">6</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T3.1.6.5.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.6.5.2.1">0.572</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T3.1.6.5.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.6.5.3.1">12</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T3.1.6.5.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T3.1.6.5.4.1">0.361</p>
+</td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T3.1.6.5.5" style="width:34.1pt;"></td>
+<td class="ltx_td ltx_border_b ltx_border_r" id="S5.T3.1.6.5.6" style="width:34.1pt;"></td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S5.SS1.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.1.2 </span>Evaluation of our Model</h4>
+<div class="ltx_para" id="S5.SS1.SSS2.p1">
+<p class="ltx_p" id="S5.SS1.SSS2.p1.1">We trained configuration X of YOLOv5, the largest version, which is still a magnitude faster than the pose estimation step. We compare 3 different models, each consecutive model trained for a longer period of time (10, 80, and 500 epochs), to compare the training time / performance ratio. Results are presented in Table <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.T2" title="Table 2 ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">2</span></a>.
+We show the precision-recall curves and the confusion matrices for the final model (500 epochs) in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.F5" title="Figure 5 ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">5</span></a>. The PR curves illustrate the performance differences between different objects, whereas the confusion matrix shows how often an object gets mistaken for another object, not detected (both false negatives) or incorrectly detected as present (false positive).
+<br class="ltx_break"/>Clearly, object 14 performs the worst of all objects, followed by object 13. We suspect the reason for the bad detection rate of object 14 is its small size compared to the remaining objects. As for object 13, its comparatively low performance comes as a surprise, since the very similar object 05 is among the best performers. We assume this is a random effect, the result of our randomly sampled camera views when creating the ground truth. One also notes that very similar objects, both in shape as well as in size, can perform very differently (object 13 and object 05, or object 01 and 02). As for why this is the case, we do not know, since we draw from an uniform distribution when rendering, giving each and every object the same probability to appear on an image and leading to a relatively equal representation in the training set. To solve this problem we propose to fine-tune the model on a second dataset, which over-represents the difficult objects.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Pose Estimation</h3>
+<figure class="ltx_table" id="S5.T4">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 4: </span>Results of our end-to-end pipeline on our test data. Total number of targets: 2824 (Real) / 31635 (Synth). Threshold is a percentage of the object diameter for MSSD (i.e. 5% times object diameter), 5r, 10r .. for <math alttext="r=\frac{image\ width}{640}" class="ltx_Math" display="inline" id="S5.T4.3.m1.1"><semantics id="S5.T4.3.m1.1b"><mrow id="S5.T4.3.m1.1.1" xref="S5.T4.3.m1.1.1.cmml"><mi id="S5.T4.3.m1.1.1.2" xref="S5.T4.3.m1.1.1.2.cmml">r</mi><mo id="S5.T4.3.m1.1.1.1" xref="S5.T4.3.m1.1.1.1.cmml">=</mo><mfrac id="S5.T4.3.m1.1.1.3" xref="S5.T4.3.m1.1.1.3.cmml"><mrow id="S5.T4.3.m1.1.1.3.2" xref="S5.T4.3.m1.1.1.3.2.cmml"><mi id="S5.T4.3.m1.1.1.3.2.2" xref="S5.T4.3.m1.1.1.3.2.2.cmml">i</mi><mo id="S5.T4.3.m1.1.1.3.2.1" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.3" xref="S5.T4.3.m1.1.1.3.2.3.cmml">m</mi><mo id="S5.T4.3.m1.1.1.3.2.1b" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.4" xref="S5.T4.3.m1.1.1.3.2.4.cmml">a</mi><mo id="S5.T4.3.m1.1.1.3.2.1c" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.5" xref="S5.T4.3.m1.1.1.3.2.5.cmml">g</mi><mo id="S5.T4.3.m1.1.1.3.2.1d" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.6" xref="S5.T4.3.m1.1.1.3.2.6.cmml">e</mi><mo id="S5.T4.3.m1.1.1.3.2.1e" lspace="0.350em" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.7" xref="S5.T4.3.m1.1.1.3.2.7.cmml">w</mi><mo id="S5.T4.3.m1.1.1.3.2.1f" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.8" xref="S5.T4.3.m1.1.1.3.2.8.cmml">i</mi><mo id="S5.T4.3.m1.1.1.3.2.1g" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.9" xref="S5.T4.3.m1.1.1.3.2.9.cmml">d</mi><mo id="S5.T4.3.m1.1.1.3.2.1h" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.10" xref="S5.T4.3.m1.1.1.3.2.10.cmml">t</mi><mo id="S5.T4.3.m1.1.1.3.2.1i" xref="S5.T4.3.m1.1.1.3.2.1.cmml">⁢</mo><mi id="S5.T4.3.m1.1.1.3.2.11" xref="S5.T4.3.m1.1.1.3.2.11.cmml">h</mi></mrow><mn id="S5.T4.3.m1.1.1.3.3" xref="S5.T4.3.m1.1.1.3.3.cmml">640</mn></mfrac></mrow><annotation-xml encoding="MathML-Content" id="S5.T4.3.m1.1c"><apply id="S5.T4.3.m1.1.1.cmml" xref="S5.T4.3.m1.1.1"><eq id="S5.T4.3.m1.1.1.1.cmml" xref="S5.T4.3.m1.1.1.1"></eq><ci id="S5.T4.3.m1.1.1.2.cmml" xref="S5.T4.3.m1.1.1.2">𝑟</ci><apply id="S5.T4.3.m1.1.1.3.cmml" xref="S5.T4.3.m1.1.1.3"><divide id="S5.T4.3.m1.1.1.3.1.cmml" xref="S5.T4.3.m1.1.1.3"></divide><apply id="S5.T4.3.m1.1.1.3.2.cmml" xref="S5.T4.3.m1.1.1.3.2"><times id="S5.T4.3.m1.1.1.3.2.1.cmml" xref="S5.T4.3.m1.1.1.3.2.1"></times><ci id="S5.T4.3.m1.1.1.3.2.2.cmml" xref="S5.T4.3.m1.1.1.3.2.2">𝑖</ci><ci id="S5.T4.3.m1.1.1.3.2.3.cmml" xref="S5.T4.3.m1.1.1.3.2.3">𝑚</ci><ci id="S5.T4.3.m1.1.1.3.2.4.cmml" xref="S5.T4.3.m1.1.1.3.2.4">𝑎</ci><ci id="S5.T4.3.m1.1.1.3.2.5.cmml" xref="S5.T4.3.m1.1.1.3.2.5">𝑔</ci><ci id="S5.T4.3.m1.1.1.3.2.6.cmml" xref="S5.T4.3.m1.1.1.3.2.6">𝑒</ci><ci id="S5.T4.3.m1.1.1.3.2.7.cmml" xref="S5.T4.3.m1.1.1.3.2.7">𝑤</ci><ci id="S5.T4.3.m1.1.1.3.2.8.cmml" xref="S5.T4.3.m1.1.1.3.2.8">𝑖</ci><ci id="S5.T4.3.m1.1.1.3.2.9.cmml" xref="S5.T4.3.m1.1.1.3.2.9">𝑑</ci><ci id="S5.T4.3.m1.1.1.3.2.10.cmml" xref="S5.T4.3.m1.1.1.3.2.10">𝑡</ci><ci id="S5.T4.3.m1.1.1.3.2.11.cmml" xref="S5.T4.3.m1.1.1.3.2.11">ℎ</ci></apply><cn id="S5.T4.3.m1.1.1.3.3.cmml" type="integer" xref="S5.T4.3.m1.1.1.3.3">640</cn></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.3.m1.1d">r=\frac{image\ width}{640}</annotation><annotation encoding="application/x-llamapun" id="S5.T4.3.m1.1e">italic_r = divide start_ARG italic_i italic_m italic_a italic_g italic_e italic_w italic_i italic_d italic_t italic_h end_ARG start_ARG 640 end_ARG</annotation></semantics></math> for MSPD, and <math alttext="\tau=0.15" class="ltx_Math" display="inline" id="S5.T4.4.m2.1"><semantics id="S5.T4.4.m2.1b"><mrow id="S5.T4.4.m2.1.1" xref="S5.T4.4.m2.1.1.cmml"><mi id="S5.T4.4.m2.1.1.2" xref="S5.T4.4.m2.1.1.2.cmml">τ</mi><mo id="S5.T4.4.m2.1.1.1" xref="S5.T4.4.m2.1.1.1.cmml">=</mo><mn id="S5.T4.4.m2.1.1.3" xref="S5.T4.4.m2.1.1.3.cmml">0.15</mn></mrow><annotation-xml encoding="MathML-Content" id="S5.T4.4.m2.1c"><apply id="S5.T4.4.m2.1.1.cmml" xref="S5.T4.4.m2.1.1"><eq id="S5.T4.4.m2.1.1.1.cmml" xref="S5.T4.4.m2.1.1.1"></eq><ci id="S5.T4.4.m2.1.1.2.cmml" xref="S5.T4.4.m2.1.1.2">𝜏</ci><cn id="S5.T4.4.m2.1.1.3.cmml" type="float" xref="S5.T4.4.m2.1.1.3">0.15</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.4.m2.1d">\tau=0.15</annotation><annotation encoding="application/x-llamapun" id="S5.T4.4.m2.1e">italic_τ = 0.15</annotation></semantics></math> for VSD respectively. In all cases, higher is better.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S5.T4.10">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T4.10.7.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" colspan="7" id="S5.T4.10.7.1.1">End-to-End Pose Estimation Results</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T4.10.6">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr ltx_border_t" id="S5.T4.10.6.7" style="width:62.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.6.7.1">THRESHOLD</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.5.1.1" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.5.1.1.1.1">MSSD <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T4.5.1.1.1.1.m1.1"><semantics id="S5.T4.5.1.1.1.1.m1.1a"><mo id="S5.T4.5.1.1.1.1.m1.1.1" stretchy="false" xref="S5.T4.5.1.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T4.5.1.1.1.1.m1.1b"><ci id="S5.T4.5.1.1.1.1.m1.1.1.cmml" xref="S5.T4.5.1.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.5.1.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T4.5.1.1.1.1.m1.1d">↑</annotation></semantics></math> Synth</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.6.2.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.6.2.2.1.1">MSSD <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T4.6.2.2.1.1.m1.1"><semantics id="S5.T4.6.2.2.1.1.m1.1a"><mo id="S5.T4.6.2.2.1.1.m1.1.1" stretchy="false" xref="S5.T4.6.2.2.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T4.6.2.2.1.1.m1.1b"><ci id="S5.T4.6.2.2.1.1.m1.1.1.cmml" xref="S5.T4.6.2.2.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.6.2.2.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T4.6.2.2.1.1.m1.1d">↑</annotation></semantics></math> Real</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.7.3.3" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.7.3.3.1.1">MSPD <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T4.7.3.3.1.1.m1.1"><semantics id="S5.T4.7.3.3.1.1.m1.1a"><mo id="S5.T4.7.3.3.1.1.m1.1.1" stretchy="false" xref="S5.T4.7.3.3.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T4.7.3.3.1.1.m1.1b"><ci id="S5.T4.7.3.3.1.1.m1.1.1.cmml" xref="S5.T4.7.3.3.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.7.3.3.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T4.7.3.3.1.1.m1.1d">↑</annotation></semantics></math> Synth</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.8.4.4" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.8.4.4.1.1">MSPD <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T4.8.4.4.1.1.m1.1"><semantics id="S5.T4.8.4.4.1.1.m1.1a"><mo id="S5.T4.8.4.4.1.1.m1.1.1" stretchy="false" xref="S5.T4.8.4.4.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T4.8.4.4.1.1.m1.1b"><ci id="S5.T4.8.4.4.1.1.m1.1.1.cmml" xref="S5.T4.8.4.4.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.8.4.4.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T4.8.4.4.1.1.m1.1d">↑</annotation></semantics></math> Real</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.9.5.5" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.9.5.5.1.1">VSD <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T4.9.5.5.1.1.m1.1"><semantics id="S5.T4.9.5.5.1.1.m1.1a"><mo id="S5.T4.9.5.5.1.1.m1.1.1" stretchy="false" xref="S5.T4.9.5.5.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T4.9.5.5.1.1.m1.1b"><ci id="S5.T4.9.5.5.1.1.m1.1.1.cmml" xref="S5.T4.9.5.5.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.9.5.5.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T4.9.5.5.1.1.m1.1d">↑</annotation></semantics></math> Synth</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.10.6.6" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.6.6.1.1">VSD <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T4.10.6.6.1.1.m1.1"><semantics id="S5.T4.10.6.6.1.1.m1.1a"><mo id="S5.T4.10.6.6.1.1.m1.1.1" stretchy="false" xref="S5.T4.10.6.6.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T4.10.6.6.1.1.m1.1b"><ci id="S5.T4.10.6.6.1.1.m1.1.1.cmml" xref="S5.T4.10.6.6.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T4.10.6.6.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T4.10.6.6.1.1.m1.1d">↑</annotation></semantics></math> Real</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T4.10.8.1">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr ltx_border_t" id="S5.T4.10.8.1.1" style="width:62.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.8.1.1.1">THR=50</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.10.8.1.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.8.1.2.1">0.2622</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.10.8.1.3" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.8.1.3.1">0.0948</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.10.8.1.4" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.8.1.4.1">0.4704</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.10.8.1.5" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.8.1.5.1">0.1866</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.10.8.1.6" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.8.1.6.1">0.292</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T4.10.8.1.7" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.8.1.7.1">0.0981</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T4.10.9.2">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr" id="S5.T4.10.9.2.1" style="width:62.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.9.2.1.1">THR=40</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.9.2.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.9.2.2.1">0.2228</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.9.2.3" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.9.2.3.1">0.0894</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.9.2.4" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.9.2.4.1">0.4113</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.9.2.5" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.9.2.5.1">0.1631</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.9.2.6" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.9.2.6.1">0.2685</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.9.2.7" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.9.2.7.1">0.0868</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T4.10.10.3">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr" id="S5.T4.10.10.3.1" style="width:62.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.10.3.1.1">THR=30</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.10.3.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.10.3.2.1">0.1917</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.10.3.3" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.10.3.3.1">0.0824</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.10.3.4" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.10.3.4.1">0.339</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.10.3.5" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.10.3.5.1">0.1356</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.10.3.6" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.10.3.6.1">0.2461</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.10.3.7" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.10.3.7.1">0.0705</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T4.10.11.4">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr" id="S5.T4.10.11.4.1" style="width:62.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.11.4.1.1">THR=20</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.11.4.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.11.4.2.1">0.1618</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.11.4.3" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.11.4.3.1">0.0765</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.11.4.4" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.11.4.4.1">0.2781</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.11.4.5" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.11.4.5.1">0.1045</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.11.4.6" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.11.4.6.1">0.223</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.11.4.7" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.11.4.7.1">0.0436</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T4.10.12.5">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr" id="S5.T4.10.12.5.1" style="width:62.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.12.5.1.1">THR=10</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.12.5.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.12.5.2.1">0.1148</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.12.5.3" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.12.5.3.1">0.0658</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.12.5.4" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.12.5.4.1">0.226</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.12.5.5" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.12.5.5.1">0.0935</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.12.5.6" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.12.5.6.1">0.129</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T4.10.12.5.7" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.12.5.7.1">0.0103</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T4.10.13.6">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_rr" id="S5.T4.10.13.6.1" style="width:62.6pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.13.6.1.1">THR=05</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T4.10.13.6.2" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.13.6.2.1">0.0673</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T4.10.13.6.3" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.13.6.3.1">0.0377</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T4.10.13.6.4" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.13.6.4.1">0.2074</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T4.10.13.6.5" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.13.6.5.1">0.0886</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T4.10.13.6.6" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.13.6.6.1">0.0287</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T4.10.13.6.7" style="width:39.8pt;">
+<p class="ltx_p ltx_align_top" id="S5.T4.10.13.6.7.1">0.0014</p>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="S5.T5">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 5: </span>Average recall across all objects. Total number of targets: 2824 (Real) / 31635 (Synth). Higher is better. We compare our results, both on physically-based rendered images, as well as on our real world sequence, to CosyPose on a dataset with some similarity to ours, as reported at <span class="ltx_ref ltx_missing_label ltx_ref_self">BOP Challenge</span>. Note that the ITODD dataset is, unlike ours, recorded with a static camera, avoiding problems such as motion blur. For comparison, we also include CosyPose performance on a strongly textured dataset (YCB-V).</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S5.T5.3">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T5.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t" colspan="5" id="S5.T5.1.1.1">Pose Estimation Averages <math alttext="\uparrow" class="ltx_Math" display="inline" id="S5.T5.1.1.1.m1.1"><semantics id="S5.T5.1.1.1.m1.1a"><mo id="S5.T5.1.1.1.m1.1.1" stretchy="false" xref="S5.T5.1.1.1.m1.1.1.cmml">↑</mo><annotation-xml encoding="MathML-Content" id="S5.T5.1.1.1.m1.1b"><ci id="S5.T5.1.1.1.m1.1.1.cmml" xref="S5.T5.1.1.1.m1.1.1">↑</ci></annotation-xml><annotation encoding="application/x-tex" id="S5.T5.1.1.1.m1.1c">\uparrow</annotation><annotation encoding="application/x-llamapun" id="S5.T5.1.1.1.m1.1d">↑</annotation></semantics></math></th>
+</tr>
+<tr class="ltx_tr" id="S5.T5.3.3">
+<th class="ltx_td ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_rr ltx_border_t" id="S5.T5.3.3.3" style="width:142.3pt;"></th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S5.T5.3.3.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.3.4.1">Synth</p>
+</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S5.T5.3.3.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.3.5.1">Real</p>
+</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S5.T5.2.2.1" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.2.2.1.1.1">C<math alttext="{}_{ITODD}" class="ltx_Math" display="inline" id="S5.T5.2.2.1.1.1.m1.1"><semantics id="S5.T5.2.2.1.1.1.m1.1a"><msub id="S5.T5.2.2.1.1.1.m1.1.1" xref="S5.T5.2.2.1.1.1.m1.1.1.cmml"><mi id="S5.T5.2.2.1.1.1.m1.1.1a" xref="S5.T5.2.2.1.1.1.m1.1.1.cmml"></mi><mrow id="S5.T5.2.2.1.1.1.m1.1.1.1" xref="S5.T5.2.2.1.1.1.m1.1.1.1.cmml"><mi id="S5.T5.2.2.1.1.1.m1.1.1.1.2" xref="S5.T5.2.2.1.1.1.m1.1.1.1.2.cmml">I</mi><mo id="S5.T5.2.2.1.1.1.m1.1.1.1.1" xref="S5.T5.2.2.1.1.1.m1.1.1.1.1.cmml">⁢</mo><mi id="S5.T5.2.2.1.1.1.m1.1.1.1.3" xref="S5.T5.2.2.1.1.1.m1.1.1.1.3.cmml">T</mi><mo id="S5.T5.2.2.1.1.1.m1.1.1.1.1a" xref="S5.T5.2.2.1.1.1.m1.1.1.1.1.cmml">⁢</mo><mi id="S5.T5.2.2.1.1.1.m1.1.1.1.4" xref="S5.T5.2.2.1.1.1.m1.1.1.1.4.cmml">O</mi><mo id="S5.T5.2.2.1.1.1.m1.1.1.1.1b" xref="S5.T5.2.2.1.1.1.m1.1.1.1.1.cmml">⁢</mo><mi id="S5.T5.2.2.1.1.1.m1.1.1.1.5" xref="S5.T5.2.2.1.1.1.m1.1.1.1.5.cmml">D</mi><mo id="S5.T5.2.2.1.1.1.m1.1.1.1.1c" xref="S5.T5.2.2.1.1.1.m1.1.1.1.1.cmml">⁢</mo><mi id="S5.T5.2.2.1.1.1.m1.1.1.1.6" xref="S5.T5.2.2.1.1.1.m1.1.1.1.6.cmml">D</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S5.T5.2.2.1.1.1.m1.1b"><apply id="S5.T5.2.2.1.1.1.m1.1.1.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1"><apply id="S5.T5.2.2.1.1.1.m1.1.1.1.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1.1"><times id="S5.T5.2.2.1.1.1.m1.1.1.1.1.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1.1.1"></times><ci id="S5.T5.2.2.1.1.1.m1.1.1.1.2.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1.1.2">𝐼</ci><ci id="S5.T5.2.2.1.1.1.m1.1.1.1.3.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1.1.3">𝑇</ci><ci id="S5.T5.2.2.1.1.1.m1.1.1.1.4.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1.1.4">𝑂</ci><ci id="S5.T5.2.2.1.1.1.m1.1.1.1.5.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1.1.5">𝐷</ci><ci id="S5.T5.2.2.1.1.1.m1.1.1.1.6.cmml" xref="S5.T5.2.2.1.1.1.m1.1.1.1.6">𝐷</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.T5.2.2.1.1.1.m1.1c">{}_{ITODD}</annotation><annotation encoding="application/x-llamapun" id="S5.T5.2.2.1.1.1.m1.1d">start_FLOATSUBSCRIPT italic_I italic_T italic_O italic_D italic_D end_FLOATSUBSCRIPT</annotation></semantics></math></p>
+</th>
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S5.T5.3.3.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.3.2.1.1">C<math alttext="{}_{YCB-V}" class="ltx_Math" display="inline" id="S5.T5.3.3.2.1.1.m1.1"><semantics id="S5.T5.3.3.2.1.1.m1.1a"><msub id="S5.T5.3.3.2.1.1.m1.1.1" xref="S5.T5.3.3.2.1.1.m1.1.1.cmml"><mi id="S5.T5.3.3.2.1.1.m1.1.1a" xref="S5.T5.3.3.2.1.1.m1.1.1.cmml"></mi><mrow id="S5.T5.3.3.2.1.1.m1.1.1.1" xref="S5.T5.3.3.2.1.1.m1.1.1.1.cmml"><mrow id="S5.T5.3.3.2.1.1.m1.1.1.1.2" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.cmml"><mi id="S5.T5.3.3.2.1.1.m1.1.1.1.2.2" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.2.cmml">Y</mi><mo id="S5.T5.3.3.2.1.1.m1.1.1.1.2.1" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.1.cmml">⁢</mo><mi id="S5.T5.3.3.2.1.1.m1.1.1.1.2.3" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.3.cmml">C</mi><mo id="S5.T5.3.3.2.1.1.m1.1.1.1.2.1a" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.1.cmml">⁢</mo><mi id="S5.T5.3.3.2.1.1.m1.1.1.1.2.4" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.4.cmml">B</mi></mrow><mo id="S5.T5.3.3.2.1.1.m1.1.1.1.1" xref="S5.T5.3.3.2.1.1.m1.1.1.1.1.cmml">−</mo><mi id="S5.T5.3.3.2.1.1.m1.1.1.1.3" xref="S5.T5.3.3.2.1.1.m1.1.1.1.3.cmml">V</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S5.T5.3.3.2.1.1.m1.1b"><apply id="S5.T5.3.3.2.1.1.m1.1.1.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1"><apply id="S5.T5.3.3.2.1.1.m1.1.1.1.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1"><minus id="S5.T5.3.3.2.1.1.m1.1.1.1.1.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1.1"></minus><apply id="S5.T5.3.3.2.1.1.m1.1.1.1.2.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2"><times id="S5.T5.3.3.2.1.1.m1.1.1.1.2.1.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.1"></times><ci id="S5.T5.3.3.2.1.1.m1.1.1.1.2.2.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.2">𝑌</ci><ci id="S5.T5.3.3.2.1.1.m1.1.1.1.2.3.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.3">𝐶</ci><ci id="S5.T5.3.3.2.1.1.m1.1.1.1.2.4.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1.2.4">𝐵</ci></apply><ci id="S5.T5.3.3.2.1.1.m1.1.1.1.3.cmml" xref="S5.T5.3.3.2.1.1.m1.1.1.1.3">𝑉</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S5.T5.3.3.2.1.1.m1.1c">{}_{YCB-V}</annotation><annotation encoding="application/x-llamapun" id="S5.T5.3.3.2.1.1.m1.1d">start_FLOATSUBSCRIPT italic_Y italic_C italic_B - italic_V end_FLOATSUBSCRIPT</annotation></semantics></math></p>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T5.3.4.1">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr ltx_border_t" id="S5.T5.3.4.1.1" style="width:142.3pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.4.1.1.1">BOP19 AVG RECALL</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T5.3.4.1.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.4.1.2.1">0.2295</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T5.3.4.1.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.4.1.3.1">0.0985</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T5.3.4.1.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.4.1.4.1">0.184</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r ltx_border_t" id="S5.T5.3.4.1.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.4.1.5.1">0.471</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T5.3.5.2">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr" id="S5.T5.3.5.2.1" style="width:142.3pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.5.2.1.1">BOP19 AVG RECALL (VSD)</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.5.2.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.5.2.2.1">0.2489</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.5.2.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.5.2.3.1">0.0573</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.5.2.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.5.2.4.1">-</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.5.2.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.5.2.5.1">-</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T5.3.6.3">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_l ltx_border_rr" id="S5.T5.3.6.3.1" style="width:142.3pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.6.3.1.1">BOP19 AVG RECALL (MSPD)</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.6.3.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.6.3.2.1">0.3305</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.6.3.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.6.3.3.1">0.1331</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.6.3.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.6.3.4.1">-</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_r" id="S5.T5.3.6.3.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.6.3.5.1">-</p>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T5.3.7.4">
+<th class="ltx_td ltx_align_justify ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_rr" id="S5.T5.3.7.4.1" style="width:142.3pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.7.4.1.1">BOP19 AVG RECALL (MSSD)</p>
+</th>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T5.3.7.4.2" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.7.4.2.1">0.179</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T5.3.7.4.3" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.7.4.3.1">0.0812</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T5.3.7.4.4" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.7.4.4.1">-</p>
+</td>
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_r" id="S5.T5.3.7.4.5" style="width:34.1pt;">
+<p class="ltx_p ltx_align_top" id="S5.T5.3.7.4.5.1">-</p>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p" id="S5.SS2.p1.1">Since we illustrate the applicability with an assistance application, we are primarily interested in detecting objects sufficiently well. The relevant metrics are Maximum Symmetry-Aware Surface Distance (MSSD) and Maximum Symmetry-Aware Projection Distance (MSPD). MSSD is especially relevant for applications involving robotic manipulation, whereas MSPD ignores the alignment along the view axis, making it highly relevant for AR applications. For comparison with results from the BOPChallenge, we also calculate and report the Visible Surface Discrepancy (VSD) metric. Details for all three metrics can be found in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib18" title="">18</a>]</cite>. We provide our results in Table <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.T4" title="Table 4 ‣ 5.2 Pose Estimation ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">4</span></a> and Table <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.T5" title="Table 5 ‣ 5.2 Pose Estimation ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">5</span></a>.
+</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>Discussion</h3>
+<div class="ltx_para" id="S5.SS3.p1">
+<p class="ltx_p" id="S5.SS3.p1.1">Comparing recall on our photo-realistic renderings with results of Mask-RCNN + CosyPose on similar datasets, such as ITODD, we achieve noticeably higher performance (Table <a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#S5.T5" title="Table 5 ‣ 5.2 Pose Estimation ‣ 5 Quantitative Results ‣ Detection and Pose Estimation of flat, Texture-less Industry Objects on HoloLens using synthetic Training"><span class="ltx_text ltx_ref_tag">5</span></a>). Once we use our real-hardware test sequence, however, performance is almost cut in half. We hypothesize at least some of the reason for this has to do with us using the HoloLens 2 camera for ground truth creation. Although the camera uses a nominally high resolution, when looking at individual frames, they are often extremely blurry, especially during movement. We still wanted to use the use-case relevant, head-mounted camera system, because we are interested in real-world performance. Also, the ITODD dataset is recorded with a static camera, avoiding our problem of vanishing detections with certain camera movements. When comparing to one of the best performing datasets (as presented by the BOPChallenge 2020) YCB-V, we argue that most of the difference is due to YCB-V being strongly texturized, since texture is a strong cue readily-exploited by CNNs <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.04979v1#bib.bib12" title="">12</a>]</cite>. As shown above, we do not make strong assumptions about the materials used in our training images, randomizing texture as well as reflection behavior. 
+<br class="ltx_break"/>As for our per object detection results, we find a generally strong performance measured in recall. We compared several model sizes and found that even the biggest models improve the result on our test set, without overfitting. Also, we showed that freezing certain layers of the feature extractor did, contrary to previous research, degrade results. As for the problem of camera movements leading to few or no detections for certain frames, one would focus on adding samples with this characteristic to the training data. We already noted that one probably needs to specifically address the more difficult to detect objects to further improve detection performance. 
+<br class="ltx_break"/>Concerning the user experience, because of our sending and receiving data to and from the backend, we experience noticeable latency. While we do think this latency does not hinder the application, reducing it would certainly improve the experience.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Conclusion and Future Work</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">We presented an easily adjustable end-to-end pipeline for detection and pose estimation of flat, texture-less industrial objects only requiring vector graphic representations for training, and evaluated on an edge devices (HoloLens 2). These results are reproducible without extensive expertise in the application domain, in order to, for example, manually create the scenes for training data acquisition. 
+<br class="ltx_break"/>Future work could focus on improving inference speed, in order to run the solution natively on low power edge devices. This would drastically reduce latency and improve the user experience.
+Another improvement, one we are currently evaluating, is the inclusion of a tracker running on the frontend device. This still requires communicating with a backend for processing, but also does away with the latency.
+Also, a user study could compare speed and accuracy at performing the sorting task, providing the manufacturing document on paper, using the iPad application, and the hands-free HoloLens 2 application.
+Finally, our experiments with freezing parts of the detection network motivate further investigation. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para" id="S6.p2">
+<p class="ltx_p" id="S6.p2.1"><span class="ltx_text ltx_font_bold" id="S6.p2.1.1">Acknowledgment</span>: This research was funded in parts by the German Federal Ministry of Education and Research. 
+<br class="ltx_break"/></p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+A. Farasin, F.P., Grangetto, M., Gianaria, E., Garza, P.: Real-time
+object detection and tracking in mixed reality using microsoft hololens. In:
+International Conference on Computer Vision Theory and Applications (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Azuma, R.: A survey of augmented reality. In: Presence: Teleoperators and
+Virtual Environments (1997)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Bochkovskiy, A., Wang, C.Y., Liao, H.Y.M.: Yolov4: Optimal speed and accuracy
+of object detection
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Bukschat, Y., Vetter, M.: Efficientpose: An efficient, accurate and scalable
+end-to-end 6d multi object pose estimation approach (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Cardoso, L., Queiroz, F., Zorzal, E.: A survey of industrial augmented
+reality. In: Computers &amp; Industrial Engineering (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+Chen Mark, Radford Alec, S.I.: Image-GPT.
+<a class="ltx_ref ltx_url" href="https://openai.com/blog/image-gpt/" style="color:#0000FF;" title="">https://openai.com/blog/image-gpt/</a> (2020), accessed: 2022-02-22
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Denninger, M., Sundermeyer, M., Winkelbauer, D., Olefir, D., Hodan, T., Zidan,
+Y., Elbadrawy, M., Knauer, M., Katam, H., Lodhi, A.: Blenderproc: Reducing
+the reality gap with photorealistic rendering (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+Di, Y., Manhardt, F., Wang, G., Ji, X., Navab, N., Tombari, F.: So-pose:
+Exploiting self-occlusion for direct 6d pose estimation. In: Proceedings of
+the IEEE/CVF International Conference on Computer Vision (ICCV). pp.
+12396–12405 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Ganin, Y., Lempitsky, V.: Unsupervised domain adaptation by backpropagation.
+In: International conference on machine learning. pp. 1180–1189. PMLR (2015)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Gard, N., Hilsmann, A., Eisert, P.: Combining local and global pose estimation
+for precise tracking of similar objects. In: VISIGRAPP (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Ge, Z., Liu, S., Wang, F., Li, Z., Sun, J.: Yolox: Exceeding yolo series in
+2021. arXiv preprint arXiv: 2107.08430 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Geirhos, R., Rubisch, P., Michaelis, C., Bethge, M., Wichmann, F.A., Brendel,
+W.: Imagenet-trained CNNs are biased towards texture; increasing shape bias
+improves accuracy and robustness. In: International Conference on Learning
+Representations, https://openreview.net/forum?id=Bygh9j09KX (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+He, K., Gkioxari, G., Dollár, P., Girshick, R.: Mask r-cnn. In: Proceedings
+of the IEEE international conference on computer vision. pp. 2961–2969
+(2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+Hinterstoisser, S., Holzer, S., Cagniart, C., Ilic, S., Konolige, K., Navab,
+N., Lepetit, V.: Multimodal templates for real-time detection of texture-less
+objects in heavily cluttered scenes. In: 2011 international conference on
+computer vision. pp. 858–865. IEEE (2011)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+Hinterstoisser, S., Lepetit, V., Wohlhart, P., Konolige, K.: On pre-trained
+image features and synthetic images for deep learning. In: European
+Conference on Computer Vision. pp. 682–697. Springer (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+Hinterstoisser, S., Pauly, O., Heibel, H., Martina, M., Bokeloh, M.: An
+annotation saved is an annotation earned: Using fully synthetic training for
+object detection. In: Proceedings of the IEEE/CVF international conference on
+computer vision workshops (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+Hodaň, T., Baráth, D., Matas, J.: EPOS: Estimating 6D pose of
+objects with symmetries. IEEE Conference on Computer Vision and Pattern
+Recognition (CVPR) (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+Hodaň, T., Sundermeyer, M., Drost, B., Labbé, Y., Brachmann, E.,
+Michel, F., Rother, C., Matas, J.: Bop challenge 2020 on 6d object
+localization. In: European Conference on Computer Vision. pp. 577–594.
+Springer (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+Hodaň, T., Zabulis, X., Lourakis, M., Obdržálek, Š.,
+Matas, J.: Detection and fine 3d pose estimation of texture-less objects in
+rgb-d images. In: IEEE/RSJ International Conference on Intelligent Robots and
+Systems (IROS). pp. 4421–4428. IEEE (2015)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+Labbe, Y., Carpentier, J., Aubry, M., Sivic, J.: Cosypose: Consistent
+multi-view multi-object 6d pose estimation. In: Proceedings of the European
+Conference on Computer Vision (ECCV) (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+Li, Y., Wang, G., Ji, X., Xiang, Y., Fox, D.: Deepim: Deep iterative matching
+for 6d pose estimation. In: Proceedings of the European Conference on
+Computer Vision (ECCV) (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+Lipson, L., Teed, Z., Goyal, A., Deng, J.: Coupled iterative refinement for 6d
+multi-object pose estimation. In: Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition. pp. 6728–6737 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+Liu, X., Iwase, S., Kitani, K.M.: Stereobj-1m: Large-scale stereo image dataset
+for 6d object pose estimation. In: Proceedings of the IEEE/CVF International
+Conference on Computer Vision (ICCV). pp. 10870–10879 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+Liu, X., Jonschkowski, R., Angelova, A., Konolige, K.: Keypose: Multi-view 3d
+labeling and keypoint estimation for transparent objects. In: Proceedings of
+the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)
+(2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., Guo, B.: Swin
+transformer: Hierarchical vision transformer using shifted windows. In:
+Proceedings of the IEEE/CVF International Conference on Computer Vision. pp.
+10012–10022 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+Long, X., Deng, K., Wang, G., Zhang, Y., Dang, Q., Gao, Y., Shen, H., Ren, J.,
+Han, S., Ding, E., et al.: Pp-yolo: An effective and efficient implementation
+of object detector. arXiv preprint arXiv: 2007.12099 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+Mohring, M., Lessig, C., Bimber, O.: Video see-through ar on consumer
+cell-phones. In: International Symposium on Mixed and Augmented Reality
+(ISMAR) (2004)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+Mourtzis, D., Zogopoulos, V., Xanthi, F.: Augmented reality application
+to support the assembly of highly customized products and to adapt to
+production rescheduling. In: The International Journal of Advanced
+Manufacturing Technology (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+Nepal, U., Eslamiat, H.: Comparing yolov3, yolov4 and yolov5 for autonomous
+landing spot detection in faulty uavs. Sensors <span class="ltx_text ltx_font_bold" id="bib.bib29.1.1">22</span>(2),  464 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+Nichol, A., Dhariwal, P., Ramesh, A., Shyam, P., Mishkin, P., McGrew, B.,
+Sutskever, I., Chen, M.: Glide: Towards photorealistic image generation and
+editing with text-guided diffusion models. In: International Conference on
+Machine Learning (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+Park, K., Patten, T., Vincze, M.: Pix2pose: Pixel-wise coordinate regression of
+objects for 6d pose estimation. In: Proceedings of the IEEE/CVF International
+Conference on Computer Vision. pp. 7668–7677 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+Peng, S., Liu, Y., Huang, Q., Zhou, X., Bao, H.: Pvnet: Pixel-wise voting
+network for 6dof pose estimation. In: Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition (CVPR) (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+Pitteri, G., Ilic, S., Lepetit, V.: Cornet: generic 3d corners for 6d pose
+estimation of new objects without retraining. In: Proceedings of the IEEE/CVF
+International Conference on Computer Vision Workshops (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock">
+Redmon, J., Farhadi, A.: Yolov3: An incremental improvement. arXiv preprint
+arXiv:1804.02767 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock">
+Rolland, J., Holloway, R., Fuchs, H.: Comparison of optical and video
+see-through, head-mounted displays. In: Proceedings of SPIE - The
+International Society for Optical Engineering (1994)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock">
+Song, C., Song, J., Huang, Q.: Hybridpose: 6d object pose estimation under
+hybrid representations. In: Proceedings of the IEEE/CVF conference on
+computer vision and pattern recognition. pp. 431–440 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock">
+Tan, M., Pang, R., Le, Q.V.: Efficientdet: Scalable and efficient object
+detection. In: Proceedings of the IEEE/CVF conference on computer vision and
+pattern recognition. pp. 10781–10790 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock">
+Tekin, B., Sinha, S.N., Fua, P.: Real-Time Seamless Single Shot 6D Object Pose
+Prediction. In: CVPR (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock">
+Tremblay, J., Prakash, A., Acuna, D., Brophy, M., Jampani, V., Anil, C., To,
+T., Cameracci, E., Boochoon, S., Birchfield, S.: Training deep networks with
+synthetic data: Bridging the reality gap by domain randomization. In:
+Proceedings of the IEEE conference on computer vision and pattern recognition
+workshops. pp. 969–977 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock">
+Tremblay, J., To, T., Sundaralingam, B., Xiang, Y., Fox, D., Birchfield, S.:
+Deep object pose estimation for semantic robotic grasping of household
+objects. In: Conference on Robot Learning. pp. 306–316. PMLR (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock">
+Wang, C.Y., Bochkovskiy, A., Liao, H.Y.M.: Scaled-yolov4: Scaling cross stage
+partial network. In: Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition. pp. 13029–13038 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock">
+Wang, G., Manhardt, F., Shao, J., Ji, X., Navab, N., Tombari, F.: Self6d:
+Self-supervised monocular 6d object pose estimation. In: European Conference
+on Computer Vision. pp. 108–125. Springer (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock">
+Wang, G., Manhardt, F., Tombari, F., Ji, X.: Gdr-net: Geometry-guided direct
+regression network for monocular 6d object pose estimation. In: Proceedings
+of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR).
+pp. 16611–16621 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock">
+Yen-Chen, L., Florence, P., Barron, J.T., Rodriguez, A., Isola, P., Lin, T.Y.:
+inerf: Inverting neural radiance fields for pose estimation. In: 2021
+IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS).
+pp. 1323–1330. IEEE (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_tag_bibitem">[45]</span>
+<span class="ltx_bibblock">
+Zakharov, S., Kehl, W., Ilic, S.: Deceptionnet: Network-driven domain
+randomization. In: Proceedings of the IEEE/CVF International Conference on
+Computer Vision (ICCV) (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_tag_bibitem">[46]</span>
+<span class="ltx_bibblock">
+Zakharov, S., Shugurov, I., Ilic, S.: Dpod: 6d pose object detector and
+refiner. In: Proceedings of the IEEE/CVF International Conference on Computer
+Vision (ICCV) (2019)
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Feb  7 15:51:15 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span style="font-size:70%;position:relative; bottom:2.2pt;">A</span>T<span style="position:relative; bottom:-0.4ex;">E</span></span><span class="ltx_font_smallcaps">xml</span><img alt="[LOGO]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

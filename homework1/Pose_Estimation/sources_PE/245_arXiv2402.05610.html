@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Extending 6D Object Pose Estimators for Stereo Vision</title>
+<!--Generated on Tue Sep 10 13:49:36 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="Computer Vision Artificial Intelligence 6D Object Pose Estimation Stereo Vision." lang="en" name="keywords"/>
+<base href="/html/2402.05610v2/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S1" title="In Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S2" title="In Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S2.SS1" title="In 2 Related Work ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Keypoint Methods</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S2.SS2" title="In 2 Related Work ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Iterative Pose Refinement</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S2.SS3" title="In 2 Related Work ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>End-to-end dense Feature 6DOPE</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S2.SS4" title="In 2 Related Work ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Disparity and Stereo</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S2.SS5" title="In 2 Related Work ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.5 </span>BOP Challenge</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3" title="In Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Approach</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.SS1" title="In 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Early Fusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.SS2" title="In 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Mid-Level Fusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.SS3" title="In 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Late Fusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.SS4" title="In 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Double Fusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.SS5" title="In 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5 </span>Early Fusion with shared Backbone Disparity Prediction</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4" title="In Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Evaluation</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4.SS1" title="In 4 Evaluation ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Synthetic and real Dataset</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4.SS2" title="In 4 Evaluation ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Parameterization</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4.SS3" title="In 4 Evaluation ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Results</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S5" title="In Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line"><span class="ltx_note ltx_role_institutetext" id="id1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">institutetext: </span>Fraunhofer Institute for Computer Graphics Research IGD, Darmstadt, Fraunhoferstraße 5, Darmstadt, Germany </span></span></span><span class="ltx_note ltx_role_institutetext" id="id2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">institutetext: </span>Technical University Darmstadt, Karolinenplatz 5, Darmstadt, Germany
+<span class="ltx_note ltx_role_email" id="id2.1"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_note_type">email: </span>thomas.poellabauer@igd.fraunhofer.de 
+<br class="ltx_break"/>mail@janemrich.de</span></span></span></span></span></span>
+<h1 class="ltx_title ltx_title_document">Extending 6D Object Pose Estimators for Stereo Vision</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Thomas Pöllabauer 
+</span><span class="ltx_author_notes">⋆⋆1122
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-0075-1181" title="ORCID identifier">0000-0003-0075-1181</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Jan Emrich
+</span><span class="ltx_author_notes">⋆⋆1122
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0009-0008-2883-0555" title="ORCID identifier">0009-0008-2883-0555</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Volker Knauthe
+</span><span class="ltx_author_notes">22
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0001-6993-5099" title="ORCID identifier">0000-0001-6993-5099</a></span>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Arjan Kuijper 
+<br class="ltx_break"/><math alttext="\star" class="ltx_Math" display="inline" id="id1.1.m1.1"><semantics id="id1.1.m1.1a"><mo id="id1.1.m1.1.1" xref="id1.1.m1.1.1.cmml">⋆</mo><annotation-xml encoding="MathML-Content" id="id1.1.m1.1b"><ci id="id1.1.m1.1.1.cmml" xref="id1.1.m1.1.1">⋆</ci></annotation-xml><annotation encoding="application/x-tex" id="id1.1.m1.1c">\star</annotation><annotation encoding="application/x-llamapun" id="id1.1.m1.1d">⋆</annotation></semantics></math> contributed equally
+</span><span class="ltx_author_notes">1122
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-6413-0061" title="ORCID identifier">0000-0002-6413-0061</a></span>
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id2.id1">Estimating the 6D pose of objects accurately, quickly, and robustly remains a difficult task. However, recent methods for directly regressing poses from RGB images using dense features have achieved state-of-the-art results. Stereo vision, which provides an additional perspective on the object, can help reduce pose ambiguity and occlusion. Moreover, stereo can directly infer the distance of an object, while mono-vision requires internalized knowledge of the object’s size. To extend the state-of-the-art in 6D object pose estimation to stereo, we created a BOP compatible stereo version of the YCB-V dataset called YCB-V DS and extended multiple state-of-the-art pose estimator algorithms to be applicable to stereo. Our method outperforms state-of-the-art 6D pose estimation algorithms by utilizing stereo vision and can easily be adopted for other dense feature-based algorithms.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Keywords: </h6>Computer Vision Artificial Intelligence 6D Object Pose Estimation Stereo Vision.
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">The task of 6D object pose estimation (6DOPE) involves determining the translation and rotation of an object within a scene. This is a crucial task in computer vision with applications in various fields, including robotics, quality control, and augmented reality. In robotics and quality control, precise object pose estimation is necessary to grasp, move, or apply manufacturing processes to objects, or to ensure their proper position during assembly. In augmented reality, accurate object pose estimation is required to merge the real world with overlaid information or virtual worlds. In all these fields, imprecise or inaccurate pose estimates, as well as low frame rates, can render tasks impossible or lead to a poor user experience. 
+<br class="ltx_break"/>To achieve high accuracy in real-time applications, such as robotics, traditional methods often rely on specialized depth cameras using time-of-flight or projected light sensors to quickly capture images. While these sensors offer fast performance, they can also introduce noise and are prone to failure when dealing with reflective or transparent objects. Also, direct regression methods recently attained the highest level of accuracy for 6DOPE. These methods rely on powerful dense intermediate representations, such as 2D-3D correspondences, which enable the prediction of the 3D coordinates related to each pixel in the image plane. With these correspondences, pose estimation can be iteratively calculated using algorithms like RANSAC. In recent developments, this iterative process has been replaced by neural networks, facilitating end-to-end training and faster inference. By directly estimating the pose in a single step, pose estimators can meet real-time requirements without the need for iterative algorithms. 
+<br class="ltx_break"/>Finally, in an effort to increase accuracy of pose estimators, previous work utilized multiple views. Stereo is an intuitive special case of multi-view inspired by human vision offering an additional perspective and indirect depth images, which can help overcome the size ambiguity issue in monocular object pose estimation. Previous work on keypoint methods have demonstrated improved accuracy adopting stereo when compared to their monocular versions highlighting the potential of stereo imaging for 6DOPE. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">In this work, we test the assumption that extending a monocular pose estimator to stereo vision is an effective way to greater pose accuracy and we test this hypothesis using current state-of-the-art correspondence-based algorithms. In particular our contributions include:</p>
+<ul class="ltx_itemize" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">an extension of the state-of-the-art pose estimator GDRNet for stereo cameras</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">YCB-V DS, a stereo version of the relevant YCB-V object dataset including depth information</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">This work is structured as follows: First, we will discuss related work. Then, we will present our dense stereo 6DOPE method and reasoning for its design, motivating the applicability to other, similar algorithms. Next we introduce our stereo YCB-V dataset (YCB-V DS) used to train and evaluate our method. Finally, we evaluate all proposed approaches and compare our method to state-of-the-art end-to-end 6DOPE.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">In the field of 6DOPE, depth information was traditionally heavily relied upon for achieving the highest accuracy through refinement. However, with the widespread availability of conventional cameras, deep learning on RGB images has gained significant interest. In the following, we will describe the common methods used for 6DOPE.</p>
+</div>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Keypoint Methods</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.2">Keypoint methods involve detecting a set of characteristic points on the surface of the target object. The pose is then estimated by solving a Perspective-N-Point (P<math alttext="n" class="ltx_Math" display="inline" id="S2.SS1.p1.1.m1.1"><semantics id="S2.SS1.p1.1.m1.1a"><mi id="S2.SS1.p1.1.m1.1.1" xref="S2.SS1.p1.1.m1.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S2.SS1.p1.1.m1.1b"><ci id="S2.SS1.p1.1.m1.1.1.cmml" xref="S2.SS1.p1.1.m1.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS1.p1.1.m1.1c">n</annotation><annotation encoding="application/x-llamapun" id="S2.SS1.p1.1.m1.1d">italic_n</annotation></semantics></math>P) problem, typically using the RANSAC algorithm. Historically, keypoints were detected using the SIFT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib19" title="">19</a>]</cite>, SURF <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib1" title="">1</a>]</cite> or similar handcrafted features, while today keypoints are predicted using neural networks. One recent method doing so is HybridPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib25" title="">25</a>]</cite>. Keypoint methods can easily be extended to the stereo modality when framing the P<math alttext="n" class="ltx_Math" display="inline" id="S2.SS1.p1.2.m2.1"><semantics id="S2.SS1.p1.2.m2.1a"><mi id="S2.SS1.p1.2.m2.1.1" xref="S2.SS1.p1.2.m2.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S2.SS1.p1.2.m2.1b"><ci id="S2.SS1.p1.2.m2.1.1.cmml" xref="S2.SS1.p1.2.m2.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS1.p1.2.m2.1c">n</annotation><annotation encoding="application/x-llamapun" id="S2.SS1.p1.2.m2.1d">italic_n</annotation></semantics></math>P problem. Also, keypoint-based methods have already been adapted for stereo pose estimation, with accuracy gains ranging from 14 to 25 percentage points over their monocular counterparts. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib22" title="">22</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib16" title="">16</a>]</cite></p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Iterative Pose Refinement</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">We differentiate two subcategories for iterative refinement methods: Refinement in image space, and refinement in point cloud space.
+Iterative Closest Point (ICP) is a widely used method and falls into the latter category requiring a point cloud. It enhances the object’s pose estimation by matching the predicted point cloud to the available geometry information. The method is often applied to depth data after an initial pose estimation with another method due to its ability to achieve high accuracy given sufficient inference time and good depth data.
+In image space-based refinement methods, the initial pose estimation is refined iteratively by rendering the best current guess and predicting the difference between the actual pose and the estimated pose in the input image. This process is repeated a set number of times. DeepIM <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib14" title="">14</a>]</cite> was the first method to introduce such refinement, while CosyPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib13" title="">13</a>]</cite> combined the DeepIM approach with scene-level refinement. Coupled Iterative Refinement <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib15" title="">15</a>]</cite> refines both pose and correspondences in lockstep. RePose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib11" title="">11</a>]</cite> achieves faster run-time by replacing the repeated forward passes of a CNN-based optimization with a fast renderer and a learned 3D texture.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>End-to-end dense Feature 6DOPE</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1"><span class="ltx_text ltx_font_bold" id="S2.SS3.p1.1.1">GDR-Net.</span> To the best of our knowledge GDR-Net (GDRN) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib28" title="">28</a>]</cite> was the first end-to-end trainable network that directly regresses pose using intermediate dense features. Unlike previous methodologies, GDRN harnesses dense representations to enhance predictions without the need for a second stage, such as RANSAC, to obtain final results. GDRN uses a 3 stage pipeline:
+First, an object detector is employed to identify the bounding box and class of the target object. Second, the bounding box-cropped image undergoes processing through the geometric feature regression network, utilizing an encoder-decoder architecture. In the case of GDRN this is based on ResNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib6" title="">6</a>]</cite>, while a modified version named GDRNPP uses ConvNeXt <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib18" title="">18</a>]</cite>. The decoder predicts various features, including the object mask, 2D-3D correspondences, and surface regions. The 2D-3D correspondences are regressed into three layers, each representing a dimension of the object coordinates.
+Third, the concatenated 2D-3D correspondences and surface regions are fed into the Patch-PnP network, composed of convolutional layers and two dense heads for regressing the translation and rotation of the pose.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1"><span class="ltx_text ltx_font_bold" id="S2.SS3.p2.1.1">SO-Pose</span>. SO-Pose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib3" title="">3</a>]</cite> extends the capabilities of GDRN by introducing an additional intermediate dense feature, self-occlusion. In the neural network architecture, a new decoder head is incorporated into the second stage of the network. This added component predicts occlusion correspondences, providing information about the self-occlusion of the 3D object. Specifically, for each origin plane of the object coordinate system, the corresponding other two dimensions are predicted, resulting in six layers. The self-occlusion maps are designed to offer supplementary insights into the 3D object. This information, being independent of the noise present in the 2D-3D correspondences, should help with ambiguous poses and textureless objects.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Disparity and Stereo</h3>
+<div class="ltx_para" id="S2.SS4.p1">
+<p class="ltx_p" id="S2.SS4.p1.1">Stereo Matching, a well-established task in Computer Vision, involves estimating the disparity map in horizontally aligned stereo images. Disparity represents the distance between corresponding pixels in two stereo images, indicating the depth in the 3D world.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p2">
+<p class="ltx_p" id="S2.SS4.p2.1">Zbontar and LeCun <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib32" title="">32</a>]</cite>, along with Zagoruyko and Komodakis <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib31" title="">31</a>]</cite>, pioneered the use of Convolutional Neural Networks (CNNs) for stereo matching, employing a siamese network that concatenated feature representations from two images to predict a disparity map.
+Luo, Schwing, and Urtasun <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib20" title="">20</a>]</cite> advanced this model by computing the inner product of image features instead of concatenation, leading to improved matching accuracy and accelerated inference times.
+Shamsafar et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib24" title="">24</a>]</cite> built upon these works by incorporating 2D MobileNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib23" title="">23</a>]</cite> blocks into stereo matching, reducing computational costs while maintaining high accuracy. Additionally, they introduced an innovative "Interlacing Cost Volume Construction" technique.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p3">
+<p class="ltx_p" id="S2.SS4.p3.1">Utilizing disparity maps for obtaining depth from stereo images also has evolved with the success of deep-learning methods. The emergence of end-to-end networks, exemplified by references <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib12" title="">12</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib30" title="">30</a>]</cite>, has been influential in predicting disparity maps. These networks typically incorporate correlation or distance cost volumes, a concept initially introduced by FlowNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib5" title="">5</a>]</cite>.
+KeyPose <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib17" title="">17</a>]</cite> introduced an early fusion architecture for stereo pose estimation, leveraging a disparity map to directly predict the depth of keypoints. Furthermore, the dense PV-Net <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib22" title="">22</a>]</cite> can be applied to stereo scenarios by predicting keypoints for each image and subsequently triangulating the object using keypoints from both images.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.5 </span>BOP Challenge</h3>
+<div class="ltx_para" id="S2.SS5.p1">
+<p class="ltx_p" id="S2.SS5.p1.1">The evaluation of methods for rigid object pose estimation faces challenges due to variations in datasets, including differences in lighting, occlusion, object textures, and spatial distributions of test poses. To address these issues, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib8" title="">8</a>]</cite> introduced a comprehensive benchmark for Mono RGB-D images using relevant metrics for 6DOPE <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib7" title="">7</a>]</cite>. Their contributions include selecting and transforming eight datasets into a standardized format, defining evaluation metrics, and introducing an evaluation system. Noteworthy datasets within the benchmark include the Linemod and Linemod-Occluded datasets and the YCB-Video dataset. Additionally, they provided results and discussions on methods across all datasets. To facilitate research on this benchmark, they also released the BOP Toolkit <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib27" title="">27</a>]</cite>. In subsequent years re-occurring challenges continued to survey the state of the art <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib9" title="">9</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib26" title="">26</a>, <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib10" title="">10</a>]</cite>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Approach</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">In the field of end-to-end 6DOPE, current state-of-the-art techniques are primarily focused on single images without an obvious methodology how to incorporate additional views. We propose a way to extend 6DOPE algorithms using dense features to the stereo modality by exploring various approaches to fuse information from two views and introducing disparity features.</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<p class="ltx_p" id="S3.p2.1">In subsequent sections, we discuss different architectures for fusing images to estimate object pose. Fusion is the process of combining the signals of both images at different stages of the processing pipeline. More specifically, we evaluate the following fusion approaches: Early Fusion, Mid Fusion, Late Fusion, Double Fusion, as well as an extension with additional features. All of these architectures are depicted in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.F1" title="Figure 1 ‣ 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">1</span></a> and will subsequently be discussed in detail.
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para" id="S3.p3">
+<p class="ltx_p" id="S3.p3.1">Our method builds upon the processing pipelines as found in GDRN and SO-Pose and begins with the estimator receiving detections with bounding boxes. These bounding boxes define a region of interest (RoI) and zooming into the RoI we obtain our embeddings. The next stage in the network predicts dense features such as 2D-3D correspondences, regions, and occlusion labels. Finally, a regression network determines the translation and rotation of the object from these features. Our contribution consists in exploring additional features like disparity and integrating multiple views into the existing pipeline at various stages. 
+<br class="ltx_break"/></p>
+</div>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="379" id="S3.F1.g1" src="extracted/5845762/images/Stereo_Pose_Diagrams_2.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F1.10.5.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S3.F1.8.4" style="font-size:90%;">Details on some proposed architectures for feature fusion at different pipeline stages. Exemplified on the SO-Pose algorithm, but also applicable to GDRN. a) Early fusion. Feature maps are merged after individual forward propagation through the backbone. b) Mid-level fusion. After two separate forward passes the embeddings are concatenated and additional convolutional layers are added inside the <math alttext="PnP" class="ltx_Math" display="inline" id="S3.F1.5.1.m1.1"><semantics id="S3.F1.5.1.m1.1b"><mrow id="S3.F1.5.1.m1.1.1" xref="S3.F1.5.1.m1.1.1.cmml"><mi id="S3.F1.5.1.m1.1.1.2" xref="S3.F1.5.1.m1.1.1.2.cmml">P</mi><mo id="S3.F1.5.1.m1.1.1.1" xref="S3.F1.5.1.m1.1.1.1.cmml">⁢</mo><mi id="S3.F1.5.1.m1.1.1.3" xref="S3.F1.5.1.m1.1.1.3.cmml">n</mi><mo id="S3.F1.5.1.m1.1.1.1b" xref="S3.F1.5.1.m1.1.1.1.cmml">⁢</mo><mi id="S3.F1.5.1.m1.1.1.4" xref="S3.F1.5.1.m1.1.1.4.cmml">P</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.F1.5.1.m1.1c"><apply id="S3.F1.5.1.m1.1.1.cmml" xref="S3.F1.5.1.m1.1.1"><times id="S3.F1.5.1.m1.1.1.1.cmml" xref="S3.F1.5.1.m1.1.1.1"></times><ci id="S3.F1.5.1.m1.1.1.2.cmml" xref="S3.F1.5.1.m1.1.1.2">𝑃</ci><ci id="S3.F1.5.1.m1.1.1.3.cmml" xref="S3.F1.5.1.m1.1.1.3">𝑛</ci><ci id="S3.F1.5.1.m1.1.1.4.cmml" xref="S3.F1.5.1.m1.1.1.4">𝑃</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F1.5.1.m1.1d">PnP</annotation><annotation encoding="application/x-llamapun" id="S3.F1.5.1.m1.1e">italic_P italic_n italic_P</annotation></semantics></math> Net to cope with the additional dimensionality. c) Late fusion. Features are fused only after the CNN inside the <math alttext="PnP" class="ltx_Math" display="inline" id="S3.F1.6.2.m2.1"><semantics id="S3.F1.6.2.m2.1b"><mrow id="S3.F1.6.2.m2.1.1" xref="S3.F1.6.2.m2.1.1.cmml"><mi id="S3.F1.6.2.m2.1.1.2" xref="S3.F1.6.2.m2.1.1.2.cmml">P</mi><mo id="S3.F1.6.2.m2.1.1.1" xref="S3.F1.6.2.m2.1.1.1.cmml">⁢</mo><mi id="S3.F1.6.2.m2.1.1.3" xref="S3.F1.6.2.m2.1.1.3.cmml">n</mi><mo id="S3.F1.6.2.m2.1.1.1b" xref="S3.F1.6.2.m2.1.1.1.cmml">⁢</mo><mi id="S3.F1.6.2.m2.1.1.4" xref="S3.F1.6.2.m2.1.1.4.cmml">P</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.F1.6.2.m2.1c"><apply id="S3.F1.6.2.m2.1.1.cmml" xref="S3.F1.6.2.m2.1.1"><times id="S3.F1.6.2.m2.1.1.1.cmml" xref="S3.F1.6.2.m2.1.1.1"></times><ci id="S3.F1.6.2.m2.1.1.2.cmml" xref="S3.F1.6.2.m2.1.1.2">𝑃</ci><ci id="S3.F1.6.2.m2.1.1.3.cmml" xref="S3.F1.6.2.m2.1.1.3">𝑛</ci><ci id="S3.F1.6.2.m2.1.1.4.cmml" xref="S3.F1.6.2.m2.1.1.4">𝑃</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F1.6.2.m2.1d">PnP</annotation><annotation encoding="application/x-llamapun" id="S3.F1.6.2.m2.1e">italic_P italic_n italic_P</annotation></semantics></math> network but before the multi-layer perceptron / dense network. d) Double fusion. Here we re-use the late fusion <math alttext="PnP" class="ltx_Math" display="inline" id="S3.F1.7.3.m3.1"><semantics id="S3.F1.7.3.m3.1b"><mrow id="S3.F1.7.3.m3.1.1" xref="S3.F1.7.3.m3.1.1.cmml"><mi id="S3.F1.7.3.m3.1.1.2" xref="S3.F1.7.3.m3.1.1.2.cmml">P</mi><mo id="S3.F1.7.3.m3.1.1.1" xref="S3.F1.7.3.m3.1.1.1.cmml">⁢</mo><mi id="S3.F1.7.3.m3.1.1.3" xref="S3.F1.7.3.m3.1.1.3.cmml">n</mi><mo id="S3.F1.7.3.m3.1.1.1b" xref="S3.F1.7.3.m3.1.1.1.cmml">⁢</mo><mi id="S3.F1.7.3.m3.1.1.4" xref="S3.F1.7.3.m3.1.1.4.cmml">P</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.F1.7.3.m3.1c"><apply id="S3.F1.7.3.m3.1.1.cmml" xref="S3.F1.7.3.m3.1.1"><times id="S3.F1.7.3.m3.1.1.1.cmml" xref="S3.F1.7.3.m3.1.1.1"></times><ci id="S3.F1.7.3.m3.1.1.2.cmml" xref="S3.F1.7.3.m3.1.1.2">𝑃</ci><ci id="S3.F1.7.3.m3.1.1.3.cmml" xref="S3.F1.7.3.m3.1.1.3">𝑛</ci><ci id="S3.F1.7.3.m3.1.1.4.cmml" xref="S3.F1.7.3.m3.1.1.4">𝑃</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F1.7.3.m3.1d">PnP</annotation><annotation encoding="application/x-llamapun" id="S3.F1.7.3.m3.1e">italic_P italic_n italic_P</annotation></semantics></math> Net and combine it with an embedding mixing scheme where half of the feature maps are swapped between left and right. This way each individual forward pass has information from both images. e) Early + shared backbone based disparity prediction. We add a disparity prediction using the feature maps as extracted from our common backbone. Disparity prediction is done both ways in a symmetric fashion. The additional features are again concatenated and fed to the <math alttext="PnP" class="ltx_Math" display="inline" id="S3.F1.8.4.m4.1"><semantics id="S3.F1.8.4.m4.1b"><mrow id="S3.F1.8.4.m4.1.1" xref="S3.F1.8.4.m4.1.1.cmml"><mi id="S3.F1.8.4.m4.1.1.2" xref="S3.F1.8.4.m4.1.1.2.cmml">P</mi><mo id="S3.F1.8.4.m4.1.1.1" xref="S3.F1.8.4.m4.1.1.1.cmml">⁢</mo><mi id="S3.F1.8.4.m4.1.1.3" xref="S3.F1.8.4.m4.1.1.3.cmml">n</mi><mo id="S3.F1.8.4.m4.1.1.1b" xref="S3.F1.8.4.m4.1.1.1.cmml">⁢</mo><mi id="S3.F1.8.4.m4.1.1.4" xref="S3.F1.8.4.m4.1.1.4.cmml">P</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.F1.8.4.m4.1c"><apply id="S3.F1.8.4.m4.1.1.cmml" xref="S3.F1.8.4.m4.1.1"><times id="S3.F1.8.4.m4.1.1.1.cmml" xref="S3.F1.8.4.m4.1.1.1"></times><ci id="S3.F1.8.4.m4.1.1.2.cmml" xref="S3.F1.8.4.m4.1.1.2">𝑃</ci><ci id="S3.F1.8.4.m4.1.1.3.cmml" xref="S3.F1.8.4.m4.1.1.3">𝑛</ci><ci id="S3.F1.8.4.m4.1.1.4.cmml" xref="S3.F1.8.4.m4.1.1.4">𝑃</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.F1.8.4.m4.1d">PnP</annotation><annotation encoding="application/x-llamapun" id="S3.F1.8.4.m4.1e">italic_P italic_n italic_P</annotation></semantics></math> network for pose regression.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.p4">
+<p class="ltx_p" id="S3.p4.1"><span class="ltx_text ltx_font_bold" id="S3.p4.1.1">Feature Fusion.</span>
+One of the most significant challenges in 6DOPE is pose ambiguity, which we argue, can be mitigated by incorporating additional views. To address this, we propose and evaluate the influence of fusing the extracted features of two images at different stages of the pipeline. We continue by describing our reasoning for the different approaches, and their combination.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Early Fusion</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">We propose merging the embeddings from the first stage in such a way that the second stage can infer 2D-3D correspondences and region classification from multiple views. To this end the feature maps from the left and the right view get concatenated after the backbone but before the decoder as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.F1" title="Figure 1 ‣ 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">1</span></a> a). To maintain the same merged channel dimension, we halve the channel dimension of the left and right embeddings. This approach should allow the network to accurately identify the object in the image, particularly for objects that may appear similar from certain views but not from others. As a result, we assume improvements in region classification and 2D-3D correspondence estimation.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Mid-Level Fusion</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.2">In our approach, we predict intermediate features, such as 2D-3D correspondences, region classifications, and masks, for each view separately. These features are then concatenated into a single feature tensor. This combined tensor is then fed into a perspective-n-point P<math alttext="n" class="ltx_Math" display="inline" id="S3.SS2.p1.1.m1.1"><semantics id="S3.SS2.p1.1.m1.1a"><mi id="S3.SS2.p1.1.m1.1.1" xref="S3.SS2.p1.1.m1.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.1.m1.1b"><ci id="S3.SS2.p1.1.m1.1.1.cmml" xref="S3.SS2.p1.1.m1.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.1.m1.1c">n</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.1.m1.1d">italic_n</annotation></semantics></math>P network, which employs a CNN to predict translation and rotation. Mid-level fusion runs the backbone and the decoder heads per view before concatenating the resulting features (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.F1" title="Figure 1 ‣ 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">1</span></a> b). We have to adjust the convolution layers in the P<math alttext="n" class="ltx_Math" display="inline" id="S3.SS2.p1.2.m2.1"><semantics id="S3.SS2.p1.2.m2.1a"><mi id="S3.SS2.p1.2.m2.1.1" xref="S3.SS2.p1.2.m2.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.2.m2.1b"><ci id="S3.SS2.p1.2.m2.1.1.cmml" xref="S3.SS2.p1.2.m2.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.2.m2.1c">n</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.2.m2.1d">italic_n</annotation></semantics></math>P network to accommodate our changes. By adopting mid fusion, the prediction head should benefit from a more diverse set of 2D-3D correspondences and region mappings, and should thereby reduce pose ambiguity.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Late Fusion</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.2">In Late fusion (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.F1" title="Figure 1 ‣ 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">1</span></a> c) we predict the intermediate features for each view separately and merge them relatively late, within the P<math alttext="n" class="ltx_Math" display="inline" id="S3.SS3.p1.1.m1.1"><semantics id="S3.SS3.p1.1.m1.1a"><mi id="S3.SS3.p1.1.m1.1.1" xref="S3.SS3.p1.1.m1.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.1.m1.1b"><ci id="S3.SS3.p1.1.m1.1.1.cmml" xref="S3.SS3.p1.1.m1.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.1.m1.1c">n</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.1.m1.1d">italic_n</annotation></semantics></math>P network. More specifically, we run the features through the convolutional layers of the P<math alttext="n" class="ltx_Math" display="inline" id="S3.SS3.p1.2.m2.1"><semantics id="S3.SS3.p1.2.m2.1a"><mi id="S3.SS3.p1.2.m2.1.1" xref="S3.SS3.p1.2.m2.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.2.m2.1b"><ci id="S3.SS3.p1.2.m2.1.1.cmml" xref="S3.SS3.p1.2.m2.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.2.m2.1c">n</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.2.m2.1d">italic_n</annotation></semantics></math>P network before concatenating them. The resulting combined feature vector is then passed through the final fully connected layers. By employing late fusion, we again hope to see a reduction in pose ambiguity.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Double Fusion</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">In our double fusion approach (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.F1" title="Figure 1 ‣ 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">1</span></a> d), we integrate both early and late fusion techniques. After the first network stage, the embeddings of the views are concatenated after the backbone, this time though we mix the feature maps of both views before feeding them into the decoder. The decoder and P<math alttext="n" class="ltx_Math" display="inline" id="S3.SS4.p1.1.m1.1"><semantics id="S3.SS4.p1.1.m1.1a"><mi id="S3.SS4.p1.1.m1.1.1" xref="S3.SS4.p1.1.m1.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.1.m1.1b"><ci id="S3.SS4.p1.1.m1.1.1.cmml" xref="S3.SS4.p1.1.m1.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.1.m1.1c">n</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.1.m1.1d">italic_n</annotation></semantics></math>P Net share the same design as found in late fusion, merging the features after the convolutional layer, but before the multi-layer perecptron. By combining the benefits of improved intermediate features and the inclusion of more views from both fusion techniques, double fusion should offer a more robust estimation of object pose.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5 </span>Early Fusion with shared Backbone Disparity Prediction</h3>
+<div class="ltx_para" id="S3.SS5.p1">
+<p class="ltx_p" id="S3.SS5.p1.2">Stereo vision can also be described by one image and the disparity to another. We argue that combining early fusion with a disparity prediction might improve overall accuracy. Early fusion can enhance the quality of dense features by merging embeddings, which should reduce pose ambiguity and rotation error. Disparity, on the other hand, should mainly enhance the translation prediction by inferring depth. We therefore integrate a disparity feature prediction to give the P<math alttext="n" class="ltx_Math" display="inline" id="S3.SS5.p1.1.m1.1"><semantics id="S3.SS5.p1.1.m1.1a"><mi id="S3.SS5.p1.1.m1.1.1" xref="S3.SS5.p1.1.m1.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS5.p1.1.m1.1b"><ci id="S3.SS5.p1.1.m1.1.1.cmml" xref="S3.SS5.p1.1.m1.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS5.p1.1.m1.1c">n</annotation><annotation encoding="application/x-llamapun" id="S3.SS5.p1.1.m1.1d">italic_n</annotation></semantics></math>P network two additional signals, the disparity prediction per view (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S3.F1" title="Figure 1 ‣ 3 Approach ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">1</span></a> e). The disparity features behave like the output of the decoder heads and are fed to the P<math alttext="n" class="ltx_Math" display="inline" id="S3.SS5.p1.2.m2.1"><semantics id="S3.SS5.p1.2.m2.1a"><mi id="S3.SS5.p1.2.m2.1.1" xref="S3.SS5.p1.2.m2.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS5.p1.2.m2.1b"><ci id="S3.SS5.p1.2.m2.1.1.cmml" xref="S3.SS5.p1.2.m2.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS5.p1.2.m2.1c">n</annotation><annotation encoding="application/x-llamapun" id="S3.SS5.p1.2.m2.1d">italic_n</annotation></semantics></math>P network. Addition of disparity loss should compel to learn depth-relevant features, which we argue, should improve the pose estimation quality.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Evaluation</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">We extend state-of-the-art methods, which includes GDRN, GDRNPP, and SO-Pose, by implementing a stereo version of SO-Pose and GDRN, called SO-Stereo and GDRN-Stereo, respectively. For comparability with standard BOP datasets, we extend the BlenderProc <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib2" title="">2</a>]</cite> Pipeline to generate all necessary data and created a stereo PBR YCB-Video dataset called YCB-V DS together with real stereo recordings.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Synthetic and real Dataset</h3>
+<figure class="ltx_figure" id="S4.F2">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel" id="S4.F2.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="449" id="S4.F2.sf1.g1" src="extracted/5845762/images/render_raw.jpg" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F2.sf1.2.1.1" style="font-size:90%;">(a)</span> </span><span class="ltx_text" id="S4.F2.sf1.3.2" style="font-size:90%;">A sample taken from our PBR YCB-V DS dataset.</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_figure ltx_figure_panel" id="S4.F2.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="449" id="S4.F2.sf2.g1" src="extracted/5845762/images/render_bboxes.jpg" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F2.sf2.2.1.1" style="font-size:90%;">(b)</span> </span><span class="ltx_text" id="S4.F2.sf2.3.2" style="font-size:90%;">Another sample from our dataset. Perfect ground truth lends itself to compare performance between algorithms.</span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F2.2.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S4.F2.3.2" style="font-size:90%;">Physically-Based-Rendered Dataset Examples</span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">We created both stereo physically-based renderings in BOP format (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4.F2" title="Figure 2 ‣ 4.1 Synthetic and real Dataset ‣ 4 Evaluation ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">2</span></a>), as well as a set of high quality real-world stereo + depth video recordings consisting of 32 scenes. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1"><span class="ltx_text ltx_font_bold" id="S4.SS1.p2.1.1">Data Generation and Processing.</span> Our dataset includes a wide range of generated scenes with randomly sampled views, objects of interest, distraction objects, and object locations. We physically simulate the objects under gravity, which ensures a wide range of realistic occlusions in the resulting scenes. The background texture, lighting direction and intensity, viewpoints, material and reflectivity of objects were sampled randomly. By extending BlenderProc to output stereo pairs, we get perfect ground truth for the 6DOPE problem.
+In total, we rendered fifty thousand stereo frames consisting of RGB and depth images, including up to 15 target objects per frame. For each scene, 25 frames were obtained from random viewpoints of the scene. Annotations such as object masks and visibility percentages were computed with the BOP Toolkit. Next, the GDRN and SO-Pose repositories were used to compute additional required annotations, such as 2D-3D correspondences and occlusion correspondences. For computing 2D-3D correspondences we modified scripts from the SO-Pose repository, speeding them up using Numba, an LLVM-based Python JIT compiler, and pallelizing tasks with Python Multiprocessing.
+In addition, we converted the file formats from the previous papers to a compressed file format (.npz) to reduce memory requirements and save space.
+The SO-Pose occlusion labels were generated using scripts from the SO-Pose repository, and we again used Numba and Python Multiprocessing to accelerate the process and compress the files.
+Finally, we removed ground truth labels if less than 10% of the object surface was visible in either of the stereo image pairs from the dataset for stability reasons. We ended up with a training set containing 433.645 labels and a test set containing 48.080 labels. Also note that the average visibility of target objects in our dataset is only 62%. High amount of occlusion is commonly recognized as increasing the difficulty of the 6DOPE problem, making our dataset quite challenging. 
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1"><span class="ltx_text ltx_font_bold" id="S4.SS1.p3.1.1">Recordings.</span>
+We provide videos (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4.F3" title="Figure 3 ‣ 4.1 Synthetic and real Dataset ‣ 4 Evaluation ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">3</span></a>) taken in three different sessions, including a wide range of object combinations and number of objects, as well as lighting conditions. Scenes include spacious and cluttered rooms, featuring large windows and diverse lighting conditions, including natural illumination, intense direct sunlight, artificial illumination, and a dimly lit room. For recording we used two Microsoft Azure Kinects mounted on a tabletop tripod with a baseline of 50 millimeters (Figure <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4.F3" title="Figure 3 ‣ 4.1 Synthetic and real Dataset ‣ 4 Evaluation ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">3</span></a>). Our setup exports two camera streams, each with a 2048 x 1536 pixel RGB signal plus a 640 x 576 pixel depth video. 
+<br class="ltx_break"/>As for the test objects, unfortunately, some of the objects are not obtainable
+anymore, thus they were replaced by newer versions. These objects differ
+from the ones in the synthetic dataset. Specifically different are the objects 002_master_chef_can (modified texture), 019_pitcher_base (color changed from blue to a transparent color with a red lid), and 035_power_drill (slight changes to overall appearance). Finally, we used various objects to distract object detectors and pose estimators. Among them are transparent or metallic objects such as glass water
+bottles or pans.</p>
+</div>
+<figure class="ltx_figure" id="S4.F3">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel" id="S4.F3.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="598" id="S4.F3.1.g1" src="extracted/5845762/images/setup.jpg" width="598"/>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel" id="S4.F3.2"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="449" id="S4.F3.2.g1" src="extracted/5845762/images/rgb_b0299.png" width="598"/>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel" id="S4.F3.3"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="449" id="S4.F3.3.g1" src="extracted/5845762/images/rgb0299.png" width="598"/>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_4">
+<figure class="ltx_figure ltx_figure_panel" id="S4.F3.4"><img alt="Refer to caption" class="ltx_graphics ltx_img_square" height="538" id="S4.F3.4.g1" src="extracted/5845762/images/depth0299_processed.png" width="598"/>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F3.6.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S4.F3.7.2" style="font-size:90%;">Using our setup of 2 Azure Kinect cameras we acquire high resolution color images together with depth information. From left to right: Our camera setup, frame of first camera, frame frame of second camera, one of the corresponding depth images.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Parameterization</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">Our approaches extend GDRN and SO-Pose, which we use as our monocular baseline. To make the comparison as fair as possible, we stick to their parameterization where possible. Since our data should be similar to the YCB-V dataset, we adopt the configuration specified by the authors, except for the adjustment of the parameter governing the exclusion of training parameters based on visibility: The visibility threshold, a training parameter initially set to 0.2 in the SO-Pose paper, dictates that training labels with less than 20% visibility due to occlusion or cutoff are excluded. Since our synthetic dataset already excludes labels with less than 10% visibility, and we aim to include cases where one label has 11% visibility while the other has 22%, we have removed this threshold across all configurations in the methods considered in our work.
+<br class="ltx_break"/>Next we go into more detail on some of our considerations and parameters:</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p2.1.1">Bounding Box Unification.</span>
+The bounding boxes of the two images undergo expansion to encompass the bounding boxes from both images, resulting in a singular larger bounding box used for both images. Unification is essential for consolidating two detections into a single prediction, given that the prediction is made relative to the bounding box. Additionally, aligning the horizontal lines is necessary for stereo matching with depth estimation.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p3.1.1">Stereo Matching.</span> For obtaining general depth information, we utilize the disparity estimation network MobileStereoNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib23" title="">23</a>]</cite>. It is relatively lightweight, yet we additionally scaled the size of the hidden layers down to diminish memory requirements and reduce the computational cost of the network and shared the backbone with the rest of the network.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p4">
+<p class="ltx_p" id="S4.SS2.p4.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p4.1.1">Feature Heads.</span>
+Except for the stereo matching features, the feature heads remain unchanged from the GDRN and SO-Pose baselines.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p5">
+<p class="ltx_p" id="S4.SS2.p5.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p5.1.1">Loss Function.</span>
+The loss function encompasses the individual loss functions associated with GDRN, SO-Pose, and the stereo matching network (if used). We do not change the weighting of individual loss terms compared to the baseline algorithms.</p>
+</div>
+<figure class="ltx_table" id="S4.T1">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S4.T1.2">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T1.2.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S4.T1.2.1.1.1">Method</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S4.T1.2.1.1.2">GDRN</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S4.T1.2.1.1.3">GDRNPP</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S4.T1.2.1.1.4">SO-Pose</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" id="S4.T1.2.1.1.5">SO-Stereo</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" colspan="3" id="S4.T1.2.1.1.6">GDRN-Stereo</th>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.2.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column" id="S4.T1.2.2.2.1">Fusion</th>
+<th class="ltx_td ltx_th ltx_th_column" id="S4.T1.2.2.2.2"></th>
+<th class="ltx_td ltx_th ltx_th_column" id="S4.T1.2.2.2.3"></th>
+<th class="ltx_td ltx_th ltx_th_column" id="S4.T1.2.2.2.4"></th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column" id="S4.T1.2.2.2.5">early</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" colspan="2" id="S4.T1.2.2.2.6">early</th>
+<th class="ltx_td ltx_nopad_r ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T1.2.2.2.7">double</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T1.2.3.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column" id="S4.T1.2.3.1.1">Shared Backbone Disp. Pred.</th>
+<th class="ltx_td ltx_th ltx_th_column" id="S4.T1.2.3.1.2"></th>
+<th class="ltx_td ltx_th ltx_th_column" id="S4.T1.2.3.1.3"></th>
+<th class="ltx_td ltx_th ltx_th_column" id="S4.T1.2.3.1.4"></th>
+<th class="ltx_td ltx_th ltx_th_column" id="S4.T1.2.3.1.5"></th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T1.2.3.1.6">yes</th>
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S4.T1.2.3.1.7">no</th>
+<td class="ltx_td ltx_nopad_r" id="S4.T1.2.3.1.8"></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.4.2">
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.4.2.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.4.2.1.1">002_master_chef_can</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.4.2.2">48.7</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.4.2.3">48.7</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.4.2.4">20.1</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.4.2.5">29.0</td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.4.2.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.4.2.6.1">53.0</span></td>
+<td class="ltx_td ltx_align_left ltx_border_t" id="S4.T1.2.4.2.7">50.6</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left ltx_border_t" id="S4.T1.2.4.2.8">51.0</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.5.3">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.5.3.1">003_cracker_box</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.5.3.2">46.7</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.5.3.3"><span class="ltx_text ltx_font_bold" id="S4.T1.2.5.3.3.1">49.9</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.5.3.4">44.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.5.3.5">49.3</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.5.3.6">48.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.5.3.7">47.5</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.5.3.8">48.9</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.6.4">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.6.4.1">004_sugar_box</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.6.4.2">37.7</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.6.4.3">36.3</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.6.4.4">35.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.6.4.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.6.4.5.1">43.6</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.6.4.6">43.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.6.4.7">39.3</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.6.4.8">40.9</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.7.5">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.7.5.1">005_tomato_soup_can</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.7.5.2">30.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.7.5.3">30.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.7.5.4">28.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.7.5.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.7.5.5.1">36.8</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.7.5.6">32.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.7.5.7">31.5</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.7.5.8">33.1</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.8.6">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.8.6.1">006_mustard_bottle</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.8.6.2">40.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.8.6.3">42.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.8.6.4">38.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.8.6.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.8.6.5.1">45.7</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.8.6.6">44.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.8.6.7">44.6</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.8.6.8">43.2</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.9.7">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.9.7.1">007_tuna_fish_can</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.9.7.2">19.8</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.9.7.3">17.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.9.7.4">15.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.9.7.5">20.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.9.7.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.9.7.6.1">21.7</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.9.7.7">20.0</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.9.7.8">19.5</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.10.8">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.10.8.1">008_pudding_box</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.10.8.2">25.8</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.10.8.3">24.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.10.8.4">21.7</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.10.8.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.10.8.5.1">31.7</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.10.8.6">31.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.10.8.7">29.4</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.10.8.8">30.6</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.11.9">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.11.9.1">009_gelatin_box</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.11.9.2">20.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.11.9.3">20.3</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.11.9.4">16.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.11.9.5">23.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.11.9.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.11.9.6.1">23.5</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.11.9.7">22.2</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.11.9.8">20.4</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.12.10">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.12.10.1">010_potted_meat_can</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.12.10.2">28.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.12.10.3">27.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.12.10.4">25.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.12.10.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.12.10.5.1">34.7</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.12.10.6">33.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.12.10.7">33.2</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.12.10.8">31.9</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.13.11">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.13.11.1">011_banana</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.13.11.2">16.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.13.11.3">9.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.13.11.4">10.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.13.11.5">13.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.13.11.6">21.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.13.11.7">22.0</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.13.11.8"><span class="ltx_text ltx_font_bold" id="S4.T1.2.13.11.8.1">23.0</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.14.12">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.14.12.1">019_pitcher_base</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.14.12.2">49.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.14.12.3">48.0</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.14.12.4">43.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.14.12.5">48.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.14.12.6">50.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.14.12.7">49.2</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.14.12.8"><span class="ltx_text ltx_font_bold" id="S4.T1.2.14.12.8.1">51.4</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.15.13">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.15.13.1">021_bleach_cleanser</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.15.13.2">45.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.15.13.3">43.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.15.13.4">41.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.15.13.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.15.13.5.1">48.4</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.15.13.6">47.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.15.13.7">44.3</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.15.13.8">48.0</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.16.14">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.16.14.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.16.14.1.1">024_bowl</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.16.14.2">61.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.16.14.3">64.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.16.14.4">62.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.16.14.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.16.14.5.1">71.8</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.16.14.6">66.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.16.14.7">64.6</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.16.14.8">66.4</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.17.15">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.17.15.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.17.15.1.1">025_mug</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.17.15.2">32.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.17.15.3">31.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.17.15.4">26.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.17.15.5">34.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.17.15.6">35.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.17.15.7">34.0</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.17.15.8"><span class="ltx_text ltx_font_bold" id="S4.T1.2.17.15.8.1">35.8</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.18.16">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.18.16.1">035_power_drill</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.18.16.2">37.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.18.16.3">19.7</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.18.16.4">31.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.18.16.5">37.0</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.18.16.6">38.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.18.16.7">35.6</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.18.16.8"><span class="ltx_text ltx_font_bold" id="S4.T1.2.18.16.8.1">39.5</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.19.17">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.19.17.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.19.17.1.1">036_wood_block</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.19.17.2">70.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.19.17.3"><span class="ltx_text ltx_font_bold" id="S4.T1.2.19.17.3.1">76.2</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.19.17.4">67.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.19.17.5">75.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.19.17.6">73.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.19.17.7">72.2</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.19.17.8">71.8</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.20.18">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.20.18.1">037_scissors</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.20.18.2">12.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.20.18.3">8.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.20.18.4">10.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.20.18.5">12.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.20.18.6">15.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.20.18.7">14.6</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.20.18.8"><span class="ltx_text ltx_font_bold" id="S4.T1.2.20.18.8.1">15.6</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.21.19">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.21.19.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.21.19.1.1">040_large_marker</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.21.19.2">8.6</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.21.19.3">4.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.21.19.4">4.3</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.21.19.5">5.9</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.21.19.6">9.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.21.19.7">10.2</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.21.19.8"><span class="ltx_text ltx_font_bold" id="S4.T1.2.21.19.8.1">11.8</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.22.20">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.22.20.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.22.20.1.1">051_large_clamp</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.22.20.2">44.5</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.22.20.3">42.4</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.22.20.4">43.8</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.22.20.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.22.20.5.1">53.5</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.22.20.6">50.3</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.22.20.7">51.3</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.22.20.8">51.5</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.23.21">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.23.21.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.23.21.1.1">052_extra_large_clamp</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.23.21.2">49.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.23.21.3">39.8</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.23.21.4">50.3</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.23.21.5">52.0</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.23.21.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.23.21.6.1">55.7</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.23.21.7">53.8</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.23.21.8">53.1</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.24.22">
+<td class="ltx_td ltx_align_left" id="S4.T1.2.24.22.1"><span class="ltx_text ltx_font_italic" id="S4.T1.2.24.22.1.1">061_foam_brick</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.24.22.2">37.2</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.24.22.3">43.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.24.22.4">33.1</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.24.22.5"><span class="ltx_text ltx_font_bold" id="S4.T1.2.24.22.5.1">50.5</span></td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.24.22.6">43.3</td>
+<td class="ltx_td ltx_align_left" id="S4.T1.2.24.22.7">42.8</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left" id="S4.T1.2.24.22.8">43.0</td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.2.25.23">
+<td class="ltx_td ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.1"></td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.2">36.3</td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.3">34.7</td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.4">31.8</td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.5">39.0</td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.6"><span class="ltx_text ltx_font_bold" id="S4.T1.2.25.23.6.1">40.0</span></td>
+<td class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.7">38.7</td>
+<td class="ltx_td ltx_nopad_r ltx_align_left ltx_border_bb ltx_border_t" id="S4.T1.2.25.23.8">39.5</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T1.5.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text" id="S4.T1.6.2" style="font-size:90%;">We report the performance of our proposed methods on a per-object basis, comparing the accuracy of a single multi-object model for both mono and stereo configurations using the common ADD0.1 metric. Our findings show that the integration of stereo vision significantly enhances performance on both SO-Pose and GDRN(PP).
+Stereo-GDRN with early fusion increases overall performance over mono GDRN from 36.3 to 38.7. Adding disparity prediction using the shared backbone adds another 1.3. Double fusion, entailing fusion both early and late in the architecture, places itself between both early fusion variants. While it demonstrated superior performance for specific objects, it did not consistently enhance overall accuracy over early fusion only. Best result per object in <span class="ltx_text ltx_font_bold" id="S4.T1.6.2.1">bold font</span>, symmetric objects in <span class="ltx_text ltx_font_italic" id="S4.T1.6.2.2">italics.</span></span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.p6">
+<p class="ltx_p" id="S4.SS2.p6.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p6.1.1">Optimization.</span>
+To optimize our model, we employed the Ranger <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#bib.bib29" title="">29</a>]</cite> optimizer with a learning rate of <math alttext="0.0001" class="ltx_Math" display="inline" id="S4.SS2.p6.1.m1.1"><semantics id="S4.SS2.p6.1.m1.1a"><mn id="S4.SS2.p6.1.m1.1.1" xref="S4.SS2.p6.1.m1.1.1.cmml">0.0001</mn><annotation-xml encoding="MathML-Content" id="S4.SS2.p6.1.m1.1b"><cn id="S4.SS2.p6.1.m1.1.1.cmml" type="float" xref="S4.SS2.p6.1.m1.1.1">0.0001</cn></annotation-xml><annotation encoding="application/x-tex" id="S4.SS2.p6.1.m1.1c">0.0001</annotation><annotation encoding="application/x-llamapun" id="S4.SS2.p6.1.m1.1d">0.0001</annotation></semantics></math>. The learning rate undergoes a warm-up phase with a factor of 0.001 during the initial 1000 iterations. In the final 27% to 72% of the training period we use learning rate annealing using the cosine function.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Results</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">We evaluate our methods on the Stereo PBR YCB-V DS dataset, as its perfect labeling presents itself for fair comparison between the algorithms. Table <a class="ltx_ref" href="https://arxiv.org/html/2402.05610v2#S4.T1" title="Table 1 ‣ 4.2 Parameterization ‣ 4 Evaluation ‣ Extending 6D Object Pose Estimators for Stereo Vision"><span class="ltx_text ltx_ref_tag">1</span></a> compares our approaches SO-Stereo and GDRN-Stereo to GDRN, GDRNPP, and SO-Pose. In our experiments we find that some of our ideas such as mid or late fusion do not lead to a meaningful increase in performance when accounting for the additional compute requirements. Therefore we only report results on a selection of our approaches.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1">Our findings are that GDRN-Stereo with early and double fusion leads to best results, with the combination of early fusion with disparity features outperforming other methods. SO-Pose performed best with early fusion, but does not match the best performing versions of GDRN-Stereo.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p3">
+<p class="ltx_p" id="S4.SS3.p3.1">Interestingly the best approach, GDRN-Stereo with incorporating early fusion with disparity, does not outperform by performing best on a large number of objects, but by being less bad on the worst performing objects (comparing GDRN with GDRN-Stereo and objects 040_large_marker and 037_scissors). In contrast, SO-Stereo with early fusion achieves best per-object performance for 9 out of 21 objects, but not best performance across all objects. We also note that, while we see a big performance difference between the mono versions of GDRN and SO-Pose, the gap narrows with our stereo extension. Especially impressive is the performance gain when integrating stereo into SO-Pose. Also noteworthy is the strong outperformance on symmetric objects using our methods, especially with early fusion SO-Stereo. The single worst object throughout all algorithms is the, contrary to its name, small 040_large_marker, with single decimal results for all monocular methods, but we can report noticeably improvements using our GDRN-Stereo. Among the best performing objects are 036_wood_block and 024_bowl, with the first being one of only two objects on which a single-view algorithm outperformed our stereo extensions.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p4">
+<p class="ltx_p" id="S4.SS3.p4.1">In sum, all of our stereo methods outperform the monocular counterparts in the single model multi-object scenario on our heavily occluded YCB-V DS dataset with a significant margin.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">We extended single-view state-of-the-art approaches for 6D pose estimation, GDRNet(PP) and SO-Pose, to incorporate stereo information and doing so, improved upon the performance noticeably. Our approach can be integrated in similar algorithms and adds only limited compute overhead. We provide our stereo + depth <a class="ltx_ref ltx_href" href="https://huggingface.co/datasets/tpoellabauer/YCB-V-DS" title="">YCB-V dataset (YCB-V DS)</a> to be used in future work.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+Bay, H., Tuytelaars, T., Van Gool, L.: Surf: Speeded up robust features. In:
+Computer Vision–ECCV 2006: 9th European Conference on Computer Vision, Graz,
+Austria, May 7-13, 2006. Proceedings, Part I 9. pp. 404–417. Springer (2006)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Denninger, M., Sundermeyer, M., Winkelbauer, D., Olefir, D., Hodan, T., Zidan,
+Y., Elbadrawy, M., Knauer, M., Katam, H., Lodhi, A.: Blenderproc: Reducing
+the reality gap with photorealistic rendering. In: International Conference
+on Robotics: Sciene and Systems, RSS 2020 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+Di, Y., Manhardt, F., Wang, G., Ji, X., Navab, N., Tombari, F.: So-pose:
+Exploiting self-occlusion for direct 6d pose estimation. In: Proceedings of
+the IEEE/CVF International Conference on Computer Vision. pp. 12396–12405
+(2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+Du, X., El-Khamy, M., Lee, J.: Amnet: Deep atrous multiscale stereo disparity
+estimation networks. arXiv preprint arXiv:1904.09099 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Fischer, P., Dosovitskiy, A., Ilg, E., Häusser, P., Hazırbaş, C.,
+Golkov, V., Van der Smagt, P., Cremers, D., Brox, T.: Flownet: Learning
+optical flow with convolutional networks. arXiv preprint arXiv:1504.06852
+(2015)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+He, K., Zhang, X., Ren, S., Sun, J.: Deep residual learning for image
+recognition. In: Proceedings of the IEEE conference on computer vision and
+pattern recognition. pp. 770–778 (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+Hodaň, T., Matas, J., Obdržálek, Š.: On evaluation of 6d
+object pose estimation. In: Computer Vision–ECCV 2016 Workshops: Amsterdam,
+The Netherlands, October 8-10 and 15-16, 2016, Proceedings, Part III 14. pp.
+606–619. Springer (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+Hodan, T., Michel, F., Brachmann, E., Kehl, W., GlentBuch, A., Kraft, D.,
+Drost, B., Vidal, J., Ihrke, S., Zabulis, X., et al.: Bop: Benchmark for 6d
+object pose estimation. In: Proceedings of the European Conference on
+Computer Vision (ECCV). pp. 19–34 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Hodaň, T., Sundermeyer, M., Drost, B., Labbé, Y., Brachmann, E.,
+Michel, F., Rother, C., Matas, J.: Bop challenge 2020 on 6d object
+localization. In: European Conference on Computer Vision. pp. 577–594.
+Springer (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+Hodaň, T., Sundermeyer, M., Labbé, Y., et al.: Bop challenge 2023. In: 8th
+International Workshop on Recovering 6D Object Pose (R6D) at ICCV23 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Iwase, S., Liu, X., Khirodkar, R., Yokota, R., Kitani, K.M.: Repose: Fast 6d
+object pose refinement via deep texture rendering. In: Proceedings of the
+IEEE/CVF International Conference on Computer Vision. pp. 3303–3312 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Kendall, A., Martirosyan, H., Dasgupta, S., Henry, P., Kennedy, R., Bachrach,
+A., Bry, A.: End-to-end learning of geometry and context for deep stereo
+regression. In: Proceedings of the IEEE International Conference on Computer
+Vision. pp. 66–75 (2017)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Labbé, Y., Carpentier, J., Aubry, M., Sivic, J.: Cosypose: Consistent
+multi-view multi-object 6d pose estimation. In: European Conference on
+Computer Vision. pp. 574–591. Springer (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+Li, Y., Wang, G., Ji, X., Xiang, Y., Fox, D.: Deepim: Deep iterative matching
+for 6d pose estimation. In: Proceedings of the European Conference on
+Computer Vision (ECCV). pp. 683–698 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+Lipson, L., Teed, Z., Goyal, A., Deng, J.: Coupled iterative refinement for 6d
+multi-object pose estimation. In: Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition. pp. 6728–6737 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+Liu, X., Iwase, S., Kitani, K.M.: Stereobj-1m: Large-scale stereo image dataset
+for 6d object pose estimation. In: Proceedings of the IEEE/CVF International
+Conference on Computer Vision. pp. 10870–10879 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+Liu, X., Jonschkowski, R., Angelova, A., Konolige, K.: Keypose: Multi-view 3d
+labeling and keypoint estimation for transparent objects. In: Proceedings of
+the IEEE/CVF conference on computer vision and pattern recognition. pp.
+11602–11610 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+Liu, Z., Mao, H., Wu, C.Y., Feichtenhofer, C., Darrell, T., Xie, S.: A convnet
+for the 2020s. In: Proceedings of the IEEE/CVF conference on computer vision
+and pattern recognition. pp. 11976–11986 (2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+Lowe, D.G.: Distinctive image features from scale-invariant keypoints.
+International journal of computer vision <span class="ltx_text ltx_font_bold" id="bib.bib19.1.1">60</span>(2), 91–110 (2004)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+Luo, W., Schwing, A.G., Urtasun, R.: Efficient deep learning for stereo
+matching. In: Proceedings of the IEEE conference on computer vision and
+pattern recognition. pp. 5695–5703 (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+Mayer, N., Ilg, E., Hausser, P., Fischer, P., Cremers, D., Dosovitskiy, A.,
+Brox, T.: A large dataset to train convolutional networks for disparity,
+optical flow, and scene flow estimation. In: Proceedings of the IEEE
+conference on computer vision and pattern recognition. pp. 4040–4048 (2016)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+Peng, S., Liu, Y., Huang, Q., Zhou, X., Bao, H.: Pvnet: Pixel-wise voting
+network for 6dof pose estimation. In: Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition. pp. 4561–4570 (2019)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+Sandler, M., Howard, A., Zhu, M., Zhmoginov, A., Chen, L.C.: Mobilenetv2:
+Inverted residuals and linear bottlenecks. In: Proceedings of the IEEE
+conference on computer vision and pattern recognition. pp. 4510–4520 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+Shamsafar, F., Woerz, S., Rahim, R., Zell, A.: Mobilestereonet: Towards
+lightweight deep networks for stereo matching. In: Proceedings of the
+ieee/cvf winter conference on applications of computer vision. pp. 2417–2426
+(2022)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+Song, C., Song, J., Huang, Q.: Hybridpose: 6d object pose estimation under
+hybrid representations. In: Proceedings of the IEEE/CVF conference on
+computer vision and pattern recognition. pp. 431–440 (2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+Sundermeyer, M., Hodaň, T., Labbe, Y., Wang, G., Brachmann, E., Drost,
+B., Rother, C., Matas, J.: Bop challenge 2022 on detection, segmentation and
+pose estimation of specific rigid objects. In: Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition. pp. 2784–2793 (2023)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+T. Hodaň, M.S.: Bop toolkit. <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://github.com/thodan/bop_toolkit" title="">https://github.com/thodan/bop_toolkit</a>
+(2020)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+Wang, G., Manhardt, F., Tombari, F., Ji, X.: Gdr-net: Geometry-guided direct
+regression network for monocular 6d object pose estimation. In: Proceedings
+of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. pp.
+16611–16621 (2021)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+Wright, L.: Ranger-Deep-Learning-Optimizer (2019),
+<a class="ltx_ref ltx_url ltx_font_typewriter" href="https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer" title="">https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+Yang, G., Zhao, H., Shi, J., Deng, Z., Jia, J.: Segstereo: Exploiting semantic
+information for disparity estimation. In: Proceedings of the European
+Conference on Computer Vision (ECCV). pp. 636–651 (2018)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+Zagoruyko, S., Komodakis, N.: Learning to compare image patches via
+convolutional neural networks. In: Proceedings of the IEEE conference on
+computer vision and pattern recognition. pp. 4353–4361 (2015)
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+Zbontar, J., LeCun, Y.: Computing the stereo matching cost with a convolutional
+neural network. In: Proceedings of the IEEE conference on computer vision and
+pattern recognition. pp. 1592–1599 (2015)
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Tue Sep 10 13:49:36 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

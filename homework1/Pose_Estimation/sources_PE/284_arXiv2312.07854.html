@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users</title>
+<!--Generated on Wed Dec 13 02:44:12 2023 by LaTeXML (version 0.8.7) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv_0.7.4.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2312.07854v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="#S1" title="1 Introduction ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="#S2" title="2 Methods ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Methods</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S2.SS1" title="2.1 Dataset ‣ 2 Methods ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Dataset</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S2.SS2" title="2.2 Zero-shot pose estimation pipeline ‣ 2 Methods ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Zero-shot pose estimation pipeline</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S2.SS3" title="2.3 Edge map conditioned diffusion model ‣ 2 Methods ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Edge map conditioned diffusion model</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S2.SS4" title="2.4 Pretrained pose estimation model ‣ 2 Methods ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Pretrained pose estimation model</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S2.SS5" title="2.5 Error quantification on keypoints coordinates ‣ 2 Methods ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.5 </span>Error quantification on keypoints coordinates</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S2.SS6" title="2.6 Error quantification on joint kinematics ‣ 2 Methods ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.6 </span>Error quantification on joint kinematics</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="#S3" title="3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Results</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S3.SS1" title="3.1 Obvious misidentification in OpenPose resolved by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Obvious misidentification in OpenPose resolved by zero-shot method</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S3.SS2" title="3.2 Substantial improvement in accuracy of quantitative measures using zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Substantial improvement in accuracy of quantitative measures using zero-shot method</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S3.SS3" title="3.3 Comparison of performance between different prosthetic types ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Comparison of performance between different prosthetic types</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S3.SS4" title="3.4 Gait anomalies in prosthetic limb revealed by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Gait anomalies in prosthetic limb revealed by zero-shot method</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="#S4" title="4 Discussion ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Discussion</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S4.SS1" title="4.1 Improved pose estimation accuracy enables quantitative analysis of gait biomechanics in lower-limb amputees ‣ 4 Discussion ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Improved pose estimation accuracy enables quantitative analysis of gait biomechanics in lower-limb amputees</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="#S4.SS2" title="4.2 Limitation, possible solutions and future work ‣ 4 Discussion ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Limitation, possible solutions and future work</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="#S5" title="5 Conclusion ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<div aria-label="”Conversion" been="" class="package-alerts ltx_document" errors="" found”="" have="" role="“status”">
+<button aria-label="Dismiss alert" onclick="closePopup()">
+<span aria-hidden="true"><svg aria-hidden="true" focusable="false" height="20" role="presentation" viewbox="0 0 44 44" width="20">
+<path d="M0.549989 4.44999L4.44999 0.549988L43.45 39.55L39.55 43.45L0.549989 4.44999Z"></path>
+<path d="M39.55 0.549988L43.45 4.44999L4.44999 43.45L0.549988 39.55L39.55 0.549988Z"></path>
+</svg></span>
+</button>
+<p>HTML conversions <a href="https://info.dev.arxiv.org/about/accessibility_html_error_messages.html" target="_blank">sometimes display errors</a> due to content that did not convert correctly from the source. This paper uses the following packages that are not yet supported by the HTML conversion tool. Feedback on these issues are not necessary; they are known and are being worked on.</p>
+<ul arial-label="Unsupported packages used in this paper">
+<li>failed: manyfoot</li>
+</ul>
+<p>Authors: achieve the best HTML results from your LaTeX submissions by selecting from this list of <a href="https://corpora.mathweb.org/corpus/arxmliv/tex_to_html/info/loaded_file" target="_blank">supported packages</a>.</p>
+</div><div class="section" id="target-section"><div id="license-tr">License: CC BY 4.0</div><div id="watermark-tr">arXiv:2312.07854v1 [cs.CV] 13 Dec 2023</div></div>
+<script>
+            function closePopup() {
+                document.querySelector('.package-alerts').style.display = 'none';
+            }
+        </script>
+<article class="ltx_document ltx_fleqn">
+<h1 class="ltx_title ltx_title_document">Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Tianxun Zhou
+</span></span>
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Muhammad Nur Shahril Iskandar
+</span></span>
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Keng-Hwee Chiam
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id1.id1">The application of 2D markerless gait analysis has garnered increasing interest and application within clinical settings. However, its effectiveness in the realm of lower-limb amputees has remained less than optimal. In response, this study introduces an innovative zero-shot method employing image generation diffusion models to achieve markerless pose estimation for lower-limb prosthetics, presenting a promising solution to gait analysis for this specific population. Our approach demonstrates an enhancement in detecting key points on prosthetic limbs over existing methods, and enables clinicians to gain invaluable insights into the kinematics of lower-limb amputees across the gait cycle. The outcomes obtained not only serve as a proof-of-concept for the feasibility of this zero-shot approach but also underscore its potential in advancing rehabilitation through gait analysis for this unique population.</p>
+</div>
+<div class="ltx_classification">
+<h6 class="ltx_title ltx_title_classification">keywords: </h6>
+transtibial, transfemoral, amputee, gait, locomotion, biomechanics, movement science
+
+</div>
+<span class="ltx_ERROR undefined" id="id1">\affiliation</span>
+<div class="ltx_para" id="p1">
+<p class="ltx_p" id="p1.1">[inst1]organization=Bioinformatics Institute,addressline=30 Biopolis Street,
+postcode=138671,
+country=Singapore</p>
+</div>
+<span class="ltx_ERROR undefined" id="id2">\affiliation</span>
+<div class="ltx_para" id="p2">
+<p class="ltx_p" id="p2.1">[inst2]organization=Nanyang Technological University,addressline=1 Nanyang Walk,
+postcode=637616,
+country=Singapore</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Human gait, especially in lower limb amputees, is a complex motor task requiring coordinated movement of various body segments. Extensive research has established that individuals in these populations frequently exhibit distinct gait abnormalities and physiological challenges. For example, it is known that gait asymmetry <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib1" title="">powers1998knee </a>; <a class="ltx_ref" href="#bib.bib2" title="">esquenaziGaitAnalysisLowerLimb2014a </a></cite> is prevalent, where the prosthetic and intact limbs display different walking patterns. The presence of gait asymmetry may contribute to the development of degenerative joint disease <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib3" title="">yang2012utilization </a></cite>. Previous studies on physiological differences have also revealed that above-knee amputations lead to an increase in oxygen consumption by approximately 49% <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib4" title="">huangAmputationEnergyCost1979 </a></cite>, in addition to an approximately 65% higher energy expenditure when compared to individuals without amputations <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib5" title="">traughEnergyExpenditureAmbulation1975 </a></cite>. These issues could hinder mobility and functionality, ultimately diminishing the quality of life <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib6" title="">gailey2008review </a></cite>. Therefore, clinicians are often keen to understand the gait patterns of lower limb amputees both in general and at an individual level, in order to improve the quality of life of prosthetic users through better rehabilitation monitoring, providing better-fitted prosthetics, reducing gait abnormalities and more.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Gait analysis offers a systematic approach to identify pathological gait patterns associated with neurological <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib7" title="">celikGaitAnalysisNeurological2021 </a></cite>, musculoskeletal <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib8" title="">jalataMovementAnalysisNeurological2021 </a></cite>, and other disorders by collecting various gait parameters data <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib9" title="">loniniVideoBasedPoseEstimation2022 </a>; <a class="ltx_ref" href="#bib.bib10" title="">moroMarkerlessGaitAnalysis2020a </a></cite>. This allows clinicians to identify deviations from normal gait patterns and tailor interventions to address the specific issue. Gait analysis can be broadly classified as either observational<cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib11" title="">ridao-fernandezObservationalGaitAssessment2019 </a></cite>, or quantitative.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">In observational gait analysis (OGA), clinicians typically rely on a checklist to note the presence of pathological gait characteristics <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib2" title="">esquenaziGaitAnalysisLowerLimb2014a </a>; <a class="ltx_ref" href="#bib.bib11" title="">ridao-fernandezObservationalGaitAssessment2019 </a></cite>. For instance, studies have shown that individuals with lower-limb amputations often exhibit a lateral trunk lean towards the prosthetic limb <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib2" title="">esquenaziGaitAnalysisLowerLimb2014a </a>; <a class="ltx_ref" href="#bib.bib12" title="">highsmith2016gait </a></cite>. When clinicians observe such characteristics during OGA, they simply mark a tick on the checklist. Subsequently, they may address these issues by implementing interventions to reduce the extent of lateral trunk lean through targeted training. These metrics are often qualitative, which may introduce errors in terms of inter- and intra-rater reliability <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib13" title="">hillmanRepeatabilityNewObservational2010 </a></cite> and are recommended to supplement their clinical assessment with some form of quantitative measurement <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib14" title="">saleh1985defence </a>; <a class="ltx_ref" href="#bib.bib15" title="">wilken2009gait </a></cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Quantitative gait assessments have been facilitated by technologies such as instrumented motion analysis <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib16" title="">sanderson1997lower </a></cite>, force platforms, electromyography <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib1" title="">powers1998knee </a></cite>, and wearable sensors. These tools allow clinicians to systematically quantify a spectrum of gait parameters, enabling them to effectively monitor progress throughout the rehabilitation journey. For instance, Sjödahl et al. <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib17" title="">sjodahl2002kinematic </a></cite> used force platforms and motion-capture systems to identify increased hip flexion at the beginning of the stance phase on the intact limb, offering timely feedback to the patient. Furthermore, intricate spatiotemporal variables such as step length and cadence could be scrutinized in meticulous detail. The study revealed a reduction in variability on the prosthetic limb, indicative of a more stabilized and symmetrical gait pattern post-treatment. Such nuanced, comprehensive and timely analysis would not be possible if clinicians were tasked with manually tracking each individual step.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">Therefore, although trained clinicians may possess the expertise to identify pathological gait patterns in OGA, the introduction of quantification brings objectivity into the assessment, facilitating more accurate and precise measurements of diverse gait parameters. This also becomes crucial when comparing results among different clinicians, ensuring consistency and reducing subjective interpretation. Furthermore, by collecting standardized and objective data, researchers can analyze gait patterns across a larger sample of amputees, compare rehabilitation strategies, and evaluate the effectiveness of different prosthetic devices.
+</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">While trained clinicians may possess the expertise to discern pathological gait patterns through OGA, the integration of quantification brings greater objectivity into the assessments. This would enable more precise and accurate measurements of a diverse range of gait parameters. This is particularly crucial when comparing results across different clinicians, ensuring consistency and mitigating subjective interpretation. Moreover, through the collection of standardized and objective data, researchers gain the ability to analyze gait patterns across a broader spectrum of amputees, compare rehabilitation strategies, and assess the efficacy of various prosthetic devices with unprecedented granularity.</p>
+</div>
+<div class="ltx_para" id="S1.p7">
+<p class="ltx_p" id="S1.p7.1">Traditionally, obtaining quantitative measurements demands specialized, often costly equipment, which confines data collection to controlled laboratory environments, subsequently limiting the broader applicability of findings <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib18" title="">blairMagnitudeVariabilityGait2018 </a>; <a class="ltx_ref" href="#bib.bib19" title="">van2020motorized </a></cite>. In recent years, an alternative arises through the utilization of high-speed video recording on commercial video cameras. Advances in deep learning have enabled rapid progress in human pose estimation from videos <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib20" title="">bernal-torresDevelopmentNewLowcost2023 </a>; <a class="ltx_ref" href="#bib.bib21" title="">chenMonocularHumanPose2020 </a>; <a class="ltx_ref" href="#bib.bib22" title="">insafutdinovDeeperCutDeeperStronger2016 </a>; <a class="ltx_ref" href="#bib.bib23" title="">mathisPrimerMotionCapture2020 </a></cite>. Pose estimation software such as OpenPose <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib24" title="">caoOpenPoseRealtimeMultiPerson2021 </a></cite> are able to estimate the position of keypoints such as joints on images of humans without the need for markers. With multiple cameras, it is possible to triangulate the keypoints to obtain 3D coordinates <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib25" title="">uhlrichOpenCap3DHuman2022 </a></cite>. Such markerless pose estimation techniques may potentially be the key to cost-effective systems for automated clinical gait analysis. Several studies have examined the accuracy of available pose estimation methods specifically for gait analysis applications <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib10" title="">moroMarkerlessGaitAnalysis2020a </a>; <a class="ltx_ref" href="#bib.bib26" title="">vanhoorenAccuracyMarkerlessMotion2023 </a>; <a class="ltx_ref" href="#bib.bib27" title="">washabaughComparingAccuracyOpensource2022b </a>; <a class="ltx_ref" href="#bib.bib28" title="">stenumTwodimensionalVideobasedAnalysis2021a </a></cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p8">
+<p class="ltx_p" id="S1.p8.1">Current markerless pose estimation models face challenges in accurately localizing joints on prosthetic limbs <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib29" title="">cimorelliPortableInclinicVideobased2022 </a></cite>. This limitation stems from their training on datasets primarily featuring able-bodied individuals, resulting in poor generalization to unseen prosthetic limbs. Custom models tailored for prosthetic keypoint identification have been proposed, yet their applicability across diverse settings is constrained by the wide array of prosthetic appearances and limited training data <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib29" title="">cimorelliPortableInclinicVideobased2022 </a>; <a class="ltx_ref" href="#bib.bib30" title="">mathisDeepLabCutMarkerlessPose2018 </a></cite>. Achieving robust generalization across varied settings necessitates training on extensive datasets akin to those used in general human pose estimation, like the COCO dataset underlying OpenPose. However, the resource-intensive manual labelling of such datasets presents a formidable barrier in terms of cost and time and would likely be beyond the reach of rehabilitation labs.</p>
+</div>
+<div class="ltx_para" id="S1.p9">
+<p class="ltx_p" id="S1.p9.1">This paper introduces a novel zero-shot pose estimation method leveraging existing pre-trained image generative diffusion models and pose estimation frameworks to achieve accurate pose estimation for lower limb prosthetic users. Recent advances in image generation artificial intelligence, notably with denoising diffusion models, have enabled the generation of remarkably realistic images conditioned on diverse inputs, including text descriptions and sample images <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib31" title="">zhangAddingConditionalControl2023 </a></cite>. Leveraging the capabilities of these image generation models, we transform prosthetic limbs in images into representations resembling able-bodied limbs while preserving their position and shape. This technique empowers existing pose estimation models to make accurate keypoint estimations on lower-limb prosthetics without further training.</p>
+</div>
+<div class="ltx_para" id="S1.p10">
+<p class="ltx_p" id="S1.p10.1">To our knowledge, this is the first work that achieves zero-shot pose estimation for lower-limb prosthetic users. The contributions of this paper are twofold. First, we provide quantification of the errors made by one of the most widely used pre-trained pose estimation software, OpenPose, on lower-limb prosthetic users. Second, we demonstrate a working method for accurate zero-shot pose estimation on lower-limb prosthetic users without the need for any data collection, labelling or training.
+</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Methods</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">We analyzed publicly accessible videos of individuals with unilateral lower-limb prosthetic walking from video sharing website YouTube <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib32" title="">missiongait2023 </a></cite>. For each video, an image generative model, ControlNet, was utilized to generate synthetic images corresponding to every frame of the video. Subsequently, OpenPose was applied to these newly synthesized images, allowing for the extraction of anatomical keypoints. Inverse kinematics was performed based on the 2D coordinates generated. We then evaluated the performance based on a custom model created using DeepLabCut (DLC). Gardiner et al. <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib33" title="">gardinerCrowdSourcedAmputeeGait2016a </a></cite> have shown that using publicly available videos produces results that are comparable with published data from controlled laboratory studies.</p>
+</div>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Dataset</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">The video search was conducted by a single researcher with terms include: gait, walking, amputee, transtibial, and transfemoral. A total of 16 videos containing two subjects with different amputation levels; a female transfemoral and a male transtibial amputee, were downloaded. Essentially, each subject has two sets of four videos (Supplementary Fig. 1), recorded at different camera positions (i.e., anterior, posterior, left and right). Both subjects are amputees on the right side. As the source of videos was publicly available, the etiology for amputation, time since amputation and type of prosthetic used were unknown. The videos were downloaded at a resolution of 1280 x 720 and 30 frames per second. Subsequently, each video was trimmed to 6 seconds (180 frames) as the initial videos included the subject changing walking direction, before following the zero-shot pose estimation pipeline.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Zero-shot pose estimation pipeline</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">The pipeline for zero-shot pose estimation is as follows. Given a video, for each frame, we first apply edge detection using Canny edge detection to generate an edge map. The edge map is then used as the conditional control into a text-to-image generative diffusion model. In this case, we use ControlNet proposed by Zhang &amp; Agrawala <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib31" title="">zhangAddingConditionalControl2023 </a></cite> which applies conditional controls using inputs such as edge maps, segmentation maps, and keypoints to pretrained large diffusion models to support additional input conditions other than prompt text. The generated image by the diffusion model conforms to the edge map to a large extent but transforms the prosthetic limbs into able-bodied limbs. The generated image is then passed to a standard pose estimation model, for example, OpenPose, trained on large human pose estimation datasets to output the pixel locations of body keypoints. The frames were rescaled to 512 x 512 to adhere to the default ControlNet configuration.
+</p>
+</div>
+<figure class="ltx_figure" id="S2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="286" id="S2.F1.g1" src="extracted/5291615/figure_workflow.png" width="538"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span><span class="ltx_text ltx_font_bold" id="S2.F1.3.1">(A)</span> The typical workflow when using pose estimation such as OpenPose. This is also a case example where the default OpenPose fails to adequately identify keypoints on the prosthetic limb.<span class="ltx_text ltx_font_bold" id="S2.F1.4.2">(B)</span> The proposed zero-shot workflow involves first acquiring the edge map of the original image and subsequently generating a synthetic image, which can then be utilized for pose estimation purposes.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Edge map conditioned diffusion model</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">Image generative diffusion models are currently state-of-the-art models for generating synthetic images. They are inspired by the diffusion process where molecules move from high to low-concentration areas, leading to a homogenization of the distribution over time. In image generation, the diffusion process is applied to the image pixels, where random noise is added over a number of time steps until the image is indistinguishable from random Gaussian noise.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1">The diffusion process is typically implemented using a sequence of invertible transformations, such as Gaussian diffusion or Langevin dynamics. During training, the model learns to reverse the diffusion process given the time step and the noisy image at that time step. During inference, new images can be generated by sampling from random Gaussian noise and applying the learnt reverse diffusion step-wise to obtain a clean generated image.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<p class="ltx_p" id="S2.SS3.p3.1">To generate images conditioned upon other features such as class, text description, or sample image, the conditioning information is provided to the diffusion model as an additional input. The conditioning information is typically encoded into a fixed-length vector representation using a separate neural network, such as a text encoder, which is then used as an input to the diffusion model.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p4">
+<p class="ltx_p" id="S2.SS3.p4.1">During training, the diffusion model is trained to maximize the log-likelihood of the observed data given the conditioning information. During inference, the conditioned diffusion model is used to generate images by sampling from the diffusion process given the conditioning information. The conditioning information is used to initialize the diffusion process and to guide the sampling process at each time step.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p5">
+<p class="ltx_p" id="S2.SS3.p5.1">Overall, conditioning diffusion models for image generation involves modifying the training and inference procedures to incorporate the conditioning information, and training a separate network to encode the conditioning information into a fixed-length vector that can be used as input to the diffusion model.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p6">
+<p class="ltx_p" id="S2.SS3.p6.1">ControlNet is a neural network architecture proposed by <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib31" title="">zhangAddingConditionalControl2023 </a></cite> that applies task-specific controls to large image diffusion models such as Stable Diffusion. ControlNet does so by changing the inputs of diffusion network blocks. ControlNet makes a copy of the network block and applies a 1x1 convolution layer before and after the block. The corresponding diffusion model network block weights are frozen during training to avoid overfitting to the smaller conditional training set and preserve the model’s pre-trained high-quality image generation capabilities. The control condition is fed to the first 1x1 convolution layer and the output of that layer is added to the original input of the network block. This modified input is then passed through the network block and the subsequent 1x1 convolution layer. The resulting output is added to the original output of the network block <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib31" title="">zhangAddingConditionalControl2023 </a></cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p7">
+<p class="ltx_p" id="S2.SS3.p7.1">On the Stable Diffusion model, which follows a U-Net architecture, ControlNet is implemented to control each level of the U-Net. It creates trainable copies of the 12 encoding blocks and 1 middle block of Stable Diffusion. The outputs of the ControlNet are added to the 12 skip-connections and 1 middle block of the U-Net. We refer interested readers to the detailed explanation in the original paper.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p8">
+<p class="ltx_p" id="S2.SS3.p8.1">ControlNets have been trained to perform tasks based on various conditions, this includes generating images that are controlled by Canny edges, Hough lines, HED edges, human pose keypoints, segmentation maps, depth maps and more.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p9">
+<p class="ltx_p" id="S2.SS3.p9.1">Specifically relevant to this application, the Canny edge conditioned ControlNet was trained with edge maps that were obtained by processing 3M images (with captions) using the Canny edge detector. The positive prompts used to generate images for this study were, “an able-body person walking, intact lower limbs, 2 legs, full-body portrait, realistic”, while the negative prompts were, “cyborg, amputee, panfuturism”. The code for ControlNet is created by <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib31" title="">zhangAddingConditionalControl2023 </a></cite> and available at <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://github.com/lllyasviel/ControlNet" title="">https://github.com/lllyasviel/ControlNet</a>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Pretrained pose estimation model</h3>
+<div class="ltx_para" id="S2.SS4.p1">
+<p class="ltx_p" id="S2.SS4.p1.1">Human pose estimation models aim to estimate the pose of humans in 2D images, typically by detecting body keypoints. Deep learning has led to significant advances in human pose estimation, and models such as OpenPose and AlphaPose, which have been trained on large datasets (COCO human keypoints dataset), demonstrated good performance on various benchmarks. Several studies also investigated the accuracy of these pretrained pose estimation models for clinical applications including gait analysis. Here we introduce OpenPose in more detail, which is the widely used model in pose estimation for clinical and biomechanics studies <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib34" title="">nakanoEvaluation3DMarkerless2020 </a>; <a class="ltx_ref" href="#bib.bib28" title="">stenumTwodimensionalVideobasedAnalysis2021a </a>; <a class="ltx_ref" href="#bib.bib35" title="">satoQuantifyingNormalParkinsonian2019 </a>; <a class="ltx_ref" href="#bib.bib36" title="">abeOpenPosebasedGaitAnalysis2021 </a></cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p2">
+<p class="ltx_p" id="S2.SS4.p2.1">The OpenPose model uses a multi-stage convolutional neural network (CNN) architecture to process images and estimate human poses <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib24" title="">caoOpenPoseRealtimeMultiPerson2021 </a></cite>. The keypoint detection is performed in two stages: the first stage generates a coarse heatmap of body keypoints and parts affinity field, and the second stage refines the heatmap to produce a more accurate estimate of the keypoint locations. The model then uses the key point heatmap and parts affinity field to link up the keypoints into the pose skeleton. The model can detect various body keypoints, including those of the head, neck, shoulders, elbows, wrists, hips, knees, and ankles. OpenPose is designed to work in real-time and is capable of estimating human poses in images or videos with multiple people, even in complex scenes with occlusions and overlapping body parts. It is also able to estimate the pose of people in different orientations and viewpoints.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p3">
+<p class="ltx_p" id="S2.SS4.p3.1">Another pose estimation model used in this study was DeepLabCut (DLC) version 2.3.0. DLC allows users to label and train with their own key points. Its architecture consists of a residual neural network (ResNet-50) with deep convolutional and deconvolutional neural network layers to predict the keypoints using feature detection. We train a DLC model using videos from the transtibial amputee. Ground truth labels for 8 lower-body keypoints (left and right of hip, knee, ankle and toes) were obtained by manual annotation of every frame for one set of the transtibial videos. Using the labels of these 4 videos as ground truth, we evaluated the accuracy of the custom model (using DLC) trained on 20 labelled frames until the training loss had plateaued.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p4">
+<p class="ltx_p" id="S2.SS4.p4.4">The data, expressed in mean (and standard deviation in parenthesis), are reported in pixels due to unknown measurements and the lack of a calibration procedure in the video. Results from our preliminary study were deemed satisfactory which showed that the custom model had a mean absolute error (MAE) of 7.89 <math alttext="\pm" class="ltx_Math" display="inline" id="S2.SS4.p4.1.m1.1"><semantics id="S2.SS4.p4.1.m1.1a"><mo id="S2.SS4.p4.1.m1.1.1" xref="S2.SS4.p4.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S2.SS4.p4.1.m1.1b"><csymbol cd="latexml" id="S2.SS4.p4.1.m1.1.1.cmml" xref="S2.SS4.p4.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S2.SS4.p4.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S2.SS4.p4.1.m1.1d">±</annotation></semantics></math> 3.11 pixels for the coordinates (Supplementary Table 5) and 1.61<math alttext="{}^{\circ}" class="ltx_Math" display="inline" id="S2.SS4.p4.2.m2.1"><semantics id="S2.SS4.p4.2.m2.1a"><msup id="S2.SS4.p4.2.m2.1.1" xref="S2.SS4.p4.2.m2.1.1.cmml"><mi id="S2.SS4.p4.2.m2.1.1a" xref="S2.SS4.p4.2.m2.1.1.cmml"></mi><mo id="S2.SS4.p4.2.m2.1.1.1" xref="S2.SS4.p4.2.m2.1.1.1.cmml">∘</mo></msup><annotation-xml encoding="MathML-Content" id="S2.SS4.p4.2.m2.1b"><apply id="S2.SS4.p4.2.m2.1.1.cmml" xref="S2.SS4.p4.2.m2.1.1"><compose id="S2.SS4.p4.2.m2.1.1.1.cmml" xref="S2.SS4.p4.2.m2.1.1.1"></compose></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS4.p4.2.m2.1c">{}^{\circ}</annotation><annotation encoding="application/x-llamapun" id="S2.SS4.p4.2.m2.1d">start_FLOATSUPERSCRIPT ∘ end_FLOATSUPERSCRIPT</annotation></semantics></math> <math alttext="\pm" class="ltx_Math" display="inline" id="S2.SS4.p4.3.m3.1"><semantics id="S2.SS4.p4.3.m3.1a"><mo id="S2.SS4.p4.3.m3.1.1" xref="S2.SS4.p4.3.m3.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S2.SS4.p4.3.m3.1b"><csymbol cd="latexml" id="S2.SS4.p4.3.m3.1.1.cmml" xref="S2.SS4.p4.3.m3.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S2.SS4.p4.3.m3.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S2.SS4.p4.3.m3.1d">±</annotation></semantics></math> 1. 19<math alttext="{}^{\circ}" class="ltx_Math" display="inline" id="S2.SS4.p4.4.m4.1"><semantics id="S2.SS4.p4.4.m4.1a"><msup id="S2.SS4.p4.4.m4.1.1" xref="S2.SS4.p4.4.m4.1.1.cmml"><mi id="S2.SS4.p4.4.m4.1.1a" xref="S2.SS4.p4.4.m4.1.1.cmml"></mi><mo id="S2.SS4.p4.4.m4.1.1.1" xref="S2.SS4.p4.4.m4.1.1.1.cmml">∘</mo></msup><annotation-xml encoding="MathML-Content" id="S2.SS4.p4.4.m4.1b"><apply id="S2.SS4.p4.4.m4.1.1.cmml" xref="S2.SS4.p4.4.m4.1.1"><compose id="S2.SS4.p4.4.m4.1.1.1.cmml" xref="S2.SS4.p4.4.m4.1.1.1"></compose></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS4.p4.4.m4.1c">{}^{\circ}</annotation><annotation encoding="application/x-llamapun" id="S2.SS4.p4.4.m4.1d">start_FLOATSUPERSCRIPT ∘ end_FLOATSUPERSCRIPT</annotation></semantics></math> for kinematics when evaluated on one set of transtibial videos (Supplementary Table 6). Therefore, a custom model following the same steps was taken to obtain the ground truth coordinates for the other 12 videos. The resulting keypoints were visually examined frame by frame to ensure accuracy before we effectively treated as manual labels.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.5 </span>Error quantification on keypoints coordinates</h3>
+<div class="ltx_para" id="S2.SS5.p1">
+<p class="ltx_p" id="S2.SS5.p1.1">In certain frames, the visibility of keypoints may be occluded leading to lower likelihood scores given by OpenPose. Consequently, frames with a likelihood below 0.50 were removed. Cubic spline interpolation was applied to address the resulting gaps in the data, and a low-pass Butterworth filter (4th order, 6 Hz) was subsequently applied to attenuate high-frequency noise. These procedures have also been used in previous studies <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib37" title="">serrancoliMarkerLessMonitoringProtocol2020 </a>; <a class="ltx_ref" href="#bib.bib26" title="">vanhoorenAccuracyMarkerlessMotion2023 </a></cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS6">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.6 </span>Error quantification on joint kinematics</h3>
+<div class="ltx_para" id="S2.SS6.p1">
+<p class="ltx_p" id="S2.SS6.p1.1">Assuming that the left and right camera views are positioned perpendicularly relative to the sagittal plane, lower-limb joint angles of the limb closest to the camera can be calculated using the keypoints coordinates via inverse kinematics <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib10" title="">moroMarkerlessGaitAnalysis2020a </a>; <a class="ltx_ref" href="#bib.bib28" title="">stenumTwodimensionalVideobasedAnalysis2021a </a>; <a class="ltx_ref" href="#bib.bib26" title="">vanhoorenAccuracyMarkerlessMotion2023 </a>; <a class="ltx_ref" href="#bib.bib27" title="">washabaughComparingAccuracyOpensource2022b </a></cite>. The hip angle was calculated involving the keypoint vectors of the hip, knee and a relative vertical line to the hip. Similarly, the knee angle was computed by using the keypoint vectors of the hip, knee and ankle. In both cases, a positive value indicates flexion while a negative value indicates extension. The ankle angle was calculated using the keypoints vectors of the knee, ankle and toe. In addition, the ankle angle is defined by the foot with respect to a 90<math alttext="{}^{\circ}" class="ltx_Math" display="inline" id="S2.SS6.p1.1.m1.1"><semantics id="S2.SS6.p1.1.m1.1a"><msup id="S2.SS6.p1.1.m1.1.1" xref="S2.SS6.p1.1.m1.1.1.cmml"><mi id="S2.SS6.p1.1.m1.1.1a" xref="S2.SS6.p1.1.m1.1.1.cmml"></mi><mo id="S2.SS6.p1.1.m1.1.1.1" xref="S2.SS6.p1.1.m1.1.1.1.cmml">∘</mo></msup><annotation-xml encoding="MathML-Content" id="S2.SS6.p1.1.m1.1b"><apply id="S2.SS6.p1.1.m1.1.1.cmml" xref="S2.SS6.p1.1.m1.1.1"><compose id="S2.SS6.p1.1.m1.1.1.1.cmml" xref="S2.SS6.p1.1.m1.1.1.1"></compose></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS6.p1.1.m1.1c">{}^{\circ}</annotation><annotation encoding="application/x-llamapun" id="S2.SS6.p1.1.m1.1d">start_FLOATSUPERSCRIPT ∘ end_FLOATSUPERSCRIPT</annotation></semantics></math> line to the tibia. The kinematic data for the entire time-series was initially calculated, followed by time normalization from 0-100% of the gait cycles. Gait cycles were defined as consecutive occurrences of heel strikes by the same foot, which were manually identified. There were at least 4 gait cycles observed for all videos.
+</p>
+</div>
+<div class="ltx_para" id="S2.SS6.p2">
+<p class="ltx_p" id="S2.SS6.p2.1">To quantify the error of pose estimation, we use the MAE which is the mean Euclidean distance between ground truth and predicted keypoints. Both coordinates and kinematics data were quantified using MAE. There are several previous works in the literature that quantify the accuracy of markerless pose estimation models such as OpenPose for the purpose of gait analysis. Supplementary Table 4 summarizes existing data reported on the accuracy of clinical gait applications of markerless pose estimation on able-bodied individuals. Original values reported are used if provided in the papers, otherwise, the values were estimated by reading off from figures.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Results</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">The experimental findings demonstrate significant improvement in pose estimation accuracy achieved by our zero-shot method when compared to the established pose estimation software, OpenPose. This is a crucial improvement needed for practical gait analysis, such as comparing joint angles through the gait cycle, that is of interest to clinicians. Additionally, we also discern and quantify variations in pose estimation performance across different prosthetic types.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Obvious misidentification in OpenPose resolved by zero-shot method</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">Our findings reveal that when OpenPose is directly applied to the original image, a substantial proportion of frames exhibit either an inability to identify or a conspicuous misidentification of lower-limb keypoints (Fig. <a class="ltx_ref" href="#S3.F2" title="Figure 2 ‣ 3.1 Obvious misidentification in OpenPose resolved by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">2</span></a>). Supplementary Table 1 provides a detailed breakdown of these occurrences. Specifically, transfemoral images display a higher incidence of such challenges compared to their transtibial counterparts. Notably, our zero-shot method demonstrates remarkable efficacy in mitigating the number of affected frames across all camera perspectives. It is also important to note that the majority of observed keypoint challenges are concentrated in the sagittal camera view, particularly when the prosthetic limb is in closer proximity to the camera.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="171" id="S3.F2.g1" src="extracted/5291615/figure_failuremodes_bargraph.png" width="538"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Values are expressed as percentages based on a total of 180 frames. Each graph shows the percentage of frames where lower-limb keypoints were not identified fully. Each colour represents the different camera positions.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Substantial improvement in accuracy of quantitative measures using zero-shot method</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">The OpenPose method exhibited coordinate errors that were about twice as large (Table <a class="ltx_ref" href="#S3.T1" title="Table 1 ‣ 3.2 Substantial improvement in accuracy of quantitative measures using zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">1</span></a>) on the prosthetic limb (right) compared to the intact limb (left). A detailed breakdown of the individual keypoints coordinates errors can be found in Supplementary Table 2.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.1">The zero-shot method consistently outperformed the OpenPose method in estimating keypoints on the prosthetic limb by a large margin for joint coordinates. The mean absolute error (MAE) measured for joint coordinates decreases by 37% for transtibial prosthetic limbs and 76% for transfemoral prosthetic limbs. Even though the OpenPose method yielded slightly lower coordinate errors on the intact limb, the differences observed were relatively minor, with a mean difference of less than 2 pixels.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<p class="ltx_p" id="S3.SS2.p3.1">Similarly for joint kinematics, the errors against ground truth using the zero-shot method consistently outperformed the OpenPose method on the prosthetic limb by a large margin. The improvement is particularly noteworthy for ankle angles and transfemoral knee angles. The comparison of joint kinematics is shown in Fig. <a class="ltx_ref" href="#S3.F4" title="Figure 4 ‣ 3.4 Gait anomalies in prosthetic limb revealed by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">4</span></a>.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>The overall mean absolute error (MAE) and standard deviations (SD), in parentheses of keypoint coordinates error (MAE) after processing using the default OpenPose and zero-shot method. For all videos, the right leg is the prosthetic limb while the left leg is the intact limb. Bold font indicates the lower value between OpenPose and the Zero-shot method.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T1.1.2.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.1.2.1.1"><span class="ltx_text ltx_font_bold" id="S3.T1.1.2.1.1.1" style="font-size:70%;">Metrics (Units)</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.1.2.1.2"><span class="ltx_text ltx_font_bold" id="S3.T1.1.2.1.2.1" style="font-size:70%;">Amputation Type</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.1.2.1.3"><span class="ltx_text ltx_font_bold" id="S3.T1.1.2.1.3.1" style="font-size:70%;">Leg</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.1.2.1.4"><span class="ltx_text ltx_font_bold" id="S3.T1.1.2.1.4.1" style="font-size:70%;">OpenPose (MAE)</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.1.2.1.5"><span class="ltx_text ltx_font_bold" id="S3.T1.1.2.1.5.1" style="font-size:70%;">Zero-shot (MAE)</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.1.3.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.1.3.1.1" rowspan="4"><span class="ltx_text" id="S3.T1.1.3.1.1.1" style="font-size:70%;">Joint Coordinates (pixels)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.1.3.1.2" rowspan="2"><span class="ltx_text" id="S3.T1.1.3.1.2.1" style="font-size:70%;">Transfemoral</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.1.3.1.3"><span class="ltx_text" id="S3.T1.1.3.1.3.1" style="font-size:70%;">Prosthetic</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.1.3.1.4"><span class="ltx_text" id="S3.T1.1.3.1.4.1" style="font-size:70%;">&gt;100 (&gt;100)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.1.3.1.5"><span class="ltx_text ltx_font_bold" id="S3.T1.1.3.1.5.1" style="font-size:70%;">23.7 (35.61)</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.4.2">
+<td class="ltx_td ltx_align_center" id="S3.T1.1.4.2.1"><span class="ltx_text" id="S3.T1.1.4.2.1.1" style="font-size:70%;">Intact</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.4.2.2"><span class="ltx_text ltx_font_bold" id="S3.T1.1.4.2.2.1" style="font-size:70%;">10.22 (5.36)</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.4.2.3"><span class="ltx_text" id="S3.T1.1.4.2.3.1" style="font-size:70%;">11.96 (7.58)</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.5.3">
+<td class="ltx_td ltx_align_center" id="S3.T1.1.5.3.1" rowspan="2"><span class="ltx_text" id="S3.T1.1.5.3.1.1" style="font-size:70%;">Transtibial</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.5.3.2"><span class="ltx_text" id="S3.T1.1.5.3.2.1" style="font-size:70%;">Prosthetic</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.5.3.3"><span class="ltx_text" id="S3.T1.1.5.3.3.1" style="font-size:70%;">24.07 (15.74)</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.5.3.4"><span class="ltx_text ltx_font_bold" id="S3.T1.1.5.3.4.1" style="font-size:70%;">15.18 (6.66)</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.6.4">
+<td class="ltx_td ltx_align_center" id="S3.T1.1.6.4.1"><span class="ltx_text" id="S3.T1.1.6.4.1.1" style="font-size:70%;">Intact</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.6.4.2"><span class="ltx_text ltx_font_bold" id="S3.T1.1.6.4.2.1" style="font-size:70%;">12.01 (3.54)</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.6.4.3"><span class="ltx_text" id="S3.T1.1.6.4.3.1" style="font-size:70%;">12.27 (7.60)</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.1">
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.1.1.1" rowspan="4"><span class="ltx_text" id="S3.T1.1.1.1.1" style="font-size:70%;">Joint Kinematics (<math alttext="{}^{\circ}" class="ltx_Math" display="inline" id="S3.T1.1.1.1.1.m1.1"><semantics id="S3.T1.1.1.1.1.m1.1a"><msup id="S3.T1.1.1.1.1.m1.1.1" xref="S3.T1.1.1.1.1.m1.1.1.cmml"><mi id="S3.T1.1.1.1.1.m1.1.1a" xref="S3.T1.1.1.1.1.m1.1.1.cmml"></mi><mo id="S3.T1.1.1.1.1.m1.1.1.1" xref="S3.T1.1.1.1.1.m1.1.1.1.cmml">∘</mo></msup><annotation-xml encoding="MathML-Content" id="S3.T1.1.1.1.1.m1.1b"><apply id="S3.T1.1.1.1.1.m1.1.1.cmml" xref="S3.T1.1.1.1.1.m1.1.1"><compose id="S3.T1.1.1.1.1.m1.1.1.1.cmml" xref="S3.T1.1.1.1.1.m1.1.1.1"></compose></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.T1.1.1.1.1.m1.1c">{}^{\circ}</annotation><annotation encoding="application/x-llamapun" id="S3.T1.1.1.1.1.m1.1d">start_FLOATSUPERSCRIPT ∘ end_FLOATSUPERSCRIPT</annotation></semantics></math>)</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.1.2" rowspan="2"><span class="ltx_text" id="S3.T1.1.1.2.1" style="font-size:70%;">Transfemoral</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.1.3"><span class="ltx_text" id="S3.T1.1.1.3.1" style="font-size:70%;">Prosthetic</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.1.4"><span class="ltx_text" id="S3.T1.1.1.4.1" style="font-size:70%;">29.64 (26.07)</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.1.5"><span class="ltx_text ltx_font_bold" id="S3.T1.1.1.5.1" style="font-size:70%;">6.66 (6.50)</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.7.5">
+<td class="ltx_td ltx_align_center" id="S3.T1.1.7.5.1"><span class="ltx_text" id="S3.T1.1.7.5.1.1" style="font-size:70%;">Intact</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.7.5.2"><span class="ltx_text" id="S3.T1.1.7.5.2.1" style="font-size:70%;">5.71 (4.77)</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.7.5.3"><span class="ltx_text ltx_font_bold" id="S3.T1.1.7.5.3.1" style="font-size:70%;">5.23 (5.10)</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.8.6">
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.1.8.6.1" rowspan="2"><span class="ltx_text" id="S3.T1.1.8.6.1.1" style="font-size:70%;">Transtibial</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.8.6.2"><span class="ltx_text" id="S3.T1.1.8.6.2.1" style="font-size:70%;">Prosthetic</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.8.6.3"><span class="ltx_text" id="S3.T1.1.8.6.3.1" style="font-size:70%;">10.23 (9.08)</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.1.8.6.4"><span class="ltx_text ltx_font_bold" id="S3.T1.1.8.6.4.1" style="font-size:70%;">6.32 (4.49)</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.9.7">
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.1.9.7.1"><span class="ltx_text" id="S3.T1.1.9.7.1.1" style="font-size:70%;">Intact</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.1.9.7.2"><span class="ltx_text ltx_font_bold" id="S3.T1.1.9.7.2.1" style="font-size:70%;">2.90 (2.11)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.1.9.7.3"><span class="ltx_text" id="S3.T1.1.9.7.3.1" style="font-size:70%;">3.25 (2.54)</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="376" id="S3.F3.g1" src="extracted/5291615/figure_both_kinematics.png" width="538"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Normalized joint angle kinematics for (A) transfemoral and (B) transtibial amputee, where each row represents the hip, knee and ankle angle. Each colour represents the pose estimation used: ground truth (green), OpenPose (blue) and the zero-shot method (red). Positive hip and knee joint angles indicate flexion, negative angles indicate extension. Positive ankle joint angles indicate dorsiflexion, and negative angles indicate plantarflexion.</figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS2.p4">
+<p class="ltx_p" id="S3.SS2.p4.1">Although the open-source videos lacked explicit calibration or measurement information, an estimate of the subject’s height enabled us to approximate the metric error. Assuming a subject height of approximately 180 cm, we deduced that 1 pixel corresponded to approximately 0.3 cm. These assumptions enabled us to draw comparisons with previous findings. Our results for OpenPose on subjects with intact limbs are consistent with existing literature (Supplementary Table 4). Clinicians aiming to replicate our study may consider incorporating calibration steps at the beginning of the video recording. This would allow them to gather additional gait parameters, such as stride length and step width, which were not analyzed in our study due to the utilization of open-source videos.
+</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Comparison of performance between different prosthetic types</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">The two main types of lower-limb prosthetics, transfemoral and transtibial differ in appearance and in characteristics of gait. The performance of pose estimation and gait analysis on transfemoral and transtibial amputees are compared.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1">As observed in Table <a class="ltx_ref" href="#S3.T1" title="Table 1 ‣ 3.2 Substantial improvement in accuracy of quantitative measures using zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">1</span></a>, when comparing transfemoral and transtibial amputees, the pose estimation of the prosthetic limb exhibited poorer performance in the transfemoral amputee. Even with the application of the zero-shot method, the coordinate errors on the prosthetic limb were twice as substantial in the transfemoral amputee. Whereas in the transtibial amputee, the zero-shot method was able to reduce the coordinate errors on the prosthetic limb to a comparable level as the intact limb.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p3">
+<p class="ltx_p" id="S3.SS3.p3.1">The hip angle curve exhibited satisfactory results for both transtibial and transfemoral amputees when employing both the OpenPose and zero-shot methods. Particularly, the zero-shot method displayed the ability to reduce the MAE on the prosthetic limb for the transfemoral condition by about 3 degrees.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p4">
+<p class="ltx_p" id="S3.SS3.p4.1">In the knee angle, the OpenPose method was able to replicate the kinematic curvature throughout the gait cycle in the transtibial amputee (Fig. <a class="ltx_ref" href="#S3.F3" title="Figure 3 ‣ 3.2 Substantial improvement in accuracy of quantitative measures using zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">3</span></a>) but less so in the transfemoral amputee (Fig. <a class="ltx_ref" href="#S3.F3" title="Figure 3 ‣ 3.2 Substantial improvement in accuracy of quantitative measures using zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">3</span></a>). Thereafter, the application of the zero-shot method resulted in an improvement in replicating the knee angle kinematic throughout the gait cycle for the transfemoral amputee (Fig. <a class="ltx_ref" href="#S3.F3" title="Figure 3 ‣ 3.2 Substantial improvement in accuracy of quantitative measures using zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">3</span></a>).</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p5">
+<p class="ltx_p" id="S3.SS3.p5.1">In comparison to the hip and knee angles measured using OpenPose, the ankle angle exhibited higher error values. This observation is further supported by the higher error in ankle keypoint coordinate (Supplementary Table 3). When the zero-shot method was applied, a slight improvement in replicating the ankle kinematic curve for the transtibial amputee was observed, but no improvement was evident for the transfemoral amputee.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Gait anomalies in prosthetic limb revealed by zero-shot method</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">Previous studies have indicated significant kinematic differences between prosthetic and intact limbs in lower-limb amputees <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib38" title="">varrecchiaCommonSpecificGait2019 </a></cite>. Notably, the kinematic gait cycle observed in our study exhibited a similar pattern to those reported in previous studies <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib39" title="">koelewijnJointContactForces2016 </a>; <a class="ltx_ref" href="#bib.bib2" title="">esquenaziGaitAnalysisLowerLimb2014a </a>; <a class="ltx_ref" href="#bib.bib40" title="">bateni2002kinematic </a></cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.1">For instance, as seen in Fig. <a class="ltx_ref" href="#S3.F4" title="Figure 4 ‣ 3.4 Gait anomalies in prosthetic limb revealed by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">4</span></a>, our zero-shot approach revealed that the hip extension of the transtibial amputee was reduced. Additionally, within the 10-50% range of the gait cycle, a decreased range of motion was observed in the knee angle. In the case of the transfemoral amputee as seen in Fig. <a class="ltx_ref" href="#S3.F5" title="Figure 5 ‣ 3.4 Gait anomalies in prosthetic limb revealed by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">5</span></a>, a noticeable phase shift in both hip and knee angles was observed, indicating a leftward displacement in the kinematic patterns throughout the gait cycle when compared to the intact limb’s kinematics. In comparison, OpenPose fails to capture some of these findings, especially in the transfemoral case due to greater inaccurate joint angle kinematics. This demonstrates the effectiveness of the zero-shot method over OpenPose for identifying and quantifying key anomalies during gait analysis and provides the means for clinicians to uncover and measure key gait markers during rehabilitation.</p>
+</div>
+<figure class="ltx_figure" id="S3.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="376" id="S3.F4.g1" src="extracted/5291615/figure_transtibial_kinematics_anomaly.png" width="538"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Normalized kinematics results for transtibial, where the top and bottom row represent hip, knee and ankle kinematics, respectively, on the left (blue; intact) and right (red; prosthetic) limb. (A) Kinematics comparing the ground truth (solid line) and OpenPose (dotted line). (B) Kinematics comparing the ground truth (solid line) and zero-shot method (dotted line). Positive hip and knee joint angles indicate flexion, negative angles indicate extension. Positive ankle joint angles indicate dorsiflexion, negative angles indicate plantarflexion. Some key differences in kinematics between the prosthetic and intact limbs are marked with arrows</figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="376" id="S3.F5.g1" src="extracted/5291615/figure_transfemoral_kinematics_anomaly.png" width="538"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Normalized kinematics results for transfemoral, where the top and bottom row represent hip, knee and ankle kinematics, respectively, on the left (blue; intact) and right (red; prosthetic) limb. (A) Kinematics comparing the ground truth (solid line) and OpenPose (dotted line). (B) Kinematics comparing the ground truth (solid line) and zero-shot method (dotted line). Positive hip and knee joint angles indicate flexion, negative angles indicate extension. Positive ankle joint angles indicate dorsiflexion, negative angles indicate plantarflexion. Some key differences in kinematics between the prosthetic and intact limbs are marked by arrows</figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Discussion</h2>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Improved pose estimation accuracy enables quantitative analysis of gait biomechanics in lower-limb amputees</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Gait analysis for lower-limb prosthetic users without the need for specialized equipment has the potential to transform rehabilitation for this population, by providing an automated, consistent and quantitative assessment of the presence and severity of pathological gait. This opens up the possibility of rapid clinical feedback, reliable longitudinal tracking of progress, objective comparison between rehabilitation strategies and more. The method proposed in this work is a step towards this goal through accurate pose estimation from markerless videos acquired from low-cost commercial cameras.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">The results obtained in our investigation demonstrate the effectiveness of the zero-shot method in reducing both the coordinates and kinematics errors when compared to applying OpenPose on the original images. Although the ankle kinematics exhibited a relatively higher error value, the hip and knee kinematics generated using the zero-shot method remain valuable for clinicians. Such kinematic information enables clinicians to discern disparities in kinematic patterns between intact and prosthetic limbs, thereby facilitating the planning and monitoring of individualized rehabilitation programs. Presently, it is evident that OpenPose encounters difficulties in accurately detecting images featuring prosthetic limbs, with higher error rates observed for prosthetic limbs compared to intact limbs (Fig. <a class="ltx_ref" href="#S3.F2" title="Figure 2 ‣ 3.1 Obvious misidentification in OpenPose resolved by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">2</span></a>). This observation aligns with the study by Cimorelli et al.<cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib29" title="">cimorelliPortableInclinicVideobased2022 </a></cite>, who similarly reported challenges when utilizing OpenPose for lower-limb amputees, consequently restricting the applicability of markerless motion capture in this population.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1">Our findings demonstrate that the implementation of the zero-shot method leads to enhanced keypoint detection by greatly reducing the number of problematic frames, subsequently reducing coordinate and kinematic errors. This improvement has practical implications for gait analysis, particularly in deriving kinematic angles throughout the gait cycle. This information is crucial for clinicians to comprehend the gait symmetry of individuals. From a clinical standpoint, the analysis of kinematics throughout the gait cycle provides the ability to discern asymmetrical walking patterns between the prosthetic and intact limb. When compared to OpenPose, we have shown the zero-shot method to be more effective in identifying and quantifying significant anomalies during gait analysis. By incorporating the identified anomalies and utilizing the insights gained from the zero-shot method, the clinician can design an individualized rehabilitation regimen that addresses specific gait deviations and promotes the restoration of balanced walking patterns. This personalized approach enhances the potential for successful rehabilitation outcomes in the lower-limb amputees’ population.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Limitation, possible solutions and future work</h3>
+<figure class="ltx_figure" id="S4.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="389" id="S4.F6.g1" src="extracted/5291615/figure_failuremodes_example.png" width="538"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span><span class="ltx_text ltx_font_bold" id="S4.F6.4.1">(A)</span> In the original image, the left limb is positioned in front. However, upon generating the synthetic image, the left leg was positioned backwards, and this discrepancy persisted after the application of OpenPose, where the dark blue line represents the left leg. <span class="ltx_text ltx_font_bold" id="S4.F6.5.2">(B)</span> Case example where the generation of the synthetic image fails to change the prosthetic limb to an intact limb. <span class="ltx_text ltx_font_bold" id="S4.F6.6.3">(C)</span>. Case example where the generation of the synthetic image successfully changes the prosthetic limb to an intact limb.</figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">One drawback in the application of the zero-shot method is the increased swapping of lower-limb keypoints in the sagittal plane (Fig. <a class="ltx_ref" href="#S3.F2" title="Figure 2 ‣ 3.1 Obvious misidentification in OpenPose resolved by zero-shot method ‣ 3 Results ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">2</span></a>). This occurs when the edge map generation process fails to preserve the information regarding the leg’s proximity to the camera. Humans can perceive the relative positions of objects from 2D images based on overlapping regions. For instance, if the left leg is closer to the camera, the left leg will naturally occlude parts of the right leg that are directly behind when viewing from the camera. Subsequently, when the edge detector fails to identify the outline of the leg in the region where the two legs overlap, it will result in an ambiguous edge map. This ambiguity may potentially result in a swap between the two legs in the synthetic image. Fig. <a class="ltx_ref" href="#S4.F6" title="Figure 6 ‣ 4.2 Limitation, possible solutions and future work ‣ 4 Discussion ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">6</span></a> provides an illustrative example of the observed phenomenon. Nevertheless, this issue can be readily resolved by manually identifying and correcting the swapped frames or by utilizing other cues, such as the asynchronous movement of the ipsilateral arm and leg swing. This observation is reinforced by the finding that, although the zero-shot method requires a higher number of frames to be swapped compared to OpenPose, it still leads to a decrease in error. It is worth highlighting that the default OpenPose on the original image may also cause the lower-limb keypoints to swap, similar to previous studies <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib28" title="">stenumTwodimensionalVideobasedAnalysis2021a </a>; <a class="ltx_ref" href="#bib.bib41" title="">needhamAccuracySeveralPose2021 </a></cite>. Moreover, the zero-shot method resulted in the reduction of frames where keypoints were not detected in OpenPose due to the non-resemblance of intact limbs. This further demonstrates the efficacy of the zero-shot method in converting the prosthetic limb to a human-like representation, thereby allowing the application of pose estimation.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">It is important to acknowledge that not all frames can be successfully transformed into images resembling able-bodied individuals (Fig. <a class="ltx_ref" href="#S4.F6" title="Figure 6 ‣ 4.2 Limitation, possible solutions and future work ‣ 4 Discussion ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">6</span></a>B). This indicates certain limitations with the edge map. Nevertheless, even when comparing frames at approximately the same gait cycle, the generation of synthetic images yields inconsistent results (Fig. <a class="ltx_ref" href="#S4.F6" title="Figure 6 ‣ 4.2 Limitation, possible solutions and future work ‣ 4 Discussion ‣ Diffusion Models Enable Zero-Shot Pose Estimation for Lower-Limb Prosthetic Users"><span class="ltx_text ltx_ref_tag">6</span></a>C). This inconsistency is more pronounced in the case of transfemoral amputees, likely attributed to the dissimilarity between the prosthetic limb and a human limb, posing challenges for the model in identifying the appropriate image type. Despite inputs of positive prompts into ControlNet, emphasizing the presence of two intact limbs, the model may still encounter difficulties. However, it is worth noting that the majority of frames can still be successfully transformed, as evidenced by the overall reduction in coordinate error, especially for the prosthetic limb. Another limitation pertains to the wide range of prosthetic options available in the market. Our testing of the diffusion model was limited to a specific subset of prosthetic users, which may introduce some variability in the results. Nevertheless, we anticipate that any deviations from our findings will be minor and not substantially different.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.1">The main advantage of the proposed method is its ability to perform zero-shot pose estimation for prosthetic users without the need for any manual labelling and model training. However, the zero-shot ability comes with the limitations of slow processing speed due to the need to run inference on the large image generative diffusion model. Thus, there is a trade-off between inference time versus the time required for manual labelling for prosthetic joints and finetuning or training a custom detection model. With personal computing hardware (Nvidia GTX Titan X), the speed of generating 512 x 512 synthetic images is approximately 8 - 10 seconds per image which presents the main bottleneck for the workflow. This means for a 24 FPS video, the inference time needed is 200x that of the video length. Given a walking speed of 1 m/s, a 10 m walk test may require 10 seconds of video recording and may take more than 30 minutes to process which precludes real-time analysis and presents limitations for practical clinical usage.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p4">
+<p class="ltx_p" id="S4.SS2.p4.1">To address this, we propose 2 methods to speed up inference. First, clinicians may run pose estimation on the original video to identify poorly estimated frames before employing the image-generative zero-shot workflow on the poorly estimated frames only. Second, clinicians may drop selected frames to reduce the number of images to be generated. For the purpose of gait analysis, the gait cycle is obtained by averaging over many gaits. In such use cases, it is possible to remove selected frames and perform interpolation without affecting the resultant gait cycle significantly. Nevertheless, the zero-shot method is still faster than creating a custom-trained image set which includes manual annotations and a longer training time for custom pose estimation models for each individual.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p5">
+<p class="ltx_p" id="S4.SS2.p5.1">Another potential alternative for regenerating an intact limb image for lower-limb amputees is inpainting a masked section of the image with diffusion models <cite class="ltx_cite ltx_citemacro_cite"><a class="ltx_ref" href="#bib.bib42" title="">lugmayr2022repaint </a></cite>. This technique involves selectively highlighting specific parts of an image that require modification. However, this option was not explored in our study due to the continuous movement of the limbs in each image, which necessitates manual masking and thereby increases post-processing time. Future research could investigate alternative methods for automating the masking of the prosthetic limb in each frame. By generating images for smaller masked regions, it may be possible to expedite the inference time.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">The proposed zero-shot method presents a novel approach to applying markerless pose estimation techniques in the context of lower-limb amputees. Our results demonstrate that this approach improves the detection of keypoints on prosthetic limbs, thereby enabling clinicians to gain valuable insights into the subject’s kinematics throughout the gait cycle. Although it is important to acknowledge that the method is not flawless, its successful implementation showcases the proof-of-concept for such techniques. Future investigations can focus on streamlining the workflow to enable real-time analysis, thereby enhancing its practical utility in clinical settings.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(1)</span>
+<span class="ltx_bibblock">
+C. M. Powers, S. Rao, J. Perry, Knee kinetics in trans-tibial amputee gait, Gait &amp; Posture 8 (1) (1998) 1–7.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(2)</span>
+<span class="ltx_bibblock">
+A. Esquenazi, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S1047965113000739" title="">Gait Analysis in Lower-Limb Amputation and Prosthetic Rehabilitation</a> 25 (1) 153–167.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.pmr.2013.09.006" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.pmr.2013.09.006</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S1047965113000739" title="">https://linkinghub.elsevier.com/retrieve/pii/S1047965113000739</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(3)</span>
+<span class="ltx_bibblock">
+L. Yang, P. Dyer, R. Carson, J. Webster, K. B. Foreman, S. Bamberg, Utilization of a lower extremity ambulatory feedback system to reduce gait asymmetry in transtibial amputation gait, Gait &amp; posture 36 (3) (2012) 631–634.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(4)</span>
+<span class="ltx_bibblock">
+C. T. Huang, J. R. Jackson, N. B. Moore, P. R. Fine, K. V. Kuhlemeier, G. H. Traugh, P. T. Saunders, Amputation: Energy cost of ambulation 60 (1) 18–24.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="http://arxiv.org/abs/420566" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">arXiv:420566</span></a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(5)</span>
+<span class="ltx_bibblock">
+G. H. Traugh, P. J. Corcoran, R. L. Reyes, Energy expenditure of ambulation in patients with above-knee amputations 56 (2) 67–71.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="http://arxiv.org/abs/1124978" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">arXiv:1124978</span></a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(6)</span>
+<span class="ltx_bibblock">
+R. Gailey, K. Allen, J. Castles, J. Kucharick, M. Roeder, Review of secondary physical conditions associated with lower-limb, Journal of Rehabilitation Research &amp; Development 45 (1-4) (2008) 15–30.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(7)</span>
+<span class="ltx_bibblock">
+Y. Celik, S. Stuart, W. Woo, A. Godfrey, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S1350453320301697" title="">Gait analysis in neurological populations: Progression in the use of wearables</a> 87 9–29.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.medengphy.2020.11.005" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.medengphy.2020.11.005</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S1350453320301697" title="">https://linkinghub.elsevier.com/retrieve/pii/S1350453320301697</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(8)</span>
+<span class="ltx_bibblock">
+I. K. Jalata, T.-D. Truong, J. L. Allen, H.-S. Seo, K. Luu, <a class="ltx_ref ltx_href" href="https://www.mdpi.com/1999-5903/13/8/194" title="">Movement Analysis for Neurological and Musculoskeletal Disorders Using Graph Convolutional Neural Network</a> 13 (8) 194.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.3390/fi13080194" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.3390/fi13080194</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www.mdpi.com/1999-5903/13/8/194" title="">https://www.mdpi.com/1999-5903/13/8/194</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(9)</span>
+<span class="ltx_bibblock">
+L. Lonini, Y. Moon, K. Embry, R. J. Cotton, K. McKenzie, S. Jenz, A. Jayaraman, <a class="ltx_ref ltx_href" href="https://www.karger.com/Article/FullText/520732" title="">Video-Based Pose Estimation for Gait Analysis in Stroke Survivors during Clinical Assessments: A Proof-of-Concept Study</a> 6 (1) 9–18.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1159/000520732" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1159/000520732</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www.karger.com/Article/FullText/520732" title="">https://www.karger.com/Article/FullText/520732</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(10)</span>
+<span class="ltx_bibblock">
+M. Moro, G. Marchesi, F. Odone, M. Casadio, <a class="ltx_ref ltx_href" href="https://dl.acm.org/doi/10.1145/3341105.3373963" title="">Markerless gait analysis in stroke survivors based on computer vision and deep learning: A pilot study</a>, in: Proceedings of the 35th Annual ACM Symposium on Applied Computing, ACM, pp. 2097–2104.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1145/3341105.3373963" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1145/3341105.3373963</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://dl.acm.org/doi/10.1145/3341105.3373963" title="">https://dl.acm.org/doi/10.1145/3341105.3373963</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(11)</span>
+<span class="ltx_bibblock">
+C. Ridao-Fernández, E. Pinero-Pinto, G. Chamorro-Moriana, <a class="ltx_ref ltx_href" href="https://www.hindawi.com/journals/bmri/2019/2085039/" title="">Observational Gait Assessment Scales in Patients with Walking Disorders: Systematic Review</a> 2019 1–12.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1155/2019/2085039" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1155/2019/2085039</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www.hindawi.com/journals/bmri/2019/2085039/" title="">https://www.hindawi.com/journals/bmri/2019/2085039/</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(12)</span>
+<span class="ltx_bibblock">
+M. J. Highsmith, C. R. Andrews, C. Millman, A. Fuller, J. T. Kahle, T. D. Klenow, K. L. Lewis, R. C. Bradley, J. J. Orriola, Gait training interventions for lower extremity amputees: a systematic literature review, Technology &amp; Innovation 18 (2-3) (2016) 99–113.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(13)</span>
+<span class="ltx_bibblock">
+S. J. Hillman, S. C. Donald, J. Herman, E. McCurrach, A. McGarry, A. M. Richardson, J. E. Robb, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S0966636210000779" title="">Repeatability of a new observational gait score for unilateral lower limb amputees</a> 32 (1) 39–45.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.gaitpost.2010.03.007" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.gaitpost.2010.03.007</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S0966636210000779" title="">https://linkinghub.elsevier.com/retrieve/pii/S0966636210000779</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(14)</span>
+<span class="ltx_bibblock">
+M. Saleh, G. Murdoch, In defence of gait analysis. observation and measurement in gait assessment, The Journal of bone and joint surgery. British volume 67 (2) (1985) 237–241.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(15)</span>
+<span class="ltx_bibblock">
+J. M. Wilken, R. Marin, Gait analysis and training of people with limb loss, Care of the Combat Amputee (2009) 535–52.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(16)</span>
+<span class="ltx_bibblock">
+D. J. Sanderson, P. E. Martin, Lower extremity kinematic and kinetic adaptations in unilateral below-knee amputees during walking, Gait &amp; Posture 6 (2) (1997) 126–136.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(17)</span>
+<span class="ltx_bibblock">
+C. Sjödahl, G.-B. Jarnlo, B. Söderberg, B. Persson, Kinematic and kinetic gait analysis in the sagittal plane of trans-femoral amputees before and after special gait re-education, Prosthetics and orthotics international 26 (2) (2002) 101–112.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(18)</span>
+<span class="ltx_bibblock">
+S. Blair, M. J. Lake, R. Ding, T. Sterzing, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S0167945717305407" title="">Magnitude and variability of gait characteristics when walking on an irregular surface at different speeds</a> 59 112–120.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.humov.2018.04.003" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.humov.2018.04.003</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S0167945717305407" title="">https://linkinghub.elsevier.com/retrieve/pii/S0167945717305407</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(19)</span>
+<span class="ltx_bibblock">
+B. Van Hooren, J. T. Fuller, J. D. Buckley, J. R. Miller, K. Sewell, G. Rao, C. Barton, C. Bishop, R. W. Willy, Is motorized treadmill running biomechanically comparable to overground running? a systematic review and meta-analysis of cross-over studies, Sports medicine 50 (2020) 785–813.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(20)</span>
+<span class="ltx_bibblock">
+M. G. Bernal-Torres, H. I. Medellín-Castillo, J. C. Arellano-González, <a class="ltx_ref ltx_href" href="http://journals.sagepub.com/doi/10.1177/09544119231163634" title="">Development of a new low-cost computer vision system for human gait analysis: A case study</a> 095441192311636<a class="ltx_ref ltx_href" href="https://doi.org/10.1177/09544119231163634" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1177/09544119231163634</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="http://journals.sagepub.com/doi/10.1177/09544119231163634" title="">http://journals.sagepub.com/doi/10.1177/09544119231163634</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(21)</span>
+<span class="ltx_bibblock">
+Y. Chen, Y. Tian, M. He, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S1077314219301778" title="">Monocular human pose estimation: A survey of deep learning-based methods</a> 192 102897.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.cviu.2019.102897" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.cviu.2019.102897</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S1077314219301778" title="">https://linkinghub.elsevier.com/retrieve/pii/S1077314219301778</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(22)</span>
+<span class="ltx_bibblock">
+E. Insafutdinov, L. Pishchulin, B. Andres, M. Andriluka, B. Schiele, <a class="ltx_ref ltx_href" href="http://arxiv.org/abs/1605.03170" title="">DeeperCut: A Deeper, Stronger, and Faster Multi-Person Pose Estimation Model</a>.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="http://arxiv.org/abs/1605.03170" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">arXiv:1605.03170</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="http://arxiv.org/abs/1605.03170" title="">http://arxiv.org/abs/1605.03170</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(23)</span>
+<span class="ltx_bibblock">
+A. Mathis, S. Schneider, J. Lauer, M. W. Mathis, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S0896627320307170" title="">A Primer on Motion Capture with Deep Learning: Principles, Pitfalls, and Perspectives</a> 108 (1) 44–65.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.neuron.2020.09.017" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.neuron.2020.09.017</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S0896627320307170" title="">https://linkinghub.elsevier.com/retrieve/pii/S0896627320307170</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(24)</span>
+<span class="ltx_bibblock">
+Z. Cao, G. Hidalgo, T. Simon, S.-E. Wei, Y. Sheikh, <a class="ltx_ref ltx_href" href="https://ieeexplore.ieee.org/document/8765346/" title="">OpenPose: Realtime Multi-Person 2D Pose Estimation Using Part Affinity Fields</a> 43 (1) 172–186.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1109/TPAMI.2019.2929257" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1109/TPAMI.2019.2929257</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://ieeexplore.ieee.org/document/8765346/" title="">https://ieeexplore.ieee.org/document/8765346/</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(25)</span>
+<span class="ltx_bibblock">
+S. D. Uhlrich, A. Falisse, L. Kidzinski, J. Muccini, M. Ko, A. S. Chaudhari, J. L. Hicks, S. L. Delp, <a class="ltx_ref ltx_href" href="http://biorxiv.org/lookup/doi/10.1101/2022.07.07.499061" title="">OpenCap: 3D human movement dynamics from smartphone videos</a>.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1101/2022.07.07.499061" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1101/2022.07.07.499061</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="http://biorxiv.org/lookup/doi/10.1101/2022.07.07.499061" title="">http://biorxiv.org/lookup/doi/10.1101/2022.07.07.499061</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(26)</span>
+<span class="ltx_bibblock">
+B. Van Hooren, N. Pecasse, K. Meijer, J. M. N. Essers, <a class="ltx_ref ltx_href" href="https://onlinelibrary.wiley.com/doi/10.1111/sms.14319" title="">The accuracy of markerless motion capture combined with computer vision techniques for measuring running kinematics</a> sms.14319<a class="ltx_ref ltx_href" href="https://doi.org/10.1111/sms.14319" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1111/sms.14319</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://onlinelibrary.wiley.com/doi/10.1111/sms.14319" title="">https://onlinelibrary.wiley.com/doi/10.1111/sms.14319</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(27)</span>
+<span class="ltx_bibblock">
+E. P. Washabaugh, T. A. Shanmugam, R. Ranganathan, C. Krishnan, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S0966636222004738" title="">Comparing the accuracy of open-source pose estimation methods for measuring gait kinematics</a> 97 188–195.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.gaitpost.2022.08.008" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.gaitpost.2022.08.008</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S0966636222004738" title="">https://linkinghub.elsevier.com/retrieve/pii/S0966636222004738</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(28)</span>
+<span class="ltx_bibblock">
+J. Stenum, C. Rossi, R. T. Roemmich, <a class="ltx_ref ltx_href" href="https://dx.plos.org/10.1371/journal.pcbi.1008935" title="">Two-dimensional video-based analysis of human gait using pose estimation</a> 17 (4) e1008935.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1371/journal.pcbi.1008935" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1371/journal.pcbi.1008935</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://dx.plos.org/10.1371/journal.pcbi.1008935" title="">https://dx.plos.org/10.1371/journal.pcbi.1008935</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(29)</span>
+<span class="ltx_bibblock">
+A. Cimorelli, A. Patel, T. Karakostas, R. J. Cotton, <a class="ltx_ref ltx_href" href="http://medrxiv.org/lookup/doi/10.1101/2022.11.10.22282089" title="">Portable in-clinic video-based gait analysis: Validation study on prosthetic users</a>.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1101/2022.11.10.22282089" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1101/2022.11.10.22282089</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="http://medrxiv.org/lookup/doi/10.1101/2022.11.10.22282089" title="">http://medrxiv.org/lookup/doi/10.1101/2022.11.10.22282089</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(30)</span>
+<span class="ltx_bibblock">
+A. Mathis, P. Mamidanna, K. M. Cury, T. Abe, V. N. Murthy, M. W. Mathis, M. Bethge, <a class="ltx_ref ltx_href" href="https://www.nature.com/articles/s41593-018-0209-y" title="">DeepLabCut: Markerless pose estimation of user-defined body parts with deep learning</a> 21 (9) 1281–1289.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1038/s41593-018-0209-y" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1038/s41593-018-0209-y</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www.nature.com/articles/s41593-018-0209-y" title="">https://www.nature.com/articles/s41593-018-0209-y</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(31)</span>
+<span class="ltx_bibblock">
+L. Zhang, M. Agrawala, Adding Conditional Control to Text-to-Image Diffusion Models, preprint at <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://arxiv.org/abs/2302.05543" title="">https://arxiv.org/abs/2302.05543</a>.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.48550/ARXIV.2302.05543" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.48550/ARXIV.2302.05543</span></a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(32)</span>
+<span class="ltx_bibblock">
+<a class="ltx_ref ltx_href" href="https://www.youtube.com/@MissionGait" title="">Mission gait</a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www.youtube.com/@MissionGait" title="">https://www.youtube.com/@MissionGait</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(33)</span>
+<span class="ltx_bibblock">
+J. Gardiner, N. Gunarathne, D. Howard, L. Kenney, <a class="ltx_ref ltx_href" href="https://dx.plos.org/10.1371/journal.pone.0165287" title="">Crowd-Sourced Amputee Gait Data: A Feasibility Study Using YouTube Videos of Unilateral Trans-Femoral Gait</a> 11 (10) e0165287.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1371/journal.pone.0165287" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1371/journal.pone.0165287</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://dx.plos.org/10.1371/journal.pone.0165287" title="">https://dx.plos.org/10.1371/journal.pone.0165287</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(34)</span>
+<span class="ltx_bibblock">
+N. Nakano, T. Sakura, K. Ueda, L. Omura, A. Kimura, Y. Iino, S. Fukashiro, S. Yoshioka, <a class="ltx_ref ltx_href" href="https://www.frontiersin.org/article/10.3389/fspor.2020.00050/full" title="">Evaluation of 3D Markerless Motion Capture Accuracy Using OpenPose With Multiple Video Cameras</a> 2 50.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.3389/fspor.2020.00050" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.3389/fspor.2020.00050</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www.frontiersin.org/article/10.3389/fspor.2020.00050/full" title="">https://www.frontiersin.org/article/10.3389/fspor.2020.00050/full</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(35)</span>
+<span class="ltx_bibblock">
+K. Sato, Y. Nagashima, T. Mano, A. Iwata, T. Toda, <a class="ltx_ref ltx_href" href="https://dx.plos.org/10.1371/journal.pone.0223549" title="">Quantifying normal and parkinsonian gait features from home movies: Practical application of a deep learning–based 2D pose estimator</a> 14 (11) e0223549.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1371/journal.pone.0223549" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1371/journal.pone.0223549</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://dx.plos.org/10.1371/journal.pone.0223549" title="">https://dx.plos.org/10.1371/journal.pone.0223549</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(36)</span>
+<span class="ltx_bibblock">
+K. Abe, K.-I. Tabei, K. Matsuura, K. Kobayashi, T. Ohkubo, <a class="ltx_ref ltx_href" href="https://ieeexplore.ieee.org/document/9661562/" title="">OpenPose-based Gait Analysis System For Parkinson’s Disease Patients From Arm Swing Data</a>, in: 2021 International Conference on Advanced Mechatronic Systems (ICAMechS), IEEE, pp. 61–65.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1109/ICAMechS54019.2021.9661562" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1109/ICAMechS54019.2021.9661562</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://ieeexplore.ieee.org/document/9661562/" title="">https://ieeexplore.ieee.org/document/9661562/</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(37)</span>
+<span class="ltx_bibblock">
+G. Serrancoli, P. Bogatikov, J. P. Huix, A. F. Barbera, A. J. S. Egea, J. T. Ribe, S. Kanaan-Izquierdo, A. Susin, <a class="ltx_ref ltx_href" href="https://ieeexplore.ieee.org/document/9131774/" title="">Marker-Less Monitoring Protocol to Analyze Biomechanical Joint Metrics During Pedaling</a> 8 122782–122790.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1109/ACCESS.2020.3006423" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1109/ACCESS.2020.3006423</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://ieeexplore.ieee.org/document/9131774/" title="">https://ieeexplore.ieee.org/document/9131774/</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(38)</span>
+<span class="ltx_bibblock">
+T. Varrecchia, M. Serrao, M. Rinaldi, A. Ranavolo, S. Conforto, C. De Marchis, A. Simonetti, I. Poni, S. Castellano, A. Silvetti, A. Tatarelli, L. Fiori, C. Conte, F. Draicchio, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S0167945718307577" title="">Common and specific gait patterns in people with varying anatomical levels of lower limb amputation and different prosthetic components</a> 66 9–21.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.humov.2019.03.008" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.humov.2019.03.008</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S0167945718307577" title="">https://linkinghub.elsevier.com/retrieve/pii/S0167945718307577</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(39)</span>
+<span class="ltx_bibblock">
+A. D. Koelewijn, A. J. Van Den Bogert, <a class="ltx_ref ltx_href" href="https://linkinghub.elsevier.com/retrieve/pii/S0966636216301448" title="">Joint contact forces can be reduced by improving joint moment symmetry in below-knee amputee gait simulations</a> 49 219–225.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1016/j.gaitpost.2016.07.007" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1016/j.gaitpost.2016.07.007</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://linkinghub.elsevier.com/retrieve/pii/S0966636216301448" title="">https://linkinghub.elsevier.com/retrieve/pii/S0966636216301448</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(40)</span>
+<span class="ltx_bibblock">
+H. Bateni, S. J. Olney, Kinematic and kinetic variations of below-knee amputee gait, JPO: Journal of Prosthetics and Orthotics 14 (1) (2002) 2–10.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(41)</span>
+<span class="ltx_bibblock">
+L. Needham, M. Evans, D. P. Cosker, L. Wade, P. M. McGuigan, J. L. Bilzon, S. L. Colyer, <a class="ltx_ref ltx_href" href="https://www.nature.com/articles/s41598-021-00212-x" title="">The accuracy of several pose estimation methods for 3D joint centre localisation</a> 11 (1) 20673.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_href" href="https://doi.org/10.1038/s41598-021-00212-x" title=""><span class="ltx_ref ltx_path ltx_font_typewriter">doi:10.1038/s41598-021-00212-x</span></a>.
+
+<br class="ltx_break"/>URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://www.nature.com/articles/s41598-021-00212-x" title="">https://www.nature.com/articles/s41598-021-00212-x</a>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(42)</span>
+<span class="ltx_bibblock">
+A. Lugmayr, M. Danelljan, A. Romero, F. Yu, R. Timofte, L. Van Gool, Repaint: Inpainting using denoising diffusion probabilistic models, arXiv preprint arXiv:2201.09865 (2022).
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Dec 13 02:44:12 2023 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span style="font-size:70%;position:relative; bottom:2.2pt;">A</span>T<span style="position:relative; bottom:-0.4ex;">E</span></span><span class="ltx_font_smallcaps">xml</span><img alt="[LOGO]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

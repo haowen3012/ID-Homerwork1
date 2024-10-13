@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild</title>
+<!--Generated on Sun Sep 15 12:44:39 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2409.09714v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S1" title="In Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S2" title="In Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3" title="In Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.SS1" title="In 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Data preprocessing</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.SS2" title="In 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Mining similar hands</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.SS3" title="In 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Contrastive learning</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S4" title="In Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S4.SS1" title="In 4 Experiments ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Datasets</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S4.SS2" title="In 4 Experiments ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Results</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S5" title="In Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Nie Lin<sup class="ltx_sup" id="id3.2.id1">∗</sup>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"> Takehiko Ohkawa<sup class="ltx_sup" id="id4.2.id1">∗</sup>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Mingfang Zhang
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<br class="ltx_break"/>Yifei Huang
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"> Ryosuke Furuta
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"> Yoichi Sato
+<br class="ltx_break"/>Institute of Industrial Science
+<br class="ltx_break"/>The University of Tokyo
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="id5.1.id1" style="font-size:90%;">{nielin, ohkawa-t, mfzhang, hyf, furuta, ysato}@iis.u-tokyo.ac.jp</span>
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id6.id1">We present a contrastive learning framework based on in-the-wild hand images tailored for pre-training 3D hand pose estimators, dubbed HandCLR. Pre-training on large-scale images achieves promising results in various tasks, but prior 3D hand pose pre-training methods have not fully utilized the potential of diverse hand images accessible from in-the-wild videos. To facilitate scalable pre-training, we first prepare an extensive pool of hand images from in-the-wild videos and design our method with contrastive learning. Specifically, we collected over 2.0M hand images from recent human-centric videos, such as <span class="ltx_text ltx_font_italic" id="id6.id1.1">100DOH</span> and <span class="ltx_text ltx_font_italic" id="id6.id1.2">Ego4D</span>. To extract discriminative information from these images, we focus on the <span class="ltx_text ltx_font_italic" id="id6.id1.3">similarity</span> of hands; pairs of similar hand poses originating from different samples, and propose a novel contrastive learning method that embeds similar hand pairs closer in the latent space. Our experiments demonstrate that our method outperforms conventional contrastive learning approaches that produce positive pairs sorely from a single image with data augmentation. We achieve significant improvements over the state-of-the-art method in various datasets, with gains of 15% on FreiHand, 10% on DexYCB, and 4% on AssemblyHands.</p>
+</div>
+<span class="ltx_note ltx_role_footnote" id="footnote1"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup>
+<sup class="ltx_sup" id="footnote1.1">∗</sup>Equal contribution
+</span></span></span>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Hands are a trigger for us to interact with the world, as seen in various human-centric videos. Precise recognition of hand states, such as 3D keypoints, is crucial for video understanding <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib34" title="">34</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib39" title="">39</a>]</cite>, AR/VR interfaces <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib18" title="">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib40" title="">40</a>]</cite>, and robot learning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib31" title="">31</a>]</cite>. To this end, 3D hand pose estimation has been studied through constructing labeled datasets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib26" title="">26</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib45" title="">45</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib27" title="">27</a>]</cite> and advancing pose estimators <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib13" title="">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib30" title="">30</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib22" title="">22</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib12" title="">12</a>]</cite>. However, utilizing large-scale, unannotated hand videos for pre-training remains underexplored, while vast collections of such videos, like 3,670 hours of videos from Ego4D <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib16" title="">16</a>]</cite> and 131 days from 100DOH <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib35" title="">35</a>]</cite>, are available.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Some works utilize unlabeled hand images for 3D hand pose pre-training using contrastive learning like SimCLR <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib9" title="">9</a>]</cite>, which maximizes agreement between positive pairs while repelling negatives. Spurr <em class="ltx_emph ltx_font_italic" id="S1.p2.1.1">et al</em>.<span class="ltx_text" id="S1.p2.1.2"></span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite> introduce pose equivariant contrastive learning (PeCLR) by aligning geometry in latent space after affine transformations for input images. However, both SimCLR and PeCLR create positive pairs from a single sample by applying augmentation, limiting the gains from positive pairs as their hand appearance and backgrounds are identical. Ziani <em class="ltx_emph ltx_font_italic" id="S1.p2.1.3">et al</em>.<span class="ltx_text" id="S1.p2.1.4"></span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib44" title="">44</a>]</cite> extend the contrastive learning framework to video sequences by treating temporally adjacent frames as positive pairs. However, in-the-wild videos can challenge tracking hands across frames, especially in egocentric views where hands may be unobservable due to camera motion.
+In addition, adjacent frames still pose limited appearance variation of hands and backgrounds.</p>
+</div>
+<figure class="ltx_figure" id="S1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="202" id="S1.F1.1.g1" src="extracted/5855737/figures/figure1_pipline.png" width="598"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S1.F1.8.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S1.F1.9.2" style="font-size:90%;">
+<span class="ltx_text ltx_font_bold" id="S1.F1.9.2.1">The pipeline of pre-training and fine-tuning in 3D hand pose estimation.</span> <span class="ltx_text ltx_font_bold" id="S1.F1.9.2.2">(Left)</span> Previous pre-training methods (<em class="ltx_emph ltx_font_italic" id="S1.F1.9.2.3">e.g</em>.<span class="ltx_text" id="S1.F1.9.2.4"></span>, PeCLR <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite>) learn from positive pairs originating from the same with different augmentations and fine-tune the network on a dataset.
+<span class="ltx_text ltx_font_bold" id="S1.F1.9.2.5">(Right)</span> Our method is designed to learn from positive pairs with similar foreground hands, sampled from a pool of hand images in the wild.
+</span></figcaption>
+</figure>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">In this work, we introduce a novel contrastive learning framework for 3D hand pose pre-training to leverage diverse hand images in the wild, with the largest 3D hand pose pre-training set to date. We collected 2.0M hand images from in-the-wild videos, specifically from Ego4D <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib16" title="">16</a>]</cite> and 100DOH <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib35" title="">35</a>]</cite>, using an off-the-shelf hand detector <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib24" title="">24</a>]</cite>. Our pre-training set significantly exceeds the scale of prior works by two orders of magnitude, such as the 32-47K images in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite> and 86K images from 100DOH in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib44" title="">44</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Our method focuses on learning discriminative information by leveraging the similarity of hands from different domains. Unlike SimCLR and PeCLR, we observe that it is further informative to learn from positive pairs with similar foreground hands but from different images. As shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">1</span></a>, our positive pairs based on different images offer additional information gains from different types of object interactions, backgrounds, and hand appearances. Specifically, we use an off-the-shelf 2D hand pose estimator <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib24" title="">24</a>]</cite> to identify similar hands from the pre-training set.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">Our contributions are threefold: 1) We construct a large-scale in-the-wild hand dataset for 3D hand pose pre-training. 2) We propose a pre-training framework using similar hand pairs via contrastive learning. 3) Our model achieves state-of-the-art performance across multiple datasets.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+<div class="ltx_para ltx_noindent" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1"><span class="ltx_text ltx_font_bold" id="S2.p1.1.1">3D hand pose estimation:</span> The task of 3D hand pose estimation aims to regress 3D keypoints of hand joints. Annotating 3D hand poses is challenging, which allows us to have limited labeled datasets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib26" title="">26</a>]</cite>, mostly constructed in controlled laboratory settings <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib45" title="">45</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib25" title="">25</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib27" title="">27</a>]</cite>. Given this challenge, two approaches have been proposed to facilitate learning from limited annotations: pseudo-labeling <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib23" title="">23</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib28" title="">28</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib22" title="">22</a>]</cite> and self-supervised pre-training <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib44" title="">44</a>]</cite>. Pseudo-labeling methods learn from pseudo-ground-truth assigned on unlabeled images <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib23" title="">23</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib28" title="">28</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib22" title="">22</a>]</cite>. Alternatively, pre-training methods first pre-train an encoder with contrastive learning on unlabeled images and then fine-tune on labeled images <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib44" title="">44</a>]</cite>. While prior works use relatively small pre-training sets (<em class="ltx_emph ltx_font_italic" id="S2.p1.1.2">e.g</em>.<span class="ltx_text" id="S2.p1.1.3"></span>, 32-47K images in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite> and 86K images in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib44" title="">44</a>]</cite>), our work emphasizes leveraging in-the-wild images on a large scale. We collected hand images from large human-centric datasets such as Ego4D <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib16" title="">16</a>]</cite> and 100DOH <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib35" title="">35</a>]</cite>, expanding our pre-training set to 2.0M images.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1"><span class="ltx_text ltx_font_bold" id="S2.p2.1.1">Contrastive learning:</span>
+The framework of contrastive learning has emerged as a powerful self-supervised learning, bringing positive samples closer while pushing negative samples apart <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib11" title="">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib33" title="">33</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib37" title="">37</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib20" title="">20</a>]</cite>. Standard methods generate positive samples from individual images with data augmentation (<em class="ltx_emph ltx_font_italic" id="S2.p2.1.2">i.e</em>.<span class="ltx_text" id="S2.p2.1.3"></span>, self-positives) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib10" title="">10</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib5" title="">5</a>]</cite>, but restrict the learning of explicit relationships between samples. To address this, Zhang <em class="ltx_emph ltx_font_italic" id="S2.p2.1.4">et al</em>.<span class="ltx_text" id="S2.p2.1.5"></span> propose a relaxed extension of self-positives, <span class="ltx_text ltx_font_italic" id="S2.p2.1.6">non-self-positives</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib42" title="">42</a>]</cite>, which share similar characteristics (<em class="ltx_emph ltx_font_italic" id="S2.p2.1.7">e.g</em>.<span class="ltx_text" id="S2.p2.1.8"></span>, same scene <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib14" title="">14</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib19" title="">19</a>]</cite> or instance <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib15" title="">15</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib17" title="">17</a>]</cite>) but originate different images. This enables the incorporation of diverse inter-sample consistency and facilitates the learning of semantics more easily. Skeleton-based action recognition methods identify non-self-positives by searching similar human skeletons <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib42" title="">42</a>]</cite>, whereas it relies on online mining, increasing computational overhead in training. In contrast, our approach creates non-self-positives using 2D hand keypoints offline for avoiding the overhead and scaling pre-training with any large data.</p>
+</div>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Method</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">Our approach called HandCLR aims to pre-train an encoder of a 3D hand pose estimator with large human-centric videos available in the wild. We first construct the pre-training set from egocentric and exocentric hand videos (Sec. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.SS1" title="3.1 Data preprocessing ‣ 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">3.1</span></a>), then find similar hand images to define positive pairs (Sec. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.SS2" title="3.2 Mining similar hands ‣ 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">3.2</span></a>), and finally incorporate these positive pairs into a contrastive learning framework (Sec. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.SS3" title="3.3 Contrastive learning ‣ 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">3.3</span></a>).</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Data preprocessing</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.14">Our preprocessing involves creating a set of valid hand images for pre-training, which is sampled from a dataset with <math alttext="N" class="ltx_Math" display="inline" id="S3.SS1.p1.1.m1.1"><semantics id="S3.SS1.p1.1.m1.1a"><mi id="S3.SS1.p1.1.m1.1.1" xref="S3.SS1.p1.1.m1.1.1.cmml">N</mi><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.1.m1.1b"><ci id="S3.SS1.p1.1.m1.1.1.cmml" xref="S3.SS1.p1.1.m1.1.1">𝑁</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.1.m1.1c">N</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.1.m1.1d">italic_N</annotation></semantics></math> videos, <math alttext="\{v_{1},v_{2},\dots,v_{N}\}" class="ltx_Math" display="inline" id="S3.SS1.p1.2.m2.4"><semantics id="S3.SS1.p1.2.m2.4a"><mrow id="S3.SS1.p1.2.m2.4.4.3" xref="S3.SS1.p1.2.m2.4.4.4.cmml"><mo id="S3.SS1.p1.2.m2.4.4.3.4" stretchy="false" xref="S3.SS1.p1.2.m2.4.4.4.cmml">{</mo><msub id="S3.SS1.p1.2.m2.2.2.1.1" xref="S3.SS1.p1.2.m2.2.2.1.1.cmml"><mi id="S3.SS1.p1.2.m2.2.2.1.1.2" xref="S3.SS1.p1.2.m2.2.2.1.1.2.cmml">v</mi><mn id="S3.SS1.p1.2.m2.2.2.1.1.3" xref="S3.SS1.p1.2.m2.2.2.1.1.3.cmml">1</mn></msub><mo id="S3.SS1.p1.2.m2.4.4.3.5" xref="S3.SS1.p1.2.m2.4.4.4.cmml">,</mo><msub id="S3.SS1.p1.2.m2.3.3.2.2" xref="S3.SS1.p1.2.m2.3.3.2.2.cmml"><mi id="S3.SS1.p1.2.m2.3.3.2.2.2" xref="S3.SS1.p1.2.m2.3.3.2.2.2.cmml">v</mi><mn id="S3.SS1.p1.2.m2.3.3.2.2.3" xref="S3.SS1.p1.2.m2.3.3.2.2.3.cmml">2</mn></msub><mo id="S3.SS1.p1.2.m2.4.4.3.6" xref="S3.SS1.p1.2.m2.4.4.4.cmml">,</mo><mi id="S3.SS1.p1.2.m2.1.1" mathvariant="normal" xref="S3.SS1.p1.2.m2.1.1.cmml">…</mi><mo id="S3.SS1.p1.2.m2.4.4.3.7" xref="S3.SS1.p1.2.m2.4.4.4.cmml">,</mo><msub id="S3.SS1.p1.2.m2.4.4.3.3" xref="S3.SS1.p1.2.m2.4.4.3.3.cmml"><mi id="S3.SS1.p1.2.m2.4.4.3.3.2" xref="S3.SS1.p1.2.m2.4.4.3.3.2.cmml">v</mi><mi id="S3.SS1.p1.2.m2.4.4.3.3.3" xref="S3.SS1.p1.2.m2.4.4.3.3.3.cmml">N</mi></msub><mo id="S3.SS1.p1.2.m2.4.4.3.8" stretchy="false" xref="S3.SS1.p1.2.m2.4.4.4.cmml">}</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.2.m2.4b"><set id="S3.SS1.p1.2.m2.4.4.4.cmml" xref="S3.SS1.p1.2.m2.4.4.3"><apply id="S3.SS1.p1.2.m2.2.2.1.1.cmml" xref="S3.SS1.p1.2.m2.2.2.1.1"><csymbol cd="ambiguous" id="S3.SS1.p1.2.m2.2.2.1.1.1.cmml" xref="S3.SS1.p1.2.m2.2.2.1.1">subscript</csymbol><ci id="S3.SS1.p1.2.m2.2.2.1.1.2.cmml" xref="S3.SS1.p1.2.m2.2.2.1.1.2">𝑣</ci><cn id="S3.SS1.p1.2.m2.2.2.1.1.3.cmml" type="integer" xref="S3.SS1.p1.2.m2.2.2.1.1.3">1</cn></apply><apply id="S3.SS1.p1.2.m2.3.3.2.2.cmml" xref="S3.SS1.p1.2.m2.3.3.2.2"><csymbol cd="ambiguous" id="S3.SS1.p1.2.m2.3.3.2.2.1.cmml" xref="S3.SS1.p1.2.m2.3.3.2.2">subscript</csymbol><ci id="S3.SS1.p1.2.m2.3.3.2.2.2.cmml" xref="S3.SS1.p1.2.m2.3.3.2.2.2">𝑣</ci><cn id="S3.SS1.p1.2.m2.3.3.2.2.3.cmml" type="integer" xref="S3.SS1.p1.2.m2.3.3.2.2.3">2</cn></apply><ci id="S3.SS1.p1.2.m2.1.1.cmml" xref="S3.SS1.p1.2.m2.1.1">…</ci><apply id="S3.SS1.p1.2.m2.4.4.3.3.cmml" xref="S3.SS1.p1.2.m2.4.4.3.3"><csymbol cd="ambiguous" id="S3.SS1.p1.2.m2.4.4.3.3.1.cmml" xref="S3.SS1.p1.2.m2.4.4.3.3">subscript</csymbol><ci id="S3.SS1.p1.2.m2.4.4.3.3.2.cmml" xref="S3.SS1.p1.2.m2.4.4.3.3.2">𝑣</ci><ci id="S3.SS1.p1.2.m2.4.4.3.3.3.cmml" xref="S3.SS1.p1.2.m2.4.4.3.3.3">𝑁</ci></apply></set></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.2.m2.4c">\{v_{1},v_{2},\dots,v_{N}\}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.2.m2.4d">{ italic_v start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT , italic_v start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT , … , italic_v start_POSTSUBSCRIPT italic_N end_POSTSUBSCRIPT }</annotation></semantics></math>. We use an off-the-shelf hand detector <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib35" title="">35</a>]</cite> to select valid frames with hands. Given an image of a video, <math alttext="I_{\textrm{full}}\in v_{i}" class="ltx_Math" display="inline" id="S3.SS1.p1.3.m3.1"><semantics id="S3.SS1.p1.3.m3.1a"><mrow id="S3.SS1.p1.3.m3.1.1" xref="S3.SS1.p1.3.m3.1.1.cmml"><msub id="S3.SS1.p1.3.m3.1.1.2" xref="S3.SS1.p1.3.m3.1.1.2.cmml"><mi id="S3.SS1.p1.3.m3.1.1.2.2" xref="S3.SS1.p1.3.m3.1.1.2.2.cmml">I</mi><mtext id="S3.SS1.p1.3.m3.1.1.2.3" xref="S3.SS1.p1.3.m3.1.1.2.3a.cmml">full</mtext></msub><mo id="S3.SS1.p1.3.m3.1.1.1" xref="S3.SS1.p1.3.m3.1.1.1.cmml">∈</mo><msub id="S3.SS1.p1.3.m3.1.1.3" xref="S3.SS1.p1.3.m3.1.1.3.cmml"><mi id="S3.SS1.p1.3.m3.1.1.3.2" xref="S3.SS1.p1.3.m3.1.1.3.2.cmml">v</mi><mi id="S3.SS1.p1.3.m3.1.1.3.3" xref="S3.SS1.p1.3.m3.1.1.3.3.cmml">i</mi></msub></mrow><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.3.m3.1b"><apply id="S3.SS1.p1.3.m3.1.1.cmml" xref="S3.SS1.p1.3.m3.1.1"><in id="S3.SS1.p1.3.m3.1.1.1.cmml" xref="S3.SS1.p1.3.m3.1.1.1"></in><apply id="S3.SS1.p1.3.m3.1.1.2.cmml" xref="S3.SS1.p1.3.m3.1.1.2"><csymbol cd="ambiguous" id="S3.SS1.p1.3.m3.1.1.2.1.cmml" xref="S3.SS1.p1.3.m3.1.1.2">subscript</csymbol><ci id="S3.SS1.p1.3.m3.1.1.2.2.cmml" xref="S3.SS1.p1.3.m3.1.1.2.2">𝐼</ci><ci id="S3.SS1.p1.3.m3.1.1.2.3a.cmml" xref="S3.SS1.p1.3.m3.1.1.2.3"><mtext id="S3.SS1.p1.3.m3.1.1.2.3.cmml" mathsize="70%" xref="S3.SS1.p1.3.m3.1.1.2.3">full</mtext></ci></apply><apply id="S3.SS1.p1.3.m3.1.1.3.cmml" xref="S3.SS1.p1.3.m3.1.1.3"><csymbol cd="ambiguous" id="S3.SS1.p1.3.m3.1.1.3.1.cmml" xref="S3.SS1.p1.3.m3.1.1.3">subscript</csymbol><ci id="S3.SS1.p1.3.m3.1.1.3.2.cmml" xref="S3.SS1.p1.3.m3.1.1.3.2">𝑣</ci><ci id="S3.SS1.p1.3.m3.1.1.3.3.cmml" xref="S3.SS1.p1.3.m3.1.1.3.3">𝑖</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.3.m3.1c">I_{\textrm{full}}\in v_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.3.m3.1d">italic_I start_POSTSUBSCRIPT full end_POSTSUBSCRIPT ∈ italic_v start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math>, the model detects the existence of the hand and gives hand crops enclosing either hand identity (right/left) from <math alttext="I_{\textrm{full}}" class="ltx_Math" display="inline" id="S3.SS1.p1.4.m4.1"><semantics id="S3.SS1.p1.4.m4.1a"><msub id="S3.SS1.p1.4.m4.1.1" xref="S3.SS1.p1.4.m4.1.1.cmml"><mi id="S3.SS1.p1.4.m4.1.1.2" xref="S3.SS1.p1.4.m4.1.1.2.cmml">I</mi><mtext id="S3.SS1.p1.4.m4.1.1.3" xref="S3.SS1.p1.4.m4.1.1.3a.cmml">full</mtext></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.4.m4.1b"><apply id="S3.SS1.p1.4.m4.1.1.cmml" xref="S3.SS1.p1.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS1.p1.4.m4.1.1.1.cmml" xref="S3.SS1.p1.4.m4.1.1">subscript</csymbol><ci id="S3.SS1.p1.4.m4.1.1.2.cmml" xref="S3.SS1.p1.4.m4.1.1.2">𝐼</ci><ci id="S3.SS1.p1.4.m4.1.1.3a.cmml" xref="S3.SS1.p1.4.m4.1.1.3"><mtext id="S3.SS1.p1.4.m4.1.1.3.cmml" mathsize="70%" xref="S3.SS1.p1.4.m4.1.1.3">full</mtext></ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.4.m4.1c">I_{\textrm{full}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.4.m4.1d">italic_I start_POSTSUBSCRIPT full end_POSTSUBSCRIPT</annotation></semantics></math>. To avoid bias regarding hand identity, we balance the number of right and left hand crops and convert all crops to the right, allowing us to address all crops equally. Then, we create a frame set for each video as <math alttext="\mathcal{F}_{i}=\{I_{i,1},I_{i,2},\dots,I_{i,T_{i}}\}" class="ltx_Math" display="inline" id="S3.SS1.p1.5.m5.10"><semantics id="S3.SS1.p1.5.m5.10a"><mrow id="S3.SS1.p1.5.m5.10.10" xref="S3.SS1.p1.5.m5.10.10.cmml"><msub id="S3.SS1.p1.5.m5.10.10.5" xref="S3.SS1.p1.5.m5.10.10.5.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS1.p1.5.m5.10.10.5.2" xref="S3.SS1.p1.5.m5.10.10.5.2.cmml">ℱ</mi><mi id="S3.SS1.p1.5.m5.10.10.5.3" xref="S3.SS1.p1.5.m5.10.10.5.3.cmml">i</mi></msub><mo id="S3.SS1.p1.5.m5.10.10.4" xref="S3.SS1.p1.5.m5.10.10.4.cmml">=</mo><mrow id="S3.SS1.p1.5.m5.10.10.3.3" xref="S3.SS1.p1.5.m5.10.10.3.4.cmml"><mo id="S3.SS1.p1.5.m5.10.10.3.3.4" stretchy="false" xref="S3.SS1.p1.5.m5.10.10.3.4.cmml">{</mo><msub id="S3.SS1.p1.5.m5.8.8.1.1.1" xref="S3.SS1.p1.5.m5.8.8.1.1.1.cmml"><mi id="S3.SS1.p1.5.m5.8.8.1.1.1.2" xref="S3.SS1.p1.5.m5.8.8.1.1.1.2.cmml">I</mi><mrow id="S3.SS1.p1.5.m5.2.2.2.4" xref="S3.SS1.p1.5.m5.2.2.2.3.cmml"><mi id="S3.SS1.p1.5.m5.1.1.1.1" xref="S3.SS1.p1.5.m5.1.1.1.1.cmml">i</mi><mo id="S3.SS1.p1.5.m5.2.2.2.4.1" xref="S3.SS1.p1.5.m5.2.2.2.3.cmml">,</mo><mn id="S3.SS1.p1.5.m5.2.2.2.2" xref="S3.SS1.p1.5.m5.2.2.2.2.cmml">1</mn></mrow></msub><mo id="S3.SS1.p1.5.m5.10.10.3.3.5" xref="S3.SS1.p1.5.m5.10.10.3.4.cmml">,</mo><msub id="S3.SS1.p1.5.m5.9.9.2.2.2" xref="S3.SS1.p1.5.m5.9.9.2.2.2.cmml"><mi id="S3.SS1.p1.5.m5.9.9.2.2.2.2" xref="S3.SS1.p1.5.m5.9.9.2.2.2.2.cmml">I</mi><mrow id="S3.SS1.p1.5.m5.4.4.2.4" xref="S3.SS1.p1.5.m5.4.4.2.3.cmml"><mi id="S3.SS1.p1.5.m5.3.3.1.1" xref="S3.SS1.p1.5.m5.3.3.1.1.cmml">i</mi><mo id="S3.SS1.p1.5.m5.4.4.2.4.1" xref="S3.SS1.p1.5.m5.4.4.2.3.cmml">,</mo><mn id="S3.SS1.p1.5.m5.4.4.2.2" xref="S3.SS1.p1.5.m5.4.4.2.2.cmml">2</mn></mrow></msub><mo id="S3.SS1.p1.5.m5.10.10.3.3.6" xref="S3.SS1.p1.5.m5.10.10.3.4.cmml">,</mo><mi id="S3.SS1.p1.5.m5.7.7" mathvariant="normal" xref="S3.SS1.p1.5.m5.7.7.cmml">…</mi><mo id="S3.SS1.p1.5.m5.10.10.3.3.7" xref="S3.SS1.p1.5.m5.10.10.3.4.cmml">,</mo><msub id="S3.SS1.p1.5.m5.10.10.3.3.3" xref="S3.SS1.p1.5.m5.10.10.3.3.3.cmml"><mi id="S3.SS1.p1.5.m5.10.10.3.3.3.2" xref="S3.SS1.p1.5.m5.10.10.3.3.3.2.cmml">I</mi><mrow id="S3.SS1.p1.5.m5.6.6.2.2" xref="S3.SS1.p1.5.m5.6.6.2.3.cmml"><mi id="S3.SS1.p1.5.m5.5.5.1.1" xref="S3.SS1.p1.5.m5.5.5.1.1.cmml">i</mi><mo id="S3.SS1.p1.5.m5.6.6.2.2.2" xref="S3.SS1.p1.5.m5.6.6.2.3.cmml">,</mo><msub id="S3.SS1.p1.5.m5.6.6.2.2.1" xref="S3.SS1.p1.5.m5.6.6.2.2.1.cmml"><mi id="S3.SS1.p1.5.m5.6.6.2.2.1.2" xref="S3.SS1.p1.5.m5.6.6.2.2.1.2.cmml">T</mi><mi id="S3.SS1.p1.5.m5.6.6.2.2.1.3" xref="S3.SS1.p1.5.m5.6.6.2.2.1.3.cmml">i</mi></msub></mrow></msub><mo id="S3.SS1.p1.5.m5.10.10.3.3.8" stretchy="false" xref="S3.SS1.p1.5.m5.10.10.3.4.cmml">}</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.5.m5.10b"><apply id="S3.SS1.p1.5.m5.10.10.cmml" xref="S3.SS1.p1.5.m5.10.10"><eq id="S3.SS1.p1.5.m5.10.10.4.cmml" xref="S3.SS1.p1.5.m5.10.10.4"></eq><apply id="S3.SS1.p1.5.m5.10.10.5.cmml" xref="S3.SS1.p1.5.m5.10.10.5"><csymbol cd="ambiguous" id="S3.SS1.p1.5.m5.10.10.5.1.cmml" xref="S3.SS1.p1.5.m5.10.10.5">subscript</csymbol><ci id="S3.SS1.p1.5.m5.10.10.5.2.cmml" xref="S3.SS1.p1.5.m5.10.10.5.2">ℱ</ci><ci id="S3.SS1.p1.5.m5.10.10.5.3.cmml" xref="S3.SS1.p1.5.m5.10.10.5.3">𝑖</ci></apply><set id="S3.SS1.p1.5.m5.10.10.3.4.cmml" xref="S3.SS1.p1.5.m5.10.10.3.3"><apply id="S3.SS1.p1.5.m5.8.8.1.1.1.cmml" xref="S3.SS1.p1.5.m5.8.8.1.1.1"><csymbol cd="ambiguous" id="S3.SS1.p1.5.m5.8.8.1.1.1.1.cmml" xref="S3.SS1.p1.5.m5.8.8.1.1.1">subscript</csymbol><ci id="S3.SS1.p1.5.m5.8.8.1.1.1.2.cmml" xref="S3.SS1.p1.5.m5.8.8.1.1.1.2">𝐼</ci><list id="S3.SS1.p1.5.m5.2.2.2.3.cmml" xref="S3.SS1.p1.5.m5.2.2.2.4"><ci id="S3.SS1.p1.5.m5.1.1.1.1.cmml" xref="S3.SS1.p1.5.m5.1.1.1.1">𝑖</ci><cn id="S3.SS1.p1.5.m5.2.2.2.2.cmml" type="integer" xref="S3.SS1.p1.5.m5.2.2.2.2">1</cn></list></apply><apply id="S3.SS1.p1.5.m5.9.9.2.2.2.cmml" xref="S3.SS1.p1.5.m5.9.9.2.2.2"><csymbol cd="ambiguous" id="S3.SS1.p1.5.m5.9.9.2.2.2.1.cmml" xref="S3.SS1.p1.5.m5.9.9.2.2.2">subscript</csymbol><ci id="S3.SS1.p1.5.m5.9.9.2.2.2.2.cmml" xref="S3.SS1.p1.5.m5.9.9.2.2.2.2">𝐼</ci><list id="S3.SS1.p1.5.m5.4.4.2.3.cmml" xref="S3.SS1.p1.5.m5.4.4.2.4"><ci id="S3.SS1.p1.5.m5.3.3.1.1.cmml" xref="S3.SS1.p1.5.m5.3.3.1.1">𝑖</ci><cn id="S3.SS1.p1.5.m5.4.4.2.2.cmml" type="integer" xref="S3.SS1.p1.5.m5.4.4.2.2">2</cn></list></apply><ci id="S3.SS1.p1.5.m5.7.7.cmml" xref="S3.SS1.p1.5.m5.7.7">…</ci><apply id="S3.SS1.p1.5.m5.10.10.3.3.3.cmml" xref="S3.SS1.p1.5.m5.10.10.3.3.3"><csymbol cd="ambiguous" id="S3.SS1.p1.5.m5.10.10.3.3.3.1.cmml" xref="S3.SS1.p1.5.m5.10.10.3.3.3">subscript</csymbol><ci id="S3.SS1.p1.5.m5.10.10.3.3.3.2.cmml" xref="S3.SS1.p1.5.m5.10.10.3.3.3.2">𝐼</ci><list id="S3.SS1.p1.5.m5.6.6.2.3.cmml" xref="S3.SS1.p1.5.m5.6.6.2.2"><ci id="S3.SS1.p1.5.m5.5.5.1.1.cmml" xref="S3.SS1.p1.5.m5.5.5.1.1">𝑖</ci><apply id="S3.SS1.p1.5.m5.6.6.2.2.1.cmml" xref="S3.SS1.p1.5.m5.6.6.2.2.1"><csymbol cd="ambiguous" id="S3.SS1.p1.5.m5.6.6.2.2.1.1.cmml" xref="S3.SS1.p1.5.m5.6.6.2.2.1">subscript</csymbol><ci id="S3.SS1.p1.5.m5.6.6.2.2.1.2.cmml" xref="S3.SS1.p1.5.m5.6.6.2.2.1.2">𝑇</ci><ci id="S3.SS1.p1.5.m5.6.6.2.2.1.3.cmml" xref="S3.SS1.p1.5.m5.6.6.2.2.1.3">𝑖</ci></apply></list></apply></set></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.5.m5.10c">\mathcal{F}_{i}=\{I_{i,1},I_{i,2},\dots,I_{i,T_{i}}\}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.5.m5.10d">caligraphic_F start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT = { italic_I start_POSTSUBSCRIPT italic_i , 1 end_POSTSUBSCRIPT , italic_I start_POSTSUBSCRIPT italic_i , 2 end_POSTSUBSCRIPT , … , italic_I start_POSTSUBSCRIPT italic_i , italic_T start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT end_POSTSUBSCRIPT }</annotation></semantics></math>, where <math alttext="I_{i,j}\in\mathbb{R}^{H\times W\times 3}" class="ltx_Math" display="inline" id="S3.SS1.p1.6.m6.2"><semantics id="S3.SS1.p1.6.m6.2a"><mrow id="S3.SS1.p1.6.m6.2.3" xref="S3.SS1.p1.6.m6.2.3.cmml"><msub id="S3.SS1.p1.6.m6.2.3.2" xref="S3.SS1.p1.6.m6.2.3.2.cmml"><mi id="S3.SS1.p1.6.m6.2.3.2.2" xref="S3.SS1.p1.6.m6.2.3.2.2.cmml">I</mi><mrow id="S3.SS1.p1.6.m6.2.2.2.4" xref="S3.SS1.p1.6.m6.2.2.2.3.cmml"><mi id="S3.SS1.p1.6.m6.1.1.1.1" xref="S3.SS1.p1.6.m6.1.1.1.1.cmml">i</mi><mo id="S3.SS1.p1.6.m6.2.2.2.4.1" xref="S3.SS1.p1.6.m6.2.2.2.3.cmml">,</mo><mi id="S3.SS1.p1.6.m6.2.2.2.2" xref="S3.SS1.p1.6.m6.2.2.2.2.cmml">j</mi></mrow></msub><mo id="S3.SS1.p1.6.m6.2.3.1" xref="S3.SS1.p1.6.m6.2.3.1.cmml">∈</mo><msup id="S3.SS1.p1.6.m6.2.3.3" xref="S3.SS1.p1.6.m6.2.3.3.cmml"><mi id="S3.SS1.p1.6.m6.2.3.3.2" mathvariant="normal" xref="S3.SS1.p1.6.m6.2.3.3.2.cmml">ℝ</mi><mrow id="S3.SS1.p1.6.m6.2.3.3.3" xref="S3.SS1.p1.6.m6.2.3.3.3.cmml"><mi id="S3.SS1.p1.6.m6.2.3.3.3.2" xref="S3.SS1.p1.6.m6.2.3.3.3.2.cmml">H</mi><mo id="S3.SS1.p1.6.m6.2.3.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS1.p1.6.m6.2.3.3.3.1.cmml">×</mo><mi id="S3.SS1.p1.6.m6.2.3.3.3.3" xref="S3.SS1.p1.6.m6.2.3.3.3.3.cmml">W</mi><mo id="S3.SS1.p1.6.m6.2.3.3.3.1a" lspace="0.222em" rspace="0.222em" xref="S3.SS1.p1.6.m6.2.3.3.3.1.cmml">×</mo><mn id="S3.SS1.p1.6.m6.2.3.3.3.4" xref="S3.SS1.p1.6.m6.2.3.3.3.4.cmml">3</mn></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.6.m6.2b"><apply id="S3.SS1.p1.6.m6.2.3.cmml" xref="S3.SS1.p1.6.m6.2.3"><in id="S3.SS1.p1.6.m6.2.3.1.cmml" xref="S3.SS1.p1.6.m6.2.3.1"></in><apply id="S3.SS1.p1.6.m6.2.3.2.cmml" xref="S3.SS1.p1.6.m6.2.3.2"><csymbol cd="ambiguous" id="S3.SS1.p1.6.m6.2.3.2.1.cmml" xref="S3.SS1.p1.6.m6.2.3.2">subscript</csymbol><ci id="S3.SS1.p1.6.m6.2.3.2.2.cmml" xref="S3.SS1.p1.6.m6.2.3.2.2">𝐼</ci><list id="S3.SS1.p1.6.m6.2.2.2.3.cmml" xref="S3.SS1.p1.6.m6.2.2.2.4"><ci id="S3.SS1.p1.6.m6.1.1.1.1.cmml" xref="S3.SS1.p1.6.m6.1.1.1.1">𝑖</ci><ci id="S3.SS1.p1.6.m6.2.2.2.2.cmml" xref="S3.SS1.p1.6.m6.2.2.2.2">𝑗</ci></list></apply><apply id="S3.SS1.p1.6.m6.2.3.3.cmml" xref="S3.SS1.p1.6.m6.2.3.3"><csymbol cd="ambiguous" id="S3.SS1.p1.6.m6.2.3.3.1.cmml" xref="S3.SS1.p1.6.m6.2.3.3">superscript</csymbol><ci id="S3.SS1.p1.6.m6.2.3.3.2.cmml" xref="S3.SS1.p1.6.m6.2.3.3.2">ℝ</ci><apply id="S3.SS1.p1.6.m6.2.3.3.3.cmml" xref="S3.SS1.p1.6.m6.2.3.3.3"><times id="S3.SS1.p1.6.m6.2.3.3.3.1.cmml" xref="S3.SS1.p1.6.m6.2.3.3.3.1"></times><ci id="S3.SS1.p1.6.m6.2.3.3.3.2.cmml" xref="S3.SS1.p1.6.m6.2.3.3.3.2">𝐻</ci><ci id="S3.SS1.p1.6.m6.2.3.3.3.3.cmml" xref="S3.SS1.p1.6.m6.2.3.3.3.3">𝑊</ci><cn id="S3.SS1.p1.6.m6.2.3.3.3.4.cmml" type="integer" xref="S3.SS1.p1.6.m6.2.3.3.3.4">3</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.6.m6.2c">I_{i,j}\in\mathbb{R}^{H\times W\times 3}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.6.m6.2d">italic_I start_POSTSUBSCRIPT italic_i , italic_j end_POSTSUBSCRIPT ∈ roman_ℝ start_POSTSUPERSCRIPT italic_H × italic_W × 3 end_POSTSUPERSCRIPT</annotation></semantics></math> represents the processed crop with height <math alttext="H" class="ltx_Math" display="inline" id="S3.SS1.p1.7.m7.1"><semantics id="S3.SS1.p1.7.m7.1a"><mi id="S3.SS1.p1.7.m7.1.1" xref="S3.SS1.p1.7.m7.1.1.cmml">H</mi><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.7.m7.1b"><ci id="S3.SS1.p1.7.m7.1.1.cmml" xref="S3.SS1.p1.7.m7.1.1">𝐻</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.7.m7.1c">H</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.7.m7.1d">italic_H</annotation></semantics></math> and width <math alttext="W" class="ltx_Math" display="inline" id="S3.SS1.p1.8.m8.1"><semantics id="S3.SS1.p1.8.m8.1a"><mi id="S3.SS1.p1.8.m8.1.1" xref="S3.SS1.p1.8.m8.1.1.cmml">W</mi><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.8.m8.1b"><ci id="S3.SS1.p1.8.m8.1.1.cmml" xref="S3.SS1.p1.8.m8.1.1">𝑊</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.8.m8.1c">W</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.8.m8.1d">italic_W</annotation></semantics></math>, and <math alttext="T_{i}" class="ltx_Math" display="inline" id="S3.SS1.p1.9.m9.1"><semantics id="S3.SS1.p1.9.m9.1a"><msub id="S3.SS1.p1.9.m9.1.1" xref="S3.SS1.p1.9.m9.1.1.cmml"><mi id="S3.SS1.p1.9.m9.1.1.2" xref="S3.SS1.p1.9.m9.1.1.2.cmml">T</mi><mi id="S3.SS1.p1.9.m9.1.1.3" xref="S3.SS1.p1.9.m9.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.9.m9.1b"><apply id="S3.SS1.p1.9.m9.1.1.cmml" xref="S3.SS1.p1.9.m9.1.1"><csymbol cd="ambiguous" id="S3.SS1.p1.9.m9.1.1.1.cmml" xref="S3.SS1.p1.9.m9.1.1">subscript</csymbol><ci id="S3.SS1.p1.9.m9.1.1.2.cmml" xref="S3.SS1.p1.9.m9.1.1.2">𝑇</ci><ci id="S3.SS1.p1.9.m9.1.1.3.cmml" xref="S3.SS1.p1.9.m9.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.9.m9.1c">T_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.9.m9.1d">italic_T start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> is the number of crops in the video <math alttext="v_{i}" class="ltx_Math" display="inline" id="S3.SS1.p1.10.m10.1"><semantics id="S3.SS1.p1.10.m10.1a"><msub id="S3.SS1.p1.10.m10.1.1" xref="S3.SS1.p1.10.m10.1.1.cmml"><mi id="S3.SS1.p1.10.m10.1.1.2" xref="S3.SS1.p1.10.m10.1.1.2.cmml">v</mi><mi id="S3.SS1.p1.10.m10.1.1.3" xref="S3.SS1.p1.10.m10.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.10.m10.1b"><apply id="S3.SS1.p1.10.m10.1.1.cmml" xref="S3.SS1.p1.10.m10.1.1"><csymbol cd="ambiguous" id="S3.SS1.p1.10.m10.1.1.1.cmml" xref="S3.SS1.p1.10.m10.1.1">subscript</csymbol><ci id="S3.SS1.p1.10.m10.1.1.2.cmml" xref="S3.SS1.p1.10.m10.1.1.2">𝑣</ci><ci id="S3.SS1.p1.10.m10.1.1.3.cmml" xref="S3.SS1.p1.10.m10.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.10.m10.1c">v_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.10.m10.1d">italic_v start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math>. The height <math alttext="H" class="ltx_Math" display="inline" id="S3.SS1.p1.11.m11.1"><semantics id="S3.SS1.p1.11.m11.1a"><mi id="S3.SS1.p1.11.m11.1.1" xref="S3.SS1.p1.11.m11.1.1.cmml">H</mi><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.11.m11.1b"><ci id="S3.SS1.p1.11.m11.1.1.cmml" xref="S3.SS1.p1.11.m11.1.1">𝐻</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.11.m11.1c">H</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.11.m11.1d">italic_H</annotation></semantics></math> and width <math alttext="W" class="ltx_Math" display="inline" id="S3.SS1.p1.12.m12.1"><semantics id="S3.SS1.p1.12.m12.1a"><mi id="S3.SS1.p1.12.m12.1.1" xref="S3.SS1.p1.12.m12.1.1.cmml">W</mi><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.12.m12.1b"><ci id="S3.SS1.p1.12.m12.1.1.cmml" xref="S3.SS1.p1.12.m12.1.1">𝑊</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.12.m12.1c">W</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.12.m12.1d">italic_W</annotation></semantics></math> are defined post-resize to give the uniform image size. Using this frame set <math alttext="\mathcal{F}_{i}" class="ltx_Math" display="inline" id="S3.SS1.p1.13.m13.1"><semantics id="S3.SS1.p1.13.m13.1a"><msub id="S3.SS1.p1.13.m13.1.1" xref="S3.SS1.p1.13.m13.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS1.p1.13.m13.1.1.2" xref="S3.SS1.p1.13.m13.1.1.2.cmml">ℱ</mi><mi id="S3.SS1.p1.13.m13.1.1.3" xref="S3.SS1.p1.13.m13.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.13.m13.1b"><apply id="S3.SS1.p1.13.m13.1.1.cmml" xref="S3.SS1.p1.13.m13.1.1"><csymbol cd="ambiguous" id="S3.SS1.p1.13.m13.1.1.1.cmml" xref="S3.SS1.p1.13.m13.1.1">subscript</csymbol><ci id="S3.SS1.p1.13.m13.1.1.2.cmml" xref="S3.SS1.p1.13.m13.1.1.2">ℱ</ci><ci id="S3.SS1.p1.13.m13.1.1.3.cmml" xref="S3.SS1.p1.13.m13.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.13.m13.1c">\mathcal{F}_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.13.m13.1d">caligraphic_F start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math>, the video dataset can be re-represented as <math alttext="\mathcal{V}=\{\mathcal{F}_{1},\mathcal{F}_{2},\dots,\mathcal{F}_{N}\}" class="ltx_Math" display="inline" id="S3.SS1.p1.14.m14.4"><semantics id="S3.SS1.p1.14.m14.4a"><mrow id="S3.SS1.p1.14.m14.4.4" xref="S3.SS1.p1.14.m14.4.4.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS1.p1.14.m14.4.4.5" xref="S3.SS1.p1.14.m14.4.4.5.cmml">𝒱</mi><mo id="S3.SS1.p1.14.m14.4.4.4" xref="S3.SS1.p1.14.m14.4.4.4.cmml">=</mo><mrow id="S3.SS1.p1.14.m14.4.4.3.3" xref="S3.SS1.p1.14.m14.4.4.3.4.cmml"><mo id="S3.SS1.p1.14.m14.4.4.3.3.4" stretchy="false" xref="S3.SS1.p1.14.m14.4.4.3.4.cmml">{</mo><msub id="S3.SS1.p1.14.m14.2.2.1.1.1" xref="S3.SS1.p1.14.m14.2.2.1.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS1.p1.14.m14.2.2.1.1.1.2" xref="S3.SS1.p1.14.m14.2.2.1.1.1.2.cmml">ℱ</mi><mn id="S3.SS1.p1.14.m14.2.2.1.1.1.3" xref="S3.SS1.p1.14.m14.2.2.1.1.1.3.cmml">1</mn></msub><mo id="S3.SS1.p1.14.m14.4.4.3.3.5" xref="S3.SS1.p1.14.m14.4.4.3.4.cmml">,</mo><msub id="S3.SS1.p1.14.m14.3.3.2.2.2" xref="S3.SS1.p1.14.m14.3.3.2.2.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS1.p1.14.m14.3.3.2.2.2.2" xref="S3.SS1.p1.14.m14.3.3.2.2.2.2.cmml">ℱ</mi><mn id="S3.SS1.p1.14.m14.3.3.2.2.2.3" xref="S3.SS1.p1.14.m14.3.3.2.2.2.3.cmml">2</mn></msub><mo id="S3.SS1.p1.14.m14.4.4.3.3.6" xref="S3.SS1.p1.14.m14.4.4.3.4.cmml">,</mo><mi id="S3.SS1.p1.14.m14.1.1" mathvariant="normal" xref="S3.SS1.p1.14.m14.1.1.cmml">…</mi><mo id="S3.SS1.p1.14.m14.4.4.3.3.7" xref="S3.SS1.p1.14.m14.4.4.3.4.cmml">,</mo><msub id="S3.SS1.p1.14.m14.4.4.3.3.3" xref="S3.SS1.p1.14.m14.4.4.3.3.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS1.p1.14.m14.4.4.3.3.3.2" xref="S3.SS1.p1.14.m14.4.4.3.3.3.2.cmml">ℱ</mi><mi id="S3.SS1.p1.14.m14.4.4.3.3.3.3" xref="S3.SS1.p1.14.m14.4.4.3.3.3.3.cmml">N</mi></msub><mo id="S3.SS1.p1.14.m14.4.4.3.3.8" stretchy="false" xref="S3.SS1.p1.14.m14.4.4.3.4.cmml">}</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.14.m14.4b"><apply id="S3.SS1.p1.14.m14.4.4.cmml" xref="S3.SS1.p1.14.m14.4.4"><eq id="S3.SS1.p1.14.m14.4.4.4.cmml" xref="S3.SS1.p1.14.m14.4.4.4"></eq><ci id="S3.SS1.p1.14.m14.4.4.5.cmml" xref="S3.SS1.p1.14.m14.4.4.5">𝒱</ci><set id="S3.SS1.p1.14.m14.4.4.3.4.cmml" xref="S3.SS1.p1.14.m14.4.4.3.3"><apply id="S3.SS1.p1.14.m14.2.2.1.1.1.cmml" xref="S3.SS1.p1.14.m14.2.2.1.1.1"><csymbol cd="ambiguous" id="S3.SS1.p1.14.m14.2.2.1.1.1.1.cmml" xref="S3.SS1.p1.14.m14.2.2.1.1.1">subscript</csymbol><ci id="S3.SS1.p1.14.m14.2.2.1.1.1.2.cmml" xref="S3.SS1.p1.14.m14.2.2.1.1.1.2">ℱ</ci><cn id="S3.SS1.p1.14.m14.2.2.1.1.1.3.cmml" type="integer" xref="S3.SS1.p1.14.m14.2.2.1.1.1.3">1</cn></apply><apply id="S3.SS1.p1.14.m14.3.3.2.2.2.cmml" xref="S3.SS1.p1.14.m14.3.3.2.2.2"><csymbol cd="ambiguous" id="S3.SS1.p1.14.m14.3.3.2.2.2.1.cmml" xref="S3.SS1.p1.14.m14.3.3.2.2.2">subscript</csymbol><ci id="S3.SS1.p1.14.m14.3.3.2.2.2.2.cmml" xref="S3.SS1.p1.14.m14.3.3.2.2.2.2">ℱ</ci><cn id="S3.SS1.p1.14.m14.3.3.2.2.2.3.cmml" type="integer" xref="S3.SS1.p1.14.m14.3.3.2.2.2.3">2</cn></apply><ci id="S3.SS1.p1.14.m14.1.1.cmml" xref="S3.SS1.p1.14.m14.1.1">…</ci><apply id="S3.SS1.p1.14.m14.4.4.3.3.3.cmml" xref="S3.SS1.p1.14.m14.4.4.3.3.3"><csymbol cd="ambiguous" id="S3.SS1.p1.14.m14.4.4.3.3.3.1.cmml" xref="S3.SS1.p1.14.m14.4.4.3.3.3">subscript</csymbol><ci id="S3.SS1.p1.14.m14.4.4.3.3.3.2.cmml" xref="S3.SS1.p1.14.m14.4.4.3.3.3.2">ℱ</ci><ci id="S3.SS1.p1.14.m14.4.4.3.3.3.3.cmml" xref="S3.SS1.p1.14.m14.4.4.3.3.3.3">𝑁</ci></apply></set></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.14.m14.4c">\mathcal{V}=\{\mathcal{F}_{1},\mathcal{F}_{2},\dots,\mathcal{F}_{N}\}</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.14.m14.4d">caligraphic_V = { caligraphic_F start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT , caligraphic_F start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT , … , caligraphic_F start_POSTSUBSCRIPT italic_N end_POSTSUBSCRIPT }</annotation></semantics></math>. Specifically, we processed two datasets, Ego4D <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib16" title="">16</a>]</cite> and 100DOH <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib35" title="">35</a>]</cite>, comprising 8K and 21K videos, respectively.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Mining similar hands</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.2">Our preliminary experiments indicate that learning from positive pairs with similar foreground hands but from different images could provide additional information gains compared to conventional contrastive learning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib9" title="">9</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite>. Here we construct a mining algorithm for similar hands from <math alttext="\mathcal{V}" class="ltx_Math" display="inline" id="S3.SS2.p1.1.m1.1"><semantics id="S3.SS2.p1.1.m1.1a"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p1.1.m1.1.1" xref="S3.SS2.p1.1.m1.1.1.cmml">𝒱</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.1.m1.1b"><ci id="S3.SS2.p1.1.m1.1.1.cmml" xref="S3.SS2.p1.1.m1.1.1">𝒱</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.1.m1.1c">\mathcal{V}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.1.m1.1d">caligraphic_V</annotation></semantics></math> by focusing on pose similarity between hand images. We first extract 2D pose from <math alttext="I" class="ltx_Math" display="inline" id="S3.SS2.p1.2.m2.1"><semantics id="S3.SS2.p1.2.m2.1a"><mi id="S3.SS2.p1.2.m2.1.1" xref="S3.SS2.p1.2.m2.1.1.cmml">I</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.2.m2.1b"><ci id="S3.SS2.p1.2.m2.1.1.cmml" xref="S3.SS2.p1.2.m2.1.1">𝐼</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.2.m2.1c">I</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.2.m2.1d">italic_I</annotation></semantics></math>, embedding in the latent space, and design a scheme for effective positive sample mining.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.11"><span class="ltx_text ltx_font_bold" id="S3.SS2.p2.11.1">Pose embedding:</span>
+To compute the hand pose similarity robustly, we obtain a <math alttext="D" class="ltx_Math" display="inline" id="S3.SS2.p2.1.m1.1"><semantics id="S3.SS2.p2.1.m1.1a"><mi id="S3.SS2.p2.1.m1.1.1" xref="S3.SS2.p2.1.m1.1.1.cmml">D</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.1.m1.1b"><ci id="S3.SS2.p2.1.m1.1.1.cmml" xref="S3.SS2.p2.1.m1.1.1">𝐷</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.1.m1.1c">D</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.1.m1.1d">italic_D</annotation></semantics></math>-dimensional embedding of 2D hand keypoints, <math alttext="\mathbf{p}\in\mathbb{R}^{D}" class="ltx_Math" display="inline" id="S3.SS2.p2.2.m2.1"><semantics id="S3.SS2.p2.2.m2.1a"><mrow id="S3.SS2.p2.2.m2.1.1" xref="S3.SS2.p2.2.m2.1.1.cmml"><mi id="S3.SS2.p2.2.m2.1.1.2" xref="S3.SS2.p2.2.m2.1.1.2.cmml">𝐩</mi><mo id="S3.SS2.p2.2.m2.1.1.1" xref="S3.SS2.p2.2.m2.1.1.1.cmml">∈</mo><msup id="S3.SS2.p2.2.m2.1.1.3" xref="S3.SS2.p2.2.m2.1.1.3.cmml"><mi id="S3.SS2.p2.2.m2.1.1.3.2" mathvariant="normal" xref="S3.SS2.p2.2.m2.1.1.3.2.cmml">ℝ</mi><mi id="S3.SS2.p2.2.m2.1.1.3.3" xref="S3.SS2.p2.2.m2.1.1.3.3.cmml">D</mi></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.2.m2.1b"><apply id="S3.SS2.p2.2.m2.1.1.cmml" xref="S3.SS2.p2.2.m2.1.1"><in id="S3.SS2.p2.2.m2.1.1.1.cmml" xref="S3.SS2.p2.2.m2.1.1.1"></in><ci id="S3.SS2.p2.2.m2.1.1.2.cmml" xref="S3.SS2.p2.2.m2.1.1.2">𝐩</ci><apply id="S3.SS2.p2.2.m2.1.1.3.cmml" xref="S3.SS2.p2.2.m2.1.1.3"><csymbol cd="ambiguous" id="S3.SS2.p2.2.m2.1.1.3.1.cmml" xref="S3.SS2.p2.2.m2.1.1.3">superscript</csymbol><ci id="S3.SS2.p2.2.m2.1.1.3.2.cmml" xref="S3.SS2.p2.2.m2.1.1.3.2">ℝ</ci><ci id="S3.SS2.p2.2.m2.1.1.3.3.cmml" xref="S3.SS2.p2.2.m2.1.1.3.3">𝐷</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.2.m2.1c">\mathbf{p}\in\mathbb{R}^{D}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.2.m2.1d">bold_p ∈ roman_ℝ start_POSTSUPERSCRIPT italic_D end_POSTSUPERSCRIPT</annotation></semantics></math>, for each image <math alttext="I" class="ltx_Math" display="inline" id="S3.SS2.p2.3.m3.1"><semantics id="S3.SS2.p2.3.m3.1a"><mi id="S3.SS2.p2.3.m3.1.1" xref="S3.SS2.p2.3.m3.1.1.cmml">I</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.3.m3.1b"><ci id="S3.SS2.p2.3.m3.1.1.cmml" xref="S3.SS2.p2.3.m3.1.1">𝐼</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.3.m3.1c">I</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.3.m3.1d">italic_I</annotation></semantics></math>. Using an off-the-shelf 2D hand pose estimator <math alttext="\phi" class="ltx_Math" display="inline" id="S3.SS2.p2.4.m4.1"><semantics id="S3.SS2.p2.4.m4.1a"><mi id="S3.SS2.p2.4.m4.1.1" xref="S3.SS2.p2.4.m4.1.1.cmml">ϕ</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.4.m4.1b"><ci id="S3.SS2.p2.4.m4.1.1.cmml" xref="S3.SS2.p2.4.m4.1.1">italic-ϕ</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.4.m4.1c">\phi</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.4.m4.1d">italic_ϕ</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib24" title="">24</a>]</cite>, we predict 2D keypoints for 21 joints. We use a concatenated <math alttext="42" class="ltx_Math" display="inline" id="S3.SS2.p2.5.m5.1"><semantics id="S3.SS2.p2.5.m5.1a"><mn id="S3.SS2.p2.5.m5.1.1" xref="S3.SS2.p2.5.m5.1.1.cmml">42</mn><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.5.m5.1b"><cn id="S3.SS2.p2.5.m5.1.1.cmml" type="integer" xref="S3.SS2.p2.5.m5.1.1">42</cn></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.5.m5.1c">42</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.5.m5.1d">42</annotation></semantics></math>-dimensional vector as the output of <math alttext="\phi" class="ltx_Math" display="inline" id="S3.SS2.p2.6.m6.1"><semantics id="S3.SS2.p2.6.m6.1a"><mi id="S3.SS2.p2.6.m6.1.1" xref="S3.SS2.p2.6.m6.1.1.cmml">ϕ</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.6.m6.1b"><ci id="S3.SS2.p2.6.m6.1.1.cmml" xref="S3.SS2.p2.6.m6.1.1">italic-ϕ</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.6.m6.1c">\phi</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.6.m6.1d">italic_ϕ</annotation></semantics></math> for later use. As these 2D keypoints are prone to be noisy, we apply PCA-based dimensionality reduction to project the vector into a lower-dimensional space of size <math alttext="D" class="ltx_Math" display="inline" id="S3.SS2.p2.7.m7.1"><semantics id="S3.SS2.p2.7.m7.1a"><mi id="S3.SS2.p2.7.m7.1.1" xref="S3.SS2.p2.7.m7.1.1.cmml">D</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.7.m7.1b"><ci id="S3.SS2.p2.7.m7.1.1.cmml" xref="S3.SS2.p2.7.m7.1.1">𝐷</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.7.m7.1c">D</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.7.m7.1d">italic_D</annotation></semantics></math>. Given the PCA projection matrix <math alttext="M\in\mathbb{R}^{42\times D}" class="ltx_Math" display="inline" id="S3.SS2.p2.8.m8.1"><semantics id="S3.SS2.p2.8.m8.1a"><mrow id="S3.SS2.p2.8.m8.1.1" xref="S3.SS2.p2.8.m8.1.1.cmml"><mi id="S3.SS2.p2.8.m8.1.1.2" xref="S3.SS2.p2.8.m8.1.1.2.cmml">M</mi><mo id="S3.SS2.p2.8.m8.1.1.1" xref="S3.SS2.p2.8.m8.1.1.1.cmml">∈</mo><msup id="S3.SS2.p2.8.m8.1.1.3" xref="S3.SS2.p2.8.m8.1.1.3.cmml"><mi id="S3.SS2.p2.8.m8.1.1.3.2" mathvariant="normal" xref="S3.SS2.p2.8.m8.1.1.3.2.cmml">ℝ</mi><mrow id="S3.SS2.p2.8.m8.1.1.3.3" xref="S3.SS2.p2.8.m8.1.1.3.3.cmml"><mn id="S3.SS2.p2.8.m8.1.1.3.3.2" xref="S3.SS2.p2.8.m8.1.1.3.3.2.cmml">42</mn><mo id="S3.SS2.p2.8.m8.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS2.p2.8.m8.1.1.3.3.1.cmml">×</mo><mi id="S3.SS2.p2.8.m8.1.1.3.3.3" xref="S3.SS2.p2.8.m8.1.1.3.3.3.cmml">D</mi></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.8.m8.1b"><apply id="S3.SS2.p2.8.m8.1.1.cmml" xref="S3.SS2.p2.8.m8.1.1"><in id="S3.SS2.p2.8.m8.1.1.1.cmml" xref="S3.SS2.p2.8.m8.1.1.1"></in><ci id="S3.SS2.p2.8.m8.1.1.2.cmml" xref="S3.SS2.p2.8.m8.1.1.2">𝑀</ci><apply id="S3.SS2.p2.8.m8.1.1.3.cmml" xref="S3.SS2.p2.8.m8.1.1.3"><csymbol cd="ambiguous" id="S3.SS2.p2.8.m8.1.1.3.1.cmml" xref="S3.SS2.p2.8.m8.1.1.3">superscript</csymbol><ci id="S3.SS2.p2.8.m8.1.1.3.2.cmml" xref="S3.SS2.p2.8.m8.1.1.3.2">ℝ</ci><apply id="S3.SS2.p2.8.m8.1.1.3.3.cmml" xref="S3.SS2.p2.8.m8.1.1.3.3"><times id="S3.SS2.p2.8.m8.1.1.3.3.1.cmml" xref="S3.SS2.p2.8.m8.1.1.3.3.1"></times><cn id="S3.SS2.p2.8.m8.1.1.3.3.2.cmml" type="integer" xref="S3.SS2.p2.8.m8.1.1.3.3.2">42</cn><ci id="S3.SS2.p2.8.m8.1.1.3.3.3.cmml" xref="S3.SS2.p2.8.m8.1.1.3.3.3">𝐷</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.8.m8.1c">M\in\mathbb{R}^{42\times D}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.8.m8.1d">italic_M ∈ roman_ℝ start_POSTSUPERSCRIPT 42 × italic_D end_POSTSUPERSCRIPT</annotation></semantics></math>, the pose embedding <math alttext="\mathbf{p}" class="ltx_Math" display="inline" id="S3.SS2.p2.9.m9.1"><semantics id="S3.SS2.p2.9.m9.1a"><mi id="S3.SS2.p2.9.m9.1.1" xref="S3.SS2.p2.9.m9.1.1.cmml">𝐩</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.9.m9.1b"><ci id="S3.SS2.p2.9.m9.1.1.cmml" xref="S3.SS2.p2.9.m9.1.1">𝐩</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.9.m9.1c">\mathbf{p}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.9.m9.1d">bold_p</annotation></semantics></math> is calculated as <math alttext="\mathbf{p}=M^{T}\mathbf{\phi}(I)" class="ltx_Math" display="inline" id="S3.SS2.p2.10.m10.1"><semantics id="S3.SS2.p2.10.m10.1a"><mrow id="S3.SS2.p2.10.m10.1.2" xref="S3.SS2.p2.10.m10.1.2.cmml"><mi id="S3.SS2.p2.10.m10.1.2.2" xref="S3.SS2.p2.10.m10.1.2.2.cmml">𝐩</mi><mo id="S3.SS2.p2.10.m10.1.2.1" xref="S3.SS2.p2.10.m10.1.2.1.cmml">=</mo><mrow id="S3.SS2.p2.10.m10.1.2.3" xref="S3.SS2.p2.10.m10.1.2.3.cmml"><msup id="S3.SS2.p2.10.m10.1.2.3.2" xref="S3.SS2.p2.10.m10.1.2.3.2.cmml"><mi id="S3.SS2.p2.10.m10.1.2.3.2.2" xref="S3.SS2.p2.10.m10.1.2.3.2.2.cmml">M</mi><mi id="S3.SS2.p2.10.m10.1.2.3.2.3" xref="S3.SS2.p2.10.m10.1.2.3.2.3.cmml">T</mi></msup><mo id="S3.SS2.p2.10.m10.1.2.3.1" xref="S3.SS2.p2.10.m10.1.2.3.1.cmml">⁢</mo><mi id="S3.SS2.p2.10.m10.1.2.3.3" xref="S3.SS2.p2.10.m10.1.2.3.3.cmml">ϕ</mi><mo id="S3.SS2.p2.10.m10.1.2.3.1a" xref="S3.SS2.p2.10.m10.1.2.3.1.cmml">⁢</mo><mrow id="S3.SS2.p2.10.m10.1.2.3.4.2" xref="S3.SS2.p2.10.m10.1.2.3.cmml"><mo id="S3.SS2.p2.10.m10.1.2.3.4.2.1" stretchy="false" xref="S3.SS2.p2.10.m10.1.2.3.cmml">(</mo><mi id="S3.SS2.p2.10.m10.1.1" xref="S3.SS2.p2.10.m10.1.1.cmml">I</mi><mo id="S3.SS2.p2.10.m10.1.2.3.4.2.2" stretchy="false" xref="S3.SS2.p2.10.m10.1.2.3.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.10.m10.1b"><apply id="S3.SS2.p2.10.m10.1.2.cmml" xref="S3.SS2.p2.10.m10.1.2"><eq id="S3.SS2.p2.10.m10.1.2.1.cmml" xref="S3.SS2.p2.10.m10.1.2.1"></eq><ci id="S3.SS2.p2.10.m10.1.2.2.cmml" xref="S3.SS2.p2.10.m10.1.2.2">𝐩</ci><apply id="S3.SS2.p2.10.m10.1.2.3.cmml" xref="S3.SS2.p2.10.m10.1.2.3"><times id="S3.SS2.p2.10.m10.1.2.3.1.cmml" xref="S3.SS2.p2.10.m10.1.2.3.1"></times><apply id="S3.SS2.p2.10.m10.1.2.3.2.cmml" xref="S3.SS2.p2.10.m10.1.2.3.2"><csymbol cd="ambiguous" id="S3.SS2.p2.10.m10.1.2.3.2.1.cmml" xref="S3.SS2.p2.10.m10.1.2.3.2">superscript</csymbol><ci id="S3.SS2.p2.10.m10.1.2.3.2.2.cmml" xref="S3.SS2.p2.10.m10.1.2.3.2.2">𝑀</ci><ci id="S3.SS2.p2.10.m10.1.2.3.2.3.cmml" xref="S3.SS2.p2.10.m10.1.2.3.2.3">𝑇</ci></apply><ci id="S3.SS2.p2.10.m10.1.2.3.3.cmml" xref="S3.SS2.p2.10.m10.1.2.3.3">italic-ϕ</ci><ci id="S3.SS2.p2.10.m10.1.1.cmml" xref="S3.SS2.p2.10.m10.1.1">𝐼</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.10.m10.1c">\mathbf{p}=M^{T}\mathbf{\phi}(I)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.10.m10.1d">bold_p = italic_M start_POSTSUPERSCRIPT italic_T end_POSTSUPERSCRIPT italic_ϕ ( italic_I )</annotation></semantics></math>. This process mitigates noise and provides a more robust representation. We empirically choose <math alttext="D=14" class="ltx_Math" display="inline" id="S3.SS2.p2.11.m11.1"><semantics id="S3.SS2.p2.11.m11.1a"><mrow id="S3.SS2.p2.11.m11.1.1" xref="S3.SS2.p2.11.m11.1.1.cmml"><mi id="S3.SS2.p2.11.m11.1.1.2" xref="S3.SS2.p2.11.m11.1.1.2.cmml">D</mi><mo id="S3.SS2.p2.11.m11.1.1.1" xref="S3.SS2.p2.11.m11.1.1.1.cmml">=</mo><mn id="S3.SS2.p2.11.m11.1.1.3" xref="S3.SS2.p2.11.m11.1.1.3.cmml">14</mn></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.11.m11.1b"><apply id="S3.SS2.p2.11.m11.1.1.cmml" xref="S3.SS2.p2.11.m11.1.1"><eq id="S3.SS2.p2.11.m11.1.1.1.cmml" xref="S3.SS2.p2.11.m11.1.1.1"></eq><ci id="S3.SS2.p2.11.m11.1.1.2.cmml" xref="S3.SS2.p2.11.m11.1.1.2">𝐷</ci><cn id="S3.SS2.p2.11.m11.1.1.3.cmml" type="integer" xref="S3.SS2.p2.11.m11.1.1.3">14</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.11.m11.1c">D=14</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.11.m11.1d">italic_D = 14</annotation></semantics></math> for our experiments.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS2.p3">
+<p class="ltx_p" id="S3.SS2.p3.11"><span class="ltx_text ltx_font_bold" id="S3.SS2.p3.11.1">Mining:</span>
+This step is designed to identify a positive sample <math alttext="J\in\mathbb{R}^{H\times W\times 3}" class="ltx_Math" display="inline" id="S3.SS2.p3.1.m1.1"><semantics id="S3.SS2.p3.1.m1.1a"><mrow id="S3.SS2.p3.1.m1.1.1" xref="S3.SS2.p3.1.m1.1.1.cmml"><mi id="S3.SS2.p3.1.m1.1.1.2" xref="S3.SS2.p3.1.m1.1.1.2.cmml">J</mi><mo id="S3.SS2.p3.1.m1.1.1.1" xref="S3.SS2.p3.1.m1.1.1.1.cmml">∈</mo><msup id="S3.SS2.p3.1.m1.1.1.3" xref="S3.SS2.p3.1.m1.1.1.3.cmml"><mi id="S3.SS2.p3.1.m1.1.1.3.2" mathvariant="normal" xref="S3.SS2.p3.1.m1.1.1.3.2.cmml">ℝ</mi><mrow id="S3.SS2.p3.1.m1.1.1.3.3" xref="S3.SS2.p3.1.m1.1.1.3.3.cmml"><mi id="S3.SS2.p3.1.m1.1.1.3.3.2" xref="S3.SS2.p3.1.m1.1.1.3.3.2.cmml">H</mi><mo id="S3.SS2.p3.1.m1.1.1.3.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS2.p3.1.m1.1.1.3.3.1.cmml">×</mo><mi id="S3.SS2.p3.1.m1.1.1.3.3.3" xref="S3.SS2.p3.1.m1.1.1.3.3.3.cmml">W</mi><mo id="S3.SS2.p3.1.m1.1.1.3.3.1a" lspace="0.222em" rspace="0.222em" xref="S3.SS2.p3.1.m1.1.1.3.3.1.cmml">×</mo><mn id="S3.SS2.p3.1.m1.1.1.3.3.4" xref="S3.SS2.p3.1.m1.1.1.3.3.4.cmml">3</mn></mrow></msup></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.1.m1.1b"><apply id="S3.SS2.p3.1.m1.1.1.cmml" xref="S3.SS2.p3.1.m1.1.1"><in id="S3.SS2.p3.1.m1.1.1.1.cmml" xref="S3.SS2.p3.1.m1.1.1.1"></in><ci id="S3.SS2.p3.1.m1.1.1.2.cmml" xref="S3.SS2.p3.1.m1.1.1.2">𝐽</ci><apply id="S3.SS2.p3.1.m1.1.1.3.cmml" xref="S3.SS2.p3.1.m1.1.1.3"><csymbol cd="ambiguous" id="S3.SS2.p3.1.m1.1.1.3.1.cmml" xref="S3.SS2.p3.1.m1.1.1.3">superscript</csymbol><ci id="S3.SS2.p3.1.m1.1.1.3.2.cmml" xref="S3.SS2.p3.1.m1.1.1.3.2">ℝ</ci><apply id="S3.SS2.p3.1.m1.1.1.3.3.cmml" xref="S3.SS2.p3.1.m1.1.1.3.3"><times id="S3.SS2.p3.1.m1.1.1.3.3.1.cmml" xref="S3.SS2.p3.1.m1.1.1.3.3.1"></times><ci id="S3.SS2.p3.1.m1.1.1.3.3.2.cmml" xref="S3.SS2.p3.1.m1.1.1.3.3.2">𝐻</ci><ci id="S3.SS2.p3.1.m1.1.1.3.3.3.cmml" xref="S3.SS2.p3.1.m1.1.1.3.3.3">𝑊</ci><cn id="S3.SS2.p3.1.m1.1.1.3.3.4.cmml" type="integer" xref="S3.SS2.p3.1.m1.1.1.3.3.4">3</cn></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.1.m1.1c">J\in\mathbb{R}^{H\times W\times 3}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.1.m1.1d">italic_J ∈ roman_ℝ start_POSTSUPERSCRIPT italic_H × italic_W × 3 end_POSTSUPERSCRIPT</annotation></semantics></math> paired with a query image <math alttext="I" class="ltx_Math" display="inline" id="S3.SS2.p3.2.m2.1"><semantics id="S3.SS2.p3.2.m2.1a"><mi id="S3.SS2.p3.2.m2.1.1" xref="S3.SS2.p3.2.m2.1.1.cmml">I</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.2.m2.1b"><ci id="S3.SS2.p3.2.m2.1.1.cmml" xref="S3.SS2.p3.2.m2.1.1">𝐼</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.2.m2.1c">I</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.2.m2.1d">italic_I</annotation></semantics></math>.
+We denote the similarity mining logic as <math alttext="J=\mathrm{SiM}(I)" class="ltx_Math" display="inline" id="S3.SS2.p3.3.m3.1"><semantics id="S3.SS2.p3.3.m3.1a"><mrow id="S3.SS2.p3.3.m3.1.2" xref="S3.SS2.p3.3.m3.1.2.cmml"><mi id="S3.SS2.p3.3.m3.1.2.2" xref="S3.SS2.p3.3.m3.1.2.2.cmml">J</mi><mo id="S3.SS2.p3.3.m3.1.2.1" xref="S3.SS2.p3.3.m3.1.2.1.cmml">=</mo><mrow id="S3.SS2.p3.3.m3.1.2.3" xref="S3.SS2.p3.3.m3.1.2.3.cmml"><mi id="S3.SS2.p3.3.m3.1.2.3.2" xref="S3.SS2.p3.3.m3.1.2.3.2.cmml">SiM</mi><mo id="S3.SS2.p3.3.m3.1.2.3.1" xref="S3.SS2.p3.3.m3.1.2.3.1.cmml">⁢</mo><mrow id="S3.SS2.p3.3.m3.1.2.3.3.2" xref="S3.SS2.p3.3.m3.1.2.3.cmml"><mo id="S3.SS2.p3.3.m3.1.2.3.3.2.1" stretchy="false" xref="S3.SS2.p3.3.m3.1.2.3.cmml">(</mo><mi id="S3.SS2.p3.3.m3.1.1" xref="S3.SS2.p3.3.m3.1.1.cmml">I</mi><mo id="S3.SS2.p3.3.m3.1.2.3.3.2.2" stretchy="false" xref="S3.SS2.p3.3.m3.1.2.3.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.3.m3.1b"><apply id="S3.SS2.p3.3.m3.1.2.cmml" xref="S3.SS2.p3.3.m3.1.2"><eq id="S3.SS2.p3.3.m3.1.2.1.cmml" xref="S3.SS2.p3.3.m3.1.2.1"></eq><ci id="S3.SS2.p3.3.m3.1.2.2.cmml" xref="S3.SS2.p3.3.m3.1.2.2">𝐽</ci><apply id="S3.SS2.p3.3.m3.1.2.3.cmml" xref="S3.SS2.p3.3.m3.1.2.3"><times id="S3.SS2.p3.3.m3.1.2.3.1.cmml" xref="S3.SS2.p3.3.m3.1.2.3.1"></times><ci id="S3.SS2.p3.3.m3.1.2.3.2.cmml" xref="S3.SS2.p3.3.m3.1.2.3.2">SiM</ci><ci id="S3.SS2.p3.3.m3.1.1.cmml" xref="S3.SS2.p3.3.m3.1.1">𝐼</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.3.m3.1c">J=\mathrm{SiM}(I)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.3.m3.1d">italic_J = roman_SiM ( italic_I )</annotation></semantics></math>. When using the closest sample in the PCA space, we encounter a trivial solution <math alttext="I,J\in v_{i}" class="ltx_Math" display="inline" id="S3.SS2.p3.4.m4.2"><semantics id="S3.SS2.p3.4.m4.2a"><mrow id="S3.SS2.p3.4.m4.2.3" xref="S3.SS2.p3.4.m4.2.3.cmml"><mrow id="S3.SS2.p3.4.m4.2.3.2.2" xref="S3.SS2.p3.4.m4.2.3.2.1.cmml"><mi id="S3.SS2.p3.4.m4.1.1" xref="S3.SS2.p3.4.m4.1.1.cmml">I</mi><mo id="S3.SS2.p3.4.m4.2.3.2.2.1" xref="S3.SS2.p3.4.m4.2.3.2.1.cmml">,</mo><mi id="S3.SS2.p3.4.m4.2.2" xref="S3.SS2.p3.4.m4.2.2.cmml">J</mi></mrow><mo id="S3.SS2.p3.4.m4.2.3.1" xref="S3.SS2.p3.4.m4.2.3.1.cmml">∈</mo><msub id="S3.SS2.p3.4.m4.2.3.3" xref="S3.SS2.p3.4.m4.2.3.3.cmml"><mi id="S3.SS2.p3.4.m4.2.3.3.2" xref="S3.SS2.p3.4.m4.2.3.3.2.cmml">v</mi><mi id="S3.SS2.p3.4.m4.2.3.3.3" xref="S3.SS2.p3.4.m4.2.3.3.3.cmml">i</mi></msub></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.4.m4.2b"><apply id="S3.SS2.p3.4.m4.2.3.cmml" xref="S3.SS2.p3.4.m4.2.3"><in id="S3.SS2.p3.4.m4.2.3.1.cmml" xref="S3.SS2.p3.4.m4.2.3.1"></in><list id="S3.SS2.p3.4.m4.2.3.2.1.cmml" xref="S3.SS2.p3.4.m4.2.3.2.2"><ci id="S3.SS2.p3.4.m4.1.1.cmml" xref="S3.SS2.p3.4.m4.1.1">𝐼</ci><ci id="S3.SS2.p3.4.m4.2.2.cmml" xref="S3.SS2.p3.4.m4.2.2">𝐽</ci></list><apply id="S3.SS2.p3.4.m4.2.3.3.cmml" xref="S3.SS2.p3.4.m4.2.3.3"><csymbol cd="ambiguous" id="S3.SS2.p3.4.m4.2.3.3.1.cmml" xref="S3.SS2.p3.4.m4.2.3.3">subscript</csymbol><ci id="S3.SS2.p3.4.m4.2.3.3.2.cmml" xref="S3.SS2.p3.4.m4.2.3.3.2">𝑣</ci><ci id="S3.SS2.p3.4.m4.2.3.3.3.cmml" xref="S3.SS2.p3.4.m4.2.3.3.3">𝑖</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.4.m4.2c">I,J\in v_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.4.m4.2d">italic_I , italic_J ∈ italic_v start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math>, where both images originate from the same video <math alttext="v_{i}" class="ltx_Math" display="inline" id="S3.SS2.p3.5.m5.1"><semantics id="S3.SS2.p3.5.m5.1a"><msub id="S3.SS2.p3.5.m5.1.1" xref="S3.SS2.p3.5.m5.1.1.cmml"><mi id="S3.SS2.p3.5.m5.1.1.2" xref="S3.SS2.p3.5.m5.1.1.2.cmml">v</mi><mi id="S3.SS2.p3.5.m5.1.1.3" xref="S3.SS2.p3.5.m5.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.5.m5.1b"><apply id="S3.SS2.p3.5.m5.1.1.cmml" xref="S3.SS2.p3.5.m5.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.5.m5.1.1.1.cmml" xref="S3.SS2.p3.5.m5.1.1">subscript</csymbol><ci id="S3.SS2.p3.5.m5.1.1.2.cmml" xref="S3.SS2.p3.5.m5.1.1.2">𝑣</ci><ci id="S3.SS2.p3.5.m5.1.1.3.cmml" xref="S3.SS2.p3.5.m5.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.5.m5.1c">v_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.5.m5.1d">italic_v start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math>. Similarly to <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib44" title="">44</a>]</cite>, the supervision by positive samples from the same video have less diversity in backgrounds, hand appearances, and object interactions. Thus we are motivated to find similar hands derived from different video domains. Specifically, we search the minimum distance within the set of all frames except for <math alttext="v_{i}" class="ltx_Math" display="inline" id="S3.SS2.p3.6.m6.1"><semantics id="S3.SS2.p3.6.m6.1a"><msub id="S3.SS2.p3.6.m6.1.1" xref="S3.SS2.p3.6.m6.1.1.cmml"><mi id="S3.SS2.p3.6.m6.1.1.2" xref="S3.SS2.p3.6.m6.1.1.2.cmml">v</mi><mi id="S3.SS2.p3.6.m6.1.1.3" xref="S3.SS2.p3.6.m6.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.6.m6.1b"><apply id="S3.SS2.p3.6.m6.1.1.cmml" xref="S3.SS2.p3.6.m6.1.1"><csymbol cd="ambiguous" id="S3.SS2.p3.6.m6.1.1.1.cmml" xref="S3.SS2.p3.6.m6.1.1">subscript</csymbol><ci id="S3.SS2.p3.6.m6.1.1.2.cmml" xref="S3.SS2.p3.6.m6.1.1.2">𝑣</ci><ci id="S3.SS2.p3.6.m6.1.1.3.cmml" xref="S3.SS2.p3.6.m6.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.6.m6.1c">v_{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.6.m6.1d">italic_v start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math>, written as <math alttext="\mathcal{F}_{\mathrm{excl},i}=\bigcup_{\begin{subarray}{c}k=1\\
+k\neq i\end{subarray}}^{N}\bigcup_{j=1}^{T_{k}}I_{kj}" class="ltx_Math" display="inline" id="S3.SS2.p3.7.m7.3"><semantics id="S3.SS2.p3.7.m7.3a"><mrow id="S3.SS2.p3.7.m7.3.4" xref="S3.SS2.p3.7.m7.3.4.cmml"><msub id="S3.SS2.p3.7.m7.3.4.2" xref="S3.SS2.p3.7.m7.3.4.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS2.p3.7.m7.3.4.2.2" xref="S3.SS2.p3.7.m7.3.4.2.2.cmml">ℱ</mi><mrow id="S3.SS2.p3.7.m7.3.3.2.4" xref="S3.SS2.p3.7.m7.3.3.2.3.cmml"><mi id="S3.SS2.p3.7.m7.2.2.1.1" xref="S3.SS2.p3.7.m7.2.2.1.1.cmml">excl</mi><mo id="S3.SS2.p3.7.m7.3.3.2.4.1" xref="S3.SS2.p3.7.m7.3.3.2.3.cmml">,</mo><mi id="S3.SS2.p3.7.m7.3.3.2.2" xref="S3.SS2.p3.7.m7.3.3.2.2.cmml">i</mi></mrow></msub><mo id="S3.SS2.p3.7.m7.3.4.1" rspace="0.111em" xref="S3.SS2.p3.7.m7.3.4.1.cmml">=</mo><mrow id="S3.SS2.p3.7.m7.3.4.3" xref="S3.SS2.p3.7.m7.3.4.3.cmml"><msubsup id="S3.SS2.p3.7.m7.3.4.3.1" xref="S3.SS2.p3.7.m7.3.4.3.1.cmml"><mo id="S3.SS2.p3.7.m7.3.4.3.1.2.2" rspace="0em" xref="S3.SS2.p3.7.m7.3.4.3.1.2.2.cmml">⋃</mo><mtable id="S3.SS2.p3.7.m7.1.1.1.1.1.1" rowspacing="0pt" xref="S3.SS2.p3.7.m7.1.1.1.2.cmml"><mtr id="S3.SS2.p3.7.m7.1.1.1.1.1.1a" xref="S3.SS2.p3.7.m7.1.1.1.2.cmml"><mtd id="S3.SS2.p3.7.m7.1.1.1.1.1.1b" xref="S3.SS2.p3.7.m7.1.1.1.2.cmml"><mrow id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.cmml"><mi id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.2" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.2.cmml">k</mi><mo id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.1" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.1.cmml">=</mo><mn id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.3" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.3.cmml">1</mn></mrow></mtd></mtr><mtr id="S3.SS2.p3.7.m7.1.1.1.1.1.1c" xref="S3.SS2.p3.7.m7.1.1.1.2.cmml"><mtd id="S3.SS2.p3.7.m7.1.1.1.1.1.1d" xref="S3.SS2.p3.7.m7.1.1.1.2.cmml"><mrow id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.cmml"><mi id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.2" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.2.cmml">k</mi><mo id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.1" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.1.cmml">≠</mo><mi id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.3" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.3.cmml">i</mi></mrow></mtd></mtr></mtable><mi id="S3.SS2.p3.7.m7.3.4.3.1.3" xref="S3.SS2.p3.7.m7.3.4.3.1.3.cmml">N</mi></msubsup><mrow id="S3.SS2.p3.7.m7.3.4.3.2" xref="S3.SS2.p3.7.m7.3.4.3.2.cmml"><msubsup id="S3.SS2.p3.7.m7.3.4.3.2.1" xref="S3.SS2.p3.7.m7.3.4.3.2.1.cmml"><mo id="S3.SS2.p3.7.m7.3.4.3.2.1.2.2" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.2.cmml">⋃</mo><mrow id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.cmml"><mi id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.2" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.2.cmml">j</mi><mo id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.1" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.1.cmml">=</mo><mn id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.3" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.3.cmml">1</mn></mrow><msub id="S3.SS2.p3.7.m7.3.4.3.2.1.3" xref="S3.SS2.p3.7.m7.3.4.3.2.1.3.cmml"><mi id="S3.SS2.p3.7.m7.3.4.3.2.1.3.2" xref="S3.SS2.p3.7.m7.3.4.3.2.1.3.2.cmml">T</mi><mi id="S3.SS2.p3.7.m7.3.4.3.2.1.3.3" xref="S3.SS2.p3.7.m7.3.4.3.2.1.3.3.cmml">k</mi></msub></msubsup><msub id="S3.SS2.p3.7.m7.3.4.3.2.2" xref="S3.SS2.p3.7.m7.3.4.3.2.2.cmml"><mi id="S3.SS2.p3.7.m7.3.4.3.2.2.2" xref="S3.SS2.p3.7.m7.3.4.3.2.2.2.cmml">I</mi><mrow id="S3.SS2.p3.7.m7.3.4.3.2.2.3" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3.cmml"><mi id="S3.SS2.p3.7.m7.3.4.3.2.2.3.2" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3.2.cmml">k</mi><mo id="S3.SS2.p3.7.m7.3.4.3.2.2.3.1" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3.1.cmml">⁢</mo><mi id="S3.SS2.p3.7.m7.3.4.3.2.2.3.3" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3.3.cmml">j</mi></mrow></msub></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.7.m7.3b"><apply id="S3.SS2.p3.7.m7.3.4.cmml" xref="S3.SS2.p3.7.m7.3.4"><eq id="S3.SS2.p3.7.m7.3.4.1.cmml" xref="S3.SS2.p3.7.m7.3.4.1"></eq><apply id="S3.SS2.p3.7.m7.3.4.2.cmml" xref="S3.SS2.p3.7.m7.3.4.2"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.3.4.2.1.cmml" xref="S3.SS2.p3.7.m7.3.4.2">subscript</csymbol><ci id="S3.SS2.p3.7.m7.3.4.2.2.cmml" xref="S3.SS2.p3.7.m7.3.4.2.2">ℱ</ci><list id="S3.SS2.p3.7.m7.3.3.2.3.cmml" xref="S3.SS2.p3.7.m7.3.3.2.4"><ci id="S3.SS2.p3.7.m7.2.2.1.1.cmml" xref="S3.SS2.p3.7.m7.2.2.1.1">excl</ci><ci id="S3.SS2.p3.7.m7.3.3.2.2.cmml" xref="S3.SS2.p3.7.m7.3.3.2.2">𝑖</ci></list></apply><apply id="S3.SS2.p3.7.m7.3.4.3.cmml" xref="S3.SS2.p3.7.m7.3.4.3"><apply id="S3.SS2.p3.7.m7.3.4.3.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.1"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.3.4.3.1.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.1">superscript</csymbol><apply id="S3.SS2.p3.7.m7.3.4.3.1.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.1"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.3.4.3.1.2.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.1">subscript</csymbol><union id="S3.SS2.p3.7.m7.3.4.3.1.2.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.1.2.2"></union><list id="S3.SS2.p3.7.m7.1.1.1.2.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1"><matrix id="S3.SS2.p3.7.m7.1.1.1.1.1.1.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1"><matrixrow id="S3.SS2.p3.7.m7.1.1.1.1.1.1a.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1"><apply id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1"><eq id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.1"></eq><ci id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.2">𝑘</ci><cn id="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.3.cmml" type="integer" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.1.1.1.3">1</cn></apply></matrixrow><matrixrow id="S3.SS2.p3.7.m7.1.1.1.1.1.1b.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1"><apply id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1"><neq id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.1.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.1"></neq><ci id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.2.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.2">𝑘</ci><ci id="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.3.cmml" xref="S3.SS2.p3.7.m7.1.1.1.1.1.1.2.1.1.3">𝑖</ci></apply></matrixrow></matrix></list></apply><ci id="S3.SS2.p3.7.m7.3.4.3.1.3.cmml" xref="S3.SS2.p3.7.m7.3.4.3.1.3">𝑁</ci></apply><apply id="S3.SS2.p3.7.m7.3.4.3.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2"><apply id="S3.SS2.p3.7.m7.3.4.3.2.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.3.4.3.2.1.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1">superscript</csymbol><apply id="S3.SS2.p3.7.m7.3.4.3.2.1.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.3.4.3.2.1.2.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1">subscript</csymbol><union id="S3.SS2.p3.7.m7.3.4.3.2.1.2.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.2"></union><apply id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3"><eq id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.1"></eq><ci id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.2">𝑗</ci><cn id="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.3.cmml" type="integer" xref="S3.SS2.p3.7.m7.3.4.3.2.1.2.3.3">1</cn></apply></apply><apply id="S3.SS2.p3.7.m7.3.4.3.2.1.3.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.3"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.3.4.3.2.1.3.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.3">subscript</csymbol><ci id="S3.SS2.p3.7.m7.3.4.3.2.1.3.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.3.2">𝑇</ci><ci id="S3.SS2.p3.7.m7.3.4.3.2.1.3.3.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.1.3.3">𝑘</ci></apply></apply><apply id="S3.SS2.p3.7.m7.3.4.3.2.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.2"><csymbol cd="ambiguous" id="S3.SS2.p3.7.m7.3.4.3.2.2.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.2">subscript</csymbol><ci id="S3.SS2.p3.7.m7.3.4.3.2.2.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.2.2">𝐼</ci><apply id="S3.SS2.p3.7.m7.3.4.3.2.2.3.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3"><times id="S3.SS2.p3.7.m7.3.4.3.2.2.3.1.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3.1"></times><ci id="S3.SS2.p3.7.m7.3.4.3.2.2.3.2.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3.2">𝑘</ci><ci id="S3.SS2.p3.7.m7.3.4.3.2.2.3.3.cmml" xref="S3.SS2.p3.7.m7.3.4.3.2.2.3.3">𝑗</ci></apply></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.7.m7.3c">\mathcal{F}_{\mathrm{excl},i}=\bigcup_{\begin{subarray}{c}k=1\\
+k\neq i\end{subarray}}^{N}\bigcup_{j=1}^{T_{k}}I_{kj}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.7.m7.3d">caligraphic_F start_POSTSUBSCRIPT roman_excl , italic_i end_POSTSUBSCRIPT = ⋃ start_POSTSUBSCRIPT start_ARG start_ROW start_CELL italic_k = 1 end_CELL end_ROW start_ROW start_CELL italic_k ≠ italic_i end_CELL end_ROW end_ARG end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_N end_POSTSUPERSCRIPT ⋃ start_POSTSUBSCRIPT italic_j = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_T start_POSTSUBSCRIPT italic_k end_POSTSUBSCRIPT end_POSTSUPERSCRIPT italic_I start_POSTSUBSCRIPT italic_k italic_j end_POSTSUBSCRIPT</annotation></semantics></math>. Given an query <math alttext="I_{i,j}" class="ltx_Math" display="inline" id="S3.SS2.p3.8.m8.2"><semantics id="S3.SS2.p3.8.m8.2a"><msub id="S3.SS2.p3.8.m8.2.3" xref="S3.SS2.p3.8.m8.2.3.cmml"><mi id="S3.SS2.p3.8.m8.2.3.2" xref="S3.SS2.p3.8.m8.2.3.2.cmml">I</mi><mrow id="S3.SS2.p3.8.m8.2.2.2.4" xref="S3.SS2.p3.8.m8.2.2.2.3.cmml"><mi id="S3.SS2.p3.8.m8.1.1.1.1" xref="S3.SS2.p3.8.m8.1.1.1.1.cmml">i</mi><mo id="S3.SS2.p3.8.m8.2.2.2.4.1" xref="S3.SS2.p3.8.m8.2.2.2.3.cmml">,</mo><mi id="S3.SS2.p3.8.m8.2.2.2.2" xref="S3.SS2.p3.8.m8.2.2.2.2.cmml">j</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.8.m8.2b"><apply id="S3.SS2.p3.8.m8.2.3.cmml" xref="S3.SS2.p3.8.m8.2.3"><csymbol cd="ambiguous" id="S3.SS2.p3.8.m8.2.3.1.cmml" xref="S3.SS2.p3.8.m8.2.3">subscript</csymbol><ci id="S3.SS2.p3.8.m8.2.3.2.cmml" xref="S3.SS2.p3.8.m8.2.3.2">𝐼</ci><list id="S3.SS2.p3.8.m8.2.2.2.3.cmml" xref="S3.SS2.p3.8.m8.2.2.2.4"><ci id="S3.SS2.p3.8.m8.1.1.1.1.cmml" xref="S3.SS2.p3.8.m8.1.1.1.1">𝑖</ci><ci id="S3.SS2.p3.8.m8.2.2.2.2.cmml" xref="S3.SS2.p3.8.m8.2.2.2.2">𝑗</ci></list></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.8.m8.2c">I_{i,j}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.8.m8.2d">italic_I start_POSTSUBSCRIPT italic_i , italic_j end_POSTSUBSCRIPT</annotation></semantics></math> where a <math alttext="j" class="ltx_Math" display="inline" id="S3.SS2.p3.9.m9.1"><semantics id="S3.SS2.p3.9.m9.1a"><mi id="S3.SS2.p3.9.m9.1.1" xref="S3.SS2.p3.9.m9.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.9.m9.1b"><ci id="S3.SS2.p3.9.m9.1.1.cmml" xref="S3.SS2.p3.9.m9.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.9.m9.1c">j</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.9.m9.1d">italic_j</annotation></semantics></math>-th image of a <math alttext="i" class="ltx_Math" display="inline" id="S3.SS2.p3.10.m10.1"><semantics id="S3.SS2.p3.10.m10.1a"><mi id="S3.SS2.p3.10.m10.1.1" xref="S3.SS2.p3.10.m10.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.10.m10.1b"><ci id="S3.SS2.p3.10.m10.1.1.cmml" xref="S3.SS2.p3.10.m10.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.10.m10.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.10.m10.1d">italic_i</annotation></semantics></math>-th video, the function <math alttext="\mathrm{SiM}(\cdot)" class="ltx_Math" display="inline" id="S3.SS2.p3.11.m11.1"><semantics id="S3.SS2.p3.11.m11.1a"><mrow id="S3.SS2.p3.11.m11.1.2" xref="S3.SS2.p3.11.m11.1.2.cmml"><mi id="S3.SS2.p3.11.m11.1.2.2" xref="S3.SS2.p3.11.m11.1.2.2.cmml">SiM</mi><mo id="S3.SS2.p3.11.m11.1.2.1" xref="S3.SS2.p3.11.m11.1.2.1.cmml">⁢</mo><mrow id="S3.SS2.p3.11.m11.1.2.3.2" xref="S3.SS2.p3.11.m11.1.2.cmml"><mo id="S3.SS2.p3.11.m11.1.2.3.2.1" stretchy="false" xref="S3.SS2.p3.11.m11.1.2.cmml">(</mo><mo id="S3.SS2.p3.11.m11.1.1" lspace="0em" rspace="0em" xref="S3.SS2.p3.11.m11.1.1.cmml">⋅</mo><mo id="S3.SS2.p3.11.m11.1.2.3.2.2" stretchy="false" xref="S3.SS2.p3.11.m11.1.2.cmml">)</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.11.m11.1b"><apply id="S3.SS2.p3.11.m11.1.2.cmml" xref="S3.SS2.p3.11.m11.1.2"><times id="S3.SS2.p3.11.m11.1.2.1.cmml" xref="S3.SS2.p3.11.m11.1.2.1"></times><ci id="S3.SS2.p3.11.m11.1.2.2.cmml" xref="S3.SS2.p3.11.m11.1.2.2">SiM</ci><ci id="S3.SS2.p3.11.m11.1.1.cmml" xref="S3.SS2.p3.11.m11.1.1">⋅</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.11.m11.1c">\mathrm{SiM}(\cdot)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.11.m11.1d">roman_SiM ( ⋅ )</annotation></semantics></math> is formulated as</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathrm{SiM}(I_{i,j})={\arg\min}_{x\in\mathcal{F}_{\mathrm{excl},i}}d(M^{T}%
+\phi(x),M^{T}\phi(I_{i,j}))," class="ltx_Math" display="block" id="S3.E1.m1.8"><semantics id="S3.E1.m1.8a"><mrow id="S3.E1.m1.8.8.1" xref="S3.E1.m1.8.8.1.1.cmml"><mrow id="S3.E1.m1.8.8.1.1" xref="S3.E1.m1.8.8.1.1.cmml"><mrow id="S3.E1.m1.8.8.1.1.1" xref="S3.E1.m1.8.8.1.1.1.cmml"><mi id="S3.E1.m1.8.8.1.1.1.3" xref="S3.E1.m1.8.8.1.1.1.3.cmml">SiM</mi><mo id="S3.E1.m1.8.8.1.1.1.2" xref="S3.E1.m1.8.8.1.1.1.2.cmml">⁢</mo><mrow id="S3.E1.m1.8.8.1.1.1.1.1" xref="S3.E1.m1.8.8.1.1.1.1.1.1.cmml"><mo id="S3.E1.m1.8.8.1.1.1.1.1.2" stretchy="false" xref="S3.E1.m1.8.8.1.1.1.1.1.1.cmml">(</mo><msub id="S3.E1.m1.8.8.1.1.1.1.1.1" xref="S3.E1.m1.8.8.1.1.1.1.1.1.cmml"><mi id="S3.E1.m1.8.8.1.1.1.1.1.1.2" xref="S3.E1.m1.8.8.1.1.1.1.1.1.2.cmml">I</mi><mrow id="S3.E1.m1.2.2.2.4" xref="S3.E1.m1.2.2.2.3.cmml"><mi id="S3.E1.m1.1.1.1.1" xref="S3.E1.m1.1.1.1.1.cmml">i</mi><mo id="S3.E1.m1.2.2.2.4.1" xref="S3.E1.m1.2.2.2.3.cmml">,</mo><mi id="S3.E1.m1.2.2.2.2" xref="S3.E1.m1.2.2.2.2.cmml">j</mi></mrow></msub><mo id="S3.E1.m1.8.8.1.1.1.1.1.3" stretchy="false" xref="S3.E1.m1.8.8.1.1.1.1.1.1.cmml">)</mo></mrow></mrow><mo id="S3.E1.m1.8.8.1.1.4" xref="S3.E1.m1.8.8.1.1.4.cmml">=</mo><mrow id="S3.E1.m1.8.8.1.1.3" xref="S3.E1.m1.8.8.1.1.3.cmml"><mrow id="S3.E1.m1.8.8.1.1.3.4" xref="S3.E1.m1.8.8.1.1.3.4.cmml"><mi id="S3.E1.m1.8.8.1.1.3.4.1" xref="S3.E1.m1.8.8.1.1.3.4.1.cmml">arg</mi><mo id="S3.E1.m1.8.8.1.1.3.4a" lspace="0.167em" xref="S3.E1.m1.8.8.1.1.3.4.cmml">⁡</mo><mrow id="S3.E1.m1.8.8.1.1.3.4.2" xref="S3.E1.m1.8.8.1.1.3.4.2.cmml"><munder id="S3.E1.m1.8.8.1.1.3.4.2.1" xref="S3.E1.m1.8.8.1.1.3.4.2.1.cmml"><mi id="S3.E1.m1.8.8.1.1.3.4.2.1.2" xref="S3.E1.m1.8.8.1.1.3.4.2.1.2.cmml">min</mi><mrow id="S3.E1.m1.4.4.2" xref="S3.E1.m1.4.4.2.cmml"><mi id="S3.E1.m1.4.4.2.4" xref="S3.E1.m1.4.4.2.4.cmml">x</mi><mo id="S3.E1.m1.4.4.2.3" xref="S3.E1.m1.4.4.2.3.cmml">∈</mo><msub id="S3.E1.m1.4.4.2.5" xref="S3.E1.m1.4.4.2.5.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E1.m1.4.4.2.5.2" xref="S3.E1.m1.4.4.2.5.2.cmml">ℱ</mi><mrow id="S3.E1.m1.4.4.2.2.2.4" xref="S3.E1.m1.4.4.2.2.2.3.cmml"><mi id="S3.E1.m1.3.3.1.1.1.1" xref="S3.E1.m1.3.3.1.1.1.1.cmml">excl</mi><mo id="S3.E1.m1.4.4.2.2.2.4.1" xref="S3.E1.m1.4.4.2.2.2.3.cmml">,</mo><mi id="S3.E1.m1.4.4.2.2.2.2" xref="S3.E1.m1.4.4.2.2.2.2.cmml">i</mi></mrow></msub></mrow></munder><mo id="S3.E1.m1.8.8.1.1.3.4.2a" lspace="0.167em" xref="S3.E1.m1.8.8.1.1.3.4.2.cmml">⁡</mo><mi id="S3.E1.m1.8.8.1.1.3.4.2.2" xref="S3.E1.m1.8.8.1.1.3.4.2.2.cmml">d</mi></mrow></mrow><mo id="S3.E1.m1.8.8.1.1.3.3" xref="S3.E1.m1.8.8.1.1.3.3.cmml">⁢</mo><mrow id="S3.E1.m1.8.8.1.1.3.2.2" xref="S3.E1.m1.8.8.1.1.3.2.3.cmml"><mo id="S3.E1.m1.8.8.1.1.3.2.2.3" stretchy="false" xref="S3.E1.m1.8.8.1.1.3.2.3.cmml">(</mo><mrow id="S3.E1.m1.8.8.1.1.2.1.1.1" xref="S3.E1.m1.8.8.1.1.2.1.1.1.cmml"><msup id="S3.E1.m1.8.8.1.1.2.1.1.1.2" xref="S3.E1.m1.8.8.1.1.2.1.1.1.2.cmml"><mi id="S3.E1.m1.8.8.1.1.2.1.1.1.2.2" xref="S3.E1.m1.8.8.1.1.2.1.1.1.2.2.cmml">M</mi><mi id="S3.E1.m1.8.8.1.1.2.1.1.1.2.3" xref="S3.E1.m1.8.8.1.1.2.1.1.1.2.3.cmml">T</mi></msup><mo id="S3.E1.m1.8.8.1.1.2.1.1.1.1" xref="S3.E1.m1.8.8.1.1.2.1.1.1.1.cmml">⁢</mo><mi id="S3.E1.m1.8.8.1.1.2.1.1.1.3" xref="S3.E1.m1.8.8.1.1.2.1.1.1.3.cmml">ϕ</mi><mo id="S3.E1.m1.8.8.1.1.2.1.1.1.1a" xref="S3.E1.m1.8.8.1.1.2.1.1.1.1.cmml">⁢</mo><mrow id="S3.E1.m1.8.8.1.1.2.1.1.1.4.2" xref="S3.E1.m1.8.8.1.1.2.1.1.1.cmml"><mo id="S3.E1.m1.8.8.1.1.2.1.1.1.4.2.1" stretchy="false" xref="S3.E1.m1.8.8.1.1.2.1.1.1.cmml">(</mo><mi id="S3.E1.m1.7.7" xref="S3.E1.m1.7.7.cmml">x</mi><mo id="S3.E1.m1.8.8.1.1.2.1.1.1.4.2.2" stretchy="false" xref="S3.E1.m1.8.8.1.1.2.1.1.1.cmml">)</mo></mrow></mrow><mo id="S3.E1.m1.8.8.1.1.3.2.2.4" xref="S3.E1.m1.8.8.1.1.3.2.3.cmml">,</mo><mrow id="S3.E1.m1.8.8.1.1.3.2.2.2" xref="S3.E1.m1.8.8.1.1.3.2.2.2.cmml"><msup id="S3.E1.m1.8.8.1.1.3.2.2.2.3" xref="S3.E1.m1.8.8.1.1.3.2.2.2.3.cmml"><mi id="S3.E1.m1.8.8.1.1.3.2.2.2.3.2" xref="S3.E1.m1.8.8.1.1.3.2.2.2.3.2.cmml">M</mi><mi id="S3.E1.m1.8.8.1.1.3.2.2.2.3.3" xref="S3.E1.m1.8.8.1.1.3.2.2.2.3.3.cmml">T</mi></msup><mo id="S3.E1.m1.8.8.1.1.3.2.2.2.2" xref="S3.E1.m1.8.8.1.1.3.2.2.2.2.cmml">⁢</mo><mi id="S3.E1.m1.8.8.1.1.3.2.2.2.4" xref="S3.E1.m1.8.8.1.1.3.2.2.2.4.cmml">ϕ</mi><mo id="S3.E1.m1.8.8.1.1.3.2.2.2.2a" xref="S3.E1.m1.8.8.1.1.3.2.2.2.2.cmml">⁢</mo><mrow id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.cmml"><mo id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.2" stretchy="false" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.cmml">(</mo><msub id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.cmml"><mi id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.2" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.2.cmml">I</mi><mrow id="S3.E1.m1.6.6.2.4" xref="S3.E1.m1.6.6.2.3.cmml"><mi id="S3.E1.m1.5.5.1.1" xref="S3.E1.m1.5.5.1.1.cmml">i</mi><mo id="S3.E1.m1.6.6.2.4.1" xref="S3.E1.m1.6.6.2.3.cmml">,</mo><mi id="S3.E1.m1.6.6.2.2" xref="S3.E1.m1.6.6.2.2.cmml">j</mi></mrow></msub><mo id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.3" stretchy="false" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.cmml">)</mo></mrow></mrow><mo id="S3.E1.m1.8.8.1.1.3.2.2.5" stretchy="false" xref="S3.E1.m1.8.8.1.1.3.2.3.cmml">)</mo></mrow></mrow></mrow><mo id="S3.E1.m1.8.8.1.2" xref="S3.E1.m1.8.8.1.1.cmml">,</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.E1.m1.8b"><apply id="S3.E1.m1.8.8.1.1.cmml" xref="S3.E1.m1.8.8.1"><eq id="S3.E1.m1.8.8.1.1.4.cmml" xref="S3.E1.m1.8.8.1.1.4"></eq><apply id="S3.E1.m1.8.8.1.1.1.cmml" xref="S3.E1.m1.8.8.1.1.1"><times id="S3.E1.m1.8.8.1.1.1.2.cmml" xref="S3.E1.m1.8.8.1.1.1.2"></times><ci id="S3.E1.m1.8.8.1.1.1.3.cmml" xref="S3.E1.m1.8.8.1.1.1.3">SiM</ci><apply id="S3.E1.m1.8.8.1.1.1.1.1.1.cmml" xref="S3.E1.m1.8.8.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E1.m1.8.8.1.1.1.1.1.1.1.cmml" xref="S3.E1.m1.8.8.1.1.1.1.1">subscript</csymbol><ci id="S3.E1.m1.8.8.1.1.1.1.1.1.2.cmml" xref="S3.E1.m1.8.8.1.1.1.1.1.1.2">𝐼</ci><list id="S3.E1.m1.2.2.2.3.cmml" xref="S3.E1.m1.2.2.2.4"><ci id="S3.E1.m1.1.1.1.1.cmml" xref="S3.E1.m1.1.1.1.1">𝑖</ci><ci id="S3.E1.m1.2.2.2.2.cmml" xref="S3.E1.m1.2.2.2.2">𝑗</ci></list></apply></apply><apply id="S3.E1.m1.8.8.1.1.3.cmml" xref="S3.E1.m1.8.8.1.1.3"><times id="S3.E1.m1.8.8.1.1.3.3.cmml" xref="S3.E1.m1.8.8.1.1.3.3"></times><apply id="S3.E1.m1.8.8.1.1.3.4.cmml" xref="S3.E1.m1.8.8.1.1.3.4"><arg id="S3.E1.m1.8.8.1.1.3.4.1.cmml" xref="S3.E1.m1.8.8.1.1.3.4.1"></arg><apply id="S3.E1.m1.8.8.1.1.3.4.2.cmml" xref="S3.E1.m1.8.8.1.1.3.4.2"><apply id="S3.E1.m1.8.8.1.1.3.4.2.1.cmml" xref="S3.E1.m1.8.8.1.1.3.4.2.1"><csymbol cd="ambiguous" id="S3.E1.m1.8.8.1.1.3.4.2.1.1.cmml" xref="S3.E1.m1.8.8.1.1.3.4.2.1">subscript</csymbol><min id="S3.E1.m1.8.8.1.1.3.4.2.1.2.cmml" xref="S3.E1.m1.8.8.1.1.3.4.2.1.2"></min><apply id="S3.E1.m1.4.4.2.cmml" xref="S3.E1.m1.4.4.2"><in id="S3.E1.m1.4.4.2.3.cmml" xref="S3.E1.m1.4.4.2.3"></in><ci id="S3.E1.m1.4.4.2.4.cmml" xref="S3.E1.m1.4.4.2.4">𝑥</ci><apply id="S3.E1.m1.4.4.2.5.cmml" xref="S3.E1.m1.4.4.2.5"><csymbol cd="ambiguous" id="S3.E1.m1.4.4.2.5.1.cmml" xref="S3.E1.m1.4.4.2.5">subscript</csymbol><ci id="S3.E1.m1.4.4.2.5.2.cmml" xref="S3.E1.m1.4.4.2.5.2">ℱ</ci><list id="S3.E1.m1.4.4.2.2.2.3.cmml" xref="S3.E1.m1.4.4.2.2.2.4"><ci id="S3.E1.m1.3.3.1.1.1.1.cmml" xref="S3.E1.m1.3.3.1.1.1.1">excl</ci><ci id="S3.E1.m1.4.4.2.2.2.2.cmml" xref="S3.E1.m1.4.4.2.2.2.2">𝑖</ci></list></apply></apply></apply><ci id="S3.E1.m1.8.8.1.1.3.4.2.2.cmml" xref="S3.E1.m1.8.8.1.1.3.4.2.2">𝑑</ci></apply></apply><interval closure="open" id="S3.E1.m1.8.8.1.1.3.2.3.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2"><apply id="S3.E1.m1.8.8.1.1.2.1.1.1.cmml" xref="S3.E1.m1.8.8.1.1.2.1.1.1"><times id="S3.E1.m1.8.8.1.1.2.1.1.1.1.cmml" xref="S3.E1.m1.8.8.1.1.2.1.1.1.1"></times><apply id="S3.E1.m1.8.8.1.1.2.1.1.1.2.cmml" xref="S3.E1.m1.8.8.1.1.2.1.1.1.2"><csymbol cd="ambiguous" id="S3.E1.m1.8.8.1.1.2.1.1.1.2.1.cmml" xref="S3.E1.m1.8.8.1.1.2.1.1.1.2">superscript</csymbol><ci id="S3.E1.m1.8.8.1.1.2.1.1.1.2.2.cmml" xref="S3.E1.m1.8.8.1.1.2.1.1.1.2.2">𝑀</ci><ci id="S3.E1.m1.8.8.1.1.2.1.1.1.2.3.cmml" xref="S3.E1.m1.8.8.1.1.2.1.1.1.2.3">𝑇</ci></apply><ci id="S3.E1.m1.8.8.1.1.2.1.1.1.3.cmml" xref="S3.E1.m1.8.8.1.1.2.1.1.1.3">italic-ϕ</ci><ci id="S3.E1.m1.7.7.cmml" xref="S3.E1.m1.7.7">𝑥</ci></apply><apply id="S3.E1.m1.8.8.1.1.3.2.2.2.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2"><times id="S3.E1.m1.8.8.1.1.3.2.2.2.2.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.2"></times><apply id="S3.E1.m1.8.8.1.1.3.2.2.2.3.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.3"><csymbol cd="ambiguous" id="S3.E1.m1.8.8.1.1.3.2.2.2.3.1.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.3">superscript</csymbol><ci id="S3.E1.m1.8.8.1.1.3.2.2.2.3.2.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.3.2">𝑀</ci><ci id="S3.E1.m1.8.8.1.1.3.2.2.2.3.3.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.3.3">𝑇</ci></apply><ci id="S3.E1.m1.8.8.1.1.3.2.2.2.4.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.4">italic-ϕ</ci><apply id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1"><csymbol cd="ambiguous" id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.1.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1">subscript</csymbol><ci id="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.2.cmml" xref="S3.E1.m1.8.8.1.1.3.2.2.2.1.1.1.2">𝐼</ci><list id="S3.E1.m1.6.6.2.3.cmml" xref="S3.E1.m1.6.6.2.4"><ci id="S3.E1.m1.5.5.1.1.cmml" xref="S3.E1.m1.5.5.1.1">𝑖</ci><ci id="S3.E1.m1.6.6.2.2.cmml" xref="S3.E1.m1.6.6.2.2">𝑗</ci></list></apply></apply></interval></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E1.m1.8c">\mathrm{SiM}(I_{i,j})={\arg\min}_{x\in\mathcal{F}_{\mathrm{excl},i}}d(M^{T}%
+\phi(x),M^{T}\phi(I_{i,j})),</annotation><annotation encoding="application/x-llamapun" id="S3.E1.m1.8d">roman_SiM ( italic_I start_POSTSUBSCRIPT italic_i , italic_j end_POSTSUBSCRIPT ) = roman_arg roman_min start_POSTSUBSCRIPT italic_x ∈ caligraphic_F start_POSTSUBSCRIPT roman_excl , italic_i end_POSTSUBSCRIPT end_POSTSUBSCRIPT italic_d ( italic_M start_POSTSUPERSCRIPT italic_T end_POSTSUPERSCRIPT italic_ϕ ( italic_x ) , italic_M start_POSTSUPERSCRIPT italic_T end_POSTSUPERSCRIPT italic_ϕ ( italic_I start_POSTSUBSCRIPT italic_i , italic_j end_POSTSUBSCRIPT ) ) ,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS2.p3.12">where <math alttext="d(\cdot,\cdot)" class="ltx_Math" display="inline" id="S3.SS2.p3.12.m1.2"><semantics id="S3.SS2.p3.12.m1.2a"><mrow id="S3.SS2.p3.12.m1.2.3" xref="S3.SS2.p3.12.m1.2.3.cmml"><mi id="S3.SS2.p3.12.m1.2.3.2" xref="S3.SS2.p3.12.m1.2.3.2.cmml">d</mi><mo id="S3.SS2.p3.12.m1.2.3.1" xref="S3.SS2.p3.12.m1.2.3.1.cmml">⁢</mo><mrow id="S3.SS2.p3.12.m1.2.3.3.2" xref="S3.SS2.p3.12.m1.2.3.3.1.cmml"><mo id="S3.SS2.p3.12.m1.2.3.3.2.1" stretchy="false" xref="S3.SS2.p3.12.m1.2.3.3.1.cmml">(</mo><mo id="S3.SS2.p3.12.m1.1.1" lspace="0em" rspace="0em" xref="S3.SS2.p3.12.m1.1.1.cmml">⋅</mo><mo id="S3.SS2.p3.12.m1.2.3.3.2.2" rspace="0em" xref="S3.SS2.p3.12.m1.2.3.3.1.cmml">,</mo><mo id="S3.SS2.p3.12.m1.2.2" lspace="0em" rspace="0em" xref="S3.SS2.p3.12.m1.2.2.cmml">⋅</mo><mo id="S3.SS2.p3.12.m1.2.3.3.2.3" stretchy="false" xref="S3.SS2.p3.12.m1.2.3.3.1.cmml">)</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p3.12.m1.2b"><apply id="S3.SS2.p3.12.m1.2.3.cmml" xref="S3.SS2.p3.12.m1.2.3"><times id="S3.SS2.p3.12.m1.2.3.1.cmml" xref="S3.SS2.p3.12.m1.2.3.1"></times><ci id="S3.SS2.p3.12.m1.2.3.2.cmml" xref="S3.SS2.p3.12.m1.2.3.2">𝑑</ci><interval closure="open" id="S3.SS2.p3.12.m1.2.3.3.1.cmml" xref="S3.SS2.p3.12.m1.2.3.3.2"><ci id="S3.SS2.p3.12.m1.1.1.cmml" xref="S3.SS2.p3.12.m1.1.1">⋅</ci><ci id="S3.SS2.p3.12.m1.2.2.cmml" xref="S3.SS2.p3.12.m1.2.2">⋅</ci></interval></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p3.12.m1.2c">d(\cdot,\cdot)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p3.12.m1.2d">italic_d ( ⋅ , ⋅ )</annotation></semantics></math> is the Euclidean distance metric.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S3.T1.2" style="width:520.0pt;height:141.8pt;vertical-align:-0.9pt;"><span class="ltx_transformed_inner" style="transform:translate(-38.8pt,10.5pt) scale(0.87,0.87) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S3.T1.2.1">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.2.1.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_tt" id="S3.T1.2.1.1.1.1" rowspan="2"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.1.1.1.1">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_tt" id="S3.T1.2.1.1.1.2" rowspan="2"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.1.1.2.1">Pre-training</span></th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2" id="S3.T1.2.1.1.1.3">
+<span class="ltx_text ltx_font_bold" id="S3.T1.2.1.1.1.3.1">FreiHand (Exo)</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib45" title="">45</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2" id="S3.T1.2.1.1.1.4">
+<span class="ltx_text ltx_font_bold" id="S3.T1.2.1.1.1.4.1">DexYCB (Exo)</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib6" title="">6</a>]</cite>
+</td>
+<td class="ltx_td ltx_align_center ltx_border_tt" colspan="2" id="S3.T1.2.1.1.1.5">
+<span class="ltx_text ltx_font_bold" id="S3.T1.2.1.1.1.5.1">AssemblyHands (Ego)</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib27" title="">27</a>]</cite>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.2.2">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.2.2.1"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.2.2.1.1">MPJPE↓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.2.2.2"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.2.2.2.1">PCK-AUC↑</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.2.2.3"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.2.2.3.1">MPJPE↓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.2.2.4"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.2.2.4.1">PCK-AUC↑</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.2.2.5"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.2.2.5.1">MPJPE↓</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.2.2.6"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.2.2.6.1">PCK-AUC↑</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.3.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.1.3.3.1" rowspan="2"><span class="ltx_text" id="S3.T1.2.1.3.3.1.1">SimCLR <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib9" title="">9</a>]</cite></span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.1.3.3.2">100DOH-1M</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.3.3.3">19.30</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.3.3.4">85.36</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.3.3.5">20.13</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.3.3.6">83.75</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.3.3.7">20.01</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.3.3.8">84.21</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.4.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.1.4.4.1">Ego4D-1M</th>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.4.4.2">19.36</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.2.1.4.4.3">85.09</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.4.4.4">20.22</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.2.1.4.4.5">83.50</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.4.4.6">20.32</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.4.4.7">83.85</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.5.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.1.5.5.1" rowspan="2"><span class="ltx_text" id="S3.T1.2.1.5.5.1.1">PeCLR <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite></span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.1.5.5.2">100DOH-1M</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.5.5.3">19.58</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.5.5.4">84.71</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.5.5.5">18.39</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.5.5.6">18.39</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.5.5.7">19.12</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.5.5.8">85.64</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.6.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.1.6.6.1">Ego4D-1M</th>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.6.6.2">19.07</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.2.1.6.6.3">85.62</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.6.6.4">18.99</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.2.1.6.6.5">85.40</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.6.6.6">19.20</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.6.6.7">85.57</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.7.7">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.1.7.7.1" rowspan="2"><span class="ltx_text" id="S3.T1.2.1.7.7.1.1">
+<span class="ltx_tabular ltx_align_middle" id="S3.T1.2.1.7.7.1.1.1">
+<span class="ltx_tr" id="S3.T1.2.1.7.7.1.1.1.1">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S3.T1.2.1.7.7.1.1.1.1.1">HandCLR</span></span>
+</span></span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S3.T1.2.1.7.7.2">100DOH-1M</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.7.7.3">16.73</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.7.7.4">88.66</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.7.7.5">17.34</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.2.1.7.7.6">87.84</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.7.7.7">18.50</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.1.7.7.8">86.56</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.8.8">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S3.T1.2.1.8.8.1">Ego4D-1M</th>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.8.8.2">16.15</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.2.1.8.8.3">89.48</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.8.8.4">16.99</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.2.1.8.8.5">88.34</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.8.8.6">18.26</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.1.8.8.7">86.95</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.1.9.9">
+<th class="ltx_td ltx_th ltx_th_row ltx_border_bb ltx_border_r" id="S3.T1.2.1.9.9.1"></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r" id="S3.T1.2.1.9.9.2">Ego4D-1M+100DOH-1M</th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.2.1.9.9.3"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.9.9.3.1">15.79</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" id="S3.T1.2.1.9.9.4"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.9.9.4.1">90.04</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.2.1.9.9.5"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.9.9.5.1">16.71</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" id="S3.T1.2.1.9.9.6"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.9.9.6.1">88.86</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.2.1.9.9.7"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.9.9.7.1">18.23</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.2.1.9.9.8"><span class="ltx_text ltx_font_bold" id="S3.T1.2.1.9.9.8.1">86.90</span></td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T1.4.1.1" style="font-size:90%;">Table 1</span>: </span><span class="ltx_text ltx_font_bold" id="S3.T1.5.2" style="font-size:90%;">Comparison with the state of the art.<span class="ltx_text ltx_font_medium" id="S3.T1.5.2.1"> We show 3D hand pose estimation accuracy (MPJPE↓) on the FreiHand (Exo) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib45" title="">45</a>]</cite>, DexYCB (Exo) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib6" title="">6</a>]</cite> and AssemblyHands (Ego) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib27" title="">27</a>]</cite>.
+Our method achieves the best results across various pre-training datasets.
+</span></span></figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Contrastive learning</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.13">Given the positive samples <math alttext="(I,J)" class="ltx_Math" display="inline" id="S3.SS3.p1.1.m1.2"><semantics id="S3.SS3.p1.1.m1.2a"><mrow id="S3.SS3.p1.1.m1.2.3.2" xref="S3.SS3.p1.1.m1.2.3.1.cmml"><mo id="S3.SS3.p1.1.m1.2.3.2.1" stretchy="false" xref="S3.SS3.p1.1.m1.2.3.1.cmml">(</mo><mi id="S3.SS3.p1.1.m1.1.1" xref="S3.SS3.p1.1.m1.1.1.cmml">I</mi><mo id="S3.SS3.p1.1.m1.2.3.2.2" xref="S3.SS3.p1.1.m1.2.3.1.cmml">,</mo><mi id="S3.SS3.p1.1.m1.2.2" xref="S3.SS3.p1.1.m1.2.2.cmml">J</mi><mo id="S3.SS3.p1.1.m1.2.3.2.3" stretchy="false" xref="S3.SS3.p1.1.m1.2.3.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.1.m1.2b"><interval closure="open" id="S3.SS3.p1.1.m1.2.3.1.cmml" xref="S3.SS3.p1.1.m1.2.3.2"><ci id="S3.SS3.p1.1.m1.1.1.cmml" xref="S3.SS3.p1.1.m1.1.1">𝐼</ci><ci id="S3.SS3.p1.1.m1.2.2.cmml" xref="S3.SS3.p1.1.m1.2.2">𝐽</ci></interval></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.1.m1.2c">(I,J)</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.1.m1.2d">( italic_I , italic_J )</annotation></semantics></math> constructed by Sec. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.SS2" title="3.2 Mining similar hands ‣ 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">3.2</span></a>, we describe feature extraction process and contrastive learning loss. Following <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib9" title="">9</a>, <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite>, we treat all samples other than its corresponding positive sample as negative samples. In our framework, feature extraction is performed by two learnable components: an encoding head <math alttext="E(\cdot)" class="ltx_Math" display="inline" id="S3.SS3.p1.2.m2.1"><semantics id="S3.SS3.p1.2.m2.1a"><mrow id="S3.SS3.p1.2.m2.1.2" xref="S3.SS3.p1.2.m2.1.2.cmml"><mi id="S3.SS3.p1.2.m2.1.2.2" xref="S3.SS3.p1.2.m2.1.2.2.cmml">E</mi><mo id="S3.SS3.p1.2.m2.1.2.1" xref="S3.SS3.p1.2.m2.1.2.1.cmml">⁢</mo><mrow id="S3.SS3.p1.2.m2.1.2.3.2" xref="S3.SS3.p1.2.m2.1.2.cmml"><mo id="S3.SS3.p1.2.m2.1.2.3.2.1" stretchy="false" xref="S3.SS3.p1.2.m2.1.2.cmml">(</mo><mo id="S3.SS3.p1.2.m2.1.1" lspace="0em" rspace="0em" xref="S3.SS3.p1.2.m2.1.1.cmml">⋅</mo><mo id="S3.SS3.p1.2.m2.1.2.3.2.2" stretchy="false" xref="S3.SS3.p1.2.m2.1.2.cmml">)</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.2.m2.1b"><apply id="S3.SS3.p1.2.m2.1.2.cmml" xref="S3.SS3.p1.2.m2.1.2"><times id="S3.SS3.p1.2.m2.1.2.1.cmml" xref="S3.SS3.p1.2.m2.1.2.1"></times><ci id="S3.SS3.p1.2.m2.1.2.2.cmml" xref="S3.SS3.p1.2.m2.1.2.2">𝐸</ci><ci id="S3.SS3.p1.2.m2.1.1.cmml" xref="S3.SS3.p1.2.m2.1.1">⋅</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.2.m2.1c">E(\cdot)</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.2.m2.1d">italic_E ( ⋅ )</annotation></semantics></math> and a projection head <math alttext="g(\cdot)" class="ltx_Math" display="inline" id="S3.SS3.p1.3.m3.1"><semantics id="S3.SS3.p1.3.m3.1a"><mrow id="S3.SS3.p1.3.m3.1.2" xref="S3.SS3.p1.3.m3.1.2.cmml"><mi id="S3.SS3.p1.3.m3.1.2.2" xref="S3.SS3.p1.3.m3.1.2.2.cmml">g</mi><mo id="S3.SS3.p1.3.m3.1.2.1" xref="S3.SS3.p1.3.m3.1.2.1.cmml">⁢</mo><mrow id="S3.SS3.p1.3.m3.1.2.3.2" xref="S3.SS3.p1.3.m3.1.2.cmml"><mo id="S3.SS3.p1.3.m3.1.2.3.2.1" stretchy="false" xref="S3.SS3.p1.3.m3.1.2.cmml">(</mo><mo id="S3.SS3.p1.3.m3.1.1" lspace="0em" rspace="0em" xref="S3.SS3.p1.3.m3.1.1.cmml">⋅</mo><mo id="S3.SS3.p1.3.m3.1.2.3.2.2" stretchy="false" xref="S3.SS3.p1.3.m3.1.2.cmml">)</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.3.m3.1b"><apply id="S3.SS3.p1.3.m3.1.2.cmml" xref="S3.SS3.p1.3.m3.1.2"><times id="S3.SS3.p1.3.m3.1.2.1.cmml" xref="S3.SS3.p1.3.m3.1.2.1"></times><ci id="S3.SS3.p1.3.m3.1.2.2.cmml" xref="S3.SS3.p1.3.m3.1.2.2">𝑔</ci><ci id="S3.SS3.p1.3.m3.1.1.cmml" xref="S3.SS3.p1.3.m3.1.1">⋅</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.3.m3.1c">g(\cdot)</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.3.m3.1d">italic_g ( ⋅ )</annotation></semantics></math>. We define image augmentation as <math alttext="\mathbf{T}" class="ltx_Math" display="inline" id="S3.SS3.p1.4.m4.1"><semantics id="S3.SS3.p1.4.m4.1a"><mi id="S3.SS3.p1.4.m4.1.1" xref="S3.SS3.p1.4.m4.1.1.cmml">𝐓</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.4.m4.1b"><ci id="S3.SS3.p1.4.m4.1.1.cmml" xref="S3.SS3.p1.4.m4.1.1">𝐓</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.4.m4.1c">\mathbf{T}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.4.m4.1d">bold_T</annotation></semantics></math> and the entire model as <math alttext="f=g\circ E" class="ltx_Math" display="inline" id="S3.SS3.p1.5.m5.1"><semantics id="S3.SS3.p1.5.m5.1a"><mrow id="S3.SS3.p1.5.m5.1.1" xref="S3.SS3.p1.5.m5.1.1.cmml"><mi id="S3.SS3.p1.5.m5.1.1.2" xref="S3.SS3.p1.5.m5.1.1.2.cmml">f</mi><mo id="S3.SS3.p1.5.m5.1.1.1" xref="S3.SS3.p1.5.m5.1.1.1.cmml">=</mo><mrow id="S3.SS3.p1.5.m5.1.1.3" xref="S3.SS3.p1.5.m5.1.1.3.cmml"><mi id="S3.SS3.p1.5.m5.1.1.3.2" xref="S3.SS3.p1.5.m5.1.1.3.2.cmml">g</mi><mo id="S3.SS3.p1.5.m5.1.1.3.1" lspace="0.222em" rspace="0.222em" xref="S3.SS3.p1.5.m5.1.1.3.1.cmml">∘</mo><mi id="S3.SS3.p1.5.m5.1.1.3.3" xref="S3.SS3.p1.5.m5.1.1.3.3.cmml">E</mi></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.5.m5.1b"><apply id="S3.SS3.p1.5.m5.1.1.cmml" xref="S3.SS3.p1.5.m5.1.1"><eq id="S3.SS3.p1.5.m5.1.1.1.cmml" xref="S3.SS3.p1.5.m5.1.1.1"></eq><ci id="S3.SS3.p1.5.m5.1.1.2.cmml" xref="S3.SS3.p1.5.m5.1.1.2">𝑓</ci><apply id="S3.SS3.p1.5.m5.1.1.3.cmml" xref="S3.SS3.p1.5.m5.1.1.3"><compose id="S3.SS3.p1.5.m5.1.1.3.1.cmml" xref="S3.SS3.p1.5.m5.1.1.3.1"></compose><ci id="S3.SS3.p1.5.m5.1.1.3.2.cmml" xref="S3.SS3.p1.5.m5.1.1.3.2">𝑔</ci><ci id="S3.SS3.p1.5.m5.1.1.3.3.cmml" xref="S3.SS3.p1.5.m5.1.1.3.3">𝐸</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.5.m5.1c">f=g\circ E</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.5.m5.1d">italic_f = italic_g ∘ italic_E</annotation></semantics></math>.
+Given the positive pair <math alttext="(I,J)" class="ltx_Math" display="inline" id="S3.SS3.p1.6.m6.2"><semantics id="S3.SS3.p1.6.m6.2a"><mrow id="S3.SS3.p1.6.m6.2.3.2" xref="S3.SS3.p1.6.m6.2.3.1.cmml"><mo id="S3.SS3.p1.6.m6.2.3.2.1" stretchy="false" xref="S3.SS3.p1.6.m6.2.3.1.cmml">(</mo><mi id="S3.SS3.p1.6.m6.1.1" xref="S3.SS3.p1.6.m6.1.1.cmml">I</mi><mo id="S3.SS3.p1.6.m6.2.3.2.2" xref="S3.SS3.p1.6.m6.2.3.1.cmml">,</mo><mi id="S3.SS3.p1.6.m6.2.2" xref="S3.SS3.p1.6.m6.2.2.cmml">J</mi><mo id="S3.SS3.p1.6.m6.2.3.2.3" stretchy="false" xref="S3.SS3.p1.6.m6.2.3.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.6.m6.2b"><interval closure="open" id="S3.SS3.p1.6.m6.2.3.1.cmml" xref="S3.SS3.p1.6.m6.2.3.2"><ci id="S3.SS3.p1.6.m6.1.1.cmml" xref="S3.SS3.p1.6.m6.1.1">𝐼</ci><ci id="S3.SS3.p1.6.m6.2.2.cmml" xref="S3.SS3.p1.6.m6.2.2">𝐽</ci></interval></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.6.m6.2c">(I,J)</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.6.m6.2d">( italic_I , italic_J )</annotation></semantics></math>, feature extraction is performed as <math alttext="\mathbf{z}=f(\mathbf{T}(I))" class="ltx_Math" display="inline" id="S3.SS3.p1.7.m7.2"><semantics id="S3.SS3.p1.7.m7.2a"><mrow id="S3.SS3.p1.7.m7.2.2" xref="S3.SS3.p1.7.m7.2.2.cmml"><mi id="S3.SS3.p1.7.m7.2.2.3" xref="S3.SS3.p1.7.m7.2.2.3.cmml">𝐳</mi><mo id="S3.SS3.p1.7.m7.2.2.2" xref="S3.SS3.p1.7.m7.2.2.2.cmml">=</mo><mrow id="S3.SS3.p1.7.m7.2.2.1" xref="S3.SS3.p1.7.m7.2.2.1.cmml"><mi id="S3.SS3.p1.7.m7.2.2.1.3" xref="S3.SS3.p1.7.m7.2.2.1.3.cmml">f</mi><mo id="S3.SS3.p1.7.m7.2.2.1.2" xref="S3.SS3.p1.7.m7.2.2.1.2.cmml">⁢</mo><mrow id="S3.SS3.p1.7.m7.2.2.1.1.1" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml"><mo id="S3.SS3.p1.7.m7.2.2.1.1.1.2" stretchy="false" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml">(</mo><mrow id="S3.SS3.p1.7.m7.2.2.1.1.1.1" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml"><mi id="S3.SS3.p1.7.m7.2.2.1.1.1.1.2" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.2.cmml">𝐓</mi><mo id="S3.SS3.p1.7.m7.2.2.1.1.1.1.1" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.1.cmml">⁢</mo><mrow id="S3.SS3.p1.7.m7.2.2.1.1.1.1.3.2" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml"><mo id="S3.SS3.p1.7.m7.2.2.1.1.1.1.3.2.1" stretchy="false" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml">(</mo><mi id="S3.SS3.p1.7.m7.1.1" xref="S3.SS3.p1.7.m7.1.1.cmml">I</mi><mo id="S3.SS3.p1.7.m7.2.2.1.1.1.1.3.2.2" stretchy="false" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml">)</mo></mrow></mrow><mo id="S3.SS3.p1.7.m7.2.2.1.1.1.3" stretchy="false" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.7.m7.2b"><apply id="S3.SS3.p1.7.m7.2.2.cmml" xref="S3.SS3.p1.7.m7.2.2"><eq id="S3.SS3.p1.7.m7.2.2.2.cmml" xref="S3.SS3.p1.7.m7.2.2.2"></eq><ci id="S3.SS3.p1.7.m7.2.2.3.cmml" xref="S3.SS3.p1.7.m7.2.2.3">𝐳</ci><apply id="S3.SS3.p1.7.m7.2.2.1.cmml" xref="S3.SS3.p1.7.m7.2.2.1"><times id="S3.SS3.p1.7.m7.2.2.1.2.cmml" xref="S3.SS3.p1.7.m7.2.2.1.2"></times><ci id="S3.SS3.p1.7.m7.2.2.1.3.cmml" xref="S3.SS3.p1.7.m7.2.2.1.3">𝑓</ci><apply id="S3.SS3.p1.7.m7.2.2.1.1.1.1.cmml" xref="S3.SS3.p1.7.m7.2.2.1.1.1"><times id="S3.SS3.p1.7.m7.2.2.1.1.1.1.1.cmml" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.1"></times><ci id="S3.SS3.p1.7.m7.2.2.1.1.1.1.2.cmml" xref="S3.SS3.p1.7.m7.2.2.1.1.1.1.2">𝐓</ci><ci id="S3.SS3.p1.7.m7.1.1.cmml" xref="S3.SS3.p1.7.m7.1.1">𝐼</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.7.m7.2c">\mathbf{z}=f(\mathbf{T}(I))</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.7.m7.2d">bold_z = italic_f ( bold_T ( italic_I ) )</annotation></semantics></math> and <math alttext="\mathbf{z}^{+}=f(\mathbf{T}(J))" class="ltx_Math" display="inline" id="S3.SS3.p1.8.m8.2"><semantics id="S3.SS3.p1.8.m8.2a"><mrow id="S3.SS3.p1.8.m8.2.2" xref="S3.SS3.p1.8.m8.2.2.cmml"><msup id="S3.SS3.p1.8.m8.2.2.3" xref="S3.SS3.p1.8.m8.2.2.3.cmml"><mi id="S3.SS3.p1.8.m8.2.2.3.2" xref="S3.SS3.p1.8.m8.2.2.3.2.cmml">𝐳</mi><mo id="S3.SS3.p1.8.m8.2.2.3.3" xref="S3.SS3.p1.8.m8.2.2.3.3.cmml">+</mo></msup><mo id="S3.SS3.p1.8.m8.2.2.2" xref="S3.SS3.p1.8.m8.2.2.2.cmml">=</mo><mrow id="S3.SS3.p1.8.m8.2.2.1" xref="S3.SS3.p1.8.m8.2.2.1.cmml"><mi id="S3.SS3.p1.8.m8.2.2.1.3" xref="S3.SS3.p1.8.m8.2.2.1.3.cmml">f</mi><mo id="S3.SS3.p1.8.m8.2.2.1.2" xref="S3.SS3.p1.8.m8.2.2.1.2.cmml">⁢</mo><mrow id="S3.SS3.p1.8.m8.2.2.1.1.1" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml"><mo id="S3.SS3.p1.8.m8.2.2.1.1.1.2" stretchy="false" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml">(</mo><mrow id="S3.SS3.p1.8.m8.2.2.1.1.1.1" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml"><mi id="S3.SS3.p1.8.m8.2.2.1.1.1.1.2" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.2.cmml">𝐓</mi><mo id="S3.SS3.p1.8.m8.2.2.1.1.1.1.1" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.1.cmml">⁢</mo><mrow id="S3.SS3.p1.8.m8.2.2.1.1.1.1.3.2" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml"><mo id="S3.SS3.p1.8.m8.2.2.1.1.1.1.3.2.1" stretchy="false" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml">(</mo><mi id="S3.SS3.p1.8.m8.1.1" xref="S3.SS3.p1.8.m8.1.1.cmml">J</mi><mo id="S3.SS3.p1.8.m8.2.2.1.1.1.1.3.2.2" stretchy="false" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml">)</mo></mrow></mrow><mo id="S3.SS3.p1.8.m8.2.2.1.1.1.3" stretchy="false" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.8.m8.2b"><apply id="S3.SS3.p1.8.m8.2.2.cmml" xref="S3.SS3.p1.8.m8.2.2"><eq id="S3.SS3.p1.8.m8.2.2.2.cmml" xref="S3.SS3.p1.8.m8.2.2.2"></eq><apply id="S3.SS3.p1.8.m8.2.2.3.cmml" xref="S3.SS3.p1.8.m8.2.2.3"><csymbol cd="ambiguous" id="S3.SS3.p1.8.m8.2.2.3.1.cmml" xref="S3.SS3.p1.8.m8.2.2.3">superscript</csymbol><ci id="S3.SS3.p1.8.m8.2.2.3.2.cmml" xref="S3.SS3.p1.8.m8.2.2.3.2">𝐳</ci><plus id="S3.SS3.p1.8.m8.2.2.3.3.cmml" xref="S3.SS3.p1.8.m8.2.2.3.3"></plus></apply><apply id="S3.SS3.p1.8.m8.2.2.1.cmml" xref="S3.SS3.p1.8.m8.2.2.1"><times id="S3.SS3.p1.8.m8.2.2.1.2.cmml" xref="S3.SS3.p1.8.m8.2.2.1.2"></times><ci id="S3.SS3.p1.8.m8.2.2.1.3.cmml" xref="S3.SS3.p1.8.m8.2.2.1.3">𝑓</ci><apply id="S3.SS3.p1.8.m8.2.2.1.1.1.1.cmml" xref="S3.SS3.p1.8.m8.2.2.1.1.1"><times id="S3.SS3.p1.8.m8.2.2.1.1.1.1.1.cmml" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.1"></times><ci id="S3.SS3.p1.8.m8.2.2.1.1.1.1.2.cmml" xref="S3.SS3.p1.8.m8.2.2.1.1.1.1.2">𝐓</ci><ci id="S3.SS3.p1.8.m8.1.1.cmml" xref="S3.SS3.p1.8.m8.1.1">𝐽</ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.8.m8.2c">\mathbf{z}^{+}=f(\mathbf{T}(J))</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.8.m8.2d">bold_z start_POSTSUPERSCRIPT + end_POSTSUPERSCRIPT = italic_f ( bold_T ( italic_J ) )</annotation></semantics></math>. Since <math alttext="\mathbf{T}" class="ltx_Math" display="inline" id="S3.SS3.p1.9.m9.1"><semantics id="S3.SS3.p1.9.m9.1a"><mi id="S3.SS3.p1.9.m9.1.1" xref="S3.SS3.p1.9.m9.1.1.cmml">𝐓</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.9.m9.1b"><ci id="S3.SS3.p1.9.m9.1.1.cmml" xref="S3.SS3.p1.9.m9.1.1">𝐓</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.9.m9.1c">\mathbf{T}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.9.m9.1d">bold_T</annotation></semantics></math> introduces geometric transformations that may cause the misalignment between the image and the feature spaces, we correct such error with the inverse transformation <math alttext="\mathbf{T}^{-1}" class="ltx_Math" display="inline" id="S3.SS3.p1.10.m10.1"><semantics id="S3.SS3.p1.10.m10.1a"><msup id="S3.SS3.p1.10.m10.1.1" xref="S3.SS3.p1.10.m10.1.1.cmml"><mi id="S3.SS3.p1.10.m10.1.1.2" xref="S3.SS3.p1.10.m10.1.1.2.cmml">𝐓</mi><mrow id="S3.SS3.p1.10.m10.1.1.3" xref="S3.SS3.p1.10.m10.1.1.3.cmml"><mo id="S3.SS3.p1.10.m10.1.1.3a" xref="S3.SS3.p1.10.m10.1.1.3.cmml">−</mo><mn id="S3.SS3.p1.10.m10.1.1.3.2" xref="S3.SS3.p1.10.m10.1.1.3.2.cmml">1</mn></mrow></msup><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.10.m10.1b"><apply id="S3.SS3.p1.10.m10.1.1.cmml" xref="S3.SS3.p1.10.m10.1.1"><csymbol cd="ambiguous" id="S3.SS3.p1.10.m10.1.1.1.cmml" xref="S3.SS3.p1.10.m10.1.1">superscript</csymbol><ci id="S3.SS3.p1.10.m10.1.1.2.cmml" xref="S3.SS3.p1.10.m10.1.1.2">𝐓</ci><apply id="S3.SS3.p1.10.m10.1.1.3.cmml" xref="S3.SS3.p1.10.m10.1.1.3"><minus id="S3.SS3.p1.10.m10.1.1.3.1.cmml" xref="S3.SS3.p1.10.m10.1.1.3"></minus><cn id="S3.SS3.p1.10.m10.1.1.3.2.cmml" type="integer" xref="S3.SS3.p1.10.m10.1.1.3.2">1</cn></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.10.m10.1c">\mathbf{T}^{-1}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.10.m10.1d">bold_T start_POSTSUPERSCRIPT - 1 end_POSTSUPERSCRIPT</annotation></semantics></math> as <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite>. Finally, we use the <span class="ltx_text ltx_font_italic" id="S3.SS3.p1.13.1">NT-Xent</span> loss <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib9" title="">9</a>]</cite> for contrastive learning, enabling the feature alignment between <math alttext="\mathbf{z}" class="ltx_Math" display="inline" id="S3.SS3.p1.11.m11.1"><semantics id="S3.SS3.p1.11.m11.1a"><mi id="S3.SS3.p1.11.m11.1.1" xref="S3.SS3.p1.11.m11.1.1.cmml">𝐳</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.11.m11.1b"><ci id="S3.SS3.p1.11.m11.1.1.cmml" xref="S3.SS3.p1.11.m11.1.1">𝐳</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.11.m11.1c">\mathbf{z}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.11.m11.1d">bold_z</annotation></semantics></math> and <math alttext="\mathbf{z}^{+}" class="ltx_Math" display="inline" id="S3.SS3.p1.12.m12.1"><semantics id="S3.SS3.p1.12.m12.1a"><msup id="S3.SS3.p1.12.m12.1.1" xref="S3.SS3.p1.12.m12.1.1.cmml"><mi id="S3.SS3.p1.12.m12.1.1.2" xref="S3.SS3.p1.12.m12.1.1.2.cmml">𝐳</mi><mo id="S3.SS3.p1.12.m12.1.1.3" xref="S3.SS3.p1.12.m12.1.1.3.cmml">+</mo></msup><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.12.m12.1b"><apply id="S3.SS3.p1.12.m12.1.1.cmml" xref="S3.SS3.p1.12.m12.1.1"><csymbol cd="ambiguous" id="S3.SS3.p1.12.m12.1.1.1.cmml" xref="S3.SS3.p1.12.m12.1.1">superscript</csymbol><ci id="S3.SS3.p1.12.m12.1.1.2.cmml" xref="S3.SS3.p1.12.m12.1.1.2">𝐳</ci><plus id="S3.SS3.p1.12.m12.1.1.3.cmml" xref="S3.SS3.p1.12.m12.1.1.3"></plus></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.12.m12.1c">\mathbf{z}^{+}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.12.m12.1d">bold_z start_POSTSUPERSCRIPT + end_POSTSUPERSCRIPT</annotation></semantics></math>. For fine-tuning, we initialize our model with the pre-trained encoder <math alttext="E(\cdot)" class="ltx_Math" display="inline" id="S3.SS3.p1.13.m13.1"><semantics id="S3.SS3.p1.13.m13.1a"><mrow id="S3.SS3.p1.13.m13.1.2" xref="S3.SS3.p1.13.m13.1.2.cmml"><mi id="S3.SS3.p1.13.m13.1.2.2" xref="S3.SS3.p1.13.m13.1.2.2.cmml">E</mi><mo id="S3.SS3.p1.13.m13.1.2.1" xref="S3.SS3.p1.13.m13.1.2.1.cmml">⁢</mo><mrow id="S3.SS3.p1.13.m13.1.2.3.2" xref="S3.SS3.p1.13.m13.1.2.cmml"><mo id="S3.SS3.p1.13.m13.1.2.3.2.1" stretchy="false" xref="S3.SS3.p1.13.m13.1.2.cmml">(</mo><mo id="S3.SS3.p1.13.m13.1.1" lspace="0em" rspace="0em" xref="S3.SS3.p1.13.m13.1.1.cmml">⋅</mo><mo id="S3.SS3.p1.13.m13.1.2.3.2.2" stretchy="false" xref="S3.SS3.p1.13.m13.1.2.cmml">)</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.13.m13.1b"><apply id="S3.SS3.p1.13.m13.1.2.cmml" xref="S3.SS3.p1.13.m13.1.2"><times id="S3.SS3.p1.13.m13.1.2.1.cmml" xref="S3.SS3.p1.13.m13.1.2.1"></times><ci id="S3.SS3.p1.13.m13.1.2.2.cmml" xref="S3.SS3.p1.13.m13.1.2.2">𝐸</ci><ci id="S3.SS3.p1.13.m13.1.1.cmml" xref="S3.SS3.p1.13.m13.1.1">⋅</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.13.m13.1c">E(\cdot)</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.13.m13.1d">italic_E ( ⋅ )</annotation></semantics></math> and then fine-tune with a 3D pose regressor on labeled datasets. The 3D regressor involves 2D heatmap regression and 3D localization, inspired by DetNet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib43" title="">43</a>]</cite>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experiments</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">In this section, we begin by detailing the datasets and present our key experiments by comparing our results with state-of-the-art methods.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Datasets</h3>
+<div class="ltx_para ltx_noindent" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1"><span class="ltx_text ltx_font_bold" id="S4.SS1.p1.1.1">Pre-training datasets:</span>
+We collected a large collection of hand images from two major video datasets, Ego4D <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib16" title="">16</a>]</cite> and 100DOH <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib35" title="">35</a>]</cite>, capturing egocentric and exocentric views respectively. From Ego4D, a vast egocentric video dataset with 3,670 hours of footage, we extracted 1.0M hand images from 8K videos. Similarly, from the exocentric dataset 100DOH, which includes 131 days of YouTube footage and 100K annotated hand-object interaction frames, we extracted 1.0M hand images from 20K videos. These extensive datasets provide diverse hand-object interactions across different views.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1"><span class="ltx_text ltx_font_bold" id="S4.SS1.p2.1.1">Fine-tuning datasets:</span> We conduct fine-tuning experiments on three datasets with ground-truth 3D hand pose: FreiHand <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib45" title="">45</a>]</cite>, DexYCB <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib6" title="">6</a>]</cite>, and AssemblyHands <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib27" title="">27</a>]</cite>. FreiHand, with 130K training frames, includes both green screen and real-world backgrounds, while DexYCB offers 582K images of natural hand-object interactions in a controlled laboratory setting. AssemblyHands, the largest of the three, consists of 412K training and 62K test samples, collected from egocentric perspectives in object assembly scenarios.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Results</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">As shown in Tab. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.T1" title="Table 1 ‣ 3.2 Mining similar hands ‣ 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">1</span></a>, we compare our method with state-of-the-art pre-training methods for 3D hand pose estimation using the metrics of MPJPE (↓) and PCK-AUC (↑).</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p2.1.1">Pre-training results:</span>
+We observe that our method significantly outperforms SimCLR and PeCLR across various datasets under the same pre-training data setup. Specifically, on the FreiHand dataset, our approach achieves a 15.3% improvement with Ego4D-1M pre-training. Furthermore, our method demonstrates strong performance on larger datasets, with a 10.53% gain on DexYCB and a 4.90% improvement on AssemblyHands compared to PeCLR. These results confirm that our model consistently achieves superior performance across various pre-training datasets.</p>
+</div>
+<figure class="ltx_figure ltx_minipage ltx_align_top" id="S4.SS2.1" style="width:216.8pt;">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2">
+<table class="ltx_tabular ltx_centering ltx_figure_panel ltx_guessed_headers ltx_align_middle" id="S4.SS2.1.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.SS2.1.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.SS2.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.1.1.1.1" style="font-size:80%;">Pre-training size</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.SS2.1.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.1.1.2.1" style="font-size:80%;">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.SS2.1.1.1.1.3"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.1.1.3.1" style="font-size:80%;">MPJPE ↓</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S4.SS2.1.1.1.1.4"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.1.1.4.1" style="font-size:80%;">PCK-AUC ↑</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.SS2.1.1.2.1">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.2.1.1" rowspan="3"><span class="ltx_text" id="S4.SS2.1.1.2.1.1.1" style="font-size:80%;">Ego4D-50K</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.2.1.2"><span class="ltx_text" id="S4.SS2.1.1.2.1.2.1" style="font-size:80%;">SimCLR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.2.1.3"><span class="ltx_text" id="S4.SS2.1.1.2.1.3.1" style="font-size:80%;">53.94</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.2.1.4"><span class="ltx_text" id="S4.SS2.1.1.2.1.4.1" style="font-size:80%;">42.54</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.3.2">
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.3.2.1"><span class="ltx_text" id="S4.SS2.1.1.3.2.1.1" style="font-size:80%;">PeCLR</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.3.2.2"><span class="ltx_text" id="S4.SS2.1.1.3.2.2.1" style="font-size:80%;">47.42</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.3.2.3"><span class="ltx_text" id="S4.SS2.1.1.3.2.3.1" style="font-size:80%;">49.85</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.4.3">
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.4.3.1"><span class="ltx_text" id="S4.SS2.1.1.4.3.1.1" style="font-size:80%;">HandCLR</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.4.3.2"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.4.3.2.1" style="font-size:80%;">35.32</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.4.3.3"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.4.3.3.1" style="font-size:80%;">63.35</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.5.4">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.5.4.1" rowspan="3"><span class="ltx_text" id="S4.SS2.1.1.5.4.1.1" style="font-size:80%;">Ego4D-100K</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.5.4.2"><span class="ltx_text" id="S4.SS2.1.1.5.4.2.1" style="font-size:80%;">SimCLR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.5.4.3"><span class="ltx_text" id="S4.SS2.1.1.5.4.3.1" style="font-size:80%;">53.49</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.5.4.4"><span class="ltx_text" id="S4.SS2.1.1.5.4.4.1" style="font-size:80%;">43.12</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.6.5">
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.6.5.1"><span class="ltx_text" id="S4.SS2.1.1.6.5.1.1" style="font-size:80%;">PeCLR</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.6.5.2"><span class="ltx_text" id="S4.SS2.1.1.6.5.2.1" style="font-size:80%;">46.00</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.6.5.3"><span class="ltx_text" id="S4.SS2.1.1.6.5.3.1" style="font-size:80%;">51.50</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.7.6">
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.7.6.1"><span class="ltx_text" id="S4.SS2.1.1.7.6.1.1" style="font-size:80%;">HandCLR</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.7.6.2"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.7.6.2.1" style="font-size:80%;">31.06</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.7.6.3"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.7.6.3.1" style="font-size:80%;">68.66</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.8.7">
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.8.7.1" rowspan="3"><span class="ltx_text" id="S4.SS2.1.1.8.7.1.1" style="font-size:80%;">Ego4D-500K</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.8.7.2"><span class="ltx_text" id="S4.SS2.1.1.8.7.2.1" style="font-size:80%;">SimCLR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.8.7.3"><span class="ltx_text" id="S4.SS2.1.1.8.7.3.1" style="font-size:80%;">49.91</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.8.7.4"><span class="ltx_text" id="S4.SS2.1.1.8.7.4.1" style="font-size:80%;">47.61</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.9.8">
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.9.8.1"><span class="ltx_text" id="S4.SS2.1.1.9.8.1.1" style="font-size:80%;">PeCLR</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.9.8.2"><span class="ltx_text" id="S4.SS2.1.1.9.8.2.1" style="font-size:80%;">43.18</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.9.8.3"><span class="ltx_text" id="S4.SS2.1.1.9.8.3.1" style="font-size:80%;">54.15</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.10.9">
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.10.9.1"><span class="ltx_text" id="S4.SS2.1.1.10.9.1.1" style="font-size:80%;">HandCLR</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.10.9.2"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.10.9.2.1" style="font-size:80%;">28.27</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.10.9.3"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.10.9.3.1" style="font-size:80%;">72.97</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.11.10">
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S4.SS2.1.1.11.10.1" rowspan="3"><span class="ltx_text" id="S4.SS2.1.1.11.10.1.1" style="font-size:80%;">Ego4D-1M</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.11.10.2"><span class="ltx_text" id="S4.SS2.1.1.11.10.2.1" style="font-size:80%;">SimCLR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.11.10.3"><span class="ltx_text" id="S4.SS2.1.1.11.10.3.1" style="font-size:80%;">46.17</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.SS2.1.1.11.10.4"><span class="ltx_text" id="S4.SS2.1.1.11.10.4.1" style="font-size:80%;">50.62</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.12.11">
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.12.11.1"><span class="ltx_text" id="S4.SS2.1.1.12.11.1.1" style="font-size:80%;">PeCLR</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.12.11.2"><span class="ltx_text" id="S4.SS2.1.1.12.11.2.1" style="font-size:80%;">34.42</span></td>
+<td class="ltx_td ltx_align_center" id="S4.SS2.1.1.12.11.3"><span class="ltx_text" id="S4.SS2.1.1.12.11.3.1" style="font-size:80%;">64.93</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.SS2.1.1.13.12">
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S4.SS2.1.1.13.12.1"><span class="ltx_text" id="S4.SS2.1.1.13.12.1.1" style="font-size:80%;">HandCLR</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S4.SS2.1.1.13.12.2"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.13.12.2.1" style="font-size:80%;">23.68</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S4.SS2.1.1.13.12.3"><span class="ltx_text ltx_font_bold" id="S4.SS2.1.1.13.12.3.1" style="font-size:80%;">79.62</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure class="ltx_table ltx_figure_panel ltx_align_center" id="S4.T2">
+<figcaption class="ltx_caption" style="font-size:80%;"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T2.9.1.1" style="font-size:113%;">Table 2</span>: </span><span class="ltx_text ltx_font_bold" id="S4.T2.10.2" style="font-size:113%;">Comparison with different pre-training data sizes.<span class="ltx_text ltx_font_medium" id="S4.T2.10.2.1">
+<br class="ltx_break"/>We use 10% of the labeled FreiHand <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib45" title="">45</a>]</cite> dataset for fine-tuning.
+</span></span></figcaption>
+</figure>
+</div>
+</div>
+</figure>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p3.1.1">Performance on Ego &amp; Exo hands:</span>
+We evaluate how pre-training with egocentric views (Ego4D) and exocentric views (100DOH) affects the performance in datasets with their corresponding views, namely AssemblyHands for egocentric and FreiHand and DexYCB for exocentric views. Interestingly, matching pre-training viewpoints does not consistently enhance performance, indicating that the view gaps have limited effects. Instead, factors like dataset diversity and the characteristics of pre-training methods are more crucial in determining effectiveness. We also assess pre-training performance using both perspectives, Ego4D and 100DOH. Combining the two datasets, the last row of Tab. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S3.T1" title="Table 1 ‣ 3.2 Mining similar hands ‣ 3 Method ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">1</span></a>, leads to the best performance in all three datasets, underscoring the potential of enriching data diversity with different camera characteristics.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p4">
+<p class="ltx_p" id="S4.SS2.p4.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p4.1.1">Effect of different pre-training data sizes:</span>
+We study results with different sizes of pre-training data, namely 50K, 100K, 500K, and 1M in Tab. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S4.T2" title="Table 2 ‣ 4.2 Results ‣ 4 Experiments ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">2</span></a>.
+We specifically test the pre-trained networks on limited labeled data, <em class="ltx_emph ltx_font_italic" id="S4.SS2.p4.1.2">i.e</em>.<span class="ltx_text" id="S4.SS2.p4.1.3"></span>, 10% of FreiHand.
+This shows that HandCLR consistently improves in all settings, with gains increasing further with more pre-training data.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S4.SS2.p5">
+<p class="ltx_p" id="S4.SS2.p5.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p5.1.1">Results in smaller fine-tuning sets:</span>
+Fig. <a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#S4.F2.1" title="Figure 2 ‣ 4.2 Results ‣ 4 Experiments ‣ Pre-Training for 3D Hand Pose Estimation with Contrastive Learning on Large-Scale Hand Images in the Wild"><span class="ltx_text ltx_ref_tag">2</span></a> illustrates the MPJPE performance comparison of three methods under different proportions of labeled data, namely 10%, 20%, 40%, and 80% in FreiHand.
+The results show that our HandCLR method performs particularly well in a limited data regime, such as 10% and 20%, compared to the baselines.
+</p>
+</div>
+<figure class="ltx_figure ltx_minipage ltx_align_center ltx_align_top" id="S4.F2.1" style="width:195.1pt;"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="366" id="S4.F2.1.g1" src="extracted/5855737/figures/histogram.jpg" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S4.F2.1.4.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text ltx_font_bold" id="S4.F2.1.5.2" style="font-size:90%;">Comparison with different data availability in fine- 
+<br class="ltx_break"/>tuning.<span class="ltx_text ltx_font_medium" id="S4.F2.1.5.2.1"> Variations in the percentage of labeled data correspond 
+<br class="ltx_break"/>to different subsets of the FreiHand <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib45" title="">45</a>]</cite> dataset, following the 
+<br class="ltx_break"/>experimental design in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2409.09714v1#bib.bib38" title="">38</a>]</cite>.</span></span></figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">We introduce a contrastive learning framework for pre-training 3D hand pose estimators using the largest in-the-wild pre-training set. Our approach leverages similar hand pairs from diverse videos, significantly enhancing the information gained during pre-training over existing methods. Experiments show our method achieves state-of-the-art performance in 3D hand pose estimation across multiple datasets. This work demonstrates the benefits of pre-training with large-scale in-the-wild images and lays the foundation for future research on using diverse human-centric videos to improve the robustness of 3D hand pose estimation.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S5.p2">
+<p class="ltx_p" id="S5.p2.1"><span class="ltx_text ltx_font_bold" id="S5.p2.1.1">Acknowledgments:</span>
+We thank Minjie Cai for helpful discussions on this manuscript.
+This work was supported by the
+JST ACT-X Grant Number JPMJAX2007,
+JST ASPIRE Grant Number JPMJAP2303, and
+JSPS KAKENHI Grant Number 24K02956.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.1.1" style="font-size:90%;">
+R. Arandjelovic, P. Gronat, A. Torii, T. Pajdla, and J. Sivic.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.2.1" style="font-size:90%;">Netvlad: Cnn architecture for weakly supervised place recognition.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib1.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib1.5.3" style="font-size:90%;">, pages 5297–5307, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.1.1" style="font-size:90%;">
+G. Berton, C. Masone, and B. Caputo.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.2.1" style="font-size:90%;">Rethinking visual geo-localization for large-scale applications.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib2.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib2.5.3" style="font-size:90%;">, pages 4878–4888, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.1.1" style="font-size:90%;">
+Y. Cai, L. Ge, J. Cai, and J. Yuan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.2.1" style="font-size:90%;">Weakly-supervised 3D hand pose estimation from monocular RGB images.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib3.4.2" style="font-size:90%;">Proceedings of the European Conference on Computer Vision (ECCV)</span><span class="ltx_text" id="bib.bib3.5.3" style="font-size:90%;">, pages 678–694, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.1.1" style="font-size:90%;">
+M. Caron, I. Misra, J. Mairal, P. Goyal, P. Bojanowski, and A. Joulin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.2.1" style="font-size:90%;">Unsupervised learning of visual features by contrasting cluster assignments.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib4.4.2" style="font-size:90%;">Proceedings of the Advances in Neural Information Processing Systems (NeurIPS)</span><span class="ltx_text" id="bib.bib4.5.3" style="font-size:90%;">, pages 9912–9924, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.1.1" style="font-size:90%;">
+M. Caron, H. Touvron, I. Misra, H. Jégou, J. Mairal, P. Bojanowski, and A. Joulin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.2.1" style="font-size:90%;">Emerging properties in self-supervised vision transformers.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib5.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib5.5.3" style="font-size:90%;">, pages 9650–9660, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.1.1" style="font-size:90%;">
+Y.-W. Chao, W. Yang, Y. Xiang, P. Molchanov, A. Handa, J. Tremblay, Y. S. Narang, K. Van Wyk, U. Iqbal, S. Birchfield, J. Kautz, and D. Fox.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.2.1" style="font-size:90%;">DexYCB: A benchmark for capturing hand grasping of objects.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib6.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib6.5.3" style="font-size:90%;">, pages 9044–9053, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.1.1" style="font-size:90%;">
+H. Chen, B. Lagadec, and F. Bremond.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.2.1" style="font-size:90%;">Ice: Inter-instance contrastive encoding for unsupervised person re-identification.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib7.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib7.5.3" style="font-size:90%;">, pages 14960–14969, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.1.1" style="font-size:90%;">
+H. Chen, Y. Wang, B. Lagadec, A. Dantcheva, and F. Bremond.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.2.1" style="font-size:90%;">Joint generative and contrastive learning for unsupervised person re-identification.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib8.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib8.5.3" style="font-size:90%;">, pages 2004–2013, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.1.1" style="font-size:90%;">
+T. Chen, S. Kornblith, M. Norouzi, and G. E. Hinton.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.2.1" style="font-size:90%;">A simple framework for contrastive learning of visual representations.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib9.4.2" style="font-size:90%;">Proceedings of the International Conference on Machine Learning (ICML)</span><span class="ltx_text" id="bib.bib9.5.3" style="font-size:90%;">, pages 1597–1607, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.1.1" style="font-size:90%;">
+X. Chen and K. He.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.2.1" style="font-size:90%;">Exploring simple siamese representation learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib10.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib10.5.3" style="font-size:90%;">, pages 15750–15758, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.1.1" style="font-size:90%;">
+S. Chopra, R. Hadsell, and Y. LeCun.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.2.1" style="font-size:90%;">Learning a similarity metric discriminatively, with application to face verification.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib11.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib11.5.3" style="font-size:90%;">, pages 539–546, 2005.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.1.1" style="font-size:90%;">
+Z. Fan, T. Ohkawa, L. Yang, N. Lin, Z. Zhou, S. Zhou, J. Liang, Z. Gao, X. Zhang, X. Zhang, F. Li, L. Zheng, F. Lu, K. A. Zeid, B. Leibe, J. On, S. Baek, A. Prakash, S. Gupta, K. He, Y. Sato, O. Hilliges, H. J. Chang, and A. Yao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.2.1" style="font-size:90%;">Benchmarks and challenges in pose estimation for egocentric hand interactions with objects.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib12.4.2" style="font-size:90%;">Proceedings of the European Conference on Computer Vision (ECCV)</span><span class="ltx_text" id="bib.bib12.5.3" style="font-size:90%;">, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.1.1" style="font-size:90%;">
+L. Ge, Z. Ren, Y. Li, Z. Xue, Y. Wang, J. Cai, and J. Yuan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.2.1" style="font-size:90%;">3D hand shape and pose estimation from a single RGB image.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib13.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib13.5.3" style="font-size:90%;">, pages 10833–10842, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.1.1" style="font-size:90%;">
+Y. Ge, H. Wang, F. Zhu, R. Zhao, and H. Li.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.2.1" style="font-size:90%;">Self-supervising fine-grained region similarities for large-scale image localization.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib14.4.2" style="font-size:90%;">Proceedings of the European Conference on Computer Vision (ECCV)</span><span class="ltx_text" id="bib.bib14.5.3" style="font-size:90%;">, pages 369–386, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.1.1" style="font-size:90%;">
+Y. Ge, F. Zhu, D. Chen, and R. Zhao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.2.1" style="font-size:90%;">Self-paced contrastive learning with hybrid memory for domain adaptive object re-id.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib15.4.2" style="font-size:90%;">Proceedings of the Advances in Neural Information Processing Systems (NeurIPS)</span><span class="ltx_text" id="bib.bib15.5.3" style="font-size:90%;">, pages 11309–11321, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.1.1" style="font-size:90%;">
+K. Grauman, A. Westbury, E. Byrne, Z. Chavis, A. Furnari, R. Girdhar, J. Hamburger, H. Jiang, M. Liu, X. Liu, M. Martin, T. Nagarajan, I. Radosavovic, S. K. Ramakrishnan, F. Ryan, J. Sharma, M. Wray, M.g Xu, E. Zhongcong Xu, C. Zhao, S. Bansal, D. Batra, V. Cartillier, S. Crane, T. Do, M. Doulaty, A. Erapalli, C. Feichtenhofer, A. Fragomeni, Q. Fu, C. Fuegen, A. Gebreselasie, C. Gonzalez, J. Hillis, X. Huang, Y. Huang, W. Jia, W. Khoo, J. Kolar, S. Kottur, A. Kumar, F. Landini, C. Li, Y. Li, Z. Li, K. Mangalam, R. Modhugu, J. Munro, T. Murrell, T. Nishiyasu, W. Price, P. R. Puentes, M. Ramazanova, L. Sari, K. Somasundaram, A. Southerland, Y. Sugano, R. Tao, M. Vo, Y. Wang, X. Wu, T. Yagi, Y. Zhu, P. Arbelaez, D. Crandall, D. Damen, G. M. Farinella, B. Ghanem, V. K. Ithapu, C. V. Jawahar, H. Joo, K. Kitani, H. Li, R. Newcombe, A. Oliva, H. Soo Park, J. M. Rehg, Y. Sato, J. Shi, M. Z. Shou, A. Torralba, Lo Torresani, M.i Yan, and J. Malik.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.2.1" style="font-size:90%;">Ego4D: Around the world in 3, 000 hours of egocentric video.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib16.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib16.5.3" style="font-size:90%;">, pages 18973–18990, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.1.1" style="font-size:90%;">
+J. Gu, K. Wang, H. Luo, C. Chen, W. Jiang, Y. Fang, S. Zhang, Y. You, and J. Zhao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.2.1" style="font-size:90%;">Msinet: Twins contrastive search of multi-scale interaction for object reid.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib17.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib17.5.3" style="font-size:90%;">, pages 19243–19253, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.1.1" style="font-size:90%;">
+S. Han, P.-C. Wu, Y. Zhang, B. Liu, L. Zhang, Z. Wang, W. Si, P. Zhang, Y. Cai, T. Hodan, R. Cabezas, L. Tran, M. Akbay, T.-H. Yu, C. Keskin, and R. Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.2.1" style="font-size:90%;">UmeTrack: Unified multi-view end-to-end hand tracking for VR.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib18.4.2" style="font-size:90%;">In Proceedings of the ACM SIGGRAPH Asia Conference</span><span class="ltx_text" id="bib.bib18.5.3" style="font-size:90%;">, pages 50:1–50:9, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.1.1" style="font-size:90%;">
+S. Hausler, S. Garg, M. Xu, M. Milford, and T. Fischer.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.2.1" style="font-size:90%;">Patch-netvlad: Multi-scale fusion of locally-global descriptors for place recognition.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib19.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib19.5.3" style="font-size:90%;">, pages 14141–14152, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.1.1" style="font-size:90%;">
+K. He, H. Fan, Y. Wu, S. Xie, and R. Girshick.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.2.1" style="font-size:90%;">Momentum contrast for unsupervised visual representation learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib20.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib20.5.3" style="font-size:90%;">, pages 9729–9738, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.1.1" style="font-size:90%;">
+F. Altché C. Tallec P. Richemond E. Buchatskaya C. Doersch B. Avila Pires Z. Guo M. Gheshlaghi Azar B. Piot K. Kavukcuoglu R. Munos M. Valko J. Grill, F. Strub.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.2.1" style="font-size:90%;">Bootstrap your own latent: A new approach to self-supervised learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib21.4.2" style="font-size:90%;">Proceedings of the Advances in Neural Information Processing Systems (NeurIPS)</span><span class="ltx_text" id="bib.bib21.5.3" style="font-size:90%;">, pages 21271–21284, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.1.1" style="font-size:90%;">
+R .Liu, T. Ohkawa, M. Zhang, and Y. Sato.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.2.1" style="font-size:90%;">Single-to-dual-view adaptation for egocentric 3d hand pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib22.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib22.5.3" style="font-size:90%;">, pages 677–686, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.1.1" style="font-size:90%;">
+S. Liu, H. Jiang, J. Xu, S. Liu, and X. Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.2.1" style="font-size:90%;">Semi-supervised 3D hand-object poses estimation with interactions in time.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib23.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib23.5.3" style="font-size:90%;">, pages 14687–14697, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.1.1" style="font-size:90%;">
+C. Lugaresi, J. Tang, H. Nash, C. McClanahan, E. Uboweja, M. Hays, and F. Zhang et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.2.1" style="font-size:90%;">Mediapipe: A framework for building perception pipelines.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib24.3.1" style="font-size:90%;">CoRR</span><span class="ltx_text" id="bib.bib24.4.2" style="font-size:90%;">, abs/1906.08172, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.1.1" style="font-size:90%;">
+G. Moon, S.-I. Yu, H. Wen, T. Shiratori, and K. M. Lee.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.2.1" style="font-size:90%;">InterHand2.6M: A dataset and baseline for 3D interacting hand pose estimation from a single RGB image.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib25.4.2" style="font-size:90%;">Proceedings of the European Conference on Computer Vision (ECCV)</span><span class="ltx_text" id="bib.bib25.5.3" style="font-size:90%;">, pages 548–564, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.1.1" style="font-size:90%;">
+T. Ohkawa, R. Furuta, and Y. Sato.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.2.1" style="font-size:90%;">Efficient annotation and learning for 3D hand pose estimation: A survey.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib26.3.1" style="font-size:90%;">International Journal on Computer Vision (IJCV)</span><span class="ltx_text" id="bib.bib26.4.2" style="font-size:90%;">, 131:3193––3206, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.1.1" style="font-size:90%;">
+T. Ohkawa, K. He, F. Sener, T. Hodan, L. Tran, and C. Keskin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.2.1" style="font-size:90%;">AssemblyHands: Towards egocentric activity understanding via 3D hand pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib27.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib27.5.3" style="font-size:90%;">, pages 12999–13008, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.1.1" style="font-size:90%;">
+T. Ohkawa, Y.-J. Li, Q. Fu, R. Furuta, K. M. Kitani, and Y. Sato.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.2.1" style="font-size:90%;">Domain adaptive hand keypoint and pixel localization in the wild.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib28.4.2" style="font-size:90%;">Proceedings of the European Conference on Computer Vision (ECCV)</span><span class="ltx_text" id="bib.bib28.5.3" style="font-size:90%;">, pages 68–87, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib29.1.1" style="font-size:90%;">
+A. Oord, Y. Li, and O .Vinyals.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib29.2.1" style="font-size:90%;">Representation learning with contrastive predictive coding.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib29.3.1" style="font-size:90%;">CoRR</span><span class="ltx_text" id="bib.bib29.4.2" style="font-size:90%;">, abs/1807.03748, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.1.1" style="font-size:90%;">
+J. Park, Y. Oh, G. Moon, H. Choi, and K. M. Lee.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.2.1" style="font-size:90%;">Handoccnet: Occlusion-robust 3d hand mesh estimation network.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib30.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib30.5.3" style="font-size:90%;">, pages 1486–1495, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib31.1.1" style="font-size:90%;">
+Y. Qin, Y.-H. Wu, S. Liu, H. Jiang, R. Yang, Y. Fu, and X. Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib31.2.1" style="font-size:90%;">DexMV: Imitation learning for dexterous manipulation from human videos.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib31.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib31.4.2" style="font-size:90%;">Proceedings of the European Conference on Computer Vision (ECCV)</span><span class="ltx_text" id="bib.bib31.5.3" style="font-size:90%;">, pages 570–587, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.1.1" style="font-size:90%;">
+A. Radford, J. Kim, C. Hallacy, A. Ramesh, G. Goh, S. Agarwal, G. Sastry, A. Askell, P. Mishkin, J. Clark, and G. Krueger.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.2.1" style="font-size:90%;">Learning transferable visual models from natural language supervision.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib32.4.2" style="font-size:90%;">Proceedings of the International Conference on Machine Learning (ICML)</span><span class="ltx_text" id="bib.bib32.5.3" style="font-size:90%;">, pages 8748–8763, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.1.1" style="font-size:90%;">
+F. Schroff, D. Kalenichenko, and J. Philbin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.2.1" style="font-size:90%;">Facenet: A unified embedding for face recognition and clustering.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib33.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib33.5.3" style="font-size:90%;">, pages 815–823, 2015.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.1.1" style="font-size:90%;">
+F. Sener, D. Chatterjee, D. Shelepov, K. He, D. Singhania, R. Wang, and A. Yao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.2.1" style="font-size:90%;">Assembly101: A large-scale multi-view video dataset for understanding procedural activities.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib34.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib34.5.3" style="font-size:90%;">, pages 21096–21106, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.1.1" style="font-size:90%;">
+D. Shan, J. Geng, M. Shu, and D. Fouhey.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.2.1" style="font-size:90%;">Understanding human hands in contact at internet scale.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib35.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib35.5.3" style="font-size:90%;">, pages 9866–9875, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.1.1" style="font-size:90%;">
+K. Sohn.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.2.1" style="font-size:90%;">Improved deep metric learning with multi-class n-pair loss objective.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib36.4.2" style="font-size:90%;">Proceedings of the Advances in Neural Information Processing Systems (NeurIPS)</span><span class="ltx_text" id="bib.bib36.5.3" style="font-size:90%;">, pages 1857–1865, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.1.1" style="font-size:90%;">
+H. Song, Y. Xiang, S. Jegelka, and S. Savarese.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.2.1" style="font-size:90%;">Deep metric learning via lifted structured feature embedding.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib37.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib37.5.3" style="font-size:90%;">, pages 4004–4012, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib38.1.1" style="font-size:90%;">
+A. Spurr, A. Dahiya, X. Wang, X. Zhang, and O. Hilliges.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib38.2.1" style="font-size:90%;">Self-supervised 3D hand pose estimation from monocular RGB via contrastive learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib38.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib38.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib38.5.3" style="font-size:90%;">, pages 11210–11219, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib39.1.1" style="font-size:90%;">
+Y. Wen, H. Pan, T. Ohkawa, L. Yang, J. Pan, Y. Sato, T. Komura, and W. Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib39.2.1" style="font-size:90%;">Generative hierarchical temporal transformer for hand action recognition and motion prediction.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib39.3.1" style="font-size:90%;">CoRR</span><span class="ltx_text" id="bib.bib39.4.2" style="font-size:90%;">, abs/2311.17366, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib40.1.1" style="font-size:90%;">
+M.-Y. Wu, P.-W. Ting, Y.-H. Tang, E. T. Chou, and L.-C. Fu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib40.2.1" style="font-size:90%;">Hand pose estimation in object-interaction based on deep learning for virtual reality applications.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib40.3.1" style="font-size:90%;">Journal of Visual Communication and Image Representation</span><span class="ltx_text" id="bib.bib40.4.2" style="font-size:90%;">, 70:102802, 04 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib41.1.1" style="font-size:90%;">
+L. Yang, S. Chen, and A. Yao.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib41.2.1" style="font-size:90%;">Semihand: Semi-supervised hand pose estimation with consistency.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib41.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib41.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib41.5.3" style="font-size:90%;">, pages 11364–11373, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib42.1.1" style="font-size:90%;">
+H. Zhang, Y. Hou, W. Zhang, and W. Li.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib42.2.1" style="font-size:90%;">Contrastive positive mining for unsupervised 3d action representation learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib42.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib42.4.2" style="font-size:90%;">Proceedings of the European Conference on Computer Vision (ECCV)</span><span class="ltx_text" id="bib.bib42.5.3" style="font-size:90%;">, pages 36–51, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib43.1.1" style="font-size:90%;">
+Y. Zhou, M. Habermann, W. Xu, I. Habibie, C. Theobalt, and F. Xu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib43.2.1" style="font-size:90%;">Monocular real-time hand shape and motion capture using multi-modal data.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib43.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib43.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</span><span class="ltx_text" id="bib.bib43.5.3" style="font-size:90%;">, pages 5346–5355, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib44.1.1" style="font-size:90%;">
+A. Ziani, Z. Fan, M. Kocabas, S. J. Christen, and O. Hilliges.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib44.2.1" style="font-size:90%;">Tempclr: Reconstructing hands via time-coherent contrastive learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib44.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib44.4.2" style="font-size:90%;">Proceedings of the International Conference on 3D Vision (3DV)</span><span class="ltx_text" id="bib.bib44.5.3" style="font-size:90%;">, pages 627–636, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_tag_bibitem">[45]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib45.1.1" style="font-size:90%;">
+C. Zimmermann, D. Ceylan, J. Yang, B. Russell, M. J. Argus, and T. Brox.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib45.2.1" style="font-size:90%;">FreiHAND: A dataset for markerless capture of hand pose and shape from single RGB images.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib45.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib45.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib45.5.3" style="font-size:90%;">, pages 813–822, 2019.
+</span>
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Sep 15 12:44:39 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

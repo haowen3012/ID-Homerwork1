@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Anticipation through Head Pose Estimation: a preliminary study</title>
+<!--Generated on Sat Aug 10 10:52:55 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2408.05516v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S1" title="In Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2" title="In Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Method</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S3" title="In Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Experimental Section</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S3.SS1" title="In III Experimental Section ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-A</span> </span><span class="ltx_text ltx_font_italic">Dataset</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S3.SS2" title="In III Experimental Section ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span> </span><span class="ltx_text ltx_font_italic">Experiments</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S4" title="In Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Anticipation through Head Pose Estimation:
+<br class="ltx_break"/>a preliminary study</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Federico Figari Tomenotti
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">MaLGa-DIBRIS, Università degli Studi di Genova
+<br class="ltx_break"/>federico.figaritomenotti@edu.unige.it
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Nicoletta Noceti
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">MaLGa-DIBRIS, Università degli Studi di Genova
+<br class="ltx_break"/>nicoletta.noceti@unige.it
+</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id1.id1">The ability to anticipate others’ goals and intentions is at the basis of human-human social interaction. Such ability, largely based on non-verbal communication, is also a key to having natural and pleasant interactions with artificial agents, like robots.
+In this work, we discuss a preliminary experiment on the use of head pose as a visual cue to understand and anticipate action goals, particularly reaching and transporting movements. By reasoning on the spatio-temporal connections between the head, hands and objects in the scene, we will show that short-range anticipation is possible, laying the foundations for future applications to human-robot interaction.
+<br class="ltx_break"/></p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.1.1">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">A key element of natural human-human interaction is the ability to anticipate humans’ goals and intentions <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib13" title="">13</a>]</cite>. The same ability is paramount in different application domains – ranging from gaming to domotics and home assistance, to robotics. In the latter, in particular, anticipation abilities may enable robots to seamlessly interact with humans in shared environments, enhancing safety, efficiency and fluidity in Human-Robot Interaction scenarios <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib8" title="">8</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Over the last years, the importance of leveraging non-verbal cues for understanding humans’ intentions has been well assessed <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib3" title="">3</a>]</cite>. The interesting work in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib11" title="">11</a>]</cite> for instance leverages the fact that anticipatory eye movements occur during both action observation and action execution. More in general, the focus of attention of a subject involved in an interaction can provide valuable insights about their intentions, enabling the identification of the next object they will interact with
+– when interacting with the environment –
+or the person they will engage with – when involved in group interaction.
+In this study, we explore the feasibility of using video-based head orientation – a proxy of human gaze – for anticipation, with particular attention to reaching and manipulation actions.
+<br class="ltx_break"/></p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">In the Computer Vision literature, anticipation often refers to the task of predicting the occurrence of future actions in long-term activity recognition <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib15" title="">15</a>]</cite>. In the last years, a growing interest has been devoted to the specific domain of egocentric vision (see for instance <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib4" title="">4</a>]</cite>). In our work, we are focusing on short-term anticipation, more relevant for seamless human-human interaction. For this reason, approaches based on third-person viewpoints are of interest. For instance <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib19" title="">19</a>]</cite> aims at the anticipation of next action of 1 sec, by exploiting the high-level goal pursued in the video. In <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib18" title="">18</a>]</cite> it is presented a memory-based approach using Transformer architectures to address the online action detection and anticipation tasks. The methods in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib5" title="">5</a>]</cite> learn how to anticipate by predicting the visual representation of images in the future.
+<br class="ltx_break"/>Differently from these approaches, in our work, we are interested in understanding and quantifying low-level features for determining the ability to predict in advance some cue of the current action goal. In this sense, our work is inspired by the concept of <em class="ltx_emph ltx_font_italic" id="S1.p3.1.1">effect anticipation</em> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib9" title="">9</a>]</cite>. 
+<br class="ltx_break"/>More in detail, we hypothesize we can use the 3D Head Direction as a proxy of the gaze, and that by deriving simple visual geometrical cues in an unsupervised way – connecting the head and hands of a subject with the elements in the environment – we can anticipate the goal of an action in terms of next active object or target position (when the movement involves a change in location of objects). The goal is achieved using object and human pose detectors, deriving the 3D head pose and reasoning on the interaction between the human and the scene and how it evolves over time.
+To test this hypothesis, we conducted preliminary experiments using a private dataset including videos of different subjects sitting in front of a table and instructed to perform a series of reaching and manipulation actions. We show that the Head Direction can effectively and efficiently anticipate the actions’ goal in such a scenario. 
+<br class="ltx_break"/>We believe the methodology discussed in this contribution may be profitably adopted as a building block for supporting HRI applications. Indeed, a robot might be engaged in smooth interactions with one or more people, favoured by the ability to anticipate the intentions of others. This opportunity will be briefly outlined in the conclusions.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.1.1">Method</span>
+</h2>
+<figure class="ltx_figure" id="S2.F1">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F1.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="320" id="S2.F1.sf1.g1" src="extracted/5784577/images/frames/example_1_bw/15.jpeg" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.sf1.2.1.1" style="font-size:90%;">(a)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F1.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="320" id="S2.F1.sf2.g1" src="extracted/5784577/images/frames/example_1_bw/23.jpeg" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.sf2.2.1.1" style="font-size:90%;">(b)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F1.sf3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="320" id="S2.F1.sf3.g1" src="extracted/5784577/images/frames/example_1_bw/38.jpeg" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.sf3.2.1.1" style="font-size:90%;">(c)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F1.sf4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="320" id="S2.F1.sf4.g1" src="extracted/5784577/images/frames/example_transport/35.jpeg" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.sf4.2.1.1" style="font-size:90%;">(d)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F1.sf5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="320" id="S2.F1.sf5.g1" src="extracted/5784577/images/frames/example_transport/45.jpeg" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.sf5.2.1.1" style="font-size:90%;">(e)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F1.sf6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="320" id="S2.F1.sf6.g1" src="extracted/5784577/images/frames/example_transport/81.jpeg" width="568"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.sf6.2.1.1" style="font-size:90%;">(f)</span> </span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F1.4.1.1" style="font-size:90%;">Figure 1</span>: </span><span class="ltx_text" id="S2.F1.5.2" style="font-size:90%;">(a,b,c): reaching from <em class="ltx_emph ltx_font_italic" id="S2.F1.5.2.1">transporting action</em>.<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf1" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(a)</span></a> The head starts to move. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf2" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(b)</span></a> The head projection onto the table reached the target. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf3" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(c)</span></a> The hand reached the target after more than 10 frames (1/3 of a second).
+<br class="ltx_break"/>                                                                                                                                                 
+(d,e,f): transporting from <em class="ltx_emph ltx_font_italic" id="S2.F1.5.2.2">transporting action</em>. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf4" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(d)</span></a> The head and hand are aligned. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf5" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(e)</span></a> The head projection onto the table reached the target at the very beginning of the hand movements. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf6" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(f)</span></a> The hand reached the target. 
+<br class="ltx_break"/>                                                                                                                                                 
+In light blue/violet bounding boxes and annotations are shown. The image is in black-white only for clarity.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1">The methodology takes as input RGB image sequences and through a multi-stage pipeline outputs different types of information: human pose, head pose, and objects in the scene.
+Thanks to these cues, we can retrieve the time at which the hand of a person approaches the target position and the time in which the human head points towards the same target/object. In this context we use the head pose as a proxy for a proper gaze measure. We do not think this can be a weakness of the method but rather an advantage, because we can estimate head position in a broader range of situations: far from the camera, with small occlusions on the eye region and using a camera instead of glasses.</p>
+</div>
+<div class="ltx_para" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1">More specifically, the pipeline starts with a pose detector (we adopt Centernet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib21" title="">21</a>]</cite>, but other solutions can be used) and an object detector, for instance, YOLO (and more specifically YOLOv8 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib14" title="">14</a>]</cite> in our case). While the first provides a list of 25 3-dimensional key points on the body, the latter detects the bounding boxes of objects in the scene and determines their classes.</p>
+</div>
+<div class="ltx_para" id="S2.p3">
+<p class="ltx_p" id="S2.p3.1">Then we exploit the 5 facial key points (on eyes, nose and ears, with their detection confidence) to estimate the 3D head pose with HHP-Net <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib16" title="">16</a>]</cite>.
+The head pose is represented with 3 angles which define the head orientation in the 3D space: yaw, pitch and roll. On the image plane, we projected them following the Tait-Bryan angles convention as explained in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib16" title="">16</a>]</cite> and representing them according to 3 versors parallel to the head axis; in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1" title="Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1</span></a> they are represented in red, green and blue.
+We hypothesise the consistency between gaze and head position and we project the field of view of the detected person on the working table (see Fig. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1" title="Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1</span></a>, where we visualize this operation by extending the blue component to reach the table).</p>
+</div>
+<div class="ltx_para" id="S2.p4">
+<p class="ltx_p" id="S2.p4.1">Our analysis is based on three relevant moments in simple human-object interactions involving reaching and transporting actions, i.e. (I) the moment when a person looks at the target, it could be an object for a reaching or a final position for the transport (we will refer to as <em class="ltx_emph ltx_font_italic" id="S2.p4.1.1">gazing_target_time</em>), (II) the one where the person touches an object with the hand at the end of a reaching (we will call <em class="ltx_emph ltx_font_italic" id="S2.p4.1.2">touching_object_time</em>), and (III) the one where an object is placed in the target position for transports (called <em class="ltx_emph ltx_font_italic" id="S2.p4.1.3">target_object_time</em>). The hypothesis is that <em class="ltx_emph ltx_font_italic" id="S2.p4.1.4">touching_object_time</em> and <em class="ltx_emph ltx_font_italic" id="S2.p4.1.5">target_object_time</em> always follow <em class="ltx_emph ltx_font_italic" id="S2.p4.1.6">gazing_object_time</em>.</p>
+</div>
+<div class="ltx_para" id="S2.p5">
+<p class="ltx_p" id="S2.p5.4">To detect these moments we decided to use, as a reference measure, the distances between the hand of the person and the target object/position. As shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1" title="Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1</span></a>, the position of the object at time t <math alttext="\mathbf{P}_{O}^{t}" class="ltx_Math" display="inline" id="S2.p5.1.m1.1"><semantics id="S2.p5.1.m1.1a"><msubsup id="S2.p5.1.m1.1.1" xref="S2.p5.1.m1.1.1.cmml"><mi id="S2.p5.1.m1.1.1.2.2" xref="S2.p5.1.m1.1.1.2.2.cmml">𝐏</mi><mi id="S2.p5.1.m1.1.1.2.3" xref="S2.p5.1.m1.1.1.2.3.cmml">O</mi><mi id="S2.p5.1.m1.1.1.3" xref="S2.p5.1.m1.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.p5.1.m1.1b"><apply id="S2.p5.1.m1.1.1.cmml" xref="S2.p5.1.m1.1.1"><csymbol cd="ambiguous" id="S2.p5.1.m1.1.1.1.cmml" xref="S2.p5.1.m1.1.1">superscript</csymbol><apply id="S2.p5.1.m1.1.1.2.cmml" xref="S2.p5.1.m1.1.1"><csymbol cd="ambiguous" id="S2.p5.1.m1.1.1.2.1.cmml" xref="S2.p5.1.m1.1.1">subscript</csymbol><ci id="S2.p5.1.m1.1.1.2.2.cmml" xref="S2.p5.1.m1.1.1.2.2">𝐏</ci><ci id="S2.p5.1.m1.1.1.2.3.cmml" xref="S2.p5.1.m1.1.1.2.3">𝑂</ci></apply><ci id="S2.p5.1.m1.1.1.3.cmml" xref="S2.p5.1.m1.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p5.1.m1.1c">\mathbf{P}_{O}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.p5.1.m1.1d">bold_P start_POSTSUBSCRIPT italic_O end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> is represented by the centroid of its bounding box resulting from the object detector. We keep track of the current position of the object (in red) and the initial one (in yellow). The current position of the hand <math alttext="\mathbf{P}_{H}^{t}" class="ltx_Math" display="inline" id="S2.p5.2.m2.1"><semantics id="S2.p5.2.m2.1a"><msubsup id="S2.p5.2.m2.1.1" xref="S2.p5.2.m2.1.1.cmml"><mi id="S2.p5.2.m2.1.1.2.2" xref="S2.p5.2.m2.1.1.2.2.cmml">𝐏</mi><mi id="S2.p5.2.m2.1.1.2.3" xref="S2.p5.2.m2.1.1.2.3.cmml">H</mi><mi id="S2.p5.2.m2.1.1.3" xref="S2.p5.2.m2.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.p5.2.m2.1b"><apply id="S2.p5.2.m2.1.1.cmml" xref="S2.p5.2.m2.1.1"><csymbol cd="ambiguous" id="S2.p5.2.m2.1.1.1.cmml" xref="S2.p5.2.m2.1.1">superscript</csymbol><apply id="S2.p5.2.m2.1.1.2.cmml" xref="S2.p5.2.m2.1.1"><csymbol cd="ambiguous" id="S2.p5.2.m2.1.1.2.1.cmml" xref="S2.p5.2.m2.1.1">subscript</csymbol><ci id="S2.p5.2.m2.1.1.2.2.cmml" xref="S2.p5.2.m2.1.1.2.2">𝐏</ci><ci id="S2.p5.2.m2.1.1.2.3.cmml" xref="S2.p5.2.m2.1.1.2.3">𝐻</ci></apply><ci id="S2.p5.2.m2.1.1.3.cmml" xref="S2.p5.2.m2.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p5.2.m2.1c">\mathbf{P}_{H}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.p5.2.m2.1d">bold_P start_POSTSUBSCRIPT italic_H end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> is approximated by the wrist key point (also in red). To approximate what we call ”the position” of the gaze <math alttext="\mathbf{P}_{G}^{t}" class="ltx_Math" display="inline" id="S2.p5.3.m3.1"><semantics id="S2.p5.3.m3.1a"><msubsup id="S2.p5.3.m3.1.1" xref="S2.p5.3.m3.1.1.cmml"><mi id="S2.p5.3.m3.1.1.2.2" xref="S2.p5.3.m3.1.1.2.2.cmml">𝐏</mi><mi id="S2.p5.3.m3.1.1.2.3" xref="S2.p5.3.m3.1.1.2.3.cmml">G</mi><mi id="S2.p5.3.m3.1.1.3" xref="S2.p5.3.m3.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.p5.3.m3.1b"><apply id="S2.p5.3.m3.1.1.cmml" xref="S2.p5.3.m3.1.1"><csymbol cd="ambiguous" id="S2.p5.3.m3.1.1.1.cmml" xref="S2.p5.3.m3.1.1">superscript</csymbol><apply id="S2.p5.3.m3.1.1.2.cmml" xref="S2.p5.3.m3.1.1"><csymbol cd="ambiguous" id="S2.p5.3.m3.1.1.2.1.cmml" xref="S2.p5.3.m3.1.1">subscript</csymbol><ci id="S2.p5.3.m3.1.1.2.2.cmml" xref="S2.p5.3.m3.1.1.2.2">𝐏</ci><ci id="S2.p5.3.m3.1.1.2.3.cmml" xref="S2.p5.3.m3.1.1.2.3">𝐺</ci></apply><ci id="S2.p5.3.m3.1.1.3.cmml" xref="S2.p5.3.m3.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p5.3.m3.1c">\mathbf{P}_{G}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.p5.3.m3.1d">bold_P start_POSTSUBSCRIPT italic_G end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math>, we consider the distance between the final point of the blue segment (with the origin on the head) and the target object. Finally, the target position for transporting movements <math alttext="\mathbf{P}_{T}^{t}" class="ltx_Math" display="inline" id="S2.p5.4.m4.1"><semantics id="S2.p5.4.m4.1a"><msubsup id="S2.p5.4.m4.1.1" xref="S2.p5.4.m4.1.1.cmml"><mi id="S2.p5.4.m4.1.1.2.2" xref="S2.p5.4.m4.1.1.2.2.cmml">𝐏</mi><mi id="S2.p5.4.m4.1.1.2.3" xref="S2.p5.4.m4.1.1.2.3.cmml">T</mi><mi id="S2.p5.4.m4.1.1.3" xref="S2.p5.4.m4.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.p5.4.m4.1b"><apply id="S2.p5.4.m4.1.1.cmml" xref="S2.p5.4.m4.1.1"><csymbol cd="ambiguous" id="S2.p5.4.m4.1.1.1.cmml" xref="S2.p5.4.m4.1.1">superscript</csymbol><apply id="S2.p5.4.m4.1.1.2.cmml" xref="S2.p5.4.m4.1.1"><csymbol cd="ambiguous" id="S2.p5.4.m4.1.1.2.1.cmml" xref="S2.p5.4.m4.1.1">subscript</csymbol><ci id="S2.p5.4.m4.1.1.2.2.cmml" xref="S2.p5.4.m4.1.1.2.2">𝐏</ci><ci id="S2.p5.4.m4.1.1.2.3.cmml" xref="S2.p5.4.m4.1.1.2.3">𝑇</ci></apply><ci id="S2.p5.4.m4.1.1.3.cmml" xref="S2.p5.4.m4.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.p5.4.m4.1c">\mathbf{P}_{T}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.p5.4.m4.1d">bold_P start_POSTSUBSCRIPT italic_T end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> (again in yellow, on the table) is fixed and available as prior knowledge.</p>
+</div>
+<div class="ltx_para" id="S2.p6">
+<p class="ltx_p" id="S2.p6.1">To summarize, we detect the three relevant moments considered in our analysis as follows:</p>
+<ul class="ltx_itemize" id="S2.I1">
+<li class="ltx_item" id="S2.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i1.p1">
+<p class="ltx_p" id="S2.I1.i1.p1.3"><em class="ltx_emph ltx_font_italic" id="S2.I1.i1.p1.3.1">gazing_target_time</em> corresponds to the instant t where the distance between <math alttext="\mathbf{P}_{G}^{t}" class="ltx_Math" display="inline" id="S2.I1.i1.p1.1.m1.1"><semantics id="S2.I1.i1.p1.1.m1.1a"><msubsup id="S2.I1.i1.p1.1.m1.1.1" xref="S2.I1.i1.p1.1.m1.1.1.cmml"><mi id="S2.I1.i1.p1.1.m1.1.1.2.2" xref="S2.I1.i1.p1.1.m1.1.1.2.2.cmml">𝐏</mi><mi id="S2.I1.i1.p1.1.m1.1.1.2.3" xref="S2.I1.i1.p1.1.m1.1.1.2.3.cmml">G</mi><mi id="S2.I1.i1.p1.1.m1.1.1.3" xref="S2.I1.i1.p1.1.m1.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.I1.i1.p1.1.m1.1b"><apply id="S2.I1.i1.p1.1.m1.1.1.cmml" xref="S2.I1.i1.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S2.I1.i1.p1.1.m1.1.1.1.cmml" xref="S2.I1.i1.p1.1.m1.1.1">superscript</csymbol><apply id="S2.I1.i1.p1.1.m1.1.1.2.cmml" xref="S2.I1.i1.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S2.I1.i1.p1.1.m1.1.1.2.1.cmml" xref="S2.I1.i1.p1.1.m1.1.1">subscript</csymbol><ci id="S2.I1.i1.p1.1.m1.1.1.2.2.cmml" xref="S2.I1.i1.p1.1.m1.1.1.2.2">𝐏</ci><ci id="S2.I1.i1.p1.1.m1.1.1.2.3.cmml" xref="S2.I1.i1.p1.1.m1.1.1.2.3">𝐺</ci></apply><ci id="S2.I1.i1.p1.1.m1.1.1.3.cmml" xref="S2.I1.i1.p1.1.m1.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.I1.i1.p1.1.m1.1c">\mathbf{P}_{G}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.I1.i1.p1.1.m1.1d">bold_P start_POSTSUBSCRIPT italic_G end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> and <math alttext="\mathbf{P}_{O}^{t}" class="ltx_Math" display="inline" id="S2.I1.i1.p1.2.m2.1"><semantics id="S2.I1.i1.p1.2.m2.1a"><msubsup id="S2.I1.i1.p1.2.m2.1.1" xref="S2.I1.i1.p1.2.m2.1.1.cmml"><mi id="S2.I1.i1.p1.2.m2.1.1.2.2" xref="S2.I1.i1.p1.2.m2.1.1.2.2.cmml">𝐏</mi><mi id="S2.I1.i1.p1.2.m2.1.1.2.3" xref="S2.I1.i1.p1.2.m2.1.1.2.3.cmml">O</mi><mi id="S2.I1.i1.p1.2.m2.1.1.3" xref="S2.I1.i1.p1.2.m2.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.I1.i1.p1.2.m2.1b"><apply id="S2.I1.i1.p1.2.m2.1.1.cmml" xref="S2.I1.i1.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S2.I1.i1.p1.2.m2.1.1.1.cmml" xref="S2.I1.i1.p1.2.m2.1.1">superscript</csymbol><apply id="S2.I1.i1.p1.2.m2.1.1.2.cmml" xref="S2.I1.i1.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S2.I1.i1.p1.2.m2.1.1.2.1.cmml" xref="S2.I1.i1.p1.2.m2.1.1">subscript</csymbol><ci id="S2.I1.i1.p1.2.m2.1.1.2.2.cmml" xref="S2.I1.i1.p1.2.m2.1.1.2.2">𝐏</ci><ci id="S2.I1.i1.p1.2.m2.1.1.2.3.cmml" xref="S2.I1.i1.p1.2.m2.1.1.2.3">𝑂</ci></apply><ci id="S2.I1.i1.p1.2.m2.1.1.3.cmml" xref="S2.I1.i1.p1.2.m2.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.I1.i1.p1.2.m2.1c">\mathbf{P}_{O}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.I1.i1.p1.2.m2.1d">bold_P start_POSTSUBSCRIPT italic_O end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> or <math alttext="\mathbf{P}_{T}^{t}" class="ltx_Math" display="inline" id="S2.I1.i1.p1.3.m3.1"><semantics id="S2.I1.i1.p1.3.m3.1a"><msubsup id="S2.I1.i1.p1.3.m3.1.1" xref="S2.I1.i1.p1.3.m3.1.1.cmml"><mi id="S2.I1.i1.p1.3.m3.1.1.2.2" xref="S2.I1.i1.p1.3.m3.1.1.2.2.cmml">𝐏</mi><mi id="S2.I1.i1.p1.3.m3.1.1.2.3" xref="S2.I1.i1.p1.3.m3.1.1.2.3.cmml">T</mi><mi id="S2.I1.i1.p1.3.m3.1.1.3" xref="S2.I1.i1.p1.3.m3.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.I1.i1.p1.3.m3.1b"><apply id="S2.I1.i1.p1.3.m3.1.1.cmml" xref="S2.I1.i1.p1.3.m3.1.1"><csymbol cd="ambiguous" id="S2.I1.i1.p1.3.m3.1.1.1.cmml" xref="S2.I1.i1.p1.3.m3.1.1">superscript</csymbol><apply id="S2.I1.i1.p1.3.m3.1.1.2.cmml" xref="S2.I1.i1.p1.3.m3.1.1"><csymbol cd="ambiguous" id="S2.I1.i1.p1.3.m3.1.1.2.1.cmml" xref="S2.I1.i1.p1.3.m3.1.1">subscript</csymbol><ci id="S2.I1.i1.p1.3.m3.1.1.2.2.cmml" xref="S2.I1.i1.p1.3.m3.1.1.2.2">𝐏</ci><ci id="S2.I1.i1.p1.3.m3.1.1.2.3.cmml" xref="S2.I1.i1.p1.3.m3.1.1.2.3">𝑇</ci></apply><ci id="S2.I1.i1.p1.3.m3.1.1.3.cmml" xref="S2.I1.i1.p1.3.m3.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.I1.i1.p1.3.m3.1c">\mathbf{P}_{T}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.I1.i1.p1.3.m3.1d">bold_P start_POSTSUBSCRIPT italic_T end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> is minimized</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i2.p1">
+<p class="ltx_p" id="S2.I1.i2.p1.2"><em class="ltx_emph ltx_font_italic" id="S2.I1.i2.p1.2.1">touching_object_time</em> is the instant with minimum distance between <math alttext="\mathbf{P}_{H}^{t}" class="ltx_Math" display="inline" id="S2.I1.i2.p1.1.m1.1"><semantics id="S2.I1.i2.p1.1.m1.1a"><msubsup id="S2.I1.i2.p1.1.m1.1.1" xref="S2.I1.i2.p1.1.m1.1.1.cmml"><mi id="S2.I1.i2.p1.1.m1.1.1.2.2" xref="S2.I1.i2.p1.1.m1.1.1.2.2.cmml">𝐏</mi><mi id="S2.I1.i2.p1.1.m1.1.1.2.3" xref="S2.I1.i2.p1.1.m1.1.1.2.3.cmml">H</mi><mi id="S2.I1.i2.p1.1.m1.1.1.3" xref="S2.I1.i2.p1.1.m1.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.I1.i2.p1.1.m1.1b"><apply id="S2.I1.i2.p1.1.m1.1.1.cmml" xref="S2.I1.i2.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S2.I1.i2.p1.1.m1.1.1.1.cmml" xref="S2.I1.i2.p1.1.m1.1.1">superscript</csymbol><apply id="S2.I1.i2.p1.1.m1.1.1.2.cmml" xref="S2.I1.i2.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S2.I1.i2.p1.1.m1.1.1.2.1.cmml" xref="S2.I1.i2.p1.1.m1.1.1">subscript</csymbol><ci id="S2.I1.i2.p1.1.m1.1.1.2.2.cmml" xref="S2.I1.i2.p1.1.m1.1.1.2.2">𝐏</ci><ci id="S2.I1.i2.p1.1.m1.1.1.2.3.cmml" xref="S2.I1.i2.p1.1.m1.1.1.2.3">𝐻</ci></apply><ci id="S2.I1.i2.p1.1.m1.1.1.3.cmml" xref="S2.I1.i2.p1.1.m1.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.I1.i2.p1.1.m1.1c">\mathbf{P}_{H}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.I1.i2.p1.1.m1.1d">bold_P start_POSTSUBSCRIPT italic_H end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> and <math alttext="\mathbf{P}_{O}^{t}" class="ltx_Math" display="inline" id="S2.I1.i2.p1.2.m2.1"><semantics id="S2.I1.i2.p1.2.m2.1a"><msubsup id="S2.I1.i2.p1.2.m2.1.1" xref="S2.I1.i2.p1.2.m2.1.1.cmml"><mi id="S2.I1.i2.p1.2.m2.1.1.2.2" xref="S2.I1.i2.p1.2.m2.1.1.2.2.cmml">𝐏</mi><mi id="S2.I1.i2.p1.2.m2.1.1.2.3" xref="S2.I1.i2.p1.2.m2.1.1.2.3.cmml">O</mi><mi id="S2.I1.i2.p1.2.m2.1.1.3" xref="S2.I1.i2.p1.2.m2.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.I1.i2.p1.2.m2.1b"><apply id="S2.I1.i2.p1.2.m2.1.1.cmml" xref="S2.I1.i2.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S2.I1.i2.p1.2.m2.1.1.1.cmml" xref="S2.I1.i2.p1.2.m2.1.1">superscript</csymbol><apply id="S2.I1.i2.p1.2.m2.1.1.2.cmml" xref="S2.I1.i2.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S2.I1.i2.p1.2.m2.1.1.2.1.cmml" xref="S2.I1.i2.p1.2.m2.1.1">subscript</csymbol><ci id="S2.I1.i2.p1.2.m2.1.1.2.2.cmml" xref="S2.I1.i2.p1.2.m2.1.1.2.2">𝐏</ci><ci id="S2.I1.i2.p1.2.m2.1.1.2.3.cmml" xref="S2.I1.i2.p1.2.m2.1.1.2.3">𝑂</ci></apply><ci id="S2.I1.i2.p1.2.m2.1.1.3.cmml" xref="S2.I1.i2.p1.2.m2.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.I1.i2.p1.2.m2.1c">\mathbf{P}_{O}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.I1.i2.p1.2.m2.1d">bold_P start_POSTSUBSCRIPT italic_O end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math></p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i3.p1">
+<p class="ltx_p" id="S2.I1.i3.p1.2"><em class="ltx_emph ltx_font_italic" id="S2.I1.i3.p1.2.1">target_object_time</em> is detected when the distance between <math alttext="\mathbf{P}_{O}^{t}" class="ltx_Math" display="inline" id="S2.I1.i3.p1.1.m1.1"><semantics id="S2.I1.i3.p1.1.m1.1a"><msubsup id="S2.I1.i3.p1.1.m1.1.1" xref="S2.I1.i3.p1.1.m1.1.1.cmml"><mi id="S2.I1.i3.p1.1.m1.1.1.2.2" xref="S2.I1.i3.p1.1.m1.1.1.2.2.cmml">𝐏</mi><mi id="S2.I1.i3.p1.1.m1.1.1.2.3" xref="S2.I1.i3.p1.1.m1.1.1.2.3.cmml">O</mi><mi id="S2.I1.i3.p1.1.m1.1.1.3" xref="S2.I1.i3.p1.1.m1.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.I1.i3.p1.1.m1.1b"><apply id="S2.I1.i3.p1.1.m1.1.1.cmml" xref="S2.I1.i3.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S2.I1.i3.p1.1.m1.1.1.1.cmml" xref="S2.I1.i3.p1.1.m1.1.1">superscript</csymbol><apply id="S2.I1.i3.p1.1.m1.1.1.2.cmml" xref="S2.I1.i3.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S2.I1.i3.p1.1.m1.1.1.2.1.cmml" xref="S2.I1.i3.p1.1.m1.1.1">subscript</csymbol><ci id="S2.I1.i3.p1.1.m1.1.1.2.2.cmml" xref="S2.I1.i3.p1.1.m1.1.1.2.2">𝐏</ci><ci id="S2.I1.i3.p1.1.m1.1.1.2.3.cmml" xref="S2.I1.i3.p1.1.m1.1.1.2.3">𝑂</ci></apply><ci id="S2.I1.i3.p1.1.m1.1.1.3.cmml" xref="S2.I1.i3.p1.1.m1.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.I1.i3.p1.1.m1.1c">\mathbf{P}_{O}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.I1.i3.p1.1.m1.1d">bold_P start_POSTSUBSCRIPT italic_O end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> and <math alttext="\mathbf{P}_{T}^{t}" class="ltx_Math" display="inline" id="S2.I1.i3.p1.2.m2.1"><semantics id="S2.I1.i3.p1.2.m2.1a"><msubsup id="S2.I1.i3.p1.2.m2.1.1" xref="S2.I1.i3.p1.2.m2.1.1.cmml"><mi id="S2.I1.i3.p1.2.m2.1.1.2.2" xref="S2.I1.i3.p1.2.m2.1.1.2.2.cmml">𝐏</mi><mi id="S2.I1.i3.p1.2.m2.1.1.2.3" xref="S2.I1.i3.p1.2.m2.1.1.2.3.cmml">T</mi><mi id="S2.I1.i3.p1.2.m2.1.1.3" xref="S2.I1.i3.p1.2.m2.1.1.3.cmml">t</mi></msubsup><annotation-xml encoding="MathML-Content" id="S2.I1.i3.p1.2.m2.1b"><apply id="S2.I1.i3.p1.2.m2.1.1.cmml" xref="S2.I1.i3.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S2.I1.i3.p1.2.m2.1.1.1.cmml" xref="S2.I1.i3.p1.2.m2.1.1">superscript</csymbol><apply id="S2.I1.i3.p1.2.m2.1.1.2.cmml" xref="S2.I1.i3.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S2.I1.i3.p1.2.m2.1.1.2.1.cmml" xref="S2.I1.i3.p1.2.m2.1.1">subscript</csymbol><ci id="S2.I1.i3.p1.2.m2.1.1.2.2.cmml" xref="S2.I1.i3.p1.2.m2.1.1.2.2">𝐏</ci><ci id="S2.I1.i3.p1.2.m2.1.1.2.3.cmml" xref="S2.I1.i3.p1.2.m2.1.1.2.3">𝑇</ci></apply><ci id="S2.I1.i3.p1.2.m2.1.1.3.cmml" xref="S2.I1.i3.p1.2.m2.1.1.3">𝑡</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.I1.i3.p1.2.m2.1c">\mathbf{P}_{T}^{t}</annotation><annotation encoding="application/x-llamapun" id="S2.I1.i3.p1.2.m2.1d">bold_P start_POSTSUBSCRIPT italic_T end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_t end_POSTSUPERSCRIPT</annotation></semantics></math> is minimized</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S2.p7">
+<p class="ltx_p" id="S2.p7.1">The <em class="ltx_emph ltx_font_italic" id="S2.p7.1.1">anticipation</em> is then estimated as <em class="ltx_emph ltx_font_italic" id="S2.p7.1.2">touching_object_time</em>-<em class="ltx_emph ltx_font_italic" id="S2.p7.1.3">gazing_target_time</em> (where target is the object) for reaching movements, and <em class="ltx_emph ltx_font_italic" id="S2.p7.1.4">target_object_time</em>-<em class="ltx_emph ltx_font_italic" id="S2.p7.1.5">gazing_target_time</em> (where target is the final position).</p>
+</div>
+<figure class="ltx_figure" id="S2.F2">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F2.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F2.sf1.g1" src="x1.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.sf1.2.1.1" style="font-size:90%;">(a)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F2.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F2.sf2.g1" src="x2.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.sf2.2.1.1" style="font-size:90%;">(b)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F2.sf3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F2.sf3.g1" src="x3.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.sf3.2.1.1" style="font-size:90%;">(c)</span> </span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F2.5.1.1" style="font-size:90%;">Figure 2</span>: </span><span class="ltx_text" id="S2.F2.6.2" style="font-size:90%;">Reaching the bottle in a <em class="ltx_emph ltx_font_italic" id="S2.F2.6.2.1">transporting action</em>. The vertical lines indicate the <em class="ltx_emph ltx_font_italic" id="S2.F2.6.2.2">gazing_target_time</em> (red) and the <em class="ltx_emph ltx_font_italic" id="S2.F2.6.2.3">touching_object_time</em> (blue). The colour code is the same for the time-lines and the vertical lines.</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S2.F3">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F3.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F3.sf1.g1" src="x4.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F3.sf1.2.1.1" style="font-size:90%;">(a)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F3.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F3.sf2.g1" src="x5.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F3.sf2.2.1.1" style="font-size:90%;">(b)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F3.sf3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F3.sf3.g1" src="x6.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F3.sf3.2.1.1" style="font-size:90%;">(c)</span> </span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F3.3.1.1" style="font-size:90%;">Figure 3</span>: </span><span class="ltx_text" id="S2.F3.4.2" style="font-size:90%;">Reaching the bottle in a <em class="ltx_emph ltx_font_italic" id="S2.F3.4.2.1">touching action</em>.</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S2.F4">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F4.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F4.sf1.g1" src="x7.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F4.sf1.2.1.1" style="font-size:90%;">(a)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F4.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F4.sf2.g1" src="x8.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F4.sf2.2.1.1" style="font-size:90%;">(b)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F4.sf3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F4.sf3.g1" src="x9.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F4.sf3.2.1.1" style="font-size:90%;">(c)</span> </span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F4.3.1.1" style="font-size:90%;">Figure 4</span>: </span><span class="ltx_text" id="S2.F4.4.2" style="font-size:90%;">Reaching the glass in the <em class="ltx_emph ltx_font_italic" id="S2.F4.4.2.1">drinking action</em>. Which is in front of the subject, indeed in <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F4.sf1" title="In Figure 4 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">4(a)</span></a> the cup is in the line of sight of the subject from the very beginning of the action.</span></figcaption>
+</figure>
+<figure class="ltx_figure" id="S2.F5">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F5.sf1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F5.sf1.g1" src="x10.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F5.sf1.2.1.1" style="font-size:90%;">(a)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F5.sf2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F5.sf2.g1" src="x11.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F5.sf2.2.1.1" style="font-size:90%;">(b)</span> </span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure class="ltx_figure ltx_figure_panel" id="S2.F5.sf3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="563" id="S2.F5.sf3.g1" src="x12.png" width="789"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F5.sf3.2.1.1" style="font-size:90%;">(c)</span> </span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S2.F5.3.1.1" style="font-size:90%;">Figure 5</span>: </span><span class="ltx_text" id="S2.F5.4.2" style="font-size:90%;">Moving bottle to the target position in the <em class="ltx_emph ltx_font_italic" id="S2.F5.4.2.1">transporting action</em>. It is very clear how the head goes to look toward that point and the hand follow consequently.</span></figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps" id="S3.1.1">Experimental Section</span>
+</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS1.5.1.1">III-A</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS1.6.2">Dataset</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.13">Stereo-HUM <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib12" title="">12</a>]</cite> is an action classification dataset of 10 actions (drinking, eating crisps, opening and closing a bottle, playing with Rubik’s cube, sanitise hands, touching a bottle, touching Rubik’s cube, transporting a bottle, transporting a pen, transporting Rubik’s cube) we acquired in-house. The full dataset is composed of 320 RGB videos of upper-body actions (a person seated at a table moving objects), each action is performed twice by each of the 16 participant subjects. 
+<br class="ltx_break"/>In this preliminary study, we selected 4 actions with characteristics in line with our needs for the analysis, in particular, the presence of a well-defined target, such as an object during a reaching or a destination of a transport action and the presence of the object in the COCO <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#bib.bib10" title="">10</a>]</cite> classification labels. So we ended up using only four of the ten actions: drinking <em class="ltx_emph ltx_font_italic" id="S3.SS1.p1.4.4">(<span class="ltx_text ltx_font_bold" id="S3.SS1.p1.4.4.1">reaching the glass</span> <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.1.1.m1.1"><semantics id="S3.SS1.p1.1.1.m1.1a"><mo id="S3.SS1.p1.1.1.m1.1.1" stretchy="false" xref="S3.SS1.p1.1.1.m1.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.1.1.m1.1b"><ci id="S3.SS1.p1.1.1.m1.1.1.cmml" xref="S3.SS1.p1.1.1.m1.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.1.1.m1.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.1.1.m1.1d">→</annotation></semantics></math> grasping it <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.2.2.m2.1"><semantics id="S3.SS1.p1.2.2.m2.1a"><mo id="S3.SS1.p1.2.2.m2.1.1" stretchy="false" xref="S3.SS1.p1.2.2.m2.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.2.2.m2.1b"><ci id="S3.SS1.p1.2.2.m2.1.1.cmml" xref="S3.SS1.p1.2.2.m2.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.2.2.m2.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.2.2.m2.1d">→</annotation></semantics></math> transporting the glass to the mouth <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.3.3.m3.1"><semantics id="S3.SS1.p1.3.3.m3.1a"><mo id="S3.SS1.p1.3.3.m3.1.1" stretchy="false" xref="S3.SS1.p1.3.3.m3.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.3.3.m3.1b"><ci id="S3.SS1.p1.3.3.m3.1.1.cmml" xref="S3.SS1.p1.3.3.m3.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.3.3.m3.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.3.3.m3.1d">→</annotation></semantics></math> drinking <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.4.4.m4.1"><semantics id="S3.SS1.p1.4.4.m4.1a"><mo id="S3.SS1.p1.4.4.m4.1.1" stretchy="false" xref="S3.SS1.p1.4.4.m4.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.4.4.m4.1b"><ci id="S3.SS1.p1.4.4.m4.1.1.cmml" xref="S3.SS1.p1.4.4.m4.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.4.4.m4.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.4.4.m4.1d">→</annotation></semantics></math> putting back the glass on the table)</em>, touching the bottle <em class="ltx_emph ltx_font_italic" id="S3.SS1.p1.5.5">(<span class="ltx_text ltx_font_bold" id="S3.SS1.p1.5.5.1">reaching the bottle with the hand</span> <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.5.5.m1.1"><semantics id="S3.SS1.p1.5.5.m1.1a"><mo id="S3.SS1.p1.5.5.m1.1.1" stretchy="false" xref="S3.SS1.p1.5.5.m1.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.5.5.m1.1b"><ci id="S3.SS1.p1.5.5.m1.1.1.cmml" xref="S3.SS1.p1.5.5.m1.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.5.5.m1.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.5.5.m1.1d">→</annotation></semantics></math> go back to the original position)</em>, transporting the bottle <em class="ltx_emph ltx_font_italic" id="S3.SS1.p1.8.8">(<span class="ltx_text ltx_font_bold" id="S3.SS1.p1.8.8.1">reaching the bottle</span> <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.6.6.m1.1"><semantics id="S3.SS1.p1.6.6.m1.1a"><mo id="S3.SS1.p1.6.6.m1.1.1" stretchy="false" xref="S3.SS1.p1.6.6.m1.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.6.6.m1.1b"><ci id="S3.SS1.p1.6.6.m1.1.1.cmml" xref="S3.SS1.p1.6.6.m1.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.6.6.m1.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.6.6.m1.1d">→</annotation></semantics></math> grasping it <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.7.7.m2.1"><semantics id="S3.SS1.p1.7.7.m2.1a"><mo id="S3.SS1.p1.7.7.m2.1.1" stretchy="false" xref="S3.SS1.p1.7.7.m2.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.7.7.m2.1b"><ci id="S3.SS1.p1.7.7.m2.1.1.cmml" xref="S3.SS1.p1.7.7.m2.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.7.7.m2.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.7.7.m2.1d">→</annotation></semantics></math> <span class="ltx_text ltx_font_bold" id="S3.SS1.p1.8.8.2">moving it to the target position</span> <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.8.8.m3.1"><semantics id="S3.SS1.p1.8.8.m3.1a"><mo id="S3.SS1.p1.8.8.m3.1.1" stretchy="false" xref="S3.SS1.p1.8.8.m3.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.8.8.m3.1b"><ci id="S3.SS1.p1.8.8.m3.1.1.cmml" xref="S3.SS1.p1.8.8.m3.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.8.8.m3.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.8.8.m3.1d">→</annotation></semantics></math> release it and go back to the original position)</em> and opening-closing a bottle <em class="ltx_emph ltx_font_italic" id="S3.SS1.p1.13.13">(<span class="ltx_text ltx_font_bold" id="S3.SS1.p1.13.13.1">reaching the bottle</span> <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.9.9.m1.1"><semantics id="S3.SS1.p1.9.9.m1.1a"><mo id="S3.SS1.p1.9.9.m1.1.1" stretchy="false" xref="S3.SS1.p1.9.9.m1.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.9.9.m1.1b"><ci id="S3.SS1.p1.9.9.m1.1.1.cmml" xref="S3.SS1.p1.9.9.m1.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.9.9.m1.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.9.9.m1.1d">→</annotation></semantics></math> bringing the bottle closer to the person <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.10.10.m2.1"><semantics id="S3.SS1.p1.10.10.m2.1a"><mo id="S3.SS1.p1.10.10.m2.1.1" stretchy="false" xref="S3.SS1.p1.10.10.m2.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.10.10.m2.1b"><ci id="S3.SS1.p1.10.10.m2.1.1.cmml" xref="S3.SS1.p1.10.10.m2.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.10.10.m2.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.10.10.m2.1d">→</annotation></semantics></math> opening the bottle <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.11.11.m3.1"><semantics id="S3.SS1.p1.11.11.m3.1a"><mo id="S3.SS1.p1.11.11.m3.1.1" stretchy="false" xref="S3.SS1.p1.11.11.m3.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.11.11.m3.1b"><ci id="S3.SS1.p1.11.11.m3.1.1.cmml" xref="S3.SS1.p1.11.11.m3.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.11.11.m3.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.11.11.m3.1d">→</annotation></semantics></math> closing the bottle <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.12.12.m4.1"><semantics id="S3.SS1.p1.12.12.m4.1a"><mo id="S3.SS1.p1.12.12.m4.1.1" stretchy="false" xref="S3.SS1.p1.12.12.m4.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.12.12.m4.1b"><ci id="S3.SS1.p1.12.12.m4.1.1.cmml" xref="S3.SS1.p1.12.12.m4.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.12.12.m4.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.12.12.m4.1d">→</annotation></semantics></math> put it back to the original position on the table and release it <math alttext="\rightarrow" class="ltx_Math" display="inline" id="S3.SS1.p1.13.13.m5.1"><semantics id="S3.SS1.p1.13.13.m5.1a"><mo id="S3.SS1.p1.13.13.m5.1.1" stretchy="false" xref="S3.SS1.p1.13.13.m5.1.1.cmml">→</mo><annotation-xml encoding="MathML-Content" id="S3.SS1.p1.13.13.m5.1b"><ci id="S3.SS1.p1.13.13.m5.1.1.cmml" xref="S3.SS1.p1.13.13.m5.1.1">→</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS1.p1.13.13.m5.1c">\rightarrow</annotation><annotation encoding="application/x-llamapun" id="S3.SS1.p1.13.13.m5.1d">→</annotation></semantics></math> put back the hand in the original position)</em>. Among the action phases, we highlighted in bold the ones we considered in our analysis.
+The set of actions used contains 128 videos in total, each single-action set contains 32 videos.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS2.5.1.1">III-B</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS2.6.2">Experiments</span>
+</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">We present our experimental findings in two formats: first, a table detailing the anticipation times in seconds for each action type, averaged across all dataset examples; second, graphs that qualitatively illustrate the timing of gaze reaching the target relative to hand movement for selected actions.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.1">Table <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S3.T1" title="TABLE I ‣ III-B Experiments ‣ III Experimental Section ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">I</span></a> provides the average estimated <em class="ltx_emph ltx_font_italic" id="S3.SS2.p2.1.1">anticipation</em> times. Negative values indicate that the head’s projected position on the table reaches the target (either an object or a final position) before the hand does. All reported anticipation estimates are negative, indicating that the head consistently orients towards the target direction before the hand reaches the target position, which signifies the specific goal of the action.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<p class="ltx_p" id="S3.SS2.p3.1">The average anticipation is 15 frames, corresponding to 0.5 seconds since the videos have been acquired at 30fps.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p4">
+<p class="ltx_p" id="S3.SS2.p4.1">We present several results in Figures <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F2" title="Figure 2 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">2</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F3" title="Figure 3 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">3</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F4" title="Figure 4 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">4</span></a>, and <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F5" title="Figure 5 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">5</span></a>, which illustrate the distances from the target for both gaze (in red) and hand (in blue). The vertical dashed lines indicate the minimum distance values used for computations: <em class="ltx_emph ltx_font_italic" id="S3.SS2.p4.1.1">gazing_target_time</em>, <em class="ltx_emph ltx_font_italic" id="S3.SS2.p4.1.2">touching_object_time</em> and <em class="ltx_emph ltx_font_italic" id="S3.SS2.p4.1.3">target_object_time</em>. This minimum is not the absolute minimum of the sequence but the first minimum within a specified time window, calculated to encompass the initial part of the motion, where the focus is on <span class="ltx_text ltx_font_italic" id="S3.SS2.p4.1.4">reaching</span>, and a subsequent part, where the focus is on <span class="ltx_text ltx_font_italic" id="S3.SS2.p4.1.5">moving the object to the target position</span>.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p5">
+<p class="ltx_p" id="S3.SS2.p5.1">Notably, the anticipation of the reaching target is consistent across different underlying actions or long-term goals. However, the amount of anticipation also depends on the object’s position on the working table and its distance from the hand. In our scenario, when an object is positioned on one side of the table, such as the bottle in Figures <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1" title="Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F2" title="Figure 2 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">2</span></a>, and <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F3" title="Figure 3 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">3</span></a>, the anticipation is pronounced and clearly observable. This is due to the relative positions of the hand, head, and target, which facilitate this observation. Conversely, when the object is directly in front of the person, such as the cup or glass, the anticipation is less evident because the head tends to remain in a neutral position, already close to the target. This is demonstrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F4.sf1" title="In Figure 4 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">4(a)</span></a>, where the minimum gaze-target distance occurs at the very beginning of the recording.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p6">
+<p class="ltx_p" id="S3.SS2.p6.1">In the transport experiment depicted in Figures <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf4" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(d)</span></a>, <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf5" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(e)</span></a> and <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F1.sf6" title="In Figure 1 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">1(f)</span></a> the measured anticipation focuses on the object’s final position or the action’s ultimate goal. This is clearly illustrated in the plots of Figure <a class="ltx_ref" href="https://arxiv.org/html/2408.05516v1#S2.F5" title="Figure 5 ‣ II Method ‣ Anticipation through Head Pose Estimation: a preliminary study"><span class="ltx_text ltx_ref_tag">5</span></a> where it can be observed that the hand consistently follows the head. Across all three examples shown, the degree of anticipation is remarkably similar.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T1.2">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T1.2.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S3.T1.2.1.1.1">original action</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.2.1.1.2">measured quantity</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.2.1.1.3">mean [s]</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.2.1.1.4">std [s]</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.2.1.1.5">median [s]</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.2.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S3.T1.2.2.1.1">transport bottle</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.2.1.2">reach bottle</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.2.1.3">-0.51</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.2.1.4">0.35</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.2.2.1.5">-0.43</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.2.3.2.1">touch bottle</th>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.2">reach bottle</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.3">-0.64</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.4">0.34</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.5">-0.63</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.4.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.2.4.3.1">open-close bottle</th>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.2">reach bottle</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.3">-0.54</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.4">0.35</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.5">-0.50</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.5.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.2.5.4.1">drinking</th>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.2">reach glass</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.3">-0.49</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.4">0.85</td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.5">-0.77</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.6.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_t" id="S3.T1.2.6.5.1">transport bottle</th>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S3.T1.2.6.5.2">object to target</td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S3.T1.2.6.5.3">-0.70</td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S3.T1.2.6.5.4">0.52</td>
+<td class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S3.T1.2.6.5.5">-0.78</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T1.3.1.1" style="font-size:90%;">TABLE I</span>: </span><span class="ltx_text" id="S3.T1.4.2" style="font-size:90%;">Anticipation in seconds using the head-pose projection with respect to the hand movement. The first column exposes the action class recorded in the dataset, whereas the second column shows the measured quantity for this assessment. The measures are in seconds (the minus is to indicate anticipation of the head with respect to the hand).</span></figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.1.1">Conclusion</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">We presented a preliminary experiment to show that visual cues derived from the head direction can be profitably used to efficiently anticipate the action’s goal of reaching and transporting movements in controlled interaction scenarios.
+This analysis lays the foundation for further exploration and development of a predictive model that could be integrated into a robotic system to enhance its social interaction abilities and its understanding of nonverbal information. In group-robot interaction, for instance, the robot might benefit from the proposed analysis for
+predicting to whom a person will pass the object in a group, or how the focus of attention of the group members evolves over time. In this sense, it is worth noticing that our method can also work online by design.
+<br class="ltx_break"/>Our current investigation aims at a more comprehensive assessment of the method.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx1">
+<h2 class="ltx_title ltx_font_smallcaps ltx_title_section">Acknowledgments</h2>
+<div class="ltx_para" id="Sx1.p1">
+<p class="ltx_p" id="Sx1.p1.1">This work has been carried out at the Machine Learning Genoa (MaLGa) center, Universitá di Genova (IT). It has been
+funded by the European Union—NextGenerationEU and by the Ministry of University and Research (MUR), National Recovery and Resilience Plan (NRRP), project “RAISE—Robotics and AI for Socio-economic Empowerment” (ECS00000035).</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cantarini et al. [2022]</span>
+<span class="ltx_bibblock">
+Giorgio Cantarini, Federico Figari Tomenotti, Nicoletta Noceti, and Francesca Odone.
+
+</span>
+<span class="ltx_bibblock">Hhp-net: A light heteroscedastic neural network for head pose estimation with uncertainty.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib1.1.1">Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</em>, pages 3521–3530, January 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Das et al. [2015]</span>
+<span class="ltx_bibblock">
+Dipankar Das, Md. Golam Rashed, Yoshinori Kobayashi, and Yoshinori Kuno.
+
+</span>
+<span class="ltx_bibblock">Supporting human–robot interaction based on the level of visual focus of attention.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib2.1.1">IEEE Transactions on Human-Machine Systems</em>, 45(6):664–675, 2015.
+
+</span>
+<span class="ltx_bibblock">doi: <span class="ltx_ref ltx_nolink ltx_Url ltx_ref_self">10.1109/THMS.2015.2445856</span>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Duarte et al. [2018]</span>
+<span class="ltx_bibblock">
+Nuno Ferreira Duarte, Mirko Raković, Jovica Tasevski, Moreno Ignazio Coco, Aude Billard, and José Santos-Victor.
+
+</span>
+<span class="ltx_bibblock">Action anticipation: Reading the intentions of humans and robots.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib3.1.1">IEEE Robotics and Automation Letters</em>, 3(4):4132–4139, 2018.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Furnari and Farinella [2023]</span>
+<span class="ltx_bibblock">
+Antonino Furnari and Giovanni Maria Farinella.
+
+</span>
+<span class="ltx_bibblock">Streaming egocentric action anticipation: An evaluation scheme and approach.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib4.1.1">Computer Vision and Image Understanding</em>, 234:103763, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Gao et al. [2017]</span>
+<span class="ltx_bibblock">
+Jiyang Gao, Zhenheng Yang, and Ram Nevatia.
+
+</span>
+<span class="ltx_bibblock">RED: reinforced encoder-decoder networks for action anticipation.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib5.1.1">British Machine Vision Conference 2017, BMVC 2017, London, UK, September 4-7, 2017</em>. BMVA Press, 2017.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Girdhar and Grauman [2021]</span>
+<span class="ltx_bibblock">
+Rohit Girdhar and Kristen Grauman.
+
+</span>
+<span class="ltx_bibblock">Anticipative video transformer.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">Proceedings of the IEEE/CVF international conference on computer vision</em>, pages 13505–13515, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Gong et al. [2022]</span>
+<span class="ltx_bibblock">
+Dayoung Gong, Joonseok Lee, Manjin Kim, Seong Jong Ha, and Minsu Cho.
+
+</span>
+<span class="ltx_bibblock">Future transformer for long-term action anticipation.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib7.1.1">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, pages 3052–3061, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Huang and Mutlu [2016]</span>
+<span class="ltx_bibblock">
+Chien-Ming Huang and Bilge Mutlu.
+
+</span>
+<span class="ltx_bibblock">Anticipatory robot control for efficient human-robot collaboration.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib8.1.1">2016 11th ACM/IEEE international conference on human-robot interaction (HRI)</em>, pages 83–90. IEEE, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kunde et al. [2007]</span>
+<span class="ltx_bibblock">
+Wilfried Kunde, Katrin Elsner, and Andrea Kiesel.
+
+</span>
+<span class="ltx_bibblock">No anticipation–no action: the role of anticipation in action and perception.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib9.1.1">Cognitive processing</em>, 8(2):71–78, 2007.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lin et al. [2014]</span>
+<span class="ltx_bibblock">
+Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C Lawrence Zitnick.
+
+</span>
+<span class="ltx_bibblock">Microsoft coco: Common objects in context.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib10.1.1">Computer Vision–ECCV 2014: 13th European Conference, Zurich, Switzerland, September 6-12, 2014, Proceedings, Part V 13</em>, pages 740–755. Springer, 2014.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Möller et al. [2015]</span>
+<span class="ltx_bibblock">
+Corina Möller, Hubert D Zimmer, and Gisa Aschersleben.
+
+</span>
+<span class="ltx_bibblock">Effects of short-term experience on anticipatory eye movements during action observation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib11.1.1">Experimental Brain Research</em>, 233:69–77, 2015.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Nicora et al. [2023]</span>
+<span class="ltx_bibblock">
+Elena Nicora, Vito Paolo Pastore, and Nicoletta Noceti.
+
+</span>
+<span class="ltx_bibblock">Gck-maps: A scene unbiased representation for efficient human action recognition.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib12.1.1">International Conference on Image Analysis and Processing</em>, pages 62–73. Springer, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Pezzulo and Ognibene [2012]</span>
+<span class="ltx_bibblock">
+Giovanni Pezzulo and Dimitri Ognibene.
+
+</span>
+<span class="ltx_bibblock">Proactive action preparation: Seeing action preparation as a continuous and proactive process.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib13.1.1">Motor control</em>, 16(3):386–424, 2012.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Redmon et al. [2016]</span>
+<span class="ltx_bibblock">
+Joseph Redmon, Santosh Divvala, Ross Girshick, and Ali Farhadi.
+
+</span>
+<span class="ltx_bibblock">You only look once: Unified, real-time object detection.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib14.1.1">Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, June 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Roy and Fernando [2021]</span>
+<span class="ltx_bibblock">
+Debaditya Roy and Basura Fernando.
+
+</span>
+<span class="ltx_bibblock">Action anticipation using pairwise human-object interactions and transformers.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib15.1.1">IEEE Transactions on Image Processing</em>, 30:8116–8129, 2021.
+
+</span>
+<span class="ltx_bibblock">doi: <span class="ltx_ref ltx_nolink ltx_Url ltx_ref_self">10.1109/TIP.2021.3113114</span>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tomenotti et al. [2024]</span>
+<span class="ltx_bibblock">
+Federico Figari Tomenotti, Nicoletta Noceti, and Francesca Odone.
+
+</span>
+<span class="ltx_bibblock">Head pose estimation with uncertainty and an application to dyadic interaction detection.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib16.1.1">Comput. Vis. Image Underst.</em>, 243:103999, 2024.
+
+</span>
+<span class="ltx_bibblock">URL <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://doi.org/10.1016/j.cviu.2024.103999" title="">https://doi.org/10.1016/j.cviu.2024.103999</a>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Vondrick et al. [2016]</span>
+<span class="ltx_bibblock">
+Carl Vondrick, Hamed Pirsiavash, and Antonio Torralba.
+
+</span>
+<span class="ltx_bibblock">Anticipating visual representations from unlabeled video.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib17.1.1">Proceedings of the IEEE conference on computer vision and pattern recognition</em>, pages 98–106, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. [2023]</span>
+<span class="ltx_bibblock">
+Jiahao Wang, Guo Chen, Yifei Huang, Limin Wang, and Tong Lu.
+
+</span>
+<span class="ltx_bibblock">Memory-and-anticipation transformer for online action understanding.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib18.1.1">Proceedings of the IEEE/CVF International Conference on Computer Vision</em>, pages 13824–13835, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zatsarynna and Gall [2023]</span>
+<span class="ltx_bibblock">
+Olga Zatsarynna and Juergen Gall.
+
+</span>
+<span class="ltx_bibblock">Action anticipation with goal consistency.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib19.1.1">2023 IEEE International Conference on Image Processing (ICIP)</em>, pages 1630–1634. IEEE, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2024]</span>
+<span class="ltx_bibblock">
+Ce Zhang, Changcheng Fu, Shijie Wang, Nakul Agarwal, Kwonjoon Lee, Chiho Choi, and Chen Sun.
+
+</span>
+<span class="ltx_bibblock">Object-centric video representation for long-term action anticipation.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib20.1.1">Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision</em>, pages 6751–6761, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhou et al. [2019]</span>
+<span class="ltx_bibblock">
+Xingyi Zhou, Dequan Wang, and Philipp Krähenbühl.
+
+</span>
+<span class="ltx_bibblock">Objects as points.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib21.1.1">arXiv preprint arXiv:1904.07850</em>, 2019.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sat Aug 10 10:52:55 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

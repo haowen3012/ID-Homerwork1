@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information</title>
+<!--Generated on Mon Jun  3 10:50:18 2024 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2406.01196v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S1" title="In 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S2" title="In 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Works</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3" title="In 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Methods</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.SS1" title="In 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Semantic Graph Attention Encoder</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.SS2" title="In 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Body Part Decoder</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.SS3" title="In 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Distance Information</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.SS4" title="In 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Loss Function</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4" title="In 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4.SS1" title="In 4 Experiments ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Datasets and Evaluation</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subparagraph"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4.SS1.SSS0.P0.SPx1" title="In 4.1 Datasets and Evaluation ‣ 4 Experiments ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title">Datasets.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subparagraph"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4.SS1.SSS0.P0.SPx2" title="In 4.1 Datasets and Evaluation ‣ 4 Experiments ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title">Evaluation.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4.SS2" title="In 4 Experiments ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Implementation Details</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4.SS3" title="In 4 Experiments ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Ablation Studies</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4.SS4" title="In 4 Experiments ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.4 </span>Comparison to the State-of-the-Art Methods</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S5" title="In 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<div class="ltx_para" id="p1">
+<p class="ltx_p" id="p1.1">(wacv)                Package wacv Warning: Package ‘hyperref’ is not loaded, but highly recommended for camera-ready version</p>
+</div>
+<h1 class="ltx_title ltx_title_document">3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Sihan Wen<sup class="ltx_sup" id="id1.1.id1">*</sup>  Xiantan Zhu  Zhiming Tan
+<br class="ltx_break"/>Fujitsu R&amp;D Center Co., Ltd.
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="id2.2.id2" style="font-size:90%;">{wensihan, zhuxiantan, zhmtan}@fujitsu.com</span>
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id3.id1">In recent years, a plethora of diverse methods have been proposed for 3D pose estimation. Among these, self-attention mechanisms and graph convolutions have both been proven to be effective and practical methods. Recognizing the strengths of those two techniques, we have developed a novel Semantic Graph Attention Network which can benefit from the ability of self-attention to capture global context, while also utilizing the graph convolutions to handle the local connectivity and structural constraints of the skeleton. We also design a Body Part Decoder that assists in extracting and refining the information related to specific segments of the body. Furthermore, our approach incorporates Distance Information, enhancing our model’s capability to comprehend and accurately predict spatial relationships. Finally, we introduce a Geometry Loss who makes a critical constraint on the structural skeleton of the body, ensuring that the model’s predictions adhere to the natural limits of human posture. The experimental results validate the effectiveness of our approach, demonstrating that every element within the system is essential for improving pose estimation outcomes. With comparison to state-of-the-art, the proposed work not only meets but exceeds the existing benchmarks.</p>
+</div>
+<figure class="ltx_figure" id="S0.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="108" id="S0.F1.1.g1" src="extracted/5639786/pic/frame.png" width="479"/>
+<figcaption class="ltx_caption ltx_centering" style="font-size:80%;"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S0.F1.5.1.1" style="font-size:113%;">Figure 1</span>: </span><span class="ltx_text" id="S0.F1.6.2" style="font-size:113%;">Overview of proposed method.</span></figcaption>
+</figure>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">3D human pose estimation is a critical task in computer vision that involves identifying and locating key points of the human body within images or video frames. This capability is essential for a wide range of applications, including analyzing human behavior, understanding intentions, and studying how individuals interact and communicate with their physical environment. Accurate pose estimation can provide insights into activities of daily living, sports analysis, virtual and augmented reality, and human-computer interaction.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Currently, two primary directions are emerged for 3D pose estimation. The first approach directly estimates the 3D body pose from a single RGB image, utilizing advanced deep learning techniques and models such as <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib26" title="">26</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib20" title="">20</a>]</cite>. The second approach employs a two-stage process, where 2D keypoint estimation is followed by a lift from the 2D human pose to a 3D space, as demonstrated in works like <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib18" title="">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib30" title="">30</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Since 2D pose estimators are already optimized for speed and accuracy <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib27" title="">27</a>]</cite>, focusing on 2D to 3D lifting process based on 2D pose estimation achievements can significantly reduce development time and computational overhead. SimpleBaseline<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib18" title="">18</a>]</cite> provide an initial straightforward approach for pose lifting employed a multi-layer perceptron, which remarkably achieved high precision despite the absence of image feature data. However, subsequent research has pointed out that considering pose as a mere vector overlooks the spatial interconnections between the body’s joints. Then, the Graph Convolutional Networks (GCNs)<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib31" title="">31</a>]</cite> was proposed to directly deal with a general class of graphs. Among those GCNs methods, semantic graph convolutions networks (SemGCN) does not rely on hand-crafted constraints to analyze the patterns for a specific application, and significantly improves the power of graph convolutions. On the other side, transformer-based <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib14" title="">14</a>]</cite> approaches that use the more generalized self-attention mechanism to learn these relationships within a sequence of tokens representing joints shows a considerable success.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Therefore, we propose a novel network called Semantic Graph Attention Network (SemGAN), which combines SemGCN and Self-attention together to obtain the global features from Self-attention and local features based on the prior information from graph.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">Another critical issue for many lifting methods in the field of 3D human pose estimation is that they rely on datasets that focused on specific parts of the body: datasets for the body joints such as <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib9" title="">9</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib12" title="">12</a>]</cite>, facial landmarks like <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib10" title="">10</a>]</cite>, and hand poses including <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib5" title="">5</a>]</cite>, leading to complex training pipelines and heterogeneous evaluations. The introduction of Human3.6M 3D WholeBody (H3WB) dataset has significantly addressed the limitations of previous datasets by providing comprehensive 3D annotations of the whole-body including body, face, hands. Our work is conducted on the H3WB dataset, aiming to harness its rich and detailed 3D annotations to achieve outstanding performance in the field of 3D human pose estimation.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">Our contributions can be summarized as follows:</p>
+<ul class="ltx_itemize" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">We embed the SemGCN into Self-Attention method to construct a SemGAN, which helps to obtain the local and non-local features among 133 joints.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">We segment the whole-body joints into three individual parts: body, face, and hands, which allows us to effectively leverage the neighboring joints with high correlation coefficients.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">We add the distance information between each joint and its parent joint to better understand the relative positions of body parts, and apply a geometry loss for training process, including the normal loss and bone loss.</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S1.I1.i4.p1">
+<p class="ltx_p" id="S1.I1.i4.p1.1">We achieve the first place on H3WB benchmark, exceeding the second place by 15.44 in Mean Per Joint Position Error (MPJPE) measurement.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Works</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p" id="S2.p1.1"><span class="ltx_text ltx_font_bold" id="S2.p1.1.1">Attention Transformer</span>
+Attention Mechanisms initially emerged in computer vision, with pivotal work in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib22" title="">22</a>]</cite> demonstrating how models could focus on relevant parts of the input data. The adoption of attention in NLP by Bahdanau et al.<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib1" title="">1</a>]</cite> marked a turning point, offering a new paradigm for sequence-to-sequence tasks. The Transformer model, introduced in the seminal paper by Vaswani et al.<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib29" title="">29</a>]</cite>, has become a cornerstone in modern deep learning. Its encoder-decoder structure, multi-head attention, and positional encoding have set a new standard for handling sequential data without the constraints of traditional RNNs and CNNs. The impact and development of Transformer models have been profound, with models like BERT and GPT showcasing their versatility and effectiveness in a myriad of NLP tasks. In computer vision, the adaptation of Transformers has given rise to architectures such as the Vision Transformer, which has demonstrated competitive performance in image classification and pose estimation. For example, <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib17" title="">17</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib14" title="">14</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib36" title="">36</a>]</cite> all achieve an impressive results on 3D pose estimation based on the attention mechanisms.</p>
+</div>
+<div class="ltx_para" id="S2.p2">
+<p class="ltx_p" id="S2.p2.1"><span class="ltx_text ltx_font_bold" id="S2.p2.1.1">Semantic Graph Convolutions</span>
+Graph Convolutional Networks (GCNs) have emerged as a powerful tool for processing graph-structured data, with applications ranging from social network analysis to molecule modeling. However, traditional GCNs<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib33" title="">33</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib13" title="">13</a>]</cite> suffer from limited expressiveness due to their reliance on fixed neighborhood aggregations and shared transformation matrices across all nodes. To address these limitations, researchers have proposed SemGCN<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib35" title="">35</a>]</cite>, which learn to capture implicit semantic information such as local and global node relations, enhancing the capability of GCNs. Additionally, self-supervised learning has been integrated into GCNs to align node features from different perspectives, further improving performance on classification or regression.</p>
+</div>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Methods</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">In this section, we describe the proposed architecture for 3D whole-body estimation, as shown in <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S0.F1" title="In 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">1</span></a>. Based on the procedure of JointFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib17" title="">17</a>]</cite>, we first feed the 2D joints into Joint Embedding layer to get a higher dimension features, then design a novel Semantic Graph Attention Encoder and Body Part Decoder model to better estimate the 3D whole-body pose.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Semantic Graph Attention Encoder</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">Self-attention mechanisms can capture a comprehensive representation of the global content by computing attention scores across the entire features. And, SemGCN by learning input-independent weights for edges which represent priors implied in the graph structures, can extract a richer set of local information. Considering the notable strengths of these two models, we craft a Semantic Graph Attention Encoder model through the combination of this two networks.</p>
+</div>
+<figure class="ltx_figure" id="S3.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="126" id="S3.F2.1.g1" src="extracted/5639786/pic/encoder.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering" style="font-size:80%;"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F2.5.1.1" style="font-size:113%;">Figure 2</span>: </span><span class="ltx_text" id="S3.F2.6.2" style="font-size:113%;">Semantic Graph Attention Encoder.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">The pipeline of Semantic Graph Attention Encoder is designed as <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.F2" title="In 3.1 Semantic Graph Attention Encoder ‣ 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">2</span></a>, consists of four layers of SemGAN. We embed the SemGCN in the last layer of self-attention which helps to maintain the global information from self-attention and equip with local information from SemGCN.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Body Part Decoder</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">Due to the mass and density of keypoints present in the human face and hands, we separate the features into there individual parts in decoder, which can better leverage the neighboring joints with high correlation coefficients within each part.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="261" id="S3.F3.1.g1" src="extracted/5639786/pic/decoder.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering" style="font-size:80%;"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text" id="S3.F3.5.1.1" style="font-size:113%;">Figure 3</span>: </span><span class="ltx_text" id="S3.F3.6.2" style="font-size:113%;">Body Part Decoder. B stands for batch size, 133 is the number joints of whole-body, 256 is the dims of feature, 23 is number joints of body, 68 is number joints of face, 42 is number joints of hands.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.1">The framework of Body Part Decoder is designed as <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.F3" title="In 3.2 Body Part Decoder ‣ 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_tag">Fig.</span> <span class="ltx_text ltx_ref_tag">3</span></a>. We use the self-attention network by twice in decoder to capture more correlated features within different body part. And endorse the SemGCN at the last layer instead of traditional linear which helps to get accurate location with assistance information from adjacency.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Distance Information</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">To explore the spatial relationships inherent in skeletal structures, we provide a data process method to obtain the distance between every joint and its parent. With this additional information a deeper sense of spatial orientation and relative positioning can be developed.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.8">The inputs and distance is defined as:</p>
+<table class="ltx_equationgroup ltx_eqn_gather ltx_eqn_table" id="S5.EGx1">
+<tbody id="S3.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\displaystyle X_{i}=\left(J_{i},D_{i}\right)" class="ltx_Math" display="block" id="S3.E1.m1.2"><semantics id="S3.E1.m1.2a"><mrow id="S3.E1.m1.2.2" xref="S3.E1.m1.2.2.cmml"><msub id="S3.E1.m1.2.2.4" xref="S3.E1.m1.2.2.4.cmml"><mi id="S3.E1.m1.2.2.4.2" xref="S3.E1.m1.2.2.4.2.cmml">X</mi><mi id="S3.E1.m1.2.2.4.3" xref="S3.E1.m1.2.2.4.3.cmml">i</mi></msub><mo id="S3.E1.m1.2.2.3" xref="S3.E1.m1.2.2.3.cmml">=</mo><mrow id="S3.E1.m1.2.2.2.2" xref="S3.E1.m1.2.2.2.3.cmml"><mo id="S3.E1.m1.2.2.2.2.3" xref="S3.E1.m1.2.2.2.3.cmml">(</mo><msub id="S3.E1.m1.1.1.1.1.1" xref="S3.E1.m1.1.1.1.1.1.cmml"><mi id="S3.E1.m1.1.1.1.1.1.2" xref="S3.E1.m1.1.1.1.1.1.2.cmml">J</mi><mi id="S3.E1.m1.1.1.1.1.1.3" xref="S3.E1.m1.1.1.1.1.1.3.cmml">i</mi></msub><mo id="S3.E1.m1.2.2.2.2.4" xref="S3.E1.m1.2.2.2.3.cmml">,</mo><msub id="S3.E1.m1.2.2.2.2.2" xref="S3.E1.m1.2.2.2.2.2.cmml"><mi id="S3.E1.m1.2.2.2.2.2.2" xref="S3.E1.m1.2.2.2.2.2.2.cmml">D</mi><mi id="S3.E1.m1.2.2.2.2.2.3" xref="S3.E1.m1.2.2.2.2.2.3.cmml">i</mi></msub><mo id="S3.E1.m1.2.2.2.2.5" xref="S3.E1.m1.2.2.2.3.cmml">)</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E1.m1.2b"><apply id="S3.E1.m1.2.2.cmml" xref="S3.E1.m1.2.2"><eq id="S3.E1.m1.2.2.3.cmml" xref="S3.E1.m1.2.2.3"></eq><apply id="S3.E1.m1.2.2.4.cmml" xref="S3.E1.m1.2.2.4"><csymbol cd="ambiguous" id="S3.E1.m1.2.2.4.1.cmml" xref="S3.E1.m1.2.2.4">subscript</csymbol><ci id="S3.E1.m1.2.2.4.2.cmml" xref="S3.E1.m1.2.2.4.2">𝑋</ci><ci id="S3.E1.m1.2.2.4.3.cmml" xref="S3.E1.m1.2.2.4.3">𝑖</ci></apply><interval closure="open" id="S3.E1.m1.2.2.2.3.cmml" xref="S3.E1.m1.2.2.2.2"><apply id="S3.E1.m1.1.1.1.1.1.cmml" xref="S3.E1.m1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E1.m1.1.1.1.1.1.1.cmml" xref="S3.E1.m1.1.1.1.1.1">subscript</csymbol><ci id="S3.E1.m1.1.1.1.1.1.2.cmml" xref="S3.E1.m1.1.1.1.1.1.2">𝐽</ci><ci id="S3.E1.m1.1.1.1.1.1.3.cmml" xref="S3.E1.m1.1.1.1.1.1.3">𝑖</ci></apply><apply id="S3.E1.m1.2.2.2.2.2.cmml" xref="S3.E1.m1.2.2.2.2.2"><csymbol cd="ambiguous" id="S3.E1.m1.2.2.2.2.2.1.cmml" xref="S3.E1.m1.2.2.2.2.2">subscript</csymbol><ci id="S3.E1.m1.2.2.2.2.2.2.cmml" xref="S3.E1.m1.2.2.2.2.2.2">𝐷</ci><ci id="S3.E1.m1.2.2.2.2.2.3.cmml" xref="S3.E1.m1.2.2.2.2.2.3">𝑖</ci></apply></interval></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E1.m1.2c">\displaystyle X_{i}=\left(J_{i},D_{i}\right)</annotation><annotation encoding="application/x-llamapun" id="S3.E1.m1.2d">italic_X start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT = ( italic_J start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT , italic_D start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+<tbody id="S3.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\displaystyle D_{i}=\|\bm{J}_{i}-\bm{J}_{\tilde{i}}\|" class="ltx_Math" display="block" id="S3.E2.m1.1"><semantics id="S3.E2.m1.1a"><mrow id="S3.E2.m1.1.1" xref="S3.E2.m1.1.1.cmml"><msub id="S3.E2.m1.1.1.3" xref="S3.E2.m1.1.1.3.cmml"><mi id="S3.E2.m1.1.1.3.2" xref="S3.E2.m1.1.1.3.2.cmml">D</mi><mi id="S3.E2.m1.1.1.3.3" xref="S3.E2.m1.1.1.3.3.cmml">i</mi></msub><mo id="S3.E2.m1.1.1.2" xref="S3.E2.m1.1.1.2.cmml">=</mo><mrow id="S3.E2.m1.1.1.1.1" xref="S3.E2.m1.1.1.1.2.cmml"><mo id="S3.E2.m1.1.1.1.1.2" stretchy="false" xref="S3.E2.m1.1.1.1.2.1.cmml">‖</mo><mrow id="S3.E2.m1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.cmml"><msub id="S3.E2.m1.1.1.1.1.1.2" xref="S3.E2.m1.1.1.1.1.1.2.cmml"><mi id="S3.E2.m1.1.1.1.1.1.2.2" xref="S3.E2.m1.1.1.1.1.1.2.2.cmml">𝑱</mi><mi id="S3.E2.m1.1.1.1.1.1.2.3" xref="S3.E2.m1.1.1.1.1.1.2.3.cmml">i</mi></msub><mo id="S3.E2.m1.1.1.1.1.1.1" xref="S3.E2.m1.1.1.1.1.1.1.cmml">−</mo><msub id="S3.E2.m1.1.1.1.1.1.3" xref="S3.E2.m1.1.1.1.1.1.3.cmml"><mi id="S3.E2.m1.1.1.1.1.1.3.2" xref="S3.E2.m1.1.1.1.1.1.3.2.cmml">𝑱</mi><mover accent="true" id="S3.E2.m1.1.1.1.1.1.3.3" xref="S3.E2.m1.1.1.1.1.1.3.3.cmml"><mi id="S3.E2.m1.1.1.1.1.1.3.3.2" xref="S3.E2.m1.1.1.1.1.1.3.3.2.cmml">i</mi><mo id="S3.E2.m1.1.1.1.1.1.3.3.1" xref="S3.E2.m1.1.1.1.1.1.3.3.1.cmml">~</mo></mover></msub></mrow><mo id="S3.E2.m1.1.1.1.1.3" stretchy="false" xref="S3.E2.m1.1.1.1.2.1.cmml">‖</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E2.m1.1b"><apply id="S3.E2.m1.1.1.cmml" xref="S3.E2.m1.1.1"><eq id="S3.E2.m1.1.1.2.cmml" xref="S3.E2.m1.1.1.2"></eq><apply id="S3.E2.m1.1.1.3.cmml" xref="S3.E2.m1.1.1.3"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.3.1.cmml" xref="S3.E2.m1.1.1.3">subscript</csymbol><ci id="S3.E2.m1.1.1.3.2.cmml" xref="S3.E2.m1.1.1.3.2">𝐷</ci><ci id="S3.E2.m1.1.1.3.3.cmml" xref="S3.E2.m1.1.1.3.3">𝑖</ci></apply><apply id="S3.E2.m1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.1"><csymbol cd="latexml" id="S3.E2.m1.1.1.1.2.1.cmml" xref="S3.E2.m1.1.1.1.1.2">norm</csymbol><apply id="S3.E2.m1.1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1.1"><minus id="S3.E2.m1.1.1.1.1.1.1.cmml" xref="S3.E2.m1.1.1.1.1.1.1"></minus><apply id="S3.E2.m1.1.1.1.1.1.2.cmml" xref="S3.E2.m1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.2.1.cmml" xref="S3.E2.m1.1.1.1.1.1.2">subscript</csymbol><ci id="S3.E2.m1.1.1.1.1.1.2.2.cmml" xref="S3.E2.m1.1.1.1.1.1.2.2">𝑱</ci><ci id="S3.E2.m1.1.1.1.1.1.2.3.cmml" xref="S3.E2.m1.1.1.1.1.1.2.3">𝑖</ci></apply><apply id="S3.E2.m1.1.1.1.1.1.3.cmml" xref="S3.E2.m1.1.1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E2.m1.1.1.1.1.1.3.1.cmml" xref="S3.E2.m1.1.1.1.1.1.3">subscript</csymbol><ci id="S3.E2.m1.1.1.1.1.1.3.2.cmml" xref="S3.E2.m1.1.1.1.1.1.3.2">𝑱</ci><apply id="S3.E2.m1.1.1.1.1.1.3.3.cmml" xref="S3.E2.m1.1.1.1.1.1.3.3"><ci id="S3.E2.m1.1.1.1.1.1.3.3.1.cmml" xref="S3.E2.m1.1.1.1.1.1.3.3.1">~</ci><ci id="S3.E2.m1.1.1.1.1.1.3.3.2.cmml" xref="S3.E2.m1.1.1.1.1.1.3.3.2">𝑖</ci></apply></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E2.m1.1c">\displaystyle D_{i}=\|\bm{J}_{i}-\bm{J}_{\tilde{i}}\|</annotation><annotation encoding="application/x-llamapun" id="S3.E2.m1.1d">italic_D start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT = ∥ bold_italic_J start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT - bold_italic_J start_POSTSUBSCRIPT over~ start_ARG italic_i end_ARG end_POSTSUBSCRIPT ∥</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS3.p2.7"><math alttext="i=0,1,...,132" class="ltx_Math" display="inline" id="S3.SS3.p2.1.m1.4"><semantics id="S3.SS3.p2.1.m1.4a"><mrow id="S3.SS3.p2.1.m1.4.5" xref="S3.SS3.p2.1.m1.4.5.cmml"><mi id="S3.SS3.p2.1.m1.4.5.2" xref="S3.SS3.p2.1.m1.4.5.2.cmml">i</mi><mo id="S3.SS3.p2.1.m1.4.5.1" xref="S3.SS3.p2.1.m1.4.5.1.cmml">=</mo><mrow id="S3.SS3.p2.1.m1.4.5.3.2" xref="S3.SS3.p2.1.m1.4.5.3.1.cmml"><mn id="S3.SS3.p2.1.m1.1.1" xref="S3.SS3.p2.1.m1.1.1.cmml">0</mn><mo id="S3.SS3.p2.1.m1.4.5.3.2.1" xref="S3.SS3.p2.1.m1.4.5.3.1.cmml">,</mo><mn id="S3.SS3.p2.1.m1.2.2" xref="S3.SS3.p2.1.m1.2.2.cmml">1</mn><mo id="S3.SS3.p2.1.m1.4.5.3.2.2" xref="S3.SS3.p2.1.m1.4.5.3.1.cmml">,</mo><mi id="S3.SS3.p2.1.m1.3.3" mathvariant="normal" xref="S3.SS3.p2.1.m1.3.3.cmml">…</mi><mo id="S3.SS3.p2.1.m1.4.5.3.2.3" xref="S3.SS3.p2.1.m1.4.5.3.1.cmml">,</mo><mn id="S3.SS3.p2.1.m1.4.4" xref="S3.SS3.p2.1.m1.4.4.cmml">132</mn></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.1.m1.4b"><apply id="S3.SS3.p2.1.m1.4.5.cmml" xref="S3.SS3.p2.1.m1.4.5"><eq id="S3.SS3.p2.1.m1.4.5.1.cmml" xref="S3.SS3.p2.1.m1.4.5.1"></eq><ci id="S3.SS3.p2.1.m1.4.5.2.cmml" xref="S3.SS3.p2.1.m1.4.5.2">𝑖</ci><list id="S3.SS3.p2.1.m1.4.5.3.1.cmml" xref="S3.SS3.p2.1.m1.4.5.3.2"><cn id="S3.SS3.p2.1.m1.1.1.cmml" type="integer" xref="S3.SS3.p2.1.m1.1.1">0</cn><cn id="S3.SS3.p2.1.m1.2.2.cmml" type="integer" xref="S3.SS3.p2.1.m1.2.2">1</cn><ci id="S3.SS3.p2.1.m1.3.3.cmml" xref="S3.SS3.p2.1.m1.3.3">…</ci><cn id="S3.SS3.p2.1.m1.4.4.cmml" type="integer" xref="S3.SS3.p2.1.m1.4.4">132</cn></list></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.1.m1.4c">i=0,1,...,132</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.1.m1.4d">italic_i = 0 , 1 , … , 132</annotation></semantics></math>, <math alttext="{\tilde{i}}" class="ltx_Math" display="inline" id="S3.SS3.p2.2.m2.1"><semantics id="S3.SS3.p2.2.m2.1a"><mover accent="true" id="S3.SS3.p2.2.m2.1.1" xref="S3.SS3.p2.2.m2.1.1.cmml"><mi id="S3.SS3.p2.2.m2.1.1.2" xref="S3.SS3.p2.2.m2.1.1.2.cmml">i</mi><mo id="S3.SS3.p2.2.m2.1.1.1" xref="S3.SS3.p2.2.m2.1.1.1.cmml">~</mo></mover><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.2.m2.1b"><apply id="S3.SS3.p2.2.m2.1.1.cmml" xref="S3.SS3.p2.2.m2.1.1"><ci id="S3.SS3.p2.2.m2.1.1.1.cmml" xref="S3.SS3.p2.2.m2.1.1.1">~</ci><ci id="S3.SS3.p2.2.m2.1.1.2.cmml" xref="S3.SS3.p2.2.m2.1.1.2">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.2.m2.1c">{\tilde{i}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.2.m2.1d">over~ start_ARG italic_i end_ARG</annotation></semantics></math> represents the associated parent of <math alttext="{i}" class="ltx_Math" display="inline" id="S3.SS3.p2.3.m3.1"><semantics id="S3.SS3.p2.3.m3.1a"><mi id="S3.SS3.p2.3.m3.1.1" xref="S3.SS3.p2.3.m3.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.3.m3.1b"><ci id="S3.SS3.p2.3.m3.1.1.cmml" xref="S3.SS3.p2.3.m3.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.3.m3.1c">{i}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.3.m3.1d">italic_i</annotation></semantics></math>, <math alttext="{D_{i}}" class="ltx_Math" display="inline" id="S3.SS3.p2.4.m4.1"><semantics id="S3.SS3.p2.4.m4.1a"><msub id="S3.SS3.p2.4.m4.1.1" xref="S3.SS3.p2.4.m4.1.1.cmml"><mi id="S3.SS3.p2.4.m4.1.1.2" xref="S3.SS3.p2.4.m4.1.1.2.cmml">D</mi><mi id="S3.SS3.p2.4.m4.1.1.3" xref="S3.SS3.p2.4.m4.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.4.m4.1b"><apply id="S3.SS3.p2.4.m4.1.1.cmml" xref="S3.SS3.p2.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS3.p2.4.m4.1.1.1.cmml" xref="S3.SS3.p2.4.m4.1.1">subscript</csymbol><ci id="S3.SS3.p2.4.m4.1.1.2.cmml" xref="S3.SS3.p2.4.m4.1.1.2">𝐷</ci><ci id="S3.SS3.p2.4.m4.1.1.3.cmml" xref="S3.SS3.p2.4.m4.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.4.m4.1c">{D_{i}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.4.m4.1d">italic_D start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> is the Euclidean Distance calculated by current joints <math alttext="{J_{i}}" class="ltx_Math" display="inline" id="S3.SS3.p2.5.m5.1"><semantics id="S3.SS3.p2.5.m5.1a"><msub id="S3.SS3.p2.5.m5.1.1" xref="S3.SS3.p2.5.m5.1.1.cmml"><mi id="S3.SS3.p2.5.m5.1.1.2" xref="S3.SS3.p2.5.m5.1.1.2.cmml">J</mi><mi id="S3.SS3.p2.5.m5.1.1.3" xref="S3.SS3.p2.5.m5.1.1.3.cmml">i</mi></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.5.m5.1b"><apply id="S3.SS3.p2.5.m5.1.1.cmml" xref="S3.SS3.p2.5.m5.1.1"><csymbol cd="ambiguous" id="S3.SS3.p2.5.m5.1.1.1.cmml" xref="S3.SS3.p2.5.m5.1.1">subscript</csymbol><ci id="S3.SS3.p2.5.m5.1.1.2.cmml" xref="S3.SS3.p2.5.m5.1.1.2">𝐽</ci><ci id="S3.SS3.p2.5.m5.1.1.3.cmml" xref="S3.SS3.p2.5.m5.1.1.3">𝑖</ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.5.m5.1c">{J_{i}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.5.m5.1d">italic_J start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT</annotation></semantics></math> and is parent joints <math alttext="{J}_{\tilde{i}}" class="ltx_Math" display="inline" id="S3.SS3.p2.6.m6.1"><semantics id="S3.SS3.p2.6.m6.1a"><msub id="S3.SS3.p2.6.m6.1.1" xref="S3.SS3.p2.6.m6.1.1.cmml"><mi id="S3.SS3.p2.6.m6.1.1.2" xref="S3.SS3.p2.6.m6.1.1.2.cmml">J</mi><mover accent="true" id="S3.SS3.p2.6.m6.1.1.3" xref="S3.SS3.p2.6.m6.1.1.3.cmml"><mi id="S3.SS3.p2.6.m6.1.1.3.2" xref="S3.SS3.p2.6.m6.1.1.3.2.cmml">i</mi><mo id="S3.SS3.p2.6.m6.1.1.3.1" xref="S3.SS3.p2.6.m6.1.1.3.1.cmml">~</mo></mover></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.6.m6.1b"><apply id="S3.SS3.p2.6.m6.1.1.cmml" xref="S3.SS3.p2.6.m6.1.1"><csymbol cd="ambiguous" id="S3.SS3.p2.6.m6.1.1.1.cmml" xref="S3.SS3.p2.6.m6.1.1">subscript</csymbol><ci id="S3.SS3.p2.6.m6.1.1.2.cmml" xref="S3.SS3.p2.6.m6.1.1.2">𝐽</ci><apply id="S3.SS3.p2.6.m6.1.1.3.cmml" xref="S3.SS3.p2.6.m6.1.1.3"><ci id="S3.SS3.p2.6.m6.1.1.3.1.cmml" xref="S3.SS3.p2.6.m6.1.1.3.1">~</ci><ci id="S3.SS3.p2.6.m6.1.1.3.2.cmml" xref="S3.SS3.p2.6.m6.1.1.3.2">𝑖</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.6.m6.1c">{J}_{\tilde{i}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.6.m6.1d">italic_J start_POSTSUBSCRIPT over~ start_ARG italic_i end_ARG end_POSTSUBSCRIPT</annotation></semantics></math>. The inputs is finally concatenated by the 2D inputs and distance to get <math alttext="X_{(x,y,d)}" class="ltx_Math" display="inline" id="S3.SS3.p2.7.m7.3"><semantics id="S3.SS3.p2.7.m7.3a"><msub id="S3.SS3.p2.7.m7.3.4" xref="S3.SS3.p2.7.m7.3.4.cmml"><mi id="S3.SS3.p2.7.m7.3.4.2" xref="S3.SS3.p2.7.m7.3.4.2.cmml">X</mi><mrow id="S3.SS3.p2.7.m7.3.3.3.5" xref="S3.SS3.p2.7.m7.3.3.3.4.cmml"><mo id="S3.SS3.p2.7.m7.3.3.3.5.1" stretchy="false" xref="S3.SS3.p2.7.m7.3.3.3.4.cmml">(</mo><mi id="S3.SS3.p2.7.m7.1.1.1.1" xref="S3.SS3.p2.7.m7.1.1.1.1.cmml">x</mi><mo id="S3.SS3.p2.7.m7.3.3.3.5.2" xref="S3.SS3.p2.7.m7.3.3.3.4.cmml">,</mo><mi id="S3.SS3.p2.7.m7.2.2.2.2" xref="S3.SS3.p2.7.m7.2.2.2.2.cmml">y</mi><mo id="S3.SS3.p2.7.m7.3.3.3.5.3" xref="S3.SS3.p2.7.m7.3.3.3.4.cmml">,</mo><mi id="S3.SS3.p2.7.m7.3.3.3.3" xref="S3.SS3.p2.7.m7.3.3.3.3.cmml">d</mi><mo id="S3.SS3.p2.7.m7.3.3.3.5.4" stretchy="false" xref="S3.SS3.p2.7.m7.3.3.3.4.cmml">)</mo></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS3.p2.7.m7.3b"><apply id="S3.SS3.p2.7.m7.3.4.cmml" xref="S3.SS3.p2.7.m7.3.4"><csymbol cd="ambiguous" id="S3.SS3.p2.7.m7.3.4.1.cmml" xref="S3.SS3.p2.7.m7.3.4">subscript</csymbol><ci id="S3.SS3.p2.7.m7.3.4.2.cmml" xref="S3.SS3.p2.7.m7.3.4.2">𝑋</ci><vector id="S3.SS3.p2.7.m7.3.3.3.4.cmml" xref="S3.SS3.p2.7.m7.3.3.3.5"><ci id="S3.SS3.p2.7.m7.1.1.1.1.cmml" xref="S3.SS3.p2.7.m7.1.1.1.1">𝑥</ci><ci id="S3.SS3.p2.7.m7.2.2.2.2.cmml" xref="S3.SS3.p2.7.m7.2.2.2.2">𝑦</ci><ci id="S3.SS3.p2.7.m7.3.3.3.3.cmml" xref="S3.SS3.p2.7.m7.3.3.3.3">𝑑</ci></vector></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p2.7.m7.3c">X_{(x,y,d)}</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p2.7.m7.3d">italic_X start_POSTSUBSCRIPT ( italic_x , italic_y , italic_d ) end_POSTSUBSCRIPT</annotation></semantics></math>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Loss Function</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.6">According to <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib17" title="">17</a>]</cite> demonstrated, with the addition of the error prediction, the training can be stabilized and leads to better overall result, we also utilize the error prediction in our loss. Furthermore, we add another two effectiveness loss during our training, normal loss and bone loss.</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{L}_{all}=\sum{\alpha\mathcal{L}_{3D}+\beta\mathcal{L}_{error}+\gamma%
+\mathcal{L}_{normal}+\delta\mathcal{L}_{bone}}" class="ltx_Math" display="block" id="S3.E3.m1.1"><semantics id="S3.E3.m1.1a"><mrow id="S3.E3.m1.1.1" xref="S3.E3.m1.1.1.cmml"><msub id="S3.E3.m1.1.1.2" xref="S3.E3.m1.1.1.2.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.2.2" xref="S3.E3.m1.1.1.2.2.cmml">ℒ</mi><mrow id="S3.E3.m1.1.1.2.3" xref="S3.E3.m1.1.1.2.3.cmml"><mi id="S3.E3.m1.1.1.2.3.2" xref="S3.E3.m1.1.1.2.3.2.cmml">a</mi><mo id="S3.E3.m1.1.1.2.3.1" xref="S3.E3.m1.1.1.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.2.3.3" xref="S3.E3.m1.1.1.2.3.3.cmml">l</mi><mo id="S3.E3.m1.1.1.2.3.1a" xref="S3.E3.m1.1.1.2.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.2.3.4" xref="S3.E3.m1.1.1.2.3.4.cmml">l</mi></mrow></msub><mo id="S3.E3.m1.1.1.1" rspace="0.111em" xref="S3.E3.m1.1.1.1.cmml">=</mo><mrow id="S3.E3.m1.1.1.3" xref="S3.E3.m1.1.1.3.cmml"><mrow id="S3.E3.m1.1.1.3.2" xref="S3.E3.m1.1.1.3.2.cmml"><mo id="S3.E3.m1.1.1.3.2.1" movablelimits="false" xref="S3.E3.m1.1.1.3.2.1.cmml">∑</mo><mrow id="S3.E3.m1.1.1.3.2.2" xref="S3.E3.m1.1.1.3.2.2.cmml"><mi id="S3.E3.m1.1.1.3.2.2.2" xref="S3.E3.m1.1.1.3.2.2.2.cmml">α</mi><mo id="S3.E3.m1.1.1.3.2.2.1" xref="S3.E3.m1.1.1.3.2.2.1.cmml">⁢</mo><msub id="S3.E3.m1.1.1.3.2.2.3" xref="S3.E3.m1.1.1.3.2.2.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.3.2.2.3.2" xref="S3.E3.m1.1.1.3.2.2.3.2.cmml">ℒ</mi><mrow id="S3.E3.m1.1.1.3.2.2.3.3" xref="S3.E3.m1.1.1.3.2.2.3.3.cmml"><mn id="S3.E3.m1.1.1.3.2.2.3.3.2" xref="S3.E3.m1.1.1.3.2.2.3.3.2.cmml">3</mn><mo id="S3.E3.m1.1.1.3.2.2.3.3.1" xref="S3.E3.m1.1.1.3.2.2.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.2.2.3.3.3" xref="S3.E3.m1.1.1.3.2.2.3.3.3.cmml">D</mi></mrow></msub></mrow></mrow><mo id="S3.E3.m1.1.1.3.1" xref="S3.E3.m1.1.1.3.1.cmml">+</mo><mrow id="S3.E3.m1.1.1.3.3" xref="S3.E3.m1.1.1.3.3.cmml"><mi id="S3.E3.m1.1.1.3.3.2" xref="S3.E3.m1.1.1.3.3.2.cmml">β</mi><mo id="S3.E3.m1.1.1.3.3.1" xref="S3.E3.m1.1.1.3.3.1.cmml">⁢</mo><msub id="S3.E3.m1.1.1.3.3.3" xref="S3.E3.m1.1.1.3.3.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.3.3.3.2" xref="S3.E3.m1.1.1.3.3.3.2.cmml">ℒ</mi><mrow id="S3.E3.m1.1.1.3.3.3.3" xref="S3.E3.m1.1.1.3.3.3.3.cmml"><mi id="S3.E3.m1.1.1.3.3.3.3.2" xref="S3.E3.m1.1.1.3.3.3.3.2.cmml">e</mi><mo id="S3.E3.m1.1.1.3.3.3.3.1" xref="S3.E3.m1.1.1.3.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.3.3" xref="S3.E3.m1.1.1.3.3.3.3.3.cmml">r</mi><mo id="S3.E3.m1.1.1.3.3.3.3.1a" xref="S3.E3.m1.1.1.3.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.3.4" xref="S3.E3.m1.1.1.3.3.3.3.4.cmml">r</mi><mo id="S3.E3.m1.1.1.3.3.3.3.1b" xref="S3.E3.m1.1.1.3.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.3.5" xref="S3.E3.m1.1.1.3.3.3.3.5.cmml">o</mi><mo id="S3.E3.m1.1.1.3.3.3.3.1c" xref="S3.E3.m1.1.1.3.3.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.3.3.3.6" xref="S3.E3.m1.1.1.3.3.3.3.6.cmml">r</mi></mrow></msub></mrow><mo id="S3.E3.m1.1.1.3.1a" xref="S3.E3.m1.1.1.3.1.cmml">+</mo><mrow id="S3.E3.m1.1.1.3.4" xref="S3.E3.m1.1.1.3.4.cmml"><mi id="S3.E3.m1.1.1.3.4.2" xref="S3.E3.m1.1.1.3.4.2.cmml">γ</mi><mo id="S3.E3.m1.1.1.3.4.1" xref="S3.E3.m1.1.1.3.4.1.cmml">⁢</mo><msub id="S3.E3.m1.1.1.3.4.3" xref="S3.E3.m1.1.1.3.4.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.3.4.3.2" xref="S3.E3.m1.1.1.3.4.3.2.cmml">ℒ</mi><mrow id="S3.E3.m1.1.1.3.4.3.3" xref="S3.E3.m1.1.1.3.4.3.3.cmml"><mi id="S3.E3.m1.1.1.3.4.3.3.2" xref="S3.E3.m1.1.1.3.4.3.3.2.cmml">n</mi><mo id="S3.E3.m1.1.1.3.4.3.3.1" xref="S3.E3.m1.1.1.3.4.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.4.3.3.3" xref="S3.E3.m1.1.1.3.4.3.3.3.cmml">o</mi><mo id="S3.E3.m1.1.1.3.4.3.3.1a" xref="S3.E3.m1.1.1.3.4.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.4.3.3.4" xref="S3.E3.m1.1.1.3.4.3.3.4.cmml">r</mi><mo id="S3.E3.m1.1.1.3.4.3.3.1b" xref="S3.E3.m1.1.1.3.4.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.4.3.3.5" xref="S3.E3.m1.1.1.3.4.3.3.5.cmml">m</mi><mo id="S3.E3.m1.1.1.3.4.3.3.1c" xref="S3.E3.m1.1.1.3.4.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.4.3.3.6" xref="S3.E3.m1.1.1.3.4.3.3.6.cmml">a</mi><mo id="S3.E3.m1.1.1.3.4.3.3.1d" xref="S3.E3.m1.1.1.3.4.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.4.3.3.7" xref="S3.E3.m1.1.1.3.4.3.3.7.cmml">l</mi></mrow></msub></mrow><mo id="S3.E3.m1.1.1.3.1b" xref="S3.E3.m1.1.1.3.1.cmml">+</mo><mrow id="S3.E3.m1.1.1.3.5" xref="S3.E3.m1.1.1.3.5.cmml"><mi id="S3.E3.m1.1.1.3.5.2" xref="S3.E3.m1.1.1.3.5.2.cmml">δ</mi><mo id="S3.E3.m1.1.1.3.5.1" xref="S3.E3.m1.1.1.3.5.1.cmml">⁢</mo><msub id="S3.E3.m1.1.1.3.5.3" xref="S3.E3.m1.1.1.3.5.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E3.m1.1.1.3.5.3.2" xref="S3.E3.m1.1.1.3.5.3.2.cmml">ℒ</mi><mrow id="S3.E3.m1.1.1.3.5.3.3" xref="S3.E3.m1.1.1.3.5.3.3.cmml"><mi id="S3.E3.m1.1.1.3.5.3.3.2" xref="S3.E3.m1.1.1.3.5.3.3.2.cmml">b</mi><mo id="S3.E3.m1.1.1.3.5.3.3.1" xref="S3.E3.m1.1.1.3.5.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.5.3.3.3" xref="S3.E3.m1.1.1.3.5.3.3.3.cmml">o</mi><mo id="S3.E3.m1.1.1.3.5.3.3.1a" xref="S3.E3.m1.1.1.3.5.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.5.3.3.4" xref="S3.E3.m1.1.1.3.5.3.3.4.cmml">n</mi><mo id="S3.E3.m1.1.1.3.5.3.3.1b" xref="S3.E3.m1.1.1.3.5.3.3.1.cmml">⁢</mo><mi id="S3.E3.m1.1.1.3.5.3.3.5" xref="S3.E3.m1.1.1.3.5.3.3.5.cmml">e</mi></mrow></msub></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E3.m1.1b"><apply id="S3.E3.m1.1.1.cmml" xref="S3.E3.m1.1.1"><eq id="S3.E3.m1.1.1.1.cmml" xref="S3.E3.m1.1.1.1"></eq><apply id="S3.E3.m1.1.1.2.cmml" xref="S3.E3.m1.1.1.2"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.2.1.cmml" xref="S3.E3.m1.1.1.2">subscript</csymbol><ci id="S3.E3.m1.1.1.2.2.cmml" xref="S3.E3.m1.1.1.2.2">ℒ</ci><apply id="S3.E3.m1.1.1.2.3.cmml" xref="S3.E3.m1.1.1.2.3"><times id="S3.E3.m1.1.1.2.3.1.cmml" xref="S3.E3.m1.1.1.2.3.1"></times><ci id="S3.E3.m1.1.1.2.3.2.cmml" xref="S3.E3.m1.1.1.2.3.2">𝑎</ci><ci id="S3.E3.m1.1.1.2.3.3.cmml" xref="S3.E3.m1.1.1.2.3.3">𝑙</ci><ci id="S3.E3.m1.1.1.2.3.4.cmml" xref="S3.E3.m1.1.1.2.3.4">𝑙</ci></apply></apply><apply id="S3.E3.m1.1.1.3.cmml" xref="S3.E3.m1.1.1.3"><plus id="S3.E3.m1.1.1.3.1.cmml" xref="S3.E3.m1.1.1.3.1"></plus><apply id="S3.E3.m1.1.1.3.2.cmml" xref="S3.E3.m1.1.1.3.2"><sum id="S3.E3.m1.1.1.3.2.1.cmml" xref="S3.E3.m1.1.1.3.2.1"></sum><apply id="S3.E3.m1.1.1.3.2.2.cmml" xref="S3.E3.m1.1.1.3.2.2"><times id="S3.E3.m1.1.1.3.2.2.1.cmml" xref="S3.E3.m1.1.1.3.2.2.1"></times><ci id="S3.E3.m1.1.1.3.2.2.2.cmml" xref="S3.E3.m1.1.1.3.2.2.2">𝛼</ci><apply id="S3.E3.m1.1.1.3.2.2.3.cmml" xref="S3.E3.m1.1.1.3.2.2.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.2.2.3.1.cmml" xref="S3.E3.m1.1.1.3.2.2.3">subscript</csymbol><ci id="S3.E3.m1.1.1.3.2.2.3.2.cmml" xref="S3.E3.m1.1.1.3.2.2.3.2">ℒ</ci><apply id="S3.E3.m1.1.1.3.2.2.3.3.cmml" xref="S3.E3.m1.1.1.3.2.2.3.3"><times id="S3.E3.m1.1.1.3.2.2.3.3.1.cmml" xref="S3.E3.m1.1.1.3.2.2.3.3.1"></times><cn id="S3.E3.m1.1.1.3.2.2.3.3.2.cmml" type="integer" xref="S3.E3.m1.1.1.3.2.2.3.3.2">3</cn><ci id="S3.E3.m1.1.1.3.2.2.3.3.3.cmml" xref="S3.E3.m1.1.1.3.2.2.3.3.3">𝐷</ci></apply></apply></apply></apply><apply id="S3.E3.m1.1.1.3.3.cmml" xref="S3.E3.m1.1.1.3.3"><times id="S3.E3.m1.1.1.3.3.1.cmml" xref="S3.E3.m1.1.1.3.3.1"></times><ci id="S3.E3.m1.1.1.3.3.2.cmml" xref="S3.E3.m1.1.1.3.3.2">𝛽</ci><apply id="S3.E3.m1.1.1.3.3.3.cmml" xref="S3.E3.m1.1.1.3.3.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.3.3.1.cmml" xref="S3.E3.m1.1.1.3.3.3">subscript</csymbol><ci id="S3.E3.m1.1.1.3.3.3.2.cmml" xref="S3.E3.m1.1.1.3.3.3.2">ℒ</ci><apply id="S3.E3.m1.1.1.3.3.3.3.cmml" xref="S3.E3.m1.1.1.3.3.3.3"><times id="S3.E3.m1.1.1.3.3.3.3.1.cmml" xref="S3.E3.m1.1.1.3.3.3.3.1"></times><ci id="S3.E3.m1.1.1.3.3.3.3.2.cmml" xref="S3.E3.m1.1.1.3.3.3.3.2">𝑒</ci><ci id="S3.E3.m1.1.1.3.3.3.3.3.cmml" xref="S3.E3.m1.1.1.3.3.3.3.3">𝑟</ci><ci id="S3.E3.m1.1.1.3.3.3.3.4.cmml" xref="S3.E3.m1.1.1.3.3.3.3.4">𝑟</ci><ci id="S3.E3.m1.1.1.3.3.3.3.5.cmml" xref="S3.E3.m1.1.1.3.3.3.3.5">𝑜</ci><ci id="S3.E3.m1.1.1.3.3.3.3.6.cmml" xref="S3.E3.m1.1.1.3.3.3.3.6">𝑟</ci></apply></apply></apply><apply id="S3.E3.m1.1.1.3.4.cmml" xref="S3.E3.m1.1.1.3.4"><times id="S3.E3.m1.1.1.3.4.1.cmml" xref="S3.E3.m1.1.1.3.4.1"></times><ci id="S3.E3.m1.1.1.3.4.2.cmml" xref="S3.E3.m1.1.1.3.4.2">𝛾</ci><apply id="S3.E3.m1.1.1.3.4.3.cmml" xref="S3.E3.m1.1.1.3.4.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.4.3.1.cmml" xref="S3.E3.m1.1.1.3.4.3">subscript</csymbol><ci id="S3.E3.m1.1.1.3.4.3.2.cmml" xref="S3.E3.m1.1.1.3.4.3.2">ℒ</ci><apply id="S3.E3.m1.1.1.3.4.3.3.cmml" xref="S3.E3.m1.1.1.3.4.3.3"><times id="S3.E3.m1.1.1.3.4.3.3.1.cmml" xref="S3.E3.m1.1.1.3.4.3.3.1"></times><ci id="S3.E3.m1.1.1.3.4.3.3.2.cmml" xref="S3.E3.m1.1.1.3.4.3.3.2">𝑛</ci><ci id="S3.E3.m1.1.1.3.4.3.3.3.cmml" xref="S3.E3.m1.1.1.3.4.3.3.3">𝑜</ci><ci id="S3.E3.m1.1.1.3.4.3.3.4.cmml" xref="S3.E3.m1.1.1.3.4.3.3.4">𝑟</ci><ci id="S3.E3.m1.1.1.3.4.3.3.5.cmml" xref="S3.E3.m1.1.1.3.4.3.3.5">𝑚</ci><ci id="S3.E3.m1.1.1.3.4.3.3.6.cmml" xref="S3.E3.m1.1.1.3.4.3.3.6">𝑎</ci><ci id="S3.E3.m1.1.1.3.4.3.3.7.cmml" xref="S3.E3.m1.1.1.3.4.3.3.7">𝑙</ci></apply></apply></apply><apply id="S3.E3.m1.1.1.3.5.cmml" xref="S3.E3.m1.1.1.3.5"><times id="S3.E3.m1.1.1.3.5.1.cmml" xref="S3.E3.m1.1.1.3.5.1"></times><ci id="S3.E3.m1.1.1.3.5.2.cmml" xref="S3.E3.m1.1.1.3.5.2">𝛿</ci><apply id="S3.E3.m1.1.1.3.5.3.cmml" xref="S3.E3.m1.1.1.3.5.3"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.3.5.3.1.cmml" xref="S3.E3.m1.1.1.3.5.3">subscript</csymbol><ci id="S3.E3.m1.1.1.3.5.3.2.cmml" xref="S3.E3.m1.1.1.3.5.3.2">ℒ</ci><apply id="S3.E3.m1.1.1.3.5.3.3.cmml" xref="S3.E3.m1.1.1.3.5.3.3"><times id="S3.E3.m1.1.1.3.5.3.3.1.cmml" xref="S3.E3.m1.1.1.3.5.3.3.1"></times><ci id="S3.E3.m1.1.1.3.5.3.3.2.cmml" xref="S3.E3.m1.1.1.3.5.3.3.2">𝑏</ci><ci id="S3.E3.m1.1.1.3.5.3.3.3.cmml" xref="S3.E3.m1.1.1.3.5.3.3.3">𝑜</ci><ci id="S3.E3.m1.1.1.3.5.3.3.4.cmml" xref="S3.E3.m1.1.1.3.5.3.3.4">𝑛</ci><ci id="S3.E3.m1.1.1.3.5.3.3.5.cmml" xref="S3.E3.m1.1.1.3.5.3.3.5">𝑒</ci></apply></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E3.m1.1c">\mathcal{L}_{all}=\sum{\alpha\mathcal{L}_{3D}+\beta\mathcal{L}_{error}+\gamma%
+\mathcal{L}_{normal}+\delta\mathcal{L}_{bone}}</annotation><annotation encoding="application/x-llamapun" id="S3.E3.m1.1d">caligraphic_L start_POSTSUBSCRIPT italic_a italic_l italic_l end_POSTSUBSCRIPT = ∑ italic_α caligraphic_L start_POSTSUBSCRIPT 3 italic_D end_POSTSUBSCRIPT + italic_β caligraphic_L start_POSTSUBSCRIPT italic_e italic_r italic_r italic_o italic_r end_POSTSUBSCRIPT + italic_γ caligraphic_L start_POSTSUBSCRIPT italic_n italic_o italic_r italic_m italic_a italic_l end_POSTSUBSCRIPT + italic_δ caligraphic_L start_POSTSUBSCRIPT italic_b italic_o italic_n italic_e end_POSTSUBSCRIPT</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS4.p1.5"><math alttext="{\mathcal{L}_{3D}}" class="ltx_Math" display="inline" id="S3.SS4.p1.1.m1.1"><semantics id="S3.SS4.p1.1.m1.1a"><msub id="S3.SS4.p1.1.m1.1.1" xref="S3.SS4.p1.1.m1.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS4.p1.1.m1.1.1.2" xref="S3.SS4.p1.1.m1.1.1.2.cmml">ℒ</mi><mrow id="S3.SS4.p1.1.m1.1.1.3" xref="S3.SS4.p1.1.m1.1.1.3.cmml"><mn id="S3.SS4.p1.1.m1.1.1.3.2" xref="S3.SS4.p1.1.m1.1.1.3.2.cmml">3</mn><mo id="S3.SS4.p1.1.m1.1.1.3.1" xref="S3.SS4.p1.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p1.1.m1.1.1.3.3" xref="S3.SS4.p1.1.m1.1.1.3.3.cmml">D</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.1.m1.1b"><apply id="S3.SS4.p1.1.m1.1.1.cmml" xref="S3.SS4.p1.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS4.p1.1.m1.1.1.1.cmml" xref="S3.SS4.p1.1.m1.1.1">subscript</csymbol><ci id="S3.SS4.p1.1.m1.1.1.2.cmml" xref="S3.SS4.p1.1.m1.1.1.2">ℒ</ci><apply id="S3.SS4.p1.1.m1.1.1.3.cmml" xref="S3.SS4.p1.1.m1.1.1.3"><times id="S3.SS4.p1.1.m1.1.1.3.1.cmml" xref="S3.SS4.p1.1.m1.1.1.3.1"></times><cn id="S3.SS4.p1.1.m1.1.1.3.2.cmml" type="integer" xref="S3.SS4.p1.1.m1.1.1.3.2">3</cn><ci id="S3.SS4.p1.1.m1.1.1.3.3.cmml" xref="S3.SS4.p1.1.m1.1.1.3.3">𝐷</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.1.m1.1c">{\mathcal{L}_{3D}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.1.m1.1d">caligraphic_L start_POSTSUBSCRIPT 3 italic_D end_POSTSUBSCRIPT</annotation></semantics></math> is the mean-squared error between 3D prediction and ground-truth. <math alttext="{\mathcal{L}_{error}}" class="ltx_Math" display="inline" id="S3.SS4.p1.2.m2.1"><semantics id="S3.SS4.p1.2.m2.1a"><msub id="S3.SS4.p1.2.m2.1.1" xref="S3.SS4.p1.2.m2.1.1.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.SS4.p1.2.m2.1.1.2" xref="S3.SS4.p1.2.m2.1.1.2.cmml">ℒ</mi><mrow id="S3.SS4.p1.2.m2.1.1.3" xref="S3.SS4.p1.2.m2.1.1.3.cmml"><mi id="S3.SS4.p1.2.m2.1.1.3.2" xref="S3.SS4.p1.2.m2.1.1.3.2.cmml">e</mi><mo id="S3.SS4.p1.2.m2.1.1.3.1" xref="S3.SS4.p1.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p1.2.m2.1.1.3.3" xref="S3.SS4.p1.2.m2.1.1.3.3.cmml">r</mi><mo id="S3.SS4.p1.2.m2.1.1.3.1a" xref="S3.SS4.p1.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p1.2.m2.1.1.3.4" xref="S3.SS4.p1.2.m2.1.1.3.4.cmml">r</mi><mo id="S3.SS4.p1.2.m2.1.1.3.1b" xref="S3.SS4.p1.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p1.2.m2.1.1.3.5" xref="S3.SS4.p1.2.m2.1.1.3.5.cmml">o</mi><mo id="S3.SS4.p1.2.m2.1.1.3.1c" xref="S3.SS4.p1.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p1.2.m2.1.1.3.6" xref="S3.SS4.p1.2.m2.1.1.3.6.cmml">r</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.2.m2.1b"><apply id="S3.SS4.p1.2.m2.1.1.cmml" xref="S3.SS4.p1.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS4.p1.2.m2.1.1.1.cmml" xref="S3.SS4.p1.2.m2.1.1">subscript</csymbol><ci id="S3.SS4.p1.2.m2.1.1.2.cmml" xref="S3.SS4.p1.2.m2.1.1.2">ℒ</ci><apply id="S3.SS4.p1.2.m2.1.1.3.cmml" xref="S3.SS4.p1.2.m2.1.1.3"><times id="S3.SS4.p1.2.m2.1.1.3.1.cmml" xref="S3.SS4.p1.2.m2.1.1.3.1"></times><ci id="S3.SS4.p1.2.m2.1.1.3.2.cmml" xref="S3.SS4.p1.2.m2.1.1.3.2">𝑒</ci><ci id="S3.SS4.p1.2.m2.1.1.3.3.cmml" xref="S3.SS4.p1.2.m2.1.1.3.3">𝑟</ci><ci id="S3.SS4.p1.2.m2.1.1.3.4.cmml" xref="S3.SS4.p1.2.m2.1.1.3.4">𝑟</ci><ci id="S3.SS4.p1.2.m2.1.1.3.5.cmml" xref="S3.SS4.p1.2.m2.1.1.3.5">𝑜</ci><ci id="S3.SS4.p1.2.m2.1.1.3.6.cmml" xref="S3.SS4.p1.2.m2.1.1.3.6">𝑟</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.2.m2.1c">{\mathcal{L}_{error}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.2.m2.1d">caligraphic_L start_POSTSUBSCRIPT italic_e italic_r italic_r italic_o italic_r end_POSTSUBSCRIPT</annotation></semantics></math> is the mean-squared error between prediction error and true error. The true error is defined as the absolute difference between the prediction and the ground-truth <math alttext="{\hat{e}=|y-\hat{y}|}" class="ltx_Math" display="inline" id="S3.SS4.p1.3.m3.1"><semantics id="S3.SS4.p1.3.m3.1a"><mrow id="S3.SS4.p1.3.m3.1.1" xref="S3.SS4.p1.3.m3.1.1.cmml"><mover accent="true" id="S3.SS4.p1.3.m3.1.1.3" xref="S3.SS4.p1.3.m3.1.1.3.cmml"><mi id="S3.SS4.p1.3.m3.1.1.3.2" xref="S3.SS4.p1.3.m3.1.1.3.2.cmml">e</mi><mo id="S3.SS4.p1.3.m3.1.1.3.1" xref="S3.SS4.p1.3.m3.1.1.3.1.cmml">^</mo></mover><mo id="S3.SS4.p1.3.m3.1.1.2" xref="S3.SS4.p1.3.m3.1.1.2.cmml">=</mo><mrow id="S3.SS4.p1.3.m3.1.1.1.1" xref="S3.SS4.p1.3.m3.1.1.1.2.cmml"><mo id="S3.SS4.p1.3.m3.1.1.1.1.2" stretchy="false" xref="S3.SS4.p1.3.m3.1.1.1.2.1.cmml">|</mo><mrow id="S3.SS4.p1.3.m3.1.1.1.1.1" xref="S3.SS4.p1.3.m3.1.1.1.1.1.cmml"><mi id="S3.SS4.p1.3.m3.1.1.1.1.1.2" xref="S3.SS4.p1.3.m3.1.1.1.1.1.2.cmml">y</mi><mo id="S3.SS4.p1.3.m3.1.1.1.1.1.1" xref="S3.SS4.p1.3.m3.1.1.1.1.1.1.cmml">−</mo><mover accent="true" id="S3.SS4.p1.3.m3.1.1.1.1.1.3" xref="S3.SS4.p1.3.m3.1.1.1.1.1.3.cmml"><mi id="S3.SS4.p1.3.m3.1.1.1.1.1.3.2" xref="S3.SS4.p1.3.m3.1.1.1.1.1.3.2.cmml">y</mi><mo id="S3.SS4.p1.3.m3.1.1.1.1.1.3.1" xref="S3.SS4.p1.3.m3.1.1.1.1.1.3.1.cmml">^</mo></mover></mrow><mo id="S3.SS4.p1.3.m3.1.1.1.1.3" stretchy="false" xref="S3.SS4.p1.3.m3.1.1.1.2.1.cmml">|</mo></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.3.m3.1b"><apply id="S3.SS4.p1.3.m3.1.1.cmml" xref="S3.SS4.p1.3.m3.1.1"><eq id="S3.SS4.p1.3.m3.1.1.2.cmml" xref="S3.SS4.p1.3.m3.1.1.2"></eq><apply id="S3.SS4.p1.3.m3.1.1.3.cmml" xref="S3.SS4.p1.3.m3.1.1.3"><ci id="S3.SS4.p1.3.m3.1.1.3.1.cmml" xref="S3.SS4.p1.3.m3.1.1.3.1">^</ci><ci id="S3.SS4.p1.3.m3.1.1.3.2.cmml" xref="S3.SS4.p1.3.m3.1.1.3.2">𝑒</ci></apply><apply id="S3.SS4.p1.3.m3.1.1.1.2.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1"><abs id="S3.SS4.p1.3.m3.1.1.1.2.1.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1.2"></abs><apply id="S3.SS4.p1.3.m3.1.1.1.1.1.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1.1"><minus id="S3.SS4.p1.3.m3.1.1.1.1.1.1.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1.1.1"></minus><ci id="S3.SS4.p1.3.m3.1.1.1.1.1.2.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1.1.2">𝑦</ci><apply id="S3.SS4.p1.3.m3.1.1.1.1.1.3.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1.1.3"><ci id="S3.SS4.p1.3.m3.1.1.1.1.1.3.1.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1.1.3.1">^</ci><ci id="S3.SS4.p1.3.m3.1.1.1.1.1.3.2.cmml" xref="S3.SS4.p1.3.m3.1.1.1.1.1.3.2">𝑦</ci></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.3.m3.1c">{\hat{e}=|y-\hat{y}|}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.3.m3.1d">over^ start_ARG italic_e end_ARG = | italic_y - over^ start_ARG italic_y end_ARG |</annotation></semantics></math>.
+<math alttext="{\alpha,\beta,\gamma,\delta}" class="ltx_Math" display="inline" id="S3.SS4.p1.4.m4.4"><semantics id="S3.SS4.p1.4.m4.4a"><mrow id="S3.SS4.p1.4.m4.4.5.2" xref="S3.SS4.p1.4.m4.4.5.1.cmml"><mi id="S3.SS4.p1.4.m4.1.1" xref="S3.SS4.p1.4.m4.1.1.cmml">α</mi><mo id="S3.SS4.p1.4.m4.4.5.2.1" xref="S3.SS4.p1.4.m4.4.5.1.cmml">,</mo><mi id="S3.SS4.p1.4.m4.2.2" xref="S3.SS4.p1.4.m4.2.2.cmml">β</mi><mo id="S3.SS4.p1.4.m4.4.5.2.2" xref="S3.SS4.p1.4.m4.4.5.1.cmml">,</mo><mi id="S3.SS4.p1.4.m4.3.3" xref="S3.SS4.p1.4.m4.3.3.cmml">γ</mi><mo id="S3.SS4.p1.4.m4.4.5.2.3" xref="S3.SS4.p1.4.m4.4.5.1.cmml">,</mo><mi id="S3.SS4.p1.4.m4.4.4" xref="S3.SS4.p1.4.m4.4.4.cmml">δ</mi></mrow><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.4.m4.4b"><list id="S3.SS4.p1.4.m4.4.5.1.cmml" xref="S3.SS4.p1.4.m4.4.5.2"><ci id="S3.SS4.p1.4.m4.1.1.cmml" xref="S3.SS4.p1.4.m4.1.1">𝛼</ci><ci id="S3.SS4.p1.4.m4.2.2.cmml" xref="S3.SS4.p1.4.m4.2.2">𝛽</ci><ci id="S3.SS4.p1.4.m4.3.3.cmml" xref="S3.SS4.p1.4.m4.3.3">𝛾</ci><ci id="S3.SS4.p1.4.m4.4.4.cmml" xref="S3.SS4.p1.4.m4.4.4">𝛿</ci></list></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.4.m4.4c">{\alpha,\beta,\gamma,\delta}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.4.m4.4d">italic_α , italic_β , italic_γ , italic_δ</annotation></semantics></math> are the weights of different loss. Through the observation of training loss and attempt of training trails, we set them to <math alttext="{5e-1,2.5e-1,2.5e-4,5e-4}" class="ltx_Math" display="inline" id="S3.SS4.p1.5.m5.4"><semantics id="S3.SS4.p1.5.m5.4a"><mrow id="S3.SS4.p1.5.m5.4.4.4" xref="S3.SS4.p1.5.m5.4.4.5.cmml"><mrow id="S3.SS4.p1.5.m5.1.1.1.1" xref="S3.SS4.p1.5.m5.1.1.1.1.cmml"><mrow id="S3.SS4.p1.5.m5.1.1.1.1.2" xref="S3.SS4.p1.5.m5.1.1.1.1.2.cmml"><mn id="S3.SS4.p1.5.m5.1.1.1.1.2.2" xref="S3.SS4.p1.5.m5.1.1.1.1.2.2.cmml">5</mn><mo id="S3.SS4.p1.5.m5.1.1.1.1.2.1" xref="S3.SS4.p1.5.m5.1.1.1.1.2.1.cmml">⁢</mo><mi id="S3.SS4.p1.5.m5.1.1.1.1.2.3" xref="S3.SS4.p1.5.m5.1.1.1.1.2.3.cmml">e</mi></mrow><mo id="S3.SS4.p1.5.m5.1.1.1.1.1" xref="S3.SS4.p1.5.m5.1.1.1.1.1.cmml">−</mo><mn id="S3.SS4.p1.5.m5.1.1.1.1.3" xref="S3.SS4.p1.5.m5.1.1.1.1.3.cmml">1</mn></mrow><mo id="S3.SS4.p1.5.m5.4.4.4.5" xref="S3.SS4.p1.5.m5.4.4.5.cmml">,</mo><mrow id="S3.SS4.p1.5.m5.2.2.2.2" xref="S3.SS4.p1.5.m5.2.2.2.2.cmml"><mrow id="S3.SS4.p1.5.m5.2.2.2.2.2" xref="S3.SS4.p1.5.m5.2.2.2.2.2.cmml"><mn id="S3.SS4.p1.5.m5.2.2.2.2.2.2" xref="S3.SS4.p1.5.m5.2.2.2.2.2.2.cmml">2.5</mn><mo id="S3.SS4.p1.5.m5.2.2.2.2.2.1" xref="S3.SS4.p1.5.m5.2.2.2.2.2.1.cmml">⁢</mo><mi id="S3.SS4.p1.5.m5.2.2.2.2.2.3" xref="S3.SS4.p1.5.m5.2.2.2.2.2.3.cmml">e</mi></mrow><mo id="S3.SS4.p1.5.m5.2.2.2.2.1" xref="S3.SS4.p1.5.m5.2.2.2.2.1.cmml">−</mo><mn id="S3.SS4.p1.5.m5.2.2.2.2.3" xref="S3.SS4.p1.5.m5.2.2.2.2.3.cmml">1</mn></mrow><mo id="S3.SS4.p1.5.m5.4.4.4.6" xref="S3.SS4.p1.5.m5.4.4.5.cmml">,</mo><mrow id="S3.SS4.p1.5.m5.3.3.3.3" xref="S3.SS4.p1.5.m5.3.3.3.3.cmml"><mrow id="S3.SS4.p1.5.m5.3.3.3.3.2" xref="S3.SS4.p1.5.m5.3.3.3.3.2.cmml"><mn id="S3.SS4.p1.5.m5.3.3.3.3.2.2" xref="S3.SS4.p1.5.m5.3.3.3.3.2.2.cmml">2.5</mn><mo id="S3.SS4.p1.5.m5.3.3.3.3.2.1" xref="S3.SS4.p1.5.m5.3.3.3.3.2.1.cmml">⁢</mo><mi id="S3.SS4.p1.5.m5.3.3.3.3.2.3" xref="S3.SS4.p1.5.m5.3.3.3.3.2.3.cmml">e</mi></mrow><mo id="S3.SS4.p1.5.m5.3.3.3.3.1" xref="S3.SS4.p1.5.m5.3.3.3.3.1.cmml">−</mo><mn id="S3.SS4.p1.5.m5.3.3.3.3.3" xref="S3.SS4.p1.5.m5.3.3.3.3.3.cmml">4</mn></mrow><mo id="S3.SS4.p1.5.m5.4.4.4.7" xref="S3.SS4.p1.5.m5.4.4.5.cmml">,</mo><mrow id="S3.SS4.p1.5.m5.4.4.4.4" xref="S3.SS4.p1.5.m5.4.4.4.4.cmml"><mrow id="S3.SS4.p1.5.m5.4.4.4.4.2" xref="S3.SS4.p1.5.m5.4.4.4.4.2.cmml"><mn id="S3.SS4.p1.5.m5.4.4.4.4.2.2" xref="S3.SS4.p1.5.m5.4.4.4.4.2.2.cmml">5</mn><mo id="S3.SS4.p1.5.m5.4.4.4.4.2.1" xref="S3.SS4.p1.5.m5.4.4.4.4.2.1.cmml">⁢</mo><mi id="S3.SS4.p1.5.m5.4.4.4.4.2.3" xref="S3.SS4.p1.5.m5.4.4.4.4.2.3.cmml">e</mi></mrow><mo id="S3.SS4.p1.5.m5.4.4.4.4.1" xref="S3.SS4.p1.5.m5.4.4.4.4.1.cmml">−</mo><mn id="S3.SS4.p1.5.m5.4.4.4.4.3" xref="S3.SS4.p1.5.m5.4.4.4.4.3.cmml">4</mn></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.SS4.p1.5.m5.4b"><list id="S3.SS4.p1.5.m5.4.4.5.cmml" xref="S3.SS4.p1.5.m5.4.4.4"><apply id="S3.SS4.p1.5.m5.1.1.1.1.cmml" xref="S3.SS4.p1.5.m5.1.1.1.1"><minus id="S3.SS4.p1.5.m5.1.1.1.1.1.cmml" xref="S3.SS4.p1.5.m5.1.1.1.1.1"></minus><apply id="S3.SS4.p1.5.m5.1.1.1.1.2.cmml" xref="S3.SS4.p1.5.m5.1.1.1.1.2"><times id="S3.SS4.p1.5.m5.1.1.1.1.2.1.cmml" xref="S3.SS4.p1.5.m5.1.1.1.1.2.1"></times><cn id="S3.SS4.p1.5.m5.1.1.1.1.2.2.cmml" type="integer" xref="S3.SS4.p1.5.m5.1.1.1.1.2.2">5</cn><ci id="S3.SS4.p1.5.m5.1.1.1.1.2.3.cmml" xref="S3.SS4.p1.5.m5.1.1.1.1.2.3">𝑒</ci></apply><cn id="S3.SS4.p1.5.m5.1.1.1.1.3.cmml" type="integer" xref="S3.SS4.p1.5.m5.1.1.1.1.3">1</cn></apply><apply id="S3.SS4.p1.5.m5.2.2.2.2.cmml" xref="S3.SS4.p1.5.m5.2.2.2.2"><minus id="S3.SS4.p1.5.m5.2.2.2.2.1.cmml" xref="S3.SS4.p1.5.m5.2.2.2.2.1"></minus><apply id="S3.SS4.p1.5.m5.2.2.2.2.2.cmml" xref="S3.SS4.p1.5.m5.2.2.2.2.2"><times id="S3.SS4.p1.5.m5.2.2.2.2.2.1.cmml" xref="S3.SS4.p1.5.m5.2.2.2.2.2.1"></times><cn id="S3.SS4.p1.5.m5.2.2.2.2.2.2.cmml" type="float" xref="S3.SS4.p1.5.m5.2.2.2.2.2.2">2.5</cn><ci id="S3.SS4.p1.5.m5.2.2.2.2.2.3.cmml" xref="S3.SS4.p1.5.m5.2.2.2.2.2.3">𝑒</ci></apply><cn id="S3.SS4.p1.5.m5.2.2.2.2.3.cmml" type="integer" xref="S3.SS4.p1.5.m5.2.2.2.2.3">1</cn></apply><apply id="S3.SS4.p1.5.m5.3.3.3.3.cmml" xref="S3.SS4.p1.5.m5.3.3.3.3"><minus id="S3.SS4.p1.5.m5.3.3.3.3.1.cmml" xref="S3.SS4.p1.5.m5.3.3.3.3.1"></minus><apply id="S3.SS4.p1.5.m5.3.3.3.3.2.cmml" xref="S3.SS4.p1.5.m5.3.3.3.3.2"><times id="S3.SS4.p1.5.m5.3.3.3.3.2.1.cmml" xref="S3.SS4.p1.5.m5.3.3.3.3.2.1"></times><cn id="S3.SS4.p1.5.m5.3.3.3.3.2.2.cmml" type="float" xref="S3.SS4.p1.5.m5.3.3.3.3.2.2">2.5</cn><ci id="S3.SS4.p1.5.m5.3.3.3.3.2.3.cmml" xref="S3.SS4.p1.5.m5.3.3.3.3.2.3">𝑒</ci></apply><cn id="S3.SS4.p1.5.m5.3.3.3.3.3.cmml" type="integer" xref="S3.SS4.p1.5.m5.3.3.3.3.3">4</cn></apply><apply id="S3.SS4.p1.5.m5.4.4.4.4.cmml" xref="S3.SS4.p1.5.m5.4.4.4.4"><minus id="S3.SS4.p1.5.m5.4.4.4.4.1.cmml" xref="S3.SS4.p1.5.m5.4.4.4.4.1"></minus><apply id="S3.SS4.p1.5.m5.4.4.4.4.2.cmml" xref="S3.SS4.p1.5.m5.4.4.4.4.2"><times id="S3.SS4.p1.5.m5.4.4.4.4.2.1.cmml" xref="S3.SS4.p1.5.m5.4.4.4.4.2.1"></times><cn id="S3.SS4.p1.5.m5.4.4.4.4.2.2.cmml" type="integer" xref="S3.SS4.p1.5.m5.4.4.4.4.2.2">5</cn><ci id="S3.SS4.p1.5.m5.4.4.4.4.2.3.cmml" xref="S3.SS4.p1.5.m5.4.4.4.4.2.3">𝑒</ci></apply><cn id="S3.SS4.p1.5.m5.4.4.4.4.3.cmml" type="integer" xref="S3.SS4.p1.5.m5.4.4.4.4.3">4</cn></apply></list></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p1.5.m5.4c">{5e-1,2.5e-1,2.5e-4,5e-4}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p1.5.m5.4d">5 italic_e - 1 , 2.5 italic_e - 1 , 2.5 italic_e - 4 , 5 italic_e - 4</annotation></semantics></math>, respectively.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.4"><span class="ltx_text ltx_font_bold" id="S3.SS4.p2.4.1">Normal Loss.</span>
+Normal loss is first raised by <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib25" title="">25</a>]</cite>, and has been confirmed to be practical in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib34" title="">34</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib19" title="">19</a>]</cite>. We following the strategy in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib19" title="">19</a>]</cite>, choosing the most powerful four part of body: <math alttext="{L_{arm}}" class="ltx_Math" display="inline" id="S3.SS4.p2.1.m1.1"><semantics id="S3.SS4.p2.1.m1.1a"><msub id="S3.SS4.p2.1.m1.1.1" xref="S3.SS4.p2.1.m1.1.1.cmml"><mi id="S3.SS4.p2.1.m1.1.1.2" xref="S3.SS4.p2.1.m1.1.1.2.cmml">L</mi><mrow id="S3.SS4.p2.1.m1.1.1.3" xref="S3.SS4.p2.1.m1.1.1.3.cmml"><mi id="S3.SS4.p2.1.m1.1.1.3.2" xref="S3.SS4.p2.1.m1.1.1.3.2.cmml">a</mi><mo id="S3.SS4.p2.1.m1.1.1.3.1" xref="S3.SS4.p2.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.1.m1.1.1.3.3" xref="S3.SS4.p2.1.m1.1.1.3.3.cmml">r</mi><mo id="S3.SS4.p2.1.m1.1.1.3.1a" xref="S3.SS4.p2.1.m1.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.1.m1.1.1.3.4" xref="S3.SS4.p2.1.m1.1.1.3.4.cmml">m</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p2.1.m1.1b"><apply id="S3.SS4.p2.1.m1.1.1.cmml" xref="S3.SS4.p2.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS4.p2.1.m1.1.1.1.cmml" xref="S3.SS4.p2.1.m1.1.1">subscript</csymbol><ci id="S3.SS4.p2.1.m1.1.1.2.cmml" xref="S3.SS4.p2.1.m1.1.1.2">𝐿</ci><apply id="S3.SS4.p2.1.m1.1.1.3.cmml" xref="S3.SS4.p2.1.m1.1.1.3"><times id="S3.SS4.p2.1.m1.1.1.3.1.cmml" xref="S3.SS4.p2.1.m1.1.1.3.1"></times><ci id="S3.SS4.p2.1.m1.1.1.3.2.cmml" xref="S3.SS4.p2.1.m1.1.1.3.2">𝑎</ci><ci id="S3.SS4.p2.1.m1.1.1.3.3.cmml" xref="S3.SS4.p2.1.m1.1.1.3.3">𝑟</ci><ci id="S3.SS4.p2.1.m1.1.1.3.4.cmml" xref="S3.SS4.p2.1.m1.1.1.3.4">𝑚</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p2.1.m1.1c">{L_{arm}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p2.1.m1.1d">italic_L start_POSTSUBSCRIPT italic_a italic_r italic_m end_POSTSUBSCRIPT</annotation></semantics></math>, <math alttext="{R_{arm}}" class="ltx_Math" display="inline" id="S3.SS4.p2.2.m2.1"><semantics id="S3.SS4.p2.2.m2.1a"><msub id="S3.SS4.p2.2.m2.1.1" xref="S3.SS4.p2.2.m2.1.1.cmml"><mi id="S3.SS4.p2.2.m2.1.1.2" xref="S3.SS4.p2.2.m2.1.1.2.cmml">R</mi><mrow id="S3.SS4.p2.2.m2.1.1.3" xref="S3.SS4.p2.2.m2.1.1.3.cmml"><mi id="S3.SS4.p2.2.m2.1.1.3.2" xref="S3.SS4.p2.2.m2.1.1.3.2.cmml">a</mi><mo id="S3.SS4.p2.2.m2.1.1.3.1" xref="S3.SS4.p2.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.2.m2.1.1.3.3" xref="S3.SS4.p2.2.m2.1.1.3.3.cmml">r</mi><mo id="S3.SS4.p2.2.m2.1.1.3.1a" xref="S3.SS4.p2.2.m2.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.2.m2.1.1.3.4" xref="S3.SS4.p2.2.m2.1.1.3.4.cmml">m</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p2.2.m2.1b"><apply id="S3.SS4.p2.2.m2.1.1.cmml" xref="S3.SS4.p2.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS4.p2.2.m2.1.1.1.cmml" xref="S3.SS4.p2.2.m2.1.1">subscript</csymbol><ci id="S3.SS4.p2.2.m2.1.1.2.cmml" xref="S3.SS4.p2.2.m2.1.1.2">𝑅</ci><apply id="S3.SS4.p2.2.m2.1.1.3.cmml" xref="S3.SS4.p2.2.m2.1.1.3"><times id="S3.SS4.p2.2.m2.1.1.3.1.cmml" xref="S3.SS4.p2.2.m2.1.1.3.1"></times><ci id="S3.SS4.p2.2.m2.1.1.3.2.cmml" xref="S3.SS4.p2.2.m2.1.1.3.2">𝑎</ci><ci id="S3.SS4.p2.2.m2.1.1.3.3.cmml" xref="S3.SS4.p2.2.m2.1.1.3.3">𝑟</ci><ci id="S3.SS4.p2.2.m2.1.1.3.4.cmml" xref="S3.SS4.p2.2.m2.1.1.3.4">𝑚</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p2.2.m2.1c">{R_{arm}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p2.2.m2.1d">italic_R start_POSTSUBSCRIPT italic_a italic_r italic_m end_POSTSUBSCRIPT</annotation></semantics></math> , <math alttext="{L_{leg}}" class="ltx_Math" display="inline" id="S3.SS4.p2.3.m3.1"><semantics id="S3.SS4.p2.3.m3.1a"><msub id="S3.SS4.p2.3.m3.1.1" xref="S3.SS4.p2.3.m3.1.1.cmml"><mi id="S3.SS4.p2.3.m3.1.1.2" xref="S3.SS4.p2.3.m3.1.1.2.cmml">L</mi><mrow id="S3.SS4.p2.3.m3.1.1.3" xref="S3.SS4.p2.3.m3.1.1.3.cmml"><mi id="S3.SS4.p2.3.m3.1.1.3.2" xref="S3.SS4.p2.3.m3.1.1.3.2.cmml">l</mi><mo id="S3.SS4.p2.3.m3.1.1.3.1" xref="S3.SS4.p2.3.m3.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.3.m3.1.1.3.3" xref="S3.SS4.p2.3.m3.1.1.3.3.cmml">e</mi><mo id="S3.SS4.p2.3.m3.1.1.3.1a" xref="S3.SS4.p2.3.m3.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.3.m3.1.1.3.4" xref="S3.SS4.p2.3.m3.1.1.3.4.cmml">g</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p2.3.m3.1b"><apply id="S3.SS4.p2.3.m3.1.1.cmml" xref="S3.SS4.p2.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS4.p2.3.m3.1.1.1.cmml" xref="S3.SS4.p2.3.m3.1.1">subscript</csymbol><ci id="S3.SS4.p2.3.m3.1.1.2.cmml" xref="S3.SS4.p2.3.m3.1.1.2">𝐿</ci><apply id="S3.SS4.p2.3.m3.1.1.3.cmml" xref="S3.SS4.p2.3.m3.1.1.3"><times id="S3.SS4.p2.3.m3.1.1.3.1.cmml" xref="S3.SS4.p2.3.m3.1.1.3.1"></times><ci id="S3.SS4.p2.3.m3.1.1.3.2.cmml" xref="S3.SS4.p2.3.m3.1.1.3.2">𝑙</ci><ci id="S3.SS4.p2.3.m3.1.1.3.3.cmml" xref="S3.SS4.p2.3.m3.1.1.3.3">𝑒</ci><ci id="S3.SS4.p2.3.m3.1.1.3.4.cmml" xref="S3.SS4.p2.3.m3.1.1.3.4">𝑔</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p2.3.m3.1c">{L_{leg}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p2.3.m3.1d">italic_L start_POSTSUBSCRIPT italic_l italic_e italic_g end_POSTSUBSCRIPT</annotation></semantics></math>, <math alttext="{R_{leg}}" class="ltx_Math" display="inline" id="S3.SS4.p2.4.m4.1"><semantics id="S3.SS4.p2.4.m4.1a"><msub id="S3.SS4.p2.4.m4.1.1" xref="S3.SS4.p2.4.m4.1.1.cmml"><mi id="S3.SS4.p2.4.m4.1.1.2" xref="S3.SS4.p2.4.m4.1.1.2.cmml">R</mi><mrow id="S3.SS4.p2.4.m4.1.1.3" xref="S3.SS4.p2.4.m4.1.1.3.cmml"><mi id="S3.SS4.p2.4.m4.1.1.3.2" xref="S3.SS4.p2.4.m4.1.1.3.2.cmml">l</mi><mo id="S3.SS4.p2.4.m4.1.1.3.1" xref="S3.SS4.p2.4.m4.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.4.m4.1.1.3.3" xref="S3.SS4.p2.4.m4.1.1.3.3.cmml">e</mi><mo id="S3.SS4.p2.4.m4.1.1.3.1a" xref="S3.SS4.p2.4.m4.1.1.3.1.cmml">⁢</mo><mi id="S3.SS4.p2.4.m4.1.1.3.4" xref="S3.SS4.p2.4.m4.1.1.3.4.cmml">g</mi></mrow></msub><annotation-xml encoding="MathML-Content" id="S3.SS4.p2.4.m4.1b"><apply id="S3.SS4.p2.4.m4.1.1.cmml" xref="S3.SS4.p2.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS4.p2.4.m4.1.1.1.cmml" xref="S3.SS4.p2.4.m4.1.1">subscript</csymbol><ci id="S3.SS4.p2.4.m4.1.1.2.cmml" xref="S3.SS4.p2.4.m4.1.1.2">𝑅</ci><apply id="S3.SS4.p2.4.m4.1.1.3.cmml" xref="S3.SS4.p2.4.m4.1.1.3"><times id="S3.SS4.p2.4.m4.1.1.3.1.cmml" xref="S3.SS4.p2.4.m4.1.1.3.1"></times><ci id="S3.SS4.p2.4.m4.1.1.3.2.cmml" xref="S3.SS4.p2.4.m4.1.1.3.2">𝑙</ci><ci id="S3.SS4.p2.4.m4.1.1.3.3.cmml" xref="S3.SS4.p2.4.m4.1.1.3.3">𝑒</ci><ci id="S3.SS4.p2.4.m4.1.1.3.4.cmml" xref="S3.SS4.p2.4.m4.1.1.3.4">𝑔</ci></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p2.4.m4.1c">{R_{leg}}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p2.4.m4.1d">italic_R start_POSTSUBSCRIPT italic_l italic_e italic_g end_POSTSUBSCRIPT</annotation></semantics></math>. With those triangles normal vector, the loss function can be defined as:</p>
+<table class="ltx_equation ltx_eqn_table" id="S3.E4">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{L}_{normal}=\frac{1}{M}\left(\sum_{i=1}^{M}\left\|\bm{n}_{i}^{gt}-\bm%
+{n}_{i}^{\text{pred}}\right\|_{1}\right)" class="ltx_Math" display="block" id="S3.E4.m1.1"><semantics id="S3.E4.m1.1a"><mrow id="S3.E4.m1.1.1" xref="S3.E4.m1.1.1.cmml"><msub id="S3.E4.m1.1.1.3" xref="S3.E4.m1.1.1.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E4.m1.1.1.3.2" xref="S3.E4.m1.1.1.3.2.cmml">ℒ</mi><mrow id="S3.E4.m1.1.1.3.3" xref="S3.E4.m1.1.1.3.3.cmml"><mi id="S3.E4.m1.1.1.3.3.2" xref="S3.E4.m1.1.1.3.3.2.cmml">n</mi><mo id="S3.E4.m1.1.1.3.3.1" xref="S3.E4.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E4.m1.1.1.3.3.3" xref="S3.E4.m1.1.1.3.3.3.cmml">o</mi><mo id="S3.E4.m1.1.1.3.3.1a" xref="S3.E4.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E4.m1.1.1.3.3.4" xref="S3.E4.m1.1.1.3.3.4.cmml">r</mi><mo id="S3.E4.m1.1.1.3.3.1b" xref="S3.E4.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E4.m1.1.1.3.3.5" xref="S3.E4.m1.1.1.3.3.5.cmml">m</mi><mo id="S3.E4.m1.1.1.3.3.1c" xref="S3.E4.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E4.m1.1.1.3.3.6" xref="S3.E4.m1.1.1.3.3.6.cmml">a</mi><mo id="S3.E4.m1.1.1.3.3.1d" xref="S3.E4.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E4.m1.1.1.3.3.7" xref="S3.E4.m1.1.1.3.3.7.cmml">l</mi></mrow></msub><mo id="S3.E4.m1.1.1.2" xref="S3.E4.m1.1.1.2.cmml">=</mo><mrow id="S3.E4.m1.1.1.1" xref="S3.E4.m1.1.1.1.cmml"><mfrac id="S3.E4.m1.1.1.1.3" xref="S3.E4.m1.1.1.1.3.cmml"><mn id="S3.E4.m1.1.1.1.3.2" xref="S3.E4.m1.1.1.1.3.2.cmml">1</mn><mi id="S3.E4.m1.1.1.1.3.3" xref="S3.E4.m1.1.1.1.3.3.cmml">M</mi></mfrac><mo id="S3.E4.m1.1.1.1.2" xref="S3.E4.m1.1.1.1.2.cmml">⁢</mo><mrow id="S3.E4.m1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.1.cmml"><mo id="S3.E4.m1.1.1.1.1.1.2" xref="S3.E4.m1.1.1.1.1.1.1.cmml">(</mo><mrow id="S3.E4.m1.1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.1.cmml"><munderover id="S3.E4.m1.1.1.1.1.1.1.2" xref="S3.E4.m1.1.1.1.1.1.1.2.cmml"><mo id="S3.E4.m1.1.1.1.1.1.1.2.2.2" lspace="0em" movablelimits="false" rspace="0em" xref="S3.E4.m1.1.1.1.1.1.1.2.2.2.cmml">∑</mo><mrow id="S3.E4.m1.1.1.1.1.1.1.2.2.3" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3.cmml"><mi id="S3.E4.m1.1.1.1.1.1.1.2.2.3.2" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3.2.cmml">i</mi><mo id="S3.E4.m1.1.1.1.1.1.1.2.2.3.1" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3.1.cmml">=</mo><mn id="S3.E4.m1.1.1.1.1.1.1.2.2.3.3" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3.3.cmml">1</mn></mrow><mi id="S3.E4.m1.1.1.1.1.1.1.2.3" xref="S3.E4.m1.1.1.1.1.1.1.2.3.cmml">M</mi></munderover><msub id="S3.E4.m1.1.1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.1.1.cmml"><mrow id="S3.E4.m1.1.1.1.1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.1.1.1.2.cmml"><mo id="S3.E4.m1.1.1.1.1.1.1.1.1.1.2" xref="S3.E4.m1.1.1.1.1.1.1.1.1.2.1.cmml">‖</mo><mrow id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.cmml"><msubsup id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.cmml"><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.2" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.2.cmml">𝒏</mi><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.3.cmml">i</mi><mrow id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.cmml"><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.2" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.2.cmml">g</mi><mo id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.1" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.1.cmml">⁢</mo><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.3.cmml">t</mi></mrow></msubsup><mo id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.1" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.1.cmml">−</mo><msubsup id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.cmml"><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.2" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.2.cmml">𝒏</mi><mi id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.3.cmml">i</mi><mtext id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.3a.cmml">pred</mtext></msubsup></mrow><mo id="S3.E4.m1.1.1.1.1.1.1.1.1.1.3" xref="S3.E4.m1.1.1.1.1.1.1.1.1.2.1.cmml">‖</mo></mrow><mn id="S3.E4.m1.1.1.1.1.1.1.1.3" xref="S3.E4.m1.1.1.1.1.1.1.1.3.cmml">1</mn></msub></mrow><mo id="S3.E4.m1.1.1.1.1.1.3" xref="S3.E4.m1.1.1.1.1.1.1.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E4.m1.1b"><apply id="S3.E4.m1.1.1.cmml" xref="S3.E4.m1.1.1"><eq id="S3.E4.m1.1.1.2.cmml" xref="S3.E4.m1.1.1.2"></eq><apply id="S3.E4.m1.1.1.3.cmml" xref="S3.E4.m1.1.1.3"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.3.1.cmml" xref="S3.E4.m1.1.1.3">subscript</csymbol><ci id="S3.E4.m1.1.1.3.2.cmml" xref="S3.E4.m1.1.1.3.2">ℒ</ci><apply id="S3.E4.m1.1.1.3.3.cmml" xref="S3.E4.m1.1.1.3.3"><times id="S3.E4.m1.1.1.3.3.1.cmml" xref="S3.E4.m1.1.1.3.3.1"></times><ci id="S3.E4.m1.1.1.3.3.2.cmml" xref="S3.E4.m1.1.1.3.3.2">𝑛</ci><ci id="S3.E4.m1.1.1.3.3.3.cmml" xref="S3.E4.m1.1.1.3.3.3">𝑜</ci><ci id="S3.E4.m1.1.1.3.3.4.cmml" xref="S3.E4.m1.1.1.3.3.4">𝑟</ci><ci id="S3.E4.m1.1.1.3.3.5.cmml" xref="S3.E4.m1.1.1.3.3.5">𝑚</ci><ci id="S3.E4.m1.1.1.3.3.6.cmml" xref="S3.E4.m1.1.1.3.3.6">𝑎</ci><ci id="S3.E4.m1.1.1.3.3.7.cmml" xref="S3.E4.m1.1.1.3.3.7">𝑙</ci></apply></apply><apply id="S3.E4.m1.1.1.1.cmml" xref="S3.E4.m1.1.1.1"><times id="S3.E4.m1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.2"></times><apply id="S3.E4.m1.1.1.1.3.cmml" xref="S3.E4.m1.1.1.1.3"><divide id="S3.E4.m1.1.1.1.3.1.cmml" xref="S3.E4.m1.1.1.1.3"></divide><cn id="S3.E4.m1.1.1.1.3.2.cmml" type="integer" xref="S3.E4.m1.1.1.1.3.2">1</cn><ci id="S3.E4.m1.1.1.1.3.3.cmml" xref="S3.E4.m1.1.1.1.3.3">𝑀</ci></apply><apply id="S3.E4.m1.1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1"><apply id="S3.E4.m1.1.1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2">superscript</csymbol><apply id="S3.E4.m1.1.1.1.1.1.1.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.2.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2">subscript</csymbol><sum id="S3.E4.m1.1.1.1.1.1.1.2.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2.2.2"></sum><apply id="S3.E4.m1.1.1.1.1.1.1.2.2.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3"><eq id="S3.E4.m1.1.1.1.1.1.1.2.2.3.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3.1"></eq><ci id="S3.E4.m1.1.1.1.1.1.1.2.2.3.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3.2">𝑖</ci><cn id="S3.E4.m1.1.1.1.1.1.1.2.2.3.3.cmml" type="integer" xref="S3.E4.m1.1.1.1.1.1.1.2.2.3.3">1</cn></apply></apply><ci id="S3.E4.m1.1.1.1.1.1.1.2.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.2.3">𝑀</ci></apply><apply id="S3.E4.m1.1.1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1">subscript</csymbol><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1"><csymbol cd="latexml" id="S3.E4.m1.1.1.1.1.1.1.1.1.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.2">norm</csymbol><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1"><minus id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.1"></minus><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2">superscript</csymbol><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2">subscript</csymbol><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.2">𝒏</ci><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.2.3">𝑖</ci></apply><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3"><times id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.1"></times><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.2">𝑔</ci><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.2.3.3">𝑡</ci></apply></apply><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3">superscript</csymbol><apply id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.1.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3">subscript</csymbol><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.2.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.2">𝒏</ci><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.3.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.2.3">𝑖</ci></apply><ci id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.3a.cmml" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.3"><mtext id="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.3.cmml" mathsize="70%" xref="S3.E4.m1.1.1.1.1.1.1.1.1.1.1.3.3">pred</mtext></ci></apply></apply></apply><cn id="S3.E4.m1.1.1.1.1.1.1.1.3.cmml" type="integer" xref="S3.E4.m1.1.1.1.1.1.1.1.3">1</cn></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E4.m1.1c">\mathcal{L}_{normal}=\frac{1}{M}\left(\sum_{i=1}^{M}\left\|\bm{n}_{i}^{gt}-\bm%
+{n}_{i}^{\text{pred}}\right\|_{1}\right)</annotation><annotation encoding="application/x-llamapun" id="S3.E4.m1.1d">caligraphic_L start_POSTSUBSCRIPT italic_n italic_o italic_r italic_m italic_a italic_l end_POSTSUBSCRIPT = divide start_ARG 1 end_ARG start_ARG italic_M end_ARG ( ∑ start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_M end_POSTSUPERSCRIPT ∥ bold_italic_n start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_g italic_t end_POSTSUPERSCRIPT - bold_italic_n start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT pred end_POSTSUPERSCRIPT ∥ start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS4.p2.6">where <math alttext="M" class="ltx_Math" display="inline" id="S3.SS4.p2.5.m1.1"><semantics id="S3.SS4.p2.5.m1.1a"><mi id="S3.SS4.p2.5.m1.1.1" xref="S3.SS4.p2.5.m1.1.1.cmml">M</mi><annotation-xml encoding="MathML-Content" id="S3.SS4.p2.5.m1.1b"><ci id="S3.SS4.p2.5.m1.1.1.cmml" xref="S3.SS4.p2.5.m1.1.1">𝑀</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p2.5.m1.1c">M</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p2.5.m1.1d">italic_M</annotation></semantics></math> denotes the number of triangles, here we set it to 4 corresponding to the selected body parts. <math alttext="{n}" class="ltx_Math" display="inline" id="S3.SS4.p2.6.m2.1"><semantics id="S3.SS4.p2.6.m2.1a"><mi id="S3.SS4.p2.6.m2.1.1" xref="S3.SS4.p2.6.m2.1.1.cmml">n</mi><annotation-xml encoding="MathML-Content" id="S3.SS4.p2.6.m2.1b"><ci id="S3.SS4.p2.6.m2.1.1.cmml" xref="S3.SS4.p2.6.m2.1.1">𝑛</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p2.6.m2.1c">{n}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p2.6.m2.1d">italic_n</annotation></semantics></math> stands for the normal vector of the local plane.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p3">
+<p class="ltx_p" id="S3.SS4.p3.1"><span class="ltx_text ltx_font_bold" id="S3.SS4.p3.1.1">Bone Loss.</span>
+Bone loss as a constraints in human poses estimation is also widely be used <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib28" title="">28</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib37" title="">37</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib23" title="">23</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib19" title="">19</a>]</cite>. We adopt this loss to deliver a limitation on skeleton and echo with the additional input distance information. The bone loss is defined as:</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p4">
+<table class="ltx_equation ltx_eqn_table" id="S3.E5">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{L}_{bone}=\frac{1}{L}\left(\sum_{i=1}^{L}\left\|\bm{b}_{i}^{gt}-\bm{b%
+}_{i}^{\text{pred}}\right\|_{1}\right)" class="ltx_Math" display="block" id="S3.E5.m1.1"><semantics id="S3.E5.m1.1a"><mrow id="S3.E5.m1.1.1" xref="S3.E5.m1.1.1.cmml"><msub id="S3.E5.m1.1.1.3" xref="S3.E5.m1.1.1.3.cmml"><mi class="ltx_font_mathcaligraphic" id="S3.E5.m1.1.1.3.2" xref="S3.E5.m1.1.1.3.2.cmml">ℒ</mi><mrow id="S3.E5.m1.1.1.3.3" xref="S3.E5.m1.1.1.3.3.cmml"><mi id="S3.E5.m1.1.1.3.3.2" xref="S3.E5.m1.1.1.3.3.2.cmml">b</mi><mo id="S3.E5.m1.1.1.3.3.1" xref="S3.E5.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E5.m1.1.1.3.3.3" xref="S3.E5.m1.1.1.3.3.3.cmml">o</mi><mo id="S3.E5.m1.1.1.3.3.1a" xref="S3.E5.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E5.m1.1.1.3.3.4" xref="S3.E5.m1.1.1.3.3.4.cmml">n</mi><mo id="S3.E5.m1.1.1.3.3.1b" xref="S3.E5.m1.1.1.3.3.1.cmml">⁢</mo><mi id="S3.E5.m1.1.1.3.3.5" xref="S3.E5.m1.1.1.3.3.5.cmml">e</mi></mrow></msub><mo id="S3.E5.m1.1.1.2" xref="S3.E5.m1.1.1.2.cmml">=</mo><mrow id="S3.E5.m1.1.1.1" xref="S3.E5.m1.1.1.1.cmml"><mfrac id="S3.E5.m1.1.1.1.3" xref="S3.E5.m1.1.1.1.3.cmml"><mn id="S3.E5.m1.1.1.1.3.2" xref="S3.E5.m1.1.1.1.3.2.cmml">1</mn><mi id="S3.E5.m1.1.1.1.3.3" xref="S3.E5.m1.1.1.1.3.3.cmml">L</mi></mfrac><mo id="S3.E5.m1.1.1.1.2" xref="S3.E5.m1.1.1.1.2.cmml">⁢</mo><mrow id="S3.E5.m1.1.1.1.1.1" xref="S3.E5.m1.1.1.1.1.1.1.cmml"><mo id="S3.E5.m1.1.1.1.1.1.2" xref="S3.E5.m1.1.1.1.1.1.1.cmml">(</mo><mrow id="S3.E5.m1.1.1.1.1.1.1" xref="S3.E5.m1.1.1.1.1.1.1.cmml"><munderover id="S3.E5.m1.1.1.1.1.1.1.2" xref="S3.E5.m1.1.1.1.1.1.1.2.cmml"><mo id="S3.E5.m1.1.1.1.1.1.1.2.2.2" lspace="0em" movablelimits="false" rspace="0em" xref="S3.E5.m1.1.1.1.1.1.1.2.2.2.cmml">∑</mo><mrow id="S3.E5.m1.1.1.1.1.1.1.2.2.3" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3.cmml"><mi id="S3.E5.m1.1.1.1.1.1.1.2.2.3.2" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3.2.cmml">i</mi><mo id="S3.E5.m1.1.1.1.1.1.1.2.2.3.1" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3.1.cmml">=</mo><mn id="S3.E5.m1.1.1.1.1.1.1.2.2.3.3" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3.3.cmml">1</mn></mrow><mi id="S3.E5.m1.1.1.1.1.1.1.2.3" xref="S3.E5.m1.1.1.1.1.1.1.2.3.cmml">L</mi></munderover><msub id="S3.E5.m1.1.1.1.1.1.1.1" xref="S3.E5.m1.1.1.1.1.1.1.1.cmml"><mrow id="S3.E5.m1.1.1.1.1.1.1.1.1.1" xref="S3.E5.m1.1.1.1.1.1.1.1.1.2.cmml"><mo id="S3.E5.m1.1.1.1.1.1.1.1.1.1.2" xref="S3.E5.m1.1.1.1.1.1.1.1.1.2.1.cmml">‖</mo><mrow id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.cmml"><msubsup id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.cmml"><mi id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.2" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.2.cmml">𝒃</mi><mi id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.3" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.3.cmml">i</mi><mrow id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.cmml"><mi id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.2" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.2.cmml">g</mi><mo id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.1" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.1.cmml">⁢</mo><mi id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.3" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.3.cmml">t</mi></mrow></msubsup><mo id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.1" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.1.cmml">−</mo><msubsup id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.cmml"><mi id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.2" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.2.cmml">𝒃</mi><mi id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.3" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.3.cmml">i</mi><mtext id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.3" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.3a.cmml">pred</mtext></msubsup></mrow><mo id="S3.E5.m1.1.1.1.1.1.1.1.1.1.3" xref="S3.E5.m1.1.1.1.1.1.1.1.1.2.1.cmml">‖</mo></mrow><mn id="S3.E5.m1.1.1.1.1.1.1.1.3" xref="S3.E5.m1.1.1.1.1.1.1.1.3.cmml">1</mn></msub></mrow><mo id="S3.E5.m1.1.1.1.1.1.3" xref="S3.E5.m1.1.1.1.1.1.1.cmml">)</mo></mrow></mrow></mrow><annotation-xml encoding="MathML-Content" id="S3.E5.m1.1b"><apply id="S3.E5.m1.1.1.cmml" xref="S3.E5.m1.1.1"><eq id="S3.E5.m1.1.1.2.cmml" xref="S3.E5.m1.1.1.2"></eq><apply id="S3.E5.m1.1.1.3.cmml" xref="S3.E5.m1.1.1.3"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.3.1.cmml" xref="S3.E5.m1.1.1.3">subscript</csymbol><ci id="S3.E5.m1.1.1.3.2.cmml" xref="S3.E5.m1.1.1.3.2">ℒ</ci><apply id="S3.E5.m1.1.1.3.3.cmml" xref="S3.E5.m1.1.1.3.3"><times id="S3.E5.m1.1.1.3.3.1.cmml" xref="S3.E5.m1.1.1.3.3.1"></times><ci id="S3.E5.m1.1.1.3.3.2.cmml" xref="S3.E5.m1.1.1.3.3.2">𝑏</ci><ci id="S3.E5.m1.1.1.3.3.3.cmml" xref="S3.E5.m1.1.1.3.3.3">𝑜</ci><ci id="S3.E5.m1.1.1.3.3.4.cmml" xref="S3.E5.m1.1.1.3.3.4">𝑛</ci><ci id="S3.E5.m1.1.1.3.3.5.cmml" xref="S3.E5.m1.1.1.3.3.5">𝑒</ci></apply></apply><apply id="S3.E5.m1.1.1.1.cmml" xref="S3.E5.m1.1.1.1"><times id="S3.E5.m1.1.1.1.2.cmml" xref="S3.E5.m1.1.1.1.2"></times><apply id="S3.E5.m1.1.1.1.3.cmml" xref="S3.E5.m1.1.1.1.3"><divide id="S3.E5.m1.1.1.1.3.1.cmml" xref="S3.E5.m1.1.1.1.3"></divide><cn id="S3.E5.m1.1.1.1.3.2.cmml" type="integer" xref="S3.E5.m1.1.1.1.3.2">1</cn><ci id="S3.E5.m1.1.1.1.3.3.cmml" xref="S3.E5.m1.1.1.1.3.3">𝐿</ci></apply><apply id="S3.E5.m1.1.1.1.1.1.1.cmml" xref="S3.E5.m1.1.1.1.1.1"><apply id="S3.E5.m1.1.1.1.1.1.1.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.1.1.1.1.2.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2">superscript</csymbol><apply id="S3.E5.m1.1.1.1.1.1.1.2.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.1.1.1.1.2.2.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2">subscript</csymbol><sum id="S3.E5.m1.1.1.1.1.1.1.2.2.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2.2.2"></sum><apply id="S3.E5.m1.1.1.1.1.1.1.2.2.3.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3"><eq id="S3.E5.m1.1.1.1.1.1.1.2.2.3.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3.1"></eq><ci id="S3.E5.m1.1.1.1.1.1.1.2.2.3.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3.2">𝑖</ci><cn id="S3.E5.m1.1.1.1.1.1.1.2.2.3.3.cmml" type="integer" xref="S3.E5.m1.1.1.1.1.1.1.2.2.3.3">1</cn></apply></apply><ci id="S3.E5.m1.1.1.1.1.1.1.2.3.cmml" xref="S3.E5.m1.1.1.1.1.1.1.2.3">𝐿</ci></apply><apply id="S3.E5.m1.1.1.1.1.1.1.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.1.1.1.1.1.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1">subscript</csymbol><apply id="S3.E5.m1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1"><csymbol cd="latexml" id="S3.E5.m1.1.1.1.1.1.1.1.1.2.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.2">norm</csymbol><apply id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1"><minus id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.1"></minus><apply id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2">superscript</csymbol><apply id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2">subscript</csymbol><ci id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.2">𝒃</ci><ci id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.3.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.2.3">𝑖</ci></apply><apply id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3"><times id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.1"></times><ci id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.2">𝑔</ci><ci id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.3.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.2.3.3">𝑡</ci></apply></apply><apply id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3">superscript</csymbol><apply id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3"><csymbol cd="ambiguous" id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.1.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3">subscript</csymbol><ci id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.2.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.2">𝒃</ci><ci id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.3.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.2.3">𝑖</ci></apply><ci id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.3a.cmml" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.3"><mtext id="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.3.cmml" mathsize="70%" xref="S3.E5.m1.1.1.1.1.1.1.1.1.1.1.3.3">pred</mtext></ci></apply></apply></apply><cn id="S3.E5.m1.1.1.1.1.1.1.1.3.cmml" type="integer" xref="S3.E5.m1.1.1.1.1.1.1.1.3">1</cn></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E5.m1.1c">\mathcal{L}_{bone}=\frac{1}{L}\left(\sum_{i=1}^{L}\left\|\bm{b}_{i}^{gt}-\bm{b%
+}_{i}^{\text{pred}}\right\|_{1}\right)</annotation><annotation encoding="application/x-llamapun" id="S3.E5.m1.1d">caligraphic_L start_POSTSUBSCRIPT italic_b italic_o italic_n italic_e end_POSTSUBSCRIPT = divide start_ARG 1 end_ARG start_ARG italic_L end_ARG ( ∑ start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_L end_POSTSUPERSCRIPT ∥ bold_italic_b start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_g italic_t end_POSTSUPERSCRIPT - bold_italic_b start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT pred end_POSTSUPERSCRIPT ∥ start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT )</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS4.p4.2">where <math alttext="{L}" class="ltx_Math" display="inline" id="S3.SS4.p4.1.m1.1"><semantics id="S3.SS4.p4.1.m1.1a"><mi id="S3.SS4.p4.1.m1.1.1" xref="S3.SS4.p4.1.m1.1.1.cmml">L</mi><annotation-xml encoding="MathML-Content" id="S3.SS4.p4.1.m1.1b"><ci id="S3.SS4.p4.1.m1.1.1.cmml" xref="S3.SS4.p4.1.m1.1.1">𝐿</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p4.1.m1.1c">{L}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p4.1.m1.1d">italic_L</annotation></semantics></math> is the number of bone vector, we use all the 133 joints. Each bone <math alttext="{b}" class="ltx_Math" display="inline" id="S3.SS4.p4.2.m2.1"><semantics id="S3.SS4.p4.2.m2.1a"><mi id="S3.SS4.p4.2.m2.1.1" xref="S3.SS4.p4.2.m2.1.1.cmml">b</mi><annotation-xml encoding="MathML-Content" id="S3.SS4.p4.2.m2.1b"><ci id="S3.SS4.p4.2.m2.1.1.cmml" xref="S3.SS4.p4.2.m2.1.1">𝑏</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS4.p4.2.m2.1c">{b}</annotation><annotation encoding="application/x-llamapun" id="S3.SS4.p4.2.m2.1d">italic_b</annotation></semantics></math> is a directed vector pointing from the starting joint to its associated parent.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T1.2">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T1.2.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_t" id="S3.T1.2.1.1.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.1.1.1.1" style="font-size:80%;">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.2.1.1.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.1.1.2.1" style="font-size:80%;">All</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.2.1.1.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.1.1.3.1" style="font-size:80%;">Body</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.2.1.1.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.1.1.4.1" style="font-size:80%;">Face/Aligned</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T1.2.1.1.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.1.1.5.1" style="font-size:80%;">Hands/Aligned</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.2.2.1">
+<td class="ltx_td ltx_align_left ltx_border_tt" id="S3.T1.2.2.1.1" style="padding-top:1.2pt;padding-bottom:1.2pt;">
+<span class="ltx_text" id="S3.T1.2.2.1.1.1" style="font-size:80%;">JointFormer</span><sup class="ltx_sup" id="S3.T1.2.2.1.1.2"><span class="ltx_text" id="S3.T1.2.2.1.1.2.1" style="font-size:80%;">*</span></sup>
+</td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S3.T1.2.2.1.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.2.1.2.1" style="font-size:80%;">67.50</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S3.T1.2.2.1.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.2.1.3.1" style="font-size:80%;">59.24</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S3.T1.2.2.1.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.2.1.4.1" style="font-size:80%;">48.64/10.10</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S3.T1.2.2.1.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.2.1.5.1" style="font-size:80%;">101.45/29.41</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.3.2">
+<td class="ltx_td ltx_align_left" id="S3.T1.2.3.2.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.3.2.1.1" style="font-size:80%;">Semantic Graph Attention Encoder</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.3.2.2.1" style="font-size:80%;">53.90</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.3.2.3.1" style="font-size:80%;">48.27</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.3.2.4.1" style="font-size:80%;">44.49/17.66</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.3.2.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.3.2.5.1" style="font-size:80%;">72.23/27.16</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.4.3">
+<td class="ltx_td ltx_align_left" id="S3.T1.2.4.3.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.4.3.1.1" style="font-size:80%;">Semantic Graph Attention Encoder-Body Part Decoder</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.4.3.2.1" style="font-size:80%;">52.57</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.4.3.3.1" style="font-size:80%;">46.82</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.4.3.4.1" style="font-size:80%;">43.75/17.08</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.4.3.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.4.3.5.1" style="font-size:80%;">69.66/26.78</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.5.4">
+<td class="ltx_td ltx_align_left" id="S3.T1.2.5.4.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.5.4.1.1" style="font-size:80%;">Semantic Graph Attention Encoder-Body Part Decoder-Distance</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.5.4.2.1" style="font-size:80%;">49.97</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.5.4.3.1" style="font-size:80%;">46.24</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.5.4.4.1" style="font-size:80%;">41.23/24.48</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.2.5.4.5" style="padding-top:1.2pt;padding-bottom:1.2pt;">
+<span class="ltx_text ltx_font_bold" id="S3.T1.2.5.4.5.1" style="font-size:80%;">66.16</span><span class="ltx_text" id="S3.T1.2.5.4.5.2" style="font-size:80%;">/</span><span class="ltx_text ltx_font_bold" id="S3.T1.2.5.4.5.3" style="font-size:80%;">25.87</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.2.6.5">
+<td class="ltx_td ltx_align_left ltx_border_b" id="S3.T1.2.6.5.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.6.5.1.1" style="font-size:80%;">Semantic Graph Attention Encoder-Body Part Decoder-Distance-Loss</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S3.T1.2.6.5.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text ltx_font_bold" id="S3.T1.2.6.5.2.1" style="font-size:80%;">47.87</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S3.T1.2.6.5.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text ltx_font_bold" id="S3.T1.2.6.5.3.1" style="font-size:80%;">45.39</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S3.T1.2.6.5.4" style="padding-top:1.2pt;padding-bottom:1.2pt;">
+<span class="ltx_text ltx_font_bold" id="S3.T1.2.6.5.4.1" style="font-size:80%;">36.37</span><span class="ltx_text" id="S3.T1.2.6.5.4.2" style="font-size:80%;">/</span><span class="ltx_text ltx_font_bold" id="S3.T1.2.6.5.4.3" style="font-size:80%;">15.95</span>
+</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S3.T1.2.6.5.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S3.T1.2.6.5.5.1" style="font-size:80%;">67.86/27.77</span></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering" style="font-size:80%;"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S3.T1.7.1.1" style="font-size:113%;">Table 1</span>: </span><span class="ltx_text" id="S3.T1.8.2" style="font-size:113%;">Ablation study of the effect on different part. JointFormer<sup class="ltx_sup" id="S3.T1.8.2.1">*</sup> represents for the network reproduced by ourselves.</span></figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experiments</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">In this section, we first introduce the datasets to train and evaluate our proposed approach, then show the implementation details, and finally perform an ablation study and a comparisons with state-of-the-art methods.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Datasets and Evaluation</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Our proposed approach is evaluated on H3WB <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib38" title="">38</a>]</cite> dataset, a recent benchmark for diverse whole-body pose estimation tasks.</p>
+</div>
+<section class="ltx_subparagraph" id="S4.SS1.SSS0.P0.SPx1">
+<h4 class="ltx_title ltx_title_subparagraph">Datasets.</h4>
+<div class="ltx_para" id="S4.SS1.SSS0.P0.SPx1.p1">
+<p class="ltx_p" id="S4.SS1.SSS0.P0.SPx1.p1.1">H3WB is a new large-scale dataset for accurate 3D whole-body pose estimation, which extend from Human3.6M <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib9" title="">9</a>]</cite> with 3D keypoint annotations. It consists of 133 paired 2D and 3D whole-body keypoint annotations for a set of 100k images from Human3.6M, following the same layout used in COCO WholeBody <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib11" title="">11</a>]</cite>.
+The training set we used are samples from S1, S5, S6 and S7, including 80k {image, 2D, 3D} triplets. The test set contains all samples from S8, including 20k triplets.</p>
+</div>
+</section>
+<section class="ltx_subparagraph" id="S4.SS1.SSS0.P0.SPx2">
+<h4 class="ltx_title ltx_title_subparagraph">Evaluation.</h4>
+<div class="ltx_para" id="S4.SS1.SSS0.P0.SPx2.p1">
+<p class="ltx_p" id="S4.SS1.SSS0.P0.SPx2.p1.1">For evaluation, we following the metric defined in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib38" title="">38</a>]</cite>:</p>
+<ul class="ltx_itemize" id="S4.I1">
+<li class="ltx_item" id="S4.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I1.i1.p1">
+<p class="ltx_p" id="S4.I1.i1.p1.1">MPJPE for the whole-body, the body, the face and the hands when all joints are aligned with the pelvis, which in our case is the middle of left and right hip,</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I1.i2.p1">
+<p class="ltx_p" id="S4.I1.i2.p1.1">MPJPE for the face when it is centered on the nose,</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I1.i3.p1">
+<p class="ltx_p" id="S4.I1.i3.p1.1">MPJPE for the hands when hands are centered on the wrists, i.e left hand aligned with keypoint 92 and right hand aligned with keypoint 113.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Implementation Details</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">We implement our method in PyTorch based on NVIDIA A40. The network is trained for 100 epochs with a batch size of 200 using AdamW <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib16" title="">16</a>]</cite> optimizer. We set the initial learning rate to 0.001 and using a cosine annealing learning rate decay <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib15" title="">15</a>]</cite>. And we use test-time data augmentation by horizontal flipping, following <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib24" title="">24</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Ablation Studies</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">To ascertain the impact of each part on the model’s predictive power, we conducted an ablation study. <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.T1" title="In 3.4 Loss Function ‣ 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">1</span></a> shows the overview of our ablation studies.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1">Examining the comprehensive results from <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S3.T1" title="In 3.4 Loss Function ‣ 3 Methods ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">1</span></a>, we find that every element plays a role in enhancing the precision of 3D whole-body pose estimation. The most substantial improvement is observed in Semantic Graph Attention Encoder part, which significantly boosting precision by integrating more global and local features. Following that is the additional Distance Information in the input, which provides a effective improvement for areas of the body that have a higher concentration of features, such as the face and hands. Subsequently, under the constraints of Normal and Bone loss, the model’s accuracy is further enhanced. Although the overall improvement from the Body Part Decoder section is not substantial, the accuracy of body part is notably improved due to the separation of the whole-body into parts with varying densities.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.4 </span>Comparison to the State-of-the-Art Methods</h3>
+<div class="ltx_para" id="S4.SS4.p1">
+<p class="ltx_p" id="S4.SS4.p1.1">We compare the performance against the three state-of-the-art 3D whole-body pose estimation methods, such as Large SimpleBaseline <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib18" title="">18</a>]</cite>, JointFormer <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib17" title="">17</a>]</cite>, and 3D-LFM <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#bib.bib7" title="">7</a>]</cite>. The results are presented in <a class="ltx_ref" href="https://arxiv.org/html/2406.01196v1#S4.T2" title="In 4.4 Comparison to the State-of-the-Art Methods ‣ 4 Experiments ‣ 3D WholeBody Pose Estimation based on Semantic Graph Attention Network and Distance Information"><span class="ltx_text ltx_ref_tag">Tab.</span> <span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+<figure class="ltx_table" id="S4.T2">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S4.T2.2" style="width:248.3pt;height:81pt;vertical-align:-0.0pt;"><span class="ltx_transformed_inner" style="transform:translate(-13.8pt,4.5pt) scale(0.9,0.9) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S4.T2.2.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S4.T2.2.1.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_t" id="S4.T2.2.1.1.1.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.1.1.1.1" style="font-size:80%;">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.2.1.1.1.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.1.1.2.1" style="font-size:80%;">All</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.2.1.1.1.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.1.1.3.1" style="font-size:80%;">Body</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.2.1.1.1.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.1.1.4.1" style="font-size:80%;">Face/Aligned</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S4.T2.2.1.1.1.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.1.1.5.1" style="font-size:80%;">Hand/Aligned</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T2.2.1.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt" id="S4.T2.2.1.2.1.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.2.1.1.1" style="font-size:80%;">Large SimpleBaseline</span></th>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S4.T2.2.1.2.1.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.2.1.2.1" style="font-size:80%;">112.3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S4.T2.2.1.2.1.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.2.1.3.1" style="font-size:80%;">112.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S4.T2.2.1.2.1.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.2.1.4.1" style="font-size:80%;">110.6/14.6</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="S4.T2.2.1.2.1.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.2.1.5.1" style="font-size:80%;">114.8/31.7</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.2.1.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T2.2.1.3.2.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.3.2.1.1" style="font-size:80%;">JointFormer</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.3.2.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.3.2.2.1" style="font-size:80%;">88.3</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.3.2.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.3.2.3.1" style="font-size:80%;">84.9</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.3.2.4" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.3.2.4.1" style="font-size:80%;">66.5/17.8</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.3.2.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.3.2.5.1" style="font-size:80%;">125.3/43.7</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.2.1.4.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S4.T2.2.1.4.3.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.4.3.1.1" style="font-size:80%;">3D-LFM</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.4.3.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.4.3.2.1" style="font-size:80%;">64.13</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.4.3.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.4.3.3.1" style="font-size:80%;">60.83</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.4.3.4" style="padding-top:1.2pt;padding-bottom:1.2pt;">
+<span class="ltx_text" id="S4.T2.2.1.4.3.4.1" style="font-size:80%;">56.55/</span><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.4.3.4.2" style="font-size:80%;">10.44</span>
+</td>
+<td class="ltx_td ltx_align_center" id="S4.T2.2.1.4.3.5" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.4.3.5.1" style="font-size:80%;">78.21/28.22</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T2.2.1.5.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b" id="S4.T2.2.1.5.4.1" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text" id="S4.T2.2.1.5.4.1.1" style="font-size:80%;">Proposed</span></th>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.2.1.5.4.2" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.5.4.2.1" style="font-size:80%;">47.87</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.2.1.5.4.3" style="padding-top:1.2pt;padding-bottom:1.2pt;"><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.5.4.3.1" style="font-size:80%;">45.39</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.2.1.5.4.4" style="padding-top:1.2pt;padding-bottom:1.2pt;">
+<span class="ltx_text ltx_font_bold" id="S4.T2.2.1.5.4.4.1" style="font-size:80%;">36.37</span><span class="ltx_text" id="S4.T2.2.1.5.4.4.2" style="font-size:80%;">/15.95</span>
+</td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T2.2.1.5.4.5" style="padding-top:1.2pt;padding-bottom:1.2pt;">
+<span class="ltx_text ltx_font_bold" id="S4.T2.2.1.5.4.5.1" style="font-size:80%;">67.86</span><span class="ltx_text" id="S4.T2.2.1.5.4.5.2" style="font-size:80%;">/</span><span class="ltx_text ltx_font_bold" id="S4.T2.2.1.5.4.5.3" style="font-size:80%;">27.77</span>
+</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering" style="font-size:80%;"><span class="ltx_tag ltx_tag_table"><span class="ltx_text" id="S4.T2.5.1.1" style="font-size:113%;">Table 2</span>: </span><span class="ltx_text" id="S4.T2.6.2" style="font-size:113%;">Comparison to the state-of-the-art methods on H3WB test dataset. Results are calculated in millimeters for MPJPE metric.</span></figcaption>
+</figure>
+<div class="ltx_para" id="S4.SS4.p2">
+<p class="ltx_p" id="S4.SS4.p2.1">As demonstrated by the experimental comparison, our approach significantly outperforms the current state-of-the-art techniques, achieving a substantial reduction in the MPJPE for the body part, decreasing from 60.83mm to 45.39mm.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">Our proposed system incorporates several innovative components that collectively enhance the performance of human pose estimation and understanding: A Semantic Graph Attention Encoder that effectively harnesses both global and local features; A Body Part Decoder which introduced to obtain more detailed insights specific to each corresponding body part; A Distance Information who can enhance the model’s ability to understand the relative positions and spatial relationships between related joints; and A Geometry Loss is implied to constrain and maintain the structural integrity of the body skeleton. Overall, these advancements delivering highly detailed and accurate 3D whole-body pose estimations.</p>
+</div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.1.1" style="font-size:90%;">
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib1.2.1" style="font-size:90%;">Neural machine translation by jointly learning to align and
+translate.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib1.3.1" style="font-size:90%;">arXiv preprint arXiv:1409.0473</span><span class="ltx_text" id="bib.bib1.4.2" style="font-size:90%;">, 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.1.1" style="font-size:90%;">
+Adnane Boukhayma, Rodrigo de Bem, and Philip H. S. Torr.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib2.2.1" style="font-size:90%;">3d hand shape and pose from images in the wild.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib2.3.1" style="font-size:90%;">2019 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR)</span><span class="ltx_text" id="bib.bib2.4.2" style="font-size:90%;">, pages 10835–10844, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.1.1" style="font-size:90%;">
+Zhe Cao, Tomas Simon, Shih-En Wei, and Yaser Sheikh.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.2.1" style="font-size:90%;">Realtime multi-person 2d pose estimation using part affinity fields.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib3.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib3.4.2" style="font-size:90%;">Proceedings of the IEEE conference on computer vision and
+pattern recognition</span><span class="ltx_text" id="bib.bib3.5.3" style="font-size:90%;">, pages 7291–7299, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.1.1" style="font-size:90%;">
+Xinlei Chen, Hao Fang, Tsung-Yi Lin, Ramakrishna Vedantam, Saurabh Gupta, Piotr
+Dollár, and C. Lawrence Zitnick.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib4.2.1" style="font-size:90%;">Microsoft coco captions: Data collection and evaluation server.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib4.3.1" style="font-size:90%;">ArXiv</span><span class="ltx_text" id="bib.bib4.4.2" style="font-size:90%;">, abs/1504.00325, 2015.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.1.1" style="font-size:90%;">
+Yujin Chen, Zhigang Tu, Di Kang, Linchao Bao, Ying Zhang, Xuefei Zhe, Ruizhi
+Chen, and Junsong Yuan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib5.2.1" style="font-size:90%;">Model-based 3d hand reconstruction via self-supervised learning.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib5.3.1" style="font-size:90%;">2021 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR)</span><span class="ltx_text" id="bib.bib5.4.2" style="font-size:90%;">, pages 10446–10455, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.1.1" style="font-size:90%;">
+Daniel E. Crispell and Maxim Bazik.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib6.2.1" style="font-size:90%;">Pix2face: Direct 3d face model estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib6.3.1" style="font-size:90%;">2017 IEEE International Conference on Computer Vision Workshops
+(ICCVW)</span><span class="ltx_text" id="bib.bib6.4.2" style="font-size:90%;">, pages 2512–2518, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.1.1" style="font-size:90%;">
+Mosam Dabhi, László A. Jeni, and Simon Lucey.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib7.2.1" style="font-size:90%;">3d-lfm: Lifting foundation model.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib7.3.1" style="font-size:90%;">ArXiv</span><span class="ltx_text" id="bib.bib7.4.2" style="font-size:90%;">, abs/2312.11894, 2023.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.1.1" style="font-size:90%;">
+Ikhsanul Habibie, Weipeng Xu, Dushyant Mehta, Gerard Pons-Moll, and Christian
+Theobalt.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.2.1" style="font-size:90%;">In the wild human pose estimation using explicit 2d features and
+intermediate 3d representations.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib8.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib8.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib8.5.3" style="font-size:90%;">, June 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.1.1" style="font-size:90%;">
+Catalin Ionescu, Dragos Papava, Vlad Olaru, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib9.2.1" style="font-size:90%;">Human3.6m: Large scale datasets and predictive methods for 3d human
+sensing in natural environments.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib9.3.1" style="font-size:90%;">IEEE Transactions on Pattern Analysis and Machine Intelligence</span><span class="ltx_text" id="bib.bib9.4.2" style="font-size:90%;">,
+36(7):1325–1339, jul 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.1.1" style="font-size:90%;">
+Aaron S. Jackson, Adrian Bulat, Vasileios Argyriou, and Georgios Tzimiropoulos.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib10.2.1" style="font-size:90%;">Large pose 3d face reconstruction from a single image via direct
+volumetric cnn regression.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib10.3.1" style="font-size:90%;">2017 IEEE International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib10.4.2" style="font-size:90%;">,
+pages 1031–1039, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.1.1" style="font-size:90%;">
+Sheng Jin, Lumin Xu, Jin Xu, Can Wang, Wentao Liu, Chen Qian, Wanli Ouyang, and
+Ping Luo.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib11.2.1" style="font-size:90%;">Whole-body human pose estimation in the wild, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.1.1" style="font-size:90%;">
+Hanbyul Joo, Tomas Simon, Xulong Li, Hao Liu, Lei Tan, Lin Gui, Sean Banerjee,
+Timothy Godisart, Bart C. Nabbe, I. Matthews, Takeo Kanade, Shohei Nobuhara,
+and Yaser Sheikh.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib12.2.1" style="font-size:90%;">Panoptic studio: A massively multiview system for social interaction
+capture.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib12.3.1" style="font-size:90%;">IEEE Transactions on Pattern Analysis and Machine Intelligence</span><span class="ltx_text" id="bib.bib12.4.2" style="font-size:90%;">,
+41:190–204, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.1.1" style="font-size:90%;">
+Thomas Kipf and Max Welling.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib13.2.1" style="font-size:90%;">Semi-supervised classification with graph convolutional networks.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib13.3.1" style="font-size:90%;">ArXiv</span><span class="ltx_text" id="bib.bib13.4.2" style="font-size:90%;">, abs/1609.02907, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.1.1" style="font-size:90%;">
+Kevin Lin, Lijuan Wang, and Zicheng Liu.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib14.2.1" style="font-size:90%;">End-to-end human pose and mesh reconstruction with transformers.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib14.3.1" style="font-size:90%;">2021 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR)</span><span class="ltx_text" id="bib.bib14.4.2" style="font-size:90%;">, pages 1954–1963, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.1.1" style="font-size:90%;">
+Ilya Loshchilov and Frank Hutter.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib15.2.1" style="font-size:90%;">Sgdr: Stochastic gradient descent with warm restarts.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib15.3.1" style="font-size:90%;">arXiv: Learning</span><span class="ltx_text" id="bib.bib15.4.2" style="font-size:90%;">, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.1.1" style="font-size:90%;">
+Ilya Loshchilov and Frank Hutter.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.2.1" style="font-size:90%;">Decoupled weight decay regularization.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib16.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib16.4.2" style="font-size:90%;">ICLR</span><span class="ltx_text" id="bib.bib16.5.3" style="font-size:90%;">, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.1.1" style="font-size:90%;">
+Sebastian Lutz, Richard Blythman, Koustav Ghosal, Matthew Moynihan, Ciaran K.
+Simms, and Aljosa Smolic.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib17.2.1" style="font-size:90%;">Jointformer: Single-frame lifting transformer with error prediction
+and refinement for 3d human pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib17.3.1" style="font-size:90%;">2022 26th International Conference on Pattern Recognition
+(ICPR)</span><span class="ltx_text" id="bib.bib17.4.2" style="font-size:90%;">, pages 1156–1163, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.1.1" style="font-size:90%;">
+Julieta Martinez, Rayat Hossain, Javier Romero, and J. Little.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib18.2.1" style="font-size:90%;">A simple yet effective baseline for 3d human pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib18.3.1" style="font-size:90%;">2017 IEEE International Conference on Computer Vision (ICCV)</span><span class="ltx_text" id="bib.bib18.4.2" style="font-size:90%;">,
+pages 2659–2668, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.1.1" style="font-size:90%;">
+Ai Matsune, Shichen Hu, Guangquan Li, Sihan Wen, Xiantan Zhu, and Zhiming Tan.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.2.1" style="font-size:90%;">A geometry loss combination for 3d human pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib19.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib19.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF Winter Conference on Applications
+of Computer Vision</span><span class="ltx_text" id="bib.bib19.5.3" style="font-size:90%;">, pages 3272–3281, 2024.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.1.1" style="font-size:90%;">
+Dushyant Mehta, Helge Rhodin, Dan Casas, Pascal V. Fua, Oleksandr Sotnychenko,
+Weipeng Xu, and Christian Theobalt.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib20.2.1" style="font-size:90%;">Monocular 3d human pose estimation in the wild using improved cnn
+supervision.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib20.3.1" style="font-size:90%;">2017 International Conference on 3D Vision (3DV)</span><span class="ltx_text" id="bib.bib20.4.2" style="font-size:90%;">, pages
+506–516, 2016.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.1.1" style="font-size:90%;">
+Dushyant Mehta, Oleksandr Sotnychenko, Franziska Mueller, Weipeng Xu, Srinath
+Sridhar, Gerard Pons-Moll, and Christian Theobalt.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib21.2.1" style="font-size:90%;">Single-shot multi-person 3d pose estimation from monocular rgb.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib21.3.1" style="font-size:90%;">2018 International Conference on 3D Vision (3DV)</span><span class="ltx_text" id="bib.bib21.4.2" style="font-size:90%;">, pages
+120–130, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.1.1" style="font-size:90%;">
+Volodymyr Mnih, Nicolas Heess, Alex Graves, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib22.2.1" style="font-size:90%;">Recurrent models of visual attention.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib22.3.1" style="font-size:90%;">Advances in neural information processing systems</span><span class="ltx_text" id="bib.bib22.4.2" style="font-size:90%;">, 27, 2014.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.1.1" style="font-size:90%;">
+Georgios Pavlakos, Xiaowei Zhou, Konstantinos G. Derpanis, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.2.1" style="font-size:90%;">Coarse-to-fine volumetric prediction for single-image 3d human pose.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib23.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib23.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib23.5.3" style="font-size:90%;">, July 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.1.1" style="font-size:90%;">
+Dario Pavllo, Christoph Feichtenhofer, David Grangier, and Michael Auli.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib24.2.1" style="font-size:90%;">3d human pose estimation in video with temporal convolutions and
+semi-supervised training.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib24.3.1" style="font-size:90%;">2019 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR)</span><span class="ltx_text" id="bib.bib24.4.2" style="font-size:90%;">, pages 7745–7754, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.1.1" style="font-size:90%;">
+Xiaojuan Qi, Renjie Liao, Zhengzhe Liu, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.2.1" style="font-size:90%;">Geonet: Geometric neural network for joint depth and surface normal
+estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib25.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib25.4.2" style="font-size:90%;">CVPR</span><span class="ltx_text" id="bib.bib25.5.3" style="font-size:90%;">, pages 283–291, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.1.1" style="font-size:90%;">
+Grégory Rogez, Philippe Weinzaepfel, and Cordelia Schmid.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib26.2.1" style="font-size:90%;">Lcr-net++: Multi-person 2d and 3d pose detection in natural images.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib26.3.1" style="font-size:90%;">IEEE Transactions on Pattern Analysis and Machine Intelligence</span><span class="ltx_text" id="bib.bib26.4.2" style="font-size:90%;">,
+42:1146–1161, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.1.1" style="font-size:90%;">
+Ke Sun, Bin Xiao, Dong Liu, and Jingdong Wang.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.2.1" style="font-size:90%;">Deep high-resolution representation learning for human pose
+estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib27.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib27.4.2" style="font-size:90%;">Proceedings of the IEEE/CVF conference on computer vision and
+pattern recognition</span><span class="ltx_text" id="bib.bib27.5.3" style="font-size:90%;">, pages 5693–5703, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.1.1" style="font-size:90%;">
+Xiao Sun, Jiaxiang Shang, Shuang Liang, et al.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.2.1" style="font-size:90%;">Compositional human pose regression.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib28.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib28.4.2" style="font-size:90%;">ICCV</span><span class="ltx_text" id="bib.bib28.5.3" style="font-size:90%;">, Oct 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib29.1.1" style="font-size:90%;">
+Ashish Vaswani, Noam M. Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib29.2.1" style="font-size:90%;">Attention is all you need.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib29.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib29.4.2" style="font-size:90%;">Neural Information Processing Systems</span><span class="ltx_text" id="bib.bib29.5.3" style="font-size:90%;">, 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.1.1" style="font-size:90%;">
+Bastian Wandt, Marco Rudolph, Petrissa Zell, Helge Rhodin, and Bodo Rosenhahn.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib30.2.1" style="font-size:90%;">Canonpose: Self-supervised monocular 3d human pose estimation in the
+wild.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib30.3.1" style="font-size:90%;">2021 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR)</span><span class="ltx_text" id="bib.bib30.4.2" style="font-size:90%;">, pages 13289–13299, 2020.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib31.1.1" style="font-size:90%;">
+Tianhan Xu and Wataru Takano.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib31.2.1" style="font-size:90%;">Graph stacked hourglass networks for 3d human pose estimation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib31.3.1" style="font-size:90%;">2021 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR)</span><span class="ltx_text" id="bib.bib31.4.2" style="font-size:90%;">, pages 16100–16109, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.1.1" style="font-size:90%;">
+Sijie Yan, Yuanjun Xiong, and Dahua Lin.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.2.1" style="font-size:90%;">Spatial temporal graph convolutional networks for skeleton-based
+action recognition.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib32.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib32.4.2" style="font-size:90%;">AAAI Conference on Artificial Intelligence</span><span class="ltx_text" id="bib.bib32.5.3" style="font-size:90%;">, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.1.1" style="font-size:90%;">
+Jianwei Yang, Jiasen Lu, Stefan Lee, Dhruv Batra, and Devi Parikh.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.2.1" style="font-size:90%;">Graph r-cnn for scene graph generation.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib33.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib33.4.2" style="font-size:90%;">European Conference on Computer Vision</span><span class="ltx_text" id="bib.bib33.5.3" style="font-size:90%;">, 2018.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.1.1" style="font-size:90%;">
+Wei Yin, Yifan Liu, and Chunhua Shen.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib34.2.1" style="font-size:90%;">Virtual normal: Enforcing geometric constraints for accurate and
+robust depth prediction.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib34.3.1" style="font-size:90%;">IEEE Transactions on Pattern Analysis and Machine Intelligence</span><span class="ltx_text" id="bib.bib34.4.2" style="font-size:90%;">,
+44(10):7282–7295, 2022.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.1.1" style="font-size:90%;">
+Long Zhao, Xi Peng, Yu Tian, Mubbasir Kapadia, and Dimitris N. Metaxas.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib35.2.1" style="font-size:90%;">Semantic graph convolutional networks for 3d human pose regression.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib35.3.1" style="font-size:90%;">2019 IEEE/CVF Conference on Computer Vision and Pattern
+Recognition (CVPR)</span><span class="ltx_text" id="bib.bib35.4.2" style="font-size:90%;">, pages 3420–3430, 2019.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.1.1" style="font-size:90%;">
+Ce Zheng, Sijie Zhu, Mat’ias Mendieta, Taojiannan Yang, Chen Chen, and
+Zhengming Ding.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib36.2.1" style="font-size:90%;">3d human pose estimation with spatial and temporal transformers.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib36.3.1" style="font-size:90%;">2021 IEEE/CVF International Conference on Computer Vision
+(ICCV)</span><span class="ltx_text" id="bib.bib36.4.2" style="font-size:90%;">, pages 11636–11645, 2021.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.1.1" style="font-size:90%;">
+Xingyi Zhou, Qixing Huang, Xiao Sun, Xiangyang Xue, and Yichen Wei.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.2.1" style="font-size:90%;">Towards 3d human pose estimation in the wild: A weakly-supervised
+approach.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib37.3.1" style="font-size:90%;">In </span><span class="ltx_text ltx_font_italic" id="bib.bib37.4.2" style="font-size:90%;">ICCV</span><span class="ltx_text" id="bib.bib37.5.3" style="font-size:90%;">, Oct 2017.
+</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib38.1.1" style="font-size:90%;">
+Yue Zhu, Nermin Samet, and David Picard.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text" id="bib.bib38.2.1" style="font-size:90%;">H3wb: Human3.6m 3d wholebody dataset and benchmark.
+</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bib38.3.1" style="font-size:90%;">2023 IEEE/CVF International Conference on Computer Vision
+(ICCV)</span><span class="ltx_text" id="bib.bib38.4.2" style="font-size:90%;">, pages 20109–20120, 2022.
+</span>
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon Jun  3 10:50:18 2024 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>
