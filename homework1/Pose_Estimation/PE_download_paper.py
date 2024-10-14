@@ -67,7 +67,7 @@ def main():
     # input_link = input("Inserisci l'URL da cui estrarre i paper: ")
     
     # Directory dove salvare i file HTML
-    output_dir = "sources_PE"
+    output_dir = "ID-Homerworks\homework1\Pose_Estimation\sources_PE"
     os.makedirs(output_dir, exist_ok=True)
     
     # Extract papers from the input link ( first 200 and next 200)
