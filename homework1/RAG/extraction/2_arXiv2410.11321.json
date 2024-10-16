@@ -4,7 +4,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "We optimize the performance of ℛℛ\\mathcal{R}caligraphic_R using the InfoNCE loss function (He et al., 2020), as shown in Equation 1, where 𝑫p⁢o⁢ssubscript𝑫𝑝𝑜𝑠\\boldsymbol{D}_{pos}bold_italic_D start_POSTSUBSCRIPT italic_p italic_o italic_s end_POSTSUBSCRIPT represents the supporting documents for the answers, and τ𝜏\\tauitalic_τ is the temperature hyperparameter. The goal is to minimize ℓℓ\\ellroman_ℓ between positive and negative samples."
+            "We optimize the performance of ℛℛ\\mathcal{R}caligraphic_R using the InfoNCE loss function (He et al., 2020), as shown in Equation 1, where 𝑫p⁢o⁢ssubscript𝑫𝑝𝑜𝑠\\boldsymbol{D}_{pos}bold_italic_D start_POSTSUBSCRIPT italic_p italic_o italic_s end_POSTSUBSCRIPT represents the supporting documents for the answers, and τ𝜏\\tauitalic_τ is the temperature hyperparameter. The goal is to minimize ℓℓ\\ellroman_ℓ between positive and negative samples."
         ]
     },
     "S3.T1.19.19": {
@@ -18,7 +18,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "F1 score and exact match (EM) metrics (Rajpurkar et al., 2016) are employed to evaluate the quality of the generated answers. Additionally, two metrics are used to evaluate retrieval performance: Recall@N (as defined in Equation 2) and a newly introduced metric, the average retrieval number (ARN), which measures the average number of documents retrieved to generate the final answer, providing a more nuanced assessment of retrieval efficiency in SAM-RAG."
+            "F1 score and exact match (EM) metrics (Rajpurkar et al., 2016) are employed to evaluate the quality of the generated answers. Additionally, two metrics are used to evaluate retrieval performance: Recall@N (as defined in Equation 2) and a newly introduced metric, the average retrieval number (ARN), which measures the average number of documents retrieved to generate the final answer, providing a more nuanced assessment of retrieval efficiency in SAM-RAG."
         ]
     },
     "S4.T2.18": {
