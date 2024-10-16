@@ -51,10 +51,11 @@ def extract_tables_from_html_file(html_file, arxiv_id):
                 footnotes_array.append(
                     etree.tostring(bibItem, method='text', encoding='unicode').strip().replace('\u00A0', ' '))
 
-        # Cerca i paragrafi che contengono un href con il frammento che fa riferimento alla tabella corrente
-        references = tree.xpath(f"//p[a[contains(@href, '#{table_id}')]]")
 
-        # Estrai il testo dei paragrafi trovati
+        #find paragraphs that contain an href with the fragment that refers to the current table
+        references = tree.xpath(f"//p[a[contains(@href, '#{'.'.join(table_id.split('.')[:2])}')]]")
+
+        # Estract the text of the paragraphs found for each reference
         references_text = [etree.tostring(ref, method='text', encoding='unicode').strip().replace('\u00A0', ' ') for ref
                            in references]
 
@@ -83,7 +84,7 @@ def process_html_files_in_directory(directory):
     # Itera su tutti i file nella directory specificata
     for filename in os.listdir(directory):
         if filename.endswith(".html"):
-            # Estrarre l'ID arXiv dal nome del file (es: "2409.17044.html" -> "2409.17044")
+            # Extract the arxiv_id from file name (es: "2409.17044.html" -> "2409.17044")
             arxiv_id = filename.split(".html")[0]
             html_file_path = os.path.join(directory, filename)
             extract_tables_from_html_file(html_file_path, arxiv_id)
