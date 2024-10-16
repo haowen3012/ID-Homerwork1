@@ -89,7 +89,9 @@ def main():
                 if download_count >= 300:  # Ferma i download al raggiungimento di 300 file
                     print("300 papers limit reached.")
                     break
-                time.sleep(2)  # Add a delay of 2 second between requests
+                time.sleep(3)  # Add a delay of 2 second between requests
+
+    print(f"Downloaded {download_count} papers.")
 
 if __name__ == "__main__":
     main()

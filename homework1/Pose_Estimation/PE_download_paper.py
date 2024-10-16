@@ -6,7 +6,7 @@ import time
 
 
 """Shows the first 200 papers on Pose Estimation (filter by title)"""
-input_link = "https://arxiv.org/search/?query=Pose+Estimation&searchtype=title&abstracts=show&order=-announced_date_first&size=200"
+input_link = "https://arxiv.org/search/?query=Retrieval+Augmented+generation&searchtype=title&abstracts=show&order=-announced_date_first&size=200"
 
 
 def clean_filename(filename):
@@ -65,13 +65,16 @@ def extract_papers_from_link(link, max_results=600):
 def main():
     # URL di partenza fornito
     # input_link = input("Inserisci l'URL da cui estrarre i paper: ")
-    
+
+    current_dir = os.path.dirname(__file__)
+    sources_rag_path = os.path.join(current_dir, 'sources_RAG')
+
     # Directory dove salvare i file HTML
-    output_dir = "ID-Homerworks\homework1\Pose_Estimation\sources_PE"
+    output_dir = sources_rag_path
     os.makedirs(output_dir, exist_ok=True)
     
     # Extract papers from the input link ( first 200 and next 200)
-    papers = extract_papers_from_link(input_link) + extract_papers_from_link(input_link + "&start=200")
+    papers = extract_papers_from_link(input_link) + extract_papers_from_link(input_link + "&start=100")
 
     # Scrittura sul file txt
     with open('read_me.txt', 'a', encoding='utf-8') as readme_file:
