@@ -1,5 +1,7 @@
 import os
 import json
+from urllib.parse import urlparse
+
 from lxml import etree
 from bs4 import BeautifulSoup
 
@@ -46,7 +48,11 @@ def extract_tables_from_html_file(html_file, arxiv_id):
         footnotes_array = []
         if footnotes:
             for index in  range(len(footnotes)):
-                footnotes_array.append(etree.tostring(footnotes[index], method='text', encoding='unicode').strip())
+                footnote_url = footnotes[index].xpath('./a/@href')[0]
+                footnote_id = urlparse(footnote_url).fragment
+                bibItem = tree.xpath(f"//li[@id='{footnote_id}']")[0]
+                footnotes_array.append(etree.tostring(bibItem, method='text', encoding='unicode').strip().replace('&nbsp;', ' '))
+
 
 
         # Find paragraphs that reference the table using 'table' keyword or similar
