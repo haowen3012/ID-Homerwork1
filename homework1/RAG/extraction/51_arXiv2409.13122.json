@@ -30,6 +30,8 @@
             "center-randomize (2024)\n\ncenter-randomize. 2024.\n\n\ncenter-randomize Repository.\n\n\nhttps://github.com/moest-np/center-randomize.\n\n\nAccessed: 2024-07-25.",
             "microagents (2023)\n\nmicroagents. 2023.\n\n\nmicroagents Repository.\n\n\nhttps://github.com/aymenfurter/microagents.\n\n\nAccessed: 2024-07-25."
         ],
-        "references": []
+        "references": [
+            "As shown in Table 1, the new benchmark provides a robust, comprehensive benchmark, comprising 8 high-quality repositories that reflect diverse applications and complexities. This improved benchmark is instrumental in validating the enhanced capabilities of our programming models."
+        ]
     }
 }
