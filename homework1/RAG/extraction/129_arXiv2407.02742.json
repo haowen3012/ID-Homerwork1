@@ -4,7 +4,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "The loss function used by TST (Equation 1 from (Poesia et al., 2022)) is minimizing the Mean-Squared Error between the vanilla loss functions comparing the utterances (ui,ujsubscript𝑢𝑖subscript𝑢𝑗u_{i},u_{j}italic_u start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT , italic_u start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT) and the target programs (pi,pjsubscript𝑝𝑖subscript𝑝𝑗p_{i},p_{j}italic_p start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT , italic_p start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT). Program similarity is denoted by S𝑆Sitalic_S. They used AST to compute program similarity, however, we used a Jaccard score over lists of API function names to be consistent with our metrics definition (Section 4)."
+            "The loss function used by TST (Equation 1 from (Poesia et al., 2022)) is minimizing the Mean-Squared Error between the vanilla loss functions comparing the utterances (ui,ujsubscript𝑢𝑖subscript𝑢𝑗u_{i},u_{j}italic_u start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT , italic_u start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT) and the target programs (pi,pjsubscript𝑝𝑖subscript𝑝𝑗p_{i},p_{j}italic_p start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT , italic_p start_POSTSUBSCRIPT italic_j end_POSTSUBSCRIPT). Program similarity is denoted by S𝑆Sitalic_S. They used AST to compute program similarity, however, we used a Jaccard score over lists of API function names to be consistent with our metrics definition (Section 4)."
         ]
     },
     "S4.E2": {

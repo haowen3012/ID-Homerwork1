@@ -4,7 +4,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "It is easy to see that Eq. (3) is similar to Eq. (1) with additionally inputting the retrieval content."
+            "It is easy to see that Eq. (3) is similar to Eq. (1) with additionally inputting the retrieval content."
         ]
     },
     "S3.Ex1": {
@@ -18,7 +18,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "where Dqsubscript𝐷𝑞D_{q}italic_D start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT denotes the set of retrieval stories, and forms a perturbed set Dqa⁢u⁢g={dia⁢u⁢g}i=1Ksuperscriptsubscript𝐷𝑞𝑎𝑢𝑔superscriptsubscriptsuperscriptsubscript𝑑𝑖𝑎𝑢𝑔𝑖1𝐾D_{q}^{aug}=\\{d_{i}^{aug}\\}_{i=1}^{K}italic_D start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT = { italic_d start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT } start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_K end_POSTSUPERSCRIPT. Then we can compute the dot product similarity between the query q𝑞qitalic_q and each dia⁢u⁢gsuperscriptsubscript𝑑𝑖𝑎𝑢𝑔d_{i}^{aug}italic_d start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT as the retrieval scores Sqa⁢u⁢g={sq,ia⁢u⁢g}i=1Ksuperscriptsubscript𝑆𝑞𝑎𝑢𝑔superscriptsubscriptsuperscriptsubscript𝑠𝑞𝑖𝑎𝑢𝑔𝑖1𝐾S_{q}^{aug}=\\{s_{q,i}^{aug}\\}_{i=1}^{K}italic_S start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT = { italic_s start_POSTSUBSCRIPT italic_q , italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT } start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_K end_POSTSUPERSCRIPT, where sq,ia⁢u⁢gsuperscriptsubscript𝑠𝑞𝑖𝑎𝑢𝑔s_{q,i}^{aug}italic_s start_POSTSUBSCRIPT italic_q , italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT denotes the dot product similarity between q𝑞qitalic_q and dia⁢u⁢gsuperscriptsubscript𝑑𝑖𝑎𝑢𝑔d_{i}^{aug}italic_d start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT. Then we can apply the learning retrieval augmentation to Sqa⁢u⁢gsuperscriptsubscript𝑆𝑞𝑎𝑢𝑔S_{q}^{aug}italic_S start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT and based on Eq. (2) minimize the following loss to update the retriever as"
+            "where Dqsubscript𝐷𝑞D_{q}italic_D start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT denotes the set of retrieval stories, and forms a perturbed set Dqa⁢u⁢g={dia⁢u⁢g}i=1Ksuperscriptsubscript𝐷𝑞𝑎𝑢𝑔superscriptsubscriptsuperscriptsubscript𝑑𝑖𝑎𝑢𝑔𝑖1𝐾D_{q}^{aug}=\\{d_{i}^{aug}\\}_{i=1}^{K}italic_D start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT = { italic_d start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT } start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_K end_POSTSUPERSCRIPT. Then we can compute the dot product similarity between the query q𝑞qitalic_q and each dia⁢u⁢gsuperscriptsubscript𝑑𝑖𝑎𝑢𝑔d_{i}^{aug}italic_d start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT as the retrieval scores Sqa⁢u⁢g={sq,ia⁢u⁢g}i=1Ksuperscriptsubscript𝑆𝑞𝑎𝑢𝑔superscriptsubscriptsuperscriptsubscript𝑠𝑞𝑖𝑎𝑢𝑔𝑖1𝐾S_{q}^{aug}=\\{s_{q,i}^{aug}\\}_{i=1}^{K}italic_S start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT = { italic_s start_POSTSUBSCRIPT italic_q , italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT } start_POSTSUBSCRIPT italic_i = 1 end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_K end_POSTSUPERSCRIPT, where sq,ia⁢u⁢gsuperscriptsubscript𝑠𝑞𝑖𝑎𝑢𝑔s_{q,i}^{aug}italic_s start_POSTSUBSCRIPT italic_q , italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT denotes the dot product similarity between q𝑞qitalic_q and dia⁢u⁢gsuperscriptsubscript𝑑𝑖𝑎𝑢𝑔d_{i}^{aug}italic_d start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT. Then we can apply the learning retrieval augmentation to Sqa⁢u⁢gsuperscriptsubscript𝑆𝑞𝑎𝑢𝑔S_{q}^{aug}italic_S start_POSTSUBSCRIPT italic_q end_POSTSUBSCRIPT start_POSTSUPERSCRIPT italic_a italic_u italic_g end_POSTSUPERSCRIPT and based on Eq. (2) minimize the following loss to update the retriever as"
         ]
     },
     "S3.Ex2": {
@@ -38,7 +38,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "It is easy to see that Eq. (3) is similar to Eq. (1) with additionally inputting the retrieval content."
+            "It is easy to see that Eq. (3) is similar to Eq. (1) with additionally inputting the retrieval content."
         ]
     },
     "S3.E4": {
@@ -46,7 +46,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "In Eq. (4), the two loss functions are treated equally. Generally speaking, introducing and tuning a weighting hyperparameter between the two losses may result in better performance but it incurs computational costs when tuning it. For simplicity, we did not introduce this hyperparameter and this could be left for future study."
+            "In Eq. (4), the two loss functions are treated equally. Generally speaking, introducing and tuning a weighting hyperparameter between the two losses may result in better performance but it incurs computational costs when tuning it. For simplicity, we did not introduce this hyperparameter and this could be left for future study."
         ]
     },
     "S4.T1.19": {

@@ -10,7 +10,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "For the optimization goals formalized in Equation 2, we aim at maximizing G𝐺Gitalic_G generating golden answers and minimizing the gap between generating answers given fine retrieved documents and bad organized documents with fabrications."
+            "For the optimization goals formalized in Equation 2, we aim at maximizing G𝐺Gitalic_G generating golden answers and minimizing the gap between generating answers given fine retrieved documents and bad organized documents with fabrications."
         ]
     },
     "A6.EGx1": {
@@ -24,8 +24,8 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "where ℒSFTsubscriptℒSFT\\mathcal{L}_{\\mathrm{SFT}}caligraphic_L start_POSTSUBSCRIPT roman_SFT end_POSTSUBSCRIPT is similar to Equation 4 but uses the attacked document list as input. ℒKLsubscriptℒKL\\mathcal{L}_{\\mathrm{KL}}caligraphic_L start_POSTSUBSCRIPT roman_KL end_POSTSUBSCRIPT is the token-level Kullback–Leibler Divergence Kullback and Leibler (1951) of answer generating probabilities between the given normal document list and the attacked document list. α𝛼\\alphaitalic_α is a pre-set hyper-parameter. Math derivations can be found in Appendix B, and implementation details can be found in Appendix D.2.",
-            "Through minimizing the SFT loss in Equation 4, we are maximizing"
+            "where ℒSFTsubscriptℒSFT\\mathcal{L}_{\\mathrm{SFT}}caligraphic_L start_POSTSUBSCRIPT roman_SFT end_POSTSUBSCRIPT is similar to Equation 4 but uses the attacked document list as input. ℒKLsubscriptℒKL\\mathcal{L}_{\\mathrm{KL}}caligraphic_L start_POSTSUBSCRIPT roman_KL end_POSTSUBSCRIPT is the token-level Kullback–Leibler Divergence Kullback and Leibler (1951) of answer generating probabilities between the given normal document list and the attacked document list. α𝛼\\alphaitalic_α is a pre-set hyper-parameter. Math derivations can be found in Appendix B, and implementation details can be found in Appendix D.2.",
+            "Through minimizing the SFT loss in Equation 4, we are maximizing"
         ]
     },
     "A6.EGx2": {

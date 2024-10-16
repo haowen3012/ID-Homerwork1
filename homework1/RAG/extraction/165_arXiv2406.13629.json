@@ -4,7 +4,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "InstructRAG-FT is a trainable instantiation of InstructRAG that learns denoising rationales via supervised fine-tuning (FT) with standard language modeling objective.\nAs defined in Eq. (1), it maximizes the likelihood of rationale r𝑟ritalic_r conditioned on question q𝑞qitalic_q and retrieved documents D𝐷Ditalic_D."
+            "InstructRAG-FT is a trainable instantiation of InstructRAG that learns denoising rationales via supervised fine-tuning (FT) with standard language modeling objective.\nAs defined in Eq. (1), it maximizes the likelihood of rationale r𝑟ritalic_r conditioned on question q𝑞qitalic_q and retrieved documents D𝐷Ditalic_D."
         ]
     },
     "S3.T2.2": {

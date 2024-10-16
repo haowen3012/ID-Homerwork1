@@ -5,17 +5,17 @@
         "footnotes": [
             "Langchain (2023)\n\nLangchain.\n2023.\n\n\nEvaluating RAG Architectures on Benchmark\nTasks.\n\n\n\n\nhttps://langchain-ai.github.io/langchain-benchmarks/notebooks/retrieval/comparing_techniques.html.",
             "Langchain (2023)\n\nLangchain.\n2023.\n\n\nEvaluating RAG Architectures on Benchmark\nTasks.\n\n\n\n\nhttps://langchain-ai.github.io/langchain-benchmarks/notebooks/retrieval/comparing_techniques.html.",
-            "Liu et al. (2023)\n\nNelson F. Liu, Tianyi\nZhang, and Percy Liang.\n2023.\n\n\nEvaluating Verifiability in Generative Search\nEngines. In Findings of the Association for\nComputational Linguistics: EMNLP 2023, Singapore, December 6-10, 2023.\n7001–7025.",
-            "Gao et al. (2023c)\n\nTianyu Gao, Howard Yen,\nJiatong Yu, and Danqi Chen.\n2023c.\n\n\nEnabling Large Language Models to Generate Text\nwith Citations. In Proceedings of the 2023\nConference on Empirical Methods in Natural Language Processing, EMNLP 2023,\nSingapore, December 6-10, 2023. 6465–6488.",
-            "Xu et al. (2024)\n\nYilong Xu, Jinhua Gao,\nXiaoming Yu, Baolong Bi,\nHuawei Shen, and Xueqi Cheng.\n2024.\n\n\nALiiCE: Evaluating Positional Fine-grained Citation\nGeneration.\n\n\narXiv preprint arXiv:2406.13375\n(2024).",
-            "Li et al. (2024)\n\nWeitao Li, Junkai Li,\nWeizhi Ma, and Yang Liu.\n2024.\n\n\nCitation-Enhanced Generation for LLM-based\nChatbots.\n\n\narXiv preprint arXiv:2402.16063\n(2024).",
-            "Zhang et al. (2024)\n\nWeijia Zhang, Mohammad\nAliannejadi, Yifei Yuan, Jiahuan Pei,\nJia-Hong Huang, and Evangelos\nKanoulas. 2024.\n\n\nTowards Fine-Grained Citation Evaluation in\nGenerated Text: A Comparative Analysis of Faithfulness Metrics.\n\n\narXiv preprint arXiv:2406.15264\n(2024).",
+            "Liu et al. (2023)\n\nNelson F. Liu, Tianyi\nZhang, and Percy Liang.\n2023.\n\n\nEvaluating Verifiability in Generative Search\nEngines. In Findings of the Association for\nComputational Linguistics: EMNLP 2023, Singapore, December 6-10, 2023.\n7001–7025.",
+            "Gao et al. (2023c)\n\nTianyu Gao, Howard Yen,\nJiatong Yu, and Danqi Chen.\n2023c.\n\n\nEnabling Large Language Models to Generate Text\nwith Citations. In Proceedings of the 2023\nConference on Empirical Methods in Natural Language Processing, EMNLP 2023,\nSingapore, December 6-10, 2023. 6465–6488.",
+            "Xu et al. (2024)\n\nYilong Xu, Jinhua Gao,\nXiaoming Yu, Baolong Bi,\nHuawei Shen, and Xueqi Cheng.\n2024.\n\n\nALiiCE: Evaluating Positional Fine-grained Citation\nGeneration.\n\n\narXiv preprint arXiv:2406.13375\n(2024).",
+            "Li et al. (2024)\n\nWeitao Li, Junkai Li,\nWeizhi Ma, and Yang Liu.\n2024.\n\n\nCitation-Enhanced Generation for LLM-based\nChatbots.\n\n\narXiv preprint arXiv:2402.16063\n(2024).",
+            "Zhang et al. (2024)\n\nWeijia Zhang, Mohammad\nAliannejadi, Yifei Yuan, Jiahuan Pei,\nJia-Hong Huang, and Evangelos\nKanoulas. 2024.\n\n\nTowards Fine-Grained Citation Evaluation in\nGenerated Text: A Comparative Analysis of Faithfulness Metrics.\n\n\narXiv preprint arXiv:2406.15264\n(2024).",
             "Cao and Wang (2024)\n\nShuyang Cao and Lu\nWang. 2024.\n\n\nVerifiable Generation with Subsentence-Level\nFine-Grained Citations.\n\n\narXiv preprint arXiv:2406.06125\n(2024).",
             "Oberst (2023)\n\nDarren Oberst.\n2023.\n\n\nHow to Evaluate LLMs for RAG?\n\n\n\nhttps://medium.com/@darrenoberst/how-accurate-is-rag-8f0706281fd9.",
-            "Chen et al. (2023b)\n\nJiawei Chen, Hongyu Lin,\nXianpei Han, and Le Sun.\n2023b.\n\n\nBenchmarking large language models in\nretrieval-augmented generation.\n\n\narXiv preprint arXiv:2309.01431\n(2023).",
-            "Ferrara et al. (2024)\n\nJoe Ferrara, Ethan-Tonic,\nand Oguzhan Mete Ozturk.\n2024.\n\n\nThe RAG Triad.\n\n\n\n\nhttps://www.trulens.org/trulens_eval/core_concepts_rag_triad/.",
-            "Es et al. (2023)\n\nShahul Es, Jithin James,\nLuis Espinosa-Anke, and Steven\nSchockaert. 2023.\n\n\nRagas: Automated evaluation of retrieval augmented\ngeneration.\n\n\narXiv preprint arXiv:2309.15217\n(2023).",
-            "Saad-Falcon et al. (2023)\n\nJon Saad-Falcon, Omar\nKhattab, Christopher Potts, and Matei\nZaharia. 2023.\n\n\nAres: An automated evaluation framework for\nretrieval-augmented generation systems.\n\n\narXiv preprint arXiv:2311.09476\n(2023)."
+            "Chen et al. (2023b)\n\nJiawei Chen, Hongyu Lin,\nXianpei Han, and Le Sun.\n2023b.\n\n\nBenchmarking large language models in\nretrieval-augmented generation.\n\n\narXiv preprint arXiv:2309.01431\n(2023).",
+            "Ferrara et al. (2024)\n\nJoe Ferrara, Ethan-Tonic,\nand Oguzhan Mete Ozturk.\n2024.\n\n\nThe RAG Triad.\n\n\n\n\nhttps://www.trulens.org/trulens_eval/core_concepts_rag_triad/.",
+            "Es et al. (2023)\n\nShahul Es, Jithin James,\nLuis Espinosa-Anke, and Steven\nSchockaert. 2023.\n\n\nRagas: Automated evaluation of retrieval augmented\ngeneration.\n\n\narXiv preprint arXiv:2309.15217\n(2023).",
+            "Saad-Falcon et al. (2023)\n\nJon Saad-Falcon, Omar\nKhattab, Christopher Potts, and Matei\nZaharia. 2023.\n\n\nAres: An automated evaluation framework for\nretrieval-augmented generation systems.\n\n\narXiv preprint arXiv:2311.09476\n(2023)."
         ],
         "references": []
     },

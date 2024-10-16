@@ -4,7 +4,7 @@
         "caption": "",
         "footnotes": [],
         "references": [
-            "Given that LLMs may generate non-factual statements or “hallucinations”, we further guide the LLMs to revise the generated answer, aisubscript𝑎𝑖a_{i}italic_a start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT, with the support of retrieved documents.\nSpecifically, in the i𝑖iitalic_i-th iteration, we initially utilize a retriever (e.g., Google, BM25, or dense retrieval model) to retrieve relevant documents, 𝒟isubscript𝒟𝑖\\mathcal{D}_{i}caligraphic_D start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT, using the deduced sub-question qisubscript𝑞𝑖q_{i}italic_q start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT (Equation 1):"
+            "Given that LLMs may generate non-factual statements or “hallucinations”, we further guide the LLMs to revise the generated answer, aisubscript𝑎𝑖a_{i}italic_a start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT, with the support of retrieved documents.\nSpecifically, in the i𝑖iitalic_i-th iteration, we initially utilize a retriever (e.g., Google, BM25, or dense retrieval model) to retrieve relevant documents, 𝒟isubscript𝒟𝑖\\mathcal{D}_{i}caligraphic_D start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT, using the deduced sub-question qisubscript𝑞𝑖q_{i}italic_q start_POSTSUBSCRIPT italic_i end_POSTSUBSCRIPT (Equation 1):"
         ]
     },
     "S3.E2": {
