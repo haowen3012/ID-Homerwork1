@@ -5,8 +5,12 @@ import re
 import time
 
 
-"""Shows the first 200 papers on Pose Estimation (filter by title)"""
-input_link = "https://arxiv.org/search/?query=Retrieval+Augmented+generation&searchtype=title&abstracts=show&order=-announced_date_first&size=200"
+"""Shows the first 200 papers on RAG (filter by title)"""
+# input_link = "https://arxiv.org/search/?query=Retrieval+Augmented+generation&searchtype=title&abstracts=show&order=-announced_date_first&size=200"
+"""Shows the first 200 papers on Data Fusion (filter by title)"""
+input_link = "https://arxiv.org/search/?query=Data+fusion&searchtype=title&abstracts=show&order=-announced_date_first&size=200"
+"""Shows the first 200 papers on Data Cleaning (filter by title)"""
+# input_link="https://arxiv.org/search/?query=Data+Cleaning&searchtype=title&abstracts=show&order=-announced_date_first&size=200"
 
 
 def clean_filename(filename):
@@ -71,7 +75,9 @@ def extract_papers_from_link(link, max_results=200):
 
 def main():
     current_dir = os.path.dirname(__file__)
-    sources_rag_path = os.path.join(current_dir, 'sources_RAG')
+    #sources_rag_path = os.path.join(current_dir, 'sources_RAG')     #cartella per RAG
+    sources_rag_path = os.path.join(current_dir, 'sources_DF')       #cartella per DF
+    #sources_rag_path = os.path.join(current_dir, 'sources_DC')      #cartella per DC
 
     # Directory where to save the HTML files
     output_dir = sources_rag_path
@@ -81,7 +87,9 @@ def main():
     papers = extract_papers_from_link(input_link) + extract_papers_from_link(input_link + "&start=100")
 
     # Write the list of downloaded HTML documents to a file txt
-    with open('read_me.txt', 'a', encoding='utf-8') as readme_file:
+    #with open('read_meRAG.txt', 'a', encoding='utf-8') as readme_file:      #per RAG
+    with open('read_meDF.txt', 'a', encoding='utf-8') as readme_file:        #per DF
+    #with open('read_meDC.txt', 'a', encoding='utf-8') as readme_file:       #per DC
         readme_file.write(f"Lista dei documenti HTML scaricati: \n\n")
 
     # Download the HTML content of the papers
@@ -90,7 +98,9 @@ def main():
         if is_valid_html(html_link):  # check if the link is a valid HTML
             if download_html(title, html_link, index, output_dir):  # download and check if successful
                 download_count += 1
-                with open('read_me.txt', 'a', encoding='utf-8') as readme_file:
+                #with open('read_meRAG.txt', 'a', encoding='utf-8') as readme_file:      #per RAG
+                with open('read_meDF.txt', 'a', encoding='utf-8') as readme_file:        #per DF
+                #with open('read_meDC.txt', 'a', encoding='utf-8') as readme_file:       #per DC
                     print(f'downloaded: {html_link}')
                     readme_file.write(f"{index}. Titolo: {title} - Link: {html_link}\n")
                 if download_count >= 300:  # stop downloads when 300 files are reached

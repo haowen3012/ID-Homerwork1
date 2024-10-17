@@ -68,7 +68,9 @@ def extract_tables_from_html_file(html_file, arxiv_id):
         }
 
     # Define output directory
-    output_dir = os.path.join(current_dir, 'extraction')
+    #output_dir = os.path.join(current_dir, 'extraction_RAG')        #per RAG
+    output_dir = os.path.join(current_dir, 'extraction_DF')          #per DF
+    #output_dir = os.path.join(current_dir, 'extraction_DC')         #per DC
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -91,7 +93,9 @@ def process_html_files_in_directory(directory):
 
 
 def main():
-    process_html_files_in_directory(os.path.join(current_dir, 'sources_RAG'))
+    #process_html_files_in_directory(os.path.join(current_dir, 'sources_RAG'))       #per RAG
+    process_html_files_in_directory(os.path.join(current_dir, 'sources_DF'))         #per DF
+    #process_html_files_in_directory(os.path.join(current_dir, 'sources_DC'))        #per DC
 
 if __name__ == "__main__":
     main()
