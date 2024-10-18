@@ -33,6 +33,7 @@ def extract_tables_from_html_file(html_file, arxiv_id, output_dir):
     # Extract all tables using XPath
     tables = tree.xpath('//table')
 
+
     # Initialize the data dictionary to store table data
     data = {}
 
@@ -47,7 +48,9 @@ def extract_tables_from_html_file(html_file, arxiv_id, output_dir):
         caption_text = ''
         # Extract the text content of the caption
         if caption:
-            caption_text = etree.tostring(caption[0], method='text', encoding='unicode').strip() if caption else ""
+            caption_text = (etree.tostring
+                            (caption[0], method='text', encoding='unicode')
+                            .strip()) if caption else ""
 
         # Extract the HTML of the table
         table_html = etree.tostring(table, pretty_print=True, method='html').decode('utf-8')
@@ -63,7 +66,9 @@ def extract_tables_from_html_file(html_file, arxiv_id, output_dir):
                         footnote_id = urlparse(footnote_url).fragment
                         bibItem = tree.xpath(f"//li[@id='{footnote_id}']")[0]
                         footnotes_array.append(
-                            etree.tostring(bibItem, method='text', encoding='unicode').strip().replace('\u00A0', ' '))
+                            etree.tostring(
+                                bibItem, method='text', encoding='unicode')
+                            .strip().replace('\u00A0', ' '))
                 else: # if the footnote does not contain a link, then extract the span text content
                     footnote_span = footnotes[index].xpath('./span/text()')
                     for span in footnote_span:
@@ -72,10 +77,12 @@ def extract_tables_from_html_file(html_file, arxiv_id, output_dir):
 
 
         # find paragraphs that contain an href with the fragment that refers to the current table
-        references = tree.xpath(f"//p[a[contains(@href, '#{'.'.join(table_id.split('.')[:2])}')]]")
+        references = tree.xpath(f"//p[a[contains(@href, "
+                                f"'#{'.'.join(table_id.split('.')[:2])}')]]")
 
         # Estract the text of the paragraphs found for each reference
-        references_text = [etree.tostring(ref, method='text', encoding='unicode').strip().replace('\u00A0', ' ') for ref
+        references_text = [etree.tostring(ref, method='text', encoding='unicode')
+                           .strip().replace('\u00A0', ' ') for ref
                            in references]
 
         # Store the extracted information in the dictionary
