@@ -6,7 +6,19 @@ from lxml import etree
 from bs4 import BeautifulSoup
 
 current_dir = os.path.dirname(__file__)
-def extract_tables_from_html_file(html_file, arxiv_id):
+
+"""source directories"""
+sources_paths = [os.path.join(current_dir, 'Data Cleaning/sources_DC'),
+                 os.path.join(current_dir, 'Data Fusion/sources_DF'),
+                 os.path.join(current_dir, 'Retrieval Augmented Generation/sources_RAG')]
+
+"""Output directories for json files"""
+output_dirs = [os.path.join(current_dir, 'Data Cleaning/extraction_DC'),
+               os.path.join(current_dir, 'Data Fusion/extraction_DF'),
+               os.path.join(current_dir, 'Retrieval Augmented Generation/extraction_RAG')]
+
+
+def extract_tables_from_html_file(html_file, arxiv_id, output_dir):
     # Leggi il contenuto del file HTML
     with open(html_file, 'r', encoding='utf-8') as file:
         content = file.read()
@@ -45,14 +57,21 @@ def extract_tables_from_html_file(html_file, arxiv_id):
         footnotes_array = []
         if footnotes:
             for index in range(len(footnotes)):
-                footnote_url = footnotes[index].xpath('./a/@href')[0]
-                footnote_id = urlparse(footnote_url).fragment
-                bibItem = tree.xpath(f"//li[@id='{footnote_id}']")[0]
-                footnotes_array.append(
-                    etree.tostring(bibItem, method='text', encoding='unicode').strip().replace('\u00A0', ' '))
+                footnote_urls = footnotes[index].xpath('./a/@href')
+                if footnote_urls: # if the footnote contains a link
+                    for footnote_url in footnote_urls:
+                        footnote_id = urlparse(footnote_url).fragment
+                        bibItem = tree.xpath(f"//li[@id='{footnote_id}']")[0]
+                        footnotes_array.append(
+                            etree.tostring(bibItem, method='text', encoding='unicode').strip().replace('\u00A0', ' '))
+                else: # if the footnote does not contain a link, then extract the span text content
+                    footnote_span = footnotes[index].xpath('./span/text()')
+                    for span in footnote_span:
+                        footnotes_array.append(
+                           span.replace('\u00A0', ' '))
 
 
-        #find paragraphs that contain an href with the fragment that refers to the current table
+        # find paragraphs that contain an href with the fragment that refers to the current table
         references = tree.xpath(f"//p[a[contains(@href, '#{'.'.join(table_id.split('.')[:2])}')]]")
 
         # Estract the text of the paragraphs found for each reference
@@ -67,11 +86,6 @@ def extract_tables_from_html_file(html_file, arxiv_id):
             "references": references_text
         }
 
-    # Define output directory
-    #output_dir = os.path.join(current_dir, 'extraction_RAG')        #per RAG
-    output_dir = os.path.join(current_dir, 'extraction_DF')          #per DF
-    #output_dir = os.path.join(current_dir, 'extraction_DC')         #per DC
-
     os.makedirs(output_dir, exist_ok=True)
 
     # Save the JSON data to a file named after the arxiv_id
@@ -82,20 +96,21 @@ def extract_tables_from_html_file(html_file, arxiv_id):
     print(f"Data extracted and saved to {output_file}")
 
 
-def process_html_files_in_directory(directory):
+def process_html_files_in_directory(source_dir, output_dir):
     # Itera su tutti i file nella directory specificata
-    for filename in os.listdir(directory):
+    for filename in os.listdir(source_dir):
         if filename.endswith(".html"):
             # Extract the arxiv_id from file name (es: "2409.17044.html" -> "2409.17044")
             arxiv_id = filename.split(".html")[0]
-            html_file_path = os.path.join(directory, filename)
-            extract_tables_from_html_file(html_file_path, arxiv_id)
+            html_file_path = os.path.join(source_dir, filename)
+            extract_tables_from_html_file(html_file_path, arxiv_id, output_dir)
 
 
 def main():
-    #process_html_files_in_directory(os.path.join(current_dir, 'sources_RAG'))       #per RAG
-    process_html_files_in_directory(os.path.join(current_dir, 'sources_DF'))         #per DF
-    #process_html_files_in_directory(os.path.join(current_dir, 'sources_DC'))        #per DC
+    # Process each HTML file in each source directory
+    for sources_path, output_dir in zip(sources_paths, output_dirs):
+        process_html_files_in_directory(sources_path, output_dir)
+
 
 if __name__ == "__main__":
     main()
