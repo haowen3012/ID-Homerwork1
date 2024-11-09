@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Form Submission</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<h1>Benvenuto nella tua applicazione Java con Servlet</h1>
-<p><a href="hello">Vai alla Servlet</a></p>
+<h1>Submit Your Query</h1>
+<form action="submitForm" method="post">
+
+    <label>Fields:</label><br>
+    <input type="checkbox" id="title" name="fields" value="title">
+    <label for="title">Title</label><br>
+    <input type="checkbox" id="author" name="fields" value="author">
+    <label for="author">Author</label><br>
+    <input type="checkbox" id="content" name="fields" value="content">
+    <label for="content">Content</label><br><br>
+
+    <label for="query">Insert a query:</label>
+    <input type="text" id="query" name="query" required><br><br>
+
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

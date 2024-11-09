@@ -84,4 +84,17 @@ public class FieldExtractorUtil {
         return authors;
     }
 
+    public static String extractContent(String filePath) {
+
+        NodeList nodeList = extractNodeList(filePath, "//body/text()");
+
+        String content = "";
+        // Return the title content
+        if (nodeList != null && nodeList.getLength() > 0) {
+            content = nodeList.item(0).getTextContent().replaceAll("/r?/n", "").trim();
+        }
+
+        return content;
+    }
+
 }

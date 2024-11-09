@@ -5,7 +5,7 @@
 
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>it.uniroma3.lucene.HelloServlet</servlet-class>
+        <servlet-class>it.uniroma3.lucene.controller.SearchServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
