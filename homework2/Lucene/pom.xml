@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>it.uniroma3.lucene</groupId>
-    <artifactId>Lucene</artifactId>
+    <artifactId>SearchEngineLucene</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 

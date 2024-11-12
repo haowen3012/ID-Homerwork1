@@ -3,21 +3,52 @@
 <head>
     <title>Form Submission</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script>
+        function toggleInputs() {
+            var titleAndAuthor = document.getElementById('titleAndAuthor');
+            var queryInput = document.getElementById('queryInput');
+            var queryInputs = document.getElementById('queryInputs');
+
+            if (titleAndAuthor.checked) {
+                queryInput.style.display = 'none';
+                queryInputs.style.display = 'block';
+                document.getElementById("query").value = '';
+            } else {
+                queryInput.style.display = 'block';
+                queryInputs.style.display = 'none';
+                document.getElementById("query1").value = '';
+                document.getElementById("query2").value = '';
+            }
+        }
+    </script>
 </head>
 <body>
 <h1>Submit Your Query</h1>
 <form action="submitForm" method="post">
 
     <label>Fields:</label><br>
-    <input type="checkbox" id="title" name="fields" value="title">
+    <input type="radio" id="title" name="fields" value="title" onclick="toggleInputs()">
     <label for="title">Title</label><br>
-    <input type="checkbox" id="author" name="fields" value="author">
-    <label for="author">Author</label><br>
-    <input type="checkbox" id="content" name="fields" value="content">
-    <label for="content">Content</label><br><br>
+    <input type="radio" id="authors" name="fields" value="authors" onclick="toggleInputs()">
+    <label for="authors">Authors</label><br>
+    <input type="radio" id="content" name="fields" value="content" onclick="toggleInputs()">
+    <label for="content">Content</label><br>
+    <input type="radio" id="abstract" name="fields" value="abstract" onclick="toggleInputs()">
+    <label for="abstract">Abstract</label><br>
+    <input type="radio" id="titleAndAuthor" name="fields" value="titleAndAuthor" onclick="toggleInputs()">
+    <label for="titleAndAuthor">Title and Authors</label><br><br>
 
-    <label for="query">Insert a query:</label>
-    <input type="text" id="query" name="query" required><br><br>
+    <div id="queryInput">
+        <label for="query">Insert a query:</label>
+        <input type="text" id="query" name="query"><br><br>
+    </div>
+
+    <div id="queryInputs" style="display: none;">
+        <label for="query1">Insert title query:</label>
+        <input type="text" id="query1" name="query1"><br>
+        <label for="query2">Insert authors query:</label>
+        <input type="text" id="query2" name="query2"><br><br>
+    </div>
 
     <input type="submit" value="Submit">
 </form>

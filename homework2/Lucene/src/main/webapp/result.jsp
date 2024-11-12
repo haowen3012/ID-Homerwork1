@@ -15,9 +15,12 @@
         </c:when>
         <c:otherwise>
             <c:forEach var="document" items="${documents}">
+                <p>Position: ${document.rankingPosition}</p>
                 <p>Title: ${document.title}</p>
                 <p>Authors: ${document.authors}</p>
-                <p>Content: ${document.content}</p>
+<%--                <p>Content: ${document.content}</p>--%>
+<%--                <p>Abstract: ${document.paperAbstract}</p>--%>
+                <p>Score: ${document.score}</p>
                 <hr>
             </c:forEach>
         </c:otherwise>
