@@ -1,4 +1,4 @@
-package it.uniroma3.searchEngineLucene.dto;
+package it.uniroma3.lucene.searchEngineLucene.dto;
 
 public class DocumentDTO {
 

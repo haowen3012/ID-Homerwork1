@@ -1,7 +1,7 @@
-package it.uniroma3.searchEngineLucene.service.utils;
+package it.uniroma3.lucene.searchEngineLucene.service.utils;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class PropUtil {

@@ -1,7 +1,7 @@
-package it.uniroma3.searchEngineLucene.listener;
+package it.uniroma3.lucene.searchEngineLucene.listener;
 
-import it.uniroma3.searchEngineLucene.service.Indexer;
-import it.uniroma3.searchEngineLucene.service.utils.PropUtil;
+import it.uniroma3.lucene.searchEngineLucene.service.Indexer;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.PropUtil;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.IndexSearcher;
@@ -11,9 +11,9 @@ import org.apache.lucene.store.FSDirectory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+
 import java.io.IOException;
 import java.nio.file.Paths;
-
 @WebListener
 public class SearcherInitializer implements ServletContextListener {
 

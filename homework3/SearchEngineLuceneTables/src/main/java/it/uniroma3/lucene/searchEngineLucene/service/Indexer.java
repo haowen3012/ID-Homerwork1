@@ -1,6 +1,10 @@
-package it.uniroma3.searchEngineLucene.service;
+package it.uniroma3.lucene.searchEngineLucene.service;
 
-import it.uniroma3.searchEngineLucene.service.utils.*;
+
+import it.uniroma3.lucene.searchEngineLucene.service.utils.AnalyzerUtil;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.FieldExtractorUtil;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.HtmlValidatorUtil;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.PropUtil;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
@@ -18,7 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;

@@ -1,4 +1,4 @@
-package it.uniroma3.searchEngineLucene.service.utils;
+package it.uniroma3.lucene.searchEngineLucene.service.utils;
 
 import org.apache.lucene.analysis.CharArraySet;
 

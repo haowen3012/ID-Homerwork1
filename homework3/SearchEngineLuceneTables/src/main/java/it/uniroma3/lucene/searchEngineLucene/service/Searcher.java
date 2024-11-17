@@ -1,18 +1,16 @@
-package it.uniroma3.searchEngineLucene.service;
+package it.uniroma3.lucene.searchEngineLucene.service;
 
-import it.uniroma3.searchEngineLucene.dto.DocumentDTO;
-import it.uniroma3.searchEngineLucene.service.utils.AnalyzerUtil;
-import it.uniroma3.searchEngineLucene.service.utils.PropUtil;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+
+import it.uniroma3.lucene.searchEngineLucene.dto.DocumentDTO;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.AnalyzerUtil;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.PropUtil;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
 

@@ -1,7 +1,7 @@
-package it.uniroma3.searchEngineLucene.controller;
+package it.uniroma3.lucene.searchEngineLucene.controller;
 
-import it.uniroma3.searchEngineLucene.dto.DocumentDTO;
-import it.uniroma3.searchEngineLucene.service.Searcher;
+import it.uniroma3.lucene.searchEngineLucene.dto.DocumentDTO;
+import it.uniroma3.lucene.searchEngineLucene.service.Searcher;
 import org.apache.lucene.search.IndexSearcher;
 
 import javax.servlet.ServletException;
@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
+
 
 @WebServlet("/submitForm")
 public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+
 
         String field = request.getParameter("fields");
         String query = request.getParameter("query");
