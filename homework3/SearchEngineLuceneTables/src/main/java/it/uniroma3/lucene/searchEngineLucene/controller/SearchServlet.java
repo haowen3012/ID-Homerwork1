@@ -1,6 +1,6 @@
 package it.uniroma3.lucene.searchEngineLucene.controller;
 
-import it.uniroma3.lucene.searchEngineLucene.dto.DocumentDTO;
+import it.uniroma3.lucene.searchEngineLucene.dto.TableDTO;
 import it.uniroma3.lucene.searchEngineLucene.service.Searcher;
 import org.apache.lucene.search.IndexSearcher;
 
@@ -19,12 +19,7 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
 
-
-        String field = request.getParameter("fields");
         String query = request.getParameter("query");
-        String query1 = request.getParameter("query1");
-        String query2 = request.getParameter("query2");
-
 
         try {
             IndexSearcher indexSearcher = (IndexSearcher) getServletContext().getAttribute("indexSearcher");
@@ -32,19 +27,15 @@ public class SearchServlet extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "indexSearcher not initialized");
                 return;
             } else {
-                List<DocumentDTO> documentDTOS;
-                if(!query1.isEmpty() && !query2.isEmpty()) {
-                    documentDTOS = Searcher.search(null, query1, query2, field, (IndexSearcher) getServletContext().getAttribute("indexSearcher"));
-                } else {
-                    documentDTOS = Searcher.search(query, null, null, field, (IndexSearcher) getServletContext().getAttribute("indexSearcher"));
-                }
-                request.setAttribute("documents", documentDTOS);
+                List<TableDTO> tableDTOS = Searcher.search(query, (IndexSearcher) getServletContext().getAttribute("indexSearcher"));
+                request.setAttribute("tables", tableDTOS);
                 request.getRequestDispatcher("/result.jsp").forward(request, response);
             }
         } catch (Exception e) {
-
             System.out.println("Error in searching:" + e);
         }
 
     }
+
+
 }

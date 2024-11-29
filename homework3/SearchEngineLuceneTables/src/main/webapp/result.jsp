@@ -10,17 +10,17 @@
 <div class="container">
     <h1>Top Ranked Result</h1>
     <c:choose>
-        <c:when test="${empty documents}">
+        <c:when test="${empty tables}">
             <p>No documents found.</p>
         </c:when>
         <c:otherwise>
-            <c:forEach var="document" items="${documents}">
-                <p>Position: ${document.rankingPosition}</p>
-                <p>Title: ${document.title}</p>
-                <p>Authors: ${document.authors}</p>
-<%--                <p>Content: ${document.content}</p>--%>
-<%--                <p>Abstract: ${document.paperAbstract}</p>--%>
-                <p>Score: ${document.score}</p>
+            <c:forEach var="table" items="${tables}">
+                <p>Position: ${table.rankingPosition}</p>
+                <p>Caption: ${table.caption}</p>
+                <p>Table: ${table.table}</p>
+                <p>Footnotes: ${table.footnotes}</p>
+                <p>References: ${table.references}</p>
+                <p>Score: ${table.score}</p>
                 <hr>
             </c:forEach>
         </c:otherwise>

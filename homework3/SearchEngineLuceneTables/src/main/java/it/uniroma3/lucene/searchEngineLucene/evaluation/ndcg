@@ -1,0 +1,26 @@
+Binary relevance: {0,1}
+
+1. evaluation metrics LLM
+relevant documents: tutti tranne 5,6,9
+
+2. moderation user preference
+relevant documents: tutti tranne 1,4
+
+3. Architecture of 1D VAE
+relevant documents: 1,7,9 (7, 9 non sono cosi rilevanti)
+
+4. list of defences against attacks -> tutti tranne 10
+
+5. list of vulnerabilities -> tutti trane 5,8,10
+
+6. data cleaning
+relevant documents: 7 (Positions: 1, 4, 6, 16, 19, 22, 23)
+
+
+7. training  BIWI dataset -> una rilevanza tenue su tutti i documenti dopo la prima posizione
+
+8. pose estimation -> tutti documenti rilevanti
+
+9. augmentation method Meta(math) -> tutti tranne 5,3,1
+
+10. aow  gro watermarks -> tutti tranne 4,6,7,8,10

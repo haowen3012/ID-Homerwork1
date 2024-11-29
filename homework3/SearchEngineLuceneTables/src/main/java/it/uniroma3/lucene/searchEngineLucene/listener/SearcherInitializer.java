@@ -1,5 +1,6 @@
 package it.uniroma3.lucene.searchEngineLucene.listener;
 
+import it.uniroma3.lucene.searchEngineLucene.service.BertLuceneIndexer;
 import it.uniroma3.lucene.searchEngineLucene.service.Indexer;
 import it.uniroma3.lucene.searchEngineLucene.service.utils.PropUtil;
 import org.apache.lucene.index.DirectoryReader;
@@ -22,6 +23,7 @@ public class SearcherInitializer implements ServletContextListener {
         try {
             if(Boolean.parseBoolean(PropUtil.getProperty("indexing.enabled"))) {
                 Indexer.index();
+               //BertLuceneIndexer.index();
             }
         } catch (Exception e) {
             throw new RuntimeException("Failed to index", e);

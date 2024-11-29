@@ -1,0 +1,10 @@
+1. evaluation metrics LLM  -> target table position : 2
+2. moderation user preference -> target table position : 2
+3. Architecture of 1D VAE -> target table position :  DA TROVARE
+4. list of defences against attacks -> target table position : 3 (Caption: Table 1. Types of Defenses and Their Implementations Against Specific Attacks)
+5. list of vulnerabilities -> target table position: 1 (Caption: TABLE I: Common threats and vulnerabilities)
+6. data cleaning -> target table position: 4 (References: In this study, we employed the Meta-Llama-3-70B model to conduct task-driven adaptation on a specialized medical instruction dataset. Initially, we acquired and curated relevant data in accordance with predefined prompts (see Table 1) for preliminary knowledge distillation. Subsequently, we implemented a rigorous data cleaning process to eliminate inconsistent and redundant data.)
+7. training  BIWI dataset -> target table position : 1
+8. pose estimation -> target table position : 1 (tutti documenti rilevanti)
+9. augmentation method Meta(math) -> target table position : 4
+10. aow  gro watermarks -> target table position : 1

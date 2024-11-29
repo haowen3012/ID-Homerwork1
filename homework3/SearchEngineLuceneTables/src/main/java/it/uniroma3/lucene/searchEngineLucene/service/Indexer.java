@@ -2,8 +2,8 @@ package it.uniroma3.lucene.searchEngineLucene.service;
 
 
 import it.uniroma3.lucene.searchEngineLucene.service.utils.AnalyzerUtil;
-import it.uniroma3.lucene.searchEngineLucene.service.utils.FieldExtractorUtil;
-import it.uniroma3.lucene.searchEngineLucene.service.utils.HtmlValidatorUtil;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.TableExtractorUtil;
+import it.uniroma3.lucene.searchEngineLucene.service.utils.JsonValidatorUtil;
 import it.uniroma3.lucene.searchEngineLucene.service.utils.PropUtil;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -16,6 +16,8 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,63 +42,90 @@ public class Indexer {
         Map<String, Analyzer> perFieldAnalyzers = new HashMap<>();
 
 
-        perFieldAnalyzers.put("title", AnalyzerUtil.getCustomAnalyzer());
-        perFieldAnalyzers.put("authors", AnalyzerUtil.getCustomAnalyzer());
-        perFieldAnalyzers.put("content", AnalyzerUtil.getStandardAnalyzer());
-        perFieldAnalyzers.put("abstract", AnalyzerUtil.getEnglishAnalyzer());
+        perFieldAnalyzers.put("caption", AnalyzerUtil.getStandardAnalyzer());
+        perFieldAnalyzers.put("table", AnalyzerUtil.getStandardAnalyzer());
+        perFieldAnalyzers.put("footnotes", AnalyzerUtil.getStandardAnalyzer());
+        perFieldAnalyzers.put("references", AnalyzerUtil.getStandardAnalyzer());
 
         Analyzer perFieldAnalyzer = new PerFieldAnalyzerWrapper(new EnglishAnalyzer(), perFieldAnalyzers);
 
-        // Definiamo la configurazione dell' IndexWriter
         IndexWriterConfig config = new IndexWriterConfig(perFieldAnalyzer);
         config.setCodec(new SimpleTextCodec());
         IndexWriter writer = new IndexWriter(directory, config);
 
         // Directory containing HTML files
-        String htmlDirPath = PropUtil.getProperty("html.directory.path");
+        String jsonDirPath = PropUtil.getProperty("json.directory.path");
 
-        AtomicInteger indexedHtmlCounter = new AtomicInteger();
+        AtomicInteger totalNumTables = new AtomicInteger();
 
 
         // List and process all HTML files in the directory
-        try (Stream<Path> paths = Files.walk(Paths.get(htmlDirPath))) {
+        try (Stream<Path> paths = Files.walk(Paths.get(jsonDirPath))) {
             paths.filter(Files::isRegularFile)
-                    .filter(path -> path.toString().endsWith(".html"))
+                    .filter(path -> path.toString().endsWith(".json"))
                     .forEach(path -> {
                         // Validate and process each HTML file
                         String filePath = path.toString();
-                        if (HtmlValidatorUtil.isValidHtml(filePath)) {
-                            String title = FieldExtractorUtil.extractTitle(filePath);
-                            String authors = FieldExtractorUtil.extractAuthor(filePath);
-                            String content = FieldExtractorUtil.extractContent(filePath);
-                            String paperAbstract = FieldExtractorUtil.extractAbstract(filePath);
 
+                        if (JsonValidatorUtil.isValidJson(filePath)) {
+                            int numTablesPerJson = 0;
+                            for (JSONObject tableObject : TableExtractorUtil.getTableObjects(filePath)) {
+                                numTablesPerJson++;
+                                totalNumTables.getAndIncrement();
+                                String caption = tableObject.optString("caption");
+                                Object table = tableObject.opt("table");
+                                JSONArray footnotes = tableObject.optJSONArray("footnotes");
+                                JSONArray references = tableObject.optJSONArray("references");
 
-                            // Create a new Lucene document
-                            Document doc = new Document();
-                            doc.add(new TextField("title", title, Field.Store.YES));
-                            doc.add(new TextField("authors", authors, Field.Store.YES));
-                            doc.add(new TextField("content", content, Field.Store.YES));
-                            doc.add(new TextField("abstract", paperAbstract, Field.Store.YES));
+                                Document doc = new Document();
+                                doc.add(new TextField("caption", caption, Field.Store.YES));
 
-                            // Add the document to the index
-                            try {
-                                System.out.println("Indexing: " + filePath);
-                                writer.addDocument(doc);
-                                indexedHtmlCounter.set(indexedHtmlCounter.get() + 1);
+                                if (table instanceof JSONArray tableArray) {
+                                    for (int i = 0; i < tableArray.length(); i++) {
+                                        doc.add(new TextField("table", tableArray.optString(i), Field.Store.YES));
+                                    }
+                                } else {
+                                    doc.add(new TextField("table", tableObject.optString("table"), Field.Store.YES));
+                                }
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                if (footnotes != null) {
+                                    for (int i = 0; i < footnotes.length(); i++) {
+                                        doc.add(new TextField("footnotes", footnotes.optString(i), Field.Store.YES));
+                                    }
+
+                                    if (references != null) {
+                                        for (int i = 0; i < references.length(); i++) {
+                                            Object reference = references.get(i);
+                                            if (reference instanceof JSONArray nestedReferences) {
+                                                for (int j = 0; j < nestedReferences.length(); j++) {
+                                                    doc.add(new TextField("references", nestedReferences.optString(j), Field.Store.YES));
+                                                }
+                                            } else {
+                                                doc.add(new TextField("references", references.optString(i), Field.Store.YES));
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // Add the document to the index
+                                try {
+                                    System.out.println("Indexing Table number: " + numTablesPerJson + " from file: " + filePath);
+                                    writer.addDocument(doc);
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
                         } else {
-                            System.out.println("Invalid HTML: " + filePath);
+                            System.out.println("Invalid JSON: " + filePath);
                         }
                     });
         }
 
         writer.commit(); // Persist changes to the disk
         writer.close();
-        System.out.println("Indexed " + indexedHtmlCounter.get() + " HTML files");
+        System.out.println("Indexed " + totalNumTables + " tables");
         // End time
         long endTime = System.nanoTime();
 
